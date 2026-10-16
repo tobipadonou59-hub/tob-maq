@@ -6,6 +6,7 @@ RUN cd server && npm ci --omit=dev && npm cache clean --force
 COPY index.html ./
 COPY ressources ressources
 COPY apercus apercus
+COPY icones icones
 COPY server/src server/src
 # /data contient la base SQLite et les fichiers envoyés : à monter sur un volume persistant.
 # Les volumes de Render et Railway sont montés au nom de root : le processus doit pouvoir y écrire.

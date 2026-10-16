@@ -432,6 +432,8 @@ export function createApp() {
   renderIndex(); // vérification au démarrage
   app.get(["/", "/index.html"], (req, res) => res.set("Cache-Control", "no-cache").type("html").send(renderIndex()));
   app.use("/ressources", express.static(path.join(SITE_DIR, "ressources"), { maxAge: "7d", fallthrough: false }));
+  app.use("/icones", express.static(path.join(SITE_DIR, "icones"), { maxAge: "7d", fallthrough: false }));
+  app.get("/favicon.ico", (req, res) => res.set("Cache-Control", "public, max-age=604800").type("image/x-icon").sendFile(path.join(SITE_DIR, "icones", "favicon.ico")));
   app.use("/apercus", express.static(path.join(SITE_DIR, "apercus"), { maxAge: "7d", fallthrough: false }));
   app.use((req, res) => res.status(404).type("text").send("Page introuvable."));
 
