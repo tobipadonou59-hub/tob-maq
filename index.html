@@ -1532,7 +1532,7 @@ function renderFormations(main, q) {
       <div class="field"><label for="fd">Domaine</label><select class="input" id="fd"><option value="">Tous</option>${DOMAINS.map(d => `<option value="${d.id}" ${q.get("domaine") === d.id ? "selected" : ""}>${d.name}</option>`).join("")}</select></div>
       <div class="field"><label for="fs">Logiciel</label><select class="input" id="fs"><option value="">Tous</option>${SOFTWARE.map(s => `<option value="${s.id}" ${q.get("logiciel") === s.id ? "selected" : ""}>${s.name}</option>`).join("")}</select></div>
       <div class="field"><label for="fl">Niveau</label><select class="input" id="fl"><option value="">Tous</option>${LEVELS.map(l => `<option>${l}</option>`).join("")}</select></div>
-      <div class="field"><label for="fp">Prix</label><select class="input" id="fp"><option value="">Tous</option><option value="gratuit">Gratuit</option><option value="premium">Premium</option></select></div>
+      <div class="field"><label for="fp">Prix</label><select class="input" id="fp"><option value="">Tous</option><option value="gratuit" ${q.get("prix") === "gratuit" ? "selected" : ""}>Gratuit</option><option value="premium" ${q.get("prix") === "premium" ? "selected" : ""}>Premium</option></select></div>
     </form>
     <p class="count" id="fCount" aria-live="polite"></p>
     <div class="grid g3" id="fList"></div>
@@ -1541,7 +1541,7 @@ function renderFormations(main, q) {
     <div class="head"><span class="eyebrow">Offres</span><h2>Gratuit pour commencer</h2><p>${state.billing?.enabled ? "Passe Premium pour débloquer toutes les formations premium, avec un paiement par MTN MoMo, Moov Money ou carte." : `Les tarifs premium seront affichés en ${CONFIG.CURRENCY} dès qu'ils seront définis.`}</p></div>
     <div class="grid g3">
       <article class="card offer feat"><span class="chip chip-ok">Disponible</span><h3>Gratuit</h3><div class="price">0 ${CONFIG.CURRENCY}</div><ul><li>Formations gratuites</li><li>Tous les jeux et défis</li><li>Ressources en accès libre</li></ul><a class="btn btn-primary" href="#/inscription">S'inscrire</a></article>
-      <article class="card offer"><span class="chip ${state.billing?.enabled ? "chip-ok" : "chip-orange"}">${state.billing?.enabled ? "Disponible" : "Bientôt"}</span><h3>Premium</h3><div class="price">${state.billing?.enabled ? `dès ${nf(Math.min(...state.billing.plans.map(p => p.price)))} ${CONFIG.CURRENCY}` : "Tarif à venir"}</div><ul><li>Formations complètes premium</li><li>Fichiers sources et packs</li><li>Paiement MTN MoMo, Moov Money ou carte</li></ul><a class="btn ${state.billing?.enabled ? "btn-grad" : "btn-outline"}" href="#/premium">Découvrir Premium</a></article>
+      <article class="card offer"><span class="chip ${state.billing?.enabled || state.billing?.trial?.enabled ? "chip-ok" : "chip-orange"}">${state.billing?.enabled || state.billing?.trial?.enabled ? "Disponible" : "Bientôt"}</span><h3>Premium</h3><div class="price">${state.billing?.enabled ? `dès ${nf(Math.min(...state.billing.plans.map(p => p.price)))} ${CONFIG.CURRENCY}` : state.billing?.trial?.enabled ? "Essai gratuit" : "Tarif à venir"}</div>${state.billing?.trial?.enabled ? `<span class="chip chip-ok">${state.billing.trial.days} jours gratuits pour essayer</span>` : ""}<ul><li>Formations complètes premium</li><li>Fichiers sources et packs</li><li>Paiement MTN MoMo, Moov Money ou carte</li></ul><a class="btn ${state.billing?.enabled || state.billing?.trial?.enabled ? "btn-grad" : "btn-outline"}" href="#/premium">${state.billing?.trial?.enabled && !state.user?.trialUsed ? "Essayer gratuitement" : "Découvrir Premium"}</a></article>
       <article class="card offer"><span class="chip chip-orange">Bientôt</span><h3>Crédits IA</h3><div class="price">Packs à venir</div><ul><li>Générations d'images</li><li>Générations de vidéos</li><li>Quotas affichés avant chaque génération</li></ul><button class="btn btn-outline" disabled>Paiement non activé</button></article>
     </div></div></section>`;
   const upd = () => {
@@ -1638,7 +1638,7 @@ function renderLesson(main, lid) {
   }
   if (l.premium && !l.loaded) {
     const paywall = msg => { main.innerHTML = `<section class="section-sm"><div class="wrap">${emptyState({ ic: "lock", title: esc(l.title), text: msg,
-      action: `<div class="row" style="justify-content:center">${state.user ? `<a class="btn btn-grad" href="#/premium">Passer Premium</a>` : `<a class="btn btn-grad" href="#/inscription">Créer un compte</a><a class="btn btn-outline" href="#/connexion">Se connecter</a>`}<a class="btn btn-ghost" href="#/formation/${f.id}">Retour à la formation</a></div>` })}</div></section>`; };
+      action: `<div class="row" style="justify-content:center">${state.user ? `<a class="btn btn-grad" href="#/premium">${state.billing?.trial?.enabled && !state.user.trialUsed ? `Essayer ${state.billing.trial.days} jours gratuits` : "Passer Premium"}</a>` : `<a class="btn btn-grad" href="#/inscription">Créer un compte${state.billing?.trial?.enabled ? " et essayer gratuitement" : ""}</a><a class="btn btn-outline" href="#/connexion">Se connecter</a>`}<a class="btn btn-ghost" href="#/formation/${f.id}">Retour à la formation</a></div>` })}</div></section>`; };
     if (!state.user) return paywall("Cette leçon est réservée aux membres Premium. Connecte-toi ou crée un compte pour y accéder.");
     if (!isPremiumUser()) return paywall("Cette leçon fait partie de l'abonnement Premium.");
     main.innerHTML = `<div class="boot"><span class="spinner"></span><span>Chargement de la leçon…</span></div>`;
@@ -1895,16 +1895,33 @@ function renderLogin(main) {
 }
 function renderPremium(main) {
   const b = state.billing, u = state.user;
-  main.innerHTML = pageHead({ crumbs: [["Premium"]], eyebrow: "Abonnement", title: "TOB-MAQ Premium", lead: "Toutes les formations premium et leurs leçons approfondies, pour progresser plus vite." }) + `<section class="section-sm"><div class="wrap">
-    ${isPremiumUser() && u.premiumUntil ? alertBox("ok", `<p><strong>Tu es membre Premium</strong> jusqu'au ${fmtDate(u.premiumUntil)}. Un nouveau paiement prolonge ton accès.</p>`) + "<div style='height:16px'></div>" : ""}
-    ${!api.configured ? alertBox("warn", "<p>L'abonnement nécessite le serveur TOB-MAQ.</p>") : !b?.enabled ? emptyState({ ic: "clock", title: "Bientôt disponible", text: "L'abonnement Premium n'est pas encore ouvert. Les formations gratuites, les jeux et les ressources libres restent accessibles." }) : `
-    <div class="grid g3">${b.plans.map(p => `<article class="card offer ${p.id === "an" ? "feat" : ""}"><h3>Premium · ${esc(p.label)}</h3><div class="price">${nf(p.price)} ${esc(b.currency)}</div>
+  const trialOpen = Boolean(b?.trial?.enabled) && !(u && (u.trialUsed || isPremiumUser()));
+  const cards = [
+    trialOpen ? `<article class="card offer feat"><span class="chip chip-ok">Sans engagement</span><h3>Essai gratuit · ${b.trial.days} jours</h3><div class="price">0 ${CONFIG.CURRENCY}</div>
+      <ul><li>Toutes les leçons premium</li><li>Aucun moyen de paiement demandé</li><li>S'arrête tout seul à la fin, sans prélèvement</li></ul>
+      <button class="btn btn-grad" id="startTrial">${u ? "Commencer l'essai gratuit" : "Créer un compte pour l'essai gratuit"}</button></article>` : "",
+    ...(b?.enabled ? b.plans.map(p => `<article class="card offer"><h3>Premium · ${esc(p.label)}</h3><div class="price">${nf(p.price)} ${esc(b.currency)}</div>
       <ul><li>Toutes les leçons premium</li><li>Accès pendant ${p.days} jours</li><li>MTN MoMo, Moov Money ou carte</li></ul>
-      <button class="btn btn-grad" data-buy="${esc(p.id)}">${u ? "Payer avec FedaPay" : "Créer un compte pour s'abonner"}</button></article>`).join("")}</div>
-    ${b.mode !== "live" ? `<p class="small muted" style="margin-top:12px">Mode test : aucun argent réel n'est prélevé.</p>` : ""}
-    <p class="small muted" style="margin-top:8px">Le paiement se fait sur la page sécurisée de FedaPay. Aucun renouvellement automatique : tu repaies quand tu veux prolonger.</p>
-    ${u?.pendingParentalConsent ? alertBox("info", "<p>L'abonnement sera possible quand ton parent ou tuteur aura donné son accord.</p>") : ""}`}
+      <button class="btn ${trialOpen ? "btn-outline" : "btn-grad"}" data-buy="${esc(p.id)}">${u ? "Payer avec FedaPay" : "Créer un compte pour s'abonner"}</button></article>`) : [])
+  ].filter(Boolean);
+  main.innerHTML = pageHead({ crumbs: [["Premium"]], eyebrow: "Abonnement", title: "TOB-MAQ Premium", lead: "Toutes les formations premium et leurs leçons approfondies, pour progresser plus vite." }) + `<section class="section-sm"><div class="wrap">
+    ${isPremiumUser() && u.premiumUntil ? alertBox("ok", `<p><strong>Tu es membre Premium</strong> jusqu'au ${fmtDate(u.premiumUntil)}.${b?.enabled ? " Un paiement prolonge ton accès à partir de cette date." : ""}</p>`) + "<div style='height:16px'></div>" : ""}
+    ${u?.trialUsed && !isPremiumUser() ? alertBox("info", "<p>Ton essai gratuit est terminé. Merci d'avoir testé Premium !</p>") + "<div style='height:16px'></div>" : ""}
+    ${!api.configured ? alertBox("warn", "<p>L'abonnement nécessite le serveur TOB-MAQ.</p>") : !cards.length ? (isPremiumUser() ? "" : emptyState({ ic: "clock", title: "Bientôt disponible", text: "L'abonnement Premium n'est pas encore ouvert. Les formations gratuites, les jeux et les ressources libres restent accessibles." })) : `
+    <div class="grid g3">${cards.join("")}</div>
+    ${b?.enabled ? `${b.mode !== "live" ? `<p class="small muted" style="margin-top:12px">Paiement en mode test : aucun argent réel n'est prélevé.</p>` : ""}
+    <p class="small muted" style="margin-top:8px">Le paiement se fait sur la page sécurisée de FedaPay. Aucun renouvellement automatique : tu repaies quand tu veux prolonger.</p>` : ""}
+    ${u?.pendingParentalConsent ? alertBox("info", "<p>Premium sera disponible quand ton parent ou tuteur aura donné son accord.</p>") : ""}`}
     <div id="buyMsg" aria-live="assertive" style="margin-top:14px"></div></div></section>`;
+  $("#startTrial")?.addEventListener("click", async e => {
+    if (!state.user) return go("#/inscription");
+    const btn = e.currentTarget, label = btn.innerHTML; btn.disabled = true; btn.innerHTML = `<span class="spinner" aria-hidden="true"></span> Activation…`;
+    try {
+      const d = await api.request("/billing/trial", { method: "POST" });
+      Object.assign(state.user, { premium: true, premiumUntil: d.premiumUntil, trialUsed: true });
+      toast(`Essai gratuit activé jusqu'au ${fmtDate(d.premiumUntil)} !`); go("#/formations?prix=premium");
+    } catch (er) { $("#buyMsg").innerHTML = alertBox("error", `<p>${esc(er.message)}</p>`); btn.disabled = false; btn.innerHTML = label; }
+  });
   $$("[data-buy]", main).forEach(btn => btn.addEventListener("click", async () => {
     if (!state.user) return go("#/inscription");
     const label = btn.innerHTML; btn.disabled = true; btn.innerHTML = `<span class="spinner" aria-hidden="true"></span> Ouverture du paiement…`;
@@ -1974,9 +1991,10 @@ function renderDashboard(main, q = new URLSearchParams()) {
   if (u) api.request("/me/billing").then(b => {
     state.user.premium = b.premium; state.user.premiumUntil = b.premiumUntil;
     const box = $("#premiumBox"); if (!box) return;
-    box.innerHTML = (b.premium ? `<p><span class="chip chip-ok">Premium</span> ${b.premiumUntil ? `jusqu'au ${fmtDate(b.premiumUntil)}` : ""}</p><a class="btn btn-ghost btn-sm" href="#/premium">Prolonger</a>`
-      : `<p class="small">Formule gratuite.</p><a class="btn btn-grad btn-sm" href="#/premium">Passer Premium</a>`)
-      + (b.payments.length ? `<ul class="list" style="margin-top:10px">${b.payments.slice(0, 3).map(p => `<li><span class="small">${esc(p.plan)} · ${nf(p.amount)} FCFA</span><span class="chip ${p.status === "approved" ? "chip-ok" : ""}">${{ approved: "payé", pending: "en attente" }[p.status] || "non abouti"}</span></li>`).join("")}</ul>` : "");
+    state.user.trialUsed = b.trialUsed;
+    box.innerHTML = (b.premium ? `<p><span class="chip chip-ok">${b.onTrial ? "Essai gratuit" : "Premium"}</span> ${b.premiumUntil ? `jusqu'au ${fmtDate(b.premiumUntil)}` : ""}</p>${state.billing?.enabled ? `<a class="btn btn-ghost btn-sm" href="#/premium">${b.onTrial ? "S'abonner pour continuer" : "Prolonger"}</a>` : ""}`
+      : `<p class="small">Formule gratuite.</p><a class="btn btn-grad btn-sm" href="#/premium">${state.billing?.trial?.enabled && !b.trialUsed ? `Essayer ${state.billing.trial.days} jours gratuits` : "Passer Premium"}</a>`)
+      + (b.payments.length ? `<ul class="list" style="margin-top:10px">${b.payments.slice(0, 3).map(p => `<li><span class="small">${esc(p.plan)} · ${nf(p.amount)} FCFA</span><span class="chip ${p.status === "approved" ? "chip-ok" : ""}">${p.amount === 0 && p.status === "approved" ? "activé" : { approved: "payé", pending: "en attente" }[p.status] || "non abouti"}</span></li>`).join("")}</ul>` : "");
   }).catch(() => { const box = $("#premiumBox"); if (box) box.innerHTML = `<p class="small">Statut indisponible pour le moment.</p>`; });
   if (u) api.request("/me/projects").then(list => {
     $("#myProjects").innerHTML = list && list.length ? `<ul class="list">${list.map(p => `<li><span>${esc(p.title)}</span><span class="chip">${esc(p.visibility)}</span></li>`).join("")}</ul>` : `<p class="small">Aucun projet enregistré.</p>`;
@@ -2237,15 +2255,18 @@ function renderAdmin(main) {
         <div class="field" style="margin-top:14px"><label for="pM">Prix pour 1 mois (${CONFIG.CURRENCY})</label><input class="input" id="pM" type="number" min="100" step="100" value="${b.priceMonthly ?? ""}" placeholder="Ex. 2000"></div>
         <div class="field"><label for="pY">Prix pour 1 an (${CONFIG.CURRENCY})</label><input class="input" id="pY" type="number" min="100" step="100" value="${b.priceYearly ?? ""}" placeholder="Laisse vide pour ne pas le proposer"></div>
         <label class="check"><input type="checkbox" id="pOn" ${b.enabled ? "checked" : ""}> Ouvrir la vente</label>
+        <div class="form-sep" style="height:1px;background:var(--line);margin:18px 0"></div>
+        <label class="check"><input type="checkbox" id="tOn" ${b.trialEnabled ? "checked" : ""}> Proposer un essai gratuit (une fois par compte, sans paiement)</label>
+        <div class="field" style="margin-top:12px"><label for="tDays">Durée de l'essai (jours)</label><input class="input" id="tDays" type="number" min="1" max="90" value="${b.trialDays ?? 30}"></div>
         <p class="small muted" style="margin-top:12px">Adresse de notification à copier dans FedaPay (Webhooks) :<br><span class="mono" style="user-select:all;word-break:break-all">${esc(b.webhookUrl)}</span></p>
         <div id="bMsg" aria-live="polite"></div><button class="btn btn-primary" type="submit">Enregistrer</button></form>
-        <div class="card"><h3>Résultats</h3><dl class="specs"><dt>Abonnés actifs</dt><dd>${nf(b.subscribers)}</dd><dt>Total encaissé</dt><dd>${nf(b.revenue)} ${CONFIG.CURRENCY}</dd></dl></div></div>
+        <div class="card"><h3>Résultats</h3><dl class="specs"><dt>Abonnés actifs</dt><dd>${nf(b.subscribers)}</dd><dt>Total encaissé</dt><dd>${nf(b.revenue)} ${CONFIG.CURRENCY}</dd><dt>Essais gratuits lancés</dt><dd>${nf(b.trials)}</dd><dt>Essais devenus abonnements</dt><dd>${nf(b.convertedTrials)}</dd></dl></div></div>
         <h3 style="margin-top:24px">Paiements</h3>` + table(pays, [["Membre", "user"], ["Formule", "plan"], ["Montant", r => nf(r.amount) + " FCFA"], ["Statut", "status"], ["Date", r => fmtDate(r.createdAt)]]);
       $("#billCfg").addEventListener("submit", async e => {
         e.preventDefault();
         await withLoading(e.currentTarget, "Enregistrement…", $("#bMsg"), async () => {
           const v = id => $(id).value === "" ? null : Number($(id).value);
-          await api.request("/admin/billing", { method: "PATCH", body: { priceMonthly: v("#pM"), priceYearly: v("#pY"), enabled: $("#pOn").checked } });
+          await api.request("/admin/billing", { method: "PATCH", body: { priceMonthly: v("#pM"), priceYearly: v("#pY"), enabled: $("#pOn").checked, trialEnabled: $("#tOn").checked, trialDays: Number($("#tDays").value) } });
           try { state.billing = await api.request("/billing/plans"); } catch { /* sans incidence */ }
           $("#bMsg").innerHTML = alertBox("ok", `<p>Enregistré. ${$("#pOn").checked ? "La vente est ouverte." : "La vente est fermée."}</p>`);
         });

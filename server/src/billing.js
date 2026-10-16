@@ -11,6 +11,7 @@ import { one, all, run, now, getBillingSettings, setBillingSettings } from "./db
 import { HttpError, fail, uid, oneOf, rateLimit } from "./security.js";
 
 export const PLANS = { mois: { label: "1 mois", days: 30, key: "priceMonthly" }, an: { label: "1 an", days: 365, key: "priceYearly" } };
+const planLabel = id => PLANS[id]?.label || (id === "essai" ? "Essai gratuit" : id);
 const PREMIUM_DIR = path.join(SERVER_DIR, "contenus-premium", "lecons");
 const ID_RE = /^[a-z0-9-]{1,60}$/;
 
@@ -66,7 +67,8 @@ export function registerBilling(api, { needUser, needAdmin, needConsent }) {
   const plansPublic = () => {
     const s = getBillingSettings();
     const plans = Object.entries(PLANS).filter(([, p]) => Number.isInteger(s[p.key]) && s[p.key] > 0).map(([id, p]) => ({ id, label: p.label, price: s[p.key], days: p.days }));
-    return { enabled: Boolean(s.enabled && config.fedapayKey && plans.length), configured: Boolean(config.fedapayKey), currency: "FCFA", plans, mode: config.fedapayEnv };
+    return { enabled: Boolean(s.enabled && config.fedapayKey && plans.length), configured: Boolean(config.fedapayKey), currency: "FCFA", plans, mode: config.fedapayEnv,
+      trial: { enabled: Boolean(s.trialEnabled), days: s.trialDays } };
   };
 
   api.get("/billing/plans", (req, res) => res.json(plansPublic()));
@@ -95,6 +97,21 @@ export function registerBilling(api, { needUser, needAdmin, needConsent }) {
     res.json({ url });
   });
 
+  /* Essai gratuit : une seule fois par compte, sans moyen de paiement ; l'accès s'arrête seul à la fin. */
+  api.post("/billing/trial", needUser, needConsent, (req, res) => {
+    const s = getBillingSettings();
+    if (!s.trialEnabled) fail(403, "L'essai gratuit n'est pas proposé pour le moment.", "TRIAL_CLOSED");
+    const u = one("SELECT * FROM users WHERE id = ?", req.user.id);
+    if (u.trial_used_at) fail(409, "Tu as déjà profité de ton essai gratuit. Tu peux continuer avec un abonnement Premium.", "TRIAL_USED");
+    if (u.premium_until && u.premium_until > now()) fail(409, "Tu es déjà membre Premium.", "ALREADY_PREMIUM");
+    const end = new Date(); end.setUTCDate(end.getUTCDate() + s.trialDays);
+    // Mise à jour conditionnelle : deux clics simultanés ne donnent qu'un seul essai.
+    const r = run("UPDATE users SET premium_until = ?, trial_used_at = ? WHERE id = ? AND trial_used_at IS NULL", end.toISOString(), now(), u.id);
+    if (!r.changes) fail(409, "Tu as déjà profité de ton essai gratuit.", "TRIAL_USED");
+    run("INSERT INTO payments(id, user_id, provider, plan, amount, status, created_at, approved_at) VALUES (?,?,?,?,?,?,?,?)", uid(), u.id, "essai", "essai", 0, "approved", now(), now());
+    res.json({ premiumUntil: end.toISOString(), days: s.trialDays });
+  });
+
   /* Retour de la page de paiement FedaPay vers le site. */
   api.get("/billing/retour", async (req, res) => {
     const pay = typeof req.query.ref === "string" ? one("SELECT * FROM payments WHERE id = ?", req.query.ref) : null;
@@ -117,10 +134,12 @@ export function registerBilling(api, { needUser, needAdmin, needConsent }) {
     for (const p of all("SELECT * FROM payments WHERE user_id = ? AND status = 'pending' AND provider_tx_id IS NOT NULL ORDER BY created_at DESC LIMIT 3", req.user.id)) {
       try { await confirmPayment(p); } catch { /* nouvel essai à la prochaine visite */ }
     }
-    const u = one("SELECT premium_until, role FROM users WHERE id = ?", req.user.id);
-    res.json({ premiumUntil: u.premium_until, premium: isPremium({ ...req.user, ...u }),
+    const u = one("SELECT premium_until, role, trial_used_at FROM users WHERE id = ?", req.user.id);
+    const paid = one("SELECT 1 AS x FROM payments WHERE user_id = ? AND status = 'approved' AND provider != 'essai'", req.user.id);
+    const premium = isPremium({ ...req.user, ...u });
+    res.json({ premiumUntil: u.premium_until, premium, trialUsed: Boolean(u.trial_used_at), onTrial: Boolean(premium && u.trial_used_at && !paid && u.role !== "admin"),
       payments: all("SELECT plan, amount, status, created_at FROM payments WHERE user_id = ? ORDER BY created_at DESC LIMIT 20", req.user.id)
-        .map(p => ({ plan: PLANS[p.plan]?.label || p.plan, amount: p.amount, status: p.status, createdAt: p.created_at })) });
+        .map(p => ({ plan: planLabel(p.plan), amount: p.amount, status: p.status, createdAt: p.created_at })) });
   });
 
   /* ---------- Contenus premium (fichiers JSON dans server/contenus-premium/lecons) ---------- */
@@ -144,15 +163,21 @@ export function registerBilling(api, { needUser, needAdmin, needConsent }) {
     res.json({ ...s, configured: Boolean(config.fedapayKey), mode: config.fedapayEnv,
       webhookUrl: `${config.publicUrl}/api/billing/webhook`,
       revenue: one("SELECT COALESCE(SUM(amount), 0) AS t FROM payments WHERE status = 'approved'").t,
-      subscribers: one("SELECT COUNT(*) AS n FROM users WHERE premium_until > ?", now()).n });
+      subscribers: one("SELECT COUNT(*) AS n FROM users WHERE premium_until > ?", now()).n,
+      trials: one("SELECT COUNT(*) AS n FROM users WHERE trial_used_at IS NOT NULL").n,
+      convertedTrials: one("SELECT COUNT(DISTINCT u.id) AS n FROM users u JOIN payments p ON p.user_id = u.id WHERE u.trial_used_at IS NOT NULL AND p.status = 'approved' AND p.provider != 'essai'").n });
   });
   api.patch("/admin/billing", needAdmin, (req, res) => {
     const price = v => { if (v === null || v === "" || v === undefined) return null; const n = Number(v); if (!Number.isInteger(n) || n < 100 || n > 5000000) fail(400, "Prix invalide : un nombre entier entre 100 et 5 000 000 FCFA."); return n; };
-    const s = { enabled: req.body?.enabled === true, priceMonthly: price(req.body?.priceMonthly), priceYearly: price(req.body?.priceYearly) };
+    const cur = getBillingSettings(); // un réglage absent de la requête garde sa valeur actuelle
+    const days = req.body?.trialDays === undefined ? cur.trialDays : Number(req.body.trialDays);
+    if (!Number.isInteger(days) || days < 1 || days > 90) fail(400, "La durée de l'essai doit être comprise entre 1 et 90 jours.");
+    const s = { enabled: req.body?.enabled === true, priceMonthly: price(req.body?.priceMonthly), priceYearly: price(req.body?.priceYearly),
+      trialEnabled: req.body?.trialEnabled === undefined ? cur.trialEnabled : req.body.trialEnabled === true, trialDays: days };
     if (s.enabled && !s.priceMonthly && !s.priceYearly) fail(400, "Fixe au moins un prix avant d'ouvrir la vente.");
     setBillingSettings(s);
     res.json(s);
   });
   api.get("/admin/payments", needAdmin, (req, res) => res.json(all("SELECT p.*, u.display_name, u.email FROM payments p JOIN users u ON u.id = p.user_id ORDER BY p.created_at DESC LIMIT 300")
-    .map(p => ({ user: `${p.display_name} (${p.email})`, plan: PLANS[p.plan]?.label || p.plan, amount: p.amount, status: p.status, createdAt: p.created_at }))));
+    .map(p => ({ user: `${p.display_name} (${p.email})`, plan: planLabel(p.plan), amount: p.amount, status: p.status, createdAt: p.created_at }))));
 }

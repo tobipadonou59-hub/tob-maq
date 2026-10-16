@@ -111,4 +111,37 @@ test("l'administration voit les paiements et le chiffre d'affaires", async () =>
   assert.equal(b.data.revenue, 2500); assert.equal(b.data.subscribers, 1);
   assert.match(b.data.webhookUrl, /\/api\/billing\/webhook$/);
   assert.equal((await a("GET", "/api/admin/payments")).data.length, 2);
+  assert.equal(b.data.trials, 0);
+});
+
+test("essai gratuit : 30 jours, une seule fois par compte, sans paiement", async () => {
+  const c = client(); await reg(c, "Essai", "essai@exemple.bj");
+  const plans = (await c("GET", "/api/billing/plans")).data;
+  assert.deepEqual(plans.trial, { enabled: true, days: 30 });
+  assert.equal((await c("GET", "/api/premium/lessons/test-premium")).data.code, "PREMIUM_REQUIRED");
+  const t = await c("POST", "/api/billing/trial");
+  assert.equal(t.status, 200);
+  const days = (new Date(t.data.premiumUntil) - Date.now()) / 864e5;
+  assert.ok(days > 29.9 && days <= 30.01);
+  const me = (await c("GET", "/api/auth/me")).data.user;
+  assert.equal(me.premium, true); assert.equal(me.trialUsed, true);
+  assert.equal((await c("GET", "/api/premium/lessons/test-premium")).status, 200, "l'essai donne accès au contenu premium");
+  assert.equal((await c("GET", "/api/me/billing")).data.onTrial, true);
+  assert.equal((await c("POST", "/api/billing/trial")).data.code, "TRIAL_USED", "un seul essai par compte");
+  const deux = await Promise.all([client(), client()].map(async (x, i) => { await x("POST", "/api/auth/login", { email: "essai@exemple.bj", password: "motdepasse12" }); return x("POST", "/api/billing/trial"); }));
+  assert.ok(deux.every(r => r.status === 409));
+});
+
+test("l'administration peut désactiver l'essai ou changer sa durée", async () => {
+  const a = client(); await a("POST", "/api/auth/login", { email: "admin@tob-maq.test", password: "motdepasse12" });
+  assert.equal((await a("PATCH", "/api/admin/billing", { enabled: true, priceMonthly: 2500, trialEnabled: true, trialDays: 200 })).status, 400);
+  assert.equal((await a("PATCH", "/api/admin/billing", { enabled: true, priceMonthly: 2500, trialEnabled: false, trialDays: 14 })).status, 200);
+  const c = client(); await reg(c, "Tardif", "tardif@exemple.bj");
+  assert.equal((await c("POST", "/api/billing/trial")).data.code, "TRIAL_CLOSED");
+  await a("PATCH", "/api/admin/billing", { enabled: true, priceMonthly: 2500, trialEnabled: true, trialDays: 14 });
+  const t = await c("POST", "/api/billing/trial");
+  const days = (new Date(t.data.premiumUntil) - Date.now()) / 864e5;
+  assert.ok(days > 13.9 && days <= 14.01);
+  const b = (await a("GET", "/api/admin/billing")).data;
+  assert.equal(b.trials, 2); assert.equal(b.revenue, 2500, "les essais ne comptent pas dans le chiffre d'affaires");
 });

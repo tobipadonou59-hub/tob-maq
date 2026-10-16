@@ -24,7 +24,7 @@ const COOKIE = "tobmaq_sid";
 const publicUser = u => ({
   displayName: u.display_name, email: u.email, level: u.level || "", interests: JSON.parse(u.interests || "[]"), role: u.role,
   ageGroup: u.age_group, pendingParentalConsent: u.age_group === "mineur" && !u.parent_consent_at,
-  premium: isPremium(u), premiumUntil: u.premium_until || null
+  premium: isPremium(u), premiumUntil: u.premium_until || null, trialUsed: Boolean(u.trial_used_at)
 });
 const authorName = u => u.age_group === "mineur" ? "Apprenant TOB-MAQ" : u.display_name; // jamais de nom affiché pour un mineur
 const ip = req => req.ip || req.socket.remoteAddress || "?";

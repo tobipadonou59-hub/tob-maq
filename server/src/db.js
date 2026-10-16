@@ -63,6 +63,7 @@ CREATE INDEX IF NOT EXISTS idx_projects_status ON projects(status);
 
 // Évolutions du schéma sur une base existante (sans effet si déjà appliquées)
 try { db.exec("ALTER TABLE users ADD COLUMN premium_until TEXT"); } catch { /* colonne déjà présente */ }
+try { db.exec("ALTER TABLE users ADD COLUMN trial_used_at TEXT"); } catch { /* colonne déjà présente */ }
 
 export const one = (sql, ...p) => db.prepare(sql).get(...p);
 export const all = (sql, ...p) => db.prepare(sql).all(...p);
@@ -79,7 +80,7 @@ export function setAiSettings(v) {
 }
 
 /* Abonnement Premium : prix en FCFA fixés par l'administration (null = pas encore fixé). */
-const BILLING_DEFAULTS = { enabled: false, priceMonthly: null, priceYearly: null };
+const BILLING_DEFAULTS = { enabled: false, priceMonthly: null, priceYearly: null, trialEnabled: true, trialDays: 30 };
 export function getBillingSettings() {
   const r = one("SELECT value FROM settings WHERE key = 'billing'");
   return { ...BILLING_DEFAULTS, ...(r ? JSON.parse(r.value) : {}) };
