@@ -49,7 +49,11 @@ export function createApp() {
     const t = parseCookies(req.headers.cookie)[COOKIE];
     if (t) {
       const s = one("SELECT s.expires_at AS session_expires, u.* FROM sessions s JOIN users u ON u.id = s.user_id WHERE s.token_hash = ?", sha256(t));
-      if (s && s.session_expires > Date.now()) req.user = s;
+      if (s && s.session_expires > Date.now()) {
+        // Une adresse listée dans ADMIN_EMAILS devient administrateur, même si le compte existait déjà.
+        if (s.role !== "admin" && config.adminEmails.includes(s.email)) { run("UPDATE users SET role = 'admin' WHERE id = ?", s.id); s.role = "admin"; }
+        req.user = s;
+      }
       else if (s) run("DELETE FROM sessions WHERE token_hash = ?", sha256(t));
     }
     next();
@@ -126,6 +130,7 @@ export function createApp() {
     const u = one("SELECT * FROM users WHERE email = ?", mail);
     const ok = await verifyPassword(typeof b.password === "string" ? b.password : "", u?.password_hash);
     if (!u || !ok) fail(401, "Adresse e-mail ou mot de passe incorrect.", "BAD_CREDENTIALS");
+    if (u.role !== "admin" && config.adminEmails.includes(u.email)) { run("UPDATE users SET role = 'admin' WHERE id = ?", u.id); u.role = "admin"; }
     openSession(req, res, u.id);
     res.json({ user: publicUser(u) });
   });

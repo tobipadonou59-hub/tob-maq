@@ -175,3 +175,13 @@ test("limitation des tentatives de connexion", async () => {
   for (let i = 0; i < 9; i++) last = await c("POST", "/api/auth/login", { email: "cible@exemple.bj", password: "essai12345" });
   assert.equal(last.status, 429);
 });
+
+test("une adresse ajoutée à ADMIN_EMAILS après l'inscription devient administrateur à la connexion", async () => {
+  const { config } = await import("../src/config.js");
+  const c = client();
+  await c("POST", "/api/auth/register", { ...adult, displayName: "Tardif", email: "tardif@exemple.bj" });
+  assert.equal((await c("GET", "/api/auth/me")).data.user.role, "membre");
+  config.adminEmails.push("tardif@exemple.bj");
+  assert.equal((await c("GET", "/api/auth/me")).data.user.role, "admin");
+  assert.equal((await c("GET", "/api/admin/stats")).status, 200);
+});

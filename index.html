@@ -2884,10 +2884,10 @@ function applyPrefs() {
 function renderAuth() {
   const u = state.user;
   $("#authActions").innerHTML = u
-    ? `<a class="btn btn-ghost btn-sm hide-m" href="#/tableau-de-bord">${icon("user")} ${esc(u.displayName)}</a><button class="btn btn-outline btn-sm hide-m" data-logout>${icon("logout")} Déconnexion</button>`
+    ? `${u.role === "admin" ? `<a class="btn btn-outline btn-sm hide-m" href="#/admin">${icon("shield")} Administration</a>` : ""}<a class="btn btn-ghost btn-sm hide-m" href="#/tableau-de-bord">${icon("user")} ${esc(u.displayName)}</a><button class="btn btn-outline btn-sm hide-m" data-logout>${icon("logout")} Déconnexion</button>`
     : `<a class="btn btn-ghost hide-m" href="#/connexion">Connexion</a><a class="btn btn-primary btn-sm" href="#/inscription">S'inscrire</a>`;
   $("#mobileAuth").innerHTML = u
-    ? `<a href="#/tableau-de-bord">${icon("user")} Tableau de bord</a><a href="#/parametres">${icon("settings")} Paramètres</a><a href="#" data-logout>${icon("logout")} Déconnexion</a>`
+    ? `${u.role === "admin" ? `<a href="#/admin">${icon("shield")} Administration</a>` : ""}<a href="#/tableau-de-bord">${icon("user")} Tableau de bord</a><a href="#/parametres">${icon("settings")} Paramètres</a><a href="#" data-logout>${icon("logout")} Déconnexion</a>`
     : `<a href="#/connexion">${icon("user")} Connexion</a><a href="#/tableau-de-bord">${icon("chart")} Tableau de bord</a><a href="#/parametres">${icon("settings")} Paramètres</a>`;
 }
 
