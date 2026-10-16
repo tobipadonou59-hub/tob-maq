@@ -33,5 +33,8 @@ export const config = {
   openaiImageModel: env("OPENAI_IMAGE_MODEL", "gpt-image-1"),
   imageCostFcfa: num("AI_IMAGE_COST_FCFA", 40),
   maxUploadMb: num("MAX_UPLOAD_MB", 50),
-  sessionDays: num("SESSION_DAYS", 30)
+  sessionDays: num("SESSION_DAYS", 30),
+  fedapayKey: env("FEDAPAY_SECRET_KEY"),
+  fedapayEnv: env("FEDAPAY_ENV", "sandbox"),           // "sandbox" pour les essais, "live" pour encaisser
+  fedapayApiUrl: env("FEDAPAY_API_URL")                // réservé aux tests automatiques
 };

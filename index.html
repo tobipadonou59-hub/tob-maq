@@ -1169,6 +1169,16 @@ async function syncAccount() {
   try { state.aiConfig = await api.request("/ai/config"); } catch { /* studio en mode dégradé */ }
 }
 
+/* Offres Premium et liste des leçons premium (titres seulement, le contenu reste sur le serveur). */
+async function loadPremium() {
+  try { state.billing = await api.request("/billing/plans"); } catch { state.billing = null; }
+  try {
+    for (const l of await api.request("/premium/catalog"))
+      LESSONS[l.id] = { ...(LESSONS[l.id] || {}), title: l.title, minutes: l.minutes, software: l.software || "", level: l.level || "", premium: true, soon: false, loaded: false };
+  } catch { /* catalogue indisponible : les leçons restent « bientôt » */ }
+}
+const isPremiumUser = () => Boolean(state.user && (state.user.premium || state.user.role === "admin"));
+
 /* Téléchargement d'un fichier public : capacité de téléchargement de claude.ai
    en version hébergée, lien direct sinon. Renvoie true si le fichier est remis. */
 async function downloadFile(url, filename) {
@@ -1528,10 +1538,10 @@ function renderFormations(main, q) {
     <div class="grid g3" id="fList"></div>
   </div></section>
   <section class="section-sm"><div class="wrap">
-    <div class="head"><span class="eyebrow">Offres</span><h2>Gratuit pour commencer</h2><p>Les tarifs premium seront affichés en ${CONFIG.CURRENCY} dès qu'ils seront définis. Aucun paiement n'est actif pour le moment.</p></div>
+    <div class="head"><span class="eyebrow">Offres</span><h2>Gratuit pour commencer</h2><p>${state.billing?.enabled ? "Passe Premium pour débloquer toutes les formations premium, avec un paiement par MTN MoMo, Moov Money ou carte." : `Les tarifs premium seront affichés en ${CONFIG.CURRENCY} dès qu'ils seront définis.`}</p></div>
     <div class="grid g3">
       <article class="card offer feat"><span class="chip chip-ok">Disponible</span><h3>Gratuit</h3><div class="price">0 ${CONFIG.CURRENCY}</div><ul><li>Formations gratuites</li><li>Tous les jeux et défis</li><li>Ressources en accès libre</li></ul><a class="btn btn-primary" href="#/inscription">S'inscrire</a></article>
-      <article class="card offer"><span class="chip chip-orange">Bientôt</span><h3>Premium</h3><div class="price">Tarif à venir</div><ul><li>Formations complètes premium</li><li>Fichiers sources et packs</li><li>Certificat de fin de formation</li></ul><button class="btn btn-outline" disabled>Paiement non activé</button></article>
+      <article class="card offer"><span class="chip ${state.billing?.enabled ? "chip-ok" : "chip-orange"}">${state.billing?.enabled ? "Disponible" : "Bientôt"}</span><h3>Premium</h3><div class="price">${state.billing?.enabled ? `dès ${nf(Math.min(...state.billing.plans.map(p => p.price)))} ${CONFIG.CURRENCY}` : "Tarif à venir"}</div><ul><li>Formations complètes premium</li><li>Fichiers sources et packs</li><li>Paiement MTN MoMo, Moov Money ou carte</li></ul><a class="btn ${state.billing?.enabled ? "btn-grad" : "btn-outline"}" href="#/premium">Découvrir Premium</a></article>
       <article class="card offer"><span class="chip chip-orange">Bientôt</span><h3>Crédits IA</h3><div class="price">Packs à venir</div><ul><li>Générations d'images</li><li>Générations de vidéos</li><li>Quotas affichés avant chaque génération</li></ul><button class="btn btn-outline" disabled>Paiement non activé</button></article>
     </div></div></section>`;
   const upd = () => {
@@ -1604,7 +1614,7 @@ function renderFormation(main, id) {
       ${f.modules.map((m, i) => `<details class="module" ${i === 0 ? "open" : ""}><summary><span><span class="mono muted">Module ${i + 1}</span> · ${esc(m.title)}</span>${icon("chevron")}</summary>
         ${m.lessons.map(lid => { const l = LESSONS[lid]; const done = state.lessonsDone[lid]; return `<div class="lesson-row"><span class="done-dot ${done ? "on" : ""}" aria-label="${done ? "Terminée" : "À faire"}">${done ? icon("check") : ""}</span>
           <span class="t">${l.soon ? `<span>${esc(l.title)}</span>` : `<a href="#/cours/${lid}">${esc(l.title)}</a>`}</span>
-          ${l.soon ? `<span class="chip">Bientôt</span>` : `<span class="mono small muted">${l.minutes} min</span>`}</div>`; }).join("")}</details>`).join("")}
+          ${l.soon ? `<span class="chip">Bientôt</span>` : l.premium && !isPremiumUser() ? `<span class="chip chip-orange">${icon("lock")} Premium</span>` : `<span class="mono small muted">${l.minutes} min</span>`}</div>`; }).join("")}</details>`).join("")}
     </div>
     <aside class="stack">
       <div class="card"><h3>Objectifs</h3><ul class="checks">${f.goals.map(g => `<li>${icon("check")}<span>${esc(g)}</span></li>`).join("")}</ul></div>
@@ -1626,6 +1636,18 @@ function renderLesson(main, lid) {
     main.innerHTML = `<section class="section-sm"><div class="wrap">${emptyState({ ic: "clock", title: esc(l.title), text: "Cette leçon est en préparation. Elle sera publiée après validation par un formateur.", action: `<a class="btn btn-primary" href="#/formation/${f.id}">Retour à la formation</a>` })}</div></section>`;
     return;
   }
+  if (l.premium && !l.loaded) {
+    const paywall = msg => { main.innerHTML = `<section class="section-sm"><div class="wrap">${emptyState({ ic: "lock", title: esc(l.title), text: msg,
+      action: `<div class="row" style="justify-content:center">${state.user ? `<a class="btn btn-grad" href="#/premium">Passer Premium</a>` : `<a class="btn btn-grad" href="#/inscription">Créer un compte</a><a class="btn btn-outline" href="#/connexion">Se connecter</a>`}<a class="btn btn-ghost" href="#/formation/${f.id}">Retour à la formation</a></div>` })}</div></section>`; };
+    if (!state.user) return paywall("Cette leçon est réservée aux membres Premium. Connecte-toi ou crée un compte pour y accéder.");
+    if (!isPremiumUser()) return paywall("Cette leçon fait partie de l'abonnement Premium.");
+    main.innerHTML = `<div class="boot"><span class="spinner"></span><span>Chargement de la leçon…</span></div>`;
+    api.request(`/premium/lessons/${encodeURIComponent(lid)}`).then(d => {
+      LESSONS[lid] = { ...LESSONS[lid], ...d, premium: true, loaded: true, steps: d.steps || [], quiz: d.quiz || [], recap: d.recap || [] };
+      if (renderedPath === `cours/${lid}`) renderLesson(main, lid);
+    }).catch(e => { if (e.code === "PREMIUM_REQUIRED") paywall("Cette leçon fait partie de l'abonnement Premium."); else main.innerHTML = `<section class="section-sm"><div class="wrap">${alertBox("error", `<p>${esc(e.message)}</p>`)}</div></section>`; });
+    return;
+  }
   const lv = state.user?.level || state.profile.level;
   const res = l.resource ? RESOURCES.find(r => r.id === l.resource) : null;
   const n = (() => { let i = 0; return () => String(++i).padStart(2, "0"); })();
@@ -1639,19 +1661,19 @@ function renderLesson(main, lid) {
         <h1 tabindex="-1" style="font-size:clamp(1.8rem,3.6vw,2.6rem)">${esc(l.title)}</h1>
         <section><h2><span class="n">${n()}</span> Objectif pédagogique</h2><p class="objective">${esc(l.objective)}</p></section>
         <section><h2><span class="n">${n()}</span> Explication</h2>${l.intro}
-          <div class="grid g2" style="margin-top:12px">${(!lv || lv !== "Avancé") ? `<div class="tip"><b>Si tu débutes</b>${esc(l.beginner)}</div>` : ""}${(!lv || lv !== "Débutant") ? `<div class="tip"><b>Pour aller plus loin</b>${esc(l.advanced)}</div>` : ""}</div>
+          <div class="grid g2" style="margin-top:12px">${l.beginner && (!lv || lv !== "Avancé") ? `<div class="tip"><b>Si tu débutes</b>${esc(l.beginner)}</div>` : ""}${l.advanced && (!lv || lv !== "Débutant") ? `<div class="tip"><b>Pour aller plus loin</b>${esc(l.advanced)}</div>` : ""}</div>
           ${lv ? "" : `<p class="small muted" style="margin-top:8px">Indique ton niveau dans <a href="#/profil">ton profil</a> pour adapter les explications.</p>`}</section>
         ${l.software.match(/Premiere|Resolve|CapCut/) ? `<section><h2><span class="n">${n()}</span> Démonstration vidéo</h2>${l.video ? `<video controls preload="none" style="width:100%;border-radius:12px" src="${esc(l.video)}"></video>` : emptyState({ ic: "video", title: "Vidéo en préparation", text: "La démonstration filmée sera ajoutée ici. Elle se chargera seulement quand tu appuieras sur lecture, pour économiser ta connexion." })}</section>` : ""}
         <section><h2><span class="n">${n()}</span> Tutoriel étape par étape</h2><ol class="howto">${l.steps.map(s => `<li><b>${esc(s.t)}</b><p>${esc(s.d)}</p>${s.keys ? `<div class="keys">${s.keys.map(k => `<span class="kbd">${esc(k)}</span>`).join("")}</div>` : ""}</li>`).join("")}</ol>
           ${keyList.length ? `<p class="small muted" style="margin-top:10px">Raccourcis Windows. Sur Mac : Ctrl → Cmd, Alt → Option.</p>` : ""}</section>
         ${l.params ? `<section><h2><span class="n">${n()}</span> Paramètres importants</h2><div class="params">${l.params.map(([k, v]) => `<div class="param"><b>${esc(k)}</b><span>${esc(v)}</span></div>`).join("")}</div></section>` : ""}
-        <section><h2><span class="n">${n()}</span> Illustration</h2><figure class="figure"><div class="art">${l.illustration === "grade" ? compareWidget() : ILLUSTRATIONS[l.illustration]()}</div><figcaption>${esc(l.caption)}</figcaption></figure></section>
+        ${l.illustration === "grade" || ILLUSTRATIONS[l.illustration] ? `<section><h2><span class="n">${n()}</span> Illustration</h2><figure class="figure"><div class="art">${l.illustration === "grade" ? compareWidget() : ILLUSTRATIONS[l.illustration]()}</div><figcaption>${esc(l.caption)}</figcaption></figure></section>` : ""}
         ${l.before ? `<section><h2><span class="n">${n()}</span> Avant / après</h2><div class="grid g2"><div class="card"><span class="chip">Avant</span><p style="margin-top:8px">${esc(l.before)}</p></div><div class="card"><span class="chip chip-ok">Après</span><p style="margin-top:8px">${esc(l.after)}</p></div></div></section>` : ""}
         <section><h2><span class="n">${n()}</span> Exemple de réalisation</h2><p>${esc(l.example)}</p></section>
         <section><h2><span class="n">${n()}</span> Exercice pratique</h2><div class="card"><p style="color:var(--ink)">${esc(l.exercise)}</p>
           ${res ? `<div class="row" style="margin-top:14px"><button class="btn btn-primary btn-sm" data-dl="${res.id}">${icon("download")} ${esc(res.title)}</button><span class="small muted">${res.format} · ${res.size}</span></div>` : `<p class="small" style="margin-top:10px">Aucun fichier source pour cet exercice : utilise tes propres images ou rushes.</p>`}</div></section>
-        <section><h2><span class="n">${n()}</span> Quiz de validation</h2><form id="lessonQuiz">${l.quiz.map((q, i) => `<fieldset class="quiz-q"><legend>${i + 1}. ${esc(q.q)}</legend>${q.choices.map((c, j) => `<label><input type="radio" name="q${i}" value="${j}"> ${esc(c)}</label>`).join("")}<p class="small" data-explain hidden></p></fieldset>`).join("")}
-          <div id="quizMsg" aria-live="polite"></div><button class="btn btn-primary" type="submit">Vérifier mes réponses</button></form></section>
+        ${l.quiz.length ? `<section><h2><span class="n">${n()}</span> Quiz de validation</h2><form id="lessonQuiz">${l.quiz.map((q, i) => `<fieldset class="quiz-q"><legend>${i + 1}. ${esc(q.q)}</legend>${q.choices.map((c, j) => `<label><input type="radio" name="q${i}" value="${j}"> ${esc(c)}</label>`).join("")}<p class="small" data-explain hidden></p></fieldset>`).join("")}
+          <div id="quizMsg" aria-live="polite"></div><button class="btn btn-primary" type="submit">Vérifier mes réponses</button></form></section>` : ""}
         <section class="recap"><h2>Fiche récapitulative</h2><ul>${l.recap.map(r => `<li>${esc(r)}</li>`).join("")}</ul>
           ${res ? `<button class="btn btn-white btn-sm" style="margin-top:14px" data-dl="${res.id}">${icon("download")} Télécharger les ressources</button>` : ""}</section>
         <div class="row between" style="margin-top:28px">
@@ -1661,7 +1683,7 @@ function renderLesson(main, lid) {
       </article>
     </div></div></section>`;
   bindCompare(main);
-  $("#lessonQuiz").addEventListener("submit", e => {
+  $("#lessonQuiz")?.addEventListener("submit", e => {
     e.preventDefault();
     let score = 0, answered = true;
     l.quiz.forEach((q, i) => {
@@ -1871,6 +1893,25 @@ function renderLogin(main) {
     });
   });
 }
+function renderPremium(main) {
+  const b = state.billing, u = state.user;
+  main.innerHTML = pageHead({ crumbs: [["Premium"]], eyebrow: "Abonnement", title: "TOB-MAQ Premium", lead: "Toutes les formations premium et leurs leçons approfondies, pour progresser plus vite." }) + `<section class="section-sm"><div class="wrap">
+    ${isPremiumUser() && u.premiumUntil ? alertBox("ok", `<p><strong>Tu es membre Premium</strong> jusqu'au ${fmtDate(u.premiumUntil)}. Un nouveau paiement prolonge ton accès.</p>`) + "<div style='height:16px'></div>" : ""}
+    ${!api.configured ? alertBox("warn", "<p>L'abonnement nécessite le serveur TOB-MAQ.</p>") : !b?.enabled ? emptyState({ ic: "clock", title: "Bientôt disponible", text: "L'abonnement Premium n'est pas encore ouvert. Les formations gratuites, les jeux et les ressources libres restent accessibles." }) : `
+    <div class="grid g3">${b.plans.map(p => `<article class="card offer ${p.id === "an" ? "feat" : ""}"><h3>Premium · ${esc(p.label)}</h3><div class="price">${nf(p.price)} ${esc(b.currency)}</div>
+      <ul><li>Toutes les leçons premium</li><li>Accès pendant ${p.days} jours</li><li>MTN MoMo, Moov Money ou carte</li></ul>
+      <button class="btn btn-grad" data-buy="${esc(p.id)}">${u ? "Payer avec FedaPay" : "Créer un compte pour s'abonner"}</button></article>`).join("")}</div>
+    ${b.mode !== "live" ? `<p class="small muted" style="margin-top:12px">Mode test : aucun argent réel n'est prélevé.</p>` : ""}
+    <p class="small muted" style="margin-top:8px">Le paiement se fait sur la page sécurisée de FedaPay. Aucun renouvellement automatique : tu repaies quand tu veux prolonger.</p>
+    ${u?.pendingParentalConsent ? alertBox("info", "<p>L'abonnement sera possible quand ton parent ou tuteur aura donné son accord.</p>") : ""}`}
+    <div id="buyMsg" aria-live="assertive" style="margin-top:14px"></div></div></section>`;
+  $$("[data-buy]", main).forEach(btn => btn.addEventListener("click", async () => {
+    if (!state.user) return go("#/inscription");
+    const label = btn.innerHTML; btn.disabled = true; btn.innerHTML = `<span class="spinner" aria-hidden="true"></span> Ouverture du paiement…`;
+    try { const d = await api.request("/billing/checkout", { method: "POST", body: { plan: btn.dataset.buy } }); window.location.href = d.url; }
+    catch (e) { $("#buyMsg").innerHTML = alertBox("error", `<p>${esc(e.message)}</p>`); btn.disabled = false; btn.innerHTML = label; }
+  }));
+}
 function renderReset(main, q) {
   main.innerHTML = pageHead({ crumbs: [["Nouveau mot de passe"]], title: "Choisir un nouveau mot de passe" }) + `
   <section class="section-sm"><div class="wrap" style="max-width:560px"><form class="card" id="reset" novalidate style="padding:26px">
@@ -1897,8 +1938,11 @@ function bindPw(root) {
 }
 
 /* ---------- Tableau de bord ---------- */
-function renderDashboard(main) {
+function renderDashboard(main, q = new URLSearchParams()) {
   const u = state.user;
+  const pay = q.get("paiement");
+  if (pay) toast({ ok: "Paiement confirmé : bienvenue dans Premium !", attente: "Paiement en attente de confirmation. Il sera pris en compte automatiquement.",
+    echec: "Le paiement n'a pas abouti. Aucun accès n'a été débloqué.", erreur: "Impossible de vérifier le paiement pour l'instant. Réessaie dans quelques minutes." }[pay] || "Retour du paiement.", pay === "ok" ? "check" : "info");
   const followed = FORMATIONS.map(f => ({ f, p: formationProgress(f) })).filter(x => x.p.done);
   const played = Object.entries(state.games).map(([id, g]) => ({ g: GAMES.find(x => x.id === id), s: g })).filter(x => x.g);
   const points = played.reduce((n, x) => n + Math.max(0, ...Object.values(x.s.best || {})), 0);
@@ -1921,11 +1965,19 @@ function renderDashboard(main) {
         <div class="card"><h2 style="font-size:1.2rem">Projets enregistrés</h2>${u ? `<div id="myProjects">${emptyState({ ic: "layers", title: "Chargement…", text: "" })}</div>` : emptyState({ ic: "layers", title: "Connecte-toi pour enregistrer tes projets", text: "Tes créations IA et tes projets de portfolio sont stockés sur le serveur, liés à ton compte." })}</div>
       </div>
       <div class="stack">
+        <div class="card"><h2 style="font-size:1.2rem">Abonnement</h2><div id="premiumBox">${u ? `<p class="small">Chargement…</p>` : `<p class="small">Formule gratuite.</p><a class="btn btn-outline btn-sm" href="#/premium">Découvrir Premium</a>`}</div></div>
         <div class="card"><h2 style="font-size:1.2rem">Ressources favorites</h2>${favs.length ? `<ul class="list">${favs.map(r => `<li><a href="#/ressource/${r.id}">${esc(r.title)}</a></li>`).join("")}</ul>` : `<p class="small">Touche l'étoile d'une ressource pour l'ajouter ici.</p>`}</div>
         <div class="card"><h2 style="font-size:1.2rem">Historique des téléchargements</h2>${state.downloads.length ? `<ul class="list">${state.downloads.slice(0, 8).map(d => `<li><span>${esc(d.title)}</span><span class="small muted">${fmtDate(d.at)}</span></li>`).join("")}</ul>` : `<p class="small">Aucun téléchargement pour l'instant.</p>`}</div>
         <div class="card"><h2 style="font-size:1.2rem">Préférences</h2><p class="small">Thème, taille du texte, contraste et animations.</p><a class="btn btn-outline btn-sm" href="#/parametres" style="margin-top:10px">${icon("settings")} Paramètres</a></div>
       </div>
     </div></div></section>`;
+  if (u) api.request("/me/billing").then(b => {
+    state.user.premium = b.premium; state.user.premiumUntil = b.premiumUntil;
+    const box = $("#premiumBox"); if (!box) return;
+    box.innerHTML = (b.premium ? `<p><span class="chip chip-ok">Premium</span> ${b.premiumUntil ? `jusqu'au ${fmtDate(b.premiumUntil)}` : ""}</p><a class="btn btn-ghost btn-sm" href="#/premium">Prolonger</a>`
+      : `<p class="small">Formule gratuite.</p><a class="btn btn-grad btn-sm" href="#/premium">Passer Premium</a>`)
+      + (b.payments.length ? `<ul class="list" style="margin-top:10px">${b.payments.slice(0, 3).map(p => `<li><span class="small">${esc(p.plan)} · ${nf(p.amount)} FCFA</span><span class="chip ${p.status === "approved" ? "chip-ok" : ""}">${{ approved: "payé", pending: "en attente" }[p.status] || "non abouti"}</span></li>`).join("")}</ul>` : "");
+  }).catch(() => { const box = $("#premiumBox"); if (box) box.innerHTML = `<p class="small">Statut indisponible pour le moment.</p>`; });
   if (u) api.request("/me/projects").then(list => {
     $("#myProjects").innerHTML = list && list.length ? `<ul class="list">${list.map(p => `<li><span>${esc(p.title)}</span><span class="chip">${esc(p.visibility)}</span></li>`).join("")}</ul>` : `<p class="small">Aucun projet enregistré.</p>`;
   }).catch(e => { const z = $("#myProjects"); if (z) z.innerHTML = alertBox("error", `<p>${esc(e.message)}</p>`); });
@@ -2134,7 +2186,7 @@ function renderAdmin(main) {
       <div class="grid g4" style="margin-top:24px">${features.map(([ic, t]) => `<div class="card"><div class="badge-ic">${icon(ic)}</div><h3 style="font-size:1rem;margin:0">${t}</h3></div>`).join("")}</div></div></section>`;
     return;
   }
-  const tabs = { stats: "Statistiques", formations: "Formations", ressources: "Ressources", ia: "IA et quotas", moderation: "Modération", utilisateurs: "Utilisateurs", annonces: "Annonces" };
+  const tabs = { stats: "Statistiques", formations: "Formations", ressources: "Ressources", ia: "IA et quotas", moderation: "Modération", abonnements: "Abonnements", utilisateurs: "Utilisateurs", annonces: "Annonces" };
   main.innerHTML = pageHead({ crumbs: [["Administration"]], title: "Administration", lead: `Connecté en tant qu'administrateur : ${esc(state.user.displayName)}` }) + `<section class="section-sm"><div class="wrap">
     <div class="tabs" role="tablist">${Object.entries(tabs).map(([k, t], i) => `<button role="tab" data-tab="${k}" aria-selected="${i === 0}">${t}</button>`).join("")}</div><div id="adm" role="tabpanel"></div></div></section>`;
   const panel = $("#adm");
@@ -2178,6 +2230,27 @@ function renderAdmin(main) {
       }));
     },
     async utilisateurs() { panel.innerHTML = table(await api.request("/admin/users"), [["Pseudo", "displayName"], ["E-mail", "email"], ["Rôle", "role"], ["Âge", "ageGroup"], ["Inscrit le", r => fmtDate(r.createdAt)]]); },
+    async abonnements() {
+      const [b, pays] = await Promise.all([api.request("/admin/billing"), api.request("/admin/payments")]);
+      panel.innerHTML = `<div class="grid g2"><form class="card" id="billCfg" novalidate><h3>Abonnement Premium</h3>
+        ${b.configured ? alertBox(b.mode === "live" ? "ok" : "warn", `<p>FedaPay est connecté en mode <strong>${b.mode === "live" ? "réel (encaissement)" : "test : aucun argent réel"}</strong>.</p>`) : alertBox("warn", "<p>FedaPay n'est pas encore configuré : ajoute la variable <span class='mono'>FEDAPAY_SECRET_KEY</span> sur Render.</p>")}
+        <div class="field" style="margin-top:14px"><label for="pM">Prix pour 1 mois (${CONFIG.CURRENCY})</label><input class="input" id="pM" type="number" min="100" step="100" value="${b.priceMonthly ?? ""}" placeholder="Ex. 2000"></div>
+        <div class="field"><label for="pY">Prix pour 1 an (${CONFIG.CURRENCY})</label><input class="input" id="pY" type="number" min="100" step="100" value="${b.priceYearly ?? ""}" placeholder="Laisse vide pour ne pas le proposer"></div>
+        <label class="check"><input type="checkbox" id="pOn" ${b.enabled ? "checked" : ""}> Ouvrir la vente</label>
+        <p class="small muted" style="margin-top:12px">Adresse de notification à copier dans FedaPay (Webhooks) :<br><span class="mono" style="user-select:all;word-break:break-all">${esc(b.webhookUrl)}</span></p>
+        <div id="bMsg" aria-live="polite"></div><button class="btn btn-primary" type="submit">Enregistrer</button></form>
+        <div class="card"><h3>Résultats</h3><dl class="specs"><dt>Abonnés actifs</dt><dd>${nf(b.subscribers)}</dd><dt>Total encaissé</dt><dd>${nf(b.revenue)} ${CONFIG.CURRENCY}</dd></dl></div></div>
+        <h3 style="margin-top:24px">Paiements</h3>` + table(pays, [["Membre", "user"], ["Formule", "plan"], ["Montant", r => nf(r.amount) + " FCFA"], ["Statut", "status"], ["Date", r => fmtDate(r.createdAt)]]);
+      $("#billCfg").addEventListener("submit", async e => {
+        e.preventDefault();
+        await withLoading(e.currentTarget, "Enregistrement…", $("#bMsg"), async () => {
+          const v = id => $(id).value === "" ? null : Number($(id).value);
+          await api.request("/admin/billing", { method: "PATCH", body: { priceMonthly: v("#pM"), priceYearly: v("#pY"), enabled: $("#pOn").checked } });
+          try { state.billing = await api.request("/billing/plans"); } catch { /* sans incidence */ }
+          $("#bMsg").innerHTML = alertBox("ok", `<p>Enregistré. ${$("#pOn").checked ? "La vente est ouverte." : "La vente est fermée."}</p>`);
+        });
+      });
+    },
     async annonces() {
       panel.innerHTML = `<form class="card" id="ann" novalidate style="max-width:640px"><h3>Publier une annonce</h3><div class="field"><label for="aT">Titre</label><input class="input" id="aT" maxlength="100"></div><div class="field"><label for="aB">Texte</label><textarea class="input" id="aB" maxlength="1000"></textarea></div><div id="anMsg" aria-live="polite"></div><button class="btn btn-primary" type="submit">Publier</button></form>`;
       $("#ann").addEventListener("submit", async e => { e.preventDefault(); if (!$("#aT").value.trim() || !$("#aB").value.trim()) { $("#anMsg").innerHTML = alertBox("error", "<p>Titre et texte obligatoires.</p>"); return; }
@@ -2937,7 +3010,7 @@ const ROUTES = [
   [/^formation\/([\w-]+)$/, (m, p) => renderFormation(m, p[1])], [/^cours\/([\w-]+)$/, (m, p) => renderLesson(m, p[1])],
   [/^ia$/, (m, p, q) => renderStudio(m, q)], [/^jeux$/, m => renderGames(m)], [/^jeux\/([\w-]+)$/, (m, p, q) => renderGame(m, p[1], q)],
   [/^ressources$/, (m, p, q) => renderResources(m, q)], [/^ressource\/([\w-]+)$/, (m, p) => renderResource(m, p[1])],
-  [/^inscription$/, m => renderSignup(m)], [/^connexion$/, m => renderLogin(m)], [/^tableau-de-bord$/, m => renderDashboard(m)],
+  [/^inscription$/, m => renderSignup(m)], [/^connexion$/, m => renderLogin(m)], [/^tableau-de-bord$/, (m, p, q) => renderDashboard(m, q)], [/^premium$/, m => renderPremium(m)],
   [/^portfolio$/, m => renderPortfolio(m)], [/^projet\/([\w-]+)$/, (m, p) => renderProject(m, p[1])], [/^profil$/, m => renderProfile(m)],
   [/^parametres$/, m => renderSettings(m)], [/^aide$/, m => renderHelp(m)], [/^(conditions|confidentialite)$/, (m, p) => renderLegal(m, p[1])],
   [/^admin$/, m => renderAdmin(m)], [/^reinitialiser$/, (m, p, q) => renderReset(m, q)], [/^recherche$/, (m, p, q) => renderSearch(m, q)]
@@ -2990,6 +3063,7 @@ async function boot() {
   if (api.configured) {
     try { const d = await api.request("/auth/me"); state.user = d && d.user ? d.user : null; } catch { state.user = null; }
     if (state.user) await syncAccount(); else { try { state.aiConfig = await api.request("/ai/config"); } catch { state.aiConfig = null; } }
+    await loadPremium();
     renderAuth();
   }
   window.addEventListener("hashchange", () => { currentPath = stripHash(location.hash); if (renderedPath !== currentPath) route(); });

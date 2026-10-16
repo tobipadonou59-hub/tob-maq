@@ -11,6 +11,7 @@ import { config, SITE_DIR } from "./config.js";
 import { one, all, run, now, getAiSettings, setAiSettings } from "./db.js";
 import { HttpError, fail, hashPassword, verifyPassword, newToken, sha256, uid, rateLimit, text, email, password, oneOf, sniff, parseCookies } from "./security.js";
 import { sendMail } from "./mail.js";
+import { registerBilling, isPremium } from "./billing.js";
 import { imageProvider, videoProvider, generateImage, buildImagePrompt, buildDemoPrompt, IMAGE_SIZES, IMAGE_STYLES } from "./ai.js";
 
 const LEVELS = ["Débutant", "Intermédiaire", "Avancé"];
@@ -22,7 +23,8 @@ const COOKIE = "tobmaq_sid";
 
 const publicUser = u => ({
   displayName: u.display_name, email: u.email, level: u.level || "", interests: JSON.parse(u.interests || "[]"), role: u.role,
-  ageGroup: u.age_group, pendingParentalConsent: u.age_group === "mineur" && !u.parent_consent_at
+  ageGroup: u.age_group, pendingParentalConsent: u.age_group === "mineur" && !u.parent_consent_at,
+  premium: isPremium(u), premiumUntil: u.premium_until || null
 });
 const authorName = u => u.age_group === "mineur" ? "Apprenant TOB-MAQ" : u.display_name; // jamais de nom affiché pour un mineur
 const ip = req => req.ip || req.socket.remoteAddress || "?";
@@ -413,6 +415,7 @@ export function createApp() {
     res.status(201).json({ ok: true });
   });
   api.get("/announcements", (req, res) => res.json(all("SELECT title, body, created_at AS createdAt FROM announcements ORDER BY created_at DESC LIMIT 5")));
+  registerBilling(api, { needUser, needAdmin, needConsent });
   api.get("/health", (req, res) => res.json({ ok: true, ai: { images: Boolean(imageProvider), videos: Boolean(videoProvider) } }));
 
   api.use((req, res) => res.status(404).json({ message: "Route inconnue.", code: "NOT_FOUND" }));

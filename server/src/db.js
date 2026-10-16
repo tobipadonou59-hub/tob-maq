@@ -52,9 +52,17 @@ CREATE TABLE IF NOT EXISTS uploaded_resources (
   id TEXT PRIMARY KEY, title TEXT NOT NULL, licence TEXT NOT NULL, file TEXT NOT NULL, original_name TEXT NOT NULL,
   mime TEXT NOT NULL, published INTEGER NOT NULL DEFAULT 0, created_at TEXT NOT NULL);
 CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS payments (
+  id TEXT PRIMARY KEY, user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE, provider TEXT NOT NULL,
+  provider_tx_id TEXT, plan TEXT NOT NULL, amount INTEGER NOT NULL, status TEXT NOT NULL DEFAULT 'pending',
+  created_at TEXT NOT NULL, approved_at TEXT);
+CREATE INDEX IF NOT EXISTS idx_payments_tx ON payments(provider_tx_id);
 CREATE INDEX IF NOT EXISTS idx_usage_user ON ai_usage(user_id, kind, at);
 CREATE INDEX IF NOT EXISTS idx_projects_status ON projects(status);
 `);
+
+// Évolutions du schéma sur une base existante (sans effet si déjà appliquées)
+try { db.exec("ALTER TABLE users ADD COLUMN premium_until TEXT"); } catch { /* colonne déjà présente */ }
 
 export const one = (sql, ...p) => db.prepare(sql).get(...p);
 export const all = (sql, ...p) => db.prepare(sql).all(...p);
@@ -68,4 +76,14 @@ export function getAiSettings() {
 }
 export function setAiSettings(v) {
   run("INSERT INTO settings(key, value) VALUES('ai', ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value", JSON.stringify(v));
+}
+
+/* Abonnement Premium : prix en FCFA fixés par l'administration (null = pas encore fixé). */
+const BILLING_DEFAULTS = { enabled: false, priceMonthly: null, priceYearly: null };
+export function getBillingSettings() {
+  const r = one("SELECT value FROM settings WHERE key = 'billing'");
+  return { ...BILLING_DEFAULTS, ...(r ? JSON.parse(r.value) : {}) };
+}
+export function setBillingSettings(v) {
+  run("INSERT INTO settings(key, value) VALUES('billing', ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value", JSON.stringify(v));
 }

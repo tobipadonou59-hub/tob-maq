@@ -46,3 +46,22 @@ Onglet **Settings → Networking → Generate Domain**. Railway donne une adress
 
 ## Sauvegarde
 Railway permet de faire des sauvegardes du volume (onglet du volume → Backups). Active-les avant d'ouvrir le site au public.
+
+---
+
+## Encaisser les abonnements Premium (FedaPay)
+
+1. **Ouvre un compte marchand** sur https://fedapay.com (pièce d'identité et informations de l'activité demandées).
+2. Dans le tableau de bord FedaPay, en **mode Sandbox** (essais), va dans **Paramètres → Clés API** et copie la **clé secrète** (`sk_sandbox_…`).
+3. Sur Render → service **tob-maq** → **Environment**, ajoute :
+   - `FEDAPAY_SECRET_KEY` = la clé secrète copiée
+   - `FEDAPAY_ENV` = `sandbox`
+4. Sur le site, **Administration → Abonnements** : fixe le prix (1 mois et/ou 1 an), coche **Ouvrir la vente**, enregistre.
+   Copie l'**adresse de notification** affichée et colle-la dans FedaPay → **Webhooks** (événement « transaction approuvée »).
+5. Fais un essai complet avec les numéros de test de FedaPay : aucun argent réel n'est prélevé.
+6. Quand tout fonctionne et que ton compte FedaPay est validé : remplace la clé par la clé **live** (`sk_live_…`) et `FEDAPAY_ENV` par `live`.
+
+**Sécurité** : la clé secrète ne doit **jamais** être envoyée par message ni écrite dans le code. Elle reste uniquement dans les variables de Render.
+Le serveur revérifie chaque paiement auprès de FedaPay avant de débloquer l'accès.
+
+**Contenu premium** : chaque leçon premium est un fichier dans `server/contenus-premium/lecons/` (voir le README de ce dossier). Passe le dépôt GitHub en **privé** avant d'y ajouter du contenu payant.
