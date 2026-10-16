@@ -1,0 +1,17 @@
+{
+  "name": "tob-maq-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Serveur de TOB-MAQ : site, API, comptes, progression, IA, portfolio et administration.",
+  "type": "module",
+  "engines": { "node": ">=22.13" },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning src/index.js",
+    "create-admin": "node --disable-warning=ExperimentalWarning src/create-admin.js",
+    "test": "node --disable-warning=ExperimentalWarning --test test/*.test.js"
+  },
+  "dependencies": {
+    "express": "5.1.0",
+    "multer": "2.0.2"
+  }
+}

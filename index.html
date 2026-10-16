@@ -599,7 +599,7 @@ dialog::backdrop{background:rgb(11 14 23 / .6)}
    des fichiers sont appelés UNIQUEMENT par le backend (voir README).
    ========================================================================== */
 const CONFIG = {
-  API_BASE_URL: "",        // ex. "https://api.tob-maq.bj" — vide = aucun serveur branché
+  API_BASE_URL: "",        // "/api" (injecté automatiquement par le serveur TOB-MAQ) ou "https://api.exemple.bj" ; vide = aucun serveur
   CONTACT_EMAIL: "",       // affiché dans Aide et contact quand il est renseigné
   HOSTED: false,           // true pour la version publiée sur claude.ai (outil de construction)
   CURRENCY: "FCFA",
@@ -1123,7 +1123,7 @@ function toast(msg, ic = "check") {
 class ApiError extends Error { constructor(code, msg, status) { super(msg); this.code = code; this.status = status; } }
 const api = {
   get configured() { return Boolean(CONFIG.API_BASE_URL); },
-  get secure() { try { const u = new URL(CONFIG.API_BASE_URL); return u.protocol === "https:" || ["localhost", "127.0.0.1"].includes(u.hostname); } catch { return false; } },
+  get secure() { try { const u = new URL(CONFIG.API_BASE_URL, location.href); return u.protocol === "https:" || ["localhost", "127.0.0.1"].includes(u.hostname); } catch { return false; } },
   async request(path, { method = "GET", body, form, timeout = 20000 } = {}) {
     if (!this.configured) throw new ApiError("NO_BACKEND", "Le serveur de TOB-MAQ n'est pas encore connecté à ce prototype. Rien n'a été envoyé ni enregistré.");
     if (!this.secure) throw new ApiError("INSECURE", "Envoi bloqué : l'adresse du serveur doit utiliser HTTPS.");
@@ -1148,6 +1148,25 @@ function httpMessage(s) {
     404: "Contenu introuvable.", 409: "Un compte existe déjà avec cette adresse e-mail.", 413: "Le fichier est trop volumineux.",
     422: "La demande a été refusée par les règles de contenu. Reformule-la.", 429: "Limite atteinte. Réessaie plus tard ou consulte tes quotas." })[s]
     || "Une erreur est survenue sur le serveur. Réessaie un peu plus tard.";
+}
+
+/* Après connexion : envoie au serveur la progression faite sur cet appareil,
+   puis récupère la progression du compte (fusion, sans perte). */
+async function syncAccount() {
+  if (!state.user) return;
+  try {
+    const p = await api.request("/me/progress/import", { method: "POST", body: { lessonsDone: state.lessonsDone, games: state.games, favorites: state.favorites } });
+    state.lessonsDone = { ...state.lessonsDone, ...p.lessonsDone };
+    for (const [id, g] of Object.entries(p.games || {})) {
+      const loc = state.games[id] || { best: {}, plays: 0 };
+      const best = { ...loc.best };
+      for (const [l, v] of Object.entries(g.best)) best[l] = Math.max(best[l] || 0, v);
+      state.games[id] = { best, plays: Math.max(loc.plays, g.plays), lastAt: g.lastAt || loc.lastAt };
+    }
+    state.favorites = [...new Set([...state.favorites, ...(p.favorites || [])])];
+    ["lessonsDone", "games", "favorites"].forEach(save);
+  } catch { /* la progression locale reste utilisable */ }
+  try { state.aiConfig = await api.request("/ai/config"); } catch { /* studio en mode dégradé */ }
 }
 
 /* Téléchargement d'un fichier public : capacité de téléchargement de claude.ai
@@ -1806,7 +1825,7 @@ function renderSignup(main) {
       const d = await api.request("/auth/register", { method: "POST", body: { displayName: name, email: mail, password: pw, interests: doms, level: lvl, ageGroup: age, parentEmail: age === "mineur" ? parent : undefined, acceptTerms: true } });
       $("#sPw").value = "";
       if (!d || !d.user) throw new ApiError("BAD", "Réponse inattendue du serveur.");
-      state.user = d.user; renderAuth(); toast(d.user.pendingParentalConsent ? "Compte créé : en attente de l'accord parental" : "Bienvenue sur TOB-MAQ !");
+      state.user = d.user; renderAuth(); await syncAccount(); toast(d.user.pendingParentalConsent ? "Compte créé : un e-mail a été envoyé à ton parent pour son accord" : "Bienvenue sur TOB-MAQ !");
       go("#/tableau-de-bord");
     });
   });
@@ -1839,7 +1858,7 @@ function renderLogin(main) {
       const d = await api.request("/auth/login", { method: "POST", body: { email: mail, password: pw } });
       $("#lPw").value = "";
       if (!d || !d.user) throw new ApiError("BAD", "Réponse inattendue du serveur.");
-      state.user = d.user; renderAuth(); toast(`Bon retour, ${d.user.displayName} !`); go("#/tableau-de-bord");
+      state.user = d.user; renderAuth(); await syncAccount(); toast(`Bon retour, ${d.user.displayName} !`); go("#/tableau-de-bord");
     });
   });
   $("#forgot").addEventListener("submit", async e => {
@@ -1849,6 +1868,24 @@ function renderLogin(main) {
     await withLoading(e.currentTarget, "Envoi…", $("#fMsg"), async () => {
       await api.request("/auth/forgot-password", { method: "POST", body: { email: mail } });
       $("#fMsg").innerHTML = alertBox("ok", "<p>Si un compte existe avec cette adresse, un lien de réinitialisation vient d'être envoyé.</p>");
+    });
+  });
+}
+function renderReset(main, q) {
+  main.innerHTML = pageHead({ crumbs: [["Nouveau mot de passe"]], title: "Choisir un nouveau mot de passe" }) + `
+  <section class="section-sm"><div class="wrap" style="max-width:560px"><form class="card" id="reset" novalidate style="padding:26px">
+    ${q.get("token") ? "" : alertBox("error", "<p>Lien incomplet. Ouvre directement le lien reçu par e-mail.</p>")}
+    ${pwField("rPw", "Nouveau mot de passe", "new-password", "Au moins 10 caractères, avec des lettres et des chiffres.")}
+    <div id="rsMsg" aria-live="assertive"></div><button class="btn btn-primary btn-block" type="submit">Enregistrer</button></form></div></section>`;
+  bindPw(main);
+  $("#reset").addEventListener("submit", async e => {
+    e.preventDefault();
+    const pw = $("#rPw").value;
+    if (!fieldErr("rPw", pw.length >= 10 && /[A-Za-zÀ-ÿ]/.test(pw) && /\d/.test(pw) ? "" : "10 caractères minimum, avec au moins une lettre et un chiffre.")) return;
+    await withLoading(e.currentTarget, "Enregistrement…", $("#rsMsg"), async () => {
+      await api.request("/auth/reset-password", { method: "POST", body: { token: q.get("token") || "", password: pw } });
+      $("#rPw").value = "";
+      $("#rsMsg").innerHTML = alertBox("ok", `<p>Mot de passe modifié. <a href="#/connexion">Se connecter</a></p>`) + "<div style='height:12px'></div>";
     });
   });
 }
@@ -1959,6 +1996,7 @@ function renderPortfolio(main) {
   main.innerHTML = pageHead({ crumbs: [["Portfolio"]], eyebrow: "Communauté créative", title: "Portfolio", lead: "Affiches, logos, maquettes, vidéos et animations. Chaque projet publié est vérifié par la modération." }) + `
   <section class="section-sm"><div class="wrap">
     ${alertBox("info", "<p>Les projets affichés pour l'instant sont des <strong>exemples réalisés par l'équipe TOB-MAQ</strong>, pas des travaux d'apprenants.</p>")}
+    <div id="pfLive"></div>
     <div class="pills" role="group" aria-label="Filtrer par discipline" id="pfFilter" style="margin:20px 0"><label><input type="radio" name="disc" value="" checked><span>Tout</span></label>${PF_DISCIPLINES.map(d => `<label><input type="radio" name="disc" value="${d}"><span>${d}</span></label>`).join("")}</div>
     <div class="grid g4" id="pfList"></div>
   </div></section>
@@ -1985,6 +2023,11 @@ function renderPortfolio(main) {
     $("#pfList").innerHTML = list.map(pfCard).join("") || `<div style="grid-column:1/-1">${emptyState({ ic: "image", title: "Aucun projet dans cette discipline", text: "Sois le premier à publier !" })}</div>`;
   };
   $("#pfFilter").addEventListener("change", upd); upd();
+  if (api.configured) api.request("/portfolio").then(list => {
+    if (!list || !list.length || !$("#pfLive")) return;
+    $("#pfLive").innerHTML = `<h2 style="margin-top:24px">Projets des apprenants</h2><div class="grid g4">${list.map(p => `<article class="card pf-card"><div class="pf-thumb">${p.mime.startsWith("video/") ? `<video src="${esc(p.fileUrl)}" controls preload="none" style="width:100%;height:100%;object-fit:cover"></video>` : `<img src="${esc(p.fileUrl)}" alt="${esc(p.title)}" loading="lazy" style="width:100%;height:100%;object-fit:cover">`}</div>
+      <div class="pf-body"><div class="row"><span class="chip">${esc(p.discipline)}</span></div><h3>${esc(p.title)}</h3><p class="small muted" style="margin:0">${esc(p.author)}</p><p class="small" style="margin:0">${esc(p.description)}</p></div></article>`).join("")}</div><h2 style="margin-top:32px">Exemples TOB-MAQ</h2>`;
+  }).catch(() => {});
   $("#pfForm").addEventListener("submit", async e => {
     e.preventDefault();
     const f = e.currentTarget, file = $("#pfFile").files[0];
@@ -2097,8 +2140,8 @@ function renderAdmin(main) {
   const panel = $("#adm");
   const table = (rows, cols) => rows && rows.length ? `<div class="card table-wrap"><table><thead><tr>${cols.map(c => `<th>${c[0]}</th>`).join("")}</tr></thead><tbody>${rows.map(r => `<tr>${cols.map(c => `<td>${esc(typeof c[1] === "function" ? c[1](r) : r[c[1]])}</td>`).join("")}</tr>`).join("")}</tbody></table></div>` : `<p class="muted">Aucune donnée.</p>`;
   const views = {
-    async stats() { const d = await api.request("/admin/stats"); panel.innerHTML = `<div class="grid g4">${[["Comptes", d.users], ["Leçons terminées", d.lessonsCompleted], ["Téléchargements", d.downloads], ["Générations IA (mois)", d.aiGenerations]].map(([t, v]) => `<div class="card stat"><div><b>${esc(v ?? "–")}</b><span>${t}</span></div></div>`).join("")}</div>`; },
-    async formations() { panel.innerHTML = table(await api.request("/admin/formations"), [["Titre", "title"], ["Domaine", "domain"], ["Leçons", "lessons"], ["Statut", "status"]]); },
+    async stats() { const d = await api.request("/admin/stats"); panel.innerHTML = `<div class="grid g4">${[["Comptes", d.users], ["Leçons terminées", d.lessonsCompleted], ["Téléchargements", d.downloads], ["Générations IA (mois)", d.aiGenerations], ["Projets à modérer", d.pendingProjects], [`Coût IA du mois (${CONFIG.CURRENCY})`, d.monthCostFcfa]].map(([t, v]) => `<div class="card stat"><div><b>${esc(v ?? "–")}</b><span>${t}</span></div></div>`).join("")}</div>`; },
+    async formations() { panel.innerHTML = `<p class="muted">Leçons terminées par les apprenants inscrits.</p>` + table(await api.request("/admin/formations"), [["Leçon", r => (LESSONS[r.lessonId] || {}).title || r.lessonId], ["Apprenants", "count"]]); },
     async ressources() {
       panel.innerHTML = `<form class="card" id="upRes" novalidate style="max-width:640px"><h3>${icon("upload")} Importer une ressource</h3>
         <div class="field"><label for="uT">Titre</label><input class="input" id="uT" name="title" maxlength="120"></div>
@@ -2122,7 +2165,18 @@ function renderAdmin(main) {
       $("#aiCfg").addEventListener("submit", async e => { e.preventDefault();
         await withLoading(e.currentTarget, "Enregistrement…", $("#aMsg"), async () => { await api.request("/admin/ai-config", { method: "PATCH", body: { dailyImageQuota: +$("#qI").value, dailyVideoQuota: +$("#qV").value, monthlyBudget: +$("#qB").value, imageEnabled: $("#eI").checked, videoEnabled: $("#eV").checked } }); $("#aMsg").innerHTML = alertBox("ok", "<p>Configuration enregistrée.</p>"); }); });
     },
-    async moderation() { panel.innerHTML = table(await api.request("/admin/reports"), [["Projet", "projectTitle"], ["Motif", "reason"], ["Date", r => fmtDate(r.createdAt)], ["Statut", "status"]]); },
+    async moderation() {
+      const [pending, reports] = await Promise.all([api.request("/admin/projects?status=pending"), api.request("/admin/reports")]);
+      panel.innerHTML = `<h3>Projets en attente (${pending.length})</h3>${pending.length ? `<div class="grid g3">${pending.map(p => `<article class="card"><div class="pf-thumb" style="border-radius:10px;overflow:hidden;margin-bottom:12px">${p.mime.startsWith("video/") ? `<video src="${esc(p.fileUrl)}" controls preload="none" style="width:100%"></video>` : `<img src="${esc(p.fileUrl)}" alt="${esc(p.title)}" style="width:100%;height:100%;object-fit:cover">`}</div>
+        <h3 style="font-size:1rem;margin:0">${esc(p.title)}</h3><p class="small">${esc(p.author)} · ${esc(p.discipline)} · ${esc(p.visibility)}</p>
+        <div class="row" style="margin-top:10px"><button class="btn btn-primary btn-sm" data-mod="${esc(p.id)}" data-st="published">Publier</button><button class="btn btn-outline btn-sm" data-mod="${esc(p.id)}" data-st="rejected">Refuser</button></div></article>`).join("")}</div>` : `<p class="muted">Aucun projet en attente.</p>`}
+        <h3 style="margin-top:26px">Signalements</h3>` + table(reports, [["Projet", "projectTitle"], ["Motif", "reason"], ["Date", r => fmtDate(r.createdAt)], ["Statut", "status"]]);
+      $$("[data-mod]", panel).forEach(b => b.addEventListener("click", async () => {
+        b.disabled = true;
+        try { await api.request(`/admin/projects/${encodeURIComponent(b.dataset.mod)}`, { method: "PATCH", body: { status: b.dataset.st } }); toast(b.dataset.st === "published" ? "Projet publié" : "Projet refusé"); show("moderation"); }
+        catch (e) { b.disabled = false; toast(e.message, "alert"); }
+      }));
+    },
     async utilisateurs() { panel.innerHTML = table(await api.request("/admin/users"), [["Pseudo", "displayName"], ["E-mail", "email"], ["Rôle", "role"], ["Âge", "ageGroup"], ["Inscrit le", r => fmtDate(r.createdAt)]]); },
     async annonces() {
       panel.innerHTML = `<form class="card" id="ann" novalidate style="max-width:640px"><h3>Publier une annonce</h3><div class="field"><label for="aT">Titre</label><input class="input" id="aT" maxlength="100"></div><div class="field"><label for="aB">Texte</label><textarea class="input" id="aB" maxlength="1000"></textarea></div><div id="anMsg" aria-live="polite"></div><button class="btn btn-primary" type="submit">Publier</button></form>`;
@@ -2642,7 +2696,8 @@ function renderStudio(main, q) {
   const quota = k => cfg && cfg.quota && cfg.quota[k] ? `${cfg.quota[k].used} / ${cfg.quota[k].limit} aujourd'hui` : "défini par l'administrateur";
   const sizes = cfg?.image?.sizes || AI_DEFAULTS.image.sizes;
   main.innerHTML = pageHead({ crumbs: [["IA créative"]], eyebrow: "TOB-MAQ AI Studio", title: "Studio d'IA créative", lead: "Génère des visuels et des scènes vidéo pour tes cours et tes projets, et explore des démonstrations interactives des techniques du métier.",
-    extra: `<div style="margin-top:18px">${api.configured ? (cfg ? "" : alertBox("warn", "<p>Le service d'IA n'a pas répondu. Réessaie plus tard.</p>")) : alertBox("warn", "<p><strong>Aperçu de l'interface.</strong> La génération réelle d'images et de vidéos nécessite un service d'IA configuré sur le serveur de TOB-MAQ. Rien n'est généré ni simulé ici : tu verras la requête qui serait envoyée.</p>")}</div>` }) + `
+    extra: `<div style="margin-top:18px">${api.configured ? (!cfg ? alertBox("warn", "<p>Le service d'IA n'a pas répondu. Réessaie plus tard.</p>")
+      : `<div class="row">${cfg.image?.enabled ? `<span class="chip chip-ok">Images : service connecté</span>` : `<span class="chip chip-warn">Images : service non configuré</span>`}${cfg.video?.enabled ? `<span class="chip chip-ok">Vidéos : service connecté</span>` : `<span class="chip chip-warn">Vidéos : service non configuré</span>`}${state.user ? "" : `<a class="chip chip-accent" href="#/connexion">Connecte-toi pour générer</a>`}</div>`) : alertBox("warn", "<p><strong>Aperçu de l'interface.</strong> La génération réelle d'images et de vidéos nécessite un service d'IA configuré sur le serveur de TOB-MAQ. Rien n'est généré ni simulé ici : tu verras la requête qui serait envoyée.</p>")}</div>` }) + `
   <section class="section-sm"><div class="wrap">
     <div class="tabs" role="tablist">${[["image", "image", "Générateur d'images"], ["video", "video", "Générateur de vidéos"], ["demos", "layers", "Démonstrations pédagogiques"]].map(([k, ic, t]) => `<button role="tab" aria-selected="${k === tab}" data-tab="${k}">${icon(ic)} ${t}</button>`).join("")}</div>
     <div id="studioPanel"></div>
@@ -2885,7 +2940,7 @@ const ROUTES = [
   [/^inscription$/, m => renderSignup(m)], [/^connexion$/, m => renderLogin(m)], [/^tableau-de-bord$/, m => renderDashboard(m)],
   [/^portfolio$/, m => renderPortfolio(m)], [/^projet\/([\w-]+)$/, (m, p) => renderProject(m, p[1])], [/^profil$/, m => renderProfile(m)],
   [/^parametres$/, m => renderSettings(m)], [/^aide$/, m => renderHelp(m)], [/^(conditions|confidentialite)$/, (m, p) => renderLegal(m, p[1])],
-  [/^admin$/, m => renderAdmin(m)], [/^recherche$/, (m, p, q) => renderSearch(m, q)]
+  [/^admin$/, m => renderAdmin(m)], [/^reinitialiser$/, (m, p, q) => renderReset(m, q)], [/^recherche$/, (m, p, q) => renderSearch(m, q)]
 ];
 const stripHash = h => String(h || "").replace(/^#\/?/, "");
 let currentPath = stripHash(location.hash), renderedPath = null, firstRoute = true, tcRaf = 0;
@@ -2934,7 +2989,7 @@ async function boot() {
   applyPrefs(); renderAuth();
   if (api.configured) {
     try { const d = await api.request("/auth/me"); state.user = d && d.user ? d.user : null; } catch { state.user = null; }
-    try { state.aiConfig = await api.request("/ai/config"); } catch { state.aiConfig = null; }
+    if (state.user) await syncAccount(); else { try { state.aiConfig = await api.request("/ai/config"); } catch { state.aiConfig = null; } }
     renderAuth();
   }
   window.addEventListener("hashchange", () => { currentPath = stripHash(location.hash); if (renderedPath !== currentPath) route(); });

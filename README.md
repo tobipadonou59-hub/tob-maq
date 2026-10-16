@@ -3,7 +3,11 @@
 > **Imagine. Crée. Maîtrise.**
 > L'académie numérique du graphisme, du maquettisme et du montage vidéo au Bénin (15–40 ans).
 
-Ce dépôt contient la **première version front-end** de la plateforme : un site complet dans `index.html`, en HTML, CSS et JavaScript, sans framework ni dépendance à installer. Les fonctions qui exigent un serveur (comptes, stockage, IA, paiements) sont **prêtes côté navigateur** mais **ne sont pas simulées** : elles affichent clairement qu'un backend est nécessaire.
+Ce dépôt contient la plateforme complète :
+- **le site** : `index.html`, en HTML, CSS et JavaScript, sans framework ;
+- **le serveur** : `server/`, en Node.js avec SQLite. Il sert le site et son API à la même adresse et gère les comptes, la progression, le portfolio, la modération, les quotas d'IA et l'administration.
+
+Ouvert sans serveur, le site reste utilisable (jeux, cours, ressources) : les fonctions qui exigent un compte l'indiquent clairement, sans rien simuler.
 
 ```
 tob-maq/
@@ -12,20 +16,47 @@ tob-maq/
 ├── apercus/                          ← vignettes PNG des PDF (première page)
 ├── outils/generer_ressources.py      ← régénère les PDF et leurs aperçus
 ├── outils/construire_publication.py  ← construit la version en ligne et le QR code
-└── publication/                      ← version publiée et QR code (générés)
+├── publication/                      ← version publiée et QR code (générés)
+├── server/                           ← serveur Node.js (API, base SQLite, tests)
+│   ├── src/index.js                  ← routes de l'API et service du site
+│   ├── src/db.js · security.js · ai.js · mail.js
+│   ├── test/api.test.js              ← 10 tests d'intégration
+│   └── .env.example                  ← modèle de configuration
+└── Dockerfile                        ← image de production (site + API)
 ```
 
 ---
 
-## 1. Lancer le site
+## 1. Lancer TOB-MAQ avec son serveur (recommandé)
+
+Prérequis : **Node.js 22.13 ou plus récent**.
 
 ```bash
-cd tob-maq
-python3 -m http.server 8000
+cd tob-maq/server
+npm install
+cp .env.example .env          # puis renseignez au minimum PUBLIC_URL et ADMIN_EMAILS
+npm start
 ```
-Ouvrez **http://localhost:8000**. Vous pouvez aussi double-cliquer sur `index.html`, mais certains navigateurs bloquent alors les téléchargements.
+Ouvrez **http://localhost:8080**. Le serveur sert le site et branche automatiquement l'API (`/api`).
 
-**Mise en ligne** : déposez le dossier tel quel sur Netlify, Vercel, Cloudflare Pages, GitHub Pages ou chez un hébergeur classique. Activez la compression gzip ou brotli : le fichier passe d’environ 300 Ko à environ 90 Ko.
+- **Devenir administrateur** : mettez votre adresse e-mail dans `ADMIN_EMAILS` avant de vous inscrire, ou, après l'inscription, lancez `npm run create-admin -- vous@exemple.bj`.
+- **E-mails** (accord parental, mot de passe oublié) : sans `BREVO_API_KEY`, ils s'affichent dans le terminal du serveur, ce qui est pratique pour tester.
+- **IA** : sans `OPENAI_API_KEY`, le studio affiche « service non configuré ». Avec une clé, la génération d'images fonctionne, avec un quota par jour et un budget mensuel en FCFA réglables dans l'administration. Aucun fournisseur vidéo n'est branché pour l'instant (voir `server/src/ai.js` pour en ajouter un).
+- **Tests** : `npm test` (10 tests : comptes, CSRF, progression, accord parental, IA, portfolio et modération, mot de passe oublié, limitation des tentatives).
+
+### Mettre en ligne (Railway, Render, Fly.io, VPS…)
+Le `Dockerfile` à la racine produit une image unique (site + API). Chez l'hébergeur :
+1. Déployez le dépôt avec ce Dockerfile.
+2. Montez un **volume persistant sur `/data`**. Il contient la base de données et les fichiers envoyés ; sans lui, tout est perdu à chaque redéploiement.
+3. Définissez les variables d'environnement de `server/.env.example`, dont `PUBLIC_URL` (votre adresse en `https://…`), `TRUST_PROXY=1` et `ADMIN_EMAILS`.
+4. Ajoutez votre nom de domaine. L'hébergeur fournit le certificat HTTPS.
+
+Sur un VPS sans Docker : `npm ci --omit=dev` dans `server/`, puis lancez `npm start` avec un gestionnaire de processus (systemd, pm2) derrière Nginx ou Caddy en HTTPS.
+
+**Sauvegardes** : copiez régulièrement le dossier `/data` (ou `server/storage`).
+
+### Sans serveur
+`python3 -m http.server 8000` à la racine, puis http://localhost:8000. Jeux, cours et ressources fonctionnent ; les comptes et l'IA indiquent qu'un serveur est nécessaire.
 
 ---
 
@@ -40,10 +71,12 @@ Ouvrez **http://localhost:8000**. Vous pouvez aussi double-cliquer sur `index.ht
 | **13 jeux jouables**, 3 niveaux chacun, points, indices, corrections, défi du jour et défi de la semaine | ✅ Fonctionnel ; progression enregistrée sur l'appareil, ou dans le compte une fois le serveur branché |
 | 5 démonstrations interactives (étalonnage, calques, profondeur de champ, typographie, timeline) | ✅ Fonctionnel, sans IA |
 | Bibliothèque : 5 vrais PDF téléchargeables, aperçus, licences, favoris, historique | ✅ Fonctionnel |
-| Inscription (avec accord parental de 15 à 17 ans), connexion, mot de passe oublié | ⚠️ Serveur requis |
-| Studio IA : images, vidéos (suivi des tâches), démonstrations par IA, quotas | ⚠️ Serveur et service d'IA requis. Sans eux, la page montre la requête qui serait envoyée |
-| Publication et signalement dans le portfolio, projets enregistrés, contact | ⚠️ Serveur requis |
-| Administration (statistiques, ressources, IA et quotas, modération, utilisateurs, annonces) | ⚠️ Serveur requis, accès réservé au rôle `admin` |
+| Inscription (avec accord parental de 15 à 17 ans), connexion, mot de passe oublié, synchronisation de la progression entre appareils | ✅ Avec le serveur inclus |
+| Portfolio : envoi, modération, publication, signalement, confidentialité des mineurs | ✅ Avec le serveur inclus |
+| Administration (statistiques, ressources, IA et quotas, modération, utilisateurs, annonces) | ✅ Avec le serveur inclus, réservée au rôle `admin` |
+| Studio IA : génération d'images et de démonstrations, quotas, budget en FCFA | ✅ Avec le serveur et une clé `OPENAI_API_KEY` (non testé avec une vraie clé) |
+| Studio IA : génération de vidéos | ⚠️ Aucun fournisseur vidéo branché pour l'instant |
+| Envoi réel des e-mails | ⚠️ Nécessite `BREVO_API_KEY` ; sinon affichés dans le journal du serveur |
 | Paiements (offres premium, crédits IA) en FCFA | ⛔ Désactivés (`PAYMENTS_ENABLED: false`) |
 
 ---
