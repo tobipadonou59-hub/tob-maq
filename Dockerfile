@@ -8,9 +8,9 @@ COPY ressources ressources
 COPY apercus apercus
 COPY server/src server/src
 # /data contient la base SQLite et les fichiers envoyés : à monter sur un volume persistant.
-RUN mkdir -p /data && chown node:node /data
+# Les volumes de Render et Railway sont montés au nom de root : le processus doit pouvoir y écrire.
+RUN mkdir -p /data
 ENV NODE_ENV=production PORT=8080 STORAGE_DIR=/data TRUST_PROXY=1
 VOLUME /data
 EXPOSE 8080
-USER node
 CMD ["node", "--disable-warning=ExperimentalWarning", "server/src/index.js"]

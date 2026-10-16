@@ -21,7 +21,8 @@ const num = (k, d) => Number.isFinite(Number(process.env[k])) && process.env[k] 
 
 export const config = {
   port: num("PORT", 8080),
-  publicUrl: env("PUBLIC_URL", "http://localhost:8080").replace(/\/$/, ""),
+  // Adresse publique : PUBLIC_URL, sinon celle fournie automatiquement par Render ou Railway.
+  publicUrl: (env("PUBLIC_URL") || env("RENDER_EXTERNAL_URL") || (env("RAILWAY_PUBLIC_DOMAIN") ? "https://" + env("RAILWAY_PUBLIC_DOMAIN") : "") || "http://localhost:8080").replace(/\/$/, ""),
   storageDir: path.resolve(SERVER_DIR, env("STORAGE_DIR", "storage")),
   trustProxy: env("TRUST_PROXY", "0") === "1",
   adminEmails: env("ADMIN_EMAILS").split(",").map(s => s.trim().toLowerCase()).filter(Boolean),

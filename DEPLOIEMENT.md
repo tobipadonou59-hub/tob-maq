@@ -1,4 +1,15 @@
-# Mettre TOB-MAQ en ligne sur Railway
+# Mettre TOB-MAQ en ligne
+
+## Option simple : Render en un clic (recommandé)
+1. Ouvre https://render.com/deploy?repo=https://github.com/tobipadonou59-hub/tob-maq
+2. Connecte-toi avec **GitHub** et autorise Render à lire le dépôt `tob-maq`.
+3. Dans le champ **ADMIN_EMAILS**, écris ton adresse e-mail (tu deviendras administrateur en t'inscrivant avec elle).
+4. Ajoute un moyen de paiement si Render le demande (l'offre « Starter » avec disque permanent est payante : vérifie le prix affiché), puis clique sur **Deploy Blueprint**.
+5. Après quelques minutes, Render affiche l'adresse du site (`https://tob-maq-xxxx.onrender.com`). Tout le reste est déjà réglé par `render.yaml` : disque pour les comptes, sécurité HTTPS, adresse du site.
+
+---
+
+## Autre option : Railway
 
 Le fichier `railway.json` indique à Railway comment construire le site (avec le `Dockerfile`) et comment vérifier qu'il fonctionne (`/api/health`).
 

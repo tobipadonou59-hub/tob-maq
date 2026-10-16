@@ -1,0 +1,23 @@
+# Déploiement en un clic sur Render :
+# https://render.com/deploy?repo=https://github.com/tobipadonou59-hub/tob-maq
+services:
+  - type: web
+    name: tob-maq
+    runtime: docker
+    plan: starter            # un disque permanent exige une offre payante
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    autoDeploy: true
+    disk:
+      name: donnees-tob-maq
+      mountPath: /data       # base de données et fichiers envoyés (comptes conservés)
+      sizeGB: 1
+    envVars:
+      - key: TRUST_PROXY
+        value: "1"
+      - key: STORAGE_DIR
+        value: /data
+      - key: MAIL_FROM
+        value: no-reply@tob-maq.bj
+      - key: ADMIN_EMAILS     # demandé au moment du déploiement : ton adresse e-mail
+        sync: false
