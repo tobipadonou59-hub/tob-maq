@@ -1,0 +1,22 @@
+{
+  "proprietaire": {
+    "prenom": "Tobi",
+    "presentation": "Je réponds souvent depuis mon téléphone, de façon simple et directe."
+  },
+  "infos_autorisees": "Seules informations que l'assistant peut donner. Exemples à remplacer par les vôtres : je suis joignable du lundi au samedi, de 8 h à 19 h. Pour un devis, je demande une description du besoin et je réponds moi-même. Mon site : https://tob-maq.onrender.com",
+  "style_par_defaut": "amical",
+  "categories_automatiques": ["salutation", "remerciement", "question_simple"],
+  "confiance_minimale": 0.8,
+  "max_reponses_auto_par_contact_par_heure": 3,
+  "pause_apres_reponse_manuelle_heures": 2,
+  "heures_automatiques": { "debut": "07:00", "fin": "22:00" },
+  "mots_toujours_valides": [
+    "argent", "prix", "tarif", "combien", "payer", "paiement", "virement", "momo", "mobile money", "banque",
+    "compte", "code", "mot de passe", "urgent", "urgence", "hôpital", "accident", "décès", "rendez-vous", "contrat",
+    "money", "price", "pay", "bank", "password", "urgent"
+  ],
+  "contacts": {
+    "22900000000": { "nom": "Exemple : Maman", "relation": "famille", "style": "chaleureux", "automatique": false }
+  },
+  "contacts_jamais_automatique": []
+}
