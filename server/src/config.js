@@ -27,6 +27,7 @@ export const config = {
   trustProxy: env("TRUST_PROXY", "0") === "1",
   adminEmails: env("ADMIN_EMAILS").split(",").map(s => s.trim().toLowerCase()).filter(Boolean),
   contactEmail: env("CONTACT_EMAIL"),
+  googleSiteVerification: env("GOOGLE_SITE_VERIFICATION"),
   mailFrom: env("MAIL_FROM", "no-reply@tob-maq.local"),
   brevoKey: env("BREVO_API_KEY"),
   openaiKey: env("OPENAI_API_KEY"),
