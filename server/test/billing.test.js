@@ -145,3 +145,25 @@ test("l'administration peut désactiver l'essai ou changer sa durée", async () 
   const b = (await a("GET", "/api/admin/billing")).data;
   assert.equal(b.trials, 2); assert.equal(b.revenue, 2500, "les essais ne comptent pas dans le chiffre d'affaires");
 });
+
+test("l'administration importe des leçons Premium validées, hors du dépôt", async () => {
+  const lesson = { title: "Leçon importée", software: "Illustrator", level: "Avancé", minutes: 30, objective: "Apprendre.",
+    intro: '<p onclick="x()">Texte <strong>clé</strong><script>alert(1)</script><img src=x onerror=alert(1)></p>',
+    steps: [{ t: "Étape", d: "Détail", keys: ["Ctrl+Y"] }], example: "Exemple.", exercise: "Exercice.",
+    quiz: [{ q: "Question ?", choices: ["a", "b"], answer: 1, explain: "Parce que." }], recap: ["Point clé."] };
+  const m = client(); await m("POST", "/api/auth/login", { email: "ama@exemple.bj", password: "motdepasse12" });
+  assert.equal((await m("PUT", "/api/admin/premium/importee", lesson)).status, 403, "un membre ne peut pas importer");
+  const a = client(); await a("POST", "/api/auth/login", { email: "admin@tob-maq.test", password: "motdepasse12" });
+  assert.equal((await a("PUT", "/api/admin/premium/Mauvais_ID", lesson)).status, 400);
+  assert.equal((await a("PUT", "/api/admin/premium/importee", { ...lesson, level: "<b>x</b>" })).status, 400);
+  assert.equal((await a("PUT", "/api/admin/premium/importee", { ...lesson, quiz: [{ ...lesson.quiz[0], answer: 5 }] })).status, 400);
+  assert.equal((await a("PUT", "/api/admin/premium/importee", lesson)).status, 200);
+  assert.ok(fs.existsSync(path.join(storage, "premium", "importee.json")), "stockée dans le dossier de données");
+  assert.ok((await m("GET", "/api/premium/catalog")).data.some(l => l.id === "importee"));
+  const got = (await m("GET", "/api/premium/lessons/importee")).data; // Ama est abonnée (test précédent)
+  assert.equal(got.intro, "<p>Texte <strong>clé</strong>alert(1)</p>", "HTML nettoyé : ni script, ni image, ni attribut");
+  assert.ok((await a("GET", "/api/admin/premium")).data.find(l => l.id === "importee").imported);
+  assert.equal((await a("DELETE", "/api/admin/premium/test-premium")).status, 404, "les leçons du dépôt ne se suppriment pas ici");
+  assert.equal((await a("DELETE", "/api/admin/premium/importee")).status, 200);
+  assert.ok(!(await m("GET", "/api/premium/catalog")).data.some(l => l.id === "importee"));
+});

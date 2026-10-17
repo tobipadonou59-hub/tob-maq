@@ -12,8 +12,41 @@ import { HttpError, fail, uid, oneOf, rateLimit } from "./security.js";
 
 export const PLANS = { mois: { label: "1 mois", days: 30, key: "priceMonthly" }, an: { label: "1 an", days: 365, key: "priceYearly" } };
 const planLabel = id => PLANS[id]?.label || (id === "essai" ? "Essai gratuit" : id);
+/* Leçons Premium : importées par l'administration dans le dossier de stockage (hors du dépôt
+   GitHub, qui peut être public), avec en secours celles livrées avec le code. */
 const PREMIUM_DIR = path.join(SERVER_DIR, "contenus-premium", "lecons");
+const premiumUploadDir = () => path.join(config.storageDir, "premium");
 const ID_RE = /^[a-z0-9-]{1,60}$/;
+const LEVELS = ["Débutant", "Intermédiaire", "Avancé"];
+
+/* L'introduction est du HTML : seules quelques balises de mise en forme sans attributs sont gardées. */
+const cleanHtml = h => String(h).replace(/<(\/?)([a-z0-9]+)[^>]*>/gi, (m, slash, tag) => ["p", "strong", "em", "b", "i", "ul", "ol", "li", "br"].includes(tag.toLowerCase()) ? `<${slash}${tag.toLowerCase()}>` : "");
+
+/* Vérifie et normalise une leçon importée ; renvoie la leçon propre ou lève une erreur 400 explicite. */
+export function validateLesson(l) {
+  const bad = m => fail(400, `Leçon invalide : ${m}`);
+  if (!l || typeof l !== "object" || Array.isArray(l)) bad("le fichier doit contenir un objet JSON.");
+  const str = (k, max, need = true) => { const v = l[k]; if (v === undefined || v === null || v === "") { if (need) bad(`le champ « ${k} » est obligatoire.`); return undefined; } if (typeof v !== "string" || v.length > max) bad(`le champ « ${k} » doit être un texte de ${max} caractères maximum.`); return v.trim(); };
+  const list = (k, max, fn, need = true) => { const v = l[k]; if (v === undefined && !need) return undefined; if (!Array.isArray(v) || (need && !v.length) || v.length > max) bad(`le champ « ${k} » doit être une liste (1 à ${max} éléments).`); return v.map((x, i) => fn(x, i)); };
+  const txt = (v, max, where) => { if (typeof v !== "string" || !v.trim() || v.length > max) bad(`${where} : texte manquant ou trop long.`); return v.trim(); };
+  const minutes = Number(l.minutes);
+  if (!Number.isInteger(minutes) || minutes < 1 || minutes > 600) bad("« minutes » doit être un nombre entier entre 1 et 600.");
+  if (!LEVELS.includes(l.level)) bad(`« level » doit valoir ${LEVELS.join(", ")}.`);
+  const out = { title: str("title", 120), software: str("software", 60), level: l.level, minutes, objective: str("objective", 400),
+    intro: cleanHtml(str("intro", 6000)), beginner: str("beginner", 800, false), advanced: str("advanced", 800, false),
+    steps: list("steps", 20, (x, i) => ({ t: txt(x?.t, 120, `étape ${i + 1}`), d: txt(x?.d, 1200, `étape ${i + 1}`),
+      ...(x?.keys !== undefined ? { keys: (Array.isArray(x.keys) && x.keys.length <= 8 ? x.keys : bad(`étape ${i + 1} : 8 raccourcis maximum.`)).map(k => txt(k, 30, `raccourci de l'étape ${i + 1}`)) } : {}) })),
+    params: l.params === undefined ? undefined : list("params", 20, (x, i) => { if (!Array.isArray(x) || x.length !== 2) bad(`paramètre ${i + 1} : il faut [nom, valeur].`); return [txt(x[0], 80, `paramètre ${i + 1}`), txt(x[1], 300, `paramètre ${i + 1}`)]; }, false),
+    illustration: str("illustration", 30, false), caption: str("caption", 200, false),
+    before: str("before", 600, false), after: str("after", 600, false),
+    example: str("example", 2000), exercise: str("exercise", 2000),
+    quiz: list("quiz", 10, (x, i) => { const choices = Array.isArray(x?.choices) && x.choices.length >= 2 && x.choices.length <= 5 ? x.choices.map(c => txt(c, 200, `quiz ${i + 1}`)) : bad(`quiz ${i + 1} : 2 à 5 réponses.`);
+      if (!Number.isInteger(x.answer) || x.answer < 0 || x.answer >= choices.length) bad(`quiz ${i + 1} : « answer » doit être le numéro (à partir de 0) de la bonne réponse.`);
+      return { q: txt(x.q, 300, `quiz ${i + 1}`), choices, answer: x.answer, explain: txt(x.explain, 500, `quiz ${i + 1}`) }; }),
+    recap: list("recap", 12, (x, i) => txt(x, 300, `récapitulatif ${i + 1}`)) };
+  if (out.illustration && !/^[a-z]+$/.test(out.illustration)) bad("« illustration » invalide.");
+  return Object.fromEntries(Object.entries(out).filter(([, v]) => v !== undefined));
+}
 
 export const isPremium = u => Boolean(u && (u.role === "admin" || (u.premium_until && u.premium_until > now())));
 
@@ -143,11 +176,11 @@ export function registerBilling(api, { needUser, needAdmin, needConsent }) {
   });
 
   /* ---------- Contenus premium (fichiers JSON dans server/contenus-premium/lecons) ---------- */
-  const readLesson = id => { try { return JSON.parse(fs.readFileSync(path.join(PREMIUM_DIR, id + ".json"), "utf8")); } catch { return null; } };
+  const dirs = () => [premiumUploadDir(), PREMIUM_DIR];
+  const readLesson = id => { for (const d of dirs()) { try { return JSON.parse(fs.readFileSync(path.join(d, id + ".json"), "utf8")); } catch { /* fichier suivant */ } } return null; };
+  const lessonIds = () => [...new Set(dirs().flatMap(d => { try { return fs.readdirSync(d).filter(f => f.endsWith(".json")).map(f => f.slice(0, -5)); } catch { return []; } }))].filter(id => ID_RE.test(id)).sort();
   api.get("/premium/catalog", (req, res) => {
-    let files = [];
-    try { files = fs.readdirSync(PREMIUM_DIR).filter(f => f.endsWith(".json")); } catch { /* dossier absent */ }
-    res.json(files.map(f => f.slice(0, -5)).filter(id => ID_RE.test(id)).map(id => { const l = readLesson(id); return l && { id, title: l.title, minutes: l.minutes, software: l.software, level: l.level }; }).filter(Boolean));
+    res.json(lessonIds().map(id => { const l = readLesson(id); return l && { id, title: l.title, minutes: l.minutes, software: l.software, level: l.level }; }).filter(Boolean));
   });
   api.get("/premium/lessons/:id", needUser, (req, res) => {
     if (!ID_RE.test(req.params.id)) fail(404, "Leçon introuvable.");
@@ -158,6 +191,25 @@ export function registerBilling(api, { needUser, needAdmin, needConsent }) {
   });
 
   /* ---------- Administration ---------- */
+  api.get("/admin/premium", needAdmin, (req, res) => {
+    res.json(lessonIds().map(id => { const l = readLesson(id); return l && { id, title: l.title, minutes: l.minutes, level: l.level,
+      imported: fs.existsSync(path.join(premiumUploadDir(), id + ".json")) }; }).filter(Boolean));
+  });
+  api.put("/admin/premium/:id", needAdmin, (req, res) => {
+    if (!ID_RE.test(req.params.id)) fail(400, "Identifiant invalide : lettres minuscules, chiffres et tirets uniquement.");
+    const lesson = validateLesson(req.body);
+    fs.mkdirSync(premiumUploadDir(), { recursive: true });
+    const file = path.join(premiumUploadDir(), req.params.id + ".json");
+    fs.writeFileSync(file + ".tmp", JSON.stringify(lesson)); fs.renameSync(file + ".tmp", file);
+    res.json({ id: req.params.id, title: lesson.title });
+  });
+  api.delete("/admin/premium/:id", needAdmin, (req, res) => {
+    if (!ID_RE.test(req.params.id)) fail(404, "Leçon introuvable.");
+    const file = path.join(premiumUploadDir(), req.params.id + ".json");
+    if (!fs.existsSync(file)) fail(404, "Seules les leçons importées depuis l'administration peuvent être retirées ici.");
+    fs.rmSync(file); res.json({ ok: true });
+  });
+
   api.get("/admin/billing", needAdmin, (req, res) => {
     const s = getBillingSettings();
     res.json({ ...s, configured: Boolean(config.fedapayKey), mode: config.fedapayEnv,

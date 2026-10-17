@@ -1295,7 +1295,13 @@ function pageHead({ crumbs = [], eyebrow = "", title, lead = "", extra = "" }) {
   return `<section class="page-head"><div class="wrap">${c}${eyebrow ? `<span class="eyebrow">${eyebrow}</span>` : ""}<h1 tabindex="-1">${title}</h1>${lead ? `<p class="lead">${lead}</p>` : ""}${extra}</div></section>`;
 }
 const domainName = id => (DOMAINS.find(d => d.id === id) || {}).name || id;
-const priceChip = p => p === "gratuit" ? `<span class="chip chip-ok">Gratuit</span>` : `<span class="chip chip-orange">Premium · tarif à venir</span>`;
+const priceChip = p => {
+  if (p === "gratuit") return `<span class="chip chip-ok">Gratuit</span>`;
+  const prices = state.billing?.enabled ? (state.billing.plans || []).map(x => x.id === "an" ? Math.round(x.price / 12) : x.price).filter(Boolean) : [];
+  return `<span class="chip chip-orange">Premium${prices.length ? ` · dès ${nf(Math.min(...prices))} ${CONFIG.CURRENCY}/mois` : ""}</span>`;
+};
+/* Une formation Premium dont des leçons sont publiées n'est plus un contenu d'exemple. */
+const isDemoFormation = f => !(f.price === "premium" && f.modules.some(m => m.lessons.some(x => LESSONS[x]?.premium)));
 const softChips = ids => ids.map(id => `<span class="chip">${softwareById(id).name.replace("Adobe ", "")}</span>`).join("");
 function formationOfLesson(lid) { return FORMATIONS.find(f => f.modules.some(m => m.lessons.includes(lid))); }
 function formationProgress(f) {
@@ -1319,7 +1325,7 @@ function courseCard(f) {
   return `<article class="card link course-card">
     <div class="course-cover">${cover(f)}<span class="soft">${f.software.length ? f.software.map(s => softwareById(s).tag).join(" · ") : "Tous logiciels"} · ${domainName(f.domain)}</span></div>
     <div class="course-body">
-      <div class="row">${priceChip(f.price)}<span class="chip">${f.level}</span>${demoTag()}</div>
+      <div class="row">${priceChip(f.price)}<span class="chip">${f.level}</span>${demoTag(isDemoFormation(f))}</div>
       <h3><a class="stretch" href="#/formation/${f.id}">${esc(f.title)}</a></h3>
       <p>${esc(f.summary)}</p>
       <div class="course-foot"><span class="mono">${f.hours} h · ${f.modules.flatMap(m => m.lessons).length} leçons</span>${p.done ? `<span class="chip chip-accent">${Math.round(p.pct * 100)} %</span>` : `<span>${icon("arrow")}</span>`}</div>
@@ -1683,7 +1689,7 @@ function renderFormation(main, id) {
     <nav class="crumbs" aria-label="Fil d'Ariane" style="color:var(--night-muted)"><a href="#/" style="color:var(--night-muted)">Accueil</a> / <a href="#/formations" style="color:var(--night-muted)">Formations</a> / <span aria-current="page">${esc(f.title)}</span></nav>
     <span class="eyebrow">${domainName(f.domain)} · ${f.level}</span><h1 tabindex="-1" style="font-size:clamp(1.9rem,4vw,2.9rem)">${esc(f.title)}</h1>
     <p class="lead" style="margin:.6rem 0 1.4rem">${esc(f.summary)}</p>
-    <div class="row">${priceChip(f.price)}<span class="chip" style="background:#ffffff14;color:#ECEEF5">${f.hours} h</span>${f.software.map(s => `<span class="chip" style="background:#ffffff14;color:#ECEEF5">${softwareById(s).name}</span>`).join("")}${demoTag()}</div>
+    <div class="row">${priceChip(f.price)}<span class="chip" style="background:#ffffff14;color:#ECEEF5">${f.hours} h</span>${f.software.map(s => `<span class="chip" style="background:#ffffff14;color:#ECEEF5">${softwareById(s).name}</span>`).join("")}${demoTag(isDemoFormation(f))}</div>
     <div class="row" style="margin-top:22px">${first ? `<a class="btn btn-grad btn-lg" href="#/cours/${first}">${p.done ? "Continuer" : "Commencer"} ${icon("arrow")}</a>` : `<button class="btn btn-night btn-lg" disabled>Leçons en préparation</button>`}
       ${state.user ? "" : `<a class="btn btn-night" href="#/inscription">S'inscrire pour suivre ta progression</a>`}</div>
   </div></section>
@@ -1736,7 +1742,7 @@ function renderLesson(main, lid) {
     <div class="player">
       <aside class="card" style="padding:12px"><ul class="toc">${toc}</ul></aside>
       <article class="lesson">
-        <div class="row" style="margin-bottom:10px"><span class="chip chip-accent">${esc(l.software)}</span><span class="chip">${l.level}</span><span class="chip mono">${l.minutes} min</span>${demoTag(l.demo)}</div>
+        <div class="row" style="margin-bottom:10px"><span class="chip chip-accent">${esc(l.software)}</span><span class="chip">${l.level}</span><span class="chip mono">${l.minutes} min</span>${l.premium ? "" : demoTag(l.demo)}</div>
         <h1 tabindex="-1" style="font-size:clamp(1.8rem,3.6vw,2.6rem)">${esc(l.title)}</h1>
         <section><h2><span class="n">${n()}</span> Objectif pédagogique</h2><p class="objective">${esc(l.objective)}</p></section>
         <section><h2><span class="n">${n()}</span> Explication</h2>${l.intro}
@@ -2340,7 +2346,40 @@ function renderAdmin(main) {
         <p class="small muted" style="margin-top:12px">Adresse de notification à copier dans FedaPay (Webhooks) :<br><span class="mono" style="user-select:all;word-break:break-all">${esc(b.webhookUrl)}</span></p>
         <div id="bMsg" aria-live="polite"></div><button class="btn btn-primary" type="submit">Enregistrer</button></form>
         <div class="card"><h3>Résultats</h3><dl class="specs"><dt>Abonnés actifs</dt><dd>${nf(b.subscribers)}</dd><dt>Total encaissé</dt><dd>${nf(b.revenue)} ${CONFIG.CURRENCY}</dd><dt>Essais gratuits lancés</dt><dd>${nf(b.trials)}</dd><dt>Essais devenus abonnements</dt><dd>${nf(b.convertedTrials)}</dd></dl></div></div>
+        <form class="card" id="premUp" novalidate style="margin-top:24px"><h3>${icon("upload")} Leçons Premium</h3>
+          <p class="small muted">Importe les fichiers <span class="mono">.json</span> des leçons. Le nom du fichier sert d'identifiant (ex. <span class="mono">logo-brief.json</span>). Elles sont gardées sur le serveur, jamais sur GitHub.</p>
+          <div id="premList" style="margin:12px 0"></div>
+          <div class="field"><label for="premF">Fichiers de leçons</label><input class="input" id="premF" type="file" accept=".json,application/json" multiple></div>
+          <div id="premMsg" aria-live="polite"></div><button class="btn btn-primary" type="submit">Importer</button></form>
         <h3 style="margin-top:24px">Paiements</h3>` + table(pays, [["Membre", "user"], ["Formule", "plan"], ["Montant", r => nf(r.amount) + " FCFA"], ["Statut", "status"], ["Date", r => fmtDate(r.createdAt)]]);
+      const premList = async () => {
+        const ls = await api.request("/admin/premium");
+        $("#premList").innerHTML = ls.length ? `<ul style="display:grid;gap:8px;list-style:none;padding:0;margin:0">${ls.map(l => `<li class="row between" style="gap:10px"><span><b>${esc(l.title)}</b> <span class="small muted mono">${esc(l.id)} · ${esc(l.level)} · ${nf(l.minutes)} min${formationOfLesson(l.id) ? "" : " · hors formation"}</span></span>${l.imported ? `<button class="btn btn-outline btn-sm" type="button" data-unprem="${esc(l.id)}">Retirer</button>` : ""}</li>`).join("")}</ul>`
+          : `<p class="small muted">Aucune leçon Premium pour l'instant.</p>`;
+        $$("[data-unprem]", panel).forEach(b => b.addEventListener("click", async () => {
+          if (!confirm(`Retirer la leçon « ${b.dataset.unprem} » ? Les abonnés n'y auront plus accès.`)) return;
+          try { await api.request(`/admin/premium/${encodeURIComponent(b.dataset.unprem)}`, { method: "DELETE" }); delete LESSONS[b.dataset.unprem]; await loadPremium(); await premList(); }
+          catch (err) { $("#premMsg").innerHTML = alertBox("error", `<p>${esc(err.message)}</p>`); }
+        }));
+      };
+      await premList();
+      $("#premUp").addEventListener("submit", async e => {
+        e.preventDefault();
+        const files = [...$("#premF").files];
+        if (!files.length) { $("#premMsg").innerHTML = alertBox("error", "<p>Choisis au moins un fichier .json.</p>"); return; }
+        await withLoading(e.currentTarget, "Import…", $("#premMsg"), async () => {
+          const done = [], errors = [];
+          for (const f of files) {
+            const id = f.name.replace(/\.json$/i, "").toLowerCase();
+            try {
+              let body; try { body = JSON.parse(await f.text()); } catch { throw new Error("ce n'est pas un fichier JSON valide."); }
+              await api.request(`/admin/premium/${encodeURIComponent(id)}`, { method: "PUT", body }); done.push(id);
+            } catch (err) { errors.push(`<li><b>${esc(f.name)}</b> : ${esc(err.message)}</li>`); }
+          }
+          await loadPremium(); await premList(); $("#premF").value = "";
+          $("#premMsg").innerHTML = (done.length ? alertBox("ok", `<p>${done.length} leçon(s) importée(s).</p>`) : "") + (errors.length ? alertBox("error", `<ul>${errors.join("")}</ul>`) : "");
+        });
+      });
       $("#billCfg").addEventListener("submit", async e => {
         e.preventDefault();
         await withLoading(e.currentTarget, "Enregistrement…", $("#bMsg"), async () => {
