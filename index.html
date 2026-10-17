@@ -646,12 +646,7 @@ dialog::backdrop{background:rgb(11 14 23 / .6)}
     <ul>
       <li><a href="#/" data-nav="">Accueil</a></li>
       <li><a href="#/formations" data-nav="formations">Formations</a></li>
-      <li><a href="#/graphisme" data-nav="graphisme">Graphisme</a></li>
-      <li><a href="#/maquettisme" data-nav="maquettisme">Maquettisme</a></li>
-      <li><a href="#/video" data-nav="video">Montage vidéo</a></li>
-      <li><a href="#/web" data-nav="web">Création web</a></li>
-      <li><a href="#/developpement" data-nav="developpement">Développement</a></li>
-      <li><a href="#/jeux-video" data-nav="jeux-video">Jeux vidéo</a></li>
+      <li><a href="#/domaines" data-nav="domaines">Domaines</a></li>
       <li><a href="#/ia" data-nav="ia" class="ai-link">IA créative</a></li>
       <li><a href="#/jeux" data-nav="jeux">Jeux et défis</a></li>
       <li><a href="#/ressources" data-nav="ressources">Ressources</a></li>
@@ -672,13 +667,14 @@ dialog::backdrop{background:rgb(11 14 23 / .6)}
       <div>
         <span class="logo-mark logo-on-night" aria-hidden="true"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span>TOB<span class="dash"></span>MA<span class="q">Q</span></span>
         <p class="slogan">Imagine. Crée. Maîtrise.</p>
-        <p>L'académie numérique des métiers créatifs au Bénin : graphisme, maquettisme, montage vidéo, création web, programmation et jeux vidéo.</p>
+        <p>L'académie numérique des métiers créatifs et du numérique au Bénin.</p>
         <span class="cmyk" aria-hidden="true"><i style="background:var(--c)"></i><i style="background:var(--m)"></i><i style="background:var(--y)"></i><i style="background:#fff"></i></span>
       </div>
       <div><h3>Apprendre</h3><ul>
         <li><a href="#/formations">Formations</a></li><li><a href="#/graphisme">Graphisme</a></li>
         <li><a href="#/maquettisme">Maquettisme</a></li><li><a href="#/video">Montage vidéo</a></li>
-        <li><a href="#/web">Création web</a></li><li><a href="#/developpement">Développement</a></li><li><a href="#/jeux-video">Jeux vidéo</a></li></ul></div>
+        <li><a href="#/web">Création web</a></li><li><a href="#/developpement">Développement</a></li><li><a href="#/jeux-video">Jeux vidéo</a></li>
+        <li><a href="#/dessin">Dessin et illustration</a></li><li><a href="#/informatique">Informatique et réseaux</a></li><li><a href="#/marketing">Marketing digital</a></li></ul></div>
       <div><h3>Pratiquer</h3><ul>
         <li><a href="#/ia">IA créative</a></li><li><a href="#/jeux">Jeux et défis</a></li>
         <li><a href="#/ressources">Ressources</a></li><li><a href="#/portfolio">Portfolio</a></li></ul></div>
@@ -776,7 +772,26 @@ const DOMAINS = [
     modules: [
       ["La boucle de jeu et le document de conception", "gd-boucle"], ["Level design et courbe de difficulté", "gd-niveaux"], ["Présenter son jeu (pitch)", "gd-pitch"],
       ["Premiers pas avec Godot", "godot-bases"], ["Déplacer un joueur et ramasser des objets", "godot-joueur"],
-      ["Construire un niveau avec les tuiles", "godot-niveau"], ["Sons, menus et exportation du jeu", "godot-export"]] }
+      ["Construire un niveau avec les tuiles", "godot-niveau"], ["Sons, menus et exportation du jeu", "godot-export"]] },
+  { id: "dessin", name: "Dessin et illustration", icon: "pen", tag: "07",
+    short: "Dessiner à la main puis illustrer en numérique : formes, perspective, lumière, personnages et illustration avec Krita.",
+    modules: [
+      ["Construire avec des formes simples et la perspective", "dessin-formes"], ["Valeurs, lumière et ombres", "dessin-ombres"], ["Le croquis sur le vif", "dessin-croquis"],
+      ["Premiers pas en illustration numérique avec Krita", "illus-krita"], ["Concevoir un personnage de A à Z", "illus-personnage"], ["Couleur et lumière en numérique", "illus-couleur"]] },
+  { id: "informatique", name: "Informatique et réseaux", icon: "terminal", tag: "08",
+    short: "Maintenance des ordinateurs, réseaux locaux, administration de serveurs Linux et cybersécurité pour protéger une entreprise.",
+    modules: [
+      ["Comprendre son ordinateur : matériel et diagnostic", "pc-materiel"], ["Entretenir, sauvegarder et réinstaller", "pc-maintenance"], ["Bureautique professionnelle", "pc-bureautique"],
+      ["Adresses IP, masques et sous-réseaux", "res-adressage"], ["Câbler un réseau : switch, routeur et Wi-Fi", "res-cablage"], ["Dépanner un réseau", "res-depannage"],
+      ["Administrer un serveur Linux", "admin-linux"], ["Services réseau : DHCP, DNS, partage et supervision", "admin-services"], ["Windows Server et Active Directory", "admin-windows-server"],
+      ["Hygiène numérique : mots de passe, 2FA et hameçonnage", "cyber-hygiene"], ["Sécuriser une petite entreprise", "cyber-entreprise"], ["Réagir à une cyberattaque", "cyber-incident"]] },
+  { id: "marketing", name: "Marketing digital", icon: "chart", tag: "09",
+    short: "Marketing, publicité en ligne, rédaction web et gestion de projets digitaux pour faire grandir une marque.",
+    modules: [
+      ["Marché, cible et proposition de valeur", "mkt-cible"], ["Le mix marketing", "mkt-4p"], ["Le plan marketing", "mkt-plan"],
+      ["Stratégie digitale et calendrier éditorial", "mkd-strategie"], ["Publicité Facebook et Instagram", "mkd-pub-meta"], ["Analyser et optimiser ses résultats", "mkd-analyse"],
+      ["Écrire pour le web", "redac-ecrire"], ["Rédiger pour Google (SEO)", "redac-seo"], ["Écrire pour les réseaux sociaux", "redac-reseaux"],
+      ["Cadrer un projet digital", "cpd-cadrage"], ["Piloter un projet en méthode agile", "cpd-pilotage"], ["Rédiger un cahier des charges", "cpd-cahier-charges"]] }
 ];
 
 /* Logiciels : fonctionnalités réellement abordées, par niveau. */
@@ -831,7 +846,19 @@ SOFTWARE.push(
       "Intermédiaire": ["Listes et dictionnaires", "Fonctions", "Gestion des erreurs (try / except)", "Fichiers et JSON"] } },
   { id: "godot", name: "Godot", tag: "Gd", color: "#478CBF", domain: "jeux-video", os: "Windows, macOS, Linux", licence: "Libre et gratuit (licence MIT)",
     levels: { "Débutant": ["Scènes et nœuds", "Sprite2D et Label", "GDScript : variables et fonctions", "Lancer et déboguer"],
-      "Intermédiaire": ["CharacterBody2D et collisions", "Area2D et signaux", "Contrôles personnalisés (InputMap)", "Timer et interface"] } });
+      "Intermédiaire": ["CharacterBody2D et collisions", "Area2D et signaux", "Contrôles personnalisés (InputMap)", "Timer et interface"] } },
+  { id: "krita", name: "Krita", tag: "Kr", color: "#3BABFF", domain: "dessin", os: "Windows, macOS, Linux", licence: "Libre et gratuit",
+    levels: { "Débutant": ["Calques et groupes", "Pinceaux et gomme", "Stabilisateur de trait", "Export PNG"], "Intermédiaire": ["Masques et calques de transparence", "Calques de remplissage et d'ombre", "Assistants de perspective", "Animation image par image"] } },
+  { id: "windows", name: "Windows 10 et 11", tag: "Wn", color: "#0078D4", domain: "informatique", os: "PC", licence: "Licence Microsoft",
+    levels: { "Débutant": ["Gestionnaire des tâches", "Paramètres et mises à jour", "Sécurité Windows (Defender)", "Sauvegarde des fichiers"], "Intermédiaire": ["Invite de commandes : ipconfig, ping", "Gestion des disques", "Réinstallation et pilotes", "Comptes et droits"] } },
+  { id: "linux", name: "Linux (Ubuntu Server)", tag: "Lx", color: "#E95420", domain: "informatique", os: "Serveur, PC", licence: "Libre et gratuit",
+    levels: { "Intermédiaire": ["Terminal et fichiers", "Utilisateurs et droits", "Paquets avec apt", "Services avec systemctl"], "Avancé": ["SSH", "Tâches planifiées (cron)", "Journaux et supervision", "Partage de fichiers"] } },
+  { id: "packettracer", name: "Cisco Packet Tracer", tag: "Pt", color: "#1BA0D7", domain: "informatique", os: "Windows, macOS, Linux", licence: "Gratuit (compte Cisco Networking Academy)",
+    levels: { "Intermédiaire": ["Placer et câbler les équipements", "Adressage IP des postes", "Configurer un routeur et un switch", "Tester avec ping"] } },
+  { id: "metabusiness", name: "Meta Business Suite", tag: "Mb", color: "#0866FF", domain: "marketing", os: "Navigateur, mobile", licence: "Gratuit (publicité payante)",
+    levels: { "Débutant": ["Planifier des publications", "Messagerie unifiée", "Statistiques de base"], "Intermédiaire": ["Gestionnaire de publicités", "Audiences", "Test A/B", "Indicateurs de résultats"] } },
+  { id: "trello", name: "Trello", tag: "Tr", color: "#0C66E4", domain: "marketing", os: "Navigateur, mobile", licence: "Gratuit (offres payantes)",
+    levels: { "Débutant": ["Tableaux, listes et cartes", "Échéances et membres", "Listes de contrôle"], "Intermédiaire": ["Méthode Kanban", "Étiquettes et filtres", "Automatisations simples"] } });
 const softwareById = id => SOFTWARE.find(s => s.id === id);
 
 /* Formations. price : "gratuit" ou "premium" (tarif affiché quand il sera défini). */
@@ -924,7 +951,51 @@ const FORMATIONS = [
   { id: "jeu-godot", title: "Créer un jeu 2D avec Godot", domain: "jeux-video", software: ["godot"], level: "Intermédiaire", hours: 12, price: "gratuit",
     summary: "Programmer un vrai jeu jouable avec le moteur gratuit Godot : personnage, collisions, objets à ramasser, score et exportation.",
     goals: ["Organiser un projet en scènes et nœuds", "Programmer un personnage en GDScript", "Exporter un jeu jouable"],
-    modules: [{ title: "Premier jeu", lessons: ["godot-bases", "godot-joueur"] }, { title: "Finaliser", lessons: ["godot-niveau", "godot-export"] }] }
+    modules: [{ title: "Premier jeu", lessons: ["godot-bases", "godot-joueur"] }, { title: "Finaliser", lessons: ["godot-niveau", "godot-export"] }] },
+  { id: "infographie-pro", title: "Infographiste : de la commande à la livraison", domain: "graphisme", software: ["photoshop", "illustrator", "indesign"], level: "Intermédiaire", hours: 10, price: "gratuit",
+    summary: "Le métier d'infographiste en agence ou en imprimerie : gérer une commande, décliner une campagne sur tous les supports et livrer des fichiers sans erreur.",
+    goals: ["Gérer une commande de A à Z", "Décliner une campagne sur tous les supports", "Livrer des fichiers prêts à imprimer"],
+    modules: [{ title: "Le métier", lessons: ["info-commande", "info-declinaisons", "info-bat"] }] },
+  { id: "dessin-bases", title: "Dessinateur : les bases du dessin", domain: "dessin", software: [], level: "Débutant", hours: 10, price: "gratuit",
+    summary: "Apprendre à dessiner ce que l'on voit : formes, proportions, perspective, lumière et ombres, avec un crayon et du papier.",
+    goals: ["Construire un dessin avec des formes simples", "Maîtriser la perspective", "Rendre le volume avec les valeurs"],
+    modules: [{ title: "Les fondations", lessons: ["dessin-formes", "dessin-ombres", "dessin-croquis"] }] },
+  { id: "illustration-numerique", title: "Illustrateur : l'illustration numérique avec Krita", domain: "dessin", software: ["krita"], level: "Débutant", hours: 12, price: "gratuit",
+    summary: "Passer du papier à l'écran avec Krita, logiciel gratuit : calques, pinceaux, tablette, et création complète d'un personnage.",
+    goals: ["Prendre en main Krita", "Concevoir un personnage", "Mettre en couleur une illustration"],
+    modules: [{ title: "Illustrer en numérique", lessons: ["illus-krita", "illus-personnage", "illus-couleur"] }] },
+  { id: "info-bases", title: "Informatique : bases et maintenance", domain: "informatique", software: ["windows"], level: "Débutant", hours: 10, price: "gratuit",
+    summary: "Comprendre, entretenir et réparer un ordinateur : matériel, diagnostic, sauvegardes, réinstallation et bureautique.",
+    goals: ["Comprendre le matériel d'un ordinateur", "Diagnostiquer un PC lent", "Sauvegarder et réinstaller un système"],
+    modules: [{ title: "L'ordinateur", lessons: ["pc-materiel", "pc-maintenance", "pc-bureautique"] }] },
+  { id: "reseau-local", title: "Réseaux : concevoir et câbler un réseau local", domain: "informatique", software: ["packettracer"], level: "Intermédiaire", hours: 12, price: "gratuit",
+    summary: "Concevoir le réseau d'une PME, d'un lycée ou d'un cybercafé : adressage IP, câblage, switch, routeur, Wi-Fi sécurisé et dépannage.",
+    goals: ["Calculer un plan d'adressage IP", "Câbler et configurer un réseau local", "Sécuriser le Wi-Fi"],
+    modules: [{ title: "Concevoir le réseau", lessons: ["res-adressage", "res-cablage", "res-depannage"] }] },
+  { id: "admin-sys-reseau", title: "Administrateur réseau et système", domain: "informatique", software: ["linux"], level: "Intermédiaire", hours: 14, price: "gratuit",
+    summary: "Administrer les serveurs et les services d'une organisation : Linux, utilisateurs et droits, DHCP, DNS, partage de fichiers, sauvegardes et supervision.",
+    goals: ["Administrer un serveur Linux", "Mettre en place les services réseau", "Superviser et documenter une infrastructure"],
+    modules: [{ title: "Serveurs et services", lessons: ["admin-linux", "admin-services", "admin-windows-server"] }] },
+  { id: "cybersecurite", title: "Cybersécurité : se protéger et protéger une entreprise", domain: "informatique", software: [], level: "Débutant", hours: 8, price: "gratuit",
+    summary: "Les bons réflexes de sécurité pour soi et pour une petite entreprise : mots de passe, double authentification, hameçonnage, sauvegardes et réaction aux incidents.",
+    goals: ["Adopter une bonne hygiène numérique", "Reconnaître les arnaques", "Sécuriser une petite entreprise"],
+    modules: [{ title: "Se protéger", lessons: ["cyber-hygiene", "cyber-entreprise", "cyber-incident"] }] },
+  { id: "marketing-fondamentaux", title: "Les fondamentaux du marketing", domain: "marketing", software: [], level: "Débutant", hours: 6, price: "gratuit",
+    summary: "Comprendre son marché, choisir sa cible, fixer son prix et construire son plan de communication.",
+    goals: ["Définir une cible et une proposition de valeur", "Construire un mix marketing", "Rédiger un plan marketing"],
+    modules: [{ title: "Les bases", lessons: ["mkt-cible", "mkt-4p", "mkt-plan"] }] },
+  { id: "marketing-digital", title: "Responsable marketing digital", domain: "marketing", software: ["metabusiness"], level: "Intermédiaire", hours: 10, price: "gratuit",
+    summary: "Piloter la présence en ligne d'une marque : stratégie, calendrier éditorial, WhatsApp Business, publicité Facebook et Instagram, mesure des résultats.",
+    goals: ["Construire une stratégie digitale", "Lancer une campagne publicitaire", "Mesurer et optimiser"],
+    modules: [{ title: "Stratégie et publicité", lessons: ["mkd-strategie", "mkd-pub-meta", "mkd-analyse"] }] },
+  { id: "redaction-web", title: "Rédacteur web", domain: "marketing", software: [], level: "Débutant", hours: 6, price: "gratuit",
+    summary: "Écrire des textes clairs qui se lisent sur écran, se trouvent sur Google et donnent envie d'agir.",
+    goals: ["Écrire pour l'écran", "Optimiser un texte pour Google", "Adapter son ton à chaque réseau"],
+    modules: [{ title: "Écrire", lessons: ["redac-ecrire", "redac-seo", "redac-reseaux"] }] },
+  { id: "chef-projet-digital", title: "Chef de projet digital", domain: "marketing", software: ["trello"], level: "Intermédiaire", hours: 8, price: "gratuit",
+    summary: "Mener un projet digital (site, application, campagne) du cadrage à la livraison, avec une équipe, un budget et des délais.",
+    goals: ["Cadrer un projet", "Piloter en méthode agile", "Livrer et faire le bilan"],
+    modules: [{ title: "Mener un projet", lessons: ["cpd-cadrage", "cpd-pilotage", "cpd-cahier-charges"] }] }
 ];
 const formationById = id => FORMATIONS.find(f => f.id === id);
 
@@ -1681,7 +1752,19 @@ func _on_body_entered(body):
  ["audio-nettoyage", "Nettoyer une voix"], ["audio-mixage", "Mixer voix et musique"], ["fcp-bibliotheques", "Bibliothèques et événements"], ["fcp-timeline", "La timeline magnétique"],
  ["clip-musical", "Monter un clip musical"], ["video-pub", "La vidéo publicitaire"], ["video-mariage", "Le film de mariage"], ["reportage", "Documentaire et reportage"]
 ].forEach(([id, title]) => { LESSONS[id] = { title, soon: true }; });
-
+[["info-commande", "De la commande client au fichier livré"], ["info-declinaisons", "Décliner une campagne sur tous les supports"], ["info-bat", "Le BAT et la relation avec l'imprimeur"],
+ ["dessin-formes", "Formes simples et perspective"], ["dessin-ombres", "Valeurs, lumière et ombres"], ["dessin-croquis", "Le croquis sur le vif"],
+ ["illus-krita", "Premiers pas avec Krita"], ["illus-personnage", "Concevoir un personnage"], ["illus-couleur", "Couleur et lumière en numérique"],
+ ["pc-materiel", "Matériel et diagnostic"], ["pc-maintenance", "Entretenir, sauvegarder et réinstaller"], ["pc-bureautique", "Bureautique professionnelle"],
+ ["res-adressage", "Adresses IP et sous-réseaux"], ["res-cablage", "Câbler un réseau"], ["res-depannage", "Dépanner un réseau"],
+ ["admin-linux", "Administrer un serveur Linux"], ["admin-services", "Services réseau"], ["admin-windows-server", "Windows Server et Active Directory"],
+ ["cyber-hygiene", "Hygiène numérique"], ["cyber-entreprise", "Sécuriser une petite entreprise"], ["cyber-incident", "Réagir à une cyberattaque"],
+ ["mkt-cible", "Marché, cible et proposition de valeur"], ["mkt-4p", "Le mix marketing"], ["mkt-plan", "Le plan marketing"],
+ ["mkd-strategie", "Stratégie digitale"], ["mkd-pub-meta", "Publicité Facebook et Instagram"], ["mkd-analyse", "Analyser et optimiser"],
+ ["redac-ecrire", "Écrire pour le web"], ["redac-seo", "Rédiger pour Google"], ["redac-reseaux", "Écrire pour les réseaux sociaux"],
+ ["cpd-cadrage", "Cadrer un projet digital"], ["cpd-pilotage", "Piloter un projet"], ["cpd-cahier-charges", "Rédiger un cahier des charges"]
+].forEach(([id, title]) => { LESSONS[id] = { title, soon: true }; });
+/*LOTS_DE_LECONS*/
 /* Ressources téléchargeables. file = fichier réellement présent ; sinon « Bientôt disponible ». */
 const RESOURCES = [
   { id: "res-raccourcis-ps", title: "Raccourcis essentiels : Photoshop et Illustrator", type: "Raccourcis clavier", category: "graphisme", software: ["photoshop", "illustrator"], level: "Débutant",
@@ -1968,7 +2051,7 @@ function pageHead({ crumbs = [], eyebrow = "", title, lead = "", extra = "" }) {
   return `<section class="page-head"><div class="wrap">${c}${eyebrow ? `<span class="eyebrow">${eyebrow}</span>` : ""}<h1 tabindex="-1">${title}</h1>${lead ? `<p class="lead">${lead}</p>` : ""}${extra}</div></section>`;
 }
 const domainName = id => (DOMAINS.find(d => d.id === id) || {}).name || ({ marketing: "Marketing" })[id] || id;
-const GAME_DOMAINS = [...DOMAINS.map(d => ({ id: d.id, name: d.name })), { id: "marketing", name: "Marketing" }];
+const GAME_DOMAINS = [...DOMAINS.map(d => ({ id: d.id, name: d.name })), ...(DOMAINS.some(d => d.id === "marketing") ? [] : [{ id: "marketing", name: "Marketing" }])];
 const priceChip = p => {
   if (p === "gratuit") return `<span class="chip chip-ok">Gratuit</span>`;
   const prices = state.billing?.enabled ? (state.billing.plans || []).map(x => x.id === "an" ? Math.round(x.price / 12) : x.price).filter(Boolean) : [];
@@ -1985,10 +2068,16 @@ function formationProgress(f) {
 }
 
 function cover(f) {
-  const hue = { graphisme: [250, 20], maquettisme: [330, 200], video: [265, 20], web: [205, 20], developpement: [160, 265], "jeux-video": [290, 40] }[f.domain];
+  const hue = { graphisme: [250, 20], maquettisme: [330, 200], video: [265, 20], web: [205, 20], developpement: [160, 265], "jeux-video": [290, 40], dessin: [30, 330], informatique: [190, 140], marketing: [15, 250] }[f.domain];
   const id = "cg" + f.id.replace(/\W/g, "");
   const art = f.domain === "web" || f.domain === "developpement"
     ? `<g opacity=".95"><rect x="188" y="16" width="150" height="88" rx="8" fill="#0B0E17" stroke="hsl(${hue[0]} 70% 60%)"/>${[0, 1, 2, 3, 4, 5].map(i => `<rect x="${200 + (i % 3 === 1 ? 14 : i % 3 === 2 ? 28 : 0)}" y="${30 + i * 11}" width="${[60, 84, 40, 70, 52, 30][i]}" height="5" rx="2.5" fill="hsl(${hue[i % 2]} 80% 65%)"/>`).join("")}<text x="306" y="100" fill="hsl(${hue[1]} 90% 65%)" style="font:700 22px var(--font-mono)">${f.domain === "web" ? "&lt;/&gt;" : "{ }"}</text></g>`
+    : f.domain === "dessin"
+    ? `<g opacity=".95"><path d="M200 100 C 230 30, 270 30, 300 80 S 340 110, 345 60" stroke="hsl(${hue[0]} 85% 62%)" stroke-width="5" fill="none" stroke-linecap="round"/><circle cx="252" cy="60" r="26" fill="none" stroke="#fff" stroke-width="2" opacity=".7"/><path d="M226 60 a26 10 0 0 0 52 0" fill="none" stroke="#fff" stroke-width="1.5" opacity=".5"/><rect x="300" y="18" width="12" height="60" rx="2" fill="hsl(${hue[1]} 80% 62%)" transform="rotate(35 306 48)"/></g>`
+    : f.domain === "informatique"
+    ? `<g opacity=".95">${[[230, 30], [310, 30], [270, 92], [200, 92], [340, 92]].map(([x, y], i) => `<line x1="270" y1="60" x2="${x}" y2="${y}" stroke="hsl(${hue[0]} 70% 60%)" stroke-width="2"/><rect x="${x - 12}" y="${y - 9}" width="24" height="18" rx="3" fill="${i === 2 ? "#fff" : `hsl(${hue[i % 2]} 75% 58%)`}"/>`).join("")}<circle cx="270" cy="60" r="14" fill="#0B0E17" stroke="#fff" stroke-width="2"/></g>`
+    : f.domain === "marketing"
+    ? `<g opacity=".95">${[30, 46, 40, 62, 78].map((h, i) => `<rect x="${210 + i * 26}" y="${104 - h}" width="18" height="${h}" rx="3" fill="hsl(${i === 4 ? hue[0] : hue[1]} 80% ${i === 4 ? 60 : 66}%)"/>`).join("")}<path d="M210 70 L 240 58 L 266 64 L 292 40 L 330 22" stroke="#fff" stroke-width="2.5" fill="none"/><circle cx="330" cy="22" r="5" fill="#fff"/></g>`
     : f.domain === "jeux-video"
     ? `<g opacity=".95"><rect x="200" y="34" width="130" height="64" rx="28" fill="hsl(${hue[0]} 60% 55%)"/><rect x="224" y="58" width="22" height="7" rx="2" fill="#fff"/><rect x="231.5" y="50.5" width="7" height="22" rx="2" fill="#fff"/><circle cx="296" cy="56" r="6" fill="hsl(${hue[1]} 90% 60%)"/><circle cx="310" cy="70" r="6" fill="#fff"/>${[0, 1, 2, 3].map(i => `<rect x="${150 + i * 10}" y="${20 + (i % 2) * 10}" width="8" height="8" fill="hsl(${hue[1]} 90% 60%)"/>`).join("")}</g>`
     : f.domain === "video"
@@ -2162,6 +2251,9 @@ function heroArt() {
   </svg>`;
 }
 function domainArt(id) {
+  if (id === "dessin") return `<svg viewBox="0 0 300 120" aria-hidden="true"><rect x="70" y="10" width="160" height="100" rx="6" style="fill:var(--surface);stroke:var(--line)"/><circle cx="150" cy="58" r="30" fill="none" stroke="#12141C" stroke-width="2"/><path d="M120 58 a30 11 0 0 0 60 0" fill="none" stroke="#12141C" stroke-width="1.5" stroke-dasharray="4 3"/><path d="M162 30 a30 30 0 0 1 18 40 l-20 -6z" fill="#545B6E" opacity=".35"/><ellipse cx="160" cy="94" rx="34" ry="6" fill="#545B6E" opacity=".3"/><rect x="214" y="18" width="10" height="70" rx="2" fill="#F2612D" transform="rotate(28 219 53)"/><path d="M232 88 l6 10 l-12 -4z" fill="#12141C"/></svg>`;
+  if (id === "informatique") return `<svg viewBox="0 0 300 120" aria-hidden="true">${[[70, 28], [230, 28], [70, 92], [230, 92]].map(([x, y]) => `<line x1="150" y1="60" x2="${x}" y2="${y}" stroke="#00A3D1" stroke-width="2.5"/><rect x="${x - 22}" y="${y - 14}" width="44" height="28" rx="4" fill="#141927"/><rect x="${x - 16}" y="${y - 9}" width="32" height="15" rx="2" fill="#5B3DF5"/>`).join("")}<rect x="122" y="46" width="56" height="28" rx="6" fill="#16794A"/>${[0, 1, 2, 3].map(i => `<circle cx="${134 + i * 11}" cy="60" r="3" fill="#4ADE95"/>`).join("")}<path d="M150 4 l18 7 v12 c0 10 -8 16 -18 20 c-10 -4 -18 -10 -18 -20 v-12z" fill="#F2612D"/></svg>`;
+  if (id === "marketing") return `<svg viewBox="0 0 300 120" aria-hidden="true"><rect x="50" y="12" width="200" height="96" rx="8" style="fill:var(--surface);stroke:var(--line)"/>${[26, 40, 34, 56, 70].map((h, i) => `<rect x="${72 + i * 26}" y="${96 - h}" width="18" height="${h}" rx="3" fill="${i === 4 ? "#F2612D" : "#5B3DF5"}" opacity="${i === 4 ? 1 : .55 + i * .1}"/>`).join("")}<path d="M72 64 L 104 54 L 130 60 L 156 38 L 196 24" stroke="#D6006F" stroke-width="2.5" fill="none"/><text x="236" y="34" text-anchor="end" fill="#16794A" style="font:800 14px var(--font-mono)">+38 %</text></svg>`;
   if (id === "web") return `<svg viewBox="0 0 300 120" aria-hidden="true"><rect x="50" y="14" width="200" height="92" rx="8" style="fill:var(--surface);stroke:var(--line)"/><rect x="50" y="14" width="200" height="16" rx="8" fill="#1F7ACC"/><circle cx="62" cy="22" r="3" fill="#fff"/><circle cx="72" cy="22" r="3" fill="#fff"/><rect x="62" y="40" width="80" height="10" rx="3" fill="#5B3DF5"/><rect x="62" y="56" width="120" height="5" rx="2" fill="#A2A9BC"/><rect x="62" y="66" width="100" height="5" rx="2" fill="#A2A9BC"/>${[0, 1, 2].map(i => `<rect x="${62 + i * 60}" y="78" width="52" height="20" rx="4" fill="${["#F2612D", "#00A3D1", "#D6006F"][i]}" opacity=".85"/>`).join("")}</svg>`;
   if (id === "developpement") return `<svg viewBox="0 0 300 120" aria-hidden="true"><rect x="40" y="14" width="220" height="92" rx="8" fill="#141927"/>${[["const", "#C792EA", 54], ["total", "#82AAFF", 96], ["=", "#ECEEF5", 136], ["prix * q;", "#F78C6C", 150]].map(([t, c, x]) => `<text x="${x}" y="44" fill="${c}" style="font:600 13px var(--font-mono)">${t}</text>`).join("")}<text x="54" y="66" fill="#C3E88D" style="font:600 13px var(--font-mono)">console.log(total);</text><text x="54" y="90" fill="#4ADE95" style="font:600 13px var(--font-mono)">&gt; 7500</text><rect x="104" y="80" width="8" height="13" fill="#4ADE95"><animate attributeName="opacity" values="1;0;1" dur="1.2s" repeatCount="indefinite"/></rect></svg>`;
   if (id === "jeux-video") return `<svg viewBox="0 0 300 120" aria-hidden="true"><rect x="30" y="14" width="240" height="92" rx="8" fill="#1D2336"/><rect x="30" y="86" width="240" height="20" fill="#4E8A3E"/>${[[70, 70], [130, 54], [190, 70]].map(([x, y]) => `<rect x="${x}" y="${y}" width="40" height="10" fill="#C9A66B"/>`).join("")}<rect x="84" y="50" width="16" height="20" rx="3" fill="#F2612D"/><circle cx="92" cy="45" r="7" fill="#8A5A3B"/>${[150, 206, 236].map(x => `<circle cx="${x}" cy="40" r="6" fill="#FFD66B"/>`).join("")}<text x="250" y="30" text-anchor="end" fill="#ECEEF5" style="font:700 12px var(--font-mono)">SCORE 120</text></svg>`;
@@ -2225,10 +2317,8 @@ function renderHome(main) {
   </div></section>
 
   <section class="section"><div class="wrap">
-    <div class="head"><span class="eyebrow">Nos domaines de formation</span><h2>Six métiers, une même exigence</h2><p>Chaque domaine combine théorie claire, tutoriels pas à pas et exercices corrigés.</p></div>
-    <div class="grid g3">${DOMAINS.map(d => `<article class="card link domain-card"><div class="domain-art">${domainArt(d.id)}</div><span class="num">${d.tag} / ${d.modules.length} modules</span>
-      <h3><a class="stretch" href="#/${d.id}">${d.name}</a></h3><p>${d.short}</p>
-      <ul>${SOFTWARE.filter(s => DOMAIN_SOFT[d.id].includes(s.id)).slice(0, 5).map(s => `<li class="chip">${s.name.replace("Adobe ", "")}</li>`).join("")}</ul></article>`).join("")}</div>
+    <div class="head"><span class="eyebrow">Nos domaines de formation</span><h2>Neuf domaines, une même exigence</h2><p>Chaque domaine combine théorie claire, tutoriels pas à pas et exercices corrigés.</p></div>
+    ${domainGrid()}
   </div></section>
 
   <section class="section section-alt"><div class="wrap">
@@ -2299,7 +2389,7 @@ function renderHome(main) {
     toast("Centres d'intérêt enregistrés sur cet appareil");
   });
 }
-const DOMAIN_SOFT = { web: ["vscode", "wordpress"], developpement: ["vscode", "python"], "jeux-video": ["godot"], graphisme: ["photoshop", "illustrator", "indesign", "canva", "affinity", "gimp", "inkscape"], maquettisme: ["indesign", "affinity", "illustrator"], video: ["premiere", "resolve", "finalcut", "capcut", "aftereffects"] };
+const DOMAIN_SOFT = { dessin: ["krita"], informatique: ["windows", "linux", "packettracer"], marketing: ["metabusiness", "trello", "canva"], web: ["vscode", "wordpress"], developpement: ["vscode", "python"], "jeux-video": ["godot"], graphisme: ["photoshop", "illustrator", "indesign", "canva", "affinity", "gimp", "inkscape"], maquettisme: ["indesign", "affinity", "illustrator"], video: ["premiere", "resolve", "finalcut", "capcut", "aftereffects"] };
 function softTile(s) { return `<div class="soft"><span class="tag" style="background:${s.color}">${s.tag}</span><div style="min-width:0"><b>${s.name}</b><span>${s.licence}</span></div></div>`; }
 function pfCard(p) {
   return `<article class="card link pf-card"><div class="pf-thumb">${portfolioArt(p)}</div><div class="pf-body"><div class="row"><span class="chip">${p.discipline}</span><span class="demo">Exemple TOB-MAQ</span></div>
@@ -2341,6 +2431,16 @@ function renderFormations(main, q) {
 }
 
 /* ---------- Centre de formation d'un domaine ---------- */
+function domainGrid() {
+  return `<div class="grid g3">${DOMAINS.map(d => `<article class="card link domain-card"><div class="domain-art">${domainArt(d.id)}</div><span class="num">${d.tag} / ${d.modules.length} modules · ${FORMATIONS.filter(f => f.domain === d.id).length} formation${FORMATIONS.filter(f => f.domain === d.id).length > 1 ? "s" : ""}</span>
+      <h3><a class="stretch" href="#/${d.id}">${d.name}</a></h3><p>${d.short}</p>
+      <ul>${SOFTWARE.filter(s => DOMAIN_SOFT[d.id].includes(s.id)).slice(0, 5).map(s => `<li class="chip">${s.name.replace("Adobe ", "")}</li>`).join("")}</ul></article>`).join("")}</div>`;
+}
+function renderDomains(main) {
+  main.innerHTML = pageHead({ crumbs: [["Domaines"]], eyebrow: "Centres de formation", title: "Nos domaines de formation",
+    lead: "Des métiers créatifs aux métiers du numérique : choisis ton domaine, puis une formation adaptée à ton niveau." }) +
+    `<section class="section-sm"><div class="wrap">${domainGrid()}</div></section>`;
+}
 function renderDomain(main, id) {
   const d = DOMAINS.find(x => x.id === id);
   const softs = DOMAIN_SOFT[id].map(softwareById);
@@ -2356,6 +2456,9 @@ function renderDomain(main, id) {
     web: "Chaque leçon contient du code prêt à copier, un exercice avec des critères de réussite, un quiz, et un cahier d'exercices PDF corrigé. Tout se fait avec des outils gratuits.",
     developpement: "On apprend en construisant de petits outils utiles (calculateur de prix, gestion de stock). Les exemples de code sont complets et testés ; le cahier d'exercices PDF contient les corrigés.",
     "jeux-video": "On conçoit d'abord sur papier (game design), puis on programme avec Godot, un moteur gratuit et libre. Le cahier d'exercices PDF accompagne chaque formation.",
+    dessin: "Le dessin s'apprend en pratiquant tous les jours : chaque leçon propose un exercice, et le cahier d'exercices PDF contient les corrigés et des grilles d'évaluation.",
+    informatique: "Les manipulations se font sur ton propre matériel ou dans des outils de simulation gratuits (Packet Tracer, machines virtuelles). En cybersécurité, tout est défensif : on apprend à protéger, jamais à attaquer.",
+    marketing: "Chaque formation part de cas concrets d'entreprises béninoises. Les cahiers d'exercices PDF proposent des mises en situation corrigées.",
     video: "Chaque tutoriel précise le logiciel utilisé. Les fonctions, les noms de menus et les raccourcis diffèrent d'un logiciel à l'autre : ne les transpose pas sans vérifier."
   };
   main.innerHTML = pageHead({ crumbs: [[d.name]], eyebrow: `Centre de formation · ${d.tag}`, title: d.name, lead: d.short,
@@ -4212,7 +4315,7 @@ $("#navToggle").addEventListener("click", () => { const n = $("#mainNav"), open 
 $("#searchForm").addEventListener("submit", e => { e.preventDefault(); go("#/recherche?q=" + encodeURIComponent($("#q").value.trim())); });
 
 const ROUTES = [
-  [/^$/, m => renderHome(m)], [/^formations$/, (m, p, q) => renderFormations(m, q)], [/^(graphisme|maquettisme|video|web|developpement|jeux-video)$/, (m, p) => renderDomain(m, p[1])],
+  [/^$/, m => renderHome(m)], [/^formations$/, (m, p, q) => renderFormations(m, q)], [/^(graphisme|maquettisme|video|web|developpement|jeux-video|dessin|informatique|marketing)$/, (m, p) => renderDomain(m, p[1])], [/^domaines$/, m => renderDomains(m)],
   [/^formation\/([\w-]+)$/, (m, p) => renderFormation(m, p[1])], [/^cours\/([\w-]+)$/, (m, p) => renderLesson(m, p[1])],
   [/^ia$/, (m, p, q) => renderStudio(m, q)], [/^jeux$/, m => renderGames(m)], [/^jeux\/([\w-]+)$/, (m, p, q) => renderGame(m, p[1], q)],
   [/^ressources$/, (m, p, q) => renderResources(m, q)], [/^ressource\/([\w-]+)$/, (m, p) => renderResource(m, p[1])],
@@ -4236,7 +4339,7 @@ function route() {
   cancelAnimationFrame(tcRaf);
   const raw = currentPath; renderedPath = raw;
   const [path, qs] = raw.split("?"), q = new URLSearchParams(qs || ""), section = path.split("/")[0], main = $("#main");
-  const navKey = { formation: "formations", cours: "formations", ressource: "ressources", projet: "portfolio" }[section] ?? section;
+  const navKey = { formation: "formations", cours: "formations", ressource: "ressources", projet: "portfolio" }[section] ?? (DOMAINS.some(d => d.id === section) ? "domaines" : section);
   $$("[data-nav]").forEach(a => a.dataset.nav === navKey ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
   $("#mainNav").classList.remove("open"); $("#navToggle").setAttribute("aria-expanded", "false");
   $("#q").value = section === "recherche" ? q.get("q") || "" : "";
