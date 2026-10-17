@@ -570,6 +570,15 @@ dialog::backdrop{background:rgb(11 14 23 / .6)}
 @keyframes introCrop{from{opacity:0;transform:scale(1.8)}to{opacity:1;transform:none}}
 @keyframes introGlow{to{transform:translate(3%,-3%) scale(1.05)}}
 
+/* Jeu « Mémo » */
+.memo-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;max-width:720px;margin:0 auto}
+.memo-card{min-height:96px;border-radius:14px;border:2px solid var(--line);background:linear-gradient(135deg,#5B3DF5,#A83BD8);color:#fff;font:800 1.6rem var(--font-display);cursor:pointer;padding:8px;display:grid;place-items:center;text-align:center;transition:transform .2s,background .2s}
+.memo-card:hover:not([disabled]){transform:translateY(-2px)}
+.memo-card:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+.memo-card.up{background:var(--surface);color:var(--ink);font:600 .86rem/1.3 var(--font-body);border-color:var(--accent)}
+.memo-card.up.mot{font:800 .95rem/1.2 var(--font-display)}
+.memo-card.found{background:var(--ok-soft);border-color:var(--ok);color:var(--ink);cursor:default}
+@media (max-width:520px){.memo-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.memo-card{min-height:84px}.memo-card.up{font-size:.78rem}}
 /* Jeu « L'œil de la pipette » */
 .match-wrap{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin:6px 0 18px}
 .match-wrap figure{margin:0;text-align:center}
@@ -2654,6 +2663,92 @@ function genMarketing(level) {
   };
   return Array.from({ length: 6 }, () => G[pick(kinds)]());
 }
+/* Valeurs de plan : le même personnage, cadré de plus en plus serré. */
+const SHOTS = {
+  ensemble: { label: "Plan d'ensemble", vb: [-420, -120, 1020, 574], n: 1, explain: "Le personnage est petit dans un grand décor : on situe le lieu et l'ambiance." },
+  moyen: { label: "Plan moyen (en pied)", vb: [-95, -12, 390, 219], n: 1, explain: "Le personnage est cadré de la tête aux pieds : on voit ses gestes et ses déplacements." },
+  rapproche: { label: "Plan rapproché (poitrine)", vb: [36, -6, 128, 72], n: 1, explain: "Cadré au niveau de la poitrine : idéal pour une interview ou un dialogue." },
+  gros: { label: "Gros plan (visage)", vb: [76, 0, 48, 27], n: 1, explain: "Le visage remplit le cadre : on montre l'émotion." },
+  americain: { label: "Plan américain (mi-cuisse)", vb: [-30, -10, 260, 146], n: 2, explain: "Coupé à mi-cuisse, hérité des westerns pour voir le pistolet à la ceinture." },
+  tgp: { label: "Très gros plan (détail)", vb: [88, 13, 24, 13.5], n: 3, explain: "Un détail (les yeux, une main) : effet très intense, à utiliser rarement." }
+};
+function shotSvg(vb) {
+  return `<svg viewBox="${vb.join(" ")}" preserveAspectRatio="xMidYMid slice" style="width:min(100%,520px);aspect-ratio:16/9;border-radius:12px;display:block;background:#9CC9E8" role="img" aria-label="Image à analyser">
+    <rect x="-2000" y="150" width="4000" height="2000" fill="#C9A66B"/><rect x="-2000" y="140" width="4000" height="12" fill="#7FA45A"/>
+    <rect x="-380" y="40" width="120" height="110" fill="#E7D3B0"/><polygon points="-390,40 -320,0 -250,40" fill="#B5543A"/><circle cx="420" cy="-60" r="34" fill="#FFD66B"/>
+    <rect x="300" y="60" width="18" height="90" fill="#6B4A2F"/><circle cx="309" cy="50" r="40" fill="#4E8A3E"/>
+    <rect x="86" y="96" width="12" height="104" rx="5" fill="#2E3A59"/><rect x="102" y="96" width="12" height="104" rx="5" fill="#2E3A59"/>
+    <rect x="80" y="38" width="40" height="64" rx="10" fill="#E8742C"/><rect x="68" y="42" width="11" height="52" rx="5" fill="#E8742C"/><rect x="121" y="42" width="11" height="52" rx="5" fill="#E8742C"/>
+    <rect x="95" y="30" width="10" height="10" fill="#8A5A3B"/><circle cx="100" cy="18" r="13" fill="#8A5A3B"/><path d="M87 14 q13 -14 26 0" fill="#1D1D1D"/>
+    <circle cx="95" cy="19" r="1.7" fill="#fff"/><circle cx="105" cy="19" r="1.7" fill="#fff"/><circle cx="95.3" cy="19.2" r=".9" fill="#111"/><circle cx="105.3" cy="19.2" r=".9" fill="#111"/>
+    <path d="M95 25 q5 3 10 0" stroke="#3B1F12" stroke-width="1.1" fill="none" stroke-linecap="round"/></svg>`;
+}
+function genShots(level) {
+  const n = LEVEL_INFO[level].n, avail = Object.keys(SHOTS).filter(k => SHOTS[k].n <= n);
+  const seq = shuffle([...avail, ...avail]).slice(0, 6);
+  return seq.map(k => { const o = shuffle([k, ...shuffle(avail.filter(x => x !== k)).slice(0, 3)]);
+    return { q: "Quelle est la valeur de ce plan ?", visual: shotSvg(SHOTS[k].vb), choices: o.map(x => SHOTS[x].label), answer: o.indexOf(k), explain: SHOTS[k].explain,
+      hint: "Regarde où le cadre coupe le personnage : les pieds, les cuisses, la poitrine, le cou… ou pas du tout." }; });
+}
+const numOpts = (ok, wrong) => { const all = shuffle([...new Set([ok, ...wrong.filter(w => w !== ok)])].slice(0, 4)); return { choices: all, answer: all.indexOf(ok) }; };
+/* Calculs d'impression : pixels, résolution et fond perdu. */
+function genPrint(level) {
+  const FMT = [["A4", 210, 297], ["A5", 148, 210], ["A6", 105, 148], ["A3", 297, 420], ["carte de visite", 85, 55], ["flyer 10 × 15 cm", 100, 150]];
+  const px = mm => Math.round(mm / 25.4 * 300);
+  const kinds = { facile: ["fp", "px"], moyen: ["fp", "px", "max"], difficile: ["px", "max", "eff", "fp"] }[level];
+  return Array.from({ length: 6 }, () => {
+    const [nm, w, h] = pick(FMT), k = pick(kinds);
+    if (k === "fp") return { q: `Ton ${nm} fait ${w} × ${h} mm. Quelle taille de document créer avec 3 mm de fond perdu de chaque côté ?`, ...numOpts(`${w + 6} × ${h + 6} mm`, [`${w + 3} × ${h + 3} mm`, `${w - 6} × ${h - 6} mm`, `${w + 30} × ${h + 30} mm`]),
+      explain: `3 mm à gauche + 3 mm à droite = 6 mm de plus en largeur, pareil en hauteur : ${w + 6} × ${h + 6} mm.`, hint: "Le fond perdu s'ajoute des deux côtés." };
+    if (k === "px") return { q: `Combien de pixels faut-il pour imprimer un ${nm} (${w} × ${h} mm) à 300 ppp ?`, ...numOpts(`${nf(px(w))} × ${nf(px(h))} px`, [`${nf(Math.round(w / 25.4 * 72))} × ${nf(Math.round(h / 25.4 * 72))} px`, `${nf(w * 3)} × ${nf(h * 3)} px`, `${nf(w * 30)} × ${nf(h * 30)} px`]),
+      explain: `1 pouce = 25,4 mm. ${w} ÷ 25,4 × 300 ≈ ${nf(px(w))} px et ${h} ÷ 25,4 × 300 ≈ ${nf(px(h))} px.`, hint: "Convertis les millimètres en pouces (÷ 25,4), puis multiplie par 300." };
+    if (k === "max") { const W = pick([1200, 1800, 2400, 3000, 3600, 4800]), cm = W / 300 * 2.54;
+      return { q: `Une photo fait ${nf(W)} px de large. Quelle largeur maximale peut-on imprimer en bonne qualité (300 ppp) ?`, ...numOpts(`${nf(Math.round(cm * 10) / 10)} cm`, [`${nf(Math.round(W / 72 * 2.54 * 10) / 10)} cm`, `${nf(W / 100)} cm`, `${nf(Math.round(cm * 25.4) / 10)} cm`]),
+        explain: `${nf(W)} ÷ 300 = ${nf(W / 300)} pouces × 2,54 = ${nf(Math.round(cm * 10) / 10)} cm.`, hint: "Pixels ÷ 300 donne des pouces ; un pouce = 2,54 cm." }; }
+    const W = pick([1200, 1500, 2000, 2400]), cm = pick([10, 15, 20, 30, 40]), ppp = Math.round(W / (cm / 2.54));
+    return { q: `Une image de ${nf(W)} px de large est imprimée sur ${cm} cm. Quelle est sa résolution réelle ?`, ...numOpts(`${nf(ppp)} ppp${ppp >= 250 ? " : suffisant" : " : trop faible"}`, [`${nf(Math.round(W / cm))} ppp`, `${nf(ppp * 2)} ppp${ppp * 2 >= 250 ? " : suffisant" : " : trop faible"}`, `300 ppp : suffisant`]),
+      explain: `${cm} cm = ${nf(Math.round(cm / 2.54 * 100) / 100)} pouces. ${nf(W)} ÷ ${nf(Math.round(cm / 2.54 * 100) / 100)} ≈ ${nf(ppp)} ppp. En dessous d'environ 250 ppp, l'impression perd en netteté.`, hint: "Divise les pixels par la largeur en pouces." };
+  });
+}
+/* Formats et ratios d'image. */
+function genRatio(level) {
+  const R = [["16:9", 16, 9, "vidéo YouTube, télévision"], ["9:16", 9, 16, "story, statut, TikTok"], ["1:1", 1, 1, "publication carrée"], ["4:5", 4, 5, "portrait du fil Instagram"], ["4:3", 4, 3, "ancien écran, tablette"], ["3:2", 3, 2, "photo d'appareil reflex"]];
+  const avail = R.slice(0, { facile: 4, moyen: 5, difficile: 6 }[level]);
+  const kinds = { facile: ["nom"], moyen: ["nom", "hauteur"], difficile: ["hauteur", "largeur", "nom"] }[level];
+  return Array.from({ length: 6 }, () => {
+    const r = pick(avail), k = pick(kinds), m = pick([60, 80, 120, 160, 240].filter(x => (r[1] * x) % 2 === 0));
+    const W = r[1] * m, H = r[2] * m;
+    if (k === "nom") { const o = shuffle([r, ...shuffle(avail.filter(x => x !== r)).slice(0, 3)]);
+      return { q: `Une image de ${nf(W)} × ${nf(H)} px a quel ratio ?`, visual: `<span style="display:block;width:${Math.round(180 * Math.min(1, r[1] / r[2]))}px;height:${Math.round(180 * Math.min(1, r[2] / r[1]))}px;border:3px solid var(--accent);border-radius:8px;background:var(--accent-soft)"></span>`,
+        choices: o.map(x => `${x[0]} (${x[3]})`), answer: o.indexOf(r), explain: `${nf(W)} ÷ ${m} = ${r[1]} et ${nf(H)} ÷ ${m} = ${r[2]} : ratio ${r[0]}.`, hint: "Divise la largeur et la hauteur par le même nombre jusqu'à obtenir de petits nombres." }; }
+    if (k === "hauteur") return { q: `Image au ratio ${r[0]}, large de ${nf(W)} px. Quelle hauteur ?`, ...numOpts(`${nf(H)} px`, [`${nf(W)} px`, `${nf(Math.round(W * r[1] / r[2]))} px`, `${nf(H + m)} px`]),
+      explain: `${nf(W)} ÷ ${r[1]} × ${r[2]} = ${nf(H)} px.`, hint: `Divise la largeur par ${r[1]}, puis multiplie par ${r[2]}.` };
+    return { q: `Image au ratio ${r[0]}, haute de ${nf(H)} px. Quelle largeur ?`, ...numOpts(`${nf(W)} px`, [`${nf(H)} px`, `${nf(Math.round(H * r[2] / r[1]))} px`, `${nf(W + m)} px`]),
+      explain: `${nf(H)} ÷ ${r[2]} × ${r[1]} = ${nf(W)} px.`, hint: `Divise la hauteur par ${r[2]}, puis multiplie par ${r[1]}.` };
+  });
+}
+/* Le devis du freelance : prix, acompte, remise et TVA (18 % au Bénin). */
+function genQuote(level) {
+  const F = n => nf(Math.round(n)) + " FCFA";
+  const kinds = { facile: ["total", "acompte"], moyen: ["total", "acompte", "remise", "taux"], difficile: ["tva", "taux", "remise", "reste"] }[level];
+  const G = {
+    total() { const h = pick([4, 6, 8, 10, 12]), t = pick([2500, 3000, 5000, 7500]), o = pick([0, 5000, 10000]); return { q: `Un logo demande ${h} h de travail à ${F(t)} de l'heure${o ? `, plus ${F(o)} pour la mini-charte` : ""}. Quel est le total du devis ?`, ...numOpts(F(h * t + o), [F(h * t), F((h + 1) * t + o), F(h * t * 2 + o)].filter((x, i) => o || i)), explain: `${h} × ${F(t)} = ${F(h * t)}${o ? ` + ${F(o)} = ${F(h * t + o)}` : ""}.`, hint: "Heures × tarif, puis ajoute les options." }; },
+    acompte() { const T = pick([30000, 50000, 75000, 100000, 150000]), a = pick([30, 40, 50]); return { q: `Devis de ${F(T)} avec un acompte de ${a} % à la commande. Combien demander au départ ?`, ...numOpts(F(T * a / 100), [F(T * (100 - a) / 100), F(T / a), F(T * a / 1000)]), explain: `${a} % de ${F(T)} = ${F(T * a / 100)}. L'acompte protège ton temps si le client abandonne.`, hint: "Calcule le pourcentage du total." }; },
+    remise() { const T = pick([40000, 60000, 80000, 120000]), r = pick([5, 10, 15, 20]); return { q: `Tu accordes ${r} % de remise sur un devis de ${F(T)}. Nouveau total ?`, ...numOpts(F(T * (1 - r / 100)), [F(T - r * 100), F(T * r / 100), F(T * (1 + r / 100))]), explain: `Remise : ${F(T * r / 100)}. ${F(T)} − ${F(T * r / 100)} = ${F(T * (1 - r / 100))}.`, hint: "Calcule d'abord le montant de la remise." }; },
+    taux() { const goal = pick([150000, 200000, 250000, 300000]), hrs = pick([50, 60, 80, 100]); return { q: `Tu veux gagner ${F(goal)} par mois et tu peux facturer ${hrs} heures. Quel tarif horaire minimum ?`, ...numOpts(F(goal / hrs), [F(goal / (hrs * 4)), F(goal / 30), F(goal * hrs / 1000)]), explain: `${F(goal)} ÷ ${hrs} h = ${F(goal / hrs)} de l'heure. Seules les heures facturées comptent : la prospection et l'administratif ne sont pas payés.`, hint: "Objectif ÷ heures facturables." }; },
+    tva() { const ht = pick([50000, 100000, 200000, 250000]); return { q: `Un devis fait ${F(ht)} hors taxes (HT). Quel est le montant TTC avec une TVA de 18 % ?`, ...numOpts(F(ht * 1.18), [F(ht * 0.82), F(ht * 0.18), F(ht + 18000)]), explain: `TTC = HT × 1,18 = ${F(ht * 1.18)} (dont ${F(ht * 0.18)} de TVA). Renseigne-toi sur ton régime fiscal : tous les freelances n'y sont pas soumis.`, hint: "Multiplie par 1,18." }; },
+    reste() { const T = pick([60000, 90000, 120000]), a = pick([30, 50]), sup = pick([5000, 10000, 15000]); return { q: `Devis de ${F(T)}, acompte de ${a} % déjà payé. Le client ajoute une retouche facturée ${F(sup)}. Combien reste-t-il à payer à la livraison ?`, ...numOpts(F(T * (1 - a / 100) + sup), [F(T * (1 - a / 100)), F(T + sup), F(T * a / 100 + sup)]), explain: `Reste du devis : ${F(T * (1 - a / 100))}, plus la retouche : ${F(T * (1 - a / 100) + sup)}.`, hint: "Ce qui reste du devis, plus ce qui a été ajouté." }; }
+  };
+  return Array.from({ length: 6 }, () => G[pick(kinds)]());
+}
+const MEMO_PAIRS = {
+  graphiste: [["CMJN", "Couleurs pour l'impression"], ["RVB", "Couleurs pour les écrans"], ["Fond perdu", "Image qui dépasse la ligne de coupe"], ["Vectoriel", "S'agrandit sans perte de qualité"], ["300 ppp", "Résolution conseillée pour l'impression"],
+    ["Approche", "Espace entre deux lettres"], ["Interlignage", "Espace entre deux lignes"], ["Masque de fusion", "Cacher sans effacer les pixels"], ["Gabarit", "Modèle de page réutilisable"], ["Complémentaires", "Couleurs opposées sur le cercle"], ["PNG", "Image avec transparence"], ["Calque", "Couche indépendante d'une image"]],
+  monteur: [["Rushes", "Images brutes du tournage"], ["Dérushage", "Trier et choisir les meilleures prises"], ["Plan de coupe", "Image glissée pour masquer une coupe"], ["J-cut", "Le son arrive avant l'image"], ["L-cut", "Le son continue sur le plan suivant"], ["Étalonnage", "Travailler les couleurs et le look"],
+    ["Images par seconde", "Fluidité du mouvement"], ["Fondu au noir", "Signale une fin ou un chapitre"], ["Voix off", "Narration enregistrée à part"], ["Débit (bitrate)", "Quantité de données par seconde"], ["Raccord dans l'axe", "Se rapprocher sans changer d'angle"], ["Jump cut", "Saut visible dans un même plan"]],
+  marketeur: [["CTR", "Taux de clic"], ["Conversion", "Visiteur qui devient client"], ["Persona", "Portrait du client type"], ["Appel à l'action", "Ce qu'on demande de faire"], ["Test A/B", "Comparer deux versions"], ["ROAS", "Ventes ÷ dépense publicitaire"],
+    ["Cible", "Les personnes que l'on veut toucher"], ["Tunnel de vente", "Parcours de l'inconnu au client"], ["Engagement", "Likes, commentaires et partages"], ["Reciblage", "Pub montrée à ceux qui ont déjà visité"], ["Portée", "Nombre de personnes touchées"], ["Fidélisation", "Faire revenir un client"]]
+};
 const PROBLEMS = {
   correcte: { label: "Image correcte", n: 1, explain: "Noirs denses, blancs propres, couleurs naturelles : rien à corriger." },
   surex: { label: "Surexposée", filter: "brightness(1.55) contrast(.85)", n: 1, explain: "Les hautes lumières sont brûlées : baisse le Gain ou l'exposition." },
@@ -2730,7 +2825,21 @@ const GAMES = [
     },
     tip: "Règle utile (AIDA) : on attire l'Attention, on crée l'Intérêt, on fait naître le Désir, puis on demande l'Action. Après la vente, on fidélise." },
   { id: "chiffres", title: "Les chiffres du marketeur", domain: "marketing", skill: "Taux de clic, conversion, rentabilité", art: "calc", engine: "quiz", gen: genMarketing,
-    consigne: "Calcule les indicateurs d'une campagne : taux de clic, conversion, coût par vente, rentabilité. Un brouillon est autorisé !" }
+    consigne: "Calcule les indicateurs d'une campagne : taux de clic, conversion, coût par vente, rentabilité. Un brouillon est autorisé !" },
+  { id: "valeurs-plan", title: "Les valeurs de plan", domain: "video", skill: "Cadrage et langage du cinéma", art: "shot", engine: "quiz", gen: genShots,
+    consigne: "Observe le cadrage et nomme la valeur du plan : plan d'ensemble, plan moyen, gros plan…" },
+  { id: "impression", title: "Calculs d'impression", domain: "maquettisme", skill: "Résolution et fond perdu", art: "print", engine: "quiz", gen: genPrint,
+    consigne: "Calcule les pixels, la résolution et le fond perdu d'un document à imprimer. Un brouillon est autorisé !" },
+  { id: "ratios", title: "Formats et ratios", domain: "graphisme", skill: "Dimensions des visuels", art: "ratio", engine: "quiz", gen: genRatio,
+    consigne: "Trouve le ratio d'une image ou calcule la dimension qui manque." },
+  { id: "devis", title: "Le devis du freelance", domain: "marketing", skill: "Fixer et calculer ses prix", art: "receipt", engine: "quiz", gen: genQuote,
+    consigne: "Calcule un devis comme un pro : total, acompte, remise, TVA et tarif horaire." },
+  { id: "memo-graphiste", title: "Mémo du graphiste", domain: "graphisme", skill: "Vocabulaire du métier", art: "memo", engine: "memo", pairs: "graphiste",
+    consigne: "Retourne les cartes deux par deux et associe chaque mot à sa définition. Moins tu fais d'erreurs, plus tu marques de points." },
+  { id: "memo-monteur", title: "Mémo du monteur", domain: "video", skill: "Vocabulaire du montage", art: "memo", engine: "memo", pairs: "monteur",
+    consigne: "Retourne les cartes deux par deux et associe chaque mot à sa définition. Moins tu fais d'erreurs, plus tu marques de points." },
+  { id: "memo-marketeur", title: "Mémo du marketeur", domain: "marketing", skill: "Vocabulaire du marketing", art: "memo", engine: "memo", pairs: "marketeur",
+    consigne: "Retourne les cartes deux par deux et associe chaque mot à sa définition. Moins tu fais d'erreurs, plus tu marques de points." }
 ];
 const gameById = id => GAMES.find(g => g.id === id);
 function gameArt(k) {
@@ -2756,6 +2865,11 @@ function gameArt(k) {
     quote: `<rect x="12" y="12" width="96" height="40" rx="10" fill="#5B3DF5"/><path d="M30 52 l-6 12 l16 -12z" fill="#5B3DF5"/><text x="60" y="38" text-anchor="middle" fill="#fff" style="font:800 15px var(--font-display)">-30 %</text>`,
     funnel: [0, 1, 2, 3].map(i => `<rect x="${18 + i * 11}" y="${10 + i * 13}" width="${84 - i * 22}" height="10" rx="3" fill="${["#5B3DF5", "#8F76FF", "#A83BD8", "#FF7A45"][i]}"/>`).join(""),
     calc: `<rect x="34" y="8" width="52" height="56" rx="7" fill="#ECEEF5"/><rect x="40" y="14" width="40" height="12" rx="2" fill="#141927"/><text x="77" y="24" text-anchor="end" fill="#4ADE95" style="font:600 9px var(--font-mono)">3,2 %</text>${[0, 1, 2].flatMap(r => [0, 1, 2].map(c => `<rect x="${41 + c * 13}" y="${31 + r * 10}" width="10" height="7" rx="2" fill="${c === 2 && r === 2 ? "#FF7A45" : "#A2A9BC"}"/>`)).join("")}`,
+    shot: `<rect x="14" y="10" width="92" height="52" rx="4" fill="#9CC9E8"/><rect x="14" y="48" width="92" height="14" fill="#C9A66B"/><circle cx="60" cy="26" r="8" fill="#8A5A3B"/><rect x="51" y="34" width="18" height="24" rx="5" fill="#E8742C"/><rect x="10" y="6" width="100" height="60" rx="6" fill="none" stroke="#FF7A45" stroke-width="3" stroke-dasharray="10 6"/>`,
+    print: `<rect x="26" y="10" width="54" height="54" fill="#FF7A45" opacity=".35"/><rect x="31" y="15" width="44" height="44" fill="#ECEEF5"/><rect x="38" y="24" width="30" height="6" fill="#12141C"/><rect x="38" y="36" width="22" height="14" fill="#5B3DF5"/>${[26, 80].map(x => `<line x1="${x + (x > 30 ? 5 : -5) * -1}" y1="2" x2="${x + (x > 30 ? 5 : -5) * -1}" y2="8" stroke="#ECEEF5" stroke-width="1.5"/>`).join("")}<text x="96" y="40" fill="#ECEEF5" style="font:600 9px var(--font-mono)">3 mm</text>`,
+    ratio: `<rect x="10" y="16" width="56" height="32" rx="3" fill="none" stroke="#8F76FF" stroke-width="3"/><rect x="74" y="8" width="20" height="36" rx="3" fill="none" stroke="#FF7A45" stroke-width="3"/><rect x="100" y="26" width="14" height="14" rx="2" fill="none" stroke="#ECEEF5" stroke-width="3"/><text x="38" y="62" text-anchor="middle" fill="#A2A9BC" style="font:600 9px var(--font-mono)">16:9</text><text x="84" y="62" text-anchor="middle" fill="#A2A9BC" style="font:600 9px var(--font-mono)">9:16</text>`,
+    receipt: `<path d="M36 6 h48 v58 l-6 -4 l-6 4 l-6 -4 l-6 4 l-6 -4 l-6 4 l-6 -4 l-6 4z" fill="#ECEEF5"/>${[16, 24, 32].map(y => `<rect x="42" y="${y}" width="${y === 24 ? 26 : 34}" height="3" rx="1.5" fill="#A2A9BC"/>`).join("")}<rect x="42" y="42" width="36" height="7" rx="2" fill="#FF7A45"/>`,
+    memo: [0, 1, 2, 3].map(i => `<rect x="${12 + i * 25}" y="${i % 2 ? 18 : 12}" width="20" height="28" rx="4" fill="${i === 1 ? "#ECEEF5" : i === 2 ? "#FF7A45" : "#5B3DF5"}" transform="rotate(${[-8, 4, -3, 7][i]} ${22 + i * 25} ${i % 2 ? 32 : 26})"/>`).join("") + `<text x="47" y="38" text-anchor="middle" fill="#12141C" style="font:800 12px var(--font-display)">?</text>`,
     chrono: `<circle cx="60" cy="38" r="24" fill="none" stroke="#ECEEF5" stroke-width="4"/><rect x="54" y="6" width="12" height="6" rx="2" fill="#ECEEF5"/><path d="M60 38 L60 22" stroke="#FF7A45" stroke-width="4" stroke-linecap="round"/><path d="M60 38 L72 44" stroke="#ECEEF5" stroke-width="3" stroke-linecap="round"/>`
   };
   return `<svg viewBox="0 0 120 70" aria-hidden="true">${A[k] || ""}</svg>`;
@@ -2933,6 +3047,46 @@ const ENGINES = {
         const pts = review.reduce((n, r, k) => n + (r.ok && !hintedIdx.has(k) ? per : 0), 0);
         ui.finish({ pts, good, total: correct.length, review, level, extra: `<p class="muted">${esc(g.tip || "Règle utile : on situe d'abord le lieu (plan large), puis on se rapproche (plan moyen, gros plan), et on termine par un plan qui conclut.")}</p>` });
       });
+    };
+    draw();
+  },
+
+  memo(g, level, ui) {
+    const n = { facile: 4, moyen: 6, difficile: 8 }[level], per = 60 * LEVEL_INFO[level].mult;
+    const pairs = shuffle(MEMO_PAIRS[g.pairs]).slice(0, n);
+    const cards = shuffle(pairs.flatMap(([a, b], i) => [{ p: i, t: a, kind: "mot" }, { p: i, t: b, kind: "def" }]));
+    let open = [], found = new Set(), errors = 0, busy = false, peeked = false;
+    const score = () => Math.max(0, Math.round(found.size * per - errors * per / 4) * (peeked ? .5 : 1));
+    const draw = () => {
+      ui.bar(`Paires trouvées : ${found.size} / ${n} · erreurs : ${errors}`, score());
+      ui.stage.innerHTML = `<p class="q-title">Associe chaque mot à sa définition</p>
+        <div class="memo-grid" style="--cols:${n <= 4 ? 4 : 4}">${cards.map((c, i) => { const up = found.has(c.p) || open.includes(i);
+          return `<button class="memo-card ${up ? "up" : ""} ${found.has(c.p) ? "found" : ""} ${c.kind}" data-i="${i}" ${found.has(c.p) ? "disabled" : ""} aria-label="${up ? esc(c.t) : `Carte ${i + 1}, face cachée`}">${up ? `<span>${esc(c.t)}</span>` : `<span aria-hidden="true">?</span>`}</button>`; }).join("")}</div>
+        <div class="game-actions"><button class="btn btn-ghost btn-sm" id="peek" ${peeked ? "disabled" : ""}>${icon("bulb")} Indice : tout montrer 2 s (points ÷ 2)</button><span class="small muted mono">+${nf(per)} pts par paire</span></div><div class="feedback" aria-live="polite"></div>`;
+      $$(".memo-card", ui.stage).forEach(b => b.addEventListener("click", () => flip(+b.dataset.i)));
+      $("#peek").addEventListener("click", () => {
+        peeked = true; busy = true;
+        $$(".memo-card", ui.stage).forEach((b, i) => { b.classList.add("up"); b.innerHTML = `<span>${esc(cards[i].t)}</span>`; });
+        setTimeout(() => { busy = false; draw(); }, 2000);
+      });
+    };
+    const flip = i => {
+      if (busy || open.includes(i) || found.has(cards[i].p)) return;
+      open.push(i); draw();
+      if (open.length < 2) { $(`[data-i="${i}"]`, ui.stage).focus(); return; }
+      const [a, b] = open.map(k => cards[k]);
+      if (a.p === b.p) {
+        found.add(a.p); open = []; draw();
+        $(".feedback", ui.stage).innerHTML = alertBox("ok", `<p><strong>Paire trouvée :</strong> ${esc(pairs[a.p][0])} = ${esc(pairs[a.p][1])}</p>`);
+        if (found.size === n) setTimeout(() => ui.finish({ pts: score(), good: n, total: n, level,
+          review: pairs.map(([m, d]) => ({ q: m, given: d, correct: d, ok: true })),
+          extra: `<p class="muted">${errors === 0 ? "Aucune erreur : mémoire parfaite !" : `${errors} erreur${errors > 1 ? "s" : ""} : chaque erreur retire un quart de paire.`}</p>` }), 700);
+        else { const nx = $(".memo-card:not([disabled])", ui.stage); if (nx) nx.focus(); }
+      } else {
+        errors++; busy = true; draw();
+        $(".feedback", ui.stage).innerHTML = alertBox("warn", "<p>Ces deux cartes ne vont pas ensemble. Mémorise-les !</p>");
+        setTimeout(() => { open = []; busy = false; draw(); const c = $(`[data-i="${i}"]`, ui.stage); if (c) c.focus(); }, 1300);
+      }
     };
     draw();
   },
