@@ -575,6 +575,25 @@ dialog::backdrop{background:rgb(11 14 23 / .6)}
 .code-box pre{margin:0;padding:18px 18px 18px;overflow-x:auto;color:#E6E8F0;font:500 .86rem/1.6 var(--font-mono);tab-size:4;-moz-tab-size:4}
 .code-box .code-copy{position:absolute;top:8px;right:8px;background:#1D2336;color:#ECEEF5;border-color:#39415C}
 .code-box .code-copy:hover{background:#262D42}
+/* Jeux : lignes de code, point de fuite, messages, étiquettes illustrées */
+.ls-lines{list-style:none;margin:0 auto;padding:0;display:grid;gap:6px;max-width:640px}
+.ls-line{width:100%;display:flex;gap:12px;align-items:center;text-align:left;padding:10px 12px;border-radius:10px;border:1.5px solid #262D42;background:#0B0E17;color:#E6E8F0;cursor:pointer;font:500 .9rem/1.4 var(--font-mono);white-space:pre;overflow-x:auto}
+.ls-line:hover:not([disabled]){border-color:var(--accent)}
+.ls-line:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+.ls-line .ls-n{color:#6E7690;min-width:1.5em;text-align:right}
+.ls-line.right{border-color:var(--ok);background:#0F2A1D}
+.ls-line.wrong{border-color:var(--err);background:#33140F}
+.ls-line code{white-space:pre}
+.vp-wrap{max-width:640px;margin:0 auto}
+.vp-wrap svg{width:100%;display:block;border-radius:12px;cursor:crosshair;border:1px solid var(--line);touch-action:manipulation}
+.vp-wrap svg:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.msg-bubble{max-width:460px;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:16px 16px 16px 4px;padding:14px 16px;box-shadow:var(--shadow)}
+.msg-bubble p{margin:.5rem 0 0;color:var(--ink)}
+.msg-from{display:flex;align-items:center;gap:6px;font-size:.9rem}
+.msg-from svg{width:16px;height:16px}
+.token .fil,.token .sw-tok{display:inline-block;width:22px;height:22px;border-radius:5px;border:1px solid var(--line-2);vertical-align:middle;margin-right:8px}
+.token .sw-tok{width:34px}
+.tok-code{font:500 .86rem var(--font-mono);white-space:pre}
 /* Jeu « Mémo » */
 .memo-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;max-width:720px;margin:0 auto}
 .memo-card{min-height:96px;border-radius:14px;border:2px solid var(--line);background:linear-gradient(135deg,#5B3DF5,#A83BD8);color:#fff;font:800 1.6rem var(--font-display);cursor:pointer;padding:8px;display:grid;place-items:center;text-align:center;transition:transform .2s,background .2s}
@@ -3890,7 +3909,86 @@ const LEVEL_INFO = {
   difficile: { label: "Difficile", mult: 2, n: 3, desc: "Pour les pros. Points ×2." }
 };
 /* Banque de questions : [niveau 1-3, question, choix, index de la bonne réponse, explication, indice] */
+const codeVis = src => `<div class="code-box" style="text-align:left;width:min(100%,560px)"><pre><code>${esc(src)}</code></pre></div>`;
 const POOLS = {
+  selecteur: [
+    [1, "Quel sélecteur cible ce paragraphe grâce à sa classe ?", [".prix", "#prix", "prix"], 0, "Le point cible une classe, le dièse un id, le nom seul une balise.", "Classe = point.", codeVis('<p class="prix">2 500 FCFA</p>')],
+    [1, "Quel sélecteur cible cette section grâce à son id ?", ["#contact", ".contact", "section#"], 0, "Le dièse cible l'id : il doit être unique dans la page.", "Id = dièse.", codeVis('<section id="contact">…</section>')],
+    [1, "Quel sélecteur cible TOUS les paragraphes de la page ?", ["p", ".p", "#p"], 0, "Le nom de la balise seul cible tous les éléments de ce type.", "Pas de point ni de dièse."],
+    [1, "Quel sélecteur cible tous les liens ?", ["a", "link", ".lien"], 0, "La balise d'un lien est <a>.", "Pense à la balise <a href=…>."],
+    [2, "Quel sélecteur cible seulement les liens qui sont DANS le menu ?", ["nav a", "a nav", "nav, a"], 0, "« nav a » = les a descendants d'un nav. La virgule (nav, a) ciblerait les deux séparément.", "Le parent d'abord, puis l'enfant, séparés par une espace.", codeVis('<nav><a href="#">Accueil</a></nav>\n<a href="#">Autre lien</a>')],
+    [2, "Quel sélecteur cible ce bouton qui porte les DEUX classes ?", [".btn.principal", ".btn .principal", "#btn.principal"], 0, "Sans espace, les deux classes sont sur le même élément. Avec une espace, on chercherait un .principal à l'intérieur d'un .btn.", "Colle les deux classes.", codeVis('<button class="btn principal">Commander</button>')],
+    [2, "Quel sélecteur s'applique quand la souris passe sur un lien ?", ["a:hover", "a:active", "a::hover"], 0, ":hover = survol ; :active = au moment du clic. hover s'écrit avec un seul deux-points.", "Survoler se dit « hover »."],
+    [2, "Quel sélecteur cible le premier élément de chaque liste ?", ["li:first-child", "li:first", "li[1]"], 0, ":first-child cible un élément qui est le premier enfant de son parent.", "Une pseudo-classe avec « child »."],
+    [3, "Quel sélecteur cible les images dont l'attribut alt est vide ?", ['img[alt=""]', "img:alt", "img.alt"], 0, "Les crochets ciblent un attribut et sa valeur : pratique pour repérer les images mal décrites.", "Les attributs se ciblent entre crochets."],
+    [3, "Quel sélecteur cible uniquement les li ENFANTS DIRECTS de .menu ?", [".menu > li", ".menu li", ".menu + li"], 0, "> = enfant direct ; espace = tous les descendants ; + = l'élément juste après.", "Un chevron pour « directement dedans ».", codeVis('<ul class="menu">\n  <li>Accueil\n    <ul><li>Sous-menu</li></ul>\n  </li>\n</ul>')],
+    [3, "Quel sélecteur cible le paragraphe placé JUSTE APRÈS un h2 ?", ["h2 + p", "h2 ~ p", "h2 > p"], 0, "+ = frère immédiatement suivant ; ~ = tous les frères suivants ; > = enfant.", "Le signe de l'addition : « juste à côté »."],
+    [3, "Quel sélecteur cible les cases à cocher cochées ?", ["input:checked", "input:selected", "input[checked=true]"], 0, ":checked suit l'état réel de la case, même après un clic de l'utilisateur.", "Coché se dit « checked »."]],
+  godot: [
+    [1, "Un personnage contrôlé par le joueur, qui se cogne aux murs.", ["CharacterBody2D", "Sprite2D", "Label"], 0, "CharacterBody2D se déplace avec move_and_slide() et gère les collisions.", "Un « corps de personnage »."],
+    [1, "Afficher une image (un personnage, un décor).", ["Sprite2D", "Timer", "Area2D"], 0, "Sprite2D affiche une texture.", "Sprite = image."],
+    [1, "Afficher le score à l'écran.", ["Label", "Camera2D", "AudioStreamPlayer"], 0, "Label affiche du texte ; on modifie sa propriété text.", "Une étiquette de texte."],
+    [1, "Jouer un son quand le joueur ramasse une pièce.", ["AudioStreamPlayer", "Camera2D", "Timer"], 0, "AudioStreamPlayer lit un fichier audio avec play().", "Audio…"],
+    [2, "Une pièce qui détecte le joueur sans le bloquer.", ["Area2D", "StaticBody2D", "RigidBody2D"], 0, "Area2D détecte les entrées (signal body_entered) sans bloquer le mouvement.", "Une zone, pas un corps solide."],
+    [2, "Un mur immobile contre lequel le joueur s'arrête.", ["StaticBody2D", "Area2D", "Label"], 0, "StaticBody2D est un corps solide qui ne bouge pas.", "Statique = immobile."],
+    [2, "Déclencher une action toutes les 3 secondes.", ["Timer", "Sprite2D", "Path2D"], 0, "Timer émet le signal timeout après le délai réglé (Wait Time).", "Un minuteur."],
+    [2, "Une caméra qui suit le joueur.", ["Camera2D (enfant du joueur)", "Sprite2D", "Area2D"], 0, "Placée comme enfant du joueur, la Camera2D le suit automatiquement.", "Caméra…"],
+    [3, "Une caisse qui tombe et rebondit selon la physique.", ["RigidBody2D", "CharacterBody2D", "StaticBody2D"], 0, "RigidBody2D est piloté par le moteur physique (gravité, rebonds).", "Un corps « rigide » soumis aux forces."],
+    [3, "Donner une forme de collision à un corps.", ["CollisionShape2D", "Sprite2D", "Marker2D"], 0, "Sans CollisionShape2D (ou CollisionPolygon2D), le corps ne sait pas où il est.", "Collision + forme."],
+    [3, "Dessiner un niveau avec des tuiles.", ["TileMapLayer (TileMap dans les anciennes versions)", "Sprite2D répété à la main", "Label"], 0, "Les tuiles se peignent rapidement sur une grille avec un TileSet.", "Tile = tuile."],
+    [3, "Animer un personnage image par image (marche, saut).", ["AnimatedSprite2D", "Camera2D", "Timer"], 0, "AnimatedSprite2D enchaîne les images définies dans des SpriteFrames.", "Un sprite… animé."]],
+  linux: [
+    [1, "Afficher le dossier dans lequel tu te trouves.", ["pwd", "ls", "cd"], 0, "pwd = print working directory.", "Trois lettres, « où suis-je ? »."],
+    [1, "Lister les fichiers du dossier.", ["ls", "pwd", "cat"], 0, "ls liste le contenu ; ls -l donne les détails.", "Comme « list »."],
+    [1, "Entrer dans le dossier documents.", ["cd documents", "ls documents", "go documents"], 0, "cd = change directory. cd .. remonte d'un niveau.", "Changer de dossier."],
+    [1, "Créer un dossier sauvegardes.", ["mkdir sauvegardes", "touch sauvegardes", "new sauvegardes"], 0, "mkdir crée un dossier ; touch crée un fichier vide.", "Make directory."],
+    [2, "Mettre à jour la liste des paquets disponibles (Ubuntu).", ["sudo apt update", "sudo apt upgrade", "apt list"], 0, "update rafraîchit la liste ; upgrade installe ensuite les mises à jour.", "D'abord on rafraîchit la liste."],
+    [2, "Voir l'espace libre sur les disques.", ["df -h", "free -h", "ls -l"], 0, "df -h affiche l'espace disque en unités lisibles ; free -h concerne la mémoire vive.", "Disk free."],
+    [2, "Redémarrer le service nginx.", ["sudo systemctl restart nginx", "sudo restart nginx", "systemctl nginx reboot"], 0, "systemctl gère les services : start, stop, restart, status.", "systemctl + action + service."],
+    [2, "Droits rwxr--r-- sur script.sh (tout pour le propriétaire, lecture pour les autres).", ["chmod 744 script.sh", "chmod 777 script.sh", "chmod 755 script.sh"], 0, "rwx = 4+2+1 = 7, r-- = 4 : 744. 755 donnerait aussi l'exécution aux autres ; 777 est dangereux.", "r = 4, w = 2, x = 1."],
+    [3, "Se connecter à distance au serveur 192.168.1.10 avec l'utilisateur admin.", ["ssh admin@192.168.1.10", "ftp 192.168.1.10 admin", "ping admin@192.168.1.10"], 0, "ssh utilisateur@adresse ouvre un terminal chiffré sur le serveur.", "Secure shell."],
+    [3, "Donner le dossier www (et son contenu) à l'utilisateur awa.", ["sudo chown -R awa www", "sudo chmod -R awa www", "sudo usermod awa www"], 0, "chown change le propriétaire ; -R l'applique à tout le contenu.", "Change owner, récursif."],
+    [3, "Lire les derniers messages du journal du service nginx.", ["journalctl -u nginx -n 50", "systemctl log nginx", "cat nginx"], 0, "journalctl -u filtre par service, -n limite le nombre de lignes.", "Le journal système : journalctl."],
+    [3, "Ajouter l'utilisateur koffi au groupe sudo.", ["sudo usermod -aG sudo koffi", "sudo useradd sudo koffi", "sudo chmod sudo koffi"], 0, "usermod -aG ajoute (a) à un groupe (G) sans retirer les autres.", "Modifier l'utilisateur, -aG."]],
+  diagnostic: [
+    [1, "Le PC est très lent et le Gestionnaire des tâches montre le disque (un vieux HDD) à 100 %.", ["Remplacer le disque dur par un SSD", "Changer l'écran", "Ajouter une souris"], 0, "Un SSD est souvent la mise à niveau qui accélère le plus un vieil ordinateur.", "Quel composant est saturé ?"],
+    [1, "Plus aucun son ne sort de l'ordinateur.", ["Vérifier le volume, la sortie audio choisie et le pilote", "Réinstaller Windows tout de suite", "Changer le clavier"], 0, "On commence toujours par les causes simples : volume coupé, mauvaise sortie, pilote.", "Du plus simple au plus compliqué."],
+    [1, "L'ordinateur s'éteint tout seul quand il chauffe.", ["Nettoyer la poussière des ventilateurs et des grilles", "Augmenter la luminosité", "Installer un jeu"], 0, "La surchauffe déclenche une coupure de protection ; la poussière bloque le refroidissement.", "Il chauffe : que bloque l'air ?"],
+    [1, "Ce PC n'a pas Internet, mais les autres appareils du bureau l'ont.", ["Vérifier le Wi-Fi ou le câble de CE PC et redémarrer sa carte réseau", "Appeler le fournisseur d'accès", "Changer le routeur"], 0, "Si les autres fonctionnent, le problème est sur ce poste.", "Le problème touche un seul appareil."],
+    [2, "Le PC rame dès qu'on ouvre plusieurs onglets ; la mémoire est à 95 %.", ["Ajouter de la RAM ou fermer des programmes", "Remplacer l'écran", "Défragmenter un SSD"], 0, "La mémoire vive saturée oblige l'ordinateur à utiliser le disque, beaucoup plus lent.", "Quelle ressource est pleine ?"],
+    [2, "Au démarrage : « Aucun périphérique de démarrage trouvé ».", ["Vérifier dans le BIOS/UEFI que le disque est détecté et l'ordre de démarrage", "Changer la souris", "Mettre à jour le navigateur"], 0, "Le disque peut être débranché, en panne, ou l'ordre de démarrage mal réglé.", "Le PC ne trouve pas sur quoi démarrer."],
+    [2, "Publicités partout et page d'accueil du navigateur changée toute seule.", ["Analyser avec l'antivirus et supprimer les extensions inconnues", "Acheter un nouvel écran", "Ignorer le problème"], 0, "Ce sont des signes de logiciel publicitaire ou d'extension malveillante.", "Un intrus s'est installé."],
+    [2, "ping 8.8.8.8 répond, mais ping google.com échoue.", ["Un problème de DNS", "Le câble est débranché", "La carte graphique est en panne"], 0, "L'adresse IP répond, donc Internet fonctionne ; seule la traduction des noms (DNS) échoue.", "Les chiffres passent, les noms non."],
+    [3, "Écran bleu juste après l'installation d'un nouveau pilote.", ["Démarrer en mode sans échec et revenir à l'ancienne version du pilote", "Changer de clavier", "Formater immédiatement"], 0, "Le dernier changement est le suspect principal : on l'annule.", "Qu'est-ce qui a changé en dernier ?"],
+    [3, "L'adresse IP du PC commence par 169.254.", ["Il n'a pas reçu d'adresse du serveur DHCP : vérifier le câble, le Wi-Fi ou le routeur", "Tout va bien", "Le disque est plein"], 0, "169.254.x.x est une adresse automatique de secours, attribuée faute de réponse DHCP.", "Qui distribue normalement les adresses ?"],
+    [3, "La batterie d'un portable de 5 ans ne tient plus que 20 minutes.", ["La batterie est usée : la remplacer", "Réinstaller Windows", "Changer le chargeur du téléphone"], 0, "Une batterie perd de la capacité avec les cycles de charge.", "L'usure est normale avec le temps."],
+    [3, "Fichiers renommés avec une extension inconnue et une note demandant une rançon.", ["Déconnecter le poste du réseau, alerter, et restaurer depuis une sauvegarde hors ligne", "Payer tout de suite la rançon", "Continuer à travailler"], 0, "C'est un rançongiciel : on isole pour éviter la propagation et on restaure. Payer ne garantit rien.", "Isoler d'abord."]],
+  smart: [
+    [1, "« Avoir plus de clients » : cet objectif est-il SMART ?", ["Non : il n'est ni chiffré ni daté", "Oui", "Non : il est trop ambitieux"], 0, "Exemple SMART : « 30 nouveaux clients d'ici le 30 juin grâce à WhatsApp Business ».", "Peut-on le mesurer ? Quand ?"],
+    [1, "« Obtenir 200 abonnés WhatsApp Business d'ici le 31 mars » : est-il SMART ?", ["Oui", "Non : il n'est pas daté", "Non : il n'est pas mesurable"], 0, "Il est précis, chiffré et daté.", "Cherche un chiffre et une date."],
+    [1, "« Être la meilleure boutique du Bénin » : est-il SMART ?", ["Non : « meilleure » ne se mesure pas", "Oui", "Oui, s'il est écrit en gras"], 0, "Un objectif vague ne permet pas de savoir s'il est atteint.", "Comment saurais-tu que c'est réussi ?"],
+    [1, "« Vendre 50 sacs en pagne en novembre grâce aux statuts WhatsApp » : est-il SMART ?", ["Oui", "Non : pas de date", "Non : pas de chiffre"], 0, "Spécifique (sacs), mesurable (50), daté (novembre), avec un moyen précis.", "Chiffre, date, moyen."],
+    [2, "« Multiplier nos ventes par 5 en une semaine, sans budget » : quel critère manque ?", ["Réaliste", "Mesurable", "Temporel"], 0, "Il est chiffré et daté, mais pas réaliste avec ces moyens.", "Est-ce possible ?"],
+    [2, "« Publier plus souvent sur Facebook » : comment le rendre SMART ?", ["« 3 publications par semaine pendant 2 mois »", "« Publier beaucoup plus »", "« Publier quand on a le temps »"], 0, "On ajoute un chiffre et une durée.", "Ajoute combien et jusqu'à quand."],
+    [2, "« Atteindre 2 % de taux de clic sur la campagne de décembre » : est-il SMART ?", ["Oui", "Non : pas mesurable", "Non : pas daté"], 0, "Le taux de clic est mesurable et la période est fixée.", "Indicateur + période."],
+    [2, "« Faire passer le coût par message sous 150 FCFA d'ici fin juin » : est-il SMART ?", ["Oui", "Non : pas de chiffre", "Non : trop vague"], 0, "Un indicateur précis, une valeur cible, une échéance.", "Indicateur, cible, date."],
+    [3, "« Obtenir 100 inscriptions à la formation » : que manque-t-il ?", ["Une date limite", "Un chiffre", "Un sujet"], 0, "Sans échéance, on ne sait pas quand faire le bilan.", "Quand ?"],
+    [3, "« Améliorer notre image de marque d'ici décembre » : que manque-t-il ?", ["Un indicateur mesurable", "Une date", "Un verbe"], 0, "Exemple : « Atteindre 4,5 étoiles de note moyenne sur Google d'ici décembre ».", "Comment mesurer « l'image » ?"],
+    [3, "Lequel de ces objectifs est le plus SMART ?", ["« 20 réservations par semaine via le site du restaurant d'ici le 1er mai »", "« Développer le restaurant cette année »", "« Être plus visible en ligne rapidement »"], 0, "Il précise quoi, combien, par quel canal et quand.", "Le plus précis gagne."],
+    [3, "« Tripler le chiffre d'affaires du maquis d'ici demain » : quel critère n'est pas respecté ?", ["Atteignable et réaliste", "Mesurable", "Spécifique"], 0, "Le délai rend l'objectif impossible : il démotive l'équipe.", "Est-ce faisable en un jour ?"]],
+  titres: [
+    [1, "Pour la recherche « restaurant Calavi livraison », quel titre de page choisir ?", ["Restaurant à Calavi : livraison en 30 min | Chez Fofo", "Accueil", "Bienvenue"], 0, "Le mot-clé au début, un bénéfice, puis la marque.", "Le mot-clé de la recherche doit apparaître."],
+    [1, "Quel titre est le plus utile pour une page de tarifs ?", ["Tarifs des formations en graphisme | TOB-MAQ", "Page 3", "Cliquez ici"], 0, "Le titre décrit précisément le contenu de la page.", "Que trouvera-t-on sur la page ?"],
+    [1, "Combien de balises title par page ?", ["Une seule, unique pour chaque page", "Trois", "Aucune"], 0, "Chaque page a son propre title, différent des autres.", "Unique."],
+    [1, "Où Google affiche-t-il le contenu de la balise title ?", ["Comme titre cliquable dans les résultats", "Dans le pied de page", "Nulle part"], 0, "C'est souvent la première chose que lit l'internaute.", "Le lien bleu des résultats."],
+    [2, "Quel titre risque d'être coupé dans les résultats ?", ["Boutique Awa, la meilleure boutique de pagnes wax, bazin et tissus de qualité de tout Cotonou et du Bénin", "Pagnes wax à Cotonou | Boutique Awa", "Pagnes wax livrés en 24 h | Boutique Awa"], 0, "Au-delà d'environ 60 caractères, Google coupe souvent le titre.", "Le plus long."],
+    [2, "Où placer le mot-clé principal dans le titre ?", ["Plutôt au début", "Toujours à la fin", "Il ne faut pas le mettre"], 0, "Au début, il est vu tout de suite et le titre reste pertinent même s'il est coupé.", "Ce qu'on lit en premier."],
+    [2, "Quelle méta-description donne le plus envie de cliquer ?", ["Formations en graphisme au Bénin : cours pas à pas, exercices corrigés et inscription gratuite.", "Bienvenue sur notre site internet.", "graphisme graphisme graphisme formation formation"], 0, "Elle résume la page, contient le mot-clé et une incitation.", "Utile, précise, engageante."],
+    [2, "Pourquoi éviter de répéter un mot-clé 10 fois dans un texte ?", ["Le texte devient illisible et Google peut le pénaliser", "Ça n'a aucun effet", "Google l'oblige"], 0, "On écrit d'abord pour les lecteurs, avec des variantes naturelles.", "Pense au lecteur."],
+    [3, "Recherche « réparation téléphone Porto-Novo ». Meilleur H1 de la page ?", ["Réparation de téléphones à Porto-Novo en 1 heure", "Bienvenue chez Tech Plus", "Nos services"], 0, "Le H1 reprend l'intention de recherche et promet un résultat.", "Le sujet exact de la page."],
+    [3, "Recherche « comment faire un logo ». Quel titre correspond à l'intention ?", ["Comment faire un logo : la méthode en 7 étapes | TOB-MAQ", "Logo pas cher, commandez maintenant", "Notre agence"], 0, "L'internaute veut apprendre : un guide répond à son intention, une page de vente non.", "Il veut apprendre ou acheter ?"],
+    [3, "Quel texte alternatif est le meilleur pour une photo de bissap ?", ["Verre de jus de bissap frais avec des glaçons", "image1.jpg", "bissap bissap jus bissap pas cher"], 0, "Il décrit l'image naturellement, utile pour l'accessibilité et le référencement des images.", "Décris ce qu'on voit."],
+    [3, "Quel lien interne est le mieux rédigé ?", ["Découvre notre formation en montage vidéo", "Cliquez ici", "Lien"], 0, "Le texte du lien indique où il mène : utile aux lecteurs et à Google.", "Le texte du lien doit avoir du sens seul."]],
   reseaux: [
     [1, "Une vidéo verticale de 30 s pour toucher les 18-25 ans.", ["TikTok ou Reels Instagram", "Un article LinkedIn", "Une affiche A3 en boutique"], 0, "Les 18-25 ans regardent surtout des vidéos verticales courtes : TikTok, Reels, Shorts.", "Où cette tranche d'âge passe-t-elle son temps ?"],
     [1, "Le format d'une story Instagram ou d'un statut WhatsApp.", ["1080 × 1920 (9:16)", "1920 × 1080 (16:9)", "800 × 600 (4:3)"], 0, "Les stories et statuts occupent tout l'écran du téléphone tenu à la verticale : 9:16.", "Le téléphone est tenu debout."],
@@ -4002,9 +4100,9 @@ function poolGen(names, count) {
     // Facile : d'abord les questions de niveau 1, complétées si besoin par le niveau 2.
     const items = n === 1 ? [...shuffle(all.filter(p => p[0] === 1)), ...shuffle(all.filter(p => p[0] === 2))]
       : shuffle(all.filter(p => n === 2 ? p[0] <= 2 : p[0] >= 2));
-    return items.slice(0, count).map(([, q, ch, a, ex, hint]) => {
+    return items.slice(0, count).map(([, q, ch, a, ex, hint, visual]) => {
       const order = shuffle(ch.map((_, i) => i));
-      return { q, choices: order.map(i => ch[i]), answer: order.indexOf(a), explain: ex, hint };
+      return { q, visual, choices: order.map(i => ch[i]), answer: order.indexOf(a), explain: ex, hint };
     });
   };
 }
@@ -4201,6 +4299,134 @@ const MEMO_PAIRS = {
   marketeur: [["CTR", "Taux de clic"], ["Conversion", "Visiteur qui devient client"], ["Persona", "Portrait du client type"], ["Appel à l'action", "Ce qu'on demande de faire"], ["Test A/B", "Comparer deux versions"], ["ROAS", "Ventes ÷ dépense publicitaire"],
     ["Cible", "Les personnes que l'on veut toucher"], ["Tunnel de vente", "Parcours de l'inconnu au client"], ["Engagement", "Likes, commentaires et partages"], ["Reciblage", "Pub montrée à ceux qui ont déjà visité"], ["Portée", "Nombre de personnes touchées"], ["Fidélisation", "Faire revenir un client"]]
 };
+/* Que va afficher le programme ? Les résultats sont calculés ici, pas devinés. */
+function genOutput(level) {
+  const T = {
+    priorite() { const a = rand(2, 9), b = rand(2, 6), c = rand(2, 6); return { code: `console.log(${a} + ${b} * ${c});`, out: String(a + b * c), wrong: [String((a + b) * c), String(a + b + c), `${a}${b * c}`], explain: `La multiplication passe avant l'addition : ${b} × ${c} = ${b * c}, puis + ${a} = ${a + b * c}.` }; },
+    reaffecte() { const a = rand(2, 9), b = rand(1, 9); return { code: `let x = ${a};\nx = x * 2;\nx += ${b};\nconsole.log(x);`, out: String(a * 2 + b), wrong: [String(a + b), String((a + b) * 2), String(a * 2)], explain: `x vaut ${a}, puis ${a * 2}, puis ${a * 2} + ${b} = ${a * 2 + b}.` }; },
+    condition() { const n = rand(6, 15); return { code: `const note = ${n};\nif (note >= 10) {\n  console.log("Admis");\n} else {\n  console.log("Ajourné");\n}`, out: n >= 10 ? "Admis" : "Ajourné", wrong: [n >= 10 ? "Ajourné" : "Admis", "Erreur", "Admis puis Ajourné"], explain: `${n} ${n >= 10 ? ">=" : "<"} 10 : seul le bloc ${n >= 10 ? "if" : "else"} s'exécute.` }; },
+    pyRepete() { const w = pick(["ha", "na", "go"]), k = rand(2, 4); return { code: `print("${w}" * ${k})`, out: w.repeat(k), wrong: [`${w}${k}`, `${w} * ${k}`, "Erreur"], explain: `En Python, texte * nombre répète le texte ${k} fois.` }; },
+    concat() { const a = rand(2, 9), b = rand(1, 9); return { code: `const x = "${a}";\nconsole.log(x + ${b});`, out: `${a}${b}`, wrong: [String(a + b), "Erreur", `${a} ${b}`], explain: `x est un texte : + colle "${a}" et ${b} au lieu d'additionner.` }; },
+    somme() { const n = rand(3, 7); return { code: `let s = 0;\nfor (let i = 1; i <= ${n}; i++) {\n  s += i;\n}\nconsole.log(s);`, out: String(n * (n + 1) / 2), wrong: [String(n * (n - 1) / 2), String(n * n), String(n)], explain: `s = 1 + 2 + … + ${n} = ${n * (n + 1) / 2}.` }; },
+    tableau() { const t = Array.from({ length: 4 }, () => rand(1, 20)); return { code: `const t = [${t.join(", ")}];\nconsole.log(t[1] + t[3]);`, out: String(t[1] + t[3]), wrong: [String(t[0] + t[2]), String(t[0] + t[3]), String(t[1] + t[2])].filter(w => w !== String(t[1] + t[3])), explain: `Les indices commencent à 0 : t[1] = ${t[1]} et t[3] = ${t[3]}.` }; },
+    pyDiv() { const a = rand(13, 40), b = rand(3, 6); return { code: `print(${a} // ${b}, ${a} % ${b})`, out: `${Math.floor(a / b)} ${a % b}`, wrong: [`${(a / b).toFixed(2)} ${a % b}`, `${a % b} ${Math.floor(a / b)}`, `${Math.floor(a / b)} 0`], explain: `// donne la division entière (${Math.floor(a / b)}), % le reste (${a % b}).` }; },
+    pyListe() { const t = Array.from({ length: 4 }, () => rand(1, 9)); return { code: `notes = [${t.join(", ")}]\nnotes.append(${t[0]})\nprint(len(notes), notes[-1])`, out: `5 ${t[0]}`, wrong: [`4 ${t[3]}`, `5 ${t[3]}`, `4 ${t[0]}`].filter(w => w !== `5 ${t[0]}`), explain: `append ajoute un 5e élément ; notes[-1] est le dernier : ${t[0]}.` }; },
+    tantQue() { const d = pick([2, 3]), lim = rand(10, 30); let x = 1, c = 0; while (x < lim) { x *= d; c++; } return { code: `let x = 1, tours = 0;\nwhile (x < ${lim}) {\n  x = x * ${d};\n  tours++;\n}\nconsole.log(tours, x);`, out: `${c} ${x}`, wrong: [`${c - 1} ${x / d}`, `${c + 1} ${x * d}`, `${c} ${lim}`], explain: `x prend les valeurs ${Array.from({ length: c + 1 }, (_, i) => d ** i).join(", ")} : la boucle tourne ${c} fois.` }; }
+  };
+  const kinds = { facile: ["priorite", "reaffecte", "condition", "pyRepete"], moyen: ["concat", "somme", "tableau", "reaffecte", "condition"], difficile: ["somme", "tableau", "pyDiv", "pyListe", "tantQue", "concat"] }[level];
+  return shuffle(kinds).concat(shuffle(kinds)).slice(0, 6).map(k => {
+    const t = T[k](), all = shuffle([...new Set([t.out, ...t.wrong])].slice(0, 4));
+    return { q: "Qu'affiche ce programme ?", visual: codeVis(t.code), choices: all, answer: all.indexOf(t.out), explain: t.explain, hint: "Exécute le programme dans ta tête, ligne par ligne, en notant la valeur de chaque variable." };
+  });
+}
+/* Calcul de sous-réseau IPv4. */
+function genSubnet(level) {
+  const ipStr = n => [24, 16, 8, 0].map(s => (n >>> s) & 255).join(".");
+  const prefixes = { facile: [24, 25], moyen: [25, 26, 27], difficile: [26, 27, 28, 29, 23] }[level];
+  const kinds = { facile: ["reseau", "hotes", "masque"], moyen: ["reseau", "diffusion", "hotes", "premiere"], difficile: ["reseau", "diffusion", "premiere", "derniere", "hotes"] }[level];
+  return Array.from({ length: 6 }, () => {
+    const pre = pick(prefixes), size = 2 ** (32 - pre), mask = (0xFFFFFFFF << (32 - pre)) >>> 0;
+    const base = pick([[192, 168, rand(0, 50)], [10, rand(0, 20), rand(0, 200)], [172, rand(16, 31), rand(0, 200)]]);
+    const ip = (((base[0] << 24) | (base[1] << 16) | (base[2] << 8) | rand(1, 254)) >>> 0);
+    const net = (ip & mask) >>> 0, bc = (net + size - 1) >>> 0, hosts = size - 2, k = pick(kinds), cidr = `${ipStr(ip)}/${pre}`;
+    const Q = {
+      reseau: [`Quelle est l'adresse du réseau de ${cidr} ?`, ipStr(net), [ipStr((net + size) >>> 0), ipStr(ip), ipStr((net + 1) >>> 0)]],
+      diffusion: [`Quelle est l'adresse de diffusion (broadcast) de ${cidr} ?`, ipStr(bc), [ipStr((bc - 1) >>> 0), ipStr(net), ipStr((bc + size) >>> 0)]],
+      premiere: [`Quelle est la première adresse utilisable de ${cidr} ?`, ipStr((net + 1) >>> 0), [ipStr(net), ipStr((net + 2) >>> 0), ipStr((bc - 1) >>> 0)]],
+      derniere: [`Quelle est la dernière adresse utilisable de ${cidr} ?`, ipStr((bc - 1) >>> 0), [ipStr(bc), ipStr((bc - 2) >>> 0), ipStr((net + 1) >>> 0)]],
+      hotes: [`Combien d'appareils peut contenir un réseau /${pre} ?`, nf(hosts), [nf(size), nf(hosts / 2 - 1), nf(hosts * 2 + 2)]],
+      masque: [`Quel masque correspond à /${pre} ?`, ipStr(mask), [ipStr(((0xFFFFFFFF << (32 - pre + 1)) >>> 0)), ipStr(((0xFFFFFFFF << (32 - pre - 1)) >>> 0)), "255.255.0.0"]]
+    }[k];
+    const all = shuffle([...new Set([Q[1], ...Q[2]])].slice(0, 4));
+    return { q: Q[0], choices: all, answer: all.indexOf(Q[1]),
+      explain: `/${pre} → masque ${ipStr(mask)}, blocs de ${nf(size)} adresses. Réseau ${ipStr(net)}, diffusion ${ipStr(bc)}, utilisables de ${ipStr((net + 1) >>> 0)} à ${ipStr((bc - 1) >>> 0)} (${nf(hosts)} appareils).`,
+      hint: `Taille d'un bloc = 2^(32 − ${pre}) = ${nf(size)}. Cherche le multiple de ce nombre juste en dessous de l'adresse.` };
+  });
+}
+/* D'où vient la lumière ? */
+const LIGHTS = { hg: ["En haut à gauche", -1, -1], h: ["En haut", 0, -1], hd: ["En haut à droite", 1, -1], g: ["À gauche", -1, 0], d: ["À droite", 1, 0] };
+function genLight(level) {
+  const keys = { facile: ["g", "d", "h"], moyen: ["hg", "h", "hd", "g", "d"], difficile: ["hg", "h", "hd", "g", "d"] }[level];
+  const k = level === "difficile" ? .2 : .32, hue = rand(0, 359);
+  return Array.from({ length: 6 }, (_, i) => {
+    const key = pick(keys), [, dx, dy] = LIGHTS[key], id = "lg" + i + Math.random().toString(36).slice(2, 6);
+    const opts = shuffle([key, ...shuffle(keys.filter(x => x !== key)).slice(0, Math.min(3, keys.length - 1))]);
+    const svg = `<svg viewBox="0 0 240 170" style="width:min(100%,420px);border-radius:12px;background:#E9E4DA" role="img" aria-label="Sphère éclairée">
+      <defs><radialGradient id="${id}" cx="${.5 + dx * k}" cy="${.5 + dy * k}" r=".75"><stop offset="0" stop-color="${hslToHex(hue, 60, 88)}"/><stop offset=".45" stop-color="${hslToHex(hue, 55, 55)}"/><stop offset="1" stop-color="${hslToHex(hue, 50, 18)}"/></radialGradient></defs>
+      <rect y="122" width="240" height="48" fill="#D3CBBD"/>${level === "difficile" ? "" : `<ellipse cx="${120 - dx * 46}" cy="136" rx="${54 + Math.abs(dx) * 10}" ry="10" fill="#000" opacity=".22"/>`}
+      <circle cx="120" cy="80" r="50" fill="url(#${id})"/></svg>`;
+    return { q: "D'où vient la lumière ?", visual: svg, choices: opts.map(o => LIGHTS[o][0]), answer: opts.indexOf(key),
+      explain: `La zone la plus claire (le reflet) est du côté de la lumière : ${LIGHTS[key][0].toLowerCase()}. L'ombre propre et l'ombre portée sont du côté opposé.`,
+      hint: "Repère la partie la plus claire de la sphère, puis l'ombre au sol : la lumière vient du côté opposé à l'ombre." };
+  });
+}
+/* Arnaque ou pas ? Messages inspirés de vraies techniques, avec des noms fictifs. */
+const MESSAGES = [
+  [1, true, "SMS", "+229 90 XX XX XX", "Bonjour, je vous ai envoyé 25 000 FCFA par erreur sur votre Mobile Money. Merci de me les renvoyer vite, c'est pour l'hôpital de ma mère.", "Vérifie toujours ton solde dans l'application ou par le code officiel : ce faux « transfert par erreur » cherche à te faire envoyer ton propre argent."],
+  [1, true, "SMS", "MOMO-SECURITE", "Votre compte Mobile Money sera bloqué dans 24 h. Pour le réactiver, répondez avec votre code PIN.", "Aucun opérateur ne demande jamais ton code PIN, ni par SMS ni par téléphone."],
+  [1, true, "WhatsApp", "+1 (555) 01X XXXX", "Félicitations ! Vous avez gagné un iPhone 15. Cliquez vite : bit.ly/cadeau-xx et payez 2 000 FCFA de frais de livraison.", "Un concours auquel tu n'as pas participé, un lien raccourci et des « frais » à payer : arnaque classique."],
+  [1, false, "SMS", "Expéditeur du service", "Votre code de vérification est 482913. Ne le communiquez à personne, même à notre service client.", "Message légitime : tu as demandé un code, et il te rappelle de ne jamais le partager. Ne le donne à personne."],
+  [2, true, "WhatsApp", "Numéro inconnu", "Coucou maman, c'est moi, j'ai cassé mon téléphone, voici mon nouveau numéro. Peux-tu m'envoyer 15 000 FCFA de crédit ? Je t'explique plus tard.", "Arnaque au faux proche : appelle ton enfant sur son ancien numéro ou pose une question que seul lui connaît."],
+  [2, true, "E-mail", "recrutement@offre-emploi-urgent.net", "Vous êtes retenu(e) pour un poste à 450 000 FCFA par mois, sans entretien. Payez 10 000 FCFA de frais de dossier pour confirmer.", "Un vrai employeur ne fait jamais payer pour obtenir un emploi."],
+  [2, false, "WhatsApp", "Boutique Awa (contact enregistré)", "Bonjour ! Votre commande de 2 pagnes est prête. Vous pouvez passer la récupérer à la boutique dès 10 h. Bonne journée.", "Message cohérent d'un contact connu, sans lien ni demande d'argent ou de code."],
+  [2, false, "SMS", "Votre banque", "Rappel : votre rendez-vous en agence est prévu demain à 10 h. Pour l'annuler, contactez votre conseiller au numéro habituel.", "Pas de lien, pas de demande d'information : il renvoie vers le contact habituel."],
+  [3, true, "E-mail", "support@paypa1-securite.com", "Activité inhabituelle détectée sur votre compte. Confirmez votre identité sous 2 heures ici : http://paypa1-securite.com/connexion", "Le domaine imite une vraie marque en remplaçant le « l » par un « 1 », et le message crée une urgence. Va toujours sur le site en tapant toi-même l'adresse."],
+  [3, true, "WhatsApp", "Service client (photo de logo)", "Bonjour, ici le service client. Pour annuler votre transaction suspecte, communiquez-nous le code à 6 chiffres que vous venez de recevoir par SMS.", "Le code reçu par SMS sert à valider une opération : le donner permet à l'escroc de prendre ton compte."],
+  [3, false, "E-mail", "noreply@ton-service-habituel.com", "Une nouvelle connexion à ton compte a eu lieu depuis Chrome sur Windows. Si c'était toi, aucune action n'est nécessaire. Sinon, change ton mot de passe depuis l'application.", "Alerte de sécurité classique : elle n'exige rien et renvoie vers l'application, pas vers un lien."],
+  [3, true, "SMS", "COLIS-INFO", "Votre colis est bloqué en douane. Réglez 1 500 FCFA de frais avant 18 h sur : colis-dedouanement.info", "Faux colis : tu n'attends rien de cet expéditeur, l'adresse du site est inconnue et l'urgence est artificielle."]
+];
+function genScam(level) {
+  const n = LEVEL_INFO[level].n;
+  const list = shuffle(MESSAGES.filter(m => n === 1 ? m[0] <= 2 : n === 2 ? m[0] <= 2 : m[0] >= 2)).slice(0, 6);
+  return list.map(([, scam, canal, from, text, clue]) => ({ q: `${canal} reçu : arnaque ou message fiable ?`,
+    visual: `<div class="msg-bubble"><div class="msg-from">${icon(canal === "E-mail" ? "mail" : "info")} <b>${esc(from)}</b> <span class="muted small">· ${canal}</span></div><p>${esc(text)}</p></div>`,
+    choices: ["Message fiable", "Arnaque"], answer: scam ? 1 : 0, explain: clue,
+    hint: "Les signaux d'alerte : urgence, demande d'argent ou de code, lien inconnu, gain trop beau, expéditeur bizarre." }));
+}
+/* Lignes à corriger : [niveau, titre, lignes, ligne fautive, explication, indice] */
+const LINE_POOLS = {
+  html: [
+    [1, "Une image sans description", ['<h1>Boutique Awa</h1>', '<img src="wax.jpg">', '<p>Livraison à Cotonou.</p>'], 1, "L'image n'a pas d'attribut alt : il faut <img src=\"wax.jpg\" alt=\"Pagne wax bleu plié\">.", "Une balise oublie de décrire quelque chose."],
+    [1, "Une liste mal fermée", ['<ul>', '  <li>Tresses</li>', '  <li>Tissages<li>', '</ul>'], 2, "La balise de fermeture est </li> avec une barre oblique.", "Compare chaque ouverture avec sa fermeture."],
+    [1, "Un lien qui ne mène nulle part", ['<a href="contact.html">Contact</a>', '<p>Appelle le 01 00 00 00 00</p>', '<a>Écris-nous sur WhatsApp</a>'], 2, "Un lien sans href ne mène nulle part : <a href=\"https://wa.me/2290100000000\">.", "Un lien a besoin d'une adresse."],
+    [1, "Un en-tête jamais fermé", ['<!DOCTYPE html>', '<html lang="fr">', '<head>', '  <title>Salon Belle</title>', '<head>'], 4, "Il faut </head> pour fermer l'en-tête.", "Regarde la dernière ligne."],
+    [2, "Deux titres principaux", ['<header>', '  <h1>Chez Fofo</h1>', '</header>', '<main>', '  <h1>Notre menu</h1>', '</main>'], 4, "Une page n'a qu'un h1 : « Notre menu » doit être un h2.", "Combien de h1 ?"],
+    [2, "Un guillemet oublié", ['<head>', '  <meta charset="UTF-8">', '  <title>Atelier Couture</title>', '  <link rel="stylesheet" href="style.css>', '</head>'], 3, "Il manque le guillemet fermant après style.css : le CSS ne se chargera pas.", "Compte les guillemets de chaque ligne."],
+    [2, "Des balises qui se croisent", ['<p>Nos horaires :', '<strong>8 h à 18 h</p></strong>'], 1, "On ferme dans l'ordre inverse de l'ouverture : </strong></p>.", "La dernière ouverte se ferme la première."],
+    [2, "Un numéro WhatsApp invalide", ['<img src="logo.png" alt="Logo Boutique Awa">', '<a href="https://wa.me/229 01 00 00 00 00">WhatsApp</a>'], 1, "Le numéro dans wa.me s'écrit sans espaces ni + : wa.me/2290100000000.", "Que contient l'adresse du lien ?"],
+    [3, "Un point-virgule oublié", ['body {', '  font-family: system-ui;', '  color: #1d1d1d', '  line-height: 1.5;', '}'], 2, "Sans point-virgule, la ligne suivante est mal lue et ignorée.", "Regarde la fin de chaque ligne."],
+    [3, "Une unité mal écrite", ['.carte {', '  padding: 16 px;', '  border-radius: 12px;', '}'], 1, "Pas d'espace entre le nombre et l'unité : 16px.", "Compare les deux valeurs en px."],
+    [3, "Une valeur qui n'existe pas", ['.produits {', '  display: flex;', '  flex-wrap: wraps;', '  gap: 16px;', '}'], 2, "La valeur correcte est wrap (sans s).", "Une faute d'orthographe dans une valeur."],
+    [3, "Une media query incomplète", ['@media (max-width: 600px)', '  h1 { font-size: 1.6rem; }', '}'], 0, "Il manque l'accolade ouvrante : @media (max-width: 600px) {", "Compte les accolades."]],
+  bug: [
+    [1, "JavaScript : le total ne s'affiche pas", ['const prix = 2500;', 'const quantite = 3;', 'console.log("Total : " + prix * quantit);'], 2, "quantit est mal orthographié : ReferenceError. Il faut quantite.", "Compare les noms de variables."],
+    [1, "Python : erreur de syntaxe", ['prix = 2500', 'quantite = 3', 'print("Total :" prix * quantite)'], 2, "Il manque une virgule entre les arguments de print.", "Entre deux éléments de print, il faut…"],
+    [1, "Python : erreur d'indentation", ['note = 14', 'if note >= 10:', 'print("Admis")'], 2, "La ligne du bloc if doit être indentée (Tab ou 4 espaces).", "Python lit les espaces en début de ligne."],
+    [1, "JavaScript : une constante modifiée", ['const nom = "Awa";', 'nom = "Koffi";', 'console.log(nom);'], 1, "On ne peut pas réaffecter une const : utilise let si la valeur doit changer.", "Quel mot-clé interdit de changer la valeur ?"],
+    [2, "JavaScript : la condition est toujours vraie", ['const note = 12;', 'if (note = 10) {', '  console.log("Pile 10");', '}'], 1, "= affecte la valeur ; pour comparer, il faut ===.", "Affecter ou comparer ?"],
+    [2, "Python : IndexError", ['notes = [12, 15, 9]', 'print(notes[3])'], 1, "Les indices vont de 0 à 2 : notes[3] n'existe pas. Le dernier est notes[2] ou notes[-1].", "On compte à partir de 0."],
+    [2, "JavaScript : 25 + 5 = 255 ?", ['const champ = "25";', 'const total = champ + 5;', 'console.log(total);'], 1, "champ est un texte : il faut Number(champ) + 5.", "Texte + nombre…"],
+    [2, "Python : KeyError", ['stock = {"pagne": 12}', 'print(stock["sac"])'], 1, "La clé « sac » n'existe pas : stock.get(\"sac\", 0) évite l'erreur.", "Cette clé est-elle dans le dictionnaire ?"],
+    [3, "JavaScript : le total vaut NaN", ['let total = 0;', 'const prix = [2500, 6000, 1500];', 'for (let i = 0; i <= prix.length; i++) {', '  total += prix[i];', '}', 'console.log(total);'], 2, "Avec <=, la boucle lit prix[3] qui vaut undefined : total devient NaN. Il faut i < prix.length.", "Combien de tours fait la boucle ?"],
+    [3, "Python : la fonction renvoie None", ['def carre(x):', '    resultat = x * x', 'print(carre(4))'], 1, "La fonction calcule mais ne renvoie rien : return x * x.", "Que renvoie la fonction ?"],
+    [3, "JavaScript : la fonction n'est pas appelée", ['function bonjour(nom) {', '  return "Bonjour " + nom;', '}', 'console.log(bonjour);'], 3, "Il faut appeler la fonction avec ses parenthèses : bonjour(\"Awa\").", "Comment appelle-t-on une fonction ?"],
+    [3, "Python : la boucle ne s'arrête jamais", ['compteur = 0', 'while compteur < 5:', '    print(compteur)'], 2, "compteur n'augmente jamais : il faut ajouter compteur += 1 dans la boucle.", "Qu'est-ce qui fait avancer la boucle ?"]]
+};
+MEMO_PAIRS.webdev = [["<h1>", "Titre principal de la page"], ["<a>", "Lien vers une autre page"], ["alt", "Description d'une image"], ["<nav>", "Menu de navigation"], ["padding", "Marge intérieure"], ["margin", "Marge extérieure"],
+  ["display: flex", "Aligner des éléments en ligne"], ["@media", "Règles selon la taille d'écran"], [":hover", "État au survol de la souris"], ["<footer>", "Pied de page"], ["class", "Nom réutilisable pour le CSS"], ["viewport", "Adaptation au téléphone"]];
+/* Scénarios générés pour le moteur « ordre » */
+const RJ45 = { B: ["blanc-orange", "orange", "blanc-vert", "bleu", "blanc-bleu", "vert", "blanc-marron", "marron"], A: ["blanc-vert", "vert", "blanc-orange", "bleu", "blanc-bleu", "orange", "blanc-marron", "marron"] };
+const FIL = { orange: "#E8742C", vert: "#2E9E4F", bleu: "#2563EB", marron: "#7A4A2A" };
+const filHtml = l => { const c = FIL[l.replace("blanc-", "")], white = l.startsWith("blanc-");
+  return `<span class="fil" style="background:${white ? `repeating-linear-gradient(135deg,#fff 0 6px,${c} 6px 10px)` : c}"></span>${esc(l)}`; };
+let GRAY_MAP = {};
+function grayScenario(level) {
+  const n = { facile: 5, moyen: 7, difficile: 9 }[level], lo = 8, hi = 94, step = (hi - lo) / (n - 1);
+  const ls = Array.from({ length: n }, (_, i) => Math.round(hi - i * step + (Math.random() - .5) * step * .3));
+  const letters = shuffle("ABCDEFGHI".slice(0, n).split(""));
+  GRAY_MAP = {}; const labels = ls.map((l, i) => { const lab = `Nuance ${letters[i]}`; GRAY_MAP[lab] = hslToHex(0, 0, l); return lab; });
+  return ["Du plus clair au plus foncé", labels];
+}
 const PROBLEMS = {
   correcte: { label: "Image correcte", n: 1, explain: "Noirs denses, blancs propres, couleurs naturelles : rien à corriger." },
   surex: { label: "Surexposée", filter: "brightness(1.55) contrast(.85)", n: 1, explain: "Les hautes lumières sont brûlées : baisse le Gain ou l'exposition." },
@@ -4291,7 +4517,61 @@ const GAMES = [
   { id: "memo-monteur", title: "Mémo du monteur", domain: "video", skill: "Vocabulaire du montage", art: "memo", engine: "memo", pairs: "monteur",
     consigne: "Retourne les cartes deux par deux et associe chaque mot à sa définition. Moins tu fais d'erreurs, plus tu marques de points." },
   { id: "memo-marketeur", title: "Mémo du marketeur", domain: "marketing", skill: "Vocabulaire du marketing", art: "memo", engine: "memo", pairs: "marketeur",
-    consigne: "Retourne les cartes deux par deux et associe chaque mot à sa définition. Moins tu fais d'erreurs, plus tu marques de points." }
+    consigne: "Retourne les cartes deux par deux et associe chaque mot à sa définition. Moins tu fais d'erreurs, plus tu marques de points." },
+  { id: "repare-page", title: "Répare la page", domain: "web", skill: "Erreurs HTML et CSS", art: "codefix", engine: "lines", pool: "html",
+    consigne: "Chaque extrait contient une erreur. Touche la ligne à corriger." },
+  { id: "selecteur-css", title: "Le bon sélecteur CSS", domain: "web", skill: "Sélecteurs CSS", art: "selector", engine: "quiz", gen: poolGen(["selecteur"], 6),
+    consigne: "Choisis le sélecteur CSS qui cible exactement l'élément demandé." },
+  { id: "memo-web", title: "Mémo du développeur web", domain: "web", skill: "Vocabulaire HTML et CSS", art: "memo", engine: "memo", pairs: "webdev",
+    consigne: "Retourne les cartes deux par deux et associe chaque balise ou propriété à son rôle." },
+  { id: "affiche-programme", title: "Que va afficher le programme ?", domain: "developpement", skill: "Lire du code", art: "console", engine: "quiz", gen: genOutput,
+    consigne: "Lis le code et prédis exactement ce qu'il affiche. Les programmes changent à chaque partie." },
+  { id: "ordre-code", title: "Remets le code dans l'ordre", domain: "developpement", skill: "Logique de programmation", art: "codeorder", engine: "order", slot: "Choisis une ligne ci-dessous", token: l => `<code class="tok-code">${esc(l)}</code>`,
+    consigne: "Remets les lignes dans l'ordre pour que le programme fonctionne.",
+    scenarios: {
+      facile: [["JavaScript : calculer un total", ["const prix = 2500;", "const quantite = 3;", "const total = prix * quantite;", "console.log(total);"]],
+               ["Python : dire bonjour", ['nom = input("Ton prénom : ")', 'message = "Bonjour " + nom', "print(message)"]]],
+      moyen: [["JavaScript : une fonction de remise", ["function prixAvecRemise(total) {", "  if (total < 20000) return total;", "  const remise = total * 0.1;", "  return total - remise;", "}"]],
+              ["Python : additionner une liste", ["total = 0", "for prix in [2500, 6000, 1500]:", "    total = total + prix", 'print("Total :", total)']]],
+      difficile: [["JavaScript : un bouton qui calcule", ['const bouton = document.querySelector("#calculer");', 'bouton.addEventListener("click", () => {', '  const q = Number(document.querySelector("#quantite").value);', "  const total = q * 2500;", '  document.querySelector("#resultat").textContent = total;', "});"]],
+                  ["Python : une moyenne sûre", ["def moyenne(notes):", "    if len(notes) == 0:", "        return 0", "    return sum(notes) / len(notes)", "print(moyenne([12, 15, 9]))"]]]
+    },
+    tip: "Règle utile : on déclare d'abord ce qu'on utilise (variables, fonctions), puis on calcule, et on affiche en dernier." },
+  { id: "chasse-bug", title: "Chasse au bug", domain: "developpement", skill: "Déboguer JavaScript et Python", art: "bug", engine: "lines", pool: "bug",
+    consigne: "Chaque programme contient un bug. Touche la ligne à corriger." },
+  { id: "noeud-godot", title: "Le bon nœud Godot", domain: "jeux-video", skill: "Nœuds de Godot 4", art: "node", engine: "quiz", gen: poolGen(["godot"], 6),
+    consigne: "Pour chaque besoin de ton jeu, choisis le nœud Godot adapté." },
+  { id: "game-designer", title: "Game designer", domain: "jeux-video", skill: "Conception et production", art: "gdflow", engine: "order",
+    consigne: "Remets les étapes dans le bon ordre, comme un studio de jeux vidéo.",
+    scenarios: {
+      facile: [["Créer son premier jeu", ["Trouver l'idée en une phrase", "Tester un prototype papier", "Programmer une version jouable", "Faire tester par des joueurs et corriger"]]],
+      moyen: [["Enseigner le saut dans un niveau", ["Le saut est présenté sans danger", "Le joueur s'entraîne sur de petits trous", "Le saut est combiné avec un ennemi qui marche", "Test de maîtrise : sauts enchaînés avant le drapeau", "Zone calme et récompense à la fin du niveau"]]],
+      difficile: [["La production d'un jeu en studio", ["Concept et document de conception", "Prototype de la boucle de jeu", "Production des niveaux, graphismes et sons", "Bêta : tests avec de vrais joueurs", "Corrections et équilibrage", "Lancement, puis mises à jour"]]]
+    },
+    tip: "Règle utile : on valide l'idée le plus tôt et le moins cher possible (papier, prototype) avant de produire le contenu final." },
+  { id: "point-fuite", title: "Trouve le point de fuite", domain: "dessin", skill: "Perspective", art: "vanish", engine: "vanish",
+    consigne: "Les lignes de ce dessin fuient vers un même point. Touche l'endroit où elles se rejoignent, puis valide." },
+  { id: "lumiere", title: "D'où vient la lumière ?", domain: "dessin", skill: "Lumière et ombres", art: "sphere", engine: "quiz", gen: genLight,
+    consigne: "Observe le reflet et les ombres de la sphère, puis indique d'où vient la lumière." },
+  { id: "echelle-gris", title: "L'échelle des gris", domain: "dessin", skill: "Valeurs", art: "grays", engine: "order", slot: "Choisis une nuance ci-dessous", token: l => `<span class="sw-tok" style="background:${GRAY_MAP[l]}"></span>${esc(l)}`, make: grayScenario,
+    consigne: "Classe les gris du plus clair au plus foncé. Plus le niveau est élevé, plus les nuances sont proches.",
+    tip: "Règle utile : plisse les yeux pour comparer les valeurs ; les dessinateurs vérifient ainsi leurs contrastes." },
+  { id: "sous-reseau", title: "Calcul de sous-réseau", domain: "informatique", skill: "Adressage IPv4", art: "subnet", engine: "quiz", gen: genSubnet,
+    consigne: "Calcule l'adresse réseau, la diffusion ou le nombre d'appareils. Les adresses changent à chaque partie. Un brouillon est autorisé !" },
+  { id: "cable-rj45", title: "Le câble RJ45", domain: "informatique", skill: "Normes T568B et T568A", art: "rj45", engine: "order", slot: "Choisis un fil ci-dessous", token: filHtml,
+    make: level => level === "difficile" ? ["Norme T568A : broches 1 à 8", RJ45.A] : ["Norme T568B : broches 1 à 8", RJ45.B],
+    consigne: "Place les 8 fils dans l'ordre des broches, de 1 à 8, selon la norme demandée.",
+    tip: "Astuce T568B : orange, vert, bleu, marron, avec le blanc toujours avant sa couleur, sauf au milieu où le bleu passe avant le blanc-bleu. En T568A, on échange orange et vert." },
+  { id: "commandes-linux", title: "Commandes Linux", domain: "informatique", skill: "Administration système", art: "terminal", engine: "quiz", gen: poolGen(["linux"], 6),
+    consigne: "Choisis la commande Linux qui réalise chaque tâche." },
+  { id: "arnaque", title: "Arnaque ou pas ?", domain: "informatique", skill: "Cybersécurité : hameçonnage", art: "phish", engine: "quiz", gen: genScam,
+    consigne: "Lis chaque message et décide : message fiable ou arnaque ? La correction explique l'indice qui la trahit. Les noms et numéros sont fictifs." },
+  { id: "diagnostic", title: "Le diagnostic du technicien", domain: "informatique", skill: "Dépannage", art: "wrench", engine: "quiz", gen: poolGen(["diagnostic"], 6),
+    consigne: "Pour chaque symptôme, choisis la cause ou l'action la plus juste." },
+  { id: "objectif-smart", title: "Objectif SMART ou pas ?", domain: "marketing", skill: "Fixer des objectifs", art: "target", engine: "quiz", gen: poolGen(["smart"], 6),
+    consigne: "Un objectif SMART est Spécifique, Mesurable, Atteignable, Réaliste et Temporel. Juge chaque objectif." },
+  { id: "titre-google", title: "Le bon titre pour Google", domain: "marketing", skill: "Rédaction web et référencement", art: "serp", engine: "quiz", gen: poolGen(["titres"], 6),
+    consigne: "Choisis le titre, la description ou le texte le mieux rédigé pour Google et pour les lecteurs." }
 ];
 const gameById = id => GAMES.find(g => g.id === id);
 function gameArt(k) {
@@ -4322,6 +4602,22 @@ function gameArt(k) {
     ratio: `<rect x="10" y="16" width="56" height="32" rx="3" fill="none" stroke="#8F76FF" stroke-width="3"/><rect x="74" y="8" width="20" height="36" rx="3" fill="none" stroke="#FF7A45" stroke-width="3"/><rect x="100" y="26" width="14" height="14" rx="2" fill="none" stroke="#ECEEF5" stroke-width="3"/><text x="38" y="62" text-anchor="middle" fill="#A2A9BC" style="font:600 9px var(--font-mono)">16:9</text><text x="84" y="62" text-anchor="middle" fill="#A2A9BC" style="font:600 9px var(--font-mono)">9:16</text>`,
     receipt: `<path d="M36 6 h48 v58 l-6 -4 l-6 4 l-6 -4 l-6 4 l-6 -4 l-6 4 l-6 -4 l-6 4z" fill="#ECEEF5"/>${[16, 24, 32].map(y => `<rect x="42" y="${y}" width="${y === 24 ? 26 : 34}" height="3" rx="1.5" fill="#A2A9BC"/>`).join("")}<rect x="42" y="42" width="36" height="7" rx="2" fill="#FF7A45"/>`,
     memo: [0, 1, 2, 3].map(i => `<rect x="${12 + i * 25}" y="${i % 2 ? 18 : 12}" width="20" height="28" rx="4" fill="${i === 1 ? "#ECEEF5" : i === 2 ? "#FF7A45" : "#5B3DF5"}" transform="rotate(${[-8, 4, -3, 7][i]} ${22 + i * 25} ${i % 2 ? 32 : 26})"/>`).join("") + `<text x="47" y="38" text-anchor="middle" fill="#12141C" style="font:800 12px var(--font-display)">?</text>`,
+    codefix: `<rect x="14" y="8" width="92" height="56" rx="6" fill="#141927"/>${[0, 1, 2, 3].map(i => `<rect x="22" y="${16 + i * 11}" width="${[50, 66, 40, 58][i]}" height="5" rx="2.5" fill="${i === 2 ? "#FF7A45" : "#8F76FF"}"/>`).join("")}<path d="M76 38 l8 8 l14 -16" stroke="#4ADE95" stroke-width="4" fill="none" stroke-linecap="round"/>`,
+    selector: `<rect x="10" y="10" width="100" height="52" rx="6" fill="#ECEEF5"/><rect x="18" y="18" width="40" height="8" rx="2" fill="#A2A9BC"/><rect x="18" y="32" width="84" height="22" rx="4" fill="none" stroke="#FF7A45" stroke-width="3"/><text x="60" y="47" text-anchor="middle" fill="#5B3DF5" style="font:700 11px var(--font-mono)">.carte</text>`,
+    console: `<rect x="10" y="8" width="100" height="56" rx="6" fill="#141927"/><text x="18" y="28" fill="#C792EA" style="font:600 10px var(--font-mono)">console.log(</text><text x="18" y="42" fill="#82AAFF" style="font:600 10px var(--font-mono)">  2 + 3 * 4)</text><text x="18" y="58" fill="#4ADE95" style="font:700 11px var(--font-mono)">&gt; ?</text>`,
+    codeorder: [0, 1, 2].map(i => `<rect x="${16 + [12, 0, 22][i]}" y="${12 + i * 18}" width="${[60, 80, 50][i]}" height="12" rx="3" fill="${["#8F76FF", "#00A3D1", "#FF7A45"][i]}"/><text x="${10}" y="${22 + i * 18}" fill="#A2A9BC" style="font:700 9px var(--font-mono)">${[2, 1, 3][i]}</text>`).join(""),
+    bug: `<ellipse cx="60" cy="40" rx="16" ry="20" fill="#FF7A45"/><circle cx="60" cy="18" r="9" fill="#12141C"/><path d="M60 22 v38" stroke="#12141C" stroke-width="2"/>${[-1, 1].flatMap(s => [28, 40, 52].map(y => `<path d="M${60 + s * 15} ${y} l${s * 14} ${y === 40 ? 0 : y < 40 ? -6 : 6}" stroke="#ECEEF5" stroke-width="2.5" stroke-linecap="round"/>`)).join("")}`,
+    node: `${[[60, 14], [36, 40], [84, 40], [84, 62]].map(([x, y], i) => `<rect x="${x - 16}" y="${y - 7}" width="32" height="14" rx="4" fill="${["#478CBF", "#8F76FF", "#4ADE95", "#FF7A45"][i]}"/>`).join("")}<path d="M60 21 V30 H36 V33 M60 30 H84 V33 M84 47 V55" stroke="#ECEEF5" stroke-width="2" fill="none"/>`,
+    gdflow: ["1", "2", "3", "4"].map((t, i) => `<circle cx="${18 + i * 28}" cy="36" r="11" fill="${["#5B3DF5", "#00A3D1", "#FF7A45", "#4ADE95"][i]}"/><text x="${18 + i * 28}" y="40" text-anchor="middle" fill="#fff" style="font:800 11px var(--font-mono)">${t}</text>${i < 3 ? `<path d="M${30 + i * 28} 36 h4" stroke="#ECEEF5" stroke-width="2"/>` : ""}`).join(""),
+    vanish: `<rect x="8" y="8" width="104" height="56" rx="4" fill="#F7F3EA"/>${[[8, 64], [112, 64], [8, 8], [112, 8]].map(([x, y]) => `<line x1="${x}" y1="${y}" x2="60" y2="30" stroke="#12141C" stroke-width="2"/>`).join("")}<line x1="8" y1="30" x2="112" y2="30" stroke="#00A3D1" stroke-dasharray="3 3"/><circle cx="60" cy="30" r="4" fill="#FF7A45"/>`,
+    sphere: `<defs><radialGradient id="gaSph" cx=".32" cy=".3" r=".8"><stop offset="0" stop-color="#FFE6D6"/><stop offset=".5" stop-color="#E8742C"/><stop offset="1" stop-color="#4A1D07"/></radialGradient></defs><ellipse cx="72" cy="58" rx="30" ry="6" fill="#000" opacity=".35"/><circle cx="58" cy="36" r="22" fill="url(#gaSph)"/><circle cx="20" cy="14" r="6" fill="#FFD66B"/>`,
+    grays: Array.from({ length: 6 }, (_, i) => `<rect x="${10 + i * 17}" y="18" width="15" height="36" rx="3" fill="${hslToHex(0, 0, 92 - i * 16)}"/>`).join(""),
+    subnet: `<text x="60" y="30" text-anchor="middle" fill="#ECEEF5" style="font:700 11px var(--font-mono)">192.168.10.75</text><text x="60" y="48" text-anchor="middle" fill="#FF7A45" style="font:800 14px var(--font-mono)">/26</text><rect x="14" y="54" width="92" height="6" rx="3" fill="#39415C"/><rect x="14" y="54" width="69" height="6" rx="3" fill="#8F76FF"/>`,
+    rj45: RJ45.B.map((f, i) => { const c = FIL[f.replace("blanc-", "")]; return `<rect x="${24 + i * 9}" y="12" width="7" height="44" rx="2" fill="${f.startsWith("blanc-") ? "#fff" : c}"/>${f.startsWith("blanc-") ? `<rect x="${24 + i * 9}" y="12" width="7" height="44" rx="2" fill="${c}" opacity=".45"/>` : ""}`; }).join("") + `<rect x="20" y="52" width="80" height="12" rx="3" fill="#A2A9BC" opacity=".6"/>`,
+    phish: `<rect x="14" y="10" width="80" height="40" rx="10" fill="#ECEEF5"/><path d="M28 50 l-6 10 l14 -10z" fill="#ECEEF5"/><rect x="24" y="20" width="56" height="5" rx="2.5" fill="#A2A9BC"/><rect x="24" y="31" width="40" height="5" rx="2.5" fill="#A2A9BC"/><circle cx="96" cy="48" r="13" fill="#B42318"/><text x="96" y="53" text-anchor="middle" fill="#fff" style="font:800 14px var(--font-display)">!</text>`,
+    wrench: `<rect x="18" y="12" width="56" height="38" rx="4" fill="#ECEEF5"/><rect x="22" y="16" width="48" height="26" rx="2" fill="#141927"/><rect x="40" y="50" width="12" height="8" fill="#A2A9BC"/><path d="M84 20 a10 10 0 1 0 8 14 l14 14 l5 -5 l-14 -14 a10 10 0 0 0 -13 -9 l6 6 l-4 4z" fill="#FF7A45"/>`,
+    target: [26, 18, 10].map((r, i) => `<circle cx="56" cy="36" r="${r}" fill="${["#ECEEF5", "#5B3DF5", "#FF7A45"][i]}"/>`).join("") + `<path d="M96 12 L60 34" stroke="#ECEEF5" stroke-width="3"/><path d="M96 12 l8 -4 l-2 8z" fill="#ECEEF5"/>`,
+    serp: `<rect x="10" y="10" width="100" height="10" rx="5" fill="#ECEEF5"/><text x="14" y="34" fill="#8F76FF" style="font:700 9px var(--font-body)">Restaurant à Calavi | Chez…</text><rect x="14" y="40" width="88" height="4" rx="2" fill="#A2A9BC"/><rect x="14" y="48" width="70" height="4" rx="2" fill="#A2A9BC"/><text x="14" y="62" fill="#4ADE95" style="font:600 7px var(--font-mono)">chezfofo.bj</text>`,
     chrono: `<circle cx="60" cy="38" r="24" fill="none" stroke="#ECEEF5" stroke-width="4"/><rect x="54" y="6" width="12" height="6" rx="2" fill="#ECEEF5"/><path d="M60 38 L60 22" stroke="#FF7A45" stroke-width="4" stroke-linecap="round"/><path d="M60 38 L72 44" stroke="#ECEEF5" stroke-width="3" stroke-linecap="round"/>`
   };
   return `<svg viewBox="0 0 120 70" aria-hidden="true">${A[k] || ""}</svg>`;
@@ -4471,7 +4767,8 @@ const ENGINES = {
       moyen: [["Reportage au marché Dantokpa", ["Plan d'ensemble : le marché vu d'en haut", "Plan moyen : une vendeuse installe ses pagnes", "Gros plan : ses mains plient un tissu", "Interview : elle raconte son métier", "Plan large final : la foule au coucher du soleil"]]],
       difficile: [["Film de mariage", ["Préparatifs de la mariée", "Arrivée du marié", "Entrée dans la salle de cérémonie", "Échange des alliances", "Sortie sous les applaudissements", "Première danse en soirée"]]]
     };
-    const [title, correct] = pick((g.scenarios || SCEN)[level]);
+    const [title, correct] = g.make ? g.make(level) : pick((g.scenarios || SCEN)[level]);
+    const show = l => g.token ? g.token(l) : esc(l);
     const per = 50 * LEVEL_INFO[level].mult;
     let pool = shuffle(correct.map((label, idx) => ({ label, idx })));
     if (pool.every((p, k) => p.idx === k)) pool.reverse();
@@ -4479,8 +4776,8 @@ const ENGINES = {
     const draw = () => {
       ui.bar(`${title} · ${placed.length}/${correct.length} placé${g.scenarios ? "e" : ""}s`, 0);
       ui.stage.innerHTML = `<p class="q-title">${esc(title)}</p>
-        <ol class="slots" aria-label="Ton montage">${correct.map((_, k) => `<li class="slot"><span class="n">${String(k + 1).padStart(2, "0")}</span>${placed[k] ? `<button class="token" data-back="${k}" aria-label="Retirer : ${esc(placed[k].label)}">${esc(placed[k].label)}</button>` : `<span class="small muted">${g.scenarios ? "Choisis une étape ci-dessous" : "Choisis un plan ci-dessous"}</span>`}</li>`).join("")}</ol>
-        <div class="tokens" role="group" aria-label="${g.scenarios ? "Étapes" : "Plans"} à placer">${pool.map((p, k) => `<button class="token" data-k="${k}">${esc(p.label)}</button>`).join("") || `<span class="small muted">Tous les plans sont placés.</span>`}</div>
+        <ol class="slots" aria-label="Ton montage">${correct.map((_, k) => `<li class="slot"><span class="n">${String(k + 1).padStart(2, "0")}</span>${placed[k] ? `<button class="token" data-back="${k}" aria-label="Retirer : ${esc(placed[k].label)}">${show(placed[k].label)}</button>` : `<span class="small muted">${g.slot || (g.scenarios ? "Choisis une étape ci-dessous" : "Choisis un plan ci-dessous")}</span>`}</li>`).join("")}</ol>
+        <div class="tokens" role="group" aria-label="Éléments à placer">${pool.map((p, k) => `<button class="token" data-k="${k}">${show(p.label)}</button>`).join("") || `<span class="small muted">Tous les plans sont placés.</span>`}</div>
         <div class="game-actions"><span class="row"><button class="btn btn-ghost btn-sm" id="hint" ${placed.length < correct.length ? "" : "disabled"}>${icon("bulb")} Indice</button><button class="btn btn-ghost btn-sm" id="reset" ${placed.length ? "" : "disabled"}>${icon("refresh")} Tout reprendre</button></span>
           <button class="btn btn-primary" id="check" ${placed.length === correct.length ? "" : "disabled"}>Vérifier ${icon("check")}</button></div>`;
       $$("[data-k]", ui.stage).forEach(b => b.addEventListener("click", () => { placed.push(pool.splice(+b.dataset.k, 1)[0]); draw(); ($("[data-k]", ui.stage) || $("#check")).focus(); }));
@@ -4501,6 +4798,85 @@ const ENGINES = {
       });
     };
     draw();
+  },
+
+  lines(g, level, ui) {
+    const n = LEVEL_INFO[level].n, base = 100 * LEVEL_INFO[level].mult, rounds = 5, all = LINE_POOLS[g.pool];
+    const main = shuffle(all.filter(x => n === 1 ? x[0] === 1 : n === 2 ? x[0] <= 2 : x[0] >= 2));
+    const items = [...main, ...shuffle(all.filter(x => !main.includes(x)))].slice(0, rounds);
+    let r = 0, pts = 0, good = 0;
+    const review = [];
+    const play = () => {
+      const [, title, src, bad, explain, hint] = items[r];
+      let hinted = false;
+      ui.bar(`Extrait ${r + 1} / ${rounds}`, pts);
+      ui.stage.innerHTML = `<p class="q-title">${esc(title)} : touche la ligne à corriger</p>
+        <ol class="ls-lines" role="group" aria-label="Lignes de code">${src.map((l, i) => `<li><button class="ls-line" data-i="${i}"><span class="ls-n" aria-hidden="true">${i + 1}</span><code>${esc(l) || " "}</code></button></li>`).join("")}</ol>
+        <div class="game-actions"><button class="btn btn-ghost btn-sm" id="hint">${icon("bulb")} Indice (points ÷ 2)</button><span class="small muted mono">+${nf(base)} pts</span></div><div class="feedback" aria-live="polite"></div>`;
+      $$(".ls-line", ui.stage).forEach(b => b.addEventListener("click", () => {
+        const i = +b.dataset.i, ok = i === bad;
+        if (ok) { good++; pts += hinted ? base / 2 : base; }
+        $$(".ls-line", ui.stage).forEach((x, j) => { x.disabled = true; if (j === bad) x.classList.add("right"); else if (j === i) x.classList.add("wrong"); });
+        review.push({ q: title, given: `Ligne ${i + 1}`, correct: `Ligne ${bad + 1}`, ok, explain });
+        r++; ui.bar(`Extrait ${r} / ${rounds}`, pts); $("#hint", ui.stage).disabled = true;
+        $(".feedback", ui.stage).innerHTML = alertBox(ok ? "ok" : "warn", `<p><strong>${ok ? "Bien vu !" : `C'était la ligne ${bad + 1}.`}</strong> ${esc(explain)}</p>`)
+          + `<div class="game-actions" style="justify-content:flex-end"><button class="btn btn-primary" id="next">${r < rounds ? "Extrait suivant" : "Voir mon résultat"} ${icon("arrow")}</button></div>`;
+        $("#next").focus();
+        $("#next").addEventListener("click", () => r < rounds ? play() : ui.finish({ pts, good, total: rounds, review, level }));
+      }));
+      $("#hint").addEventListener("click", e => { hinted = true; e.currentTarget.disabled = true; $(".feedback", ui.stage).innerHTML = alertBox("info", `<p><strong>Indice :</strong> ${esc(hint)}</p>`, "bulb"); });
+      $(".ls-line", ui.stage).focus({ preventScroll: true });
+    };
+    play();
+  },
+
+  vanish(g, level, ui) {
+    const rounds = 5, base = 100 * LEVEL_INFO[level].mult, okAt = { facile: 24, moyen: 16, difficile: 10 }[level];
+    const nRays = { facile: 4, moyen: 3, difficile: 2 }[level], reach = { facile: .72, moyen: .55, difficile: .4 }[level];
+    const W = 400, H = 260;
+    let r = 0, pts = 0, good = 0;
+    const review = [];
+    const play = () => {
+      const vp = { x: rand(70, 330), y: rand(60, 150) };
+      const starts = shuffle([[0, rand(200, 260)], [W, rand(200, 260)], [0, rand(0, 40)], [W, rand(0, 40)], [rand(20, 120), H], [rand(280, 380), H]]).slice(0, nRays);
+      const rays = starts.map(([x, y]) => ({ x, y, ex: x + (vp.x - x) * reach, ey: y + (vp.y - y) * reach }));
+      let cur = { x: W / 2, y: H / 2 }, moved = false;
+      ui.bar(`Dessin ${r + 1} / ${rounds}`, pts);
+      ui.stage.innerHTML = `<p class="q-title">Où se trouve le point de fuite ?</p>
+        <div class="vp-wrap"><svg viewBox="0 0 ${W} ${H}" id="vpSvg" tabindex="0" role="application" aria-label="Dessin en perspective. Touche ou utilise les flèches du clavier pour placer le viseur, puis Entrée pour valider.">
+          <rect width="${W}" height="${H}" fill="#F7F3EA"/>
+          ${rays.map(t => `<line x1="${t.x}" y1="${t.y}" x2="${t.ex}" y2="${t.ey}" stroke="#12141C" stroke-width="3" stroke-linecap="round"/>`).join("")}
+          <g id="vpRes"></g><g id="vpCross" pointer-events="none"><circle r="9" fill="none" stroke="#5B3DF5" stroke-width="2.5"/><path d="M-15 0h10M5 0h10M0 -15v10M0 5v10" stroke="#5B3DF5" stroke-width="2.5"/></g></svg></div>
+        <div class="game-actions"><span class="small muted">Touche le dessin, ou déplace le viseur avec les flèches (Maj = plus vite).</span><button class="btn btn-primary" id="vpOk">Valider ${icon("check")}</button></div>
+        <div class="feedback" aria-live="polite"></div>`;
+      const svg = $("#vpSvg", ui.stage), cross = $("#vpCross", ui.stage);
+      const place = () => cross.setAttribute("transform", `translate(${cur.x} ${cur.y})`);
+      place();
+      let done = false;
+      svg.addEventListener("click", e => { if (done) return; const pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY; const q = pt.matrixTransform(svg.getScreenCTM().inverse()); cur = { x: Math.round(q.x), y: Math.round(q.y) }; moved = true; place(); });
+      svg.addEventListener("keydown", e => {
+        if (done) return; const d = e.shiftKey ? 20 : 4, m = { ArrowLeft: [-d, 0], ArrowRight: [d, 0], ArrowUp: [0, -d], ArrowDown: [0, d] }[e.key];
+        if (m) { e.preventDefault(); cur = { x: Math.max(0, Math.min(W, cur.x + m[0])), y: Math.max(0, Math.min(H, cur.y + m[1])) }; moved = true; place(); }
+        if (e.key === "Enter") { e.preventDefault(); $("#vpOk", ui.stage).click(); }
+      });
+      $("#vpOk", ui.stage).addEventListener("click", () => {
+        if (done) return;
+        if (!moved) { $(".feedback", ui.stage).innerHTML = alertBox("info", "<p>Place d'abord le viseur en touchant le dessin.</p>"); return; }
+        done = true;
+        const d = Math.hypot(cur.x - vp.x, cur.y - vp.y), ok = d <= okAt, gain = Math.round(base * Math.max(0, 1 - d / 90));
+        pts += gain; if (ok) good++;
+        $("#vpRes", ui.stage).innerHTML = rays.map(t => `<line x1="${t.ex}" y1="${t.ey}" x2="${vp.x}" y2="${vp.y}" stroke="#F2612D" stroke-width="2" stroke-dasharray="6 5"/>`).join("") + `<line x1="0" y1="${vp.y}" x2="${W}" y2="${vp.y}" stroke="#00A3D1" stroke-width="1.5" stroke-dasharray="3 4"/><circle cx="${vp.x}" cy="${vp.y}" r="7" fill="#F2612D"/>`;
+        review.push({ q: `Dessin ${r + 1}`, given: `Écart de ${Math.round(d)} px`, correct: `Moins de ${okAt} px`, ok, explain: ok ? "Point de fuite bien placé." : "Prolonge mentalement deux lignes : leur croisement est le point de fuite, toujours sur la ligne d'horizon." });
+        r++; ui.bar(`Dessin ${r} / ${rounds}`, pts);
+        $(".feedback", ui.stage).innerHTML = alertBox(ok ? "ok" : "warn", `<p><strong>Écart : ${Math.round(d)} px</strong> (moins de ${okAt} = réussi). +${nf(gain)} pts. En pointillés : les lignes prolongées et la ligne d'horizon.</p>`)
+          + `<div class="game-actions" style="justify-content:flex-end"><button class="btn btn-primary" id="next">${r < rounds ? "Dessin suivant" : "Voir mon résultat"} ${icon("arrow")}</button></div>`;
+        $("#next").focus();
+        $("#next").addEventListener("click", () => r < rounds ? play() : ui.finish({ pts, good, total: rounds, review, level,
+          extra: `<p class="muted">En perspective à un point, toutes les lignes qui s'éloignent se rejoignent au point de fuite, placé sur la ligne d'horizon, à hauteur des yeux.</p>` }));
+      });
+      svg.focus({ preventScroll: true });
+    };
+    play();
   },
 
   memo(g, level, ui) {
