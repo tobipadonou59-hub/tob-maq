@@ -569,6 +569,19 @@ dialog::backdrop{background:rgb(11 14 23 / .6)}
 @keyframes introIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 @keyframes introCrop{from{opacity:0;transform:scale(1.8)}to{opacity:1;transform:none}}
 @keyframes introGlow{to{transform:translate(3%,-3%) scale(1.05)}}
+
+/* Jeu « L'œil de la pipette » */
+.match-wrap{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin:6px 0 18px}
+.match-wrap figure{margin:0;text-align:center}
+.match-sw{display:block;width:clamp(120px,32vw,190px);aspect-ratio:1;border-radius:18px;box-shadow:var(--shadow);border:1px solid var(--line)}
+.match-wrap figcaption{margin-top:8px;font:600 .8rem var(--font-mono);color:var(--muted)}
+.match-sliders{display:grid;gap:14px;max-width:520px;margin:0 auto}
+.match-sl{display:grid;gap:6px;font-weight:600}
+.match-sl span{display:flex;justify-content:space-between}
+.match-sl input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:16px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line);cursor:pointer}
+.match-sl input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:#fff;border:3px solid var(--ink);box-shadow:0 1px 4px rgb(0 0 0 / .3)}
+.match-sl input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#fff;border:3px solid var(--ink)}
+.match-sl input[type=range]:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 </style>
 </head>
 <body>
@@ -1294,7 +1307,8 @@ function pageHead({ crumbs = [], eyebrow = "", title, lead = "", extra = "" }) {
   const c = crumbs.length ? `<nav class="crumbs" aria-label="Fil d'Ariane"><a href="#/">Accueil</a>${crumbs.map(([t, h]) => ` / ${h ? `<a href="${h}">${t}</a>` : `<span aria-current="page">${t}</span>`}`).join("")}</nav>` : "";
   return `<section class="page-head"><div class="wrap">${c}${eyebrow ? `<span class="eyebrow">${eyebrow}</span>` : ""}<h1 tabindex="-1">${title}</h1>${lead ? `<p class="lead">${lead}</p>` : ""}${extra}</div></section>`;
 }
-const domainName = id => (DOMAINS.find(d => d.id === id) || {}).name || id;
+const domainName = id => (DOMAINS.find(d => d.id === id) || {}).name || ({ marketing: "Marketing" })[id] || id;
+const GAME_DOMAINS = [...DOMAINS.map(d => ({ id: d.id, name: d.name })), { id: "marketing", name: "Marketing" }];
 const priceChip = p => {
   if (p === "gratuit") return `<span class="chip chip-ok">Gratuit</span>`;
   const prices = state.billing?.enabled ? (state.billing.plans || []).map(x => x.id === "an" ? Math.round(x.price / 12) : x.price).filter(Boolean) : [];
@@ -2416,6 +2430,58 @@ const LEVEL_INFO = {
 };
 /* Banque de questions : [niveau 1-3, question, choix, index de la bonne réponse, explication, indice] */
 const POOLS = {
+  reseaux: [
+    [1, "Une vidéo verticale de 30 s pour toucher les 18-25 ans.", ["TikTok ou Reels Instagram", "Un article LinkedIn", "Une affiche A3 en boutique"], 0, "Les 18-25 ans regardent surtout des vidéos verticales courtes : TikTok, Reels, Shorts.", "Où cette tranche d'âge passe-t-elle son temps ?"],
+    [1, "Le format d'une story Instagram ou d'un statut WhatsApp.", ["1080 × 1920 (9:16)", "1920 × 1080 (16:9)", "800 × 600 (4:3)"], 0, "Les stories et statuts occupent tout l'écran du téléphone tenu à la verticale : 9:16.", "Le téléphone est tenu debout."],
+    [1, "Trouver des clients entreprises pour un studio de graphisme.", ["LinkedIn", "Snapchat", "Un jeu mobile"], 0, "LinkedIn est le réseau des professionnels et des décideurs : idéal pour vendre aux entreprises (B2B).", "Où sont les patrons et les responsables ?"],
+    [1, "Prévenir vite tes clients fidèles d'une promotion.", ["Un statut ou une liste de diffusion WhatsApp", "Une affiche dans une autre ville", "Un long article de blog"], 0, "Tes clients ont déjà ton numéro : WhatsApp les touche directement et gratuitement.", "Quel canal tes clients consultent-ils plusieurs fois par jour ?"],
+    [2, "Le format qui prend le plus de place dans le fil Instagram.", ["1080 × 1350 (4:5, portrait)", "1080 × 566 (paysage)", "1080 × 1080 (carré)"], 0, "Le portrait 4:5 occupe plus de hauteur dans le fil, donc il attire davantage l'œil.", "Plus c'est haut, plus ça se voit en faisant défiler."],
+    [2, "La taille recommandée d'une miniature YouTube.", ["1280 × 720 (16:9)", "1080 × 1920 (9:16)", "500 × 500 (carré)"], 0, "YouTube affiche des miniatures 16:9 ; 1280 × 720 est la taille conseillée.", "Comme une vidéo YouTube classique, à l'horizontale."],
+    [2, "Tu veux savoir laquelle de deux affiches attire le plus de clics.", ["Un test A/B : les deux versions diffusées en même temps à des publics comparables", "Publier l'une ce mois-ci, l'autre le mois prochain", "Demander l'avis d'un ami"], 0, "Un test A/B compare deux versions dans les mêmes conditions : seul le visuel change.", "Il faut que la seule différence soit l'affiche."],
+    [2, "Ta publicité est très vue mais presque personne ne clique. Que modifier d'abord ?", ["L'accroche et le visuel", "La photo de profil de la page", "Doubler le budget"], 0, "Peu de clics = le message n'arrête pas les gens. Plus de budget montrerait juste plus la même pub inefficace.", "Le problème est avant le clic."],
+    [2, "Qu'est-ce qu'un « persona » en marketing ?", ["Un portrait réaliste de ton client type (âge, besoins, habitudes)", "Un influenceur payé", "Un logo secondaire"], 0, "Le persona t'aide à écrire pour une personne précise au lieu de parler à tout le monde.", "On l'imagine comme une vraie personne."],
+    [3, "Ta pub a beaucoup de clics mais aucune vente. Où chercher le problème ?", ["Après le clic : l'offre, le prix, la confiance, la réponse aux messages", "Dans le visuel de la pub", "Dans la couleur du logo"], 0, "Les clics prouvent que la pub attire. La perte se produit ensuite : page, offre ou conversation qui ne convainc pas.", "La pub fait son travail : elle amène du monde."],
+    [3, "Sur 1 000 personnes touchées, 50 cliquent et 5 achètent. Où perds-tu le plus, en proportion ?", ["Entre la vue et le clic (95 % perdus)", "Entre le clic et l'achat (90 % perdus)", "Les deux étapes perdent autant"], 0, "950 personnes sur 1 000 ne cliquent pas (95 %), contre 45 sur 50 qui n'achètent pas (90 %).", "Calcule le pourcentage perdu à chaque étape."],
+    [3, "Une marque publie sur 6 réseaux mais vend très peu. Meilleur conseil ?", ["Se concentrer sur 1 ou 2 réseaux où se trouvent ses clients, et bien les travailler", "Ouvrir 3 réseaux de plus", "Publier la même chose 10 fois par jour partout"], 0, "Mieux vaut être excellent là où sont les clients que moyen partout.", "Le temps et l'énergie sont limités."]],
+  accroche: [
+    [1, "Quelle accroche est la plus efficace pour un salon de coiffure ?", ["Des tresses qui tiennent 6 semaines, faites en 3 h", "Bienvenue sur notre page", "Nous sommes les meilleurs"], 0, "Une bonne accroche promet un bénéfice concret et chiffré, pas une formule vague.", "Cherche le bénéfice précis pour la cliente."],
+    [1, "Quel appel à l'action est le plus clair ?", ["Écris « TRESSE » sur WhatsApp au 01 00 00 00 00 pour réserver", "N'hésitez pas", "Plus d'infos bientôt"], 0, "Un bon appel à l'action dit exactement quoi faire, où et comment.", "Le client doit savoir quoi faire sans réfléchir."],
+    [1, "Le meilleur titre pour une affiche de promotion.", ["-30 % sur tous les pagnes jusqu'à samedi", "Grande opération spéciale exceptionnelle de la boutique", "Promotion"], 0, "Court, chiffré et avec une limite dans le temps : le titre se comprend en un coup d'œil.", "Quel titre donne l'information en moins de 2 secondes ?"],
+    [1, "Laquelle de ces phrases parle d'un bénéfice (et pas d'une caractéristique) ?", ["Ton téléphone tient 2 jours sans recharge", "Batterie de 5 000 mAh", "Processeur huit cœurs"], 0, "La caractéristique décrit le produit ; le bénéfice dit ce que le client y gagne.", "Qu'est-ce que le client vit concrètement ?"],
+    [2, "Pourquoi ajouter une date limite à une offre ?", ["Elle crée l'urgence et pousse à agir maintenant", "Elle rend l'affiche plus jolie", "C'est obligatoire"], 0, "Sans limite, le client remet à plus tard… et oublie.", "Que fait un client quand rien ne presse ?"],
+    [2, "Quelle preuve rassure le plus un nouveau client ?", ["Le témoignage d'un vrai client, avec son prénom et une photo du résultat", "« Qualité garantie à 100 % »", "Un long texte sur l'histoire de l'entreprise"], 0, "Une preuve venant d'un autre client est plus crédible qu'une promesse de la marque.", "Qui est le plus crédible : la marque ou un client ?"],
+    [2, "Combien d'appels à l'action dans une même publicité ?", ["Un seul, clair", "Trois ou quatre, pour laisser le choix", "Aucun, le client trouvera"], 0, "Trop de choix paralysent : une pub = une action.", "Plus il y a de choix, plus on hésite."],
+    [2, "À qui doit s'adresser le texte d'une publicité ?", ["À une personne précise : ton client type", "À tout le monde", "À tes concurrents"], 0, "Parler à tout le monde, c'est ne toucher personne. Écris comme si tu parlais à ton persona.", "Pense à une seule personne en écrivant."],
+    [3, "Accroche pour une formation de montage vidéo destinée aux étudiants.", ["Monte ta première vidéo TikTok pro en 7 jours, depuis ton téléphone", "Formation de montage vidéo disponible", "Apprenez le montage avec des experts certifiés depuis 2010"], 0, "Elle parle le langage de la cible, promet un résultat concret, un délai et lève un frein (pas besoin d'ordinateur).", "Résultat + délai + obstacle levé."],
+    [3, "Le meilleur ordre pour une publicité courte.", ["Problème → solution → preuve → action", "Logo → historique → adresse", "Prix → logo → problème"], 0, "On part de ce que vit le client, on montre la solution, on prouve, puis on demande l'action.", "Commence par ce qui concerne le client."],
+    [3, "« Achetez maintenant ! » ne fonctionne pas. Quelle version tester ?", ["Réserve ta place : plus que 5 places à 2 000 FCFA", "ACHETEZ MAINTENANT !!!", "Achetez si vous voulez"], 0, "Rareté réelle, prix clair et verbe d'action précis : la version la plus convaincante.", "Qu'est-ce qui donne une raison d'agir tout de suite ?"],
+    [3, "Un client hésite à cause du prix. Quel message aide le plus ?", ["Montrer ce que lui coûte le problème : « Un logo raté refait deux fois coûte plus cher »", "Baisser le prix sans rien dire", "Ignorer la remarque"], 0, "On compare le prix à la valeur ou au coût du problème, au lieu de brader son travail.", "Compare le prix à autre chose."]],
+  coquilles: [
+    [1, "Quelle phrase est correctement composée en français ?", ["Tu viens samedi ?", "Tu viens samedi?", "Tu viens samedi ??"], 0, "En français, on met une espace (insécable) avant ? ! : et ;", "Regarde juste avant le point d'interrogation."],
+    [1, "Quels guillemets utilise-t-on en français ?", ["« Bonjour »", "\"Bonjour\"", "'Bonjour'"], 0, "Les guillemets français sont les chevrons « », avec une espace insécable à l'intérieur.", "Ils ressemblent à des petites flèches."],
+    [1, "Comment écrire une heure dans un texte soigné ?", ["18 h 30", "18H30", "18:30H"], 0, "La norme typographique française : h minuscule entouré d'espaces.", "Le h est en minuscule."],
+    [1, "Garde-t-on les accents sur les majuscules ?", ["Oui : « État », « À bientôt »", "Non, jamais", "Seulement sur les affiches"], 0, "Les accents sur les majuscules évitent les confusions et sont recommandés par l'Académie française.", "« Elève » ou « Élève » ?"],
+    [2, "La dernière ligne d'un paragraphe, isolée en haut de la colonne suivante, s'appelle…", ["une veuve", "une orpheline", "une lézarde"], 0, "Veuve : dernière ligne seule en haut. Orpheline : première ligne seule en bas. On les évite en mise en page.", "Elle arrive « après » tout le monde."],
+    [2, "Des blancs qui s'alignent verticalement dans un texte justifié forment…", ["des lézardes", "des veuves", "des marges"], 0, "Les lézardes (ou rivières) apparaissent quand les espaces entre les mots sont trop grandes : on corrige avec la césure.", "Comme des fissures dans un mur."],
+    [2, "Comment écrire un grand nombre ?", ["25 000 FCFA", "25.000 FCFA", "25000FCFA"], 0, "En français, les milliers se séparent par une espace (insécable), pas par un point.", "Le point est réservé à d'autres usages en anglais."],
+    [2, "Quels points de suspension sont corrects ?", ["Bientôt…", "Bientôt....", "Bientôt . . ."], 0, "Toujours trois points, collés au mot (idéalement le caractère « … »).", "Combien de points exactement ?"],
+    [3, "L'abréviation correcte de « première ».", ["1re", "1ère", "1ière"], 0, "L'usage typographique recommande 1re (et 1er, 2e, 3e…), en lettres supérieures.", "La forme la plus courte est la bonne."],
+    [3, "Comment écrire le siècle ?", ["XXIe siècle", "21ème siècle", "XXIème siècle"], 0, "Siècle en chiffres romains (petites capitales) suivi de « e » en exposant.", "Chiffres romains et abréviation courte."],
+    [3, "Quelle écriture des unités est correcte ?", ["5 km", "5Km", "5 Kms"], 0, "Symbole en minuscule, séparé du nombre par une espace, et jamais de « s » au pluriel.", "Les symboles d'unités sont invariables."],
+    [3, "Avant les deux-points « : », on met…", ["une espace insécable", "aucune espace", "deux espaces"], 0, "L'espace insécable empêche le signe de se retrouver seul en début de ligne.", "Le signe ne doit jamais commencer une ligne."]],
+  raccourcis: [
+    [1, "Premiere Pro : l'outil Cutter (pour couper un plan).", ["C", "V", "R"], 0, "C comme « Cut ». Pense à revenir à la sélection (V) juste après.", "Comme « cut » en anglais."],
+    [1, "Premiere Pro : l'outil de sélection.", ["V", "C", "S"], 0, "V est l'outil de sélection dans la plupart des logiciels Adobe.", "Le même que dans Photoshop et Illustrator."],
+    [1, "Lancer ou arrêter la lecture.", ["Barre d'espace", "Entrée", "Tab"], 0, "La barre d'espace lance et arrête la lecture dans presque tous les logiciels de montage.", "La plus grande touche du clavier."],
+    [1, "Marquer le début et la fin d'un passage (points d'entrée et de sortie).", ["I et O", "E et S", "A et Z"], 0, "I pour « In » et O pour « Out » : universel en montage.", "In et Out en anglais."],
+    [2, "Lire en arrière, faire pause, lire en avant, comme les pros.", ["J, K, L", "A, S, D", "Q, W, E"], 0, "J, K, L : appuie plusieurs fois sur L ou J pour accélérer. Fonctionne aussi dans DaVinci Resolve et Final Cut.", "Trois touches voisines sous la main droite."],
+    [2, "Premiere Pro : ajouter un point de montage à la tête de lecture.", ["Ctrl+K", "Ctrl+C", "Ctrl+N"], 0, "Ctrl+K coupe les pistes ciblées sans changer d'outil (Ctrl+Maj+K pour toutes les pistes).", "K comme dans « cut »… en son."],
+    [2, "Premiere Pro : supprimer un plan et refermer le trou.", ["Maj+Suppr", "Suppr", "Ctrl+X"], 0, "La suppression avec raccord (ripple delete) recolle les plans suivants.", "Suppr seul laisse un trou noir."],
+    [2, "Premiere Pro : raccourcir le début du plan jusqu'à la tête de lecture, en refermant le trou.", ["Q", "W", "E"], 0, "Q coupe ce qui est avant la tête de lecture, W ce qui est après. Très rapide pour nettoyer.", "La touche à gauche de W."],
+    [3, "Premiere Pro : ouvrir l'exportation.", ["Ctrl+M", "Ctrl+E", "Ctrl+S"], 0, "Ctrl+M ouvre l'exportation du média.", "M comme « Media »."],
+    [3, "Premiere Pro : voir toute la séquence dans la timeline.", ["\\ (barre oblique inverse)", "Z", "Ctrl+0"], 0, "La barre oblique inverse ajuste le zoom pour afficher toute la séquence.", "Une touche de ponctuation, près de Entrée."],
+    [3, "Premiere Pro : délier l'image et le son d'un plan.", ["Ctrl+L", "Ctrl+U", "Ctrl+D"], 0, "Ctrl+L lie ou délie l'audio et la vidéo. Ctrl+D applique la transition vidéo par défaut.", "L comme « Link »."],
+    [3, "Premiere Pro : ajouter un marqueur sur le rythme pendant la lecture.", ["M", "K", "N"], 0, "M pose un marqueur : idéal pour repérer les temps de la musique.", "M comme « Marker »."]],
   formats: [
     [1, "Un logo à agrandir sur une bâche sans perte de qualité. Quel type de fichier ?", ["JPG", "Fichier vectoriel (SVG, AI ou PDF vectoriel)", "GIF"], 1, "Un fichier vectoriel se compose de formes mathématiques : il s'agrandit sans pixelisation.", "Pense aux formes, pas aux pixels."],
     [1, "Un logo avec fond transparent pour un site web. Quel format ?", ["PNG", "JPG", "BMP"], 0, "Le PNG gère la transparence ; le JPG non.", "Un de ces formats sait gérer la transparence."],
@@ -2524,6 +2590,70 @@ function genTypo(level) {
     visual: `<div style="font-family:${f.font};font-weight:${f.w};font-size:clamp(2rem,6vw,3rem);padding:18px 26px;border:1px solid var(--line);border-radius:14px;background:var(--surface)">${pick(samples)}</div>`,
     choices: fams.map(x => x.label), answer: fams.indexOf(f), explain: f.ex, hint: "Observe le bout des lettres et la largeur de chaque caractère." }));
 }
+/* Code HEX : lire les trois couples rouge, vert, bleu. */
+function genHex(level) {
+  const hx = v => v.toString(16).padStart(2, "0").toUpperCase();
+  const code = c => "#" + c.map(hx).join("");
+  return Array.from({ length: 6 }, () => {
+    let c; do { c = [rand(1, 14) * 16, rand(1, 14) * 16, rand(1, 14) * 16]; } while (Math.max(...c) - Math.min(...c) < (level === "facile" ? 128 : 80));
+    const outs = new Set([code(c)]), dist = [];
+    const cands = level === "difficile"
+      ? [0, 1, 2].flatMap(k => [-48, 48].map(d => c.map((v, j) => j === k ? Math.max(0, Math.min(255, v + d)) : v)))
+      : [[c[2], c[1], c[0]], [c[1], c[0], c[2]], [c[0], c[2], c[1]], [c[1], c[2], c[0]], [c[2], c[0], c[1]]];
+    for (const x of shuffle(cands)) { const k = code(x); if (!outs.has(k) && dist.length < 3) { outs.add(k); dist.push(k); } }
+    const choices = shuffle([code(c), ...dist]);
+    const [r, g, b] = c, top = ["rouge", "vert", "bleu"][c.indexOf(Math.max(...c))];
+    return { q: "Quel code HEX correspond à cette couleur ?", visual: `<span style="display:block;width:min(100%,260px);height:110px;border-radius:14px;background:${code(c)};box-shadow:var(--shadow)"></span>`,
+      choices: choices.map(x => `<span class="mono">${x}</span>`).map((html, i) => ({ html, label: choices[i] })), answer: choices.indexOf(code(c)),
+      explain: `${code(c)} = rouge ${hx(r)}, vert ${hx(g)}, bleu ${hx(b)}. La composante la plus forte est le ${top}.`,
+      hint: "Un code HEX se lit par paires : rouge, vert, bleu. 00 = rien, FF = le maximum." };
+  });
+}
+/* Timecode : heures:minutes:secondes:images. */
+function genTimecode(level) {
+  const tc = (f, fps) => { const ff = f % fps, s = Math.floor(f / fps); return [Math.floor(s / 3600), Math.floor(s / 60) % 60, s % 60, ff].map(v => String(v).padStart(2, "0")).join(":"); };
+  const opts = (ok, wrong) => { const all = shuffle([...new Set([ok, ...wrong])].slice(0, 4)); return { choices: all, answer: all.indexOf(ok) }; };
+  const fpsList = { facile: [25], moyen: [25, 30], difficile: [24, 25, 30] }[level];
+  const kinds = { facile: ["images", "duree"], moyen: ["images", "duree", "tc"], difficile: ["duree", "tc", "plans"] }[level];
+  return Array.from({ length: 6 }, () => {
+    const fps = pick(fpsList), k = pick(kinds);
+    if (k === "images") {
+      const s = rand(2, 12), extra = level === "facile" ? 0 : rand(1, fps - 1), n = s * fps + extra;
+      return { q: `À ${fps} images par seconde, combien d'images contient un plan de ${s} s${extra ? ` et ${extra} images` : ""} ?`, ...opts(String(n), [String(s * 24 + extra), String(s * 30 + extra === n ? s * 25 + extra : s * 30 + extra), String(n + fps), String(s * 100 + extra)]),
+        explain: `${s} × ${fps} = ${s * fps}${extra ? ` + ${extra} = ${n}` : ""} images.`, hint: "Multiplie les secondes par le nombre d'images par seconde." };
+    }
+    if (k === "duree") {
+      const a = rand(2, 40) * fps + (level === "facile" ? 0 : rand(0, fps - 1)), d = rand(2, 9) * fps + (level === "facile" ? 0 : rand(1, fps - 1)), b = a + d;
+      return { q: `À ${fps} i/s, un plan commence à ${tc(a, fps)} et finit à ${tc(b, fps)}. Quelle est sa durée ?`, ...opts(tc(d, fps), [tc(d + fps, fps), tc(Math.max(1, d - fps), fps), tc(d + 1 + (d % fps === fps - 1 ? 2 : 0), fps)]),
+        explain: `${tc(b, fps)} − ${tc(a, fps)} = ${tc(d, fps)}, soit ${Math.floor(d / fps)} s et ${d % fps} images.`, hint: `Soustrais d'abord les images : il y en a ${fps} dans une seconde.` };
+    }
+    if (k === "tc") {
+      const n = rand(fps * 3, fps * 90);
+      return { q: `À ${fps} i/s, à quel timecode correspond l'image n° ${n} (en partant de 00:00:00:00) ?`, ...opts(tc(n, fps), [tc(n + fps, fps), tc(Math.round(n * 25 / (fps === 25 ? 30 : 25)), fps), tc(n - (n % fps) + Math.min(fps - 1, (n % fps) + 2), fps), tc(n + fps * 60, fps)]),
+        explain: `${n} ÷ ${fps} = ${Math.floor(n / fps)} s, reste ${n % fps} images → ${tc(n, fps)}.`, hint: "Divise par le nombre d'images par seconde : le reste donne les images." };
+    }
+    const [total, plans] = pick([15, 30, 60].flatMap(t => [3, 4, 5, 6, 8, 10, 12, 20].filter(p => (t * fps) % p === 0).map(p => [t, p]))), per = total * fps / plans;
+    return { q: `Une publicité de ${total} s à ${fps} i/s doit contenir ${plans} plans de même durée. Combien d'images par plan ?`, ...opts(String(per), [String(per + fps), String(Math.round(total / plans)), String(per * 2), String(Math.max(1, per - 1))]),
+      explain: `${total} × ${fps} = ${total * fps} images, ÷ ${plans} plans = ${per} images (${(per / fps).toLocaleString("fr-FR")} s).`, hint: "Calcule d'abord le nombre total d'images." };
+  });
+}
+/* Calculs du marketeur : taux de clic, conversion, coûts et rentabilité. */
+function genMarketing(level) {
+  const F = n => nf(Math.round(n * 100) / 100), pct = n => F(n) + " %";
+  const opts = (ok, wrong) => { const all = shuffle([...new Set([ok, ...wrong.filter(w => w !== ok)])].slice(0, 4)); return { choices: all, answer: all.indexOf(ok) }; };
+  const kinds = { facile: ["ctr", "conv", "cpc"], moyen: ["ctr", "conv", "cpc", "cpa", "promo"], difficile: ["cpa", "promo", "roas", "seuil", "marge"] }[level];
+  const G = {
+    ctr() { const v = pick([2000, 4000, 5000, 10000, 20000]), c = v * pick([1, 2, 3, 4, 5, 8]) / 100; return { q: `Ta publicité a été vue ${nf(v)} fois et a reçu ${nf(c)} clics. Quel est son taux de clic (CTR) ?`, ...opts(pct(c / v * 100), [pct(c / v * 1000), pct(c / v * 10), pct(v / c)]), explain: `CTR = clics ÷ vues × 100 = ${nf(c)} ÷ ${nf(v)} × 100 = ${pct(c / v * 100)}.`, hint: "Divise les clics par les vues, puis multiplie par 100." }; },
+    conv() { const v = pick([200, 400, 500, 800, 1000]), s = v * pick([1, 2, 3, 4, 5, 10]) / 100; return { q: `${nf(v)} personnes ont visité ta page et ${nf(s)} ont acheté. Quel est le taux de conversion ?`, ...opts(pct(s / v * 100), [pct(s / v * 1000), pct(s / v * 10), pct(100 - s / v * 100)]), explain: `Taux de conversion = achats ÷ visiteurs × 100 = ${pct(s / v * 100)}.`, hint: "Même calcul que le taux de clic, avec les achats." }; },
+    cpc() { const c = pick([50, 100, 200, 250, 500]), b = c * pick([20, 25, 40, 50, 100]); return { q: `Tu as dépensé ${nf(b)} FCFA en publicité pour ${nf(c)} clics. Combien coûte un clic (CPC) ?`, ...opts(F(b / c) + " FCFA", [F(b / c * 10) + " FCFA", F(b / c / 10) + " FCFA", F(c / b * 100) + " FCFA"]), explain: `CPC = budget ÷ clics = ${nf(b)} ÷ ${nf(c)} = ${F(b / c)} FCFA.`, hint: "Divise le budget par le nombre de clics." }; },
+    cpa() { const s = pick([4, 5, 8, 10, 20]), b = s * pick([500, 1000, 1500, 2500]); return { q: `Une campagne de ${nf(b)} FCFA a rapporté ${s} ventes. Combien coûte une vente (coût d'acquisition) ?`, ...opts(F(b / s) + " FCFA", [F(b * s) + " FCFA", F(b / s / 2) + " FCFA", F(b / s + 1000) + " FCFA"]), explain: `Coût par vente = budget ÷ ventes = ${F(b / s)} FCFA. S'il dépasse ta marge par vente, tu perds de l'argent.`, hint: "Budget divisé par le nombre de ventes." }; },
+    promo() { const p = pick([5000, 8000, 10000, 12000, 15000, 20000]), r = pick([10, 15, 20, 25, 30]); return { q: `Un article coûte ${nf(p)} FCFA. Quel est son prix avec une réduction de ${r} % ?`, ...opts(F(p * (1 - r / 100)) + " FCFA", [F(p - r) + " FCFA", F(p * r / 100) + " FCFA", F(p * (1 - r / 1000)) + " FCFA"]), explain: `${r} % de ${nf(p)} = ${F(p * r / 100)} FCFA de remise → ${F(p * (1 - r / 100))} FCFA.`, hint: "Calcule d'abord le montant de la remise." }; },
+    roas() { const b = pick([10000, 20000, 25000, 50000]), m = pick([2, 3, 4, 5]); return { q: `Tu dépenses ${nf(b)} FCFA en pub et elle génère ${nf(b * m)} FCFA de ventes. Quel est le ROAS (retour sur dépense publicitaire) ?`, ...opts(`${m} (×${m})`, [`${m * 100} (×${m * 100})`, `${m - 1} (×${m - 1})`, `${m * 10} (×${m * 10})`]), explain: `ROAS = ventes ÷ dépense = ${nf(b * m)} ÷ ${nf(b)} = ${m}. Chaque franc investi rapporte ${m} francs de ventes (avant les coûts du produit).`, hint: "Ventes divisées par la dépense publicitaire." }; },
+    seuil() { const p = pick([5000, 8000, 10000]), c = p * pick([40, 50, 60]) / 100, b = (p - c) * pick([5, 8, 10, 12]); const n = Math.ceil(b / (p - c)); return { q: `Tu vends un article ${nf(p)} FCFA qui te coûte ${nf(c)} FCFA. Combien de ventes faut-il pour rembourser ${nf(b)} FCFA de publicité ?`, ...opts(String(n), [String(Math.ceil(b / p)), String(n * 2), String(Math.ceil(b / c))]), explain: `Tu gagnes ${nf(p - c)} FCFA par vente. ${nf(b)} ÷ ${nf(p - c)} = ${n} ventes pour rentrer dans tes frais.`, hint: "Calcule d'abord ce que tu gagnes vraiment sur une vente." }; },
+    marge() { const c = pick([2000, 3000, 4000, 6000]), p = c * pick([1.25, 1.5, 2, 2.5]); return { q: `Un tee-shirt te coûte ${nf(c)} FCFA et tu le vends ${nf(p)} FCFA. Quelle part du prix de vente est ta marge ?`, ...opts(pct((p - c) / p * 100), [pct((p - c) / c * 100), pct(c / p * 100), pct(100 - (p - c) / p * 50)]), explain: `Marge = (prix − coût) ÷ prix × 100 = ${nf(p - c)} ÷ ${nf(p)} × 100 = ${pct((p - c) / p * 100)}.`, hint: "Ce que tu gagnes, divisé par le prix de vente." }; }
+  };
+  return Array.from({ length: 6 }, () => G[pick(kinds)]());
+}
 const PROBLEMS = {
   correcte: { label: "Image correcte", n: 1, explain: "Noirs denses, blancs propres, couleurs naturelles : rien à corriger." },
   surex: { label: "Surexposée", filter: "brightness(1.55) contrast(.85)", n: 1, explain: "Les hautes lumières sont brûlées : baisse le Gain ou l'exposition." },
@@ -2575,7 +2705,32 @@ const GAMES = [
   { id: "audio", title: "Problèmes audio", domain: "video", skill: "Nettoyage et mixage", art: "audio", engine: "quiz", gen: poolGen(["audio"], 6),
     consigne: "Identifie le problème audio et la bonne solution." },
   { id: "chrono", title: "Défi chrono du monteur", domain: "video", skill: "Défi de montage en temps limité", art: "chrono", engine: "quiz", timed: true, gen: poolGen(["formats", "transitions", "camera", "audio", "export"], 40),
-    consigne: "Réponds au maximum de questions avant la fin du chrono. Pas d'explication pendant le défi : la correction arrive à la fin." }
+    consigne: "Réponds au maximum de questions avant la fin du chrono. Pas d'explication pendant le défi : la correction arrive à la fin." },
+  { id: "pipette", title: "L'œil de la pipette", domain: "graphisme", skill: "Reproduire une couleur", art: "mixer", engine: "match",
+    consigne: "Reproduis la couleur du modèle avec les curseurs Teinte, Saturation et Luminosité. Plus tu es proche, plus tu gagnes de points." },
+  { id: "hex", title: "Code couleur HEX", domain: "graphisme", skill: "Lire un code HEX", art: "hex", engine: "quiz", gen: genHex,
+    consigne: "Observe la couleur et choisis son code HEX. Les codes se lisent par paires : rouge, vert, bleu." },
+  { id: "coquilles", title: "Chasse aux coquilles", domain: "maquettisme", skill: "Typographie française", art: "proof", engine: "quiz", gen: poolGen(["coquilles"], 6),
+    consigne: "Repère l'écriture correcte selon les règles typographiques françaises, celles qu'un maquettiste vérifie avant l'impression." },
+  { id: "timecode", title: "Maître du timecode", domain: "video", skill: "Images, secondes et timecode", art: "timecode", engine: "quiz", gen: genTimecode,
+    consigne: "Calcule les durées et les timecodes (heures:minutes:secondes:images) comme un monteur. Un brouillon est autorisé !" },
+  { id: "raccourcis", title: "Raccourcis du monteur", domain: "video", skill: "Vitesse dans Premiere Pro", art: "keys", engine: "quiz", gen: poolGen(["raccourcis"], 6),
+    consigne: "Trouve le bon raccourci clavier. Raccourcis de Premiere Pro sous Windows (sur Mac : Ctrl devient Cmd)." },
+  { id: "reseaux", title: "Le bon réseau", domain: "marketing", skill: "Stratégie réseaux sociaux", art: "megaphone", engine: "quiz", gen: poolGen(["reseaux"], 6),
+    consigne: "Choisis le réseau, le format ou la décision la plus juste pour chaque situation de marketing." },
+  { id: "accroche", title: "L'accroche qui vend", domain: "marketing", skill: "Rédaction publicitaire", art: "quote", engine: "quiz", gen: poolGen(["accroche"], 6),
+    consigne: "Choisis le texte le plus efficace : accroche, bénéfice, preuve ou appel à l'action." },
+  { id: "tunnel", title: "Le tunnel de vente", domain: "marketing", skill: "Parcours client (AIDA)", art: "funnel", engine: "order",
+    consigne: "Remets les étapes dans l'ordre qui transforme un inconnu en client.",
+    scenarios: {
+      facile: [["Publicité pour une coque de téléphone étanche", ["Vidéo choc : un téléphone tombe dans l'eau", "On explique : la coque protège jusqu'à 2 m de profondeur", "Témoignage : un pêcheur de Ganvié l'utilise depuis un an", "« Commande sur WhatsApp, livraison en 24 h »"]],
+               ["Affiche pour un cours de danse", ["Une photo de danseurs en plein saut", "« Apprends l'afrobeat en 4 semaines, même débutant »", "« 120 élèves formés, la soirée de fin d'année en vidéo »", "« Premier cours offert : inscris-toi au 01 00 00 00 00 »"]]],
+      moyen: [["Lancer une campagne publicitaire", ["Définir l'objectif et la cible (persona)", "Créer le visuel et le texte", "Publier et sponsoriser", "Mesurer les résultats : clics, messages, ventes", "Améliorer ce qui fonctionne mal et relancer"]]],
+      difficile: [["Le parcours complet d'un client", ["Il voit ta publicité sur Facebook", "Il clique et découvre ton offre", "Il laisse son numéro pour recevoir un échantillon gratuit", "Tu le relances sur WhatsApp avec une offre limitée", "Il fait son premier achat", "Tu lui demandes un avis et il parraine un ami"]]]
+    },
+    tip: "Règle utile (AIDA) : on attire l'Attention, on crée l'Intérêt, on fait naître le Désir, puis on demande l'Action. Après la vente, on fidélise." },
+  { id: "chiffres", title: "Les chiffres du marketeur", domain: "marketing", skill: "Taux de clic, conversion, rentabilité", art: "calc", engine: "quiz", gen: genMarketing,
+    consigne: "Calcule les indicateurs d'une campagne : taux de clic, conversion, coût par vente, rentabilité. Un brouillon est autorisé !" }
 ];
 const gameById = id => GAMES.find(g => g.id === id);
 function gameArt(k) {
@@ -2592,6 +2747,15 @@ function gameArt(k) {
     export: `<rect x="20" y="10" width="28" height="50" rx="4" fill="none" stroke="#ECEEF5" stroke-width="2"/><rect x="56" y="20" width="50" height="30" rx="4" fill="none" stroke="#FF7A45" stroke-width="2"/><text x="81" y="40" text-anchor="middle" fill="#FF7A45" style="font:600 9px var(--font-mono)">16:9</text><text x="34" y="39" text-anchor="middle" fill="#ECEEF5" style="font:600 8px var(--font-mono)">9:16</text>`,
     camera: `<rect x="22" y="22" width="52" height="32" rx="6" fill="#ECEEF5"/><path d="M74 32 l20 -10 v32 l-20 -10z" fill="#ECEEF5"/><circle cx="36" cy="16" r="9" fill="none" stroke="#8F76FF" stroke-width="3"/><circle cx="58" cy="16" r="9" fill="none" stroke="#8F76FF" stroke-width="3"/>`,
     audio: Array.from({ length: 24 }, (_, i) => { const h = Math.min(56, 6 + Math.abs(Math.sin(i * .9)) * (i > 12 && i < 18 ? 80 : 26)); return `<rect x="${10 + i * 4.2}" y="${35 - h / 2}" width="2.6" height="${h}" fill="${h >= 56 ? "#FF7A45" : "#4ADE95"}"/>`; }).join(""),
+    mixer: `<rect x="14" y="14" width="36" height="42" rx="6" fill="#A83BD8"/>${[0, 1, 2].map(i => `<line x1="60" y1="${20 + i * 15}" x2="108" y2="${20 + i * 15}" stroke="#39415C" stroke-width="4" stroke-linecap="round"/><circle cx="${72 + i * 13}" cy="${20 + i * 15}" r="6" fill="${["#FF7A45", "#8F76FF", "#ECEEF5"][i]}"/>`).join("")}`,
+    hex: `<rect x="10" y="16" width="30" height="38" rx="6" fill="#5B3DF5"/><text x="48" y="41" fill="#ECEEF5" style="font:600 14px var(--font-mono)">#5B3DF5</text>`,
+    proof: `<rect x="18" y="10" width="84" height="52" rx="6" fill="#ECEEF5"/>${[20, 30, 40, 50].map((y, i) => `<rect x="26" y="${y}" width="${[60, 52, 64, 40][i]}" height="4" rx="2" fill="#A2A9BC"/>`).join("")}<circle cx="74" cy="32" r="9" fill="none" stroke="#FF7A45" stroke-width="3"/><path d="M80 38 l10 10" stroke="#FF7A45" stroke-width="3" stroke-linecap="round"/>`,
+    timecode: `<rect x="10" y="20" width="100" height="30" rx="6" fill="#141927" stroke="#39415C"/><text x="60" y="40" text-anchor="middle" fill="#4ADE95" style="font:600 13px var(--font-mono)">00:01:24:12</text>`,
+    keys: ["J", "K", "L"].map((k, i) => `<rect x="${16 + i * 32}" y="18" width="26" height="30" rx="5" fill="#ECEEF5"/><rect x="${16 + i * 32}" y="44" width="26" height="6" rx="3" fill="#A2A9BC"/><text x="${29 + i * 32}" y="39" text-anchor="middle" fill="#12141C" style="font:800 14px var(--font-display)">${k}</text>`).join(""),
+    megaphone: `<path d="M24 28 h14 l36 -16 v46 l-36 -16 h-14z" fill="#FF7A45"/><rect x="34" y="42" width="10" height="16" rx="3" fill="#ECEEF5"/>${[0, 1, 2].map(i => `<path d="M${84 + i * 8} ${22 + i * 0} q8 13 0 26" fill="none" stroke="#8F76FF" stroke-width="3"/>`).join("")}`,
+    quote: `<rect x="12" y="12" width="96" height="40" rx="10" fill="#5B3DF5"/><path d="M30 52 l-6 12 l16 -12z" fill="#5B3DF5"/><text x="60" y="38" text-anchor="middle" fill="#fff" style="font:800 15px var(--font-display)">-30 %</text>`,
+    funnel: [0, 1, 2, 3].map(i => `<rect x="${18 + i * 11}" y="${10 + i * 13}" width="${84 - i * 22}" height="10" rx="3" fill="${["#5B3DF5", "#8F76FF", "#A83BD8", "#FF7A45"][i]}"/>`).join(""),
+    calc: `<rect x="34" y="8" width="52" height="56" rx="7" fill="#ECEEF5"/><rect x="40" y="14" width="40" height="12" rx="2" fill="#141927"/><text x="77" y="24" text-anchor="end" fill="#4ADE95" style="font:600 9px var(--font-mono)">3,2 %</text>${[0, 1, 2].flatMap(r => [0, 1, 2].map(c => `<rect x="${41 + c * 13}" y="${31 + r * 10}" width="10" height="7" rx="2" fill="${c === 2 && r === 2 ? "#FF7A45" : "#A2A9BC"}"/>`)).join("")}`,
     chrono: `<circle cx="60" cy="38" r="24" fill="none" stroke="#ECEEF5" stroke-width="4"/><rect x="54" y="6" width="12" height="6" rx="2" fill="#ECEEF5"/><path d="M60 38 L60 22" stroke="#FF7A45" stroke-width="4" stroke-linecap="round"/><path d="M60 38 L72 44" stroke="#ECEEF5" stroke-width="3" stroke-linecap="round"/>`
   };
   return `<svg viewBox="0 0 120 70" aria-hidden="true">${A[k] || ""}</svg>`;
@@ -2620,7 +2784,7 @@ function renderGames(main) {
     <div class="challenge">${dailyChallenges().map(challengeCard).join("")}</div>
     <form class="toolbar" id="gFilters" onsubmit="return false">
       <div class="field"><label for="gq">Rechercher</label><input class="input" id="gq" type="search" placeholder="Ex. : couleur, export…"></div>
-      <div class="field"><label for="gd">Domaine</label><select class="input" id="gd"><option value="">Tous</option>${DOMAINS.map(d => `<option value="${d.id}">${d.name}</option>`).join("")}</select></div>
+      <div class="field"><label for="gd">Domaine</label><select class="input" id="gd"><option value="">Tous</option>${GAME_DOMAINS.map(d => `<option value="${d.id}">${d.name}</option>`).join("")}</select></div>
     </form>
     <p class="count" id="gCount" aria-live="polite"></p><div class="grid g4" id="gList"></div>
     <p class="small muted" style="margin-top:18px">${state.user ? "Ta progression est enregistrée dans ton compte." : "Ta progression est enregistrée sur cet appareil. Connecte-toi pour la retrouver partout."}</p>
@@ -2741,16 +2905,16 @@ const ENGINES = {
       moyen: [["Reportage au marché Dantokpa", ["Plan d'ensemble : le marché vu d'en haut", "Plan moyen : une vendeuse installe ses pagnes", "Gros plan : ses mains plient un tissu", "Interview : elle raconte son métier", "Plan large final : la foule au coucher du soleil"]]],
       difficile: [["Film de mariage", ["Préparatifs de la mariée", "Arrivée du marié", "Entrée dans la salle de cérémonie", "Échange des alliances", "Sortie sous les applaudissements", "Première danse en soirée"]]]
     };
-    const [title, correct] = pick(SCEN[level]);
+    const [title, correct] = pick((g.scenarios || SCEN)[level]);
     const per = 50 * LEVEL_INFO[level].mult;
     let pool = shuffle(correct.map((label, idx) => ({ label, idx })));
     if (pool.every((p, k) => p.idx === k)) pool.reverse();
     const placed = [], hintedIdx = new Set();
     const draw = () => {
-      ui.bar(`${title} · ${placed.length}/${correct.length} placés`, 0);
+      ui.bar(`${title} · ${placed.length}/${correct.length} placé${g.scenarios ? "e" : ""}s`, 0);
       ui.stage.innerHTML = `<p class="q-title">${esc(title)}</p>
-        <ol class="slots" aria-label="Ton montage">${correct.map((_, k) => `<li class="slot"><span class="n">${String(k + 1).padStart(2, "0")}</span>${placed[k] ? `<button class="token" data-back="${k}" aria-label="Retirer : ${esc(placed[k].label)}">${esc(placed[k].label)}</button>` : `<span class="small muted">Choisis un plan ci-dessous</span>`}</li>`).join("")}</ol>
-        <div class="tokens" role="group" aria-label="Plans à placer">${pool.map((p, k) => `<button class="token" data-k="${k}">${esc(p.label)}</button>`).join("") || `<span class="small muted">Tous les plans sont placés.</span>`}</div>
+        <ol class="slots" aria-label="Ton montage">${correct.map((_, k) => `<li class="slot"><span class="n">${String(k + 1).padStart(2, "0")}</span>${placed[k] ? `<button class="token" data-back="${k}" aria-label="Retirer : ${esc(placed[k].label)}">${esc(placed[k].label)}</button>` : `<span class="small muted">${g.scenarios ? "Choisis une étape ci-dessous" : "Choisis un plan ci-dessous"}</span>`}</li>`).join("")}</ol>
+        <div class="tokens" role="group" aria-label="${g.scenarios ? "Étapes" : "Plans"} à placer">${pool.map((p, k) => `<button class="token" data-k="${k}">${esc(p.label)}</button>`).join("") || `<span class="small muted">Tous les plans sont placés.</span>`}</div>
         <div class="game-actions"><span class="row"><button class="btn btn-ghost btn-sm" id="hint" ${placed.length < correct.length ? "" : "disabled"}>${icon("bulb")} Indice</button><button class="btn btn-ghost btn-sm" id="reset" ${placed.length ? "" : "disabled"}>${icon("refresh")} Tout reprendre</button></span>
           <button class="btn btn-primary" id="check" ${placed.length === correct.length ? "" : "disabled"}>Vérifier ${icon("check")}</button></div>`;
       $$("[data-k]", ui.stage).forEach(b => b.addEventListener("click", () => { placed.push(pool.splice(+b.dataset.k, 1)[0]); draw(); ($("[data-k]", ui.stage) || $("#check")).focus(); }));
@@ -2767,10 +2931,75 @@ const ENGINES = {
         const review = placed.map((p, k) => ({ q: `Position ${k + 1}`, given: p.label, correct: correct[k], ok: p.idx === k }));
         const good = review.filter(r => r.ok).length;
         const pts = review.reduce((n, r, k) => n + (r.ok && !hintedIdx.has(k) ? per : 0), 0);
-        ui.finish({ pts, good, total: correct.length, review, level, extra: `<p class="muted">Règle utile : on situe d'abord le lieu (plan large), puis on se rapproche (plan moyen, gros plan), et on termine par un plan qui conclut.</p>` });
+        ui.finish({ pts, good, total: correct.length, review, level, extra: `<p class="muted">${esc(g.tip || "Règle utile : on situe d'abord le lieu (plan large), puis on se rapproche (plan moyen, gros plan), et on termine par un plan qui conclut.")}</p>` });
       });
     };
     draw();
+  },
+
+  match(g, level, ui) {
+    const rounds = 5, base = 100 * LEVEL_INFO[level].mult, okAt = { facile: 12, moyen: 9, difficile: 6 }[level];
+    // Facile : seule la teinte est libre. Moyen : teinte + luminosité. Difficile : les trois.
+    const free = { facile: ["h"], moyen: ["h", "l"], difficile: ["h", "s", "l"] }[level];
+    const SL = { h: ["Teinte", 0, 359, "°"], s: ["Saturation", 0, 100, " %"], l: ["Luminosité", 0, 100, " %"] };
+    const lab = hex => { // ΔE : écart de couleur perçu par l'œil (espace CIELAB)
+      const [r, g2, b] = [1, 3, 5].map(i => { const c = parseInt(hex.slice(i, i + 2), 16) / 255; return c > .04045 ? ((c + .055) / 1.055) ** 2.4 : c / 12.92; });
+      const f = t => t > .008856 ? Math.cbrt(t) : 7.787 * t + 16 / 116;
+      const [x, y, z] = [(r * .4124 + g2 * .3576 + b * .1805) / .95047, r * .2126 + g2 * .7152 + b * .0722, (r * .0193 + g2 * .1192 + b * .9505) / 1.08883].map(f);
+      return [116 * y - 16, 500 * (x - y), 200 * (y - z)];
+    };
+    const dE = (a, b) => { const p = lab(a), q = lab(b); return Math.hypot(p[0] - q[0], p[1] - q[1], p[2] - q[2]); };
+    let r = 0, pts = 0, good = 0;
+    const review = [];
+    const play = () => {
+      const target = { h: rand(0, 359), s: rand(45, 90), l: rand(32, 68) };
+      const cur = { h: rand(0, 359), s: free.includes("s") ? rand(20, 100) : target.s, l: free.includes("l") ? rand(20, 80) : target.l };
+      let hinted = false;
+      const hexOf = c => hslToHex(c.h, c.s, c.l);
+      ui.bar(`Couleur ${r + 1} / ${rounds}`, pts);
+      ui.stage.innerHTML = `<p class="q-title">Reproduis la couleur du modèle</p>
+        <div class="match-wrap"><figure><span class="match-sw" style="background:${hexOf(target)}"></span><figcaption>Modèle</figcaption></figure>
+          <figure><span class="match-sw" id="mine"></span><figcaption>Ta couleur</figcaption></figure></div>
+        <div class="match-sliders">${free.map(k => `<label class="match-sl"><span>${SL[k][0]} <b class="mono" id="v-${k}"></b></span>
+          <input type="range" min="${SL[k][1]}" max="${SL[k][2]}" value="${cur[k]}" data-k="${k}" class="track-${k}" aria-label="${SL[k][0]}"></label>`).join("")}</div>
+        <div class="game-actions"><button class="btn btn-ghost btn-sm" id="hint">${icon("bulb")} Indice (points ÷ 2)</button><button class="btn btn-primary" id="valid">Valider ${icon("check")}</button></div>
+        <div class="feedback" aria-live="polite"></div>`;
+      const paint = () => {
+        $("#mine", ui.stage).style.background = hexOf(cur);
+        free.forEach(k => { $(`#v-${k}`, ui.stage).textContent = cur[k] + SL[k][3]; });
+        const h = $(".track-h", ui.stage); if (h) h.style.background = `linear-gradient(90deg,${[0, 60, 120, 180, 240, 300, 360].map(d => hslToHex(d % 360, cur.s, cur.l)).join(",")})`;
+        const sl = $(".track-s", ui.stage); if (sl) sl.style.background = `linear-gradient(90deg,${hslToHex(cur.h, 0, cur.l)},${hslToHex(cur.h, 100, cur.l)})`;
+        const ll = $(".track-l", ui.stage); if (ll) ll.style.background = `linear-gradient(90deg,#000,${hslToHex(cur.h, cur.s, 50)},#fff)`;
+      };
+      $$("input[type=range]", ui.stage).forEach(i => i.addEventListener("input", () => { cur[i.dataset.k] = +i.value; paint(); }));
+      $("#hint").addEventListener("click", e => {
+        hinted = true; e.currentTarget.disabled = true;
+        const dh = ((target.h - cur.h + 540) % 360) - 180;
+        const tips = [`Teinte : ${Math.abs(dh) < 8 ? "presque bonne" : dh > 0 ? "augmente-la d'environ " + Math.round(Math.abs(dh) / 10) * 10 + "°" : "diminue-la d'environ " + Math.round(Math.abs(dh) / 10) * 10 + "°"}.`];
+        if (free.includes("l")) tips.push(`Luminosité : ${Math.abs(target.l - cur.l) < 4 ? "presque bonne" : target.l > cur.l ? "plus claire" : "plus sombre"}.`);
+        if (free.includes("s")) tips.push(`Saturation : ${Math.abs(target.s - cur.s) < 5 ? "presque bonne" : target.s > cur.s ? "plus vive" : "plus grise"}.`);
+        $(".feedback", ui.stage).innerHTML = alertBox("info", `<p><strong>Indice :</strong> ${tips.join(" ")}</p>`, "bulb");
+      });
+      $("#valid").addEventListener("click", () => {
+        const d = dE(hexOf(cur), hexOf(target)), ok = d <= okAt;
+        const gain = Math.round(base * Math.max(0, 1 - d / 40) * (hinted ? .5 : 1));
+        pts += gain; if (ok) good++;
+        const fmt = c => free.map(k => `${SL[k][0][0]} ${c[k]}${SL[k][3]}`).join(" · ");
+        review.push({ q: `Couleur ${r + 1}`, given: `${fmt(cur)} (écart ${nf(Math.round(d * 10) / 10)})`, correct: fmt(target), ok,
+          explain: d < 3 ? "Écart imperceptible : œil de pro !" : ok ? "Très proche : la différence se voit à peine." : "L'écart est visible : compare d'abord la teinte, puis la clarté." });
+        $$("input[type=range], #hint, #valid", ui.stage).forEach(x => { x.disabled = true; });
+        r++;
+        ui.bar(`Couleur ${r} / ${rounds}`, pts);
+        $(".feedback", ui.stage).innerHTML = alertBox(ok ? "ok" : "warn", `<p><strong>Écart : ${nf(Math.round(d * 10) / 10)}</strong> (sous ${okAt} = réussi). +${nf(gain)} pts. Le modèle était : ${fmt(target)}.</p>`)
+          + `<div class="game-actions" style="justify-content:flex-end"><button class="btn btn-primary" id="next">${r < rounds ? "Couleur suivante" : "Voir mon résultat"} ${icon("arrow")}</button></div>`;
+        $("#next").focus();
+        $("#next").addEventListener("click", () => r < rounds ? play() : ui.finish({ pts, good, total: rounds, review, level,
+          extra: `<p class="muted">L'écart est mesuré comme l'œil humain perçoit les couleurs (ΔE). En dessous de 2, la différence est presque invisible.</p>` }));
+      });
+      paint();
+      $("input[type=range]", ui.stage).focus({ preventScroll: true });
+    };
+    play();
   },
 
   spot(g, level, ui) {

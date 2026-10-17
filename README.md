@@ -68,7 +68,7 @@ Sur un VPS sans Docker : `npm ci --omit=dev` dans `server/`, puis lancez `npm st
 | Thème clair / sombre / système, taille du texte, contraste renforcé, réduction des animations | ✅ Fonctionnel, mémorisé sur l'appareil |
 | Catalogue, filtres (domaine, logiciel, niveau, prix), pages des 3 domaines, 12 logiciels détaillés par niveau | ✅ Fonctionnel |
 | **8 leçons complètes** (objectif, explication adaptée au niveau, tutoriel, raccourcis, paramètres, illustration, avant/après, exemple, exercice, fichier, quiz, fiche) | ✅ Contenus de démonstration à faire valider |
-| **13 jeux jouables**, 3 niveaux chacun, points, indices, corrections, défi du jour et défi de la semaine | ✅ Fonctionnel ; progression enregistrée sur l'appareil, ou dans le compte une fois le serveur branché |
+| **22 jeux jouables** (graphisme, maquettisme, montage vidéo, marketing), 3 niveaux chacun, points, indices, corrections, défi du jour et défi de la semaine | ✅ Fonctionnel ; progression enregistrée sur l'appareil, ou dans le compte une fois le serveur branché |
 | 5 démonstrations interactives (étalonnage, calques, profondeur de champ, typographie, timeline) | ✅ Fonctionnel, sans IA |
 | Bibliothèque : 5 vrais PDF téléchargeables, aperçus, licences, favoris, historique | ✅ Fonctionnel |
 | Inscription (avec accord parental de 15 à 17 ans), connexion, mot de passe oublié, synchronisation de la progression entre appareils | ✅ Avec le serveur inclus |
