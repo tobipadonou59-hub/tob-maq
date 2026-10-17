@@ -570,6 +570,11 @@ dialog::backdrop{background:rgb(11 14 23 / .6)}
 @keyframes introCrop{from{opacity:0;transform:scale(1.8)}to{opacity:1;transform:none}}
 @keyframes introGlow{to{transform:translate(3%,-3%) scale(1.05)}}
 
+/* Exemples de code dans les leçons */
+.code-box{position:relative;border-radius:14px;background:#0B0E17;border:1px solid #262D42;overflow:hidden}
+.code-box pre{margin:0;padding:18px 18px 18px;overflow-x:auto;color:#E6E8F0;font:500 .86rem/1.6 var(--font-mono);tab-size:4;-moz-tab-size:4}
+.code-box .code-copy{position:absolute;top:8px;right:8px;background:#1D2336;color:#ECEEF5;border-color:#39415C}
+.code-box .code-copy:hover{background:#262D42}
 /* Jeu « Mémo » */
 .memo-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;max-width:720px;margin:0 auto}
 .memo-card{min-height:96px;border-radius:14px;border:2px solid var(--line);background:linear-gradient(135deg,#5B3DF5,#A83BD8);color:#fff;font:800 1.6rem var(--font-display);cursor:pointer;padding:8px;display:grid;place-items:center;text-align:center;transition:transform .2s,background .2s}
@@ -644,6 +649,9 @@ dialog::backdrop{background:rgb(11 14 23 / .6)}
       <li><a href="#/graphisme" data-nav="graphisme">Graphisme</a></li>
       <li><a href="#/maquettisme" data-nav="maquettisme">Maquettisme</a></li>
       <li><a href="#/video" data-nav="video">Montage vidéo</a></li>
+      <li><a href="#/web" data-nav="web">Création web</a></li>
+      <li><a href="#/developpement" data-nav="developpement">Développement</a></li>
+      <li><a href="#/jeux-video" data-nav="jeux-video">Jeux vidéo</a></li>
       <li><a href="#/ia" data-nav="ia" class="ai-link">IA créative</a></li>
       <li><a href="#/jeux" data-nav="jeux">Jeux et défis</a></li>
       <li><a href="#/ressources" data-nav="ressources">Ressources</a></li>
@@ -664,12 +672,13 @@ dialog::backdrop{background:rgb(11 14 23 / .6)}
       <div>
         <span class="logo-mark logo-on-night" aria-hidden="true"><span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span>TOB<span class="dash"></span>MA<span class="q">Q</span></span>
         <p class="slogan">Imagine. Crée. Maîtrise.</p>
-        <p>L'académie numérique du graphisme, du maquettisme et du montage vidéo au Bénin.</p>
+        <p>L'académie numérique des métiers créatifs au Bénin : graphisme, maquettisme, montage vidéo, création web, programmation et jeux vidéo.</p>
         <span class="cmyk" aria-hidden="true"><i style="background:var(--c)"></i><i style="background:var(--m)"></i><i style="background:var(--y)"></i><i style="background:#fff"></i></span>
       </div>
       <div><h3>Apprendre</h3><ul>
         <li><a href="#/formations">Formations</a></li><li><a href="#/graphisme">Graphisme</a></li>
-        <li><a href="#/maquettisme">Maquettisme</a></li><li><a href="#/video">Montage vidéo</a></li></ul></div>
+        <li><a href="#/maquettisme">Maquettisme</a></li><li><a href="#/video">Montage vidéo</a></li>
+        <li><a href="#/web">Création web</a></li><li><a href="#/developpement">Développement</a></li><li><a href="#/jeux-video">Jeux vidéo</a></li></ul></div>
       <div><h3>Pratiquer</h3><ul>
         <li><a href="#/ia">IA créative</a></li><li><a href="#/jeux">Jeux et défis</a></li>
         <li><a href="#/ressources">Ressources</a></li><li><a href="#/portfolio">Portfolio</a></li></ul></div>
@@ -748,7 +757,26 @@ const DOMAINS = [
       ["Montage de clips musicaux", "evenementiel-pro"], ["Vidéos publicitaires", "evenementiel-pro"],
       ["Vidéos événementielles", "evenementiel-pro"], ["Vidéos de mariage", "evenementiel-pro"],
       ["Reels, TikTok et Shorts", "reels-capcut"], ["Documentaires et reportages", "evenementiel-pro"],
-      ["Exportation selon la plateforme de diffusion", "capcut-export"]] }
+      ["Exportation selon la plateforme de diffusion", "capcut-export"]] },
+  { id: "web", name: "Création web", icon: "code", tag: "04",
+    short: "Sites vitrines et pages modernes : HTML, CSS, responsive et WordPress, pour les commerces et les clients.",
+    modules: [
+      ["Structurer une page avec HTML", "web-html"], ["Mettre en forme avec CSS", "web-css"], ["Mise en page responsive avec Flexbox", "web-responsive"],
+      ["Formulaires et contact", "web-formulaire"], ["Mettre son site en ligne", "web-mise-en-ligne"],
+      ["Nom de domaine, hébergement et installation de WordPress", "wp-installer"], ["Construire un site vitrine avec WordPress", "wp-site-vitrine"],
+      ["Être trouvé sur Google (référencement)", "wp-referencement"], ["Livrer et maintenir le site d'un client", "web-wordpress"]] },
+  { id: "developpement", name: "Développement", icon: "terminal", tag: "05",
+    short: "Apprendre à programmer pour de vrai : JavaScript pour le web, Python pour automatiser, avec des projets utiles.",
+    modules: [
+      ["Variables, types et calculs", "js-bases"], ["Conditions, boucles et fonctions", "js-logique"], ["Rendre une page interactive (DOM)", "js-page"],
+      ["Projet : application de liste de courses", "js-projet"], ["Premiers programmes en Python", "py-bases"],
+      ["Listes, dictionnaires et fonctions", "py-projet"], ["Lire et écrire des fichiers", "py-fichiers"], ["Versionner son code avec Git et GitHub", null]] },
+  { id: "jeux-video", name: "Jeux vidéo", icon: "game", tag: "06",
+    short: "Concevoir et programmer ses propres jeux : game design, niveaux, et développement 2D avec le moteur gratuit Godot.",
+    modules: [
+      ["La boucle de jeu et le document de conception", "gd-boucle"], ["Level design et courbe de difficulté", "gd-niveaux"], ["Présenter son jeu (pitch)", "gd-pitch"],
+      ["Premiers pas avec Godot", "godot-bases"], ["Déplacer un joueur et ramasser des objets", "godot-joueur"],
+      ["Construire un niveau avec les tuiles", "godot-niveau"], ["Sons, menus et exportation du jeu", "godot-export"]] }
 ];
 
 /* Logiciels : fonctionnalités réellement abordées, par niveau. */
@@ -791,6 +819,19 @@ const SOFTWARE = [
     levels: { "Débutant": ["Compositions et calques", "Images clés et propriétés de transformation"],
       "Intermédiaire": ["Masques et caches", "Titres animés", "Expressions simples (wiggle)"], "Avancé": ["Suivi de mouvement", "Suivi de caméra 3D", "Roto-pinceau"] } }
 ];
+SOFTWARE.push(
+  { id: "vscode", name: "Visual Studio Code", tag: "Vs", color: "#1F7ACC", domain: "web", os: "Windows, macOS, Linux", licence: "Gratuit",
+    levels: { "Débutant": ["Ouvrir un dossier de projet", "Abréviations Emmet (! puis Tab)", "Extension Live Server", "Terminal intégré"],
+      "Intermédiaire": ["Recherche et remplacement dans le projet", "Formatage automatique", "Débogueur", "Intégration Git"] } },
+  { id: "wordpress", name: "WordPress", tag: "Wp", color: "#21759B", domain: "web", os: "Navigateur (installé sur un hébergement)", licence: "Libre et gratuit (hébergement payant)",
+    levels: { "Débutant": ["Pages et éditeur de blocs", "Thèmes et éditeur de site", "Menus", "Médias et texte alternatif"],
+      "Intermédiaire": ["Extensions : sauvegarde, sécurité, formulaires", "Rôles des utilisateurs", "Compositions réutilisables", "Référencement de base"] } },
+  { id: "python", name: "Python", tag: "Py", color: "#3776AB", domain: "developpement", os: "Windows, macOS, Linux", licence: "Libre et gratuit",
+    levels: { "Débutant": ["print, input et variables", "Types et conversions", "Conditions et boucles", "f-strings"],
+      "Intermédiaire": ["Listes et dictionnaires", "Fonctions", "Gestion des erreurs (try / except)", "Fichiers et JSON"] } },
+  { id: "godot", name: "Godot", tag: "Gd", color: "#478CBF", domain: "jeux-video", os: "Windows, macOS, Linux", licence: "Libre et gratuit (licence MIT)",
+    levels: { "Débutant": ["Scènes et nœuds", "Sprite2D et Label", "GDScript : variables et fonctions", "Lancer et déboguer"],
+      "Intermédiaire": ["CharacterBody2D et collisions", "Area2D et signaux", "Contrôles personnalisés (InputMap)", "Timer et interface"] } });
 const softwareById = id => SOFTWARE.find(s => s.id === id);
 
 /* Formations. price : "gratuit" ou "premium" (tarif affiché quand il sera défini). */
@@ -859,7 +900,31 @@ const FORMATIONS = [
   { id: "evenementiel-pro", title: "Clips, pubs, mariages et reportages", domain: "video", software: ["premiere", "resolve"], level: "Avancé", hours: 14, price: "premium",
     summary: "Les méthodes propres à chaque type de commande : clip musical, publicité, mariage, documentaire.",
     goals: ["Adapter le montage au genre", "Gérer un tournage multi-caméras", "Livrer plusieurs versions"],
-    modules: [{ title: "Genres", lessons: ["clip-musical", "video-pub", "video-mariage", "reportage"] }] }
+    modules: [{ title: "Genres", lessons: ["clip-musical", "video-pub", "video-mariage", "reportage"] }] },
+  { id: "web-html-css", title: "Créer son premier site web : HTML et CSS", domain: "web", software: ["vscode"], level: "Débutant", hours: 10, price: "gratuit",
+    summary: "Écrire une page propre en HTML, l'habiller en CSS et la rendre parfaite sur téléphone, sans aucun logiciel payant.",
+    goals: ["Structurer une page en HTML", "Créer une identité visuelle en CSS", "Rendre un site responsive"],
+    modules: [{ title: "Les bases", lessons: ["web-html", "web-css"] }, { title: "Mise en page et mise en ligne", lessons: ["web-responsive", "web-formulaire", "web-mise-en-ligne"] }] },
+  { id: "web-wordpress", title: "Sites vitrines pour clients avec WordPress", domain: "web", software: ["wordpress"], level: "Débutant", hours: 8, price: "gratuit",
+    summary: "Mettre en ligne le site d'un commerce, d'une ONG ou d'une école, et le livrer à un client capable de le mettre à jour.",
+    goals: ["Choisir domaine et hébergement", "Construire un site vitrine de 4 pages", "Livrer un site sécurisé et autonome"],
+    modules: [{ title: "Lancer le site", lessons: ["wp-installer", "wp-site-vitrine"] }, { title: "Faire venir des visiteurs", lessons: ["wp-referencement"] }] },
+  { id: "dev-javascript", title: "Programmer avec JavaScript", domain: "developpement", software: ["vscode"], level: "Débutant", hours: 12, price: "gratuit",
+    summary: "Les bases de la programmation avec le langage du web, jusqu'à un calculateur interactif utilisable sur un vrai site.",
+    goals: ["Comprendre variables, conditions et boucles", "Écrire des fonctions réutilisables", "Rendre une page interactive"],
+    modules: [{ title: "Penser comme un programmeur", lessons: ["js-bases", "js-logique"] }, { title: "JavaScript dans la page", lessons: ["js-page", "js-projet"] }] },
+  { id: "dev-python", title: "Python pour débuter", domain: "developpement", software: ["python"], level: "Débutant", hours: 10, price: "gratuit",
+    summary: "Un langage simple et puissant pour automatiser les tâches, traiter des données et créer de petits outils de gestion.",
+    goals: ["Écrire et exécuter des programmes Python", "Manipuler listes et dictionnaires", "Construire un outil de gestion de stock"],
+    modules: [{ title: "Bases et projet", lessons: ["py-bases", "py-projet", "py-fichiers"] }] },
+  { id: "jeu-game-design", title: "Game design : concevoir un jeu", domain: "jeux-video", software: [], level: "Débutant", hours: 6, price: "gratuit",
+    summary: "Imaginer un jeu amusant avant de le programmer : boucle de jeu, règles, niveaux, difficulté et tests avec de vrais joueurs.",
+    goals: ["Définir une boucle de jeu", "Rédiger un document de conception", "Concevoir des niveaux progressifs"],
+    modules: [{ title: "Concevoir", lessons: ["gd-boucle", "gd-niveaux", "gd-pitch"] }] },
+  { id: "jeu-godot", title: "Créer un jeu 2D avec Godot", domain: "jeux-video", software: ["godot"], level: "Intermédiaire", hours: 12, price: "gratuit",
+    summary: "Programmer un vrai jeu jouable avec le moteur gratuit Godot : personnage, collisions, objets à ramasser, score et exportation.",
+    goals: ["Organiser un projet en scènes et nœuds", "Programmer un personnage en GDScript", "Exporter un jeu jouable"],
+    modules: [{ title: "Premier jeu", lessons: ["godot-bases", "godot-joueur"] }, { title: "Finaliser", lessons: ["godot-niveau", "godot-export"] }] }
 ];
 const formationById = id => FORMATIONS.find(f => f.id === id);
 
@@ -1048,7 +1113,561 @@ const LESSONS = {
       { q: "Où éviter de placer les textes ?", choices: ["En bas et sur le bord droit", "Au centre", "Dans le tiers supérieur"], answer: 0, explain: "C'est là que l'interface de l'application s'affiche." }],
     recap: ["Projet en 9:16 dès le départ.", "1080 × 1920, MP4, cadence des rushes.", "Textes hors des zones d'interface.", "Sous-titres relus.", "Vérification finale sur téléphone."] }
 };
+/* Leçons des domaines Création web, Développement et Jeux vidéo. */
+Object.assign(LESSONS, {
+  "web-html": { title: "Structurer sa première page avec HTML", software: "VS Code + navigateur", level: "Débutant", minutes: 40, demo: false,
+    objective: "Créer la page d'accueil d'une petite boutique avec un HTML propre, lisible par les navigateurs, Google et les lecteurs d'écran.",
+    intro: "<p>Une page web est un simple fichier texte écrit en <strong>HTML</strong>. Le HTML ne s'occupe pas des couleurs : il décrit la <strong>structure</strong> (ceci est un titre, ceci est un paragraphe, ceci est un lien). Le CSS, vu à la leçon suivante, s'occupera de l'apparence.</p><p>Chaque élément s'écrit avec des <strong>balises</strong> : <em>&lt;p&gt;</em> ouvre un paragraphe, <em>&lt;/p&gt;</em> le ferme. Un HTML bien structuré est plus facile à styliser, mieux référencé par Google et accessible aux personnes aveugles.</p>",
+    beginner: "Tout ce dont tu as besoin est gratuit : l'éditeur VS Code et ton navigateur. Pas besoin d'Internet pour commencer.",
+    advanced: "Valide ta page sur validator.w3.org : il signale les balises mal fermées et les attributs oubliés, comme un correcteur d'orthographe pour le HTML.",
+    steps: [
+      { t: "Installe ton atelier", d: "Télécharge VS Code (gratuit) et crée un dossier « boutique-awa » sur ton ordinateur. Ouvre ce dossier dans VS Code avec Fichier > Ouvrir le dossier." },
+      { t: "Crée le fichier index.html", d: "Nouveau fichier, nommé exactement index.html : c'est la page d'accueil que les navigateurs cherchent en premier. Tape ! puis Tab : VS Code écrit le squelette de la page.", keys: ["Ctrl+N", "!", "Tab"] },
+      { t: "Comprends le squelette", d: "<!DOCTYPE html> annonce une page moderne. <html lang=\"fr\"> indique la langue. Le <head> contient les réglages invisibles (encodage UTF-8, titre de l'onglet, adaptation au téléphone). Le <body> contient tout ce qui s'affiche." },
+      { t: "Hiérarchise les titres", d: "Un seul <h1> par page (le nom de la boutique ou le sujet principal), puis des <h2> pour les grandes parties, des <h3> pour les sous-parties. Ne choisis jamais un titre pour sa taille : la taille se règle en CSS." },
+      { t: "Ajoute textes, liens et images", d: "<p> pour un paragraphe, <a href=\"…\"> pour un lien, <img src=\"…\" alt=\"…\"> pour une image. L'attribut alt décrit l'image pour ceux qui ne la voient pas : il est obligatoire." },
+      { t: "Utilise les balises de structure", d: "<header> pour l'en-tête, <nav> pour le menu, <main> pour le contenu principal, <section> pour chaque partie, <footer> pour le pied de page. Elles rendent le code lisible et aident Google." },
+      { t: "Ouvre la page dans le navigateur", d: "Enregistre, puis double-clique sur index.html. Avec l'extension Live Server de VS Code, la page se recharge toute seule à chaque enregistrement.", keys: ["Ctrl+S"] }],
+    params: [["Nom de la page d'accueil", "index.html"], ["Encodage", "UTF-8"], ["Langue", "lang=\"fr\""], ["Titres", "Un seul h1 par page"], ["Images", "Toujours un attribut alt"]],
+    code: `<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Boutique Awa · Pagnes à Cotonou</title>
+</head>
+<body>
+  <header>
+    <h1>Boutique Awa</h1>
+    <nav><a href="#produits">Produits</a> · <a href="#contact">Contact</a></nav>
+  </header>
+  <main>
+    <section id="produits">
+      <h2>Nos pagnes</h2>
+      <img src="images/wax-bleu.jpg" alt="Pagne wax bleu et orange plié">
+      <p>Du wax de qualité, livré à Cotonou en 24 h.</p>
+    </section>
+    <section id="contact">
+      <h2>Contact</h2>
+      <a href="https://wa.me/2290100000000">Écrire sur WhatsApp</a>
+    </section>
+  </main>
+  <footer><p>© 2026 Boutique Awa</p></footer>
+</body>
+</html>`,
+    before: "Une page où tout est dans des <div>, avec trois <h1>, des images sans alt et un lien « cliquez ici » : illisible pour Google et pour un lecteur d'écran.",
+    after: "Une page avec header, nav, main, sections et footer, un seul h1, des titres hiérarchisés, des images décrites et des liens explicites.",
+    example: "La page d'accueil de « Boutique Awa » : le nom de la boutique en h1, deux sections (Nos pagnes, Contact), une photo décrite par son alt et un lien direct vers WhatsApp grâce à l'adresse wa.me suivie du numéro au format international.",
+    exercise: "Crée la page d'accueil d'un commerce de ton quartier : un h1, au moins trois sections avec un h2, deux images avec un alt utile, un lien WhatsApp et un pied de page. Vérifie-la sur validator.w3.org jusqu'à zéro erreur.",
+    resource: "res-cahier-web",
+    quiz: [
+      { q: "Combien de balises h1 conseille-t-on par page ?", choices: ["Une seule", "Trois", "Autant qu'on veut"], answer: 0, explain: "Le h1 annonce le sujet principal de la page ; les parties utilisent h2, h3…" },
+      { q: "À quoi sert l'attribut alt d'une image ?", choices: ["À décrire l'image à ceux qui ne la voient pas", "À changer sa taille", "À la rendre cliquable"], answer: 0, explain: "Lecteurs d'écran, Google et connexions lentes s'appuient sur le texte alternatif." },
+      { q: "Où se place le titre affiché dans l'onglet du navigateur ?", choices: ["Dans <title>, à l'intérieur du <head>", "Dans le premier <h1>", "Dans le <footer>"], answer: 0, explain: "Le <head> contient les informations qui ne s'affichent pas dans la page elle-même." },
+      { q: "Comment s'appelle le fichier de la page d'accueil ?", choices: ["index.html", "accueil.txt", "home.doc"], answer: 0, explain: "Les serveurs web cherchent index.html en premier dans un dossier." }],
+    recap: ["HTML = structure, CSS = apparence.", "Squelette : doctype, html lang, head, body.", "Un seul h1, puis h2 et h3 dans l'ordre.", "Images avec alt, liens avec un texte clair.", "Balises de structure : header, nav, main, section, footer.", "Valider sa page sur validator.w3.org."] },
+
+  "web-css": { title: "Mettre en forme avec CSS", software: "VS Code + navigateur", level: "Débutant", minutes: 45, demo: false,
+    objective: "Donner une identité visuelle à la page HTML : couleurs, typographie, espacements et boutons.",
+    intro: "<p>Le <strong>CSS</strong> décrit l'apparence de la page. On l'écrit dans un fichier séparé, <em>style.css</em>, relié au HTML. Une règle CSS se lit ainsi : <strong>« pour tel élément, applique tels réglages »</strong>.</p><p>Tout élément d'une page est une <strong>boîte</strong> : le contenu, entouré d'une marge intérieure (<em>padding</em>), d'une bordure (<em>border</em>) et d'une marge extérieure (<em>margin</em>). Comprendre ces boîtes, c'est comprendre 80 % des problèmes de mise en page.</p>",
+    beginner: "Si une règle ne s'applique pas, vérifie d'abord l'orthographe du sélecteur et l'oubli d'un point-virgule : ce sont les deux erreurs les plus fréquentes.",
+    advanced: "Déclare tes couleurs comme variables (--violet: #5b3df5;) dans :root : tu changeras toute la charte en modifiant une seule ligne.",
+    steps: [
+      { t: "Relie le fichier CSS", d: "Crée style.css à côté de index.html, puis ajoute dans le <head> : <link rel=\"stylesheet\" href=\"style.css\">. Ajoute une règle de test (body { background: yellow; }) pour vérifier le lien, puis retire-la." },
+      { t: "Comprends une règle", d: "Sélecteur, accolades, puis des paires « propriété: valeur; ». Exemple : h1 { color: #5b3df5; } colore tous les titres h1 en violet." },
+      { t: "Choisis les bons sélecteurs", d: "p cible tous les paragraphes, .bouton cible les éléments qui ont class=\"bouton\", #contact cible l'élément d'id contact. Préfère les classes : elles sont réutilisables." },
+      { t: "Règle la typographie", d: "font-family pour la police (system-ui est rapide et lisible), font-size pour la taille, line-height autour de 1,5 pour le confort de lecture, max-width autour de 65ch pour les textes longs." },
+      { t: "Maîtrise le modèle de boîte", d: "padding éloigne le contenu de la bordure, margin éloigne la boîte des autres. Ajoute * { box-sizing: border-box; } pour que la largeur annoncée inclue le padding et la bordure." },
+      { t: "Crée un bouton", d: "Transforme un lien en bouton avec une classe : couleur de fond, texte blanc, padding, coins arrondis (border-radius), et un état :hover un peu plus foncé au survol." },
+      { t: "Inspecte et corrige", d: "Clic droit > Inspecter dans le navigateur : tu vois les règles appliquées, les marges en couleur, et tu peux tester des valeurs en direct avant de les recopier dans ton fichier.", keys: ["F12", "Ctrl+Maj+C"] }],
+    params: [["Fichier", "style.css relié dans le <head>"], ["Interlignage", "line-height: 1.5"], ["Largeur de lecture", "max-width: 65ch"], ["Modèle de boîte", "box-sizing: border-box"], ["Contraste du texte", "Au moins 4,5:1"]],
+    illustration: "boxmodel", caption: "Schéma : le modèle de boîte CSS, du contenu à la marge extérieure.",
+    code: `* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+  color: #1d1d1d;
+}
+
+header {
+  background: #5b3df5;
+  color: white;
+  padding: 24px;
+}
+
+.bouton {
+  display: inline-block;
+  background: #e8742c;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.bouton:hover {
+  background: #c75e1c;
+}`,
+    example: "La Boutique Awa reçoit un en-tête violet, une police système lisible, des sections aérées de 24 px et un bouton orange « Écrire sur WhatsApp » qui fonce légèrement au survol.",
+    exercise: "Habille ta page de la leçon précédente avec un fichier style.css : une palette de 3 couleurs, une police, des sections espacées et un bouton WhatsApp avec un état :hover. Vérifie le contraste de tes textes avec le jeu « Le bon contraste ».",
+    resource: "res-cahier-web",
+    quiz: [
+      { q: "Quel sélecteur cible les éléments qui ont class=\"carte\" ?", choices: [".carte", "#carte", "carte"], answer: 0, explain: "Le point cible une classe, le dièse un id, le nom seul une balise." },
+      { q: "Quelle propriété éloigne le contenu de sa propre bordure ?", choices: ["padding", "margin", "border"], answer: 0, explain: "padding = espace intérieur ; margin = espace extérieur." },
+      { q: "Que fait box-sizing: border-box ?", choices: ["La largeur inclut le padding et la bordure", "Ajoute une bordure", "Centre la boîte"], answer: 0, explain: "Sans lui, width: 300px + 20px de padding donne une boîte de 340 px." },
+      { q: "Comment tester une valeur CSS sans modifier le fichier ?", choices: ["Avec l'inspecteur du navigateur (F12)", "En renommant le fichier", "Impossible"], answer: 0, explain: "L'inspecteur permet d'essayer en direct, puis de recopier la bonne valeur." }],
+    recap: ["Un fichier style.css relié par <link>.", "Règle = sélecteur { propriété: valeur; }.", "Préférer les classes (.nom).", "Modèle de boîte : contenu, padding, border, margin.", "box-sizing: border-box partout.", "Inspecter (F12) pour comprendre et tester."] },
+
+  "web-responsive": { title: "Mise en page responsive avec Flexbox", software: "VS Code + navigateur", level: "Intermédiaire", minutes: 45, demo: false,
+    objective: "Construire une grille de produits qui s'adapte automatiquement au téléphone, à la tablette et à l'ordinateur.",
+    intro: "<p>Au Bénin, la grande majorité des visiteurs arrive sur un site <strong>depuis un téléphone</strong>. Un site <strong>responsive</strong> réorganise son contenu selon la largeur de l'écran : trois colonnes sur ordinateur, une seule sur téléphone.</p><p>Deux outils suffisent pour la plupart des cas : <strong>Flexbox</strong>, qui aligne des éléments en ligne et les fait passer à la ligne quand la place manque, et les <strong>media queries</strong>, qui appliquent des règles seulement en dessous ou au-dessus d'une certaine largeur.</p>",
+    beginner: "Commence toujours par la version téléphone (une colonne), puis ajoute les colonnes pour les grands écrans. C'est la méthode « mobile d'abord ».",
+    advanced: "Avec flex: 1 1 260px, les cartes se répartissent toutes seules sans media query : chacune fait au moins 260 px et grandit pour remplir la ligne.",
+    steps: [
+      { t: "Vérifie la balise viewport", d: "Sans <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> dans le <head>, le téléphone affiche une version miniature de la page d'ordinateur. C'est la première chose à contrôler." },
+      { t: "Rends les images souples", d: "img { max-width: 100%; height: auto; } empêche une image de dépasser de l'écran tout en gardant ses proportions." },
+      { t: "Crée le conteneur Flexbox", d: "Sur le parent des cartes : display: flex; flex-wrap: wrap; gap: 16px. Les enfants se placent côte à côte et passent à la ligne quand il n'y a plus de place." },
+      { t: "Dimensionne les cartes", d: "Sur chaque carte : flex: 1 1 260px. Elles mesurent au moins 260 px, grandissent pour remplir la ligne et se mettent en colonne sur un petit écran." },
+      { t: "Aligne avec justify-content et align-items", d: "justify-content répartit sur l'axe principal (space-between, center…), align-items aligne sur l'axe perpendiculaire. Parfait pour un en-tête avec le logo à gauche et le menu à droite." },
+      { t: "Ajoute une media query", d: "@media (max-width: 600px) { … } applique des règles seulement sur les petits écrans : titre plus petit, marges réduites, menu empilé." },
+      { t: "Teste sur tous les écrans", d: "Dans l'inspecteur, active le mode appareil pour simuler un téléphone, puis vérifie sur ton vrai téléphone. Aucun défilement horizontal ne doit apparaître.", keys: ["F12", "Ctrl+Maj+M"] }],
+    params: [["Balise viewport", "width=device-width, initial-scale=1"], ["Images", "max-width: 100%; height: auto"], ["Conteneur", "display: flex; flex-wrap: wrap; gap"], ["Cartes", "flex: 1 1 260px"], ["Point de rupture courant", "600 px (téléphone)"]],
+    code: `img { max-width: 100%; height: auto; }
+
+.produits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.carte {
+  flex: 1 1 260px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.entete {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .entete { flex-direction: column; gap: 8px; }
+  h1 { font-size: 1.6rem; }
+}`,
+    before: "Sur téléphone, le visiteur doit zoomer et faire défiler de gauche à droite pour lire trois colonnes minuscules : il quitte le site.",
+    after: "Les produits s'affichent en une colonne lisible sur téléphone, en deux sur tablette, en trois sur ordinateur, sans aucun défilement horizontal.",
+    example: "Le catalogue de Boutique Awa : six cartes produit (photo, nom, prix en FCFA, bouton « Commander »). Sur ordinateur trois par ligne, sur téléphone une par ligne ; l'en-tête passe le menu sous le logo en dessous de 600 px.",
+    exercise: "Ajoute à ta page une section de 6 cartes (produits ou services) en Flexbox. Teste-la à 360 px, 768 px et 1280 px de large dans le mode appareil : aucune barre de défilement horizontale, textes lisibles sans zoomer.",
+    resource: "res-cahier-web",
+    quiz: [
+      { q: "Quelle balise est indispensable pour un affichage correct sur téléphone ?", choices: ["<meta name=\"viewport\" …>", "<meta charset=\"UTF-8\">", "<link rel=\"icon\">"], answer: 0, explain: "Sans viewport, le téléphone simule un écran d'ordinateur et réduit tout." },
+      { q: "Que fait flex-wrap: wrap ?", choices: ["Fait passer les éléments à la ligne quand la place manque", "Cache les éléments qui dépassent", "Centre les éléments"], answer: 0, explain: "Sans wrap, Flexbox écrase tous les éléments sur une seule ligne." },
+      { q: "Que signifie « mobile d'abord » ?", choices: ["Concevoir d'abord la version téléphone, puis l'enrichir", "Faire seulement une application", "Tester sur téléphone à la fin"], answer: 0, explain: "On part du plus contraint ; ajouter des colonnes est plus simple que d'en retirer." },
+      { q: "Quelle règle empêche une image de dépasser de l'écran ?", choices: ["max-width: 100%", "width: 2000px", "overflow: scroll"], answer: 0, explain: "L'image ne dépasse jamais la largeur de son conteneur." }],
+    recap: ["La plupart des visiteurs sont sur téléphone.", "Balise viewport obligatoire.", "Images : max-width: 100%.", "Flexbox : display flex, wrap, gap.", "Cartes souples : flex: 1 1 260px.", "Media queries pour les ajustements, test à 360 px."] },
+
+  "wp-installer": { title: "Nom de domaine, hébergement et installation", software: "WordPress", level: "Débutant", minutes: 35, demo: false,
+    objective: "Comprendre ce qu'il faut acheter pour mettre un site client en ligne, et installer WordPress proprement et en sécurité.",
+    intro: "<p><strong>WordPress</strong> est le logiciel de création de sites le plus utilisé au monde : on construit les pages avec des blocs, sans écrire de code, et le client peut ensuite modifier ses textes lui-même. C'est une compétence très demandée par les commerces, les ONG et les écoles.</p><p>Pour qu'un site existe sur Internet, il faut trois choses : un <strong>nom de domaine</strong> (l'adresse, ex. boutique-awa.com), un <strong>hébergement</strong> (l'ordinateur allumé en permanence qui stocke le site) et <strong>WordPress</strong> installé sur cet hébergement.</p>",
+    beginner: "Le domaine et l'hébergement doivent être au nom du client, avec ses propres identifiants. Tu l'aides à les créer, mais le site lui appartient.",
+    advanced: "Fais travailler le client sur une copie de test (sous-domaine ou extension de « staging ») avant les grosses modifications : le site en ligne n'est jamais cassé.",
+    steps: [
+      { t: "Choisis le nom de domaine", d: "Court, facile à dicter au téléphone, sans tirets inutiles. Vérifie sa disponibilité chez un registraire. Pour une activité au Bénin, le .bj ou le .com sont courants. Le domaine se renouvelle chaque année : note la date." },
+      { t: "Choisis un hébergement adapté", d: "Pour un site vitrine, un hébergement mutualisé avec certificat SSL gratuit (HTTPS), sauvegardes automatiques et installation WordPress en un clic suffit. Regarde la localisation des serveurs et la qualité du support." },
+      { t: "Relie le domaine à l'hébergement", d: "Si les deux sont chez des fournisseurs différents, modifie les serveurs DNS du domaine avec ceux donnés par l'hébergeur. La mise à jour peut prendre quelques heures." },
+      { t: "Installe WordPress", d: "Depuis le panneau de l'hébergeur, utilise l'installateur WordPress. Choisis un identifiant administrateur qui n'est pas « admin », un mot de passe long et unique, et l'adresse e-mail du client." },
+      { t: "Active le HTTPS", d: "Active le certificat SSL dans le panneau de l'hébergeur, puis vérifie que le site s'ouvre en https:// avec le cadenas. Sans lui, les navigateurs affichent « Non sécurisé »." },
+      { t: "Fais les réglages de base", d: "Réglages > Général : titre du site, slogan, fuseau horaire (Africa/Porto-Novo) et format de date. Réglages > Permaliens : choisis « Titre de la publication » pour des adresses lisibles." },
+      { t: "Sécurise dès le premier jour", d: "Supprime les thèmes et extensions inutilisés, active les mises à jour automatiques, installe une extension de sauvegarde et une de sécurité (limitation des tentatives de connexion)." }],
+    params: [["Adresse", "Nom de domaine au nom du client"], ["Sécurité", "HTTPS obligatoire"], ["Identifiant", "Jamais « admin »"], ["Permaliens", "Titre de la publication"], ["Sauvegardes", "Automatiques, au moins chaque semaine"]],
+    example: "Pour le salon « Beauté Divine » à Abomey-Calavi : le domaine beautedivine.bj est acheté au nom de la gérante, l'hébergement mutualisé inclut le HTTPS et des sauvegardes quotidiennes, WordPress est installé en un clic avec un identifiant personnel, fuseau Africa/Porto-Novo et permaliens lisibles.",
+    exercise: "Rédige pour un client fictif une fiche de lancement d'une page : nom de domaine choisi (et deux alternatives), type d'hébergement, liste des comptes à créer à son nom, réglages WordPress à faire et budget annuel (domaine + hébergement). Si tu le peux, installe WordPress en local (avec un outil comme LocalWP) et applique les réglages.",
+    resource: "res-cahier-wordpress",
+    quiz: [
+      { q: "À quoi sert l'hébergement ?", choices: ["À stocker le site sur un ordinateur allumé en permanence", "À choisir l'adresse du site", "À dessiner le logo"], answer: 0, explain: "Le domaine est l'adresse ; l'hébergement est le lieu où le site est stocké." },
+      { q: "Au nom de qui doivent être le domaine et l'hébergement ?", choices: ["Du client", "Du développeur", "De n'importe qui"], answer: 0, explain: "Le client doit rester propriétaire de son site, même s'il change de prestataire." },
+      { q: "Pourquoi le HTTPS est-il indispensable ?", choices: ["Il chiffre les échanges et évite l'avertissement « Non sécurisé »", "Il rend le site plus coloré", "Il est seulement utile aux banques"], answer: 0, explain: "Les navigateurs et Google pénalisent les sites sans HTTPS." },
+      { q: "Quel identifiant administrateur éviter ?", choices: ["admin", "Un identifiant personnel", "Une adresse e-mail"], answer: 0, explain: "« admin » est le premier essayé par les robots qui attaquent les sites." }],
+    recap: ["Domaine = adresse ; hébergement = stockage ; WordPress = logiciel.", "Tout au nom du client.", "HTTPS activé et vérifié.", "Identifiant personnel et mot de passe long.", "Permaliens lisibles, fuseau Africa/Porto-Novo.", "Sauvegardes et mises à jour automatiques."] },
+
+  "wp-site-vitrine": { title: "Construire un site vitrine avec l'éditeur de blocs", software: "WordPress", level: "Débutant", minutes: 50, demo: false,
+    objective: "Créer les pages essentielles d'un site vitrine, le menu et un contact WhatsApp, puis livrer un site que le client sait modifier.",
+    intro: "<p>Un <strong>site vitrine</strong> présente une activité et donne envie de contacter : il n'a pas besoin de dizaines de pages. Quatre pages bien faites suffisent souvent : <strong>Accueil, Services (ou Produits), À propos, Contact</strong>.</p><p>WordPress construit les pages avec des <strong>blocs</strong> : paragraphe, image, bouton, colonnes, galerie… Un <strong>thème</strong> donne le style général (polices, couleurs, en-tête). Le secret d'un site professionnel est la simplicité : peu de couleurs, de grands titres clairs, des photos de qualité et un bouton de contact visible partout.</p>",
+    beginner: "Commence avec un thème léger et récent (par exemple un thème officiel « Twenty… » ou un thème populaire bien noté) : évite les thèmes chargés d'animations qui ralentissent le site sur mobile.",
+    advanced: "Crée des « compositions » (patterns) réutilisables pour les blocs répétés, comme une carte de service : le client pourra ajouter un service sans casser la mise en page.",
+    steps: [
+      { t: "Choisis et règle le thème", d: "Apparence > Thèmes : installe un thème léger. Dans l'éditeur du site, règle la palette (2 ou 3 couleurs de la charte du client), les polices et le logo." },
+      { t: "Crée les pages", d: "Pages > Ajouter : Accueil, Services, À propos, Contact. Dans Réglages > Lecture, choisis « Une page statique » et sélectionne Accueil comme page d'accueil." },
+      { t: "Construis l'accueil avec des blocs", d: "En haut : une grande image ou couverture avec une phrase qui dit ce que fait l'entreprise et un bouton. Ensuite : 3 services en colonnes, un témoignage client, puis un appel à l'action final." },
+      { t: "Crée le menu", d: "Dans l'éditeur de site, modifie le bloc Navigation de l'en-tête : ajoute les 4 pages dans l'ordre logique. Vérifie le menu sur téléphone (icône hamburger)." },
+      { t: "Ajoute le contact WhatsApp", d: "Ajoute un bouton dont le lien est https://wa.me/ suivi du numéro au format international, sans + ni espaces. Mets-le sur l'accueil, la page Contact et dans le pied de page." },
+      { t: "Optimise les images", d: "Avant de les envoyer, réduis les photos à environ 1600 px de large et compresse-les (WebP ou JPG de qualité 75 à 80). Remplis toujours le texte alternatif." },
+      { t: "Teste et livre", d: "Vérifie chaque page sur téléphone, les liens, la vitesse de chargement. Crée un compte « Éditeur » pour le client (pas Administrateur) et enregistre une courte vidéo qui lui montre comment modifier un texte et une image." }],
+    params: [["Pages essentielles", "Accueil, Services, À propos, Contact"], ["Couleurs", "2 ou 3, celles de la charte"], ["Images", "≈ 1600 px de large, compressées"], ["Contact", "Bouton wa.me sur chaque page clé"], ["Compte du client", "Rôle Éditeur"]],
+    before: "Un site de 12 pages avec 6 couleurs, des photos de 8 Mo, aucun numéro visible et un client incapable de changer ses prix.",
+    after: "4 pages claires, un bouton WhatsApp toujours visible, des images légères, et un client autonome qui met à jour ses services en deux minutes.",
+    example: "Site vitrine d'un atelier de couture à Porto-Novo : accueil avec photo d'une création et le titre « Tenues sur mesure livrées en 7 jours », trois services (mariage, cérémonie, uniformes), deux témoignages, et un bouton « Commander sur WhatsApp » dans l'en-tête et le pied de page.",
+    exercise: "Construis (en local ou sur un hébergement de test) le site vitrine de 4 pages d'un commerce réel ou fictif. Critères : thème léger, 3 couleurs maximum, bouton WhatsApp fonctionnel sur 3 pages, images compressées avec texte alternatif, menu testé sur téléphone, compte Éditeur créé pour le client.",
+    resource: "res-cahier-wordpress",
+    quiz: [
+      { q: "Quelles pages forment le cœur d'un site vitrine ?", choices: ["Accueil, Services, À propos, Contact", "Blog, Forum, Boutique, FAQ", "Une seule page vide"], answer: 0, explain: "Ces quatre pages répondent aux questions : quoi, pour qui, qui êtes-vous, comment vous joindre." },
+      { q: "Quel lien ouvre une conversation WhatsApp ?", choices: ["https://wa.me/ suivi du numéro international", "whatsapp.bj/numéro", "Le numéro seul"], answer: 0, explain: "Le format wa.me fonctionne sur téléphone comme sur ordinateur." },
+      { q: "Quel rôle donner au client pour le quotidien ?", choices: ["Éditeur", "Administrateur", "Abonné"], answer: 0, explain: "Il peut modifier ses contenus sans risquer de casser les réglages ou les extensions." },
+      { q: "Pourquoi compresser les images ?", choices: ["Pour que le site charge vite, surtout sur mobile", "Pour améliorer leurs couleurs", "C'est inutile"], answer: 0, explain: "Les images lourdes sont la première cause de lenteur, et les données mobiles coûtent cher." }],
+    recap: ["Un thème léger et une palette de 2-3 couleurs.", "4 pages : Accueil, Services, À propos, Contact.", "Accueil : promesse, services, preuve, action.", "Bouton WhatsApp wa.me bien visible.", "Images ≈ 1600 px compressées, avec alt.", "Client en rôle Éditeur, avec un tutoriel vidéo."] },
+
+  "js-bases": { title: "Variables, types et calculs en JavaScript", software: "VS Code + navigateur", level: "Débutant", minutes: 40, demo: false,
+    objective: "Écrire tes premières instructions JavaScript : stocker des valeurs, faire des calculs et afficher des résultats.",
+    intro: "<p><strong>JavaScript</strong> est le langage de programmation du web : il rend les pages interactives (calculer un prix, afficher un message, vérifier un formulaire). Il fonctionne directement dans le navigateur, sans rien installer.</p><p>Programmer, c'est donner à l'ordinateur des <strong>instructions précises</strong>, dans l'ordre. Pour retenir une information, on utilise une <strong>variable</strong> : une boîte avec un nom, dans laquelle on range une valeur (un nombre, un texte, vrai ou faux).</p>",
+    beginner: "Fais tes premiers essais dans la console du navigateur (F12, onglet Console) : tu tapes une ligne, tu appuies sur Entrée, tu vois le résultat tout de suite.",
+    advanced: "Utilise const par défaut et let seulement quand la valeur doit changer : ton code devient plus prévisible et les erreurs se repèrent plus vite.",
+    steps: [
+      { t: "Ouvre la console", d: "Dans le navigateur, F12 puis l'onglet Console. Tape 2 + 3 et Entrée : la console répond 5. Tape \"Bonjour\" : elle répète le texte.", keys: ["F12"] },
+      { t: "Déclare des variables", d: "const pour une valeur qui ne change pas (const tva = 0.18;), let pour une valeur qui change (let quantite = 3;). Le nom décrit le contenu : prixUnitaire plutôt que x." },
+      { t: "Connais les types de base", d: "Nombre (2500), texte entre guillemets (\"Chez Awa\"), booléen (true ou false). typeof 2500 répond \"number\". Attention : \"5\" + 2 donne \"52\" (texte), alors que 5 + 2 donne 7." },
+      { t: "Calcule", d: "+, -, * (multiplier), / (diviser), % (reste de la division). Les parenthèses fixent l'ordre : (prix + livraison) * quantite." },
+      { t: "Affiche des résultats", d: "console.log(...) affiche dans la console. Les gabarits entre accents graves `...` insèrent des variables dans un texte : `Total : ${total} FCFA`." },
+      { t: "Passe dans un fichier", d: "Crée script.js et relie-le en bas du <body> : <script src=\"script.js\"><\/script>. Recharge la page, ouvre la console : tes console.log s'y affichent." },
+      { t: "Lis les erreurs", d: "Une erreur rouge indique le fichier et la ligne. « x is not defined » = variable mal orthographiée ou non déclarée. Lire l'erreur calmement résout la plupart des problèmes." }],
+    params: [["Valeur fixe", "const"], ["Valeur qui change", "let"], ["Affichage", "console.log()"], ["Texte avec variables", "`Total : ${total}`"], ["Fichier", "script.js en bas du <body>"]],
+    code: `const boutique = "Chez Awa";
+const prixUnitaire = 2500;   // en FCFA
+let quantite = 3;
+
+let total = prixUnitaire * quantite;
+console.log(\`\${boutique} : \${quantite} articles = \${total} FCFA\`);
+
+quantite = quantite + 2;      // le client en ajoute deux
+total = prixUnitaire * quantite;
+console.log(\`Nouveau total : \${total} FCFA\`);
+
+console.log("5" + 2);  // "52" : du texte collé
+console.log(5 + 2);    // 7 : une vraie addition`,
+    example: "Le calcul d'une commande de la boutique « Chez Awa » : 3 pagnes à 2 500 FCFA = 7 500 FCFA, puis le client en ajoute deux : 12 500 FCFA. Le même programme fonctionnera demain pour n'importe quel prix et n'importe quelle quantité.",
+    exercise: "Écris un script qui calcule le prix d'une commande : prix unitaire, quantité, frais de livraison fixes de 1 000 FCFA, puis affiche une phrase complète dans la console. Ajoute ensuite le calcul de la TVA à 18 % et affiche le total TTC.",
+    resource: "res-cahier-javascript",
+    quiz: [
+      { q: "Quel mot utiliser pour une valeur qui ne changera pas ?", choices: ["const", "let", "var"], answer: 0, explain: "const protège la valeur contre une modification accidentelle." },
+      { q: "Que donne \"5\" + 2 en JavaScript ?", choices: ["\"52\"", "7", "Une erreur"], answer: 0, explain: "Avec un texte, + colle les morceaux au lieu d'additionner." },
+      { q: "Où afficher des messages de test ?", choices: ["Avec console.log(), dans la console", "Dans le <title>", "Dans le fichier CSS"], answer: 0, explain: "La console est l'outil de base pour vérifier ce que fait ton programme." },
+      { q: "Que signifie l'erreur « total is not defined » ?", choices: ["La variable n'existe pas ou est mal orthographiée", "Le total vaut zéro", "Le navigateur est trop ancien"], answer: 0, explain: "Vérifie l'orthographe exacte et que la variable est bien déclarée avant." }],
+    recap: ["JavaScript rend les pages interactives.", "const par défaut, let si la valeur change.", "Types : nombre, texte, booléen.", "Attention : texte + nombre = texte collé.", "console.log et gabarits `${…}`.", "Lire le message d'erreur et la ligne indiquée."] },
+
+  "js-logique": { title: "Conditions, boucles et fonctions", software: "VS Code + navigateur", level: "Débutant", minutes: 45, demo: false,
+    objective: "Faire prendre des décisions à ton programme, répéter des actions et regrouper du code réutilisable dans des fonctions.",
+    intro: "<p>Un programme devient vraiment utile quand il <strong>décide</strong> (si le panier dépasse 20 000 FCFA, alors remise), quand il <strong>répète</strong> (calculer le prix de chaque article d'une liste) et quand il <strong>réutilise</strong> du code (une fonction « calculer la remise » appelée partout).</p><p>Ces trois idées, <strong>conditions, boucles et fonctions</strong>, se retrouvent dans tous les langages : JavaScript, Python, GDScript pour les jeux… Les maîtriser ici, c'est apprendre à programmer pour toujours.</p>",
+    beginner: "Avant de coder, écris la logique en français : « si le total est supérieur ou égal à 20 000, enlever 10 %, sinon ne rien changer ». Le code n'est qu'une traduction.",
+    advanced: "Une bonne fonction fait une seule chose, porte un nom de verbe (calculerRemise) et renvoie un résultat avec return au lieu d'afficher directement : elle reste réutilisable.",
+    steps: [
+      { t: "Compare des valeurs", d: "=== (égal), !== (différent), >, <, >=, <=. Le résultat est true ou false. Utilise toujours === plutôt que == pour éviter les conversions surprises." },
+      { t: "Décide avec if / else", d: "if (condition) { … } else { … }. Ajoute else if pour plusieurs cas. && signifie « et », || signifie « ou »." },
+      { t: "Range des valeurs dans un tableau", d: "const paniers = [8000, 15000, 25000]; paniers[0] vaut 8000 (on compte à partir de 0). paniers.length donne le nombre d'éléments." },
+      { t: "Répète avec une boucle", d: "for (const p of paniers) { … } exécute le bloc pour chaque élément. for (let i = 1; i <= 10; i++) { … } répète 10 fois avec un compteur." },
+      { t: "Crée une fonction", d: "function prixAvecRemise(total) { … return … } : total est le paramètre, return renvoie le résultat. On l'appelle avec prixAvecRemise(25000)." },
+      { t: "Combine les trois", d: "Une boucle parcourt les paniers, appelle la fonction pour chacun, et la fonction utilise une condition. C'est la structure de la plupart des programmes réels." },
+      { t: "Teste les cas limites", d: "Que se passe-t-il exactement à 20 000 ? Avec 0 ? Avec un nombre négatif ? Tester les limites révèle la majorité des bugs." }],
+    params: [["Égalité stricte", "==="], ["Et / ou", "&& / ||"], ["Premier élément d'un tableau", "indice 0"], ["Parcourir une liste", "for (const x of liste)"], ["Renvoyer un résultat", "return"]],
+    code: `function prixAvecRemise(total) {
+  if (total >= 20000) {
+    return total * 0.9;      // 10 % de remise
+  } else if (total >= 10000) {
+    return total * 0.95;     // 5 % de remise
+  }
+  return total;
+}
+
+const paniers = [8000, 15000, 25000];
+
+for (const panier of paniers) {
+  const aPayer = prixAvecRemise(panier);
+  console.log(\`\${panier} FCFA → \${aPayer} FCFA\`);
+}
+// 8000 FCFA → 8000 FCFA
+// 15000 FCFA → 14250 FCFA
+// 25000 FCFA → 22500 FCFA`,
+    example: "Une boutique applique 5 % de remise dès 10 000 FCFA et 10 % dès 20 000 FCFA. La fonction prixAvecRemise traite n'importe quel panier, et la boucle calcule toute la liste des commandes du jour en une fois.",
+    exercise: "Écris une fonction noteEnMention(note) qui renvoie « Très bien » (16 et plus), « Bien » (14 à 15,99), « Assez bien » (12 à 13,99), « Passable » (10 à 11,99) ou « Ajourné ». Teste-la avec une boucle sur un tableau de 6 notes, dont les cas limites 10, 12, 14 et 16.",
+    resource: "res-cahier-javascript",
+    quiz: [
+      { q: "Quel opérateur teste l'égalité stricte ?", choices: ["===", "=", "=>"], answer: 0, explain: "= affecte une valeur ; === compare sans conversion de type." },
+      { q: "Que vaut paniers[0] si paniers = [8000, 15000] ?", choices: ["8000", "15000", "undefined"], answer: 0, explain: "Les tableaux commencent à l'indice 0." },
+      { q: "À quoi sert return dans une fonction ?", choices: ["À renvoyer un résultat à celui qui l'appelle", "À recommencer la fonction", "À afficher un message"], answer: 0, explain: "La valeur renvoyée peut ensuite être stockée, affichée ou réutilisée." },
+      { q: "Pourquoi tester le cas « exactement 20 000 » ?", choices: ["C'est une limite où les erreurs >= / > apparaissent", "Ce n'est pas utile", "Parce que c'est un nombre rond"], answer: 0, explain: "Les bugs se cachent souvent aux frontières des conditions." }],
+    recap: ["Conditions : if / else if / else.", "Comparer avec ===, combiner avec && et ||.", "Tableaux indexés à partir de 0.", "Boucle for…of pour parcourir une liste.", "Fonctions : paramètres et return.", "Tester les cas limites."] },
+
+  "js-page": { title: "Rendre une page interactive (le DOM)", software: "VS Code + navigateur", level: "Intermédiaire", minutes: 45, demo: false,
+    objective: "Relier JavaScript à la page : lire ce que tape l'utilisateur, réagir à un clic et afficher un résultat, pour créer un vrai calculateur.",
+    intro: "<p>Le <strong>DOM</strong> est la représentation de ta page HTML que JavaScript peut lire et modifier. Avec trois outils, tu peux déjà créer de vraies petites applications : <strong>trouver</strong> un élément (querySelector), <strong>écouter</strong> un événement (addEventListener) et <strong>modifier</strong> le contenu (textContent).</p><p>Le projet de cette leçon : un calculateur de commande en FCFA qu'une boutique pourrait réellement mettre sur son site.</p>",
+    beginner: "Si rien ne se passe au clic, ouvre la console : une erreur rouge indique presque toujours un sélecteur mal écrit (#total au lieu de #resultat par exemple).",
+    advanced: "Valide les saisies : une quantité vide, négative ou décimale doit afficher un message clair au lieu d'un résultat absurde. Un bon développeur ne fait jamais confiance aux saisies.",
+    steps: [
+      { t: "Prépare le HTML", d: "Un champ <input type=\"number\" id=\"quantite\">, un <select id=\"article\"> avec les prix en valeur, un <button id=\"calculer\"> et un paragraphe <p id=\"resultat\"> vide." },
+      { t: "Trouve les éléments", d: "document.querySelector(\"#quantite\") renvoie l'élément d'id quantite. Range-les dans des constantes au début du script." },
+      { t: "Écoute le clic", d: "bouton.addEventListener(\"click\", () => { … }) exécute le code à chaque clic. On appelle cette fonction un « gestionnaire d'événement »." },
+      { t: "Lis les valeurs", d: ".value donne ce que contient un champ, toujours sous forme de texte : convertis-le avec Number(...) avant de calculer." },
+      { t: "Affiche le résultat", d: "resultat.textContent = `Total : ${total} FCFA`. Utilise textContent plutôt qu'innerHTML pour du texte : c'est plus sûr." },
+      { t: "Formate les montants", d: "total.toLocaleString(\"fr-FR\") écrit 12 500 au lieu de 12500 : plus lisible pour le client." },
+      { t: "Gère les erreurs de saisie", d: "Si la quantité n'est pas un entier positif (Number.isInteger(q) && q > 0), affiche « Indique une quantité valide » et arrête le calcul avec return." }],
+    params: [["Trouver un élément", "document.querySelector(\"#id\")"], ["Réagir à un clic", "addEventListener(\"click\", …)"], ["Lire un champ", "Number(champ.value)"], ["Afficher du texte", "textContent"], ["Nombre lisible", "toLocaleString(\"fr-FR\")"]],
+    code: `<!-- index.html -->
+<label>Article
+  <select id="article">
+    <option value="2500">Pagne wax (2 500 FCFA)</option>
+    <option value="6000">Sac en pagne (6 000 FCFA)</option>
+  </select>
+</label>
+<label>Quantité <input id="quantite" type="number" value="1" min="1"></label>
+<button id="calculer">Calculer</button>
+<p id="resultat"></p>
+<script src="script.js"><\/script>
+
+// script.js
+const article = document.querySelector("#article");
+const quantite = document.querySelector("#quantite");
+const resultat = document.querySelector("#resultat");
+
+document.querySelector("#calculer").addEventListener("click", () => {
+  const q = Number(quantite.value);
+  if (!Number.isInteger(q) || q <= 0) {
+    resultat.textContent = "Indique une quantité valide.";
+    return;
+  }
+  const total = Number(article.value) * q;
+  resultat.textContent = \`Total : \${total.toLocaleString("fr-FR")} FCFA\`;
+});`,
+    example: "Sur le site de Boutique Awa, le client choisit « Sac en pagne », tape 3 et clique : « Total : 18 000 FCFA » s'affiche instantanément, sans recharger la page. S'il tape -2, un message lui demande une quantité valide.",
+    exercise: "Améliore le calculateur : ajoute une case à cocher « Livraison (+1 000 FCFA) », applique la remise de la leçon précédente au-dessus de 20 000 FCFA, et affiche le détail (sous-total, remise, livraison, total). Teste avec une quantité vide, 0, -1 et 2,5.",
+    resource: "res-cahier-javascript",
+    quiz: [
+      { q: "Quelle méthode trouve un élément par son id ?", choices: ["document.querySelector(\"#id\")", "document.find(\"id\")", "console.log(\"#id\")"], answer: 0, explain: "querySelector accepte les mêmes sélecteurs que le CSS." },
+      { q: "Quel type renvoie champ.value ?", choices: ["Toujours du texte", "Toujours un nombre", "Un booléen"], answer: 0, explain: "Il faut convertir avec Number() avant de calculer." },
+      { q: "Pourquoi préférer textContent à innerHTML pour afficher un texte ?", choices: ["C'est plus sûr : le texte n'est pas interprété comme du code", "C'est plus coloré", "innerHTML n'existe pas"], answer: 0, explain: "innerHTML avec une saisie utilisateur peut permettre d'injecter du code." },
+      { q: "Que faire si la quantité saisie est négative ?", choices: ["Afficher un message et arrêter le calcul", "Calculer quand même", "Recharger la page"], answer: 0, explain: "Valider les saisies évite des résultats absurdes et des bugs." }],
+    recap: ["DOM = la page vue par JavaScript.", "Trouver : querySelector.", "Réagir : addEventListener.", "Lire : Number(champ.value).", "Afficher : textContent, montants avec toLocaleString.", "Toujours valider les saisies."] },
+
+  "py-bases": { title: "Premiers programmes en Python", software: "Python 3", level: "Débutant", minutes: 40, demo: false,
+    objective: "Installer Python, écrire et exécuter tes premiers programmes qui dialoguent avec l'utilisateur.",
+    intro: "<p><strong>Python</strong> est l'un des langages les plus faciles à lire et l'un des plus utilisés : automatisation, analyse de données, intelligence artificielle, sites web, outils de bureau. Son code ressemble presque à de l'anglais simple.</p><p>En Python, l'<strong>indentation</strong> (les espaces en début de ligne) fait partie de la syntaxe : elle indique quelles lignes appartiennent à un bloc. C'est une contrainte au début, mais elle oblige à écrire du code propre.</p>",
+    beginner: "Si tu n'as pas d'ordinateur personnel, tu peux t'entraîner dans un éditeur Python en ligne gratuit, même depuis un téléphone.",
+    advanced: "Prends l'habitude des f-strings (f\"Total : {total} FCFA\") et des noms de variables en minuscules avec des tirets bas (prix_unitaire) : c'est le style officiel de Python (PEP 8).",
+    steps: [
+      { t: "Installe Python 3", d: "Télécharge Python 3 sur python.org. Sous Windows, coche « Add Python to PATH » pendant l'installation. Vérifie dans un terminal avec python --version (ou python3 --version)." },
+      { t: "Écris ton premier fichier", d: "Dans VS Code, crée bonjour.py et écris print(\"Bonjour TOB-MAQ !\"). Exécute-le avec python bonjour.py dans le terminal, ou le bouton ▶ de VS Code." },
+      { t: "Utilise des variables", d: "prix = 2500, nom = \"Awa\", en_stock = True. Pas de mot-clé de déclaration en Python : on donne simplement un nom et une valeur." },
+      { t: "Demande une saisie", d: "nom = input(\"Ton prénom : \") attend que l'utilisateur tape quelque chose. Attention : input() renvoie toujours du texte." },
+      { t: "Convertis les types", d: "int(\"25\") donne le nombre 25, float(\"2.5\") donne 2.5, str(25) donne le texte \"25\". Sans conversion, \"25\" + 5 provoque une erreur." },
+      { t: "Affiche avec des f-strings", d: "print(f\"Bonjour {nom}, total : {total} FCFA\") insère les variables directement dans le texte." },
+      { t: "Lis le message d'erreur", d: "Python indique la ligne et le type d'erreur : NameError (nom inconnu), TypeError (types mélangés), ValueError (conversion impossible, par exemple int(\"abc\"))." }],
+    params: [["Version", "Python 3"], ["Extension des fichiers", ".py"], ["Afficher", "print()"], ["Saisie", "input() renvoie du texte"], ["Style des noms", "prix_unitaire (PEP 8)"]],
+    code: `nom = input("Ton prénom : ")
+prix = int(input("Prix d'un article (FCFA) : "))
+quantite = int(input("Quantité : "))
+
+total = prix * quantite
+print(f"Merci {nom} ! Total : {total} FCFA")
+
+if total >= 20000:
+    print("Tu as droit à la livraison gratuite.")
+else:
+    manque = 20000 - total
+    print(f"Encore {manque} FCFA pour la livraison gratuite.")`,
+    example: "Un petit programme de caisse pour une boutique : il demande le prénom, le prix et la quantité, affiche le total et indique combien il manque pour la livraison gratuite à partir de 20 000 FCFA.",
+    exercise: "Écris un convertisseur : l'utilisateur tape un montant en FCFA et le programme affiche l'équivalent en euros (1 € = 655,957 FCFA, parité fixe), arrondi à 2 décimales avec round(). Puis ajoute la conversion inverse.",
+    resource: "res-cahier-python",
+    quiz: [
+      { q: "Que renvoie toujours input() ?", choices: ["Du texte (str)", "Un nombre entier", "Un booléen"], answer: 0, explain: "Il faut convertir avec int() ou float() pour calculer." },
+      { q: "Quel est le rôle de l'indentation en Python ?", choices: ["Elle indique quelles lignes appartiennent à un bloc", "Elle est seulement décorative", "Elle ralentit le programme"], answer: 0, explain: "Une indentation incorrecte provoque une IndentationError." },
+      { q: "Quelle ligne affiche « Total : 7500 FCFA » si total vaut 7500 ?", choices: ["print(f\"Total : {total} FCFA\")", "print(\"Total : {total} FCFA\")", "print(Total, FCFA)"], answer: 0, explain: "Le f devant les guillemets active le remplacement des {variables}." },
+      { q: "Quelle erreur provoque int(\"abc\") ?", choices: ["ValueError", "NameError", "Aucune"], answer: 0, explain: "Le texte « abc » ne peut pas être converti en nombre." }],
+    recap: ["Python 3, fichiers .py, exécution avec python fichier.py.", "Variables sans mot-clé.", "input() renvoie du texte : convertir avec int()/float().", "f-strings pour afficher.", "L'indentation définit les blocs.", "Lire NameError, TypeError, ValueError."] },
+
+  "py-projet": { title: "Mini-projet : gérer le stock d'une boutique", software: "Python 3", level: "Intermédiaire", minutes: 50, demo: false,
+    objective: "Utiliser listes, dictionnaires, boucles et fonctions pour construire un petit outil de gestion de stock réellement utile.",
+    intro: "<p>Les vrais programmes manipulent des <strong>collections</strong> de données : une liste de produits, un stock par article, des ventes du jour. Python offre deux outils essentiels : la <strong>liste</strong> (une suite ordonnée) et le <strong>dictionnaire</strong> (des paires clé → valeur, comme « pagne » → 12).</p><p>Dans ce projet, tu construis un gestionnaire de stock qu'un commerçant pourrait utiliser : afficher le stock, enregistrer une vente, signaler les ruptures.</p>",
+    beginner: "Avance par petites étapes : écris une fonction, teste-la, puis passe à la suivante. Un programme qui fonctionne à moitié vaut mieux qu'un programme complet qui ne marche pas.",
+    advanced: "Sauvegarde le stock dans un fichier JSON (module json) à chaque modification, et recharge-le au démarrage : les données survivent à la fermeture du programme.",
+    steps: [
+      { t: "Crée une liste", d: "articles = [\"pagne\", \"sac\", \"chaussures\"]. articles.append(\"chapeau\") ajoute un élément, len(articles) donne le nombre d'éléments." },
+      { t: "Crée un dictionnaire", d: "stock = {\"pagne\": 12, \"sac\": 5}. stock[\"pagne\"] donne 12. stock[\"pagne\"] -= 3 retire 3. stock.get(\"chapeau\", 0) renvoie 0 si l'article n'existe pas, sans erreur." },
+      { t: "Parcours un dictionnaire", d: "for article, quantite in stock.items(): parcourt chaque paire. Idéal pour afficher tout le stock." },
+      { t: "Écris des fonctions", d: "def vendre(stock, article, quantite): … Une fonction par action : afficher, vendre, réapprovisionner. Chaque fonction se teste seule." },
+      { t: "Ajoute les vérifications", d: "Avant de vendre, vérifie que le stock suffit. Sinon, affiche un message clair et ne modifie rien." },
+      { t: "Crée un menu", d: "Une boucle while True affiche un menu (1. Voir le stock, 2. Vendre, 3. Quitter) et appelle la bonne fonction selon le choix. break sort de la boucle." },
+      { t: "Signale les ruptures", d: "Une fonction alertes(stock, seuil=2) liste les articles dont la quantité est inférieure ou égale au seuil : le commerçant sait quoi racheter." }],
+    params: [["Liste", "[\"pagne\", \"sac\"]"], ["Dictionnaire", "{\"pagne\": 12}"], ["Valeur par défaut", "stock.get(article, 0)"], ["Parcourir", "for cle, valeur in d.items()"], ["Boucle de menu", "while True … break"]],
+    code: `stock = {"pagne": 12, "sac": 5, "chaussures": 0}
+
+def afficher_stock(stock):
+    for article, quantite in stock.items():
+        etat = "RUPTURE" if quantite == 0 else f"{quantite} en stock"
+        print(f"- {article} : {etat}")
+
+def vendre(stock, article, quantite):
+    if stock.get(article, 0) >= quantite:
+        stock[article] -= quantite
+        print(f"Vente enregistrée : {quantite} {article}")
+    else:
+        print(f"Stock insuffisant pour {article}")
+
+def alertes(stock, seuil=2):
+    return [a for a, q in stock.items() if q <= seuil]
+
+vendre(stock, "pagne", 3)
+vendre(stock, "chaussures", 1)
+afficher_stock(stock)
+print("À racheter :", ", ".join(alertes(stock)))`,
+    example: "Une vendeuse du marché Dantokpa lance le programme le matin : elle voit son stock, enregistre chaque vente, et le soir la fonction alertes lui indique « À racheter : chaussures » avant de retourner chez son fournisseur.",
+    exercise: "Complète le gestionnaire avec : un menu en boucle (voir, vendre, réapprovisionner, alertes, quitter), un dictionnaire des prix pour calculer le chiffre d'affaires des ventes de la journée, et un message d'erreur si l'utilisateur tape un article inconnu ou une quantité non numérique (utilise try / except ValueError).",
+    resource: "res-cahier-python",
+    quiz: [
+      { q: "Que renvoie stock.get(\"chapeau\", 0) si « chapeau » n'est pas dans le dictionnaire ?", choices: ["0", "Une erreur KeyError", "None obligatoirement"], answer: 0, explain: "get permet de donner une valeur par défaut au lieu de provoquer une erreur." },
+      { q: "Comment parcourir les clés et valeurs d'un dictionnaire ?", choices: ["for cle, valeur in d.items():", "for i in d.length:", "while d:"], answer: 0, explain: "items() fournit les paires (clé, valeur)." },
+      { q: "Comment sortir d'une boucle while True ?", choices: ["Avec break", "Avec return seulement hors fonction", "C'est impossible"], answer: 0, explain: "break interrompt immédiatement la boucle la plus proche." },
+      { q: "Pourquoi une fonction par action (afficher, vendre…) ?", choices: ["Pour tester et réutiliser chaque partie séparément", "Pour rendre le programme plus long", "Python l'exige"], answer: 0, explain: "Des fonctions courtes et précises rendent le programme fiable et lisible." }],
+    recap: ["Liste = suite ordonnée ; dictionnaire = clé → valeur.", "get() avec une valeur par défaut.", "items() pour parcourir un dictionnaire.", "Une fonction par action.", "Vérifier avant de modifier.", "Menu : while True + break."] },
+
+  "gd-boucle": { title: "La boucle de jeu et le document de conception", software: "Papier + tous moteurs", level: "Débutant", minutes: 40, demo: false,
+    objective: "Concevoir le cœur d'un jeu avant de programmer : boucle de jeu, règles, objectif, et un document de conception d'une page.",
+    intro: "<p>Le <strong>game design</strong>, c'est concevoir ce que le joueur fait et ressent. Avant d'ouvrir un moteur de jeu, les studios décrivent la <strong>boucle de jeu</strong> : l'action que le joueur répète en permanence et qui doit être amusante en elle-même.</p><p>Exemple : dans un jeu de course, la boucle est « accélérer → éviter un obstacle → gagner du temps → recommencer ». Si cette boucle n'est pas agréable sur papier, aucun graphisme ne sauvera le jeu.</p>",
+    beginner: "Commence petit : un jeu qu'on peut terminer en 5 minutes, avec une seule mécanique bien faite. Tous les créateurs qui réussissent ont commencé par de tout petits jeux.",
+    advanced: "Fabrique un prototype papier (cartes, pions, dés) et fais-y jouer 3 personnes : tu découvriras en 20 minutes des problèmes qui t'auraient coûté des semaines de code.",
+    steps: [
+      { t: "Trouve l'idée en une phrase", d: "« Un jeu où [le joueur] doit [action] pour [objectif], mais [obstacle]. » Exemple : un pêcheur de Ganvié doit attraper des poissons avant la nuit, mais les pirogues adverses lui volent sa place." },
+      { t: "Définis la boucle de jeu", d: "Défi → action du joueur → retour immédiat (son, animation, points) → récompense → nouveau défi un peu plus dur. Écris-la sous forme de cercle." },
+      { t: "Fixe objectif, règles et défaite", d: "Comment gagne-t-on ? Que peut-on faire et ne pas faire ? Comment perd-on ? Des règles simples, expliquées en moins d'une minute." },
+      { t: "Choisis les commandes", d: "Combien de boutons ? Sur téléphone, un ou deux gestes maximum (toucher, glisser). Moins il y a de commandes, plus le jeu est accessible." },
+      { t: "Prévois les retours (feedback)", d: "Chaque action doit produire une réponse claire : un son, une petite animation, un chiffre qui s'affiche. Un jeu sans retour paraît « mou »." },
+      { t: "Rédige le document d'une page", d: "Titre, phrase d'idée, public, plateforme, boucle de jeu, commandes, objectif et défaite, 3 éléments de progression, style visuel avec 2 ou 3 images de référence." },
+      { t: "Teste avec un prototype papier", d: "Simule une partie avec des pions et des cartes. Observe sans expliquer : là où les joueurs hésitent ou s'ennuient, il faut simplifier." }],
+    params: [["Durée du premier jeu", "Une partie de 2 à 5 minutes"], ["Mécanique principale", "Une seule, bien faite"], ["Commandes sur téléphone", "1 ou 2 gestes"], ["Document de conception", "1 page"], ["Testeurs du prototype", "Au moins 3"]],
+    illustration: "gameloop", caption: "Schéma : la boucle de jeu, que le joueur répète en permanence.",
+    example: "« Zémidjan Rush » : le joueur conduit un zémidjan dans Cotonou et doit livrer ses passagers à l'heure en évitant les nids-de-poule. Boucle : prendre un client → choisir un itinéraire → éviter les obstacles → être payé → client suivant plus pressé. Une seule commande : glisser à gauche ou à droite.",
+    exercise: "Rédige le document de conception d'une page pour un jeu inspiré de ta ville : phrase d'idée, boucle de jeu dessinée, commandes, conditions de victoire et de défaite, progression sur 3 niveaux. Fabrique ensuite un prototype papier et fais-le tester par 3 personnes ; note 3 améliorations.",
+    resource: "res-cahier-game-design",
+    quiz: [
+      { q: "Qu'est-ce que la boucle de jeu ?", choices: ["L'action principale que le joueur répète", "Le menu de départ", "La musique de fond"], answer: 0, explain: "Si la boucle n'est pas amusante, le reste du jeu ne la sauvera pas." },
+      { q: "Pourquoi faire un prototype papier ?", choices: ["Pour tester les règles vite et gratuitement", "Pour remplacer le jeu final", "Pour éviter de jouer"], answer: 0, explain: "On découvre les problèmes de règles avant d'écrire une seule ligne de code." },
+      { q: "Combien de commandes conseille-t-on pour un premier jeu mobile ?", choices: ["1 ou 2 gestes", "Au moins 8 boutons", "Aucune"], answer: 0, explain: "Moins de commandes = jeu plus accessible et plus facile à apprendre." },
+      { q: "À quoi sert le « feedback » ?", choices: ["À montrer clairement au joueur le résultat de chaque action", "À punir le joueur", "À charger le niveau"], answer: 0, explain: "Sons, animations et points rendent les actions satisfaisantes." }],
+    recap: ["L'idée en une phrase.", "La boucle : défi, action, retour, récompense.", "Objectif, règles et défaite simples.", "Peu de commandes.", "Un retour clair pour chaque action.", "Document d'une page et prototype papier testé."] },
+
+  "gd-niveaux": { title: "Level design et courbe de difficulté", software: "Papier + tous moteurs", level: "Intermédiaire", minutes: 40, demo: false,
+    objective: "Concevoir des niveaux qui apprennent le jeu au joueur sans texte, avec une difficulté qui monte progressivement.",
+    intro: "<p>Le <strong>level design</strong> est l'art de construire les niveaux : où placer les obstacles, les ennemis, les récompenses. Un bon niveau <strong>enseigne</strong> : le joueur découvre une mécanique en sécurité, la pratique, puis la maîtrise face à un vrai défi.</p><p>La <strong>courbe de difficulté</strong> doit monter, mais pas en ligne droite : on alterne moments intenses et moments de repos, comme le rythme d'un film.</p>",
+    beginner: "Introduis une seule nouveauté à la fois. Si le joueur découvre en même temps un nouvel ennemi, un nouveau saut et un nouveau décor, il ne saura pas pourquoi il échoue.",
+    advanced: "Utilise des « indices visuels » cohérents dans tout le jeu : une couleur pour ce qui est dangereux, une autre pour ce qui est interactif. Le joueur lit le niveau sans tutoriel.",
+    steps: [
+      { t: "Applique la méthode en 4 temps", d: "Pour chaque mécanique : 1. la présenter sans danger, 2. la faire pratiquer, 3. la combiner avec une autre, 4. un test de maîtrise. C'est la structure de nombreux jeux célèbres." },
+      { t: "Dessine le niveau sur papier", d: "Une feuille quadrillée : départ, arrivée, chemin principal, obstacles, récompenses. Vérifie qu'on peut toujours avancer et qu'on ne peut pas rester bloqué." },
+      { t: "Guide le regard", d: "La lumière, les couleurs vives, les pièces à ramasser et les flèches du décor indiquent le chemin sans texte. Le joueur suit naturellement ce qui ressort." },
+      { t: "Place les points de sauvegarde", d: "Après chaque passage difficile, un point de reprise : le joueur ne doit jamais refaire 5 minutes de jeu à cause d'une erreur." },
+      { t: "Construis la courbe de difficulté", d: "Monte la difficulté par paliers, avec une pause après chaque pic (zone calme, récompense). Le dernier niveau combine tout ce qui a été appris." },
+      { t: "Récompense la curiosité", d: "Des chemins secrets ou des bonus cachés pour ceux qui explorent, sans pénaliser ceux qui vont tout droit." },
+      { t: "Fais tester et mesure", d: "Observe 3 joueurs sans les aider. Note où ils meurent, où ils hésitent, combien de temps ils mettent. Plus de 5 échecs au même endroit : simplifie." }],
+    params: [["Nouveautés par niveau", "Une seule"], ["Méthode", "Présenter, pratiquer, combiner, tester"], ["Points de reprise", "Après chaque passage difficile"], ["Courbe", "Paliers avec pauses"], ["Seuil d'alerte", "5 échecs au même endroit"]],
+    example: "Niveau 1 de « Zémidjan Rush » : une route droite sans danger pour apprendre à glisser, puis quelques nids-de-poule bien visibles, puis une rue avec nids-de-poule et voitures. Niveau 2 : les marchés ajoutent des piétons. Niveau final : heure de pointe, tout combiné, avec un point de reprise à chaque carrefour.",
+    exercise: "Dessine sur papier quadrillé les 3 premiers niveaux du jeu conçu à la leçon précédente, en appliquant la méthode en 4 temps. Trace la courbe de difficulté sur un graphique (temps en abscisse, difficulté en ordonnée). Fais tester le niveau 1 en prototype papier par 3 personnes et note où elles échouent.",
+    resource: "res-cahier-game-design",
+    quiz: [
+      { q: "Combien de nouvelles mécaniques introduire à la fois ?", choices: ["Une seule", "Trois", "Toutes dès le début"], answer: 0, explain: "Une nouveauté isolée se comprend ; trois à la fois créent la confusion." },
+      { q: "Quel est l'ordre de la méthode en 4 temps ?", choices: ["Présenter, pratiquer, combiner, tester", "Tester, présenter, oublier, recommencer", "Combiner, tester, présenter, pratiquer"], answer: 0, explain: "Le joueur apprend sans danger avant d'être mis à l'épreuve." },
+      { q: "Pourquoi alterner moments intenses et moments calmes ?", choices: ["Pour éviter la fatigue et donner du rythme", "Pour rallonger le jeu", "Parce que le moteur l'exige"], answer: 0, explain: "Comme dans un film, le rythme rend les pics plus marquants." },
+      { q: "Que faire si les testeurs échouent 5 fois au même endroit ?", choices: ["Simplifier ce passage", "Ajouter un ennemi", "Ne rien changer"], answer: 0, explain: "Un échec répété signale souvent un problème de lisibilité ou de difficulté." }],
+    recap: ["Le niveau enseigne le jeu sans texte.", "Une nouveauté à la fois.", "Présenter, pratiquer, combiner, tester.", "Guider le regard avec la lumière et la couleur.", "Courbe par paliers avec pauses.", "Observer les testeurs et simplifier."] },
+
+  "godot-bases": { title: "Premiers pas avec Godot : scènes, nœuds et GDScript", software: "Godot 4", level: "Débutant", minutes: 45, demo: false,
+    objective: "Installer Godot, comprendre l'organisation d'un projet en scènes et en nœuds, et écrire ton premier script GDScript.",
+    intro: "<p><strong>Godot</strong> est un moteur de jeu <strong>gratuit et libre</strong>, léger (il tourne sur des ordinateurs modestes) et très utilisé pour les jeux 2D. Pas d'abonnement, pas de redevance sur tes ventes.</p><p>Dans Godot, tout est fait de <strong>nœuds</strong> (un sprite, une caméra, un son, une zone de collision) rangés en arbre dans des <strong>scènes</strong>. Le joueur est une scène, une pièce est une scène, un niveau est une scène qui contient les autres. Le langage <strong>GDScript</strong> ressemble beaucoup à Python.</p>",
+    beginner: "Garde le Gestionnaire de projets bien rangé : un dossier par jeu, avec des sous-dossiers scenes, scripts, images et sons dès le premier jour.",
+    advanced: "Pense « une scène = un objet réutilisable » : crée la pièce une seule fois, puis instancie-la autant de fois que nécessaire dans tes niveaux.",
+    steps: [
+      { t: "Installe Godot 4", d: "Télécharge Godot 4 sur godotengine.org (version standard). Pas d'installation compliquée : décompresse et lance. Crée un nouveau projet dans un dossier vide." },
+      { t: "Découvre l'interface", d: "À gauche, l'arbre de la scène (les nœuds) et le système de fichiers. Au centre, la vue 2D. À droite, l'Inspecteur, qui affiche les propriétés du nœud sélectionné." },
+      { t: "Crée ta première scène", d: "Scène > Nouvelle scène, nœud racine Node2D, renomme-le « Monde ». Enregistre-la (monde.tscn) et définis-la comme scène principale dans Projet > Paramètres du projet > Application > Exécuter.", keys: ["Ctrl+S"] },
+      { t: "Ajoute des nœuds", d: "Clic sur + (Ajouter un nœud enfant) : ajoute un Sprite2D et glisse une image dans sa propriété Texture. Ajoute un Label pour afficher du texte.", keys: ["Ctrl+A"] },
+      { t: "Attache un script", d: "Clic droit sur le nœud Monde > Attacher un script. GDScript, nom monde.gd. La fonction _ready() s'exécute une fois quand le nœud apparaît." },
+      { t: "Écris du GDScript", d: "var score := 0 déclare une variable, func ajouter_points(points): déclare une fonction. L'indentation (avec Tab) définit les blocs, comme en Python." },
+      { t: "Lance le jeu", d: "F5 lance la scène principale, F6 la scène ouverte. Les print() s'affichent dans le panneau Sortie en bas de l'écran.", keys: ["F5", "F6"] }],
+    params: [["Version", "Godot 4 (standard)"], ["Organisation", "Scènes faites de nœuds"], ["Langage", "GDScript"], ["Démarrage d'un nœud", "func _ready()"], ["Lancer le jeu", "F5"]],
+    code: `extends Node2D
+
+const NOM_DU_JEU := "Aventure à Ganvié"
+var score := 0
+
+func _ready():
+	print("Bienvenue dans ", NOM_DU_JEU)
+	ajouter_points(10)
+	ajouter_points(5)
+
+func ajouter_points(points):
+	score += points
+	print("Score : ", score)
+	if score >= 15:
+		print("Niveau suivant débloqué !")`,
+    example: "Le projet « Aventure à Ganvié » : une scène Monde avec un décor de lagune (Sprite2D), un titre (Label) et un script qui affiche le message de bienvenue et gère le score. Les scènes du joueur et des poissons seront ajoutées à la leçon suivante.",
+    exercise: "Crée un projet Godot avec une scène principale contenant un décor, un Label de titre et un script : une variable vies := 3, une fonction perdre_une_vie() qui retire une vie et affiche « Partie terminée » quand il n'en reste plus. Appelle-la trois fois dans _ready() et vérifie la Sortie.",
+    resource: "res-cahier-godot",
+    quiz: [
+      { q: "De quoi est faite une scène Godot ?", choices: ["D'un arbre de nœuds", "D'une seule image", "D'un fichier Excel"], answer: 0, explain: "Chaque nœud a un rôle : image, collision, son, caméra…" },
+      { q: "Quand s'exécute la fonction _ready() ?", choices: ["Une fois, quand le nœud apparaît dans la scène", "À chaque image", "Jamais automatiquement"], answer: 0, explain: "On l'utilise pour préparer l'état de départ." },
+      { q: "À quel langage ressemble GDScript ?", choices: ["Python", "HTML", "SQL"], answer: 0, explain: "Même logique d'indentation et syntaxe proche." },
+      { q: "Quelle touche lance la scène principale ?", choices: ["F5", "F12", "Ctrl+P"], answer: 0, explain: "F6 lance seulement la scène actuellement ouverte." }],
+    recap: ["Godot : gratuit, libre, léger.", "Tout est nœud ; les nœuds forment des scènes.", "Une scène = un objet réutilisable.", "GDScript proche de Python.", "_ready() au démarrage du nœud.", "F5 pour lancer, Sortie pour lire les print()."] },
+
+  "godot-joueur": { title: "Déplacer un joueur et ramasser des objets", software: "Godot 4", level: "Intermédiaire", minutes: 55, demo: false,
+    objective: "Créer un personnage contrôlé au clavier ou à la manette, gérer les collisions et compter les objets ramassés.",
+    intro: "<p>Un personnage jouable dans Godot repose sur le nœud <strong>CharacterBody2D</strong> : il se déplace avec la fonction <strong>move_and_slide()</strong> et s'arrête contre les murs grâce à sa forme de collision.</p><p>Pour les objets à ramasser, on utilise une <strong>Area2D</strong> : une zone qui détecte quand quelque chose entre dedans et envoie un <strong>signal</strong>. Les signaux sont la façon dont les nœuds se parlent dans Godot : « une pièce a été ramassée » → le score augmente.</p>",
+    beginner: "Si le personnage traverse les murs, vérifie que le joueur ET le mur ont chacun une CollisionShape2D avec une forme définie : c'est l'oubli le plus fréquent.",
+    advanced: "Définis tes propres actions dans Projet > Paramètres > Contrôles (InputMap) : « gauche », « droite »… Tu pourras ensuite proposer plusieurs touches ou une manette sans toucher au code.",
+    steps: [
+      { t: "Crée la scène du joueur", d: "Nouvelle scène avec un CharacterBody2D renommé « Joueur », un Sprite2D (l'image du personnage) et une CollisionShape2D (forme : rectangle ou capsule ajustée au sprite). Enregistre joueur.tscn." },
+      { t: "Écris le déplacement", d: "Attache un script au Joueur. Dans _physics_process(delta), lis la direction avec Input.get_vector(), multiplie par la vitesse dans velocity, puis appelle move_and_slide()." },
+      { t: "Rends la vitesse réglable", d: "Le mot-clé @export devant var vitesse fait apparaître la vitesse dans l'Inspecteur : tu l'ajustes sans rouvrir le code." },
+      { t: "Ajoute des murs", d: "Dans la scène Monde, ajoute des StaticBody2D avec une CollisionShape2D pour les bords et les obstacles. Instancie le joueur (icône chaîne) et teste : il doit glisser le long des murs." },
+      { t: "Crée la pièce à ramasser", d: "Nouvelle scène : Area2D « Piece » avec un Sprite2D et une CollisionShape2D. Dans l'onglet Nœud, connecte le signal body_entered à son propre script." },
+      { t: "Émet un signal et disparais", d: "Dans le script de la pièce : déclare signal ramassee. Quand le corps qui entre est le joueur, appelle ramassee.emit() puis queue_free() pour supprimer la pièce." },
+      { t: "Compte le score", d: "Dans le Monde, connecte le signal ramassee de chaque pièce à une fonction qui augmente le score et met à jour un Label. Ton premier jeu jouable est prêt !" }],
+    params: [["Personnage", "CharacterBody2D"], ["Déplacement", "velocity + move_and_slide()"], ["Collision", "CollisionShape2D sur chaque corps"], ["Zone de détection", "Area2D + body_entered"], ["Réglage dans l'Inspecteur", "@export"]],
+    code: `# joueur.gd (sur le CharacterBody2D « Joueur »)
+extends CharacterBody2D
+
+@export var vitesse := 200.0
+
+func _physics_process(_delta):
+	var direction := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	velocity = direction * vitesse
+	move_and_slide()
+
+
+# piece.gd (sur l'Area2D « Piece »)
+extends Area2D
+
+signal ramassee
+
+func _on_body_entered(body):
+	if body.name == "Joueur":
+		ramassee.emit()
+		queue_free()`,
+    example: "Dans « Aventure à Ganvié », le joueur dirige une pirogue sur la lagune avec les flèches. Les maisons sur pilotis sont des obstacles (StaticBody2D) ; les poissons sont des Area2D qui disparaissent quand la pirogue les touche, et le compteur en haut de l'écran augmente.",
+    exercise: "Termine ton premier jeu : un joueur qui se déplace, au moins 4 murs, 10 objets à ramasser et un Label de score. Ajoute une condition de victoire (« Bravo ! » quand tout est ramassé) et un minuteur de 60 secondes (nœud Timer) qui affiche « Temps écoulé » à la fin.",
+    resource: "res-cahier-godot",
+    quiz: [
+      { q: "Quel nœud utiliser pour un personnage contrôlé par le joueur ?", choices: ["CharacterBody2D", "Label", "AudioStreamPlayer"], answer: 0, explain: "Il gère le mouvement et les collisions avec move_and_slide()." },
+      { q: "Pourquoi le personnage traverse-t-il un mur ?", choices: ["Il manque une CollisionShape2D au joueur ou au mur", "La vitesse est trop faible", "Le jeu n'est pas enregistré"], answer: 0, explain: "Sans forme de collision, Godot ne sait pas où est le corps." },
+      { q: "Que fait queue_free() ?", choices: ["Supprime le nœud de la scène", "Met le jeu en pause", "Ajoute un point"], answer: 0, explain: "La pièce ramassée disparaît proprement." },
+      { q: "À quoi sert un signal ?", choices: ["À prévenir d'autres nœuds qu'un événement s'est produit", "À dessiner un sprite", "À changer de langue"], answer: 0, explain: "Les signaux permettent aux nœuds de communiquer sans dépendre les uns des autres." }],
+    recap: ["Joueur = CharacterBody2D + Sprite2D + CollisionShape2D.", "Input.get_vector → velocity → move_and_slide().", "@export pour régler dans l'Inspecteur.", "Murs : StaticBody2D avec collision.", "Objets : Area2D + body_entered.", "Signaux pour communiquer, queue_free pour supprimer."] }
+});
 /* Leçons annoncées, sans contenu pour l'instant. */
+[["web-formulaire", "Formulaires et contact"], ["web-mise-en-ligne", "Mettre son site en ligne"], ["wp-referencement", "Être trouvé sur Google"],
+ ["js-projet", "Projet : une liste de courses interactive"], ["py-fichiers", "Lire et écrire des fichiers"], ["gd-pitch", "Présenter son jeu (pitch)"],
+ ["godot-niveau", "Construire un niveau avec les tuiles"], ["godot-export", "Sons, menus et exportation du jeu"]
+].forEach(([id, title]) => { LESSONS[id] = { title, soon: true }; });
 [["intro-graphisme", "Qu'est-ce que le graphisme ?"], ["composition", "Les principes de composition"], ["contrastes", "Gérer les contrastes"],
  ["ps-interface", "L'interface de Photoshop"], ["ps-calques", "Comprendre les calques"], ["ps-retouche", "Retouche de portrait"], ["ps-export", "Exporter pour le web et l'impression"],
  ["affiche-composition", "Composer une affiche publicitaire"], ["flyer-evenement", "Flyer événementiel de A à Z"],
@@ -1088,8 +1707,38 @@ const RESOURCES = [
   { id: "res-titres", title: "Modèles de titres animés", type: "Présélections et titres", category: "video", software: ["premiere", "aftereffects"], level: "Intermédiaire", file: null, format: "MOGRT", licence: "À définir", access: "compte", desc: "Titres réglables pour Premiere Pro." },
   { id: "res-projet-montage", title: "Projet de montage d'exemple : interview", type: "Projet d'exemple", category: "video", software: ["resolve"], level: "Débutant", file: null, format: "DRP + médias", licence: "À définir", access: "compte", desc: "Projet DaVinci Resolve avec rushes d'entraînement." },
   { id: "res-rushes", title: "Séquences vidéo d'entraînement (marché, rue, portrait)", type: "Séquences d'entraînement", category: "video", software: [], level: "Débutant", file: null, format: "MP4", licence: "À définir", access: "compte", desc: "Rushes tournés au Bénin, avec autorisation des personnes filmées." },
-  { id: "res-sons", title: "Effets sonores et ambiances", type: "Audio", category: "video", software: [], level: "Débutant", file: null, format: "WAV", licence: "Vérification en cours", access: "compte", desc: "Ambiances de rue, de marché et de nature, sous licence vérifiée." }
+  { id: "res-sons", title: "Effets sonores et ambiances", type: "Audio", category: "video", software: [], level: "Débutant", file: null, format: "WAV", licence: "Vérification en cours", access: "compte", desc: "Ambiances de rue, de marché et de nature, sous licence vérifiée." },
+  { id: "res-cahier-web", title: "Cahier d'exercices : HTML, CSS et responsive", type: "Cahier d'exercices", category: "web", software: ["vscode"], level: "Débutant",
+    file: "ressources/tobmaq-cahier-web-html-css.pdf", preview: "apercus/tobmaq-cahier-web-html-css.png", format: "PDF", size: "70 Ko", pages: 4,
+    licence: "CC BY 4.0 · TOB-MAQ", access: "libre", desc: "5 exercices progressifs, de la première page à une grille de produits responsive, avec les corrigés en code complet." },
+  { id: "res-cahier-wordpress", title: "Cahier d'exercices : site vitrine WordPress", type: "Cahier d'exercices", category: "web", software: ["wordpress"], level: "Débutant",
+    file: "ressources/tobmaq-cahier-wordpress.pdf", preview: "apercus/tobmaq-cahier-wordpress.png", format: "PDF", size: "49 Ko", pages: 3,
+    licence: "CC BY 4.0 · TOB-MAQ", access: "libre", desc: "4 mises en situation avec un client : budget, cahier des charges, construction du site et checklist de livraison, avec les corrigés." },
+  { id: "res-cahier-javascript", title: "Cahier d'exercices : JavaScript", type: "Cahier d'exercices", category: "developpement", software: ["vscode"], level: "Débutant",
+    file: "ressources/tobmaq-cahier-javascript.pdf", preview: "apercus/tobmaq-cahier-javascript.png", format: "PDF", size: "69 Ko", pages: 4,
+    licence: "CC BY 4.0 · TOB-MAQ", access: "libre", desc: "5 exercices, des variables jusqu'à un calculateur interactif, avec les corrigés en code commenté." },
+  { id: "res-cahier-python", title: "Cahier d'exercices : Python", type: "Cahier d'exercices", category: "developpement", software: ["python"], level: "Débutant",
+    file: "ressources/tobmaq-cahier-python.pdf", preview: "apercus/tobmaq-cahier-python.png", format: "PDF", size: "70 Ko", pages: 4,
+    licence: "CC BY 4.0 · TOB-MAQ", access: "libre", desc: "5 exercices concrets (convertisseur FCFA, tontine, stock, devinette) avec les corrigés en code Python commenté." },
+  { id: "res-cahier-game-design", title: "Cahier d'exercices : game design", type: "Cahier d'exercices", category: "jeux-video", software: [], level: "Débutant",
+    file: "ressources/tobmaq-cahier-game-design.pdf", preview: "apercus/tobmaq-cahier-game-design.png", format: "PDF", size: "49 Ko", pages: 3,
+    licence: "CC BY 4.0 · TOB-MAQ", access: "libre", desc: "4 exercices pour concevoir un jeu sur papier : analyse, boucle de jeu, document de conception et niveaux, avec les éléments de réponse." },
+  { id: "res-cahier-godot", title: "Cahier d'exercices : Godot et GDScript", type: "Cahier d'exercices", category: "jeux-video", software: ["godot"], level: "Intermédiaire",
+    file: "ressources/tobmaq-cahier-godot.pdf", preview: "apercus/tobmaq-cahier-godot.png", format: "PDF", size: "68 Ko", pages: 3,
+    licence: "CC BY 4.0 · TOB-MAQ", access: "libre", desc: "4 exercices en GDScript (vies, course, minuteur, ennemi) pour finir un premier jeu jouable, avec les corrigés." },
+  { id: "res-cahier-graphisme", title: "Cahier d'exercices : graphisme", type: "Cahier d'exercices", category: "graphisme", software: ["photoshop", "illustrator", "canva"], level: "Débutant",
+    file: "ressources/tobmaq-cahier-graphisme.pdf", preview: "apercus/tobmaq-cahier-graphisme.png", format: "PDF", size: "49 Ko", pages: 3,
+    licence: "CC BY 4.0 · TOB-MAQ", access: "libre", desc: "5 exercices sur les couleurs, la typographie, l'affiche, le logo et les formats, avec les éléments de réponse et les grilles d'évaluation." },
+  { id: "res-cahier-maquettisme", title: "Cahier d'exercices : maquettisme et mise en page", type: "Cahier d'exercices", category: "maquettisme", software: ["indesign", "affinity"], level: "Intermédiaire",
+    file: "ressources/tobmaq-cahier-maquettisme.pdf", preview: "apercus/tobmaq-cahier-maquettisme.png", format: "PDF", size: "49 Ko", pages: 3,
+    licence: "CC BY 4.0 · TOB-MAQ", access: "libre", desc: "4 exercices de mise en page (grille, coquilles typographiques, chemin de fer, calculs d'impression) avec les corrigés." },
+  { id: "res-cahier-montage", title: "Cahier d'exercices : montage vidéo", type: "Cahier d'exercices", category: "video", software: ["premiere", "resolve", "capcut"], level: "Débutant",
+    file: "ressources/tobmaq-cahier-montage-video.pdf", preview: "apercus/tobmaq-cahier-montage-video.png", format: "PDF", size: "50 Ko", pages: 3,
+    licence: "CC BY 4.0 · TOB-MAQ", access: "libre", desc: "5 exercices de montage (timecode, ordre des plans, Reel, publicité, export) avec les corrigés et les grilles d'évaluation." }
 ];
+/* Une leçon sans ressource propre renvoie au cahier d'exercices de son domaine. */
+const CAHIER_DOMAINE = { graphisme: "res-cahier-graphisme", maquettisme: "res-cahier-maquettisme", video: "res-cahier-montage" };
+Object.entries(LESSONS).forEach(([id, l]) => { if (!l.soon && !l.resource) { const f = formationOfLesson(id); if (f && CAHIER_DOMAINE[f.domain]) l.resource = CAHIER_DOMAINE[f.domain]; } });
 const RES_TYPES = [...new Set(RESOURCES.map(r => r.type))].sort();
 
 /* Portfolio : EXEMPLES créés par l'équipe (aucun apprenant inventé). */
@@ -1129,6 +1778,8 @@ const ICONS = {
   layout: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>',
   film: '<rect x="2" y="3" width="20" height="18" rx="2"/><path d="M7 3v18M17 3v18M2 8h5M2 13h5M2 18h5M17 8h5M17 13h5M17 18h5"/>',
   spark: '<path d="M12 3l1.9 5.6L19.5 10l-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.4z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/>',
+  code: '<path d="M8 6l-6 6 6 6M16 6l6 6-6 6M14 4l-4 16"/>',
+  terminal: '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 9l4 3-4 3M12 15h6"/>',
   game: '<rect x="2" y="6" width="20" height="12" rx="4"/><path d="M6 12h4M8 10v4M15 11h.01M18 13h.01"/>',
   download: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>',
   upload: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>',
@@ -1334,9 +1985,13 @@ function formationProgress(f) {
 }
 
 function cover(f) {
-  const hue = { graphisme: [250, 20], maquettisme: [330, 200], video: [265, 20] }[f.domain];
+  const hue = { graphisme: [250, 20], maquettisme: [330, 200], video: [265, 20], web: [205, 20], developpement: [160, 265], "jeux-video": [290, 40] }[f.domain];
   const id = "cg" + f.id.replace(/\W/g, "");
-  const art = f.domain === "video"
+  const art = f.domain === "web" || f.domain === "developpement"
+    ? `<g opacity=".95"><rect x="188" y="16" width="150" height="88" rx="8" fill="#0B0E17" stroke="hsl(${hue[0]} 70% 60%)"/>${[0, 1, 2, 3, 4, 5].map(i => `<rect x="${200 + (i % 3 === 1 ? 14 : i % 3 === 2 ? 28 : 0)}" y="${30 + i * 11}" width="${[60, 84, 40, 70, 52, 30][i]}" height="5" rx="2.5" fill="hsl(${hue[i % 2]} 80% 65%)"/>`).join("")}<text x="306" y="100" fill="hsl(${hue[1]} 90% 65%)" style="font:700 22px var(--font-mono)">${f.domain === "web" ? "&lt;/&gt;" : "{ }"}</text></g>`
+    : f.domain === "jeux-video"
+    ? `<g opacity=".95"><rect x="200" y="34" width="130" height="64" rx="28" fill="hsl(${hue[0]} 60% 55%)"/><rect x="224" y="58" width="22" height="7" rx="2" fill="#fff"/><rect x="231.5" y="50.5" width="7" height="22" rx="2" fill="#fff"/><circle cx="296" cy="56" r="6" fill="hsl(${hue[1]} 90% 60%)"/><circle cx="310" cy="70" r="6" fill="#fff"/>${[0, 1, 2, 3].map(i => `<rect x="${150 + i * 10}" y="${20 + (i % 2) * 10}" width="8" height="8" fill="hsl(${hue[1]} 90% 60%)"/>`).join("")}</g>`
+    : f.domain === "video"
     ? `<g opacity=".9">${[0, 1, 2, 3, 4].map(i => `<rect x="${20 + i * 64}" y="40" width="${40 + (i % 2) * 14}" height="14" rx="3" fill="hsl(${hue[0] + i * 12} 80% 65%)"/>`).join("")}<rect x="20" y="62" width="300" height="10" rx="3" fill="#ffffff22"/><path d="M20 90 ${Array.from({ length: 30 }, (_, i) => `L${20 + i * 10} ${90 + Math.sin(i * 1.3) * 8}`).join(" ")}" stroke="#ffffff55" fill="none"/><rect x="170" y="30" width="2" height="80" fill="#FF7A45"/></g>`
     : f.domain === "maquettisme"
       ? `<g opacity=".9"><rect x="200" y="14" width="80" height="104" fill="#fff" opacity=".92"/><rect x="284" y="14" width="80" height="104" fill="#fff" opacity=".85"/>${[0, 1, 2].map(i => `<rect x="${206 + i * 25}" y="44" width="20" height="66" fill="hsl(${hue[0]} 70% 60% / .35)"/>`).join("")}<rect x="206" y="22" width="68" height="14" fill="hsl(${hue[1]} 80% 50%)"/><rect x="290" y="22" width="68" height="40" fill="hsl(${hue[0]} 60% 55%)"/></g>`
@@ -1435,6 +2090,23 @@ const ILLUSTRATIONS = {
       <line x1="196" y1="30" x2="196" y2="205" stroke="#FF7A45" stroke-width="2"/><path d="M190 30 h12 l-6 8z" fill="#FF7A45"/>
       <text x="204" y="210" fill="#FF9A6B" style="font:11px var(--font-body)">Tête de lecture</text><text x="152" y="47" fill="#ECEEF5" style="font:10px var(--font-body)">point de montage</text></svg>`;
   },
+  boxmodel() {
+    const box = (x, y, w, h, fill, stroke, label, dash) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="6" fill="${fill}" stroke="${stroke}" stroke-width="2" ${dash ? 'stroke-dasharray="6 4"' : ""}/><text x="${x + 10}" y="${y + 18}" fill="${stroke}" style="font:700 12px var(--font-mono)">${label}</text>`;
+    return `<svg viewBox="0 0 420 300" role="img" aria-label="Modèle de boîte CSS : contenu, padding, bordure et marge">
+      ${box(20, 16, 380, 268, "#FFEDE5", "#C2410C", "margin (extérieur)", true)}${box(60, 50, 300, 200, "#12141C", "#12141C", "", false)}
+      <text x="70" y="68" fill="#fff" style="font:700 12px var(--font-mono)">border (bordure)</text>
+      ${box(72, 78, 276, 160, "#ECE8FF", "#4A2FE0", "padding (intérieur)", false)}${box(122, 116, 176, 84, "#FFFFFF", "#16794A", "contenu", false)}
+      <text x="210" y="172" text-anchor="middle" fill="#12141C" style="font:600 13px var(--font-body)">Texte ou image</text></svg>`;
+  },
+  gameloop() {
+    const pts = [["Défi", 210, 46, "#5B3DF5"], ["Action du joueur", 340, 150, "#00A3D1"], ["Retour (son, effet, points)", 210, 254, "#C2410C"], ["Récompense", 80, 150, "#16794A"]];
+    return `<svg viewBox="0 0 420 300" role="img" aria-label="Boucle de jeu : défi, action du joueur, retour, récompense, puis nouveau défi">
+      <defs><marker id="glA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#A2A9BC"/></marker></defs>
+      <circle cx="210" cy="150" r="104" fill="none" stroke="#A2A9BC" stroke-width="3" stroke-dasharray="14 10"/>
+      ${[[290, 70], [290, 230], [130, 230], [130, 70]].map(([x, y], i) => { const a = [[300, 80, 312, 96], [302, 218, 290, 232], [120, 220, 108, 204], [118, 82, 130, 68]][i]; return `<line x1="${a[0]}" y1="${a[1]}" x2="${a[2]}" y2="${a[3]}" stroke="#A2A9BC" stroke-width="3" marker-end="url(#glA)"/>`; }).join("")}
+      ${pts.map(([t, x, y, c]) => `<g><rect x="${x - (y === 150 ? 64 : 76)}" y="${y - 18}" width="${y === 150 ? 128 : 152}" height="36" rx="18" fill="${c}"/><text x="${x}" y="${y + 5}" text-anchor="middle" fill="#fff" style="font:700 ${t.length > 18 ? 10 : 13}px var(--font-body)">${t}</text></g>`).join("")}
+      <text x="210" y="140" text-anchor="middle" fill="#12141C" style="font:800 15px var(--font-display)">Boucle</text><text x="210" y="158" text-anchor="middle" fill="#545B6E" style="font:11px var(--font-body)">un peu plus dure</text><text x="210" y="172" text-anchor="middle" fill="#545B6E" style="font:11px var(--font-body)">à chaque tour</text></svg>`;
+  },
   safezone() {
     return `<svg viewBox="0 0 420 320" role="img" aria-label="Cadre vertical 9:16 et zones occupées par l'interface">
       <rect x="40" y="10" width="168" height="299" rx="12" fill="#141927"/><rect x="40" y="234" width="168" height="75" fill="#C2410C" opacity=".35"/><rect x="176" y="120" width="32" height="114" fill="#C2410C" opacity=".35"/>
@@ -1490,6 +2162,9 @@ function heroArt() {
   </svg>`;
 }
 function domainArt(id) {
+  if (id === "web") return `<svg viewBox="0 0 300 120" aria-hidden="true"><rect x="50" y="14" width="200" height="92" rx="8" style="fill:var(--surface);stroke:var(--line)"/><rect x="50" y="14" width="200" height="16" rx="8" fill="#1F7ACC"/><circle cx="62" cy="22" r="3" fill="#fff"/><circle cx="72" cy="22" r="3" fill="#fff"/><rect x="62" y="40" width="80" height="10" rx="3" fill="#5B3DF5"/><rect x="62" y="56" width="120" height="5" rx="2" fill="#A2A9BC"/><rect x="62" y="66" width="100" height="5" rx="2" fill="#A2A9BC"/>${[0, 1, 2].map(i => `<rect x="${62 + i * 60}" y="78" width="52" height="20" rx="4" fill="${["#F2612D", "#00A3D1", "#D6006F"][i]}" opacity=".85"/>`).join("")}</svg>`;
+  if (id === "developpement") return `<svg viewBox="0 0 300 120" aria-hidden="true"><rect x="40" y="14" width="220" height="92" rx="8" fill="#141927"/>${[["const", "#C792EA", 54], ["total", "#82AAFF", 96], ["=", "#ECEEF5", 136], ["prix * q;", "#F78C6C", 150]].map(([t, c, x]) => `<text x="${x}" y="44" fill="${c}" style="font:600 13px var(--font-mono)">${t}</text>`).join("")}<text x="54" y="66" fill="#C3E88D" style="font:600 13px var(--font-mono)">console.log(total);</text><text x="54" y="90" fill="#4ADE95" style="font:600 13px var(--font-mono)">&gt; 7500</text><rect x="104" y="80" width="8" height="13" fill="#4ADE95"><animate attributeName="opacity" values="1;0;1" dur="1.2s" repeatCount="indefinite"/></rect></svg>`;
+  if (id === "jeux-video") return `<svg viewBox="0 0 300 120" aria-hidden="true"><rect x="30" y="14" width="240" height="92" rx="8" fill="#1D2336"/><rect x="30" y="86" width="240" height="20" fill="#4E8A3E"/>${[[70, 70], [130, 54], [190, 70]].map(([x, y]) => `<rect x="${x}" y="${y}" width="40" height="10" fill="#C9A66B"/>`).join("")}<rect x="84" y="50" width="16" height="20" rx="3" fill="#F2612D"/><circle cx="92" cy="45" r="7" fill="#8A5A3B"/>${[150, 206, 236].map(x => `<circle cx="${x}" cy="40" r="6" fill="#FFD66B"/>`).join("")}<text x="250" y="30" text-anchor="end" fill="#ECEEF5" style="font:700 12px var(--font-mono)">SCORE 120</text></svg>`;
   if (id === "graphisme") return `<svg viewBox="0 0 300 120" aria-hidden="true"><circle cx="120" cy="60" r="38" fill="#5B3DF5" opacity=".85"/><rect x="140" y="30" width="62" height="62" fill="#F2612D" opacity=".85" transform="rotate(14 171 61)"/><path d="M60 100 C 110 10, 190 120, 250 30" style="stroke:var(--ink)" stroke-width="2" fill="none"/><circle cx="60" cy="100" r="4" style="fill:var(--ink)"/><circle cx="250" cy="30" r="4" style="fill:var(--ink)"/></svg>`;
   if (id === "maquettisme") return `<svg viewBox="0 0 300 120" aria-hidden="true"><rect x="70" y="14" width="80" height="96" style="fill:var(--surface);stroke:var(--line)"/><rect x="152" y="14" width="80" height="96" style="fill:var(--surface);stroke:var(--line)"/>${[0, 1, 2, 3, 4, 5].map(i => `<rect x="${76 + i * 26}" y="20" width="20" height="84" fill="#D6006F" opacity=".1"/>`).join("")}<rect x="76" y="22" width="68" height="16" style="fill:var(--ink)"/><rect x="158" y="22" width="68" height="44" fill="#00A3D1" opacity=".7"/><g stroke="#D6006F"><path d="M64 14h-8M70 8V0M238 14h8M232 8V0"/></g></svg>`;
   return `<svg viewBox="0 0 300 120" aria-hidden="true"><rect x="30" y="20" width="240" height="80" rx="8" fill="#141927"/>${[[40, 60], [104, 90], [198, 62]].map(([x, w]) => `<rect x="${x}" y="34" width="${w}" height="18" rx="3" fill="#5B3DF5"/>`).join("")}<rect x="40" y="60" width="220" height="14" rx="3" fill="#123A2A"/><rect x="40" y="80" width="220" height="10" rx="3" fill="#3A1E14"/><line x1="150" y1="26" x2="150" y2="96" stroke="#FF7A45" stroke-width="2"/></svg>`;
@@ -1531,7 +2206,7 @@ function renderHome(main) {
     <div>
       <span class="eyebrow">Imagine. Crée. Maîtrise.</span>
       <h1 tabindex="-1">Transforme tes idées en <em>créations professionnelles.</em></h1>
-      <p class="lead">Apprends le graphisme, le maquettisme et le montage vidéo cinématique avec des tutoriels pratiques, des exercices guidés et des outils créatifs propulsés par l'intelligence artificielle.</p>
+      <p class="lead">Apprends le graphisme, le maquettisme, le montage vidéo, la création web, la programmation et les jeux vidéo avec des tutoriels pratiques, des exercices guidés et des outils créatifs propulsés par l'intelligence artificielle.</p>
       <div class="hero-ctas">
         <a class="btn btn-grad btn-lg" href="#/inscription">Commencer à apprendre ${icon("arrow")}</a>
         <a class="btn btn-night btn-lg" href="#/formations">Explorer les formations</a>
@@ -1550,7 +2225,7 @@ function renderHome(main) {
   </div></section>
 
   <section class="section"><div class="wrap">
-    <div class="head"><span class="eyebrow">Nos domaines de formation</span><h2>Trois métiers, une même exigence</h2><p>Chaque domaine combine théorie claire, tutoriels pas à pas et exercices corrigés.</p></div>
+    <div class="head"><span class="eyebrow">Nos domaines de formation</span><h2>Six métiers, une même exigence</h2><p>Chaque domaine combine théorie claire, tutoriels pas à pas et exercices corrigés.</p></div>
     <div class="grid g3">${DOMAINS.map(d => `<article class="card link domain-card"><div class="domain-art">${domainArt(d.id)}</div><span class="num">${d.tag} / ${d.modules.length} modules</span>
       <h3><a class="stretch" href="#/${d.id}">${d.name}</a></h3><p>${d.short}</p>
       <ul>${SOFTWARE.filter(s => DOMAIN_SOFT[d.id].includes(s.id)).slice(0, 5).map(s => `<li class="chip">${s.name.replace("Adobe ", "")}</li>`).join("")}</ul></article>`).join("")}</div>
@@ -1624,7 +2299,7 @@ function renderHome(main) {
     toast("Centres d'intérêt enregistrés sur cet appareil");
   });
 }
-const DOMAIN_SOFT = { graphisme: ["photoshop", "illustrator", "indesign", "canva", "affinity", "gimp", "inkscape"], maquettisme: ["indesign", "affinity", "illustrator"], video: ["premiere", "resolve", "finalcut", "capcut", "aftereffects"] };
+const DOMAIN_SOFT = { web: ["vscode", "wordpress"], developpement: ["vscode", "python"], "jeux-video": ["godot"], graphisme: ["photoshop", "illustrator", "indesign", "canva", "affinity", "gimp", "inkscape"], maquettisme: ["indesign", "affinity", "illustrator"], video: ["premiere", "resolve", "finalcut", "capcut", "aftereffects"] };
 function softTile(s) { return `<div class="soft"><span class="tag" style="background:${s.color}">${s.tag}</span><div style="min-width:0"><b>${s.name}</b><span>${s.licence}</span></div></div>`; }
 function pfCard(p) {
   return `<article class="card link pf-card"><div class="pf-thumb">${portfolioArt(p)}</div><div class="pf-body"><div class="row"><span class="chip">${p.discipline}</span><span class="demo">Exemple TOB-MAQ</span></div>
@@ -1678,6 +2353,9 @@ function renderDomain(main, id) {
   const notes = {
     graphisme: "Chaque cours comprend : objectif, explication, tutoriel pas à pas, illustration, exemple, exercice, fichier source quand il existe, quiz et fiche récapitulative.",
     maquettisme: "Les exercices de mise en page fournissent un fichier de départ, des consignes et des critères d'évaluation.",
+    web: "Chaque leçon contient du code prêt à copier, un exercice avec des critères de réussite, un quiz, et un cahier d'exercices PDF corrigé. Tout se fait avec des outils gratuits.",
+    developpement: "On apprend en construisant de petits outils utiles (calculateur de prix, gestion de stock). Les exemples de code sont complets et testés ; le cahier d'exercices PDF contient les corrigés.",
+    "jeux-video": "On conçoit d'abord sur papier (game design), puis on programme avec Godot, un moteur gratuit et libre. Le cahier d'exercices PDF accompagne chaque formation.",
     video: "Chaque tutoriel précise le logiciel utilisé. Les fonctions, les noms de menus et les raccourcis diffèrent d'un logiciel à l'autre : ne les transpose pas sans vérifier."
   };
   main.innerHTML = pageHead({ crumbs: [[d.name]], eyebrow: `Centre de formation · ${d.tag}`, title: d.name, lead: d.short,
@@ -1774,6 +2452,7 @@ function renderLesson(main, lid) {
         ${l.software.match(/Premiere|Resolve|CapCut/) ? `<section><h2><span class="n">${n()}</span> Démonstration vidéo</h2>${l.video ? `<video controls preload="none" style="width:100%;border-radius:12px" src="${esc(l.video)}"></video>` : emptyState({ ic: "video", title: "Vidéo en préparation", text: "La démonstration filmée sera ajoutée ici. Elle se chargera seulement quand tu appuieras sur lecture, pour économiser ta connexion." })}</section>` : ""}
         <section><h2><span class="n">${n()}</span> Tutoriel étape par étape</h2><ol class="howto">${l.steps.map(s => `<li><b>${esc(s.t)}</b><p>${esc(s.d)}</p>${s.keys ? `<div class="keys">${s.keys.map(k => `<span class="kbd">${esc(k)}</span>`).join("")}</div>` : ""}</li>`).join("")}</ol>
           ${keyList.length ? `<p class="small muted" style="margin-top:10px">Raccourcis Windows. Sur Mac : Ctrl → Cmd, Alt → Option.</p>` : ""}</section>
+        ${l.code ? `<section><h2><span class="n">${n()}</span> Exemple de code</h2><div class="code-box"><button class="btn btn-ghost btn-sm code-copy" type="button" data-copy>${icon("file")} Copier</button><pre><code>${esc(l.code)}</code></pre></div><p class="small muted" style="margin-top:8px">Recopie ce code, exécute-le, puis modifie-le pour voir ce qui change : c'est la meilleure façon d'apprendre.</p></section>` : ""}
         ${l.params ? `<section><h2><span class="n">${n()}</span> Paramètres importants</h2><div class="params">${l.params.map(([k, v]) => `<div class="param"><b>${esc(k)}</b><span>${esc(v)}</span></div>`).join("")}</div></section>` : ""}
         ${l.illustration === "grade" || ILLUSTRATIONS[l.illustration] ? `<section><h2><span class="n">${n()}</span> Illustration</h2><figure class="figure"><div class="art">${l.illustration === "grade" ? compareWidget() : ILLUSTRATIONS[l.illustration]()}</div><figcaption>${esc(l.caption)}</figcaption></figure></section>` : ""}
         ${l.before ? `<section><h2><span class="n">${n()}</span> Avant / après</h2><div class="grid g2"><div class="card"><span class="chip">Avant</span><p style="margin-top:8px">${esc(l.before)}</p></div><div class="card"><span class="chip chip-ok">Après</span><p style="margin-top:8px">${esc(l.after)}</p></div></div></section>` : ""}
@@ -1791,6 +2470,11 @@ function renderLesson(main, lid) {
       </article>
     </div></div></section>`;
   bindCompare(main);
+  $("[data-copy]", main)?.addEventListener("click", async e => {
+    try { await navigator.clipboard.writeText(l.code); toast("Code copié"); }
+    catch { const r = document.createRange(); r.selectNodeContents($(".code-box code", main)); getSelection().removeAllRanges(); getSelection().addRange(r); toast("Code sélectionné : copie-le avec Ctrl+C", "info"); }
+    e.currentTarget.blur();
+  });
   $("#lessonQuiz")?.addEventListener("submit", e => {
     e.preventDefault();
     let score = 0, answered = true;
@@ -2898,7 +3582,7 @@ function renderGames(main) {
     <div class="challenge">${dailyChallenges().map(challengeCard).join("")}</div>
     <form class="toolbar" id="gFilters" onsubmit="return false">
       <div class="field"><label for="gq">Rechercher</label><input class="input" id="gq" type="search" placeholder="Ex. : couleur, export…"></div>
-      <div class="field"><label for="gd">Domaine</label><select class="input" id="gd"><option value="">Tous</option>${GAME_DOMAINS.map(d => `<option value="${d.id}">${d.name}</option>`).join("")}</select></div>
+      <div class="field"><label for="gd">Domaine</label><select class="input" id="gd"><option value="">Tous</option>${GAME_DOMAINS.filter(d => GAMES.some(g => g.domain === d.id)).map(d => `<option value="${d.id}">${d.name}</option>`).join("")}</select></div>
     </form>
     <p class="count" id="gCount" aria-live="polite"></p><div class="grid g4" id="gList"></div>
     <p class="small muted" style="margin-top:18px">${state.user ? "Ta progression est enregistrée dans ton compte." : "Ta progression est enregistrée sur cet appareil. Connecte-toi pour la retrouver partout."}</p>
@@ -3528,7 +4212,7 @@ $("#navToggle").addEventListener("click", () => { const n = $("#mainNav"), open 
 $("#searchForm").addEventListener("submit", e => { e.preventDefault(); go("#/recherche?q=" + encodeURIComponent($("#q").value.trim())); });
 
 const ROUTES = [
-  [/^$/, m => renderHome(m)], [/^formations$/, (m, p, q) => renderFormations(m, q)], [/^(graphisme|maquettisme|video)$/, (m, p) => renderDomain(m, p[1])],
+  [/^$/, m => renderHome(m)], [/^formations$/, (m, p, q) => renderFormations(m, q)], [/^(graphisme|maquettisme|video|web|developpement|jeux-video)$/, (m, p) => renderDomain(m, p[1])],
   [/^formation\/([\w-]+)$/, (m, p) => renderFormation(m, p[1])], [/^cours\/([\w-]+)$/, (m, p) => renderLesson(m, p[1])],
   [/^ia$/, (m, p, q) => renderStudio(m, q)], [/^jeux$/, m => renderGames(m)], [/^jeux\/([\w-]+)$/, (m, p, q) => renderGame(m, p[1], q)],
   [/^ressources$/, (m, p, q) => renderResources(m, q)], [/^ressource\/([\w-]+)$/, (m, p) => renderResource(m, p[1])],
