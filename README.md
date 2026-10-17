@@ -87,7 +87,7 @@ Tout se trouve dans `index.html`, section **« 2. DONNÉES »** du script :
 
 | Constante | Contenu |
 |---|---|
-| `DOMAINS` | Les 6 domaines (graphisme, maquettisme, montage vidéo, création web, développement, jeux vidéo) et leurs modules (liés aux leçons ou formations) |
+| `DOMAINS` | Les 9 domaines (graphisme, maquettisme, montage vidéo, création web, développement, jeux vidéo, dessin et illustration, informatique et réseaux, marketing digital) et leurs modules (liés aux leçons ou formations) |
 | `SOFTWARE` | Logiciels, systèmes, licence, fonctionnalités par niveau |
 | `FORMATIONS` | Formations : domaine, logiciels, niveau, durée, `price: "gratuit" \| "premium"`, modules |
 | `LESSONS` | Leçons complètes, ou annoncées (`soon: true`) |

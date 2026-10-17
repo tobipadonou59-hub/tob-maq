@@ -446,6 +446,653 @@ CAHIERS = [
 ]
 
 
+# Lot A : cahiers d'exercices Infographie, Dessin et Illustration.
+CAHIERS_A = [
+{
+ "id": "res-cahier-infographie", "fichier": "tobmaq-cahier-infographie.pdf", "categorie": "graphisme", "logiciels": ["photoshop", "illustrator", "indesign"], "niveau": "Intermédiaire",
+ "titre": "Cahier d'exercices · Infographie professionnelle", "sous_titre": "Graphisme · 5 mises en situation et leurs corrigés",
+ "titre_court": "Cahier d'exercices : commande et déclinaisons",
+ "desc": "5 mises en situation, du brief client à la déclinaison d'une campagne sur six supports, avec les calculs et les corrigés détaillés.",
+ "intro": "Ce cahier accompagne la formation Infographiste. Il te met face à de vraies commandes : comprendre un client, chiffrer un travail, préparer des fichiers "
+          "aux bons formats et décliner une campagne. Fais les calculs à la main avant de vérifier dans Photoshop, Illustrator ou InDesign.",
+ "exercices": [
+  {"titre": "Le brief du client", "niveau": "Débutant", "duree": "20 min",
+   "consigne": "Une boutique de pagnes du marché Dantokpa t'écrit sur WhatsApp : « Je veux une affiche pour mes soldes, c'est urgent. » Rédige les 8 questions à poser avant de commencer, puis le résumé du brief que tu lui renverras pour confirmation.",
+   "criteres": ["Les questions couvrent le support, le format, le délai, le public, le message, les éléments fournis et le budget.", "Le résumé tient en quelques lignes et demande une confirmation écrite."],
+   "corrige": {"texte": ["Questions attendues : 1) Sur quels supports l'affiche sera-t-elle utilisée (impression, Facebook, WhatsApp) ? 2) À quel format et en combien d'exemplaires ? "
+                          "3) Pour quelle date exacte en as-tu besoin ? 4) Qui sont tes clients ? 5) Quel est le message principal (pourcentage de réduction, dates des soldes) ? "
+                          "6) As-tu un logo, des photos de tes pagnes, tes couleurs ? 7) Quelles informations pratiques afficher (adresse dans le marché, numéro, horaires) ? 8) Quel est ton budget ?",
+                          "Résumé type : « Affiche A3 pour les soldes du 1er au 15 du mois, -30 % sur le wax, public : femmes de 25 à 50 ans, logo et 5 photos fournis par toi, "
+                          "livraison du fichier le jeudi. Merci de me confirmer par écrit pour que je lance le travail. »"]}},
+  {"titre": "Le devis et l'acompte", "niveau": "Débutant", "duree": "15 min",
+   "consigne": "Tu factures l'affiche maître 25 000 FCFA et chaque déclinaison 7 500 FCFA. Le client veut l'affiche et 4 déclinaisons, avec 3 aller-retours inclus et 5 000 FCFA par correction supplémentaire. Tu demandes 40 % d'acompte. Calcule le total, l'acompte et le solde. Le client demande finalement 2 corrections en plus : quel est le nouveau solde ?",
+   "criteres": ["Chaque ligne du calcul est détaillée.", "Le devis précise le nombre d'aller-retours inclus."],
+   "corrige": {"texte": ["Déclinaisons : 4 × 7 500 = 30 000 FCFA. Total : 25 000 + 30 000 = 55 000 FCFA.",
+                          "Acompte : 55 000 × 0,40 = 22 000 FCFA. Solde : 55 000 - 22 000 = 33 000 FCFA.",
+                          "Corrections supplémentaires : 2 × 5 000 = 10 000 FCFA. Nouveau solde : 33 000 + 10 000 = 43 000 FCFA, soit un total payé de 65 000 FCFA."]}},
+  {"titre": "Les formats et les résolutions", "niveau": "Intermédiaire", "duree": "25 min",
+   "consigne": "Calcule les dimensions en pixels de ces documents : un flyer A5 (148 × 210 mm) avec 3 mm de fond perdu à 300 ppp ; un kakémono 85 × 200 cm à 100 ppp puis à 150 ppp ; une bâche de 400 × 100 cm à 100 ppp. Rappel : 1 pouce = 2,54 cm = 25,4 mm.",
+   "criteres": ["Le fond perdu est ajouté des deux côtés.", "Les conversions en pouces sont justifiées.", "Les résultats sont arrondis au pixel."],
+   "corrige": {"texte": ["Flyer : 148 + 2 × 3 = 154 mm et 210 + 2 × 3 = 216 mm. 154 ÷ 25,4 × 300 ≈ 1 819 px ; 216 ÷ 25,4 × 300 ≈ 2 551 px. Document : 1 819 × 2 551 px.",
+                          "Kakémono à 100 ppp : 85 ÷ 2,54 × 100 ≈ 3 346 px et 200 ÷ 2,54 × 100 ≈ 7 874 px. À 150 ppp : environ 5 020 × 11 811 px.",
+                          "Bâche à 100 ppp : 400 ÷ 2,54 × 100 ≈ 15 748 px et 100 ÷ 2,54 × 100 ≈ 3 937 px. Un fichier aussi grand est lourd : beaucoup d'infographistes travaillent "
+                          "à l'échelle 1/10 (40 × 10 cm à 1 000 ppp), ce qui donne exactement le même nombre de pixels. Demande toujours à l'imprimeur l'échelle et la résolution qu'il accepte."]}},
+  {"titre": "La photo est-elle assez grande ?", "niveau": "Intermédiaire", "duree": "15 min",
+   "consigne": "Le client envoie une photo de 3 000 × 2 000 px. Peut-on l'utiliser en pleine largeur sur une affiche A4 (21 cm de large) à 300 ppp ? Et en pleine largeur sur un kakémono de 85 cm ? Calcule la résolution obtenue dans chaque cas et conclus.",
+   "criteres": ["La résolution effective est calculée en divisant les pixels par les pouces.", "La conclusion propose une solution concrète."],
+   "corrige": {"texte": ["A4 : 21 ÷ 2,54 ≈ 8,27 pouces. 3 000 ÷ 8,27 ≈ 363 ppp : c'est au-dessus de 300 ppp, la photo convient.",
+                          "Kakémono : 85 ÷ 2,54 ≈ 33,46 pouces. 3 000 ÷ 33,46 ≈ 90 ppp : c'est un peu sous les 100 ppp conseillés. Solutions : demander l'original de la photo "
+                          "en plus grande taille, ou ne pas l'utiliser en pleine largeur (par exemple sur les deux tiers), ou accepter un léger flou après un test d'impression. "
+                          "Agrandir l'image dans Photoshop n'ajoute pas de vrais détails."]}},
+  {"titre": "Décliner une campagne", "niveau": "Intermédiaire", "duree": "3 h",
+   "consigne": "Crée l'affiche maître A3 d'un concert à Cotonou, puis décline-la en 5 supports : flyer A5, kakémono 85 × 200 cm, publication 1080 × 1080 px, story 1080 × 1920 px et bannière web 1200 × 628 px.",
+   "etapes": ["Affiche maître : titre, artiste, date, lieu, prix en FCFA, logo de l'organisateur.", "Un fichier ou un plan de travail par support, au format exact.",
+              "Imprimés en CMJN avec fond perdu 3 mm pour le flyer ; écrans en RVB.", "Exports nommés : concert_support_dimensions.extension."],
+   "criteres": ["Formats et modes colorimétriques exacts.", "Aucune image ni aucun texte déformé.", "Le texte important de la story est dans la zone sûre.", "Les 6 supports semblent appartenir à la même campagne."],
+   "corrige": {"texte": ["Grille d'évaluation sur 10 : formats et résolutions exacts (2 points) ; modes CMJN et RVB corrects (1 point) ; fond perdu et marges de sécurité respectés (1 point) ; "
+                          "lisibilité adaptée à chaque distance (2 points) ; cohérence des couleurs, polices et logo (2 points) ; zones sûres de la story et du pied de kakémono respectées (1 point) ; "
+                          "fichiers nommés et organisés (1 point).",
+                          "Erreurs fréquentes : affiche simplement étirée en bannière, trop de texte sur le kakémono, date masquée en haut de la story, flyer exporté en RVB."]}}]},
+{
+ "id": "res-cahier-dessin", "fichier": "tobmaq-cahier-dessin.pdf", "categorie": "dessin", "logiciels": [], "niveau": "Débutant",
+ "titre": "Cahier d'exercices · Dessin : formes, perspective, ombres", "sous_titre": "Dessin · 5 exercices progressifs et leurs corrigés",
+ "titre_court": "Cahier d'exercices : bases du dessin",
+ "desc": "5 exercices progressifs, de l'échelle de valeurs à la nature morte complète, avec critères de réussite et grilles d'évaluation.",
+ "intro": "Ce cahier accompagne la formation Dessinateur. Il te faut seulement du papier, des crayons HB, 2B, 4B et 6B, une gomme, une gomme mie de pain et une règle. "
+          "Date chaque dessin et garde-les tous : comparer tes premières pages aux dernières est la meilleure preuve de tes progrès.",
+ "exercices": [
+  {"titre": "L'échelle de valeurs", "niveau": "Débutant", "duree": "20 min",
+   "consigne": "Trace une bande de 7 cases de 2 × 2 cm. Laisse la première blanche, remplis la septième le plus foncé possible, puis crée 5 gris réguliers entre les deux. Recommence une deuxième bande uniquement en hachures.",
+   "criteres": ["Les écarts entre deux cases voisines semblent égaux.", "La dernière case est vraiment noire.", "Les hachures sont régulières et sans traits qui dépassent."],
+   "corrige": {"texte": ["Crayons conseillés : case 2 au HB très léger, cases 3 et 4 au 2B, case 5 au 4B, cases 6 et 7 au 6B en plusieurs couches croisées.",
+                          "Vérification : prends une photo en noir et blanc et plisse les yeux. Si deux cases se confondent, reprends la plus claire des deux. "
+                          "En hachures, le gris se fonce en serrant les traits puis en ajoutant une deuxième, puis une troisième direction."]}},
+  {"titre": "Les proportions du corps", "niveau": "Débutant", "duree": "15 min",
+   "consigne": "On mesure souvent un adulte en hauteurs de tête : environ 7,5 têtes. Pour dessiner un adulte de 1,70 m, quelle est la hauteur d'une tête ? Si ton personnage mesure 15 cm sur la feuille, quelle hauteur dessines-tu pour la tête ? Où se situe à peu près le milieu du corps ?",
+   "criteres": ["Les deux divisions sont posées.", "Le repère du milieu du corps est indiqué."],
+   "corrige": {"texte": ["Réalité : 170 ÷ 7,5 ≈ 22,7 cm par tête. Sur la feuille : 15 ÷ 7,5 = 2 cm par tête.",
+                          "Le milieu du corps d'un adulte se situe à peu près au niveau du bassin, vers le haut des cuisses. Ce sont des repères moyens : "
+                          "un enfant a une tête plus grande par rapport au corps, et chaque personne est un peu différente. Observe toujours ton modèle."]}},
+  {"titre": "Des boîtes en perspective", "niveau": "Débutant", "duree": "30 min",
+   "consigne": "Sur une feuille A4 posée à l'horizontale, trace une ligne d'horizon. Dessine 3 boîtes en perspective à 1 point de fuite (une sous l'horizon, une coupée par l'horizon, une au-dessus), puis 3 boîtes en perspective à 2 points de fuite placés aux bords de la feuille.",
+   "criteres": ["Toutes les lignes de fuite d'une boîte rejoignent bien son point de fuite.", "Les verticales restent verticales.", "On voit le dessus des boîtes sous l'horizon et le dessous de celles au-dessus."],
+   "corrige": {"texte": ["En perspective à 1 point, la face avant reste un vrai rectangle et seules les arêtes de profondeur fuient. La boîte coupée par l'horizon ne montre ni son dessus ni son dessous.",
+                          "En perspective à 2 points, l'arête verticale la plus proche est la plus haute. Si les boîtes semblent déformées, éloigne les points de fuite : "
+                          "des points trop rapprochés écrasent les volumes. Vérifie chaque ligne avec la règle après l'avoir tracée à main levée."]}},
+  {"titre": "Trois solides éclairés", "niveau": "Débutant", "duree": "45 min",
+   "consigne": "Dessine une sphère, un cube et un cylindre éclairés par une seule lumière venant d'en haut à gauche. Indique la lumière, l'ombre propre, la lumière réfléchie et l'ombre portée de chacun.",
+   "criteres": ["Toutes les ombres vont dans la même direction.", "Les ombres portées sont plus foncées au point de contact.", "Au moins 5 valeurs différentes sont visibles."],
+   "corrige": {"texte": ["Sphère : lumière et reflet en haut à gauche, dégradé progressif vers l'ombre propre en bas à droite, mince lumière réfléchie au bord inférieur, ombre portée vers la droite.",
+                          "Cube : trois faces de trois valeurs nettes (le dessus le plus clair, la face gauche moyenne, la face droite foncée), sans dégradé brusque. "
+                          "Cylindre : dégradé vertical sur le corps, dessus elliptique clair. Erreur fréquente : un contour noir épais tout autour, qui aplatit le volume."]}},
+  {"titre": "La nature morte du marché", "niveau": "Intermédiaire", "duree": "1 h 30",
+   "consigne": "Compose une nature morte avec 3 objets de la vie quotidienne (par exemple une calebasse, un bol émaillé et une mangue) posés sur un pagne plié, éclairés par une fenêtre. Construis-les en formes simples, puis ombre-les complètement.",
+   "criteres": ["Construction visible et proportions justes.", "Les objets sont bien posés sur la table grâce aux ombres portées.", "Contraste fort entre les zones claires et sombres."],
+   "corrige": {"texte": ["Grille d'évaluation sur 10 : composition équilibrée sur la feuille (1 point) ; construction en formes simples (2 points) ; proportions et ellipses justes (2 points) ; "
+                          "lumière cohérente sur tous les objets (2 points) ; ombres portées qui ancrent les objets (1 point) ; richesse des valeurs et contraste (1 point) ; propreté du trait final (1 point).",
+                          "Les plis du pagne se traitent comme des cylindres couchés : un côté éclairé, un côté dans l'ombre. Le bol émaillé, brillant, demande des passages brusques du clair au foncé."]}}]},
+{
+ "id": "res-cahier-illustration", "fichier": "tobmaq-cahier-illustration.pdf", "categorie": "dessin", "logiciels": ["krita"], "niveau": "Débutant",
+ "titre": "Cahier d'exercices · Illustration numérique avec Krita", "sous_titre": "Illustration · 5 exercices progressifs et leurs corrigés",
+ "titre_court": "Cahier d'exercices : Krita et personnage",
+ "desc": "5 exercices, de la prise en main de Krita à la fiche personnage complète, avec critères de réussite et grilles d'évaluation.",
+ "intro": "Ce cahier accompagne la formation Illustrateur. Tu as besoin de Krita (gratuit, sur krita.org) et idéalement d'une tablette graphique. "
+          "Enregistre toujours ton travail en .kra pour garder les calques, et exporte en PNG pour montrer ou publier.",
+ "exercices": [
+  {"titre": "Préparer la bonne toile", "niveau": "Débutant", "duree": "10 min",
+   "consigne": "Calcule les dimensions en pixels d'une illustration destinée à être imprimée en A4 (21 × 29,7 cm) à 300 ppp, puis en A5 (14,8 × 21 cm) à 300 ppp. Crée ensuite le document A4 dans Krita avec Fichier > Nouveau.",
+   "criteres": ["Les conversions en pouces sont justifiées (1 pouce = 2,54 cm).", "Le document créé dans Krita a les bonnes dimensions."],
+   "corrige": {"texte": ["A4 : 21 ÷ 2,54 × 300 ≈ 2 480 px et 29,7 ÷ 2,54 × 300 ≈ 3 508 px. Toile : 2 480 × 3 508 px.",
+                          "A5 : 14,8 ÷ 2,54 × 300 ≈ 1 748 px et 21 ÷ 2,54 × 300 ≈ 2 480 px. Toile : 1 748 × 2 480 px. Pour une impression à fond perdu, demande en plus la marge à l'imprimeur."]}},
+  {"titre": "Prise en main et raccourcis", "niveau": "Débutant", "duree": "30 min",
+   "consigne": "Dessine une mangue en utilisant uniquement le clavier pour changer d'outil et de taille de pinceau. Utilise au moins : B, E, [ et ], Ctrl pour prélever une couleur, Espace pour déplacer la toile, M pour le miroir et Ctrl+Z.",
+   "etapes": ["Règle la courbe de pression de la tablette dans les paramètres de Krita.", "Dessine le contour, puis colore la mangue.", "Vérifie le dessin en miroir avec M et corrige les défauts."],
+   "criteres": ["Les raccourcis demandés sont tous utilisés.", "Le trait varie en épaisseur grâce à la pression.", "Le dessin est exporté en PNG."],
+   "corrige": {"texte": ["B active le pinceau à main levée ; E bascule entre pinceau et mode gomme ; [ et ] réduisent et agrandissent la taille ; Ctrl maintenu prélève une couleur ; "
+                          "Espace + glisser déplace la toile ; M affiche la vue en miroir ; Ctrl+Z annule.",
+                          "Si le trait ne varie pas en épaisseur, vérifie que le pilote de la tablette est installé et que la taille du pinceau dépend bien de la pression dans l'éditeur de pinceaux."]}},
+  {"titre": "Croquis, encrage, couleurs", "niveau": "Débutant", "duree": "1 h",
+   "consigne": "Illustre un zémidjan à l'arrêt en utilisant trois calques nommés Croquis, Encrage et Couleurs. Baisse l'opacité du croquis pour encrer, active le stabilisateur, puis place les couleurs sous l'encrage.",
+   "criteres": ["Trois calques nommés, dans le bon ordre.", "Lignes d'encrage nettes, d'épaisseurs variées.", "Les couleurs ne débordent pas sur les traits."],
+   "corrige": {"texte": ["Ordre des calques, de haut en bas : Encrage, Couleurs, Croquis (masqué à la fin). Opacité du croquis autour de 20 à 30 %.",
+                          "Encrage : contour extérieur plus épais, détails (rayons des roues, plis du gilet) plus fins. Le stabilisateur se règle dans les options de l'outil pinceau, "
+                          "rubrique lissage du pinceau. Les aplats se posent avec l'outil de remplissage ou au pinceau, sur le calque Couleurs."]}},
+  {"titre": "Silhouettes et turnaround", "niveau": "Intermédiaire", "duree": "1 h 30",
+   "consigne": "Pour un personnage de pêcheur de Ganvié, dessine 10 silhouettes noires différentes, choisis-en une, puis réalise son turnaround face, profil et dos avec des lignes de repère horizontales.",
+   "criteres": ["Les 10 silhouettes sont vraiment différentes (formes, postures, accessoires).", "La silhouette choisie est reconnaissable sans détail intérieur.", "Les trois vues ont la même taille et les mêmes repères."],
+   "corrige": {"texte": ["Les silhouettes réussies jouent sur un ou deux éléments forts : chapeau large, filet de pêche, pagaie, posture penchée sur la pirogue.",
+                          "Lignes de repère attendues : sommet du crâne, yeux, menton, épaules, taille, genoux, plante des pieds. Chaque vue s'aligne sur ces lignes. "
+                          "Erreur fréquente : un profil plus petit que la face, ou des bras plus longs de dos."]}},
+  {"titre": "La fiche personnage", "niveau": "Intermédiaire", "duree": "3 h",
+   "consigne": "Réalise la fiche personnage complète de ton pêcheur sur une toile de 3 508 × 2 480 px : nom, turnaround en couleur, 4 expressions, 2 accessoires détaillés, palette avec codes couleur et 3 lignes de présentation.",
+   "criteres": ["Tous les éléments demandés sont présents.", "Palette limitée et cohérente.", "Une seule direction de lumière pour toutes les ombres.", "Mise en page claire et lisible."],
+   "corrige": {"texte": ["Grille d'évaluation sur 10 : silhouette lisible et originale (2 points) ; turnaround cohérent (2 points) ; expressions variées et justes (1 point) ; "
+                          "encrage net (1 point) ; palette limitée avec codes couleur (1 point) ; ombres cohérentes (1 point) ; mise en page et textes de la fiche (2 points).",
+                          "La fiche doit permettre à un autre illustrateur de dessiner le même personnage sans te poser de question : c'est le vrai test de réussite."]}}]}
+]
+
+CAHIERS_B = [
+{
+ "id": "res-cahier-informatique", "fichier": "tobmaq-cahier-informatique.pdf", "categorie": "informatique", "logiciels": ["windows"], "niveau": "Débutant",
+ "titre": "Cahier d'exercices · Informatique : bases et maintenance", "sous_titre": "Informatique · 5 exercices de diagnostic et d'entretien et leurs corrigés",
+ "titre_court": "Cahier d'exercices : matériel, diagnostic et maintenance",
+ "desc": "5 exercices concrets, de la lecture d'une fiche technique à la réinstallation de Windows, avec budget en FCFA et corrigés détaillés.",
+ "intro": "Ce cahier accompagne la formation « Informatique : bases et maintenance ». Il te met dans la situation d'un technicien qui dépanne "
+          "les ordinateurs d'un cybercafé, d'un secrétariat ou d'une PME. Un ordinateur sous Windows 10 ou 11 suffit pour tous les exercices.",
+ "exercices": [
+  {"titre": "Lire une fiche technique", "niveau": "Débutant", "duree": "15 min",
+   "consigne": "Un client de Cotonou te montre l'annonce ci-dessous pour un portable d'occasion à 180 000 FCFA. Pour chaque ligne, dis à quel "
+               "composant elle correspond et si elle te paraît suffisante pour de la bureautique, Internet et un peu de visioconférence.",
+   "code": "Processeur : Intel Core i5-8250U, 4 cœurs, 1,6 GHz\nMémoire : 4 Go DDR4\nStockage : HDD 1 To 5400 tr/min\n"
+           "Écran : 15,6 pouces 1366 x 768\nSystème : Windows 10 Professionnel\nBatterie : tient 1 h 30",
+   "criteres": ["Les 6 lignes sont associées au bon composant.", "Au moins deux faiblesses sont identifiées et justifiées.",
+                "Une amélioration chiffrée est proposée."],
+   "corrige": {"texte": ["Processeur : correct pour la bureautique (4 cœurs). Mémoire vive : 4 Go est insuffisant, il faut au moins 8 Go. "
+                          "Stockage : un HDD à 5400 tr/min est le principal frein, un SSD rendra le PC bien plus réactif ; 1 To est en revanche "
+                          "confortable. Écran : résolution modeste mais utilisable. Système : Windows 10 ne reçoit plus de correctifs de sécurité "
+                          "gratuits depuis le 14 octobre 2025 ; vérifie dans Paramètres > Windows Update si le passage à Windows 11 est proposé "
+                          "(ce processeur de 8e génération figure parmi les processeurs compatibles, mais il faut aussi TPM 2.0 et le démarrage sécurisé). "
+                          "Batterie : usée, à prévoir dans le budget.",
+                          "Conseil au client : négocier le prix en tenant compte d'un SSD, d'une barrette de RAM supplémentaire et d'une batterie."]}},
+  {"titre": "Le diagnostic au Gestionnaire des tâches", "niveau": "Débutant", "duree": "20 min",
+   "consigne": "Pour chacun des trois postes ci-dessous, observés dans l'onglet Performances du Gestionnaire des tâches (Ctrl+Maj+Échap), "
+               "indique le composant en cause et la solution.",
+   "etapes": ["Poste A : Disque 0 (HDD) à 100 % pendant 10 minutes après le démarrage, processeur à 15 %, mémoire à 55 %.",
+              "Poste B : mémoire à 94 % (3,7 Go sur 4 Go), 25 onglets ouverts dans le navigateur, disque à 60 %.",
+              "Poste C : processeur à 100 % en permanence à cause d'un processus au nom inconnu, même quand aucun programme n'est ouvert."],
+   "criteres": ["Le composant saturé est identifié pour chaque poste.", "La solution proposée traite la cause, pas le symptôme.",
+                "Le poste C est traité comme un incident de sécurité possible."],
+   "corrige": {"texte": ["Poste A : le disque dur est le goulot d'étranglement. Solution durable : remplacer le HDD par un SSD. En attendant, "
+                          "réduire les applications de démarrage.",
+                          "Poste B : la mémoire vive est saturée, Windows utilise alors le disque comme mémoire de secours, ce qui ralentit tout. "
+                          "Solution immédiate : fermer des onglets. Solution durable : passer à 8 Go de RAM.",
+                          "Poste C : un processus inconnu qui monopolise le processeur peut être un logiciel malveillant (par exemple un mineur de "
+                          "cryptomonnaie). Clic droit sur le processus > Ouvrir l'emplacement du fichier, recherche de son nom, puis analyse complète "
+                          "avec Microsoft Defender. Déconnecte le poste du réseau si le doute persiste."]}},
+  {"titre": "Mise à niveau ou PC neuf ?", "niveau": "Débutant", "duree": "15 min",
+   "consigne": "Un cybercafé de Cotonou possède 5 postes lents (HDD et 4 Go de RAM). Un SSD de 256 Go coûte 20 000 FCFA, une barrette de 4 Go "
+               "15 000 FCFA, la main-d'œuvre 5 000 FCFA par poste. Un PC neuf équivalent coûte 250 000 FCFA. Calcule le coût des deux options "
+               "pour les 5 postes et l'économie réalisée.",
+   "criteres": ["Le coût par poste et le total sont détaillés.", "L'économie est calculée et la décision est argumentée."],
+   "corrige": {"texte": ["Mise à niveau : 20 000 + 15 000 + 5 000 = 40 000 FCFA par poste, soit 40 000 × 5 = 200 000 FCFA pour les 5 postes.",
+                          "PC neufs : 250 000 × 5 = 1 250 000 FCFA. Économie : 1 250 000 - 200 000 = 1 050 000 FCFA.",
+                          "Décision : la mise à niveau est rentable si les processeurs suffisent aux usages et si le système reçoit encore des "
+                          "mises à jour de sécurité. Sinon, une partie de l'économie doit être réservée au remplacement progressif des postes."]}},
+  {"titre": "Le plan de sauvegarde 3-2-1", "niveau": "Débutant", "duree": "25 min",
+   "consigne": "Le secrétariat d'une PME de Porto-Novo a un seul ordinateur qui contient les factures, les contrats et la comptabilité. "
+               "Rédige son plan de sauvegarde selon la règle 3-2-1.",
+   "etapes": ["Liste les dossiers à sauvegarder.", "Indique les 3 copies, les 2 supports et la copie hors site.",
+              "Précise la fréquence, la personne responsable et le test de restauration."],
+   "criteres": ["La règle 3-2-1 est respectée.", "Au moins une copie est hors ligne.", "Un test de restauration est prévu."],
+   "corrige": {"texte": ["Copie 1 : les fichiers sur le PC (dossiers Documents, Bureau, Comptabilité). Copie 2 : un disque externe, avec l'outil "
+                          "Historique des fichiers de Windows ou une copie manuelle, chaque vendredi à 17 h ; le disque est débranché ensuite et "
+                          "rangé dans une armoire fermée. Copie 3, hors site : synchronisation sur un cloud (OneDrive ou Google Drive) ou un "
+                          "second disque gardé au domicile du gérant et échangé chaque semaine.",
+                          "Deux supports différents : le disque interne du PC et le disque externe (le cloud est un support supplémentaire). "
+                          "Responsable : la secrétaire, avec un rappel dans son agenda. Test : le premier lundi du mois, restaurer un fichier "
+                          "au hasard depuis le disque externe et vérifier qu'il s'ouvre."]}},
+  {"titre": "Remettre les étapes dans l'ordre", "niveau": "Intermédiaire", "duree": "15 min",
+   "consigne": "Voici, dans le désordre, les étapes de la réinstallation de Windows sur un PC de lycée. Remets-les dans le bon ordre et "
+               "explique pourquoi l'étape de sauvegarde ne peut pas être déplacée.",
+   "code": "a) Installer les pilotes manquants depuis le site du fabricant\nb) Démarrer sur la clé USB (touche F12, F9 ou Échap)\n"
+           "c) Sauvegarder les fichiers et vérifier qu'ils s'ouvrent\nd) Lancer Windows Update jusqu'au bout\n"
+           "e) Créer la clé avec l'outil officiel de Microsoft (8 Go minimum)\nf) Restaurer les fichiers de l'utilisateur\n"
+           "g) Installation personnalisée, partitions du disque système supprimées\nh) Vérifier Microsoft Defender et le Gestionnaire de périphériques",
+   "criteres": ["L'ordre est correct.", "Le rôle de la sauvegarde avant la suppression des partitions est expliqué."],
+   "corrige": {"texte": ["Ordre : c, e, b, g, d, a, h, f. On peut aussi restaurer les fichiers (f) juste après les pilotes : l'essentiel est que "
+                          "le système soit à jour et protégé avant d'y remettre les données.",
+                          "La sauvegarde vient obligatoirement en premier : supprimer les partitions efface tout le contenu du disque. Une "
+                          "sauvegarde non vérifiée ne compte pas : on ouvre quelques fichiers avant d'effacer quoi que ce soit."]}}]},
+{
+ "id": "res-cahier-reseau", "fichier": "tobmaq-cahier-reseau.pdf", "categorie": "informatique", "logiciels": ["packettracer"], "niveau": "Intermédiaire",
+ "titre": "Cahier d'exercices · Réseaux : adressage et câblage", "sous_titre": "Réseaux · 5 exercices, du calcul d'adresses au laboratoire Packet Tracer",
+ "titre_court": "Cahier d'exercices : adresses IP, sous-réseaux et câblage",
+ "desc": "5 exercices progressifs : binaire, calculs de sous-réseaux, découpage d'un réseau de lycée, sertissage RJ45 et laboratoire Packet Tracer, avec corrigés.",
+ "intro": "Ce cahier accompagne la formation « Réseaux : concevoir et câbler un réseau local ». Les calculs se font au crayon : vérifie-les "
+          "ensuite avec un calculateur IP en ligne. Le dernier exercice demande Cisco Packet Tracer, gratuit avec un compte Cisco Networking Academy.",
+ "exercices": [
+  {"titre": "Binaire et masques", "niveau": "Débutant", "duree": "20 min",
+   "consigne": "Convertis en binaire les nombres 192, 168 et 224. Donne ensuite la notation CIDR des masques 255.255.255.0, 255.255.255.192 "
+               "et 255.255.255.224, puis le masque décimal de /25 et de /20.",
+   "criteres": ["Les trois conversions sont justes (8 bits chacune).", "Les cinq masques sont justes."],
+   "corrige": {"texte": ["Poids des bits d'un octet : 128, 64, 32, 16, 8, 4, 2, 1. 192 = 128 + 64 = 11000000. 168 = 128 + 32 + 8 = 10101000. "
+                          "224 = 128 + 64 + 32 = 11100000.",
+                          "255.255.255.0 = /24 (8 + 8 + 8). 255.255.255.192 = /26 (24 + 2 bits à 1). 255.255.255.224 = /27 (24 + 3). "
+                          "/25 = 255.255.255.128. /20 = 255.255.240.0 (16 + 4 bits à 1 dans le troisième octet : 128 + 64 + 32 + 16 = 240)."]}},
+  {"titre": "Calculer un sous-réseau", "niveau": "Intermédiaire", "duree": "30 min",
+   "consigne": "Pour chaque adresse, donne l'adresse du réseau, la première et la dernière adresse utilisables, la diffusion et le nombre "
+               "d'appareils possibles.",
+   "code": "a) 192.168.1.130/26\nb) 192.168.20.14/27\nc) 10.10.5.200/25",
+   "criteres": ["Les 15 valeurs sont justes.", "La méthode (nombre magique ou binaire) est écrite."],
+   "corrige": {"texte": ["Méthode : nombre magique = 256 - octet du masque. Le sous-réseau commence au multiple de ce nombre juste inférieur "
+                          "ou égal à l'octet de l'adresse."],
+               "code": "a) /26, magique 256-192 = 64 ; 130 est entre 128 et 191\n"
+                       "   Réseau 192.168.1.128  Utilisables .129 à .190\n"
+                       "   Diffusion 192.168.1.191  2^6 - 2 = 62 appareils\n"
+                       "b) /27, magique 256-224 = 32 ; 14 est entre 0 et 31\n"
+                       "   Réseau 192.168.20.0  Utilisables .1 à .30\n"
+                       "   Diffusion 192.168.20.31  2^5 - 2 = 30 appareils\n"
+                       "c) /25, magique 256-128 = 128 ; 200 est entre 128 et 255\n"
+                       "   Réseau 10.10.5.128  Utilisables .129 à .254\n"
+                       "   Diffusion 10.10.5.255  2^7 - 2 = 126 appareils"}},
+  {"titre": "Le plan d'adressage du lycée", "niveau": "Intermédiaire", "duree": "40 min",
+   "consigne": "Un lycée de Parakou dispose du réseau 192.168.50.0/24. Il faut : une salle informatique de 100 postes, une salle des "
+               "enseignants de 40 appareils, l'administration avec 20 appareils et un Wi-Fi invités de 25 appareils. Attribue à chaque "
+               "zone le plus petit sous-réseau suffisant, sans chevauchement, et donne sa passerelle (première adresse utilisable).",
+   "etapes": ["Trouve le préfixe nécessaire pour chaque zone (2^n - 2 doit être supérieur ou égal au besoin).",
+              "Place les sous-réseaux du plus grand au plus petit.", "Présente le résultat sous forme de tableau."],
+   "criteres": ["Chaque sous-réseau contient assez d'adresses.", "Aucun sous-réseau ne chevauche un autre.", "Les passerelles sont justes."],
+   "corrige": {"texte": ["100 postes : /25 (126 adresses). 40 : /26 (62). 20 : /27 (30). 25 : /27 (30). On commence par le plus grand pour "
+                          "que chaque sous-réseau démarre sur une limite correcte. Le /24 est entièrement utilisé : 128 + 64 + 32 + 32 = 256 adresses."],
+               "code": "Zone            Sous-réseau          Passerelle     Diffusion\n"
+                       "Salle info      192.168.50.0/25      192.168.50.1   192.168.50.127\n"
+                       "Enseignants     192.168.50.128/26    192.168.50.129 192.168.50.191\n"
+                       "Administration  192.168.50.192/27    192.168.50.193 192.168.50.223\n"
+                       "Wi-Fi invités   192.168.50.224/27    192.168.50.225 192.168.50.255"}},
+  {"titre": "Sertir et contrôler un câble", "niveau": "Débutant", "duree": "30 min",
+   "consigne": "Écris l'ordre des 8 fils de la norme T568B. Un stagiaire a serti un câble avec T568B à un bout et l'ordre ci-dessous à "
+               "l'autre bout : identifie le problème et ses conséquences.",
+   "code": "Broche : 1            2       3           4     5\n"
+           "Fil    : blanc-orange orange  blanc-bleu  bleu  blanc-vert\n"
+           "Broche : 6            7             8\n"
+           "Fil    : vert         blanc-marron  marron",
+   "criteres": ["L'ordre T568B est juste.", "L'erreur est localisée précisément (broches 3 et 5).", "La correction est décrite."],
+   "corrige": {"texte": ["T568B : 1 blanc-orange, 2 orange, 3 blanc-vert, 4 bleu, 5 blanc-bleu, 6 vert, 7 blanc-marron, 8 marron.",
+                          "Les fils blanc-vert et blanc-bleu sont inversés (broches 3 et 5). Les paires sont alors séparées : le fil blanc-vert "
+                          "n'est plus torsadé avec le vert. Le testeur signale une erreur de câblage et, même si le lien s'établit parfois, il "
+                          "sera instable ou limité en vitesse. Il faut couper le connecteur et sertir à nouveau dans l'ordre T568B, puis "
+                          "repasser le câble au testeur."]}},
+  {"titre": "Laboratoire Packet Tracer", "niveau": "Intermédiaire", "duree": "1 h",
+   "consigne": "Construis dans Packet Tracer le réseau d'un cybercafé, puis résous la panne décrite à la fin.",
+   "etapes": ["1 routeur (passerelle 192.168.1.1/24), 1 switch, 6 PC, 1 imprimante en 192.168.1.10 et 1 point d'accès.",
+              "Câbles droits partout ; PC en adresses fixes de 192.168.1.101 à 192.168.1.106, masque 255.255.255.0.",
+              "Wi-Fi en WPA2-PSK avec chiffrement AES et une phrase de passe d'au moins 12 caractères.",
+              "Panne : le PC6 ne joint ni l'imprimante ni la passerelle. Sa configuration est 192.168.10.106, masque 255.255.255.0, passerelle 192.168.1.1."],
+   "criteres": ["Tous les PC joignent la passerelle et l'imprimante par ping.", "Le plan d'adressage est fourni.", "La panne du PC6 est expliquée."],
+   "corrige": {"texte": ["Tests attendus dans Desktop > Command Prompt de chaque PC : ping 192.168.1.1 puis ping 192.168.1.10.",
+                          "Panne du PC6 : son adresse 192.168.10.106/24 appartient au réseau 192.168.10.0/24, et non à 192.168.1.0/24. "
+                          "Pour lui, l'imprimante et la passerelle sont sur un autre réseau : il ne peut joindre l'imprimante "
+                          "directement, et sa passerelle 192.168.1.1 est hors de son réseau, donc inutilisable. Correction : adresse "
+                          "192.168.1.106. Si le ping échoue encore, vérifie le câble (lien vert aux deux bouts) et le port du switch."],
+               "code": "C:\\> ipconfig\n  IPv4 Address......: 192.168.1.106\n  Subnet Mask.......: 255.255.255.0\n"
+                       "  Default Gateway...: 192.168.1.1\nC:\\> ping 192.168.1.10\nReply from 192.168.1.10: bytes=32 ...   (4 réponses attendues)"}}]},
+{
+ "id": "res-cahier-admin", "fichier": "tobmaq-cahier-admin-systeme.pdf", "categorie": "informatique", "logiciels": ["linux"], "niveau": "Intermédiaire",
+ "titre": "Cahier d'exercices · Administrer un serveur Linux", "sous_titre": "Administration système · 5 exercices et leurs corrigés en commandes",
+ "titre_court": "Cahier d'exercices : administration Linux et services",
+ "desc": "5 exercices sur Ubuntu Server : droits en octal, utilisateurs et groupes, crontab, partage Samba et supervision, avec les commandes corrigées.",
+ "intro": "Ce cahier accompagne la formation « Administrateur réseau et système ». Travaille dans une machine virtuelle Ubuntu Server LTS "
+          "(VirtualBox est gratuit) : tu peux tout essayer sans risque et revenir en arrière avec un instantané.",
+ "exercices": [
+  {"titre": "Les droits en octal", "niveau": "Débutant", "duree": "15 min",
+   "consigne": "Convertis en octal : rwxr-x---, rw-r--r--, rw-------, rwxrwx---. Convertis ensuite en lettres : 755, 640, 700. "
+               "Pour chaque cas, dis qui peut lire le fichier.",
+   "criteres": ["Les 7 conversions sont justes.", "La règle r = 4, w = 2, x = 1 est appliquée par groupe de trois lettres."],
+   "corrige": {"texte": ["rwxr-x--- = 750 · rw-r--r-- = 644 · rw------- = 600 · rwxrwx--- = 770.",
+                          "755 = rwxr-xr-x (tout le monde lit et exécute, seul le propriétaire écrit) · 640 = rw-r----- (propriétaire et groupe "
+                          "lisent, les autres rien) · 700 = rwx------ (seul le propriétaire a accès).",
+                          "Sur un dossier, x signifie « pouvoir y entrer » : un dossier en 640 est inutilisable, on lui donne plutôt 750 ou 770."]}},
+  {"titre": "Utilisateurs, groupes et dossiers", "niveau": "Intermédiaire", "duree": "40 min",
+   "consigne": "Sur le serveur d'une PME de Porto-Novo, crée les groupes compta et direction, les utilisateurs awa (compta), koffi (compta) "
+               "et mariam (direction), et deux dossiers /srv/compta et /srv/direction accessibles chacun à son seul groupe.",
+   "criteres": ["Chaque dossier appartient au bon groupe, en 770.", "awa ne peut pas lire /srv/direction (testé avec su - awa).",
+                "Aucun dossier en 777."],
+   "corrige": {"texte": ["On crée d'abord les groupes, puis les utilisateurs, puis on les ajoute aux groupes avec usermod -aG (le -a évite de "
+                          "les retirer de leurs autres groupes). Un utilisateur doit se reconnecter pour que son nouveau groupe soit pris en compte."],
+               "code": "sudo groupadd compta\nsudo groupadd direction\n"
+                       "sudo adduser awa\nsudo adduser koffi\nsudo adduser mariam\n"
+                       "sudo usermod -aG compta awa\nsudo usermod -aG compta koffi\nsudo usermod -aG direction mariam\n"
+                       "sudo mkdir -p /srv/compta /srv/direction\n"
+                       "sudo chown root:compta /srv/compta\nsudo chown root:direction /srv/direction\n"
+                       "sudo chmod 770 /srv/compta /srv/direction\nls -ld /srv/*\n"
+                       "su - awa -c 'ls /srv/direction'   # doit afficher : Permission non accordée"}},
+  {"titre": "Écrire une crontab", "niveau": "Intermédiaire", "duree": "20 min",
+   "consigne": "Écris la ligne cron (5 champs puis la commande /usr/local/bin/sauvegarde.sh) pour chacun des horaires suivants.",
+   "code": "a) Tous les jours à 23 h 45\nb) Du lundi au vendredi à 18 h\nc) Le 1er de chaque mois à 3 h\n"
+           "d) Toutes les 15 minutes\ne) Chaque dimanche à 4 h 30",
+   "criteres": ["Les 5 lignes sont justes.", "L'ordre des champs est respecté : minute, heure, jour du mois, mois, jour de la semaine."],
+   "corrige": {"texte": ["Rappel : jour de la semaine 0 ou 7 = dimanche, 1 = lundi. Dans une crontab, le caractère % doit être écrit \\%. "
+                          "Ajoute >> /var/log/sauvegarde.log 2>&1 pour garder une trace de chaque exécution."],
+               "code": "45 23 * * *    /usr/local/bin/sauvegarde.sh   # a)\n"
+                       "0 18 * * 1-5   /usr/local/bin/sauvegarde.sh   # b)\n"
+                       "0 3 1 * *      /usr/local/bin/sauvegarde.sh   # c)\n"
+                       "*/15 * * * *   /usr/local/bin/sauvegarde.sh   # d)\n"
+                       "30 4 * * 0     /usr/local/bin/sauvegarde.sh   # e)"}},
+  {"titre": "Un partage Samba pour Windows", "niveau": "Avancé", "duree": "45 min",
+   "consigne": "Rends le dossier /srv/compta accessible depuis les postes Windows sous le nom compta, uniquement pour les membres du "
+               "groupe compta, en lecture et écriture.",
+   "etapes": ["Installe Samba.", "Ajoute la section de partage dans /etc/samba/smb.conf.", "Crée le mot de passe Samba de awa et koffi.",
+              "Vérifie la configuration, redémarre le service et ouvre \\\\IP-du-serveur\\compta depuis l'Explorateur Windows."],
+   "criteres": ["testparm ne signale aucune erreur.", "awa accède au partage, mariam est refusée.", "Le service smbd est actif au démarrage."],
+   "corrige": {"texte": ["Les mots de passe Samba sont distincts des mots de passe Linux : sans smbpasswd -a, l'utilisateur ne peut pas se "
+                          "connecter au partage. Si le pare-feu ufw est actif, autorise Samba avec sudo ufw allow samba."],
+               "code": "sudo apt install samba\nsudo nano /etc/samba/smb.conf   # ajouter à la fin :\n"
+                       "[compta]\n   path = /srv/compta\n   valid users = @compta\n   read only = no\n   browseable = yes\n\n"
+                       "sudo smbpasswd -a awa\nsudo smbpasswd -a koffi\ntestparm\n"
+                       "sudo systemctl restart smbd\nsystemctl is-enabled smbd   # doit afficher enabled"}},
+  {"titre": "Supervision et documentation", "niveau": "Avancé", "duree": "30 min",
+   "consigne": "Voici la sortie de df -h sur le serveur d'une ONG de Cotonou. Interprète-la, propose les actions et rédige les 6 rubriques "
+               "minimales du dossier d'exploitation de ce serveur.",
+   "code": "Sys. de fichiers Taille Utilisé Dispo Uti% Monté sur\n"
+           "/dev/sda2          98G     91G  2,4G  98% /\n"
+           "/dev/sdb1         916G    412G  458G  48% /srv",
+   "criteres": ["La partition critique est identifiée.", "Les commandes de recherche sont justes.", "La documentation ne contient aucun mot de passe."],
+   "corrige": {"texte": ["La partition racine / est pleine à 98 % : au-delà de 85 %, il faut agir, et à 100 % les services (journaux, bases, "
+                          "mises à jour) tombent en panne. /srv est à 48 %, sans urgence.",
+                          "Actions : trouver les dossiers les plus lourds, nettoyer les paquets inutiles et limiter la taille des journaux. "
+                          "Ensuite, planifier un relevé quotidien de df -h.",
+                          "Dossier d'exploitation : 1) schéma du réseau ; 2) plan d'adressage ; 3) serveurs et services (rôle, version, ports) ; "
+                          "4) sauvegardes (quoi, où, quand) et procédure de restauration testée ; 5) tâches planifiées (crontab) ; "
+                          "6) contacts (prestataires, fournisseur d'accès). Les mots de passe restent dans un gestionnaire de mots de passe."],
+               "code": "sudo du -xh / --max-depth=1 | sort -h | tail   # dossiers lourds\n"
+                       "sudo apt autoremove && sudo apt clean          # paquets inutiles\n"
+                       "journalctl --disk-usage                        # place des journaux\n"
+                       "sudo journalctl --vacuum-size=500M             # limiter à 500 Mo"}}]},
+{
+ "id": "res-cahier-cyber", "fichier": "tobmaq-cahier-cybersecurite.pdf", "categorie": "informatique", "logiciels": [], "niveau": "Débutant",
+ "titre": "Cahier d'exercices · Cybersécurité au quotidien et en entreprise", "sous_titre": "Cybersécurité · 5 mises en situation défensives et leurs corrigés",
+ "titre_court": "Cahier d'exercices : se protéger et protéger une entreprise",
+ "desc": "5 mises en situation : repérer l'hameçonnage, choisir ses mots de passe, sécuriser son téléphone, organiser une PME et réagir à un rançongiciel.",
+ "intro": "Ce cahier accompagne la formation « Cybersécurité : se protéger et protéger une entreprise ». Tous les exercices sont défensifs : "
+          "il s'agit de protéger, de détecter et de réagir. Les situations sont inspirées d'arnaques réellement rencontrées au Bénin.",
+ "exercices": [
+  {"titre": "Vrai message ou arnaque ?", "niveau": "Débutant", "duree": "15 min",
+   "consigne": "Pour chacun des messages suivants, dis s'il est suspect et cite les signes qui t'alertent. Indique la bonne réaction.",
+   "etapes": ["SMS d'un numéro ordinaire : « Vous avez reçu 25 000 FCFA par erreur, merci de les renvoyer au 01 XX XX XX XX. »",
+              "WhatsApp d'un ami : « Envoie-moi vite le code à 6 chiffres que tu viens de recevoir, je me suis trompé de numéro. »",
+              "E-mail : « Votre compte bancaire sera suspendu dans 2 heures. Confirmez vos informations ici : banque-securite-verif.com »",
+              "Message : « Recrutement urgent, 300 000 FCFA par mois sans diplôme, payez 5 000 FCFA de frais de dossier. »",
+              "Notification de l'application officielle de ta banque, ouverte par toi-même, qui affiche ton relevé du mois."],
+   "criteres": ["Les 4 arnaques sont repérées.", "Pour chacune, au moins deux signes sont cités.", "La bonne réaction est donnée."],
+   "corrige": {"texte": ["1) Arnaque : vérifie ton solde par le menu officiel de l'opérateur, jamais d'après le SMS ; rien n'est arrivé, ne renvoie rien. "
+                          "2) Arnaque très courante : ce code sert à installer ton WhatsApp sur le téléphone du fraudeur, dont le compte de "
+                          "ton ami a probablement été piraté. Ne le donne jamais, préviens ton ami par un appel. "
+                          "3) Hameçonnage : urgence, adresse qui n'est pas celle de la banque. Ne clique pas, contacte ta banque par son numéro officiel. "
+                          "4) Arnaque à l'emploi : un vrai employeur ne fait pas payer de frais de dossier. "
+                          "5) Légitime : c'est toi qui as ouvert l'application officielle."]}},
+  {"titre": "Classer des mots de passe", "niveau": "Débutant", "duree": "15 min",
+   "consigne": "Classe ces mots de passe du plus faible au plus solide et explique ton classement. Propose ensuite une phrase de passe pour ton téléphone.",
+   "code": "a) Koffi1998\nb) 123456\nc) mangue-taxi-moto-lagune-violet\nd) P@ssw0rd!\ne) Cotonou2026",
+   "criteres": ["Le classement est justifié.", "La phrase de passe proposée compte au moins 4 mots sans lien entre eux."],
+   "corrige": {"texte": ["Du plus faible au plus solide : b, d, a et e (à égalité), c. 123456 est le mot de passe le plus essayé au monde. "
+                          "P@ssw0rd! remplace des lettres par des symboles de façon prévisible : les logiciels d'attaque connaissent ces "
+                          "substitutions. Koffi1998 et Cotonou2026 combinent un prénom ou une ville et une année, faciles à deviner à partir "
+                          "des réseaux sociaux. La phrase de passe c est longue (30 caractères) et sans lien logique : de loin la plus solide.",
+                          "Rappel : même un excellent mot de passe ne doit servir que pour un seul compte. Utilise un gestionnaire pour les autres."]}},
+  {"titre": "Le bilan de ton téléphone", "niveau": "Débutant", "duree": "30 min",
+   "consigne": "Fais le bilan de sécurité de ton téléphone en vérifiant chaque point, et corrige ce qui manque.",
+   "etapes": ["Verrouillage par code d'au moins 6 chiffres ou empreinte, délai de verrouillage automatique.",
+              "Système et applications à jour, applications installées uniquement depuis la boutique officielle.",
+              "WhatsApp : validation en deux étapes activée avec un code PIN et une adresse e-mail de récupération.",
+              "Messagerie e-mail : double authentification activée.", "Localisation et effacement à distance activés."],
+   "criteres": ["Les 5 points sont vérifiés.", "Les réglages manquants sont activés.", "Un plan est noté en cas de perte du téléphone."],
+   "corrige": {"texte": ["Chemins utiles : WhatsApp > Paramètres > Compte > Validation en deux étapes. Android : Paramètres > Sécurité > "
+                          "Localiser mon appareil. iPhone : Réglages > ton nom > Localiser.",
+                          "Plan en cas de perte : 1) localiser ou effacer le téléphone à distance ; 2) appeler l'opérateur pour bloquer la carte SIM "
+                          "et le compte mobile money ; 3) changer le mot de passe de la messagerie depuis un autre appareil ; 4) réinstaller "
+                          "WhatsApp sur une nouvelle SIM avec le même numéro."]}},
+  {"titre": "Organiser la sécurité d'une PME", "niveau": "Intermédiaire", "duree": "45 min",
+   "consigne": "Une PME de Porto-Novo compte 8 salariés, un serveur de fichiers, un routeur Wi-Fi et des comptes de messagerie. Tout le monde "
+               "utilise le compte administrateur « Bureau ». Propose une organisation sécurisée.",
+   "etapes": ["Rédige l'inventaire (appareils, comptes, données sensibles).", "Définis les comptes et leurs droits selon le moindre privilège.",
+              "Décris la sauvegarde 3-2-1 avec une copie hors ligne.", "Propose le réglage du Wi-Fi (personnel et invités)."],
+   "criteres": ["Un compte nominatif standard par salarié.", "Au moins une copie de sauvegarde hors ligne.", "Le Wi-Fi invités est isolé."],
+   "corrige": {"texte": ["Comptes : un compte standard nominatif par salarié, un seul compte administrateur réservé à l'informaticien, désactivation "
+                          "le jour du départ. Dossiers par service : chacun n'accède qu'aux dossiers de son équipe. Double authentification sur "
+                          "toutes les messageries.",
+                          "Sauvegarde : copie 1 sur le serveur, copie 2 chaque nuit sur un disque dédié, copie 3 chaque vendredi sur un disque "
+                          "externe débranché et emporté hors des locaux (en alternance avec un second disque). Test de restauration mensuel.",
+                          "Wi-Fi : réseau du personnel en WPA2-AES ou WPA3, réseau invités isolé avec son propre mot de passe, WPS désactivé, "
+                          "mot de passe d'administration du routeur changé. Mises à jour automatiques partout."]}},
+  {"titre": "Exercice sur table : le rançongiciel", "niveau": "Intermédiaire", "duree": "40 min",
+   "consigne": "Lundi, 8 h. Dans une ONG de Cotonou, les fichiers du serveur portent une extension inconnue et une note réclame une rançon en "
+               "cryptomonnaie. Rédige la fiche réflexe : qui fait quoi, dans quel ordre, pendant les premières heures.",
+   "criteres": ["L'isolement vient en premier.", "La rançon n'est pas payée.", "La restauration part d'une sauvegarde saine et hors ligne.",
+                "Le signalement aux autorités compétentes est prévu."],
+   "corrige": {"texte": ["1) Isoler : débrancher le câble réseau et couper le Wi-Fi des appareils touchés, sans les éteindre si possible (des traces "
+                          "utiles à l'analyse restent en mémoire). 2) Alerter le responsable désigné et le prestataire informatique. 3) Ne pas payer : "
+                          "rien ne garantit la récupération des données, et cela finance les attaquants. 4) Photographier la note de rançon et noter "
+                          "l'heure des constats. 5) Changer les mots de passe depuis un appareil sain, en commençant par les comptes administrateur "
+                          "et la messagerie. 6) Vérifier que la sauvegarde hors ligne est intacte, réinstaller les systèmes touchés, restaurer.",
+                          "7) Signaler : porter plainte auprès de la police et solliciter le bjCSIRT, le centre national de réponse aux incidents de "
+                          "cybersécurité du Bénin, dont les coordonnées figurent sur son site officiel. 8) Après l'incident : comprendre l'origine "
+                          "(e-mail piégé, mot de passe faible, système non mis à jour) et corriger la faiblesse."]}}]},
+]
+
+CAHIERS_C = [
+{
+ "id": "res-cahier-marketing", "fichier": "tobmaq-cahier-marketing.pdf", "categorie": "marketing", "logiciels": [], "niveau": "Débutant",
+ "titre": "Cahier d'exercices · Les fondamentaux du marketing", "sous_titre": "Marketing · 5 exercices progressifs et leurs corrigés",
+ "titre_court": "Cahier d'exercices : fondamentaux du marketing",
+ "desc": "5 exercices progressifs, de l'analyse des concurrents au plan de communication, avec calcul de prix et corrigés détaillés.",
+ "intro": "Ce cahier accompagne la formation « Les fondamentaux du marketing ». Tu n'as besoin que d'un carnet, d'un tableur et de quelques conversations avec "
+          "de vrais clients. Tous les chiffres utilisés sont des exemples pour t'entraîner : remplace-les par ceux de ton activité dès que possible.",
+ "exercices": [
+  {"titre": "Analyser trois concurrents", "niveau": "Débutant", "duree": "45 min",
+   "consigne": "Tu conseilles un nouveau restaurant de plats locaux à Abomey-Calavi, près du campus. Construis un tableau d'analyse de 3 concurrents (deux directs, un indirect).",
+   "etapes": ["Colonnes : nom, type (direct ou indirect), produits, fourchette de prix, canaux de vente, points forts, points faibles, ce que disent les clients.",
+              "Remplis le tableau à partir d'une visite, des pages Facebook ou Google Maps et d'au moins 3 conversations.",
+              "Termine par 3 opportunités : des besoins mal servis par les concurrents."],
+   "criteres": ["Au moins un concurrent indirect est identifié.", "Chaque point fort ou faible est observé, pas supposé.", "Les 3 opportunités découlent du tableau."],
+   "corrige": {"texte": ["Exemple de tableau attendu. Concurrent A (direct) : maquis familial, plats du jour, environ 1 000 à 1 500 FCFA en exemple, vente sur place uniquement ; "
+                          "points forts : portions copieuses, prix bas ; points faibles : attente longue à midi, pas de livraison, horaires irréguliers. "
+                          "Concurrent B (direct) : restaurant avec page Facebook, prix plus élevés, livraison ; point faible : réponses lentes sur WhatsApp selon les avis. "
+                          "Concurrent C (indirect) : vendeuses de rue et repas préparés à la maison ; point fort : prix très bas ; point faible : choix limité, hygiène variable selon les clients interrogés.",
+                          "Opportunités possibles : un repas servi en moins de 10 minutes à midi pour les étudiants pressés ; la commande WhatsApp avec réponse rapide ; un menu du jour annoncé chaque matin. "
+                          "Erreur fréquente : oublier le concurrent indirect, alors que c'est souvent le principal rival pour un public au budget serré."]}},
+  {"titre": "Segmenter et créer un persona", "niveau": "Débutant", "duree": "40 min",
+   "consigne": "Pour une boutique de pagnes et de tenues sur mesure à Cotonou, propose 3 segments de clientèle, choisis-en un et rédige le persona correspondant.",
+   "etapes": ["Pour chaque segment : critères (âge, lieu, besoin, comportement d'achat), taille estimée (petite, moyenne, grande), facilité à l'atteindre.",
+              "Justifie le choix du segment prioritaire en 3 phrases.",
+              "Persona : prénom, âge, métier, ville, budget d'exemple, réseaux utilisés, besoins, freins, objections, phrase qu'il pourrait dire."],
+   "criteres": ["Les 3 segments sont vraiment différents.", "Le choix est justifié par des critères, pas par un goût personnel.", "Le persona contient au moins un frein et une objection."],
+   "corrige": {"texte": ["Segments possibles : 1) Femmes de 25 à 40 ans qui préparent une cérémonie (besoin : une tenue unique et prête à temps). "
+                          "2) Membres de la diaspora qui commandent depuis l'étranger (besoin : confiance, envoi fiable). "
+                          "3) Associations et familles qui commandent un même pagne en grande quantité (besoin : prix de groupe, délai).",
+                          "Choix argumenté du segment 1 : il est nombreux, joignable par WhatsApp et Facebook, achète régulièrement (mariages, baptêmes, fêtes) et accepte de payer plus pour la fiabilité.",
+                          "Persona attendu : « Carine, 29 ans, comptable à Cotonou. Budget d'exemple : 30 000 à 40 000 FCFA par tenue. Utilise WhatsApp et Instagram. Besoin : une tenue assortie au thème de la fête. "
+                          "Freins : peur du retard, mauvaises expériences avec des couturières. Objection : C'est plus cher qu'au marché. » La réponse marketing à l'objection : délai garanti et essayage inclus."]}},
+  {"titre": "Réécrire des propositions de valeur", "niveau": "Débutant", "duree": "25 min",
+   "consigne": "Ces trois phrases sont des propositions de valeur faibles. Explique ce qui ne va pas, puis réécris chacune avec le modèle : Pour [cible] qui [besoin], [marque] offre [bénéfice] grâce à [preuve].",
+   "etapes": ["« Salon Belle, la qualité au meilleur prix. »", "« Nous sommes une ONG engagée pour un monde meilleur. »", "« JusPlus, des jus naturels pour tous. »"],
+   "criteres": ["Chaque phrase réécrite nomme une cible précise.", "Le bénéfice est concret et vérifiable.", "Une personne extérieure comprend la phrase en 5 secondes."],
+   "corrige": {"texte": ["Défauts communs : pas de cible, des mots vides (« qualité », « meilleur », « pour tous ») que tous les concurrents peuvent utiliser, aucune preuve.",
+                          "Exemples de réponses : 1) « Pour les femmes actives de Calavi qui manquent de temps, Salon Belle réalise tes tresses sur rendez-vous WhatsApp, sans attente, avec un prix annoncé avant de commencer. » "
+                          "2) « Pour les familles rurales du Zou, notre ONG installe des points d'eau potable gérés par un comité du village, avec un rapport public pour chaque donateur. » "
+                          "3) « Pour les salariés de Cotonou qui veulent manger plus sain, JusPlus livre au bureau des jus pressés le matin même, sans sucre ajouté, payables par mobile money. »",
+                          "Grille : cible précise (1 point), besoin réel (1 point), bénéfice concret (1 point), preuve ou élément différenciant (1 point), clarté (1 point). Vise 4 sur 5 au minimum."]}},
+  {"titre": "Calculer un prix rentable", "niveau": "Débutant", "duree": "30 min",
+   "consigne": "Restaurant étudiant à Calavi (chiffres d'exemple). Par plat : ingrédients 650 FCFA, emballage 100 FCFA. Charges fixes mensuelles : 180 000 FCFA. Volume prévu : 1 200 plats par mois. "
+                "Concurrents : 1 000 à 1 500 FCFA. Le gérant veut une marge minimale de 20 % sur le coût de revient.",
+   "etapes": ["Calcule le coût variable par plat et la part de charges fixes par plat.", "Calcule le coût de revient et le prix plancher.",
+              "Propose un prix de vente justifié par les trois repères.", "Calcule le bénéfice mensuel prévu et le nombre de plats à vendre pour couvrir les charges fixes (seuil de rentabilité)."],
+   "criteres": ["Chaque calcul est posé ligne par ligne.", "Le prix proposé est au-dessus du plancher et cohérent avec la concurrence.", "Le seuil de rentabilité est correctement interprété."],
+   "corrige": {"texte": ["Coût variable par plat : 650 + 100 = 750 FCFA. Part de charges fixes : 180 000 ÷ 1 200 = 150 FCFA. Coût de revient : 750 + 150 = 900 FCFA.",
+                          "Prix plancher : 900 × 1,20 = 1 080 FCFA. Les concurrents sont entre 1 000 et 1 500 FCFA. Un prix de 1 200 FCFA est au-dessus du plancher, dans la fourchette basse du marché et cohérent avec une cible étudiante.",
+                          "Bénéfice par plat : 1 200 − 900 = 300 FCFA. Bénéfice mensuel prévu : 300 × 1 200 = 360 000 FCFA (si les 1 200 plats sont vendus).",
+                          "Seuil de rentabilité : chaque plat rapporte 1 200 − 750 = 450 FCFA pour couvrir les charges fixes. 180 000 ÷ 450 = 400 plats par mois. En dessous de 400 plats, le restaurant perd de l'argent ; au-dessus, il en gagne. "
+                          "Attention : si le volume réel n'est que de 600 plats, la part de charges fixes passe à 300 FCFA et le coût de revient à 1 050 FCFA : la marge fond, d'où l'importance de prévoir un volume réaliste."]}},
+  {"titre": "Le plan de communication d'un mois", "niveau": "Débutant", "duree": "45 min",
+   "consigne": "Avec un budget d'exemple de 50 000 FCFA, construis le plan de communication du premier mois d'une boutique de jus naturels à Cotonou.",
+   "etapes": ["Fixe un objectif chiffré et daté.", "Écris le message principal à partir de la proposition de valeur.",
+              "Choisis 3 à 4 actions (canal, contenu, fréquence, coût).", "Répartis le budget et indique comment tu mesureras chaque action."],
+   "criteres": ["L'objectif est mesurable.", "Le budget total est respecté.", "Chaque action a un indicateur."],
+   "corrige": {"texte": ["Exemple de plan. Objectif : 150 bouteilles vendues en 4 semaines et 80 contacts WhatsApp enregistrés. Message : « Des jus pressés du jour, sans sucre ajouté, livrés au bureau à Cotonou. »",
+                          "Actions : 1) Dégustation dans 2 entreprises de Ganhi : 15 000 FCFA (échantillons), mesure : contacts recueillis. 2) Statuts WhatsApp quotidiens (photo du jour, prix, comment commander) : 0 FCFA, mesure : messages reçus. "
+                          "3) Publicité Facebook ciblée sur Cotonou, objectif messages : 25 000 FCFA, mesure : coût par conversation. 4) Carte de fidélité imprimée (la 10e bouteille offerte) : 10 000 FCFA, mesure : cartes revenues.",
+                          "Total : 15 000 + 0 + 25 000 + 10 000 = 50 000 FCFA. Bilan en fin de mois : comparer les ventes et les contacts à l'objectif, garder l'action la moins chère par client obtenu."]}}]},
+{
+ "id": "res-cahier-marketing-digital", "fichier": "tobmaq-cahier-marketing-digital.pdf", "categorie": "marketing", "logiciels": ["metabusiness"], "niveau": "Intermédiaire",
+ "titre": "Cahier d'exercices · Responsable marketing digital", "sous_titre": "Marketing digital · 5 exercices et leurs corrigés",
+ "titre_court": "Cahier d'exercices : marketing digital et publicité Meta",
+ "desc": "5 exercices : objectifs SMART, calendrier éditorial, WhatsApp Business, calcul des indicateurs publicitaires et rapport mensuel, avec corrigés détaillés.",
+ "intro": "Ce cahier accompagne la formation « Responsable marketing digital ». Il te met dans la peau d'un responsable qui doit planifier, lancer et justifier ses actions avec des chiffres. "
+          "Les résultats de campagne sont des exemples d'entraînement ; l'interface de Meta évolue souvent, concentre-toi sur la logique.",
+ "exercices": [
+  {"titre": "Des objectifs SMART", "niveau": "Intermédiaire", "duree": "20 min",
+   "consigne": "Transforme ces objectifs vagues en objectifs SMART pour une boutique en ligne de cosmétiques naturels à Cotonou (qui reçoit aujourd'hui, en exemple, 30 commandes par mois).",
+   "etapes": ["« Être plus visible sur Instagram. »", "« Vendre plus grâce à WhatsApp. »", "« Avoir une communauté engagée. »", "« Faire de la publicité. »"],
+   "criteres": ["Chaque objectif est chiffré, daté et réaliste par rapport au point de départ.", "Chaque objectif est relié à un indicateur précis."],
+   "corrige": {"texte": ["Exemples de réponses : 1) « Passer de 800 à 1 500 abonnés Instagram dans la zone Cotonou-Calavi d'ici le 30 juin, en publiant 4 fois par semaine. » "
+                          "2) « Passer de 30 à 45 commandes par mois via WhatsApp d'ici fin mars. » 3) « Atteindre 50 commentaires ou réponses par semaine sur nos publications et statuts d'ici 3 mois. » "
+                          "4) « Obtenir 100 conversations WhatsApp en 2 semaines avec une campagne Meta de 30 000 FCFA, soit au plus 300 FCFA par conversation. »",
+                          "Point de vigilance : un objectif réaliste part des chiffres actuels. Passer de 30 à 300 commandes en un mois n'est pas crédible sans moyens supplémentaires."]}},
+  {"titre": "Calendrier éditorial et WhatsApp Business", "niveau": "Intermédiaire", "duree": "1 h",
+   "consigne": "Prépare deux semaines de publications pour la même boutique et la configuration de son WhatsApp Business.",
+   "etapes": ["Dans Google Sheets : colonnes date, canal, format, type de contenu, thème, appel à l'action, responsable, statut.", "Au moins 8 publications sur 2 canaux, avec 4 types de contenus différents.",
+              "Rédige le message d'accueil, le message d'absence et 5 réponses rapides avec leur raccourci.", "Propose 5 étiquettes pour classer les conversations."],
+   "criteres": ["Pas plus de deux publications de vente directe sur quatre.", "Chaque publication a un appel à l'action.", "Les réponses rapides couvrent prix, livraison, paiement, délai et retours."],
+   "corrige": {"texte": ["Exemple de semaine : lundi Instagram, carrousel conseil (« 3 erreurs avec le beurre de karité »), appel à l'action « Enregistre ce post » ; mercredi statut WhatsApp, coulisses de la fabrication ; "
+                          "vendredi Instagram, avis cliente avec photo (avec son accord) ; samedi statut WhatsApp, offre du week-end, « Réponds OFFRE pour commander ».",
+                          "Message d'accueil : « Bonjour et bienvenue chez Naturelle ! Consulte notre catalogue ou dis-nous ce que tu cherches, nous répondons de 8 h à 20 h. » "
+                          "Réponses rapides : /prix (renvoi au catalogue), /livraison (zones, délais et tarifs), /paiement (mobile money ou à la livraison), /delai (préparation sous 24 h), /retour (conditions d'échange).",
+                          "Étiquettes : Nouveau contact, Commande en cours, Payé, Livré, À relancer. Les listes de diffusion ne touchent que les personnes qui ont enregistré ton numéro."]}},
+  {"titre": "Comparer deux campagnes Meta", "niveau": "Intermédiaire", "duree": "30 min",
+   "consigne": "Deux campagnes d'exemple, même budget de 15 000 FCFA, objectif messages, produit vendu 8 000 FCFA avec une marge brute de 3 000 FCFA par vente. "
+                "Campagne A : 25 000 impressions, 300 clics, 50 conversations, 10 ventes. Campagne B : 40 000 impressions, 320 clics, 30 conversations, 6 ventes.",
+   "etapes": ["Calcule pour chacune : CTR, CPC, coût par conversation, coût par vente, chiffre d'affaires, ROAS.", "Calcule le bénéfice après publicité.", "Décide quelle campagne garder et propose une amélioration pour l'autre."],
+   "criteres": ["Les formules sont écrites avant les résultats.", "La décision s'appuie sur le coût par vente et le bénéfice, pas sur les impressions."],
+   "corrige": {"texte": ["Formules : CTR = clics ÷ impressions × 100 ; CPC = dépense ÷ clics ; coût par conversation = dépense ÷ conversations ; coût par vente = dépense ÷ ventes ; ROAS = chiffre d'affaires ÷ dépense.",
+                          "Campagne A : CTR = 300 ÷ 25 000 × 100 = 1,2 %. CPC = 15 000 ÷ 300 = 50 FCFA. Coût par conversation = 15 000 ÷ 50 = 300 FCFA. Coût par vente = 15 000 ÷ 10 = 1 500 FCFA. "
+                          "Chiffre d'affaires = 10 × 8 000 = 80 000 FCFA. ROAS = 80 000 ÷ 15 000 ≈ 5,3. Bénéfice = 10 × 3 000 − 15 000 = 15 000 FCFA.",
+                          "Campagne B : CTR = 320 ÷ 40 000 × 100 = 0,8 %. CPC = 15 000 ÷ 320 ≈ 46,9 FCFA. Coût par conversation = 15 000 ÷ 30 = 500 FCFA. Coût par vente = 15 000 ÷ 6 = 2 500 FCFA. "
+                          "Chiffre d'affaires = 6 × 8 000 = 48 000 FCFA. ROAS = 48 000 ÷ 15 000 = 3,2. Bénéfice = 6 × 3 000 − 15 000 = 3 000 FCFA.",
+                          "Décision : garder A. B touche plus de monde et a un CPC légèrement plus bas, mais ses clics se transforment moins en conversations et en ventes. "
+                          "Piste pour B : resserrer l'audience ou reprendre le visuel de A. Retiens aussi qu'un ROAS de 3,2 n'est pas forcément rentable : tout dépend de la marge."]}},
+  {"titre": "Concevoir un test A/B", "niveau": "Intermédiaire", "duree": "25 min",
+   "consigne": "Un collègue propose trois tests. Dis pour chacun s'il est valable et pourquoi, puis conçois un test correct pour une boutique de pagnes.",
+   "etapes": ["Test 1 : version A photo de tissu plié, texte court ; version B vidéo de la tenue portée, texte long, autre audience.",
+              "Test 2 : version A et version B identiques sauf le visuel, budget égal, 7 jours.",
+              "Test 3 : version A diffusée 2 jours, version B diffusée la semaine suivante pendant les fêtes."],
+   "criteres": ["Les trois verdicts sont justifiés.", "Le test proposé ne fait varier qu'un seul élément.", "La durée, le budget et l'indicateur de décision sont indiqués."],
+   "corrige": {"texte": ["Test 1 : non valable, trois éléments changent (format, texte, audience) ; impossible de savoir ce qui explique l'écart. Test 2 : valable, une seule variable, budget égal, durée suffisante. "
+                          "Test 3 : non valable, les périodes sont différentes (les fêtes modifient le comportement d'achat) et 2 jours sont trop courts.",
+                          "Test proposé : même audience (femmes 25-45 ans, Cotonou et Calavi), même texte, même budget de 2 500 FCFA par jour chacune pendant 7 jours, en même temps. "
+                          "Variable : visuel A (tissu plié) contre visuel B (tenue portée). Indicateur de décision : coût par conversation WhatsApp, puis confirmation par les ventes."]}},
+  {"titre": "Le rapport mensuel", "niveau": "Intermédiaire", "duree": "40 min",
+   "consigne": "Chiffres d'exemple du mois : portée Facebook 18 000 (mois précédent 12 000), messages WhatsApp 140 (110), commandes 38 (35), dépense publicitaire 40 000 FCFA, chiffre d'affaires lié 190 000 FCFA. "
+                "Rédige un rapport d'une page pour la gérante : résultats, analyse, 3 recommandations.",
+   "criteres": ["Les évolutions sont calculées en pourcentage.", "Le rapport distingue ce qui progresse de ce qui stagne.", "Les recommandations sont concrètes et mesurables."],
+   "corrige": {"texte": ["Évolutions : portée +50 % ((18 000 − 12 000) ÷ 12 000), messages +27 % environ ((140 − 110) ÷ 110), commandes +9 % environ ((38 − 35) ÷ 35). "
+                          "Taux de transformation des messages en commandes : 35 ÷ 110 ≈ 32 % le mois précédent, 38 ÷ 140 ≈ 27 % ce mois-ci. ROAS : 190 000 ÷ 40 000 = 4,75.",
+                          "Analyse : la visibilité et les contacts progressent bien, mais une part plus faible des conversations aboutit à une commande. Le problème se situe probablement dans la conversation (délai de réponse, prix, livraison), pas dans la publicité.",
+                          "Recommandations : 1) Répondre en moins de 15 minutes aux heures de pointe, mesuré par un relevé sur une semaine. 2) Relancer sous 48 h les contacts étiquetés « À relancer ». "
+                          "3) Ajouter les frais de livraison dans le catalogue pour éviter les abandons. Objectif du mois suivant : revenir à au moins 32 % de transformation."]}}]},
+{
+ "id": "res-cahier-redaction", "fichier": "tobmaq-cahier-redaction-web.pdf", "categorie": "marketing", "logiciels": [], "niveau": "Débutant",
+ "titre": "Cahier d'exercices · Rédacteur web", "sous_titre": "Rédaction web · 5 exercices et leurs corrigés",
+ "titre_court": "Cahier d'exercices : rédaction web et SEO",
+ "desc": "5 exercices pour écrire clair et court puis rédiger pour Google : réécriture, titres, intention de recherche, title, méta-description et plan Hn.",
+ "intro": "Ce cahier accompagne la formation « Rédacteur web ». Un traitement de texte comme Google Docs et un navigateur suffisent. "
+          "Les longueurs indiquées pour la balise title et la méta-description sont des repères : Google peut couper ou réécrire selon l'écran.",
+ "exercices": [
+  {"titre": "Réécrire un texte trop long", "niveau": "Débutant", "duree": "25 min",
+   "consigne": "Réécris ce texte pour une page web en moins de 45 mots, avec la pyramide inversée, une phrase d'appel à l'action et des phrases courtes : "
+                "« Depuis de nombreuses années, notre pâtisserie familiale, qui a été fondée par notre grand-mère avec beaucoup d'amour et de passion, met tout en œuvre afin de proposer à sa fidèle clientèle "
+                "des gâteaux de qualité, et nous avons aujourd'hui l'immense plaisir de vous annoncer qu'il est désormais possible de passer commande de gâteaux d'anniversaire, qui seront livrés à Cotonou. »",
+   "criteres": ["L'information principale est dans la première phrase.", "Moins de 45 mots.", "Un appel à l'action avec un moyen de contact."],
+   "corrige": {"texte": ["Exemple de réponse : « Commande ton gâteau d'anniversaire, livré à Cotonou. Choisis parmi nos recettes familiales, indique la date et le nombre d'invités, nous livrons à l'heure. "
+                          "Écris-nous sur WhatsApp au 01 00 00 00 00. Paiement par mobile money ou à la livraison. » (environ 40 mots)",
+                          "Ce qui a changé : l'information utile (gâteaux d'anniversaire livrés à Cotonou) passe en premier ; l'histoire de la famille est réduite à « recettes familiales » ; "
+                          "la phrase unique d'environ 60 mots devient 4 phrases courtes ; les formules creuses (« met tout en œuvre », « immense plaisir ») disparaissent ; un appel à l'action est ajouté."]}},
+  {"titre": "Des titres qui informent", "niveau": "Débutant", "duree": "15 min",
+   "consigne": "Réécris ces 5 titres vagues pour qu'ils annoncent un bénéfice ou une réponse précise.",
+   "etapes": ["« Nos services » (agence de nettoyage à Cotonou)", "« Actualités » (ONG d'éducation à Porto-Novo)", "« Découvrez notre offre » (forfait internet pour PME)",
+              "« À propos » (start-up de livraison à Calavi)", "« Conseils » (blog d'une pharmacie)"],
+   "criteres": ["Chaque titre dit concrètement ce que le lecteur va trouver.", "Pas plus d'environ 10 mots par titre."],
+   "corrige": {"texte": ["Exemples : 1) « Nettoyage de bureaux à Cotonou, le soir ou le week-end ». 2) « 120 enfants inscrits au soutien scolaire cette année » (avec le chiffre réel de l'ONG). "
+                          "3) « Internet illimité pour ta PME, installé en 48 h ». 4) « Qui nous sommes : des livreurs de Calavi formés et assurés ». 5) « Paludisme : 5 gestes pour protéger ta famille ».",
+                          "Grille : le titre est précis (2 points), annonce un bénéfice ou une réponse (2 points), reste court (1 point)."]}},
+  {"titre": "Mots-clés et intention de recherche", "niveau": "Débutant", "duree": "20 min",
+   "consigne": "Classe ces 8 requêtes selon l'intention (s'informer, trouver un site précis, comparer, acheter), puis indique le type de page le plus adapté pour chacune.",
+   "etapes": ["comment conserver le gari", "boutique Awa Dantokpa", "meilleur forfait internet Bénin", "commander gâteau anniversaire Cotonou",
+              "prix moto neuve Cotonou", "recette sauce arachide", "pharmacie de garde Calavi", "formation marketing digital en ligne avis"],
+   "criteres": ["Au moins 6 bonnes réponses sur 8.", "Le type de page est cohérent avec l'intention."],
+   "corrige": {"texte": ["S'informer : « comment conserver le gari » et « recette sauce arachide » (article ou guide). Trouver un site ou un lieu précis : « boutique Awa Dantokpa » (page d'accueil ou fiche Google de la boutique), "
+                          "« pharmacie de garde Calavi » (page d'informations pratiques à jour). Comparer : « meilleur forfait internet Bénin », « prix moto neuve Cotonou », « formation marketing digital en ligne avis » "
+                          "(comparatif, page de tarifs, avis). Acheter : « commander gâteau anniversaire Cotonou » (page de commande avec prix et contact).",
+                          "Certaines requêtes sont mixtes : « prix moto neuve Cotonou » peut aussi être proche de l'achat. Regarde les premiers résultats de Google pour trancher."]}},
+  {"titre": "Balise title et méta-description", "niveau": "Intermédiaire", "duree": "30 min",
+   "consigne": "Pour la page de commande d'une pâtisserie de Cotonou (mot-clé : « gâteau anniversaire Cotonou »), critique le title proposé, puis rédige un title et une méta-description. Compte les caractères.",
+   "etapes": ["Title proposé : « Bienvenue sur le site officiel de notre magnifique pâtisserie familiale située à Cotonou au Bénin ».",
+              "Repères indicatifs : title d'environ 50 à 60 caractères, méta-description d'environ 120 à 160 caractères."],
+   "criteres": ["Le mot-clé principal apparaît au début du title.", "Les longueurs sont dans les repères.", "La méta-description se termine par une incitation."],
+   "corrige": {"texte": ["Critique : le title proposé fait 97 caractères, il sera coupé ; il commence par « Bienvenue », qui n'apporte rien, et ne contient pas le mot-clé « gâteau anniversaire ».",
+                          "Title possible (60 caractères) : « Gâteau d'anniversaire à Cotonou livré en 24 h | Délices Mado ».",
+                          "Méta-description possible (128 caractères) : « Commande ton gâteau d'anniversaire à Cotonou : 20 parfums, livraison en 24 h, paiement mobile money. Devis gratuit sur WhatsApp. »",
+                          "Les promesses (20 parfums, 24 h) doivent être vraies pour l'entreprise : une méta-description trompeuse fait fuir le visiteur dès qu'il arrive sur la page."]}},
+  {"titre": "Corriger un plan de page", "niveau": "Intermédiaire", "duree": "30 min",
+   "consigne": "Ce plan de page pour un salon de coiffure de Calavi contient 5 erreurs de structure ou de SEO. Repère-les, puis propose un plan corrigé.",
+   "code": "H1 : Bienvenue\nH1 : Salon de coiffure tresses Calavi tresses pas cher tresses\nH3 : Nos prestations\nH2 : Nos tarifs\nImage : IMG_2045.jpg (pas de texte alternatif)\nLien : « cliquez ici » vers la page Réservation",
+   "criteres": ["Les 5 erreurs sont trouvées et expliquées.", "Le plan corrigé a un seul H1 et des niveaux sans saut.", "Le lien et l'image sont corrigés."],
+   "corrige": {"texte": ["Erreurs : 1) Deux H1. 2) Bourrage de mots-clés dans le second H1. 3) Saut de niveau : un H3 apparaît avant tout H2. 4) Image sans texte alternatif et nom de fichier non parlant. "
+                          "5) Texte de lien « cliquez ici » qui n'indique pas la destination."],
+               "code": "H1 : Salon de coiffure à Calavi : tresses, nattes et tissages\nH2 : Nos prestations\n  H3 : Tresses et nattes\n  H3 : Tissages et perruques\nH2 : Nos tarifs\nH2 : Questions fréquentes\nImage : tresses-longues-salon-calavi.jpg\n  alt : « Tresses longues réalisées au salon Belle Tête »\nLien : « Réserve ton rendez-vous en ligne » vers la page Réservation"}}]},
+{
+ "id": "res-cahier-projet", "fichier": "tobmaq-cahier-chef-de-projet.pdf", "categorie": "marketing", "logiciels": ["trello"], "niveau": "Intermédiaire",
+ "titre": "Cahier d'exercices · Chef de projet digital", "sous_titre": "Gestion de projet · 5 exercices et leurs corrigés",
+ "titre_court": "Cahier d'exercices : cadrer et piloter un projet digital",
+ "desc": "5 exercices, du cadrage au suivi prévu / réel : questions client, priorisation MoSCoW, budget avec réserve, tableau Trello et recette, avec corrigés détaillés.",
+ "intro": "Ce cahier accompagne la formation « Chef de projet digital ». Il suit un projet fil rouge : le site de commande en ligne d'un restaurant de Cotonou. "
+          "Les montants et les taux journaliers sont des exemples d'entraînement, à adapter au marché et à ton équipe.",
+ "exercices": [
+  {"titre": "Reformuler le besoin", "niveau": "Intermédiaire", "duree": "30 min",
+   "consigne": "La gérante du restaurant t'écrit : « Il nous faut une application comme les grandes marques, vite, et pas trop chère. » Rédige 10 questions de cadrage, puis une reformulation du besoin en 5 lignes à lui renvoyer pour validation.",
+   "criteres": ["Les questions portent sur le problème, les utilisateurs, les objectifs, le budget et le délai.", "La reformulation ne présuppose pas la solution technique."],
+   "corrige": {"texte": ["Questions utiles : Quel problème voulez-vous résoudre ? Comment les clients commandent-ils aujourd'hui ? Combien de commandes par jour, et combien en voulez-vous ? "
+                          "Qui recevra et préparera les commandes en ligne ? Quels moyens de paiement ? Qui livre et dans quelle zone ? Quel budget pour la création et pour l'entretien chaque année ? "
+                          "Pour quelle date et pourquoi cette date ? Qui décide et valide ? Qui mettra à jour le menu et les prix ?",
+                          "Reformulation possible : « Vous souhaitez que vos clients de Cotonou puissent commander et payer en ligne sans appeler, pour réduire les erreurs de commande et augmenter les ventes à emporter. "
+                          "Les commandes doivent arriver dans la cuisine et sur WhatsApp. Le menu doit être modifiable par votre équipe. Le lancement est visé avant la rentrée. "
+                          "Une application mobile n'est peut-être pas nécessaire au départ : un site adapté au téléphone peut suffire. »"]}},
+  {"titre": "Prioriser le périmètre avec MoSCoW", "niveau": "Intermédiaire", "duree": "20 min",
+   "consigne": "Classe ces 10 fonctionnalités en Must, Should, Could, Won't pour une première version livrée en 8 semaines, et justifie deux choix difficiles.",
+   "etapes": ["Menu avec photos et prix", "Panier et commande", "Paiement mobile money", "Paiement à la livraison", "Suivi de commande en temps réel sur carte",
+              "Programme de fidélité à points", "Notification WhatsApp au restaurant", "Application mobile Android et iOS", "Espace d'administration du menu", "Avis clients"],
+   "criteres": ["Les Must permettent à eux seuls de commander et d'être servi.", "Au moins une fonctionnalité est en Won't.", "Les justifications citent le délai, le budget ou la valeur pour le client."],
+   "corrige": {"texte": ["Proposition : Must : menu avec photos et prix, panier et commande, paiement à la livraison, notification WhatsApp au restaurant, espace d'administration du menu. "
+                          "Should : paiement mobile money. Could : avis clients, programme de fidélité. Won't (cette version) : suivi en temps réel sur carte, application mobile Android et iOS.",
+                          "Justifications : le paiement mobile money est très attendu mais dépend de l'ouverture d'un compte marchand et de délais externes ; le paiement à la livraison permet de lancer sans attendre. "
+                          "L'application mobile doublerait le travail et le budget ; un site adapté au téléphone répond au besoin de la première version. D'autres classements sont acceptables s'ils sont justifiés."]}},
+  {"titre": "Budget avec réserve", "niveau": "Intermédiaire", "duree": "25 min",
+   "consigne": "Calcule le budget du projet à partir de ces estimations d'exemple : design 3 jours à 25 000 FCFA, développement 15 jours à 30 000 FCFA, rédaction des contenus 4 jours à 20 000 FCFA, "
+                "gestion de projet 6 jours à 25 000 FCFA, tests 3 jours à 20 000 FCFA, domaine et hébergement 54 000 FCFA pour un an. Ajoute une réserve de 15 % sur le total.",
+   "criteres": ["Chaque ligne est calculée séparément.", "La réserve est calculée sur le total hors réserve.", "Les frais récurrents sont signalés à part."],
+   "corrige": {"texte": ["Design : 3 × 25 000 = 75 000. Développement : 15 × 30 000 = 450 000. Rédaction : 4 × 20 000 = 80 000. Gestion de projet : 6 × 25 000 = 150 000. Tests : 3 × 20 000 = 60 000. "
+                          "Domaine et hébergement : 54 000.",
+                          "Total hors réserve : 75 000 + 450 000 + 80 000 + 150 000 + 60 000 + 54 000 = 869 000 FCFA. Réserve de 15 % : 869 000 × 0,15 = 130 350 FCFA. Budget total : 869 000 + 130 350 = 999 350 FCFA.",
+                          "À présenter au client : la création (815 000 FCFA hors réserve) est payée une fois ; le domaine et l'hébergement (54 000 FCFA) reviennent chaque année. "
+                          "La réserve n'est pas un bénéfice caché : elle sert aux imprévus et son usage est expliqué au client."]}},
+  {"titre": "Tableau Trello et sprints", "niveau": "Intermédiaire", "duree": "1 h",
+   "consigne": "Crée dans Trello le tableau du projet et organise la réalisation en 3 sprints de deux semaines.",
+   "etapes": ["Colonnes : Carnet, À faire, En cours, À vérifier, Terminé.", "Au moins 15 cartes avec responsable, échéance, liste de contrôle et étiquette.",
+              "Répartis les cartes dans 3 sprints avec un objectif par sprint.", "Ajoute un tableau de 4 risques : probabilité, impact, action."],
+   "criteres": ["Chaque carte est assez petite pour être finie en 1 à 2 jours.", "Chaque sprint se termine par quelque chose de montrable au client.", "Chaque risque a une action concrète et un responsable."],
+   "corrige": {"texte": ["Exemple de découpage. Sprint 1 (objectif : maquettes validées et menu en ligne) : maquette accueil, maquette page menu, charte couleurs, installation du site, saisie de 20 plats avec photos. "
+                          "Sprint 2 (objectif : commande de bout en bout) : panier, formulaire de commande, notification WhatsApp, paiement à la livraison, espace d'administration. "
+                          "Sprint 3 (objectif : prêt à lancer) : paiement mobile money, pages Contact et Livraison, tests sur téléphone, corrections, formation de l'équipe.",
+                          "Risques : contenus (photos, prix) fournis en retard par le client, probabilité forte, action : liste des contenus avec date limite dès le cadrage. "
+                          "Compte marchand mobile money non validé à temps, probabilité moyenne, action : lancer avec paiement à la livraison. Indisponibilité du développeur, action : code et accès documentés. "
+                          "Connexion lente des clients, action : images compressées et pages légères."]}},
+  {"titre": "Suivi prévu / réel et recette", "niveau": "Intermédiaire", "duree": "40 min",
+   "consigne": "Fin de la semaine 4 sur 8 (chiffres d'exemple). Budget de réalisation : 800 000 FCFA. Le carnet compte 40 cartes. Prévu à mi-parcours : 20 cartes terminées et 400 000 FCFA dépensés. "
+                "Réel : 14 cartes terminées et 480 000 FCFA dépensés. Analyse la situation, propose une décision, puis rédige 5 cas de test pour la commande en ligne.",
+   "etapes": ["Calcule l'avancement réel et la consommation du budget en pourcentage.", "Estime la date de fin et le coût final si le rythme reste le même.",
+              "Propose deux options au commanditaire et ta recommandation.", "Cas de test : étape, résultat attendu, résultat obtenu, conforme ou non."],
+   "criteres": ["Les calculs sont justes et expliqués.", "Les options sont chiffrées.", "Les cas de test couvrent au moins un cas d'erreur."],
+   "corrige": {"texte": ["Avancement : 14 ÷ 40 = 35 % (prévu 50 %). Budget consommé : 480 000 ÷ 800 000 = 60 % (prévu 50 %). Le projet est en retard et coûte plus cher que prévu : signal d'alerte.",
+                          "Rythme : 14 cartes en 4 semaines = 3,5 cartes par semaine. Il reste 26 cartes : 26 ÷ 3,5 ≈ 7,4 semaines, soit une fin vers la semaine 11 ou 12 au lieu de 8. "
+                          "Coût : 480 000 ÷ 14 ≈ 34 300 FCFA par carte ; 40 cartes × 34 300 ≈ 1 372 000 FCFA, soit environ 570 000 FCFA de dépassement si rien ne change.",
+                          "Option 1 : réduire le périmètre en reportant les Could et une partie des Should (par exemple 8 cartes) pour tenir la date et limiter le dépassement. "
+                          "Option 2 : garder tout le périmètre, décaler la mise en ligne d'environ 4 semaines et augmenter le budget. Recommandation : option 1, car le restaurant a besoin d'être en ligne avant la rentrée ; "
+                          "à décider avec la gérante cette semaine, pas à la fin du projet.",
+                          "Cas de test d'exemple : 1) Ajouter 2 plats au panier : le total est juste. 2) Valider une commande avec paiement à la livraison : confirmation affichée et message WhatsApp reçu par le restaurant. "
+                          "3) Envoyer le formulaire sans numéro de téléphone : message d'erreur clair, commande bloquée. 4) Modifier un prix dans l'administration : nouveau prix visible sur le site. "
+                          "5) Passer une commande sur un téléphone d'entrée de gamme en connexion lente : la page reste utilisable."]}}]},
+]
+
+CAHIERS += CAHIERS_A + CAHIERS_B + CAHIERS_C
+
 def taille(fichier):
     return f"{max(1, round((OUT / fichier).stat().st_size / 1024))} Ko"
 
