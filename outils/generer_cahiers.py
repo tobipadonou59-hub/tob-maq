@@ -1091,7 +1091,394 @@ CAHIERS_C = [
                           "5) Passer une commande sur un téléphone d'entrée de gamme en connexion lente : la page reste utilisable."]}}]},
 ]
 
-CAHIERS += CAHIERS_A + CAHIERS_B + CAHIERS_C
+CAHIERS_D = [
+{
+ "id": "res-cahier-ecommerce", "fichier": "tobmaq-cahier-ecommerce.pdf", "categorie": "business", "logiciels": [], "niveau": "Débutant",
+ "titre": "Cahier d'exercices · E-commerce : vendre en ligne", "sous_titre": "E-commerce · 5 exercices progressifs et leurs corrigés",
+ "titre_court": "Cahier d'exercices : e-commerce et vente en ligne",
+ "desc": "5 exercices progressifs, de la fiche produit au service après-vente, avec calcul du prix, de la livraison, du panier moyen et du taux de conversion, et corrigés détaillés.",
+ "intro": "Ce cahier accompagne la formation « E-commerce : vendre en ligne ». Il te suffit d'un téléphone, d'un tableur et d'un carnet. "
+          "Tous les chiffres sont des exemples d'entraînement : remplace-les par tes vrais coûts, tes vrais tarifs de livraison et les frais réels de ton opérateur.",
+ "exercices": [
+  {"titre": "Réécrire trois fiches produits", "niveau": "Débutant", "duree": "35 min",
+   "consigne": "Une vendeuse de Cotonou publie ces trois annonces sur son catalogue WhatsApp Business. Explique ce qui ne va pas, puis réécris chaque fiche complète.",
+   "etapes": ["Annonce 1 : « Beau pagne dispo, prix en privé. » (une seule photo sombre)",
+              "Annonce 2 : « Sac top qualité !!! Livraison partout. »",
+              "Annonce 3 : « Huile de coco 100 % naturelle, 3 500. »",
+              "Pour chaque fiche : titre, description (matière, dimensions ou contenance, usage, entretien), prix en FCFA, délai et zone de livraison, liste des photos à prendre."],
+   "criteres": ["Chaque titre indique le type de produit et une caractéristique clé.", "Le prix est affiché en FCFA, sans « prix en privé ».",
+                "Le délai et la zone de livraison sont précisés.", "Au moins 3 photos différentes sont prévues par produit."],
+   "corrige": {"texte": ["Défauts communs : prix caché (annonce 1), mots vagues sans information vérifiable (« top qualité », « partout »), aucune dimension ni contenance, livraison non précisée, photo unique et sombre. "
+                          "Le client doit poser plusieurs questions avant de savoir s'il veut acheter : beaucoup abandonnent.",
+                          "Exemple de réponse 1 : « Pagne wax 6 yards, motif fleurs jaunes et bleues, 100 % coton. » Description : environ 6 yards, idéal pour une tenue de cérémonie, lavage à la main à l'eau froide. "
+                          "Prix d'exemple : 7 500 FCFA. Livraison à Cotonou en 24 h, 1 000 FCFA. Photos : pagne plié, motif en gros plan, pagne déplié sur un fond blanc, tenue portée.",
+                          "Exemple de réponse 2 : « Sac à main en pagne wax doublé, fermeture éclair, 30 x 25 cm. » Description : doublure intérieure, une poche zippée, anse renforcée. Prix d'exemple : 9 000 FCFA. "
+                          "Livraison : Cotonou et Calavi en 24 à 48 h selon la zone, tarifs affichés ; autres villes sur demande avec acompte. Photos : face, intérieur, détail de la couture, sac porté à l'épaule.",
+                          "Exemple de réponse 3 : « Huile de coco vierge, flacon de 250 ml. » Description : usage cheveux et peau, conserver à l'abri du soleil, se solidifie au frais (c'est normal). Prix d'exemple : 3 500 FCFA. "
+                          "Livraison à Cotonou en 24 h. Photos : flacon de face, étiquette lisible, texture, flacon à côté d'un objet pour l'échelle.",
+                          "Grille sur 10 : titre clair (2), description complète (2), prix affiché (2), livraison précisée (2), photos prévues (2). Vise au moins 8 sur 10."]}},
+  {"titre": "Coût de revient et prix de vente", "niveau": "Débutant", "duree": "35 min",
+   "consigne": "Tu vends des sacs en pagne fabriqués par une couturière (chiffres d'exemple). Par sac : tissu 2 000 FCFA, fermeture et doublure 800 FCFA, couture 1 500 FCFA, emballage 200 FCFA. "
+                "Charges fixes mensuelles : internet 15 000 FCFA, publicité 50 000 FCFA, déplacements 25 000 FCFA. Volume prévu : 60 sacs par mois. Les concurrents vendent entre 8 000 et 12 000 FCFA. Tu vises un taux de marge de 50 % sur le coût de revient.",
+   "etapes": ["Calcule le coût variable par sac et la part de charges fixes par sac.", "Calcule le coût de revient et le prix de vente correspondant au taux de marge visé.",
+              "Vérifie que ce prix est cohérent avec la concurrence.", "Calcule le bénéfice mensuel prévu et le seuil de rentabilité en nombre de sacs."],
+   "criteres": ["Chaque calcul est posé ligne par ligne avec ses unités.", "Le prix tient compte de toutes les charges.", "Le seuil de rentabilité est correctement interprété."],
+   "corrige": {"texte": ["Coût variable par sac : 2 000 + 800 + 1 500 + 200 = 4 500 FCFA. Charges fixes mensuelles : 15 000 + 50 000 + 25 000 = 90 000 FCFA. Part de charges fixes par sac : 90 000 ÷ 60 = 1 500 FCFA.",
+                          "Coût de revient : 4 500 + 1 500 = 6 000 FCFA. Prix avec 50 % de marge : 6 000 × 1,50 = 9 000 FCFA. Marge par sac : 9 000 − 6 000 = 3 000 FCFA. "
+                          "Le prix de 9 000 FCFA se situe dans la fourchette des concurrents (8 000 à 12 000 FCFA), plutôt dans le bas : il est crédible et laisse de la place pour une version plus haut de gamme.",
+                          "Bénéfice mensuel prévu : 3 000 × 60 = 180 000 FCFA, si les 60 sacs sont vendus.",
+                          "Seuil de rentabilité : chaque sac rapporte 9 000 − 4 500 = 4 500 FCFA pour couvrir les charges fixes. 90 000 ÷ 4 500 = 20 sacs par mois. "
+                          "En dessous de 20 sacs, l'activité perd de l'argent ; au-delà, chaque sac supplémentaire rapporte 4 500 FCFA de bénéfice. Contrôle : 60 sacs donnent (60 − 20) × 4 500 = 180 000 FCFA, on retrouve le bénéfice calculé.",
+                          "Erreur fréquente : oublier la publicité ou les déplacements dans le calcul. Sans les charges fixes, le vendeur croirait gagner 4 500 FCFA par sac au lieu de 3 000 FCFA."]}},
+  {"titre": "Livraison, frais de paiement et colis refusés", "niveau": "Intermédiaire", "duree": "40 min",
+   "consigne": "Reprends le sac vendu 9 000 FCFA avec une marge de 3 000 FCFA. Tarifs d'exemple de ton livreur à zémidjan : zone A (Cotonou centre) 1 000 FCFA, zone B (Akpakpa, Godomey) 1 500 FCFA, zone C (Calavi, Porto-Novo) 2 500 FCFA. "
+                "Pour l'exercice, on suppose des frais de paiement Mobile Money de 1 % à ta charge (vérifie les frais réels auprès de ton opérateur). Le mois dernier, sur 40 commandes payables à la livraison, 4 colis ont été refusés ; chaque refus t'a coûté 2 000 FCFA (aller et retour du livreur).",
+   "etapes": ["Calcule la marge restante si tu offres la livraison dans chaque zone, avec paiement Mobile Money.", "Calcule le coût total des refus et leur coût moyen par commande livrée.",
+              "Propose une politique de livraison et de paiement rentable.", "Rédige le message qui présente cette politique au client."],
+   "criteres": ["Les frais de paiement sont calculés sur le prix de vente.", "La politique proposée garde une marge positive dans toutes les zones.", "Le message au client est clair et poli."],
+   "corrige": {"texte": ["Frais de paiement : 9 000 × 1 % = 90 FCFA. Marge avec livraison offerte : zone A : 3 000 − 1 000 − 90 = 1 910 FCFA ; zone B : 3 000 − 1 500 − 90 = 1 410 FCFA ; zone C : 3 000 − 2 500 − 90 = 410 FCFA. "
+                          "Offrir la livraison en zone C ne laisse presque rien : un seul imprévu suffit à rendre la vente déficitaire.",
+                          "Refus : 4 × 2 000 = 8 000 FCFA perdus. Commandes réellement livrées : 40 − 4 = 36. Coût moyen par commande livrée : 8 000 ÷ 36 ≈ 222 FCFA. Taux de refus : 4 ÷ 40 × 100 = 10 %.",
+                          "Exemple de politique : livraison payée par le client selon la zone (tarifs affichés) ; livraison offerte en zone A à partir de 15 000 FCFA d'achat ; paiement à la livraison accepté en zones A et B ; "
+                          "en zone C et pour les nouveaux clients, acompte du montant de la livraison par Mobile Money avant l'envoi. Ainsi, un refus ne te coûte plus rien en zone C.",
+                          "Exemple de message : « Bonjour ! Livraison en 24 h : 1 000 FCFA à Cotonou centre, 1 500 FCFA à Akpakpa et Godomey, 2 500 FCFA à Calavi et Porto-Novo. Offerte à Cotonou centre dès 15 000 FCFA d'achat. "
+                          "Pour Calavi et Porto-Novo, nous demandons le paiement de la livraison par Mobile Money à la commande. Merci de ta confiance ! »",
+                          "Grille : calculs justes (4 points), politique rentable dans toutes les zones (3 points), message clair (3 points)."]}},
+  {"titre": "Panier moyen et taux de conversion", "niveau": "Intermédiaire", "duree": "35 min",
+   "consigne": "Données d'exemple d'une boutique en ligne de pagnes. Mois 1 : 250 conversations WhatsApp, 35 commandes, chiffre d'affaires 420 000 FCFA. "
+                "Au mois 2, la boutique ajoute une offre « pagne + foulard assorti », des réponses rapides sur les tailles et une relance des clients indécis. Mois 2 : 300 conversations, 48 commandes, chiffre d'affaires 624 000 FCFA.",
+   "etapes": ["Calcule le taux de conversion et le panier moyen des deux mois.", "Calcule l'évolution du chiffre d'affaires en pourcentage.",
+              "Explique quelle action a probablement agi sur quel indicateur.", "Fixe un objectif chiffré pour le mois 3 et calcule le chiffre d'affaires visé."],
+   "criteres": ["Les formules sont écrites avant les résultats.", "Chaque action est reliée à l'indicateur qu'elle influence.", "L'objectif du mois 3 est réaliste par rapport au mois 2."],
+   "corrige": {"texte": ["Formules : taux de conversion = commandes ÷ conversations × 100 ; panier moyen = chiffre d'affaires ÷ commandes.",
+                          "Mois 1 : conversion = 35 ÷ 250 × 100 = 14 % ; panier moyen = 420 000 ÷ 35 = 12 000 FCFA. Mois 2 : conversion = 48 ÷ 300 × 100 = 16 % ; panier moyen = 624 000 ÷ 48 = 13 000 FCFA.",
+                          "Évolution du chiffre d'affaires : (624 000 − 420 000) ÷ 420 000 × 100 ≈ 48,6 %. Trois leviers ont joué en même temps : plus de conversations (+50), meilleure conversion (+2 points) et panier moyen plus élevé (+1 000 FCFA).",
+                          "Lien actions et indicateurs : l'offre pagne + foulard agit sur le panier moyen ; les réponses rapides sur les tailles et la relance des indécis agissent sur le taux de conversion. "
+                          "La hausse des conversations peut venir de la publicité, du bouche-à-oreille ou de la saison : il faudrait le vérifier.",
+                          "Exemple d'objectif pour le mois 3 : garder 300 conversations, atteindre 18 % de conversion et 13 000 FCFA de panier moyen. Commandes visées : 300 × 18 % = 54. "
+                          "Chiffre d'affaires visé : 54 × 13 000 = 702 000 FCFA. Un objectif à 40 % de conversion ne serait pas réaliste sans changement majeur."]}},
+  {"titre": "Avis clients, service après-vente et retours", "niveau": "Intermédiaire", "duree": "40 min",
+   "consigne": "Rédige la politique de service après-vente de ta boutique en ligne, puis réponds par écrit aux trois situations suivantes.",
+   "etapes": ["Politique en 5 à 7 lignes : délai pour signaler un problème, cas acceptés, cas refusés, qui paie le retour, échange, avoir ou remboursement.",
+              "Situation 1 : une cliente reçoit un pagne d'une autre couleur que celle commandée.",
+              "Situation 2 : un client publie en commentaire « Livraison en retard, je ne recommande pas ! ».",
+              "Situation 3 : une cliente veut rendre une robe portée pour une cérémonie, sans défaut, 10 jours après la livraison.",
+              "Rédige aussi le message envoyé après chaque livraison pour demander un avis."],
+   "criteres": ["La politique est claire, courte et visible avant l'achat.", "Les réponses restent calmes, polies et proposent une solution.",
+                "Les décisions respectent la politique annoncée.", "La demande d'avis est courte et demande l'accord pour une éventuelle photo."],
+   "corrige": {"texte": ["Exemple de politique : « Tu as 48 h après réception pour signaler un problème avec photo. Nous échangeons ou remboursons en cas d'erreur de notre part ou de défaut. "
+                          "En cas d'erreur de notre part, le retour est à notre charge. Un changement d'avis est accepté sous 48 h si l'article n'a pas été porté ni lavé, retour à ta charge, sous forme d'échange ou d'avoir. "
+                          "Les articles sur mesure, portés ou lavés ne sont ni repris ni échangés, sauf défaut. »",
+                          "Situation 1 (erreur du vendeur) : s'excuser, envoyer le bon pagne à tes frais et récupérer l'autre au même passage du livreur. Exemple : « Bonjour, toutes nos excuses pour cette erreur. "
+                          "Notre livreur t'apporte le bon pagne demain et récupère l'autre, sans frais pour toi. »",
+                          "Situation 2 (avis public négatif) : répondre publiquement, brièvement, sans se justifier longuement, puis continuer en privé. Exemple : « Bonjour, tu as raison, ta commande est arrivée avec un jour de retard "
+                          "et nous en sommes désolés. Nous t'écrivons en privé pour trouver une solution. » Une petite compensation (livraison offerte sur la prochaine commande) peut être proposée.",
+                          "Situation 3 : la demande sort de la politique (article porté, délai de 48 h dépassé). Refuser poliment en citant la règle : « Nous comprenons ta demande, mais comme indiqué dans nos conditions, "
+                          "les articles portés ne peuvent pas être repris. Nous serons ravis de t'aider pour ta prochaine tenue. »",
+                          "Demande d'avis : « Merci pour ta commande ! As-tu bien reçu ton article ? Ton avis en une phrase nous aide beaucoup. Si tu es d'accord, envoie-nous aussi une photo : nous la partagerons seulement avec ta permission. »",
+                          "Grille sur 10 : politique complète (3), trois réponses polies et cohérentes (2 chacune, soit 6), demande d'avis (1)."]}}]},
+{
+ "id": "res-cahier-freelance", "fichier": "tobmaq-cahier-freelance.pdf", "categorie": "business", "logiciels": [], "niveau": "Débutant",
+ "titre": "Cahier d'exercices · Freelance : vivre de ses compétences", "sous_titre": "Freelance · 5 exercices progressifs et leurs corrigés",
+ "titre_court": "Cahier d'exercices : freelance, tarifs et devis",
+ "desc": "5 exercices progressifs : offre et portfolio, calcul du tarif journalier, devis avec acompte, facturation et relances, gestion d'un client difficile, avec corrigés détaillés.",
+ "intro": "Ce cahier accompagne la formation « Freelance : vivre de ses compétences ». Il te fait passer de l'idée d'offre jusqu'à la gestion d'un client difficile. "
+          "Les montants sont des exemples d'entraînement. Pour ton statut, tes impôts et les mentions obligatoires de tes factures, renseigne-toi auprès des services officiels ou d'un comptable.",
+ "exercices": [
+  {"titre": "Offre, niche et portfolio", "niveau": "Débutant", "duree": "45 min",
+   "consigne": "Construis l'offre de départ d'un freelance (toi ou un profil imaginaire) et le plan de son portfolio.",
+   "etapes": ["Liste 3 compétences, 3 types de clients possibles et 3 problèmes que tu sais résoudre.",
+              "Choisis une niche et rédige ton offre avec le modèle : « J'aide [client] à [résultat] grâce à [service] ».",
+              "Prévois 3 projets de portfolio : contexte, travail réalisé, résultat, visuel, et précise s'il s'agit d'un projet réel ou d'entraînement.",
+              "Rédige le titre de ton profil LinkedIn (une ligne)."],
+   "criteres": ["L'offre nomme un client précis et un résultat concret.", "Les projets du portfolio correspondent à la niche choisie.",
+                "Les projets d'entraînement sont présentés honnêtement.", "Le titre LinkedIn est compréhensible par un non-spécialiste."],
+   "corrige": {"texte": ["Exemple de réponse. Compétences : graphisme, montage vidéo court, rédaction de publications. Clients possibles : restaurants, salons de coiffure, écoles privées. "
+                          "Problèmes : visuels peu attirants, pages Facebook inactives, menus illisibles.",
+                          "Offre : « J'aide les restaurants et maquis de Cotonou à attirer plus de clients grâce à des menus, affiches et vidéos courtes pour WhatsApp et Facebook. »",
+                          "Portfolio : 1) Menu refait pour un maquis d'Akpakpa (projet d'entraînement, précisé), avant/après. 2) Série de 4 visuels pour le restaurant d'un proche (projet réel, avec son accord), "
+                          "résultat : plus de messages après publication selon le gérant. 3) Vidéo de 20 secondes présentant un plat du jour (projet d'entraînement).",
+                          "Titre LinkedIn : « Graphiste pour restaurants · Menus, affiches et vidéos qui donnent faim ».",
+                          "Erreur fréquente : présenter un projet d'entraînement comme une commande réelle. Si un client le découvre, la confiance est perdue. Grille : offre précise (3), cohérence du portfolio (3), honnêteté (2), titre clair (2)."]}},
+  {"titre": "Calculer son tarif journalier", "niveau": "Débutant", "duree": "35 min",
+   "consigne": "Chiffres d'exemple d'un freelance à Cotonou. Besoins mensuels : charges personnelles 180 000 FCFA, internet 20 000 FCFA, logiciels 15 000 FCFA, épargne et imprévus 30 000 FCFA, "
+                "provision pour impôts et cotisations 30 000 FCFA (montant à vérifier selon ton statut). Il a acheté un ordinateur de 600 000 FCFA qu'il veut renouveler dans 24 mois. "
+                "Il compte 20 jours ouvrés par mois, dont 6 consacrés à la prospection, à l'administratif et à la formation.",
+   "etapes": ["Calcule la part mensuelle de l'ordinateur et le besoin mensuel total.", "Calcule le nombre de jours facturables et le tarif journalier minimum.",
+              "Arrondis le tarif journalier, puis calcule un tarif horaire sur une base de 7 h par jour.", "Estime le prix d'un logo qui demande 2,5 jours de travail."],
+   "criteres": ["Le matériel est réparti sur sa durée d'utilisation.", "Les jours non facturables sont déduits.", "Les arrondis sont faits vers le haut et justifiés."],
+   "corrige": {"texte": ["Part de l'ordinateur : 600 000 ÷ 24 = 25 000 FCFA par mois. Besoin mensuel total : 180 000 + 20 000 + 15 000 + 30 000 + 30 000 + 25 000 = 300 000 FCFA.",
+                          "Jours facturables : 20 − 6 = 14. Tarif journalier minimum : 300 000 ÷ 14 ≈ 21 429 FCFA. Arrondi vers le haut : 22 000 FCFA par jour. "
+                          "Contrôle : 14 × 22 000 = 308 000 FCFA, ce qui couvre bien les 300 000 FCFA de besoins.",
+                          "Tarif horaire : 22 000 ÷ 7 ≈ 3 143 FCFA, arrondi à 3 150 FCFA de l'heure.",
+                          "Logo de 2,5 jours : 2,5 × 22 000 = 55 000 FCFA. Ce prix est ensuite comparé au marché et à la valeur pour le client : s'il est très au-dessus des prix pratiqués, il faut travailler plus vite, "
+                          "viser des clients plus solides ou mieux montrer la valeur du travail.",
+                          "Erreur fréquente : diviser par 20 jours au lieu de 14. Le tarif serait de 15 000 FCFA par jour, et le freelance ne couvrirait que 14 × 15 000 = 210 000 FCFA, soit 90 000 FCFA de moins que ses besoins."]}},
+  {"titre": "Rédiger un devis avec acompte", "niveau": "Intermédiaire", "duree": "45 min",
+   "consigne": "Une clinique de Cotonou te demande un site vitrine. Avec ton tarif de 22 000 FCFA par jour, prépare un devis complet. Durées estimées : maquette 2 jours, intégration de 5 pages 4 jours, "
+                "formulaire de contact et bouton WhatsApp 1 jour, mise en ligne 0,5 jour, formation du personnel 0,5 jour. L'hébergement et le nom de domaine ne sont pas inclus. Acompte : 40 %.",
+   "etapes": ["Calcule le prix de chaque ligne et le total.", "Calcule l'acompte et le solde.",
+              "Rédige les conditions : délai, nombre de retouches, ce qui n'est pas inclus, validité du devis, propriété des fichiers.",
+              "Rédige le message d'envoi du devis au client."],
+   "criteres": ["Chaque ligne a une durée, un prix unitaire et un total.", "Acompte et solde sont justes et leur échéance est indiquée.",
+                "Ce qui n'est pas inclus est écrit clairement.", "Le nombre de retouches est précisé."],
+   "corrige": {"texte": ["Lignes : maquette 2 × 22 000 = 44 000 FCFA ; intégration 4 × 22 000 = 88 000 FCFA ; formulaire et bouton WhatsApp 1 × 22 000 = 22 000 FCFA ; mise en ligne 0,5 × 22 000 = 11 000 FCFA ; "
+                          "formation 0,5 × 22 000 = 11 000 FCFA. Total : 44 000 + 88 000 + 22 000 + 11 000 + 11 000 = 176 000 FCFA (8 jours au total).",
+                          "Acompte : 176 000 × 40 % = 70 400 FCFA, à la signature. Solde : 176 000 − 70 400 = 105 600 FCFA, à la mise en ligne.",
+                          "Conditions d'exemple : délai de 4 semaines à partir de la réception de l'acompte et des contenus (textes, photos, logo) ; 2 séries de retouches incluses sur la maquette et 1 sur le site ; "
+                          "retouche supplémentaire facturée au tarif horaire ; hébergement, nom de domaine, rédaction des textes et photos professionnelles non inclus ; devis valable 30 jours ; "
+                          "codes d'accès et fichiers remis après paiement complet.",
+                          "Message : « Bonjour Docteur, comme convenu, voici le devis pour le site de la clinique (176 000 FCFA, 8 jours de travail). Le projet démarre dès réception de l'acompte de 70 400 FCFA "
+                          "et des contenus. Je reste disponible pour en parler par téléphone. »",
+                          "Point de vigilance : les mentions obligatoires d'un devis et d'une facture dépendent de ton statut ; vérifie-les auprès de l'administration fiscale ou d'un comptable."]}},
+  {"titre": "Facturer et relancer les paiements", "niveau": "Intermédiaire", "duree": "35 min",
+   "consigne": "Le 20 du mois, ton tableau de suivi contient 4 factures d'exemple. F-001 : 70 400 FCFA, payée. F-002 : 105 600 FCFA, échéance dépassée de 12 jours. "
+                "F-003 : 55 000 FCFA, échéance dans 3 jours. F-004 : 90 000 FCFA, échéance dépassée de 3 jours.",
+   "etapes": ["Prépare les colonnes du tableau de suivi des factures.", "Calcule le montant total en attente et le montant en retard.",
+              "Indique quelle relance envoyer pour chaque facture non payée.", "Rédige les trois modèles de messages : rappel avant échéance, relance courtoise, relance ferme."],
+   "criteres": ["Le tableau permet de voir d'un coup d'œil ce qui est en retard.", "Les montants sont justes.", "Le ton des relances monte progressivement en restant poli."],
+   "corrige": {"texte": ["Colonnes : numéro, client, date d'émission, montant, date d'échéance, date de paiement, statut (payée, à venir, en retard), nombre de jours de retard, dernière relance, prochaine action.",
+                          "Total en attente : 105 600 + 55 000 + 90 000 = 250 600 FCFA. En retard : 105 600 + 90 000 = 195 600 FCFA. F-003 n'est pas encore en retard.",
+                          "Actions : F-002 (12 jours de retard) : relance ferme par écrit puis appel téléphonique. F-004 (3 jours) : relance courtoise. F-003 : rappel aimable la veille de l'échéance.",
+                          "Rappel : « Bonjour, petit rappel : la facture F-003 de 55 000 FCFA arrive à échéance demain. Merci d'avance ! » "
+                          "Relance courtoise : « Bonjour, sauf erreur de ma part, la facture F-004 de 90 000 FCFA, échue depuis 3 jours, n'est pas encore réglée. Peux-tu me confirmer la date de paiement ? »",
+                          "Relance ferme : « Bonjour, la facture F-002 de 105 600 FCFA est échue depuis 12 jours malgré mes messages. Conformément au devis signé, les fichiers définitifs seront remis après paiement. "
+                          "Merci de régler cette facture d'ici vendredi. Je t'appelle demain pour en parler. »",
+                          "Grille : tableau complet (3), calculs justes (3), relances adaptées et progressives (4)."]}},
+  {"titre": "Gérer un client difficile", "niveau": "Intermédiaire", "duree": "40 min",
+   "consigne": "Étude de cas. Un commerçant te contacte pour une affiche « urgente pour demain », refuse l'acompte « parce qu'il paie toujours à la fin », demande trois propositions gratuites « pour voir ton niveau », "
+                "trouve tes prix trop élevés et, après une première version, demande d'ajouter un flyer et une vidéo « dans le même prix ».",
+   "etapes": ["Repère tous les signaux d'alerte de ce cas.", "Pour chacun, propose une réponse professionnelle.",
+              "Décide si tu acceptes la mission et à quelles conditions.", "Rédige le message qui répond à la demande du flyer et de la vidéo."],
+   "criteres": ["Au moins 4 signaux d'alerte sont identifiés.", "Les réponses s'appuient sur le devis et les conditions, pas sur l'émotion.",
+                "La décision finale est argumentée.", "Le message reste poli et propose une solution payante."],
+   "corrige": {"texte": ["Signaux d'alerte : délai irréaliste sans brief clair ; refus de l'acompte ; demande de travail gratuit ; contestation des prix avant même de voir le travail ; ajout de prestations sans paiement.",
+                          "Réponses : délai : proposer un délai réaliste ou un supplément pour urgence écrit dans le devis. Acompte : rappeler que c'est ta règle avec tous les nouveaux clients. "
+                          "Travail gratuit : renvoyer vers ton portfolio. Prix : expliquer ce qui est inclus ou proposer une version plus simple, sans baisser ton tarif journalier.",
+                          "Décision possible : accepter seulement avec un devis signé et un acompte de 50 %, sinon refuser poliment. Un client qui refuse toutes les règles dès le début coûte souvent plus qu'il ne rapporte.",
+                          "Message : « Bonjour, merci pour ta confiance ! Le flyer et la vidéo ne font pas partie du devis de l'affiche. Je te propose un devis complémentaire : flyer 15 000 FCFA, vidéo de 20 secondes 25 000 FCFA, "
+                          "livraison en 5 jours après acompte. Dis-moi si cela te convient. » (prix d'exemple)",
+                          "Grille : signaux identifiés (3), réponses professionnelles (3), décision argumentée (2), message clair et poli (2)."]}}]},
+{
+ "id": "res-cahier-services", "fichier": "tobmaq-cahier-services-numeriques.pdf", "categorie": "business", "logiciels": [], "niveau": "Débutant",
+ "titre": "Cahier d'exercices · Services numériques : créer son activité", "sous_titre": "Services numériques · 5 exercices progressifs et leurs corrigés",
+ "titre_court": "Cahier d'exercices : services numériques pour PME",
+ "desc": "5 exercices progressifs : diagnostic des PME, 3 formules chiffrées, contrat de maintenance, trésorerie prévisionnelle et choix entre recruter ou sous-traiter, avec corrigés détaillés.",
+ "intro": "Ce cahier accompagne la formation « Services numériques : créer son activité ». Tu vas construire une offre pour les PME de ta ville, la chiffrer, puis apprendre à la gérer. "
+          "Tous les montants sont des exemples. Pour l'enregistrement de ton activité, la fiscalité et l'embauche, renseigne-toi auprès des services officiels ou d'un professionnel.",
+ "exercices": [
+  {"titre": "Diagnostiquer la présence en ligne de 5 PME", "niveau": "Débutant", "duree": "1 h",
+   "consigne": "Choisis 5 PME d'une même zone (par exemple restaurants, pharmacies ou écoles d'un quartier de Cotonou ou de Calavi) et évalue leur présence numérique avec une grille sur 10.",
+   "etapes": ["Grille : fiche Google à jour (2), page Facebook active dans le mois (2), WhatsApp Business avec catalogue ou réponses rapides (2), site web ou page de présentation (2), visuels de qualité (2).",
+              "Note chaque PME et écris 2 observations précises.", "Pour chaque PME, propose le service qui aurait le plus d'impact.",
+              "Termine par les 3 besoins les plus fréquents."],
+   "criteres": ["Chaque note est justifiée par une observation.", "Les services proposés répondent au manque observé.", "Les 3 besoins fréquents découlent du tableau."],
+   "corrige": {"texte": ["Exemple : Pharmacie A : 4 sur 10. Fiche Google présente mais horaires faux (1 sur 2) ; pas de page Facebook (0) ; WhatsApp Business installé mais profil incomplet, sans catalogue ni réponses rapides (1 sur 2) ; pas de site (0) ; enseigne et photos nettes (2 sur 2). Total : 1 + 0 + 1 + 0 + 2 = 4. "
+                          "Service prioritaire : mise à jour de la fiche Google et configuration de WhatsApp Business.",
+                          "Restaurant B : 6 sur 10. Page Facebook active mais photos sombres ; pas de catalogue WhatsApp. Service prioritaire : visuels de plats et catalogue WhatsApp Business.",
+                          "Les 3 besoins fréquents typiques : informations à jour (horaires, localisation), publications régulières de qualité, commande ou prise de contact facile par WhatsApp. "
+                          "Ce sont de bonnes bases pour une formule d'entrée.",
+                          "Erreur fréquente : noter « à l'impression » sans vérifier. Chaque point doit être justifié par ce que tu as vu (date de la dernière publication, horaires affichés, etc.)."]}},
+  {"titre": "Chiffrer trois formules", "niveau": "Débutant", "duree": "45 min",
+   "consigne": "Pour des restaurants, tu proposes 3 formules mensuelles. Ton coût horaire cible est de 3 000 FCFA (chiffre d'exemple). "
+                "Essentiel : mise à jour de la fiche Google 1 h, 4 visuels 4 h, mise à jour du catalogue WhatsApp 2 h, outils 3 000 FCFA. "
+                "Visibilité : 12 publications à 45 min chacune, réponses aux messages 4 h, rapport 1 h, outils 5 000 FCFA. "
+                "Croissance : tout Visibilité + gestion d'une campagne publicitaire 4 h + rapport détaillé 2 h supplémentaires, outils 8 000 FCFA ; le budget publicitaire est payé à part par le client. "
+                "Prix proposés : 40 000, 75 000 et 120 000 FCFA.",
+   "etapes": ["Calcule le temps total et le coût de chaque formule.", "Calcule la marge de chaque formule et son taux de marge sur le coût.",
+              "Vérifie que les formules sont bien progressives.", "Rédige la présentation des 3 formules côte à côte."],
+   "criteres": ["Les heures et les coûts sont détaillés ligne par ligne.", "Chaque formule a une marge positive.", "La présentation indique ce qui est inclus et ce qui ne l'est pas."],
+   "corrige": {"texte": ["Essentiel : 1 + 4 + 2 = 7 h ; 7 × 3 000 = 21 000 FCFA + 3 000 FCFA d'outils = 24 000 FCFA. Marge : 40 000 − 24 000 = 16 000 FCFA. Taux de marge : 16 000 ÷ 24 000 × 100 ≈ 66,7 %.",
+                          "Visibilité : publications 12 × 45 min = 540 min = 9 h ; total 9 + 4 + 1 = 14 h ; 14 × 3 000 = 42 000 FCFA + 5 000 FCFA = 47 000 FCFA. Marge : 75 000 − 47 000 = 28 000 FCFA. Taux : 28 000 ÷ 47 000 × 100 ≈ 59,6 %.",
+                          "Croissance : 14 + 4 + 2 = 20 h ; 20 × 3 000 = 60 000 FCFA + 8 000 FCFA = 68 000 FCFA. Marge : 120 000 − 68 000 = 52 000 FCFA. Taux : 52 000 ÷ 68 000 × 100 ≈ 76,5 %.",
+                          "Progression : chaque formule ajoute un résultat visible (être trouvé, être actif, attirer de nouveaux clients) et la marge en FCFA augmente avec la formule. "
+                          "La marge de la formule du milieu est confortable : c'est celle à mettre en avant.",
+                          "Présentation : pour chaque formule, le résultat promis, la liste des tâches incluses, les exclusions (budget publicitaire, séance photo, impression), l'engagement minimum (3 mois), le prix et le paiement en début de mois."]}},
+  {"titre": "Rédiger et chiffrer un contrat de maintenance", "niveau": "Intermédiaire", "duree": "45 min",
+   "consigne": "Une école privée de Calavi possède 10 ordinateurs et 2 imprimantes. Tu proposes une visite mensuelle de 3 h et estimes en moyenne 2 h d'interventions supplémentaires par mois. "
+                "Ton coût horaire de technicien est de 4 000 FCFA et chaque mois te coûte 2 000 FCFA de transport (chiffres d'exemple). Les pièces de rechange sont facturées à part.",
+   "etapes": ["Calcule le coût mensuel du contrat.", "Propose un prix mensuel avec une marge et calcule cette marge.",
+              "Calcule le prix annuel, puis le prix avec une remise de 10 % pour un engagement de 12 mois.",
+              "Rédige les clauses principales du contrat."],
+   "criteres": ["Le coût inclut le temps et le transport.", "La remise est calculée correctement.", "Le contrat précise périmètre, interventions incluses, délai de réponse, exclusions, durée et préavis."],
+   "corrige": {"texte": ["Coût mensuel : (3 + 2) h × 4 000 = 20 000 FCFA + 2 000 FCFA de transport = 22 000 FCFA.",
+                          "Prix mensuel proposé : 35 000 FCFA. Marge : 35 000 − 22 000 = 13 000 FCFA par mois, soit un taux de marge de 13 000 ÷ 22 000 × 100 ≈ 59 %.",
+                          "Prix annuel sans remise : 35 000 × 12 = 420 000 FCFA. Remise de 10 % : 420 000 × 0,10 = 42 000 FCFA. Prix annuel avec engagement : 420 000 − 42 000 = 378 000 FCFA, soit 31 500 FCFA par mois. "
+                          "Marge mensuelle restante : 31 500 − 22 000 = 9 500 FCFA : la remise reste rentable et sécurise un client pour un an.",
+                          "Clauses d'exemple : périmètre (10 ordinateurs, 2 imprimantes, réseau de la salle) ; une visite mensuelle de 3 h (nettoyage, mises à jour, antivirus, sauvegardes, vérification des imprimantes) ; "
+                          "jusqu'à 2 h d'interventions supplémentaires par mois incluses, au-delà facturées à l'heure ; délai de réponse sous 24 h ouvrées ; pièces et matériel neuf exclus ; "
+                          "durée de 12 mois ; préavis de résiliation d'un mois ; paiement en début de mois.",
+                          "Grille : coût juste (3), prix et remise justes (3), clauses complètes (4)."]}},
+  {"titre": "Construire une trésorerie prévisionnelle", "niveau": "Intermédiaire", "duree": "45 min",
+   "consigne": "Petite agence de services numériques (chiffres d'exemple). Solde au début du mois 1 : 150 000 FCFA. Charges fixes : 250 000 FCFA par mois. Rémunération des deux associés : 300 000 FCFA par mois. "
+                "Encaissements prévus : mois 1 : 600 000 FCFA ; mois 2 : 800 000 FCFA (dont 100 000 FCFA de retard du mois 1) ; mois 3 : 750 000 FCFA. "
+                "Dépenses ponctuelles : achat d'un ordinateur de 350 000 FCFA au mois 1 et sous-traitance de 50 000 FCFA aux mois 2 et 3.",
+   "etapes": ["Construis le tableau : solde de début, encaissements, décaissements, solde de fin, pour les 3 mois.", "Repère le problème éventuel.",
+              "Propose une solution et refais le calcul.", "Compare le solde final à une réserve cible de 2 mois de charges fixes."],
+   "criteres": ["Le solde de fin d'un mois devient le solde de début du suivant.", "Tous les décaissements sont comptés.", "La solution proposée est réaliste et chiffrée."],
+   "corrige": {"texte": ["Mois 1 : décaissements 250 000 + 300 000 + 350 000 = 900 000 FCFA. Solde de fin : 150 000 + 600 000 − 900 000 = −150 000 FCFA.",
+                          "Mois 2 : décaissements 250 000 + 300 000 + 50 000 = 600 000 FCFA. Solde de fin : −150 000 + 800 000 − 600 000 = 50 000 FCFA. "
+                          "Mois 3 : décaissements 600 000 FCFA. Solde de fin : 50 000 + 750 000 − 600 000 = 200 000 FCFA.",
+                          "Problème : la trésorerie est négative au mois 1, l'agence ne peut pas payer toutes ses dépenses, même si elle est rentable sur 3 mois.",
+                          "Solution : reporter l'achat de l'ordinateur au mois 3. Mois 1 : 150 000 + 600 000 − 550 000 = 200 000 FCFA. Mois 2 : 200 000 + 800 000 − 600 000 = 400 000 FCFA. "
+                          "Mois 3 : 400 000 + 750 000 − 600 000 − 350 000 = 200 000 FCFA. Le solde reste positif chaque mois. Autres pistes : facturer les forfaits en début de mois, relancer plus tôt le client en retard.",
+                          "Réserve cible : 2 × 250 000 = 500 000 FCFA. Avec 200 000 FCFA en fin de mois 3, il manque 300 000 FCFA : il faut mettre de côté une partie de chaque mois avant tout nouvel achat important."]}},
+  {"titre": "Recruter, sous-traiter et garantir la qualité", "niveau": "Intermédiaire", "duree": "40 min",
+   "consigne": "L'agence a, en moyenne, 30 h de maintenance de trop chaque mois. Option A : sous-traiter à un technicien indépendant à 4 000 FCFA de l'heure. "
+                "Option B : recruter un technicien pour un coût total d'exemple de 200 000 FCFA par mois (salaire et obligations, à vérifier auprès des services officiels).",
+   "etapes": ["Calcule le coût mensuel de chaque option pour 30 h.", "Calcule le nombre d'heures à partir duquel le recrutement devient moins cher.",
+              "Choisis une option et argumente avec au moins 2 critères non financiers.", "Rédige une checklist qualité de 8 points pour une intervention de maintenance."],
+   "criteres": ["Les deux coûts sont justes.", "Le seuil est calculé et interprété.", "La checklist est concrète et vérifiable."],
+   "corrige": {"texte": ["Option A : 30 × 4 000 = 120 000 FCFA par mois. Option B : 200 000 FCFA par mois, quel que soit le volume. Pour 30 h, la sous-traitance coûte 80 000 FCFA de moins.",
+                          "Seuil : 200 000 ÷ 4 000 = 50 h par mois. Au-delà de 50 h stables chaque mois, recruter devient moins cher que sous-traiter.",
+                          "Décision : sous-traiter pour l'instant. Critères non financiers : souplesse si le volume baisse ; possibilité de tester la personne sur quelques missions ; moins d'obligations administratives. "
+                          "En contrepartie : moindre disponibilité et nécessité de contrôler le travail, car l'agence reste responsable face au client. À réévaluer si le volume dépasse durablement 50 h.",
+                          "Checklist d'exemple : 1) confirmer le rendez-vous la veille ; 2) noter le problème signalé ; 3) sauvegarder les données avant intervention ; 4) vérifier les mises à jour et l'antivirus ; "
+                          "5) tester les imprimantes et le réseau ; 6) nettoyer le matériel ; 7) faire signer une fiche d'intervention ; 8) envoyer un compte rendu au client dans les 24 h.",
+                          "Grille : calculs justes (4), décision argumentée (3), checklist complète (3)."]}}]},
+]
+
+CAHIERS_E = [
+{
+ "id": "res-cahier-paris", "fichier": "tobmaq-cahier-paris-sportifs.pdf", "categorie": "business", "logiciels": [], "niveau": "Débutant",
+ "titre": "Cahier d'exercices · Paris sportifs : cotes, risques et arnaques (18+)", "sous_titre": "Éducation financière · 5 exercices progressifs et leurs corrigés",
+ "titre_court": "Cahier d'exercices : cotes, risques et arnaques aux paris (18+)",
+ "desc": "5 exercices pour adultes : probabilités implicites, marge du bookmaker, espérance, coupons combinés, martingale, budget et analyse d'arnaques aux pronostics, avec corrigés détaillés.",
+ "intro": "Ce cahier accompagne la formation « Paris sportifs : comprendre les cotes et les risques (18+) ». Il est réservé aux adultes (18 ans et plus) et purement éducatif : "
+          "il ne donne aucun pronostic, aucune méthode pour gagner et ne t'invite jamais à parier. Tu n'as besoin que d'une calculatrice ou d'un tableur. "
+          "Tous les chiffres sont des exemples pour t'entraîner. Si le jeu te pose un problème, parles-en à un proche ou à un professionnel de santé.",
+ "exercices": [
+  {"titre": "Des cotes aux probabilités", "niveau": "Débutant", "duree": "20 min",
+   "consigne": "Un match fictif est proposé avec les cotes suivantes : victoire de l'équipe A à 1,80, match nul à 3,50, victoire de l'équipe B à 4,50. Un second pari, à deux issues (plus ou moins de 2,5 buts), est coté 1,85 et 1,95.",
+   "etapes": ["Calcule la probabilité implicite de chaque issue (1 ÷ cote), arrondie au centième de pourcent.",
+              "Additionne les probabilités de chaque pari et déduis la marge du bookmaker.",
+              "Pour le match, estime les probabilités « sans marge » en divisant chaque probabilité implicite par la somme."],
+   "criteres": ["Les 5 probabilités implicites sont justes.", "Les deux marges sont calculées et interprétées.", "Les probabilités sans marge totalisent 100 %."],
+   "corrige": {"texte": ["Match : 1 ÷ 1,80 = 55,56 % ; 1 ÷ 3,50 = 28,57 % ; 1 ÷ 4,50 = 22,22 %. Somme : 106,35 %. La marge du bookmaker est d'environ 6,35 points.",
+                          "Plus ou moins de 2,5 buts : 1 ÷ 1,85 = 54,05 % ; 1 ÷ 1,95 = 51,28 %. Somme : 105,34 %, soit une marge d'environ 5,34 points.",
+                          "Probabilités sans marge du match (approximation) : 55,56 ÷ 106,35 = 52,24 % ; 28,57 ÷ 106,35 = 26,87 % ; 22,22 ÷ 106,35 = 20,90 %. Total : 100 %. "
+                          "Conclusion : le bookmaker affiche pour chaque issue une probabilité plus élevée que son estimation, et paie donc moins que ce que le risque justifierait. "
+                          "Erreur fréquente : croire qu'une cote basse signifie « victoire sûre ». Une cote de 1,80 correspond à un peu plus d'une chance sur deux."]}},
+  {"titre": "L'espérance mathématique d'un pari", "niveau": "Débutant", "duree": "20 min",
+   "consigne": "Calcule l'espérance de deux paris fictifs, puis leur résultat moyen sur une longue série. Formule : espérance = probabilité réelle × montant total reçu - mise.",
+   "etapes": ["Pari 1 : mise de 2 000 FCFA à la cote 1,90 sur une issue dont la probabilité réelle est de 50 %.",
+              "Pari 2 : mise de 2 000 FCFA à la cote 3,00 sur une issue dont la probabilité réelle est de 30 %.",
+              "Pour chaque pari, calcule l'espérance en FCFA et en pourcentage de la mise, puis la perte moyenne attendue sur 50 paris identiques."],
+   "criteres": ["Les espérances sont négatives et correctement calculées.", "Le passage au pourcentage est juste.", "La conclusion distingue court terme et long terme."],
+   "corrige": {"texte": ["Pari 1 : 0,5 × (2 000 × 1,90) - 2 000 = 0,5 × 3 800 - 2 000 = -100 FCFA, soit -5 % de la mise. Sur 50 paris : 50 × (-100) = -5 000 FCFA en moyenne.",
+                          "Pari 2 : 0,3 × (2 000 × 3,00) - 2 000 = 0,3 × 6 000 - 2 000 = -200 FCFA, soit -10 % de la mise. Sur 50 paris : -10 000 FCFA en moyenne.",
+                          "Conclusion : sur quelques paris, le hasard peut donner un gain ou une perte importante. Mais plus le nombre de paris augmente, plus le résultat total se rapproche de l'espérance, "
+                          "qui est négative. C'est pour cela que le pari ne peut pas être une source de revenus."]}},
+  {"titre": "Le piège du coupon combiné", "niveau": "Débutant", "duree": "25 min",
+   "consigne": "Un groupe WhatsApp vante un « coupon combiné » de 5 matchs, chacun à la cote 1,50. Supposons (exemple) que la probabilité réelle de chaque issue soit de 62 % et que les matchs soient indépendants.",
+   "etapes": ["Calcule la probabilité implicite d'une cote de 1,50 et compare-la à 62 %.",
+              "Calcule la cote totale du combiné et la probabilité réelle que les 5 issues se réalisent.",
+              "Calcule l'espérance d'une mise de 1 000 FCFA sur ce combiné, en FCFA et en pourcentage."],
+   "criteres": ["La cote totale est obtenue par multiplication.", "La probabilité de tout gagner est obtenue par multiplication.", "L'espérance est comparée à celle d'un pari simple."],
+   "corrige": {"texte": ["Probabilité implicite : 1 ÷ 1,50 = 66,67 %, alors que la probabilité réelle de l'exemple est de 62 % : chaque cote est déjà défavorable.",
+                          "Cote totale : 1,50 × 1,50 × 1,50 × 1,50 × 1,50 = 7,59 (exactement 7,59375). Probabilité de tout gagner : 0,62 × 0,62 × 0,62 × 0,62 × 0,62 = 0,0916, soit environ 9,2 %. "
+                          "Le parieur perd donc son coupon environ 9 fois sur 10.",
+                          "Espérance : 0,0916 × 7 594 - 1 000 = environ 696 - 1 000 = -304 FCFA, soit environ -30 % de la mise. "
+                          "Pour un seul de ces paris : 0,62 × 1 500 - 1 000 = -70 FCFA, soit -7 %. Le combiné multiplie les marges : c'est le produit le plus rentable pour l'opérateur, pas pour le parieur."]}},
+  {"titre": "Budget de jeu et piège de la martingale", "niveau": "Débutant", "duree": "30 min",
+   "consigne": "Koffi gagne en exemple 90 000 FCFA par mois. Ses dépenses essentielles (loyer, nourriture, transport, factures) s'élèvent à 70 000 FCFA, il épargne 10 000 FCFA et il lui reste 10 000 FCFA de loisirs. Un ami lui conseille la « martingale » : doubler la mise après chaque perte, en commençant à 500 FCFA, sur des paris à environ 50 %.",
+   "etapes": ["Indique quelles sommes ne doivent jamais aller au jeu, et propose une limite mensuelle raisonnable dans les loisirs.",
+              "Calcule le total misé si Koffi perd 6 paris de suite avec la martingale (500, 1 000, 2 000...), et ce qu'il espérait gagner.",
+              "Calcule la probabilité de 6 pertes de suite à 50 %, puis explique pourquoi cette série finit presque sûrement par arriver si on répète la méthode."],
+   "criteres": ["Les dépenses essentielles et l'épargne sont protégées.", "Le total de la martingale est juste.", "L'argument sur la répétition est compris."],
+   "corrige": {"texte": ["Les 70 000 FCFA essentiels et les 10 000 FCFA d'épargne ne doivent jamais servir au jeu, ni aucun emprunt. Seule une petite partie des 10 000 FCFA de loisirs, par exemple 2 000 FCFA, "
+                          "pourrait être fixée comme limite, à condition d'accepter de la perdre entièrement et de s'arrêter une fois atteinte.",
+                          "Martingale : 500 + 1 000 + 2 000 + 4 000 + 8 000 + 16 000 = 31 500 FCFA perdus en 6 paris, pour un gain espéré de seulement 500 FCFA par série. "
+                          "Le 7e pari demanderait 32 000 FCFA : bien plus que tout le budget de loisirs, et même que l'épargne.",
+                          "Probabilité de 6 pertes de suite : 0,5 × 0,5 × 0,5 × 0,5 × 0,5 × 0,5 = 1/64, soit environ 1,6 %. Cela paraît faible, mais sur 100 séries, la probabilité de rencontrer au moins une fois "
+                          "cette série noire est d'environ 79 % (1 - (63/64) puissance 100). Et comme les cotes contiennent une marge, l'espérance reste négative à chaque pari. "
+                          "La martingale ne supprime pas le risque : elle remplace beaucoup de petits gains par une grosse perte presque certaine à terme."]}},
+  {"titre": "Démonter une arnaque aux pronostics", "niveau": "Débutant", "duree": "25 min",
+   "consigne": "Analyse ce message fictif reçu sur Telegram : « BIG ANNONCE ! Match arrangé ce soir, cote 32, info directe des dirigeants. Seulement 20 places VIP à 15 000 FCFA par Mobile Money au 01 XX XX XX XX. 100 % sûr, remboursé si perdu. Regardez les gains de nos membres (captures). Payez avant 18 h ! »",
+   "etapes": ["Relève au moins 6 signaux d'alerte dans le message.",
+              "Explique pourquoi la logique même de l'offre est absurde.",
+              "Rédige la réponse que tu enverrais à un ami qui veut payer, et liste ce qu'il faut faire face à ce type de message."],
+   "criteres": ["Au moins 6 signaux pertinents.", "L'incohérence économique de l'offre est expliquée.", "Les bons réflexes sont donnés : ne pas payer, conserver les preuves, signaler, demander de l'aide."],
+   "corrige": {"texte": ["Signaux d'alerte : promesse de gain « 100 % sûr » ; prétendu match « arrangé » avec une source invérifiable ; cote très élevée présentée comme certaine ; urgence (« avant 18 h ») "
+                          "et rareté (« 20 places ») pour empêcher de réfléchir ; paiement à un numéro Mobile Money personnel, sans facture ni société identifiable ; « remboursement » impossible à faire valoir ; "
+                          "captures de gains faciles à truquer ou à sélectionner.",
+                          "Incohérence : si quelqu'un connaissait réellement un résultat à l'avance, il n'aurait aucun intérêt à le vendre 15 000 FCFA à des inconnus, au risque d'attirer l'attention. "
+                          "Le vrai produit vendu, c'est l'accès payant : le vendeur gagne sur les paiements, que le match soit gagné ou perdu. Certains vendent même des issues différentes à différents groupes "
+                          "pour pouvoir montrer ensuite des « gagnants ». Rappel : participer à une vraie manipulation de match serait de toute façon illégal.",
+                          "Réponse possible : « Ne paie pas. Aucun pronostic n'est sûr, et ce groupe gagne sur ton argent, pas sur le match. » Bons réflexes : ne rien payer, ne transmettre aucun code "
+                          "ni pièce d'identité, conserver les captures et le numéro, signaler le compte à la plateforme et aux autorités compétentes, quitter le groupe. "
+                          "Si l'envie de jouer devient difficile à contrôler, en parler à un proche ou consulter un professionnel de santé."]}}]},
+{
+ "id": "res-cahier-trading", "fichier": "tobmaq-cahier-trading.pdf", "categorie": "business", "logiciels": [], "niveau": "Intermédiaire",
+ "titre": "Cahier d'exercices · Trading : risques, levier et arnaques (18+)", "sous_titre": "Éducation financière · 5 exercices progressifs et leurs corrigés",
+ "titre_court": "Cahier d'exercices : risques du trading et arnaques (18+)",
+ "desc": "5 exercices pour adultes : pourcentages de gain et de perte, effet de levier, frais et stop-loss, calcul d'une promesse de Ponzi et analyse d'un faux trader, avec corrigés détaillés.",
+ "intro": "Ce cahier accompagne la formation « Trading : comprendre les marchés et éviter les arnaques (18+) ». Il est réservé aux adultes (18 ans et plus) et purement éducatif : "
+          "il ne constitue pas un conseil en investissement, ne recommande aucun produit et ne t'invite jamais à placer de l'argent réel. Tu n'as besoin que d'une calculatrice ou d'un tableur. "
+          "Tous les chiffres sont des exemples pour t'entraîner à mesurer le risque et à reconnaître les arnaques.",
+ "exercices": [
+  {"titre": "Pourcentages de gain et de perte", "niveau": "Débutant", "duree": "20 min",
+   "consigne": "Un capital fictif de 200 000 FCFA subit plusieurs variations. Formule : variation en % = (valeur finale - valeur initiale) ÷ valeur initiale × 100.",
+   "etapes": ["Le capital tombe à 150 000 FCFA. Calcule la perte en % et le gain nécessaire pour revenir à 200 000 FCFA.",
+              "Complète le tableau : gain nécessaire pour revenir au départ après une perte de 10 %, 20 %, 50 % et 80 % (formule : 1 ÷ (1 - perte) - 1).",
+              "Le capital de départ subit successivement +10 %, -10 %, +15 % puis -20 %. Calcule la valeur finale et la variation totale."],
+   "criteres": ["Les calculs sont justes et détaillés.", "L'asymétrie des pertes est expliquée.", "Les variations successives sont multipliées, pas additionnées."],
+   "corrige": {"texte": ["Perte : (150 000 - 200 000) ÷ 200 000 = -25 %. Pour revenir à 200 000 FCFA, il faut gagner 50 000 FCFA sur 150 000 FCFA, soit 50 000 ÷ 150 000 = +33,3 %.",
+                          "Tableau : après -10 %, il faut +11,1 % ; après -20 %, +25 % ; après -50 %, +100 % ; après -80 %, +400 % (le capital doit être multiplié par 5).",
+                          "Variations successives : 200 000 × 1,10 × 0,90 × 1,15 × 0,80 = 182 160 FCFA, soit -8,92 %. Additionner les pourcentages (+10 - 10 + 15 - 20 = -5 %) serait faux. "
+                          "Leçon : les grosses pertes sont très difficiles à rattraper, d'où l'importance de limiter le risque plutôt que de chercher de gros gains."]}},
+  {"titre": "Mesurer l'effet de levier", "niveau": "Intermédiaire", "duree": "25 min",
+   "consigne": "Avec un capital fictif de 50 000 FCFA, compare l'effet d'une variation de prix de +3 % et de -3 % selon le levier : 1, 5, 20 et 50.",
+   "etapes": ["Pour chaque levier, calcule l'exposition (capital × levier).",
+              "Calcule le gain et la perte en FCFA et en % du capital pour +3 % et -3 %.",
+              "Calcule la baisse de prix qui effacerait tout le capital (100 % ÷ levier) et commente le cas du levier 50."],
+   "criteres": ["Les 4 expositions sont justes.", "Gains et pertes sont symétriques et correctement calculés.", "Le seuil de perte totale est compris."],
+   "corrige": {"texte": ["Levier 1 : exposition 50 000 FCFA ; +3 % donne +1 500 FCFA (+3 %), -3 % donne -1 500 FCFA (-3 %). Capital effacé par une baisse de 100 %.",
+                          "Levier 5 : exposition 250 000 FCFA ; +/- 7 500 FCFA, soit +/- 15 % du capital. Capital effacé par une baisse de 20 %.",
+                          "Levier 20 : exposition 1 000 000 FCFA ; +/- 30 000 FCFA, soit +/- 60 % du capital. Capital effacé par une baisse de 5 %.",
+                          "Levier 50 : exposition 2 500 000 FCFA ; +3 % donnerait +75 000 FCFA (+150 %), mais -3 % représenterait -75 000 FCFA, plus que le capital : "
+                          "la position est fermée bien avant, dès une baisse de 2 %, et tout le capital est perdu (voire davantage selon les conditions de la plateforme). "
+                          "Conclusion : le levier ne rend pas plus habile, il multiplie le résultat dans les deux sens, et une petite variation suffit à tout perdre."]}},
+  {"titre": "Frais et stop-loss", "niveau": "Intermédiaire", "duree": "25 min",
+   "consigne": "Exemple fictif : achat de 50 titres à 2 500 FCFA, avec des frais de 0,5 % sur chaque opération (achat et vente). Un stop-loss est placé à 2 250 FCFA.",
+   "etapes": ["Calcule le montant investi, les frais d'achat, et la perte en % visée par le stop-loss.",
+              "Si le stop-loss s'exécute à 2 250 FCFA, calcule la perte sur le prix, les frais de vente et la perte totale.",
+              "Explique ce qui se passe si le prix chute brutalement de 2 400 à 2 100 FCFA, et conclus sur ce que garantit ou non un stop-loss."],
+   "criteres": ["Les frais sont comptés à l'achat et à la vente.", "La perte totale est juste.", "La limite du stop-loss est expliquée."],
+   "corrige": {"texte": ["Montant investi : 50 × 2 500 = 125 000 FCFA. Frais d'achat : 125 000 × 0,5 % = 625 FCFA. Perte visée : (2 250 - 2 500) ÷ 2 500 = -10 %.",
+                          "Vente à 2 250 FCFA : 50 × 2 250 = 112 500 FCFA, soit une perte de 12 500 FCFA sur le prix. Frais de vente : 112 500 × 0,5 % = 562,50 FCFA. "
+                          "Perte totale : 12 500 + 625 + 562,50 = 13 687,50 FCFA, soit environ 10,95 % des 125 000 FCFA.",
+                          "En cas de chute brutale, l'ordre se déclenche mais s'exécute au premier prix disponible, ici 2 100 FCFA : perte sur le prix de 50 × 400 = 20 000 FCFA (-16 %), plus les frais. "
+                          "Un stop-loss limite la perte visée et évite de rester bloqué par l'émotion, mais ne garantit pas le prix de sortie. Les frais, eux, s'ajoutent toujours."]}},
+  {"titre": "La promesse impossible : calcul d'un Ponzi", "niveau": "Intermédiaire", "duree": "25 min",
+   "consigne": "Une « société d'investissement » contactée sur Facebook promet 15 % par mois garantis et un bonus pour chaque personne parrainée. Chaque membre doit recruter 3 nouveaux membres pour toucher ses gains.",
+   "etapes": ["Calcule ce que deviendraient 100 000 FCFA après 12 mois à 15 % par mois composés.",
+              "Calcule le nombre de nouveaux membres nécessaires au niveau 10 puis au niveau 15 du système de parrainage (3 puissance n).",
+              "Explique d'où viennent les « gains » versés et comment le système finit."],
+   "criteres": ["Le calcul composé est juste.", "La croissance du recrutement est chiffrée.", "Le mécanisme du Ponzi est expliqué clairement."],
+   "corrige": {"texte": ["100 000 × 1,15 puissance 12 = environ 535 025 FCFA, soit plus de 5 fois la mise en un an. Aucun placement honnête ne peut garantir un tel rendement : "
+                          "un rendement élevé va toujours avec un risque élevé, et le mot « garanti » est ici le premier signal d'arnaque.",
+                          "Recrutement : 3 puissance 10 = 59 049 nouveaux membres au niveau 10, et 3 puissance 15 = 14 348 907 au niveau 15, soit de l'ordre de la population d'un pays entier. "
+                          "Le recrutement ne peut donc pas continuer longtemps.",
+                          "Les « gains » des premiers membres sont payés avec l'argent des nouveaux arrivants : c'est une pyramide de Ponzi. Quand les inscriptions ralentissent, les retraits sont « bloqués », "
+                          "des « frais de déblocage » sont réclamés, puis les organisateurs disparaissent. La grande majorité des participants, souvent des proches recrutés les uns par les autres, perdent leur argent."]}},
+  {"titre": "Analyser un faux trader et vérifier un intermédiaire", "niveau": "Intermédiaire", "duree": "30 min",
+   "consigne": "Analyse ce message fictif reçu sur Instagram : « Salut ! Moi c'est Coach Max, trader pro. Regarde mes résultats : +1 200 000 FCFA cette semaine (capture). Mes signaux VIP 25 000 FCFA/mois, 95 % de réussite. Ou envoie-moi 100 000 FCFA par Mobile Money et je trade pour toi, tu récupères 300 000 FCFA dans 2 semaines. Plateforme partenaire avec levier x500. Offre valable aujourd'hui seulement. »",
+   "etapes": ["Relève au moins 7 signaux d'alerte.",
+              "Calcule la baisse de prix qui effacerait tout le capital avec un levier de 500.",
+              "Rédige la liste des vérifications à faire avant de confier de l'argent à un intermédiaire, et les gestes à adopter si l'on a déjà payé."],
+   "criteres": ["Au moins 7 signaux pertinents.", "Le calcul du levier est juste.", "Les vérifications citent le régulateur compétent et les bons réflexes en cas d'arnaque."],
+   "corrige": {"texte": ["Signaux : contact spontané par un inconnu ; captures de gains invérifiables ; taux de réussite irréaliste (« 95 % ») ; vente de « signaux » payants ; demande d'envoyer de l'argent sur un compte "
+                          "personnel pour « trader à ta place » ; rendement promis et quasi garanti (triplement en 2 semaines) ; levier extrême ; urgence (« aujourd'hui seulement ») ; "
+                          "plateforme « partenaire » sans identité vérifiable.",
+                          "Levier 500 : la baisse qui efface le capital est 100 % ÷ 500 = 0,2 %. Une variation minuscule, qui peut arriver en quelques minutes, suffit à tout perdre.",
+                          "Vérifications : identité et adresse de la société ; agrément par le régulateur compétent (dans l'UMOA, dont fait partie le Bénin, une autorité régionale régule le marché financier : "
+                          "renseigne-toi auprès d'elle ou de sources officielles) ; aucun paiement vers un numéro personnel ; aucune promesse de rendement garanti ; possibilité de retirer son argent sans frais inventés. "
+                          "Si l'on a déjà payé : arrêter tout nouveau versement (même pour des « frais de déblocage »), conserver captures, numéros et reçus, prévenir son opérateur Mobile Money ou sa banque, "
+                          "signaler aux autorités compétentes, et en parler à un proche pour ne pas rester seul face à la pression."]}}]},
+]
+
+CAHIERS += CAHIERS_A + CAHIERS_B + CAHIERS_C + CAHIERS_D + CAHIERS_E
 
 def taille(fichier):
     return f"{max(1, round((OUT / fichier).stat().st_size / 1024))} Ko"

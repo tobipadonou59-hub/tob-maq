@@ -68,7 +68,7 @@ Sur un VPS sans Docker : `npm ci --omit=dev` dans `server/`, puis lancez `npm st
 | Thème clair / sombre / système, taille du texte, contraste renforcé, réduction des animations | ✅ Fonctionnel, mémorisé sur l'appareil |
 | Catalogue, filtres (domaine, logiciel, niveau, prix), pages des 3 domaines, 12 logiciels détaillés par niveau | ✅ Fonctionnel |
 | **8 leçons complètes** (objectif, explication adaptée au niveau, tutoriel, raccourcis, paramètres, illustration, avant/après, exemple, exercice, fichier, quiz, fiche) | ✅ Contenus de démonstration à faire valider |
-| **47 jeux jouables** dans les 9 domaines, 3 niveaux chacun, points, indices, corrections, défi du jour et défi de la semaine | ✅ Fonctionnel ; progression enregistrée sur l'appareil, ou dans le compte une fois le serveur branché |
+| **63 jeux jouables** dans les 10 domaines, 3 niveaux chacun, points, indices, corrections, défi du jour et défi de la semaine | ✅ Fonctionnel ; progression enregistrée sur l'appareil, ou dans le compte une fois le serveur branché |
 | 5 démonstrations interactives (étalonnage, calques, profondeur de champ, typographie, timeline) | ✅ Fonctionnel, sans IA |
 | Bibliothèque : 5 vrais PDF téléchargeables, aperçus, licences, favoris, historique | ✅ Fonctionnel |
 | Inscription (avec accord parental de 15 à 17 ans), connexion, mot de passe oublié, synchronisation de la progression entre appareils | ✅ Avec le serveur inclus |
@@ -87,7 +87,7 @@ Tout se trouve dans `index.html`, section **« 2. DONNÉES »** du script :
 
 | Constante | Contenu |
 |---|---|
-| `DOMAINS` | Les 9 domaines (graphisme, maquettisme, montage vidéo, création web, développement, jeux vidéo, dessin et illustration, informatique et réseaux, marketing digital) et leurs modules (liés aux leçons ou formations) |
+| `DOMAINS` | Les 10 domaines (graphisme, maquettisme, montage vidéo, création web, développement, jeux vidéo, dessin et illustration, informatique et réseaux, marketing digital, business et finance) et leurs modules (liés aux leçons ou formations) |
 | `SOFTWARE` | Logiciels, systèmes, licence, fonctionnalités par niveau |
 | `FORMATIONS` | Formations : domaine, logiciels, niveau, durée, `price: "gratuit" \| "premium"`, modules |
 | `LESSONS` | Leçons complètes, ou annoncées (`soon: true`) |
