@@ -594,6 +594,11 @@ dialog::backdrop{background:rgb(11 14 23 / .6)}
 .token .fil,.token .sw-tok{display:inline-block;width:22px;height:22px;border-radius:5px;border:1px solid var(--line-2);vertical-align:middle;margin-right:8px}
 .token .sw-tok{width:34px}
 .tok-code{font:500 .86rem var(--font-mono);white-space:pre}
+/* Vidéos de la page Aide */
+.video-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:18px;margin-top:16px;align-items:start}
+.video-card{padding:0;overflow:hidden}
+.video-card video{display:block;width:100%;aspect-ratio:16/9;background:#0B0E17}
+.video-card.vertical video{aspect-ratio:9/16;max-height:560px;object-fit:contain}
 /* Jeu « Mémo » */
 .memo-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;max-width:720px;margin:0 auto}
 .memo-card{min-height:96px;border-radius:14px;border:2px solid var(--line);background:linear-gradient(135deg,#5B3DF5,#A83BD8);color:#fff;font:800 1.6rem var(--font-display);cursor:pointer;padding:8px;display:grid;place-items:center;text-align:center;transition:transform .2s,background .2s}
@@ -4040,13 +4045,26 @@ function renderProject(main, id) {
 /* ---------- Aide et contact ---------- */
 function renderHelp(main) {
   const faq = [
-    ["TOB-MAQ est-il gratuit ?", "Oui : les formations gratuites, les jeux et les ressources en accès libre ne demandent aucun paiement. Des offres premium seront proposées plus tard, avec des tarifs en FCFA clairement affichés."],
+    ["Comment rejoindre une formation ?", "Ouvre Domaines dans le menu, choisis ton domaine, puis une formation, et clique sur Commencer. Crée ton compte gratuit pour garder ta progression. La vidéo « Rejoindre une formation » ci-dessus montre chaque étape."],
+    ["TOB-MAQ est-il gratuit ?", "Oui : les formations gratuites, les jeux et les ressources en accès libre ne demandent aucun paiement. L'abonnement Premium donne accès aux leçons avancées, avec un essai gratuit sans moyen de paiement ; ses tarifs en FCFA sont affichés sur la page Premium."],
     ["Quel logiciel dois-je installer ?", "Tu peux commencer sans rien payer : GIMP, Inkscape, DaVinci Resolve (version gratuite), Canva et CapCut ont des versions gratuites. Chaque tutoriel indique le logiciel utilisé."],
     ["Pourquoi le studio IA ne génère-t-il rien ?", "La génération nécessite un service d'IA connecté au serveur de TOB-MAQ. Tant qu'il n'est pas configuré, l'interface est en aperçu et rien n'est simulé."],
     ["Le site consomme-t-il beaucoup de données ?", "Non : les illustrations sont dessinées dans la page et les vidéos ne se chargent que lorsque tu appuies sur lecture."],
     ["J'ai moins de 18 ans, puis-je m'inscrire ?", "Oui dès 15 ans, avec l'accord d'un parent ou tuteur. Ton portfolio reste privé ou réservé aux membres, jamais public."],
     ["Puis-je utiliser les ressources pour mes clients ?", "Les ressources sous licence CC BY 4.0 peuvent être utilisées commercialement en mentionnant TOB-MAQ. Vérifie la licence indiquée sur chaque ressource."]];
-  main.innerHTML = pageHead({ crumbs: [["Aide et contact"]], title: "Aide et contact" }) + `
+  const videos = [
+    ["tutoriel-rejoindre-une-formation", "Rejoindre une formation", "Tutoriel · 2 min 14", "Entrer dans un domaine, choisir une formation, créer son compte et commencer la première leçon.", false],
+    ["publicite-telephone", "Publicité TOB-MAQ (téléphone)", "25 s · format vertical", "Pour les statuts WhatsApp, TikTok, Reels et Shorts.", true],
+    ["publicite-ordinateur", "Publicité TOB-MAQ (ordinateur)", "25 s · format 16:9", "Pour YouTube, Facebook et les présentations.", false],
+    ["presentation-du-site", "Présentation du site", "4 min 53 · visite guidée", "La visite de la première version du site : formations, jeux, ressources, inscription et tableau de bord.", false]];
+  main.innerHTML = pageHead({ crumbs: [["Aide et contact"]], title: "Aide et contact", lead: "Des vidéos pour bien démarrer, les questions fréquentes, et un formulaire pour nous écrire." }) + `
+  <section class="section-sm"><div class="wrap">
+    <h2>Vidéos</h2><p class="muted" style="margin-top:-.4rem">Elles ne se chargent que lorsque tu appuies sur lecture. Tu peux aussi les télécharger pour les partager.</p>
+    <div class="video-grid">${videos.map(([f, t, meta, d, vertical]) => `<article class="card video-card${vertical ? " vertical" : ""}">
+      <video controls preload="none" playsinline poster="videos/${f}.jpg" src="videos/${f}.mp4" aria-label="${esc(t)}"></video>
+      <div style="padding:14px 16px 16px"><span class="chip">${meta}</span><h3 style="margin:.5rem 0 .3rem;font-size:1.1rem">${t}</h3><p class="small muted" style="margin:0 0 10px">${d}</p>
+        <a class="btn btn-ghost btn-sm" href="videos/${f}.mp4" download>${icon("download")} Télécharger</a></div></article>`).join("")}</div>
+  </div></section>
   <section class="section-sm"><div class="wrap split">
     <div><h2>Questions fréquentes</h2><div class="faq">${faq.map(([q, a]) => `<details><summary>${q}</summary><p>${a}</p></details>`).join("")}</div></div>
     <form class="card" id="contact" novalidate style="padding:24px"><h2 style="font-size:1.3rem">Nous écrire</h2>
