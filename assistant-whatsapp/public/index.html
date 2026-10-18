@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Assistant">
+<meta name="robots" content="noindex">
+<title>Assistant WhatsApp</title>
+<style>
+  :root { --fond:#f4f5f2; --carte:#fff; --texte:#1b1f1c; --doux:#5d665f; --bord:#dfe3dd; --vert:#128c4a; --rouge:#c62828; --orange:#b26a00; }
+  @media (prefers-color-scheme: dark) { :root { --fond:#111412; --carte:#1b201c; --texte:#e9ece8; --doux:#9aa49c; --bord:#2c332d; --vert:#3fbf74; --rouge:#ff6b6b; --orange:#f0a940; } }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--fond); color:var(--texte); font:16px/1.45 -apple-system, system-ui, sans-serif; padding:16px; padding-top:max(16px, env(safe-area-inset-top)); }
+  main { max-width:720px; margin:0 auto; }
+  h1 { font-size:22px; margin:0 0 12px; } h2 { font-size:17px; margin:24px 0 8px; }
+  .carte { background:var(--carte); border:1px solid var(--bord); border-radius:14px; padding:14px; margin-bottom:12px; }
+  .ligne { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  button, select, input { font:inherit; border-radius:10px; border:1px solid var(--bord); padding:10px 14px; background:var(--carte); color:var(--texte); }
+  button { cursor:pointer; font-weight:600; } button.vert { background:var(--vert); color:#fff; border-color:var(--vert); } button.rouge { background:var(--rouge); color:#fff; border-color:var(--rouge); }
+  .modes button[aria-pressed="true"] { background:var(--texte); color:var(--carte); }
+  textarea { width:100%; font:inherit; border-radius:10px; border:1px solid var(--bord); padding:10px; background:var(--fond); color:var(--texte); min-height:80px; }
+  .doux { color:var(--doux); font-size:14px; } .alerte { color:var(--orange); font-size:14px; } .erreur { color:var(--rouge); font-size:14px; }
+  .recu { background:var(--fond); border-radius:10px; padding:8px 10px; margin:6px 0; white-space:pre-wrap; }
+  .pause { border:2px solid var(--rouge); }
+  #regles { min-height:320px; font-family:ui-monospace, Menlo, monospace; font-size:13px; }
+  [hidden] { display:none !important; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Assistant WhatsApp</h1>
+
+  <section id="connexion" class="carte" hidden>
+    <p>Entrez le mot de passe du tableau de bord (la valeur de <code>ADMIN_TOKEN</code>).</p>
+    <form id="formConnexion" class="ligne"><input id="mdp" type="password" autocomplete="current-password" required style="flex:1"><button class="vert">Ouvrir</button></form>
+    <p id="erreurConnexion" class="erreur"></p>
+  </section>
+
+  <div id="app" hidden>
+    <section id="carteEtat" class="carte">
+      <div class="ligne modes" role="group" aria-label="Mode">
+        <button data-mode="suggestion">1 · Suggestion</button>
+        <button data-mode="validation">2 · Validation</button>
+        <button data-mode="automatique">3 · Automatique</button>
+      </div>
+      <p id="explicationMode" class="doux"></p>
+      <button id="boutonPause" class="rouge" style="width:100%"></button>
+      <p id="problemes" class="erreur"></p>
+    </section>
+
+    <h2>À traiter</h2>
+    <div id="enAttente"></div>
+
+    <h2>Historique récent</h2>
+    <div id="recents"></div>
+
+    <h2>Règles</h2>
+    <details class="carte">
+      <summary>Modifier les règles (format JSON)</summary>
+      <p class="doux">Informations que l'assistant peut donner, catégories autorisées en automatique, mots qui imposent toujours votre validation, fiches des contacts (numéro au format international sans « + », par exemple 22997000000).</p>
+      <textarea id="regles" spellcheck="false"></textarea>
+      <div class="ligne"><button id="enregistrerRegles" class="vert">Enregistrer</button><span id="etatRegles" class="doux"></span></div>
+    </details>
+    <p class="doux"><button id="deconnexion">Se déconnecter</button></p>
+  </div>
+</main>
+
+<script>
+const EXPLICATIONS = {
+  suggestion: "L'assistant propose des réponses ici. Rien n'est envoyé sans que vous appuyiez sur Envoyer.",
+  validation: "Chaque réponse attend votre accord ici avant de partir.",
+  automatique: "Les messages simples et autorisés partent seuls. Tout le reste attend votre accord ici."
+};
+const STATUTS = { a_valider: "À valider", suggestion: "Suggestion", erreur: "Erreur", envoye: "Envoyé", rejete: "Rejeté", ignore: "Ignoré" };
+let jeton = "";
+try { jeton = localStorage.getItem("jeton") || ""; } catch {}
+
+const $ = s => document.querySelector(s);
+const el = (tag, props = {}, ...enfants) => { const e = Object.assign(document.createElement(tag), props); e.append(...enfants); return e; };
+const heure = t => new Date(t).toLocaleString("fr-FR", { weekday: "short", hour: "2-digit", minute: "2-digit" });
+
+async function api(chemin, options = {}) {
+  const r = await fetch("/api/admin" + chemin, { ...options, headers: { "Content-Type": "application/json", Authorization: "Bearer " + jeton } });
+  const data = await r.json().catch(() => ({}));
+  if (r.status === 401) { afficherConnexion(data.erreur); throw new Error(data.erreur); }
+  if (!r.ok) throw new Error(data.erreur || "Erreur " + r.status);
+  return data;
+}
+
+function afficherConnexion(msg) { $("#app").hidden = true; $("#connexion").hidden = false; $("#erreurConnexion").textContent = msg || ""; }
+
+function carteBrouillon(b, modifiable) {
+  const a = b.analyse || {};
+  const carte = el("div", { className: "carte" },
+    el("div", { className: "ligne" }, el("strong", { textContent: b.nom || "+" + b.contact }), el("span", { className: "doux", textContent: `${heure(b.cree)} · ${STATUTS[b.statut] || b.statut}${a.categorie ? " · " + a.categorie.replace(/_/g, " ") : ""}` })),
+    ...b.textes.map(m => el("div", { className: "recu", textContent: m.texte })),
+    el("p", { className: b.statut === "erreur" ? "erreur" : "alerte", textContent: b.erreur || b.raison })
+  );
+  if (!modifiable) { if (b.reponse) carte.append(el("p", { className: "doux", textContent: "Réponse : " + b.reponse })); return carte; }
+  const zone = el("textarea", { value: b.reponse, placeholder: "Écrivez la réponse…" });
+  const envoyer = el("button", { className: "vert", textContent: "Envoyer" });
+  const copier = el("button", { textContent: "Copier" });
+  const rejeter = el("button", { textContent: "Rejeter" });
+  const info = el("span", { className: "erreur" });
+  envoyer.onclick = async () => { envoyer.disabled = true; try { await api(`/brouillons/${b.id}/envoyer`, { method: "POST", body: JSON.stringify({ texte: zone.value }) }); charger(); } catch (e) { info.textContent = e.message; envoyer.disabled = false; } };
+  rejeter.onclick = async () => { try { await api(`/brouillons/${b.id}/rejeter`, { method: "POST" }); charger(); } catch (e) { info.textContent = e.message; } };
+  copier.onclick = async () => { try { await navigator.clipboard.writeText(zone.value); copier.textContent = "Copié"; } catch { zone.select(); } };
+  carte.append(zone, el("div", { className: "ligne" }, envoyer, copier, rejeter, info));
+  return carte;
+}
+
+async function charger() {
+  const e = await api("/etat");
+  $("#connexion").hidden = true; $("#app").hidden = false;
+  document.querySelectorAll("[data-mode]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.mode === e.mode)));
+  $("#explicationMode").textContent = EXPLICATIONS[e.mode] + " Modèle : " + e.modele + ".";
+  $("#boutonPause").textContent = e.pause ? "Arrêt d'urgence ACTIVÉ — appuyer pour réactiver l'automatique" : "Arrêt d'urgence : couper toute réponse automatique";
+  $("#boutonPause").dataset.pause = e.pause;
+  $("#carteEtat").classList.toggle("pause", e.pause);
+  $("#problemes").textContent = e.problemes.join(" ");
+  // Ne pas écraser une réponse en cours de modification.
+  if (!document.activeElement?.matches("#enAttente textarea"))
+    $("#enAttente").replaceChildren(...(e.enAttente.length ? e.enAttente.map(b => carteBrouillon(b, true)) : [el("p", { className: "doux", textContent: "Rien à traiter." })]));
+  $("#recents").replaceChildren(...e.recents.map(b => carteBrouillon(b, false)));
+}
+
+document.querySelectorAll("[data-mode]").forEach(b => b.onclick = async () => {
+  if (b.dataset.mode === "automatique" && !confirm("Activer les réponses automatiques pour les messages simples ?")) return;
+  await api("/mode", { method: "POST", body: JSON.stringify({ mode: b.dataset.mode }) }); charger();
+});
+$("#boutonPause").onclick = async () => { await api("/pause", { method: "POST", body: JSON.stringify({ pause: $("#boutonPause").dataset.pause !== "true" }) }); charger(); };
+$("#formConnexion").onsubmit = async ev => {
+  ev.preventDefault(); jeton = $("#mdp").value.trim();
+  try { await charger(); try { localStorage.setItem("jeton", jeton); } catch {} chargerRegles(); } catch {}
+};
+$("#deconnexion").onclick = () => { try { localStorage.removeItem("jeton"); } catch {} jeton = ""; afficherConnexion(); };
+
+async function chargerRegles() { $("#regles").value = JSON.stringify(await api("/regles"), null, 2); }
+$("#enregistrerRegles").onclick = async () => {
+  try { const r = JSON.parse($("#regles").value); await api("/regles", { method: "PUT", body: JSON.stringify(r) }); $("#etatRegles").textContent = "Enregistré."; }
+  catch (e) { $("#etatRegles").textContent = e instanceof SyntaxError ? "JSON invalide : vérifiez les virgules et les guillemets." : e.message; }
+};
+
+if (jeton) charger().then(chargerRegles).catch(() => {}); else afficherConnexion();
+setInterval(() => { if (jeton && !document.hidden) charger().catch(() => {}); }, 15000);
+</script>
+</body>
+</html>

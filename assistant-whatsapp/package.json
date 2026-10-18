@@ -1,0 +1,17 @@
+{
+  "name": "assistant-whatsapp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Assistant IA (Claude) pour répondre aux messages WhatsApp via l'API officielle WhatsApp Business Platform, avec validation humaine.",
+  "type": "module",
+  "engines": { "node": ">=22.13" },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env --disable-warning=ExperimentalWarning src/index.js",
+    "essai": "node --env-file-if-exists=.env --disable-warning=ExperimentalWarning src/essai.js",
+    "test": "node --disable-warning=ExperimentalWarning --test test/*.test.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "0.135.0",
+    "express": "5.1.0"
+  }
+}
