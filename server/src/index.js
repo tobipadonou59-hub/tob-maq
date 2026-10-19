@@ -16,7 +16,7 @@ import { imageProvider, videoProvider, generateImage, buildImagePrompt, buildDem
 
 const LEVELS = ["Débutant", "Intermédiaire", "Avancé"];
 const INTERESTS = ["graphisme", "maquettisme", "video", "reseaux", "cinema", "ia"];
-const DISCIPLINES = ["Affiches", "Logos", "Identités visuelles", "Maquettes éditoriales", "Vidéos cinématiques", "Clips montés", "Publicités", "Animations graphiques"];
+const DISCIPLINES = ["Affiches", "Logos", "Identités visuelles", "Maquettes éditoriales", "Packaging", "Illustrations", "Infographies", "Réseaux sociaux", "Sites web", "Applications mobiles", "Jeux vidéo", "Maquettes 3D", "Vidéos cinématiques", "Clips montés", "Publicités", "Animations graphiques"];
 const GAME_LEVELS = ["facile", "moyen", "difficile"];
 const ID_RE = /^[a-z0-9-]{1,60}$/;
 const COOKIE = "tobmaq_sid";

@@ -510,6 +510,8 @@ dl.specs dt{color:var(--muted)} dl.specs dd{margin:0;font-weight:600;min-width:0
 .pf-thumb svg{width:100%;height:100%}
 .pf-body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px}
 .pf-body h3{margin:0;font-size:1rem}
+.pf-case{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+@media (max-width:820px){.pf-case{grid-template-columns:1fr}}
 
 /* ---------- Tableau de bord, comptes ---------- */
 .auth{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:26px;align-items:start}
@@ -2848,8 +2850,98 @@ const CAHIER_DOMAINE = { graphisme: "res-cahier-graphisme", maquettisme: "res-ca
 Object.entries(LESSONS).forEach(([id, l]) => { if (!l.soon && !l.resource) { const f = formationOfLesson(id); if (f && CAHIER_DOMAINE[f.domain]) l.resource = CAHIER_DOMAINE[f.domain]; } });
 const RES_TYPES = [...new Set(RESOURCES.map(r => r.type))].sort();
 
-/* Portfolio : EXEMPLES créés par l'équipe (aucun apprenant inventé). */
+/* Portfolio : EXEMPLES créés par l'équipe (aucun apprenant inventé). Les briefs sont fictifs. */
 const PORTFOLIO = [
+  { id: "pf-site-restaurant", featured: true, title: "Site vitrine « Maquis Chez Tanti »", discipline: "Sites web", tools: ["Figma", "HTML", "CSS"], art: "site", palette: ["#7A2E12", "#F2A541", "#FFF7EC"],
+    desc: "Site vitrine responsive pour un restaurant : accueil appétissant, menu du jour, réservation par WhatsApp et plan d'accès.",
+    brief: "Un maquis familial veut être trouvé sur Google et recevoir des réservations sans passer par les appels.",
+    steps: ["Arborescence en 4 pages et maquette mobile d'abord dans Figma", "Photos des plats recadrées en 4:3 et compressées (moins de 150 Ko)", "Intégration HTML et CSS, bouton WhatsApp fixe en bas d'écran", "Titres et descriptions optimisés pour la recherche locale"],
+    deliverables: ["Maquettes Figma mobile et ordinateur", "Site en ligne responsive", "Guide pour changer le menu du jour"], formation: "web-html-css" },
+  { id: "pf-app-zem", featured: true, title: "Appli mobile « ZémGo » (taxi-moto)", discipline: "Applications mobiles", tools: ["Figma"], art: "app", palette: ["#00A86B", "#FFC83D", "#0F1720"],
+    desc: "Conception UX/UI d'une appli de réservation de taxi-moto : carte, prix affiché avant de partir, paiement Mobile Money et note du conducteur.",
+    brief: "Rassurer les passagers sur le prix et la sécurité, avec une appli utilisable d'une seule main et sur des téléphones d'entrée de gamme.",
+    steps: ["Interviews de 6 passagers et parcours utilisateur", "Wireframes basse fidélité de 9 écrans", "Interface en composants : boutons, cartes, champs, états d'erreur", "Prototype cliquable testé avec 5 personnes, puis corrections"],
+    deliverables: ["Prototype Figma cliquable", "Kit de composants (design system)", "Rapport de test utilisateur"], formation: "chef-projet-digital" },
+  { id: "pf-dashboard", title: "Tableau de bord d'une boutique en ligne", discipline: "Sites web", tools: ["Figma", "JavaScript"], art: "dashboard", palette: ["#6D5DFC", "#22C55E", "#0B1020"],
+    desc: "Interface d'administration en mode sombre : ventes, commandes, produits les plus vendus et alertes de stock, lisible en un coup d'œil.",
+    brief: "La gérante d'une boutique en ligne veut suivre ses ventes chaque matin en moins d'une minute.",
+    steps: ["Choix de 4 indicateurs clés seulement", "Graphiques simples : courbe pour l'évolution, barres pour comparer", "Couleurs réservées au sens : vert = hausse, rouge = alerte", "Version mobile avec les indicateurs empilés"],
+    deliverables: ["Maquette ordinateur et mobile", "Prototype JavaScript avec données d'exemple"], formation: "dev-javascript" },
+  { id: "pf-packaging-gari", featured: true, title: "Packaging « Gari Royal »", discipline: "Packaging", tools: ["Illustrator", "Photoshop"], art: "pack", palette: ["#C9962B", "#1F3B2D", "#F6EBD3"],
+    desc: "Sachet stand-up de 1 kg pour un gari de qualité : couronne dorée, vert profond, fenêtre transparente pour montrer le produit.",
+    brief: "Faire passer un produit vendu au marché en vrac à un produit premium vendu en supérette.",
+    steps: ["Étude des emballages concurrents en rayon", "Pistes de logo et choix de la couronne", "Gabarit d'impression avec fonds perdus et zone de soudure", "Maquette 3D réaliste pour la présentation au client"],
+    deliverables: ["Fichier d'impression PDF/X en CMJN", "Maquette 3D du sachet", "Déclinaisons 500 g et 5 kg"], formation: "infographie-pro" },
+  { id: "pf-campagne-rentree", title: "Campagne Instagram « Rentrée scolaire »", discipline: "Réseaux sociaux", tools: ["Canva", "Photoshop"], art: "feed", palette: ["#FF5A36", "#2A6FDB", "#FFD23F"],
+    desc: "Série de 9 publications cohérentes pour une librairie : compte à rebours, offres, listes de fournitures et témoignages.",
+    brief: "Une librairie veut attirer les parents en août et septembre avec un budget publicitaire réduit.",
+    steps: ["Calendrier éditorial sur 3 semaines", "Gabarits réutilisables : même grille, même typographie", "Alternance couleur pleine et photo pour une grille équilibrée", "Versions story 9:16 de chaque publication"],
+    deliverables: ["9 publications 1080×1350", "9 stories 1080×1920", "Gabarits Canva modifiables"], formation: "canva-reseaux" },
+  { id: "pf-illustration-agojie", featured: true, title: "Illustration « Les Agojie »", discipline: "Illustrations", tools: ["Krita"], art: "agojie", palette: ["#8E2C2C", "#E9A23B", "#1D1A2F"],
+    desc: "Illustration numérique en hommage aux guerrières du Dahomey : silhouette héroïque au crépuscule, motifs inspirés des appliqués d'Abomey.",
+    brief: "Couverture illustrée pour un livre jeunesse sur l'histoire du Bénin.",
+    steps: ["Recherche documentaire et planche de références", "Croquis de 5 compositions en vignettes", "Valeurs en niveaux de gris avant la couleur", "Couleur, lumière de contre-jour et motifs en bordure"],
+    deliverables: ["Illustration 300 dpi au format A4", "Version recadrée pour les réseaux sociaux"], formation: "illustration-numerique" },
+  { id: "pf-bd-zangbeto", title: "Planche de BD « La nuit du Zangbeto »", discipline: "Illustrations", tools: ["Krita"], art: "bd", palette: ["#F2612D", "#2B2D42", "#F7F3E9"],
+    desc: "Planche de bande dessinée en 4 cases : mise en scène, cadrages variés, bulles lisibles et onomatopée.",
+    brief: "Une première planche pour présenter un projet de BD fantastique à un éditeur.",
+    steps: ["Découpage du scénario en cases", "Storyboard rapide et choix des cadrages", "Encrage et couleurs en aplats", "Lettrage des bulles et de l'onomatopée"],
+    deliverables: ["Planche en haute définition", "Storyboard de la planche"], formation: "dessin-bases" },
+  { id: "pf-jeu-dantokpa", title: "Jeu 2D « Course à Dantokpa »", discipline: "Jeux vidéo", tools: ["Godot"], art: "game", palette: ["#3BA55D", "#FFB703", "#1E2A4A"],
+    desc: "Jeu de plateforme en pixel art : traverser le marché, ramasser les pièces et éviter les obstacles avant la fermeture.",
+    brief: "Prototype jouable de 3 niveaux à présenter dans un concours de jeux vidéo étudiant.",
+    steps: ["Document de game design d'une page", "Personnage, tuiles et décor en pixel art", "Programmation des sauts, des pièces et du chronomètre", "Tests avec 8 joueurs et réglage de la difficulté"],
+    deliverables: ["Jeu jouable sur ordinateur et téléphone", "Document de game design"], formation: "jeu-godot" },
+  { id: "pf-infographie-eau", title: "Infographie « Économiser l'eau à la maison »", discipline: "Infographies", tools: ["Illustrator"], art: "infog", palette: ["#0077B6", "#90E0EF", "#03045E"],
+    desc: "Infographie verticale en 4 gestes simples, avec pictogrammes, numérotation et hiérarchie claire pour un affichage et un partage WhatsApp.",
+    brief: "Une association veut une affiche compréhensible même par les personnes qui lisent peu.",
+    steps: ["Réduction du message à 4 gestes", "Pictogrammes dessinés sur une grille commune", "Hiérarchie : titre, numéros, verbes d'action", "Test de lecture auprès de 10 personnes"],
+    deliverables: ["Affiche A2 imprimable", "Version mobile 1080×1920"], formation: "fondamentaux-graphisme" },
+  { id: "pf-charte-karite", title: "Charte graphique « Karité Nord »", discipline: "Identités visuelles", tools: ["Illustrator", "InDesign"], art: "brandboard", palette: ["#6B8F3A", "#E8C468", "#3D2B1F"],
+    desc: "Identité complète d'une coopérative de beurre de karité : logo, couleurs, typographies, motif et papeterie.",
+    brief: "Une coopérative de femmes veut exporter ses produits et inspirer confiance aux acheteurs.",
+    steps: ["Atelier avec les membres pour définir les valeurs", "Logo : la noix et la feuille de karité stylisées", "Règles d'usage : marges, tailles minimales, interdits", "Charte de 16 pages mise en page dans InDesign"],
+    deliverables: ["Logo en 4 versions", "Charte graphique PDF", "Cartes de visite et étiquettes"], formation: "logo-identite" },
+  { id: "pf-affiche-afrovibes", featured: true, title: "Affiche de concert « Afro Vibes Live »", discipline: "Affiches", tools: ["Photoshop", "Illustrator"], art: "concert", palette: ["#FF2E63", "#08D9D6", "#252A34"],
+    desc: "Affiche en bichromie avec trame de points, typographie empilée et informations pratiques lisibles à 3 mètres.",
+    brief: "Affiche A2 et visuels réseaux sociaux pour un concert afrobeat.",
+    steps: ["Moodboard : affiches de concert et bichromies", "Photo de l'artiste détourée puis tramée", "Titre empilé et contour pour le mot « LIVE »", "Déclinaison en story, publication et bannière"],
+    deliverables: ["Affiche A2 prête à imprimer", "Story 9:16 et publication 4:5"], formation: "affiches-flyers" },
+  { id: "pf-generique", title: "Générique animé d'une web-série", discipline: "Animations graphiques", tools: ["After Effects"], art: "titles", palette: ["#9B5DE5", "#F15BB5", "#00F5D4"],
+    desc: "Générique de 12 secondes : formes géométriques, titres cinétiques et courbes de vitesse travaillées dans l'éditeur de graphiques.",
+    brief: "Donner une identité forte à une web-série humoristique publiée sur YouTube.",
+    steps: ["Storyboard de 6 vignettes", "Animation des formes calée sur la musique", "Courbes de vitesse adoucies (ease in / ease out)", "Exports 16:9 et 9:16"],
+    deliverables: ["Générique 1080p", "Version verticale", "Projet After Effects modifiable"], formation: "after-effects-titres" },
+  { id: "pf-documentaire", title: "Mini-documentaire « Les tisserands »", discipline: "Vidéos cinématiques", tools: ["DaVinci Resolve"], art: "docu", palette: ["#C1440E", "#2F4858", "#F6E7CB"],
+    desc: "Portrait documentaire de 4 minutes : interviews, plans de coupe sur les gestes, sous-titres et étalonnage chaud.",
+    brief: "Valoriser un savoir-faire artisanal pour une exposition et les réseaux sociaux.",
+    steps: ["Repérage et liste de plans", "Tournage : interview en lumière naturelle et plans serrés des mains", "Montage autour des meilleures phrases de l'interview", "Étalonnage, mixage et sous-titres"],
+    deliverables: ["Film 4 min en 1080p", "Extrait de 45 s pour les réseaux", "Fichier de sous-titres"], formation: "resolve-etalonnage" },
+  { id: "pf-maquette-pavillon", title: "Maquette « Pavillon culturel »", discipline: "Maquettes 3D", tools: ["Blender"], art: "iso", palette: ["#E4DED0", "#C2703D", "#2E3A46"],
+    desc: "Maquette 3D d'un petit pavillon d'exposition : volumes, toiture débordante, végétation et personnages pour donner l'échelle.",
+    brief: "Présenter un projet d'architecte à une mairie avec des images faciles à comprendre.",
+    steps: ["Modélisation à partir des plans 2D", "Matériaux simples : enduit, bois, terre cuite", "Éclairage de fin d'après-midi", "Rendus en vue isométrique et à hauteur d'homme"],
+    deliverables: ["3 rendus haute définition", "Vue isométrique annotée"], formation: "fondamentaux-graphisme" },
+  { id: "pf-magazine-mode", title: "Couverture « Cotonou Mode »", discipline: "Maquettes éditoriales", tools: ["InDesign", "Photoshop"], art: "cover", palette: ["#111111", "#E63946", "#F1FAEE"],
+    desc: "Couverture de magazine de mode : titre de une, accroches hiérarchisées, mise en valeur du pagne et code-barres.",
+    brief: "Numéro spécial consacré aux jeunes créateurs de mode de Cotonou.",
+    steps: ["Choix de la photo et recadrage", "Titre de une et grille de couverture", "Accroches sur 3 niveaux de lecture", "Préparation pour l'impression avec fonds perdus"],
+    deliverables: ["Couverture prête à imprimer", "Version pour les réseaux sociaux"], formation: "edition-magazine" },
+  { id: "pf-signaletique", title: "Signalétique d'un marché couvert", discipline: "Identités visuelles", tools: ["Illustrator"], art: "signs", palette: ["#1D3557", "#F4A261", "#FFFFFF"],
+    desc: "Système de panneaux directionnels : zones par couleur et par lettre, pictogrammes universels, lisibilité à distance.",
+    brief: "Aider les clients à trouver les rayons dans un grand marché, même sans savoir lire le français.",
+    steps: ["Plan des zones et des flux de visiteurs", "Pictogrammes dessinés sur une même grille", "Tests de lisibilité à 10 mètres", "Fiches de fabrication pour le sérigraphe"],
+    deliverables: ["12 panneaux prêts à fabriquer", "Bibliothèque de 20 pictogrammes"], formation: "infographie-pro" },
+  { id: "pf-pub-savon", title: "Publicité vidéo « Savon Karité Pur »", discipline: "Publicités", tools: ["Premiere Pro", "CapCut"], art: "story", palette: ["#F3E9DC", "#A3B18A", "#5E503F"],
+    desc: "Spot vertical de 20 secondes construit en storyboard : accroche, problème, produit, preuve, appel à l'action.",
+    brief: "Faire connaître un savon artisanal sur TikTok et dans les statuts WhatsApp.",
+    steps: ["Storyboard en 4 temps avec les timecodes", "Tournage au téléphone en lumière douce", "Montage rythmé et textes animés", "Sous-titres pour une lecture sans le son"],
+    deliverables: ["Spot 9:16 de 20 s", "Version 6 s pour les publicités"], formation: "reels-capcut" },
+  { id: "pf-logo-lagune", title: "Logo « Lagune Tech Hub »", discipline: "Logos", tools: ["Illustrator"], art: "construct", palette: ["#0A2540", "#00D4FF", "#FFFFFF"],
+    desc: "Monogramme construit sur une grille et des cercles de proportion, avec ses déclinaisons : icône d'appli, version monochrome et réduite.",
+    brief: "Un espace de coworking pour développeurs veut un logo moderne qui fonctionne aussi en tout petit.",
+    steps: ["Mots-clés et recherche de 30 croquis", "Construction géométrique du monogramme", "Test de lisibilité à 16 pixels", "Déclinaisons et fichier de livraison"],
+    deliverables: ["Logo en SVG, PNG et PDF", "Icône d'application", "Mini guide d'utilisation"], formation: "logo-identite" },
   { id: "pf-affiche-festival", title: "Affiche « Festival Lumières »", discipline: "Affiches", tools: ["Illustrator", "Photoshop"], art: "poster", palette: ["#5B3DF5", "#F2612D", "#FFD400"],
     desc: "Affiche A3 en composition complémentaire violet/orange, titre en typographie géométrique, informations hiérarchisées sur trois niveaux." },
   { id: "pf-logo-cafe", title: "Logo « Kafé Doux »", discipline: "Logos", tools: ["Illustrator"], art: "logo", palette: ["#3B2416", "#E8A23A", "#F4EDE2"],
@@ -2867,7 +2959,7 @@ const PORTFOLIO = [
   { id: "pf-motion", title: "Animation de logo", discipline: "Animations graphiques", tools: ["After Effects"], art: "motion", palette: ["#5B3DF5", "#FFFFFF", "#F2612D"],
     desc: "Révélation de logo de 4 secondes avec courbes de vitesse adoucies." }
 ];
-const PF_DISCIPLINES = ["Affiches", "Logos", "Identités visuelles", "Maquettes éditoriales", "Vidéos cinématiques", "Clips montés", "Publicités", "Animations graphiques"];
+const PF_DISCIPLINES = ["Affiches", "Logos", "Identités visuelles", "Maquettes éditoriales", "Packaging", "Illustrations", "Infographies", "Réseaux sociaux", "Sites web", "Applications mobiles", "Jeux vidéo", "Maquettes 3D", "Vidéos cinématiques", "Clips montés", "Publicités", "Animations graphiques"];
 
 const INTERESTS = [["graphisme", "Graphisme"], ["maquettisme", "Maquettisme"], ["video", "Montage vidéo"], ["reseaux", "Contenus pour les réseaux"], ["cinema", "Vidéo cinématique"], ["ia", "IA créative"]];
 const PROFILES = ["Débutant en graphisme", "Graphiste en progression", "Maquettiste / mise en page", "Monteur vidéo débutant", "Monteur vidéo intermédiaire", "Créateur de contenus", "Créateur de vidéos cinématiques", "Maîtriser un logiciel pro"];
@@ -3289,6 +3381,162 @@ function domainArt(id) {
   if (id === "maquettisme") return `<svg viewBox="0 0 300 120" aria-hidden="true"><rect x="70" y="14" width="80" height="96" style="fill:var(--surface);stroke:var(--line)"/><rect x="152" y="14" width="80" height="96" style="fill:var(--surface);stroke:var(--line)"/>${[0, 1, 2, 3, 4, 5].map(i => `<rect x="${76 + i * 26}" y="20" width="20" height="84" fill="#D6006F" opacity=".1"/>`).join("")}<rect x="76" y="22" width="68" height="16" style="fill:var(--ink)"/><rect x="158" y="22" width="68" height="44" fill="#00A3D1" opacity=".7"/><g stroke="#D6006F"><path d="M64 14h-8M70 8V0M238 14h8M232 8V0"/></g></svg>`;
   return `<svg viewBox="0 0 300 120" aria-hidden="true"><rect x="30" y="20" width="240" height="80" rx="8" fill="#141927"/>${[[40, 60], [104, 90], [198, 62]].map(([x, w]) => `<rect x="${x}" y="34" width="${w}" height="18" rx="3" fill="#5B3DF5"/>`).join("")}<rect x="40" y="60" width="220" height="14" rx="3" fill="#123A2A"/><rect x="40" y="80" width="220" height="10" rx="3" fill="#3A1E14"/><line x1="150" y1="26" x2="150" y2="96" stroke="#FF7A45" stroke-width="2"/></svg>`;
 }
+/* Visuels détaillés des exemples de portfolio (SVG 400×300). */
+const PF_ART = {
+  site: (a, b, c) => `<rect width="400" height="300" fill="#E9E4DC"/><rect x="28" y="20" width="344" height="262" rx="10" fill="#fff" filter="drop-shadow(0 8px 14px #0002)"/>
+    <path d="M28 30a10 10 0 0 1 10-10h324a10 10 0 0 1 10 10v14H28z" fill="#F1EEE9"/>${["#E5584F", "#F4BE4F", "#5FC454"].map((f, i) => `<circle cx="${42 + i * 10}" cy="32" r="3" fill="${f}"/>`).join("")}
+    <rect x="130" y="26" width="140" height="12" rx="6" fill="#fff"/><text x="200" y="35" text-anchor="middle" fill="#888" style="font:7px var(--font-mono)">chez-tanti.bj</text>
+    <rect x="28" y="44" width="344" height="118" fill="${a}"/>${[0, 1, 2, 3, 4, 5].map(i => `<circle cx="${40 + i * 30}" cy="150" r="22" fill="#fff" opacity=".04"/>`).join("")}
+    <text x="46" y="62" fill="${c}" style="font:800 9px var(--font-display)">CHEZ TANTI</text><text x="232" y="62" fill="${c}" opacity=".85" style="font:600 7px var(--font-body)">Menu   Réserver   Accès</text>
+    <text x="46" y="96" fill="${c}" style="font:800 19px var(--font-display)">Le goût</text><text x="46" y="117" fill="${b}" style="font:800 19px var(--font-display)">de la maison</text>
+    <text x="46" y="133" fill="${c}" opacity=".8" style="font:500 7.5px var(--font-body)">Cuisine béninoise, midi et soir · Cotonou</text>
+    <rect x="46" y="140" width="66" height="16" rx="8" fill="${b}"/><text x="79" y="151" text-anchor="middle" fill="${a}" style="font:700 7.5px var(--font-body)">Réserver</text>
+    <circle cx="292" cy="104" r="46" fill="${c}"/><circle cx="292" cy="104" r="36" fill="${b}"/><circle cx="284" cy="98" r="14" fill="#fff" opacity=".9"/><path d="M296 92 q16 6 8 26 q-14 -2 -8 -26z" fill="#3E7B27"/><circle cx="300" cy="118" r="7" fill="${a}"/>
+    ${[0, 1, 2].map(i => `<g transform="translate(${46 + i * 106} 174)"><rect width="96" height="94" rx="8" fill="${c}" stroke="#0001"/><rect width="96" height="46" rx="8" fill="${[b, a, "#3E7B27"][i]}" opacity="${i === 1 ? .85 : 1}"/><rect y="38" width="96" height="8" fill="${[b, a, "#3E7B27"][i]}" opacity="${i === 1 ? .85 : 1}"/><circle cx="48" cy="23" r="15" fill="#fff" opacity=".35"/>
+      <text x="10" y="62" fill="#2a1a10" style="font:700 8px var(--font-body)">${["Amiwô au poulet", "Sauce gombo", "Ablo et poisson"][i]}</text><rect x="10" y="68" width="60" height="4" rx="2" fill="#ddd"/><text x="10" y="86" fill="${a}" style="font:800 8px var(--font-display)">${["2 500 F", "2 000 F", "3 000 F"][i]}</text></g>`).join("")}`,
+  app: (a, b, c) => `<rect width="400" height="300" fill="#EEF4F0"/><circle cx="330" cy="40" r="120" fill="${a}" opacity=".12"/><circle cx="60" cy="280" r="90" fill="${b}" opacity=".15"/>
+    <g transform="translate(78 18)"><rect width="124" height="264" rx="20" fill="${c}"/><rect x="6" y="8" width="112" height="248" rx="15" fill="#DDEBE2"/>
+      <path d="M6 70 L118 40 M6 150 L118 120 M40 8 L70 256 M90 8 L100 256" stroke="#fff" stroke-width="7"/><path d="M30 190 C 50 150, 70 140, 92 90" stroke="${a}" stroke-width="3" fill="none" stroke-dasharray="5 4"/>
+      <circle cx="30" cy="190" r="6" fill="${c}"/><path d="M92 90 a9 9 0 1 1 0.1 0z" fill="${a}"/><circle cx="92" cy="80" r="3.5" fill="#fff"/>
+      <rect x="44" y="12" width="36" height="8" rx="4" fill="${c}"/><rect x="12" y="186" width="100" height="62" rx="10" fill="#fff"/><text x="20" y="202" fill="${c}" style="font:700 8px var(--font-body)">Zém en 3 min</text><text x="20" y="213" fill="#667" style="font:500 6.5px var(--font-body)">Prix fixé avant le départ</text>
+      <rect x="20" y="222" width="84" height="18" rx="9" fill="${a}"/><text x="62" y="234" text-anchor="middle" fill="#fff" style="font:700 7.5px var(--font-body)">Commander · 500 F</text></g>
+    <g transform="translate(214 30)"><rect width="124" height="264" rx="20" fill="${c}"/><rect x="6" y="8" width="112" height="248" rx="15" fill="#152230"/><rect x="44" y="12" width="36" height="8" rx="4" fill="${c}"/>
+      <text x="16" y="44" fill="#fff" style="font:800 11px var(--font-display)">Ton trajet</text><text x="16" y="72" fill="${b}" style="font:800 15px var(--font-display)">500 FCFA</text><text x="16" y="84" fill="#9AA" style="font:500 6.5px var(--font-body)">Mobile Money · Espèces</text>
+      ${[0, 1, 2].map(i => `<g transform="translate(14 ${100 + i * 40})"><rect width="96" height="32" rx="8" fill="#1E3040"/><circle cx="16" cy="16" r="9" fill="${[a, b, "#6C8CFF"][i]}"/><rect x="30" y="9" width="40" height="5" rx="2" fill="#cfd8dc"/><text x="30" y="25" fill="${b}" style="font:7px var(--font-body)">★★★★${i === 2 ? "☆" : "★"}</text></g>`).join("")}
+      <rect x="14" y="224" width="96" height="20" rx="10" fill="${a}"/><text x="62" y="237" text-anchor="middle" fill="#fff" style="font:700 7.5px var(--font-body)">Confirmer</text></g>`,
+  dashboard: (a, b, c) => `<rect width="400" height="300" fill="${c}"/><rect width="64" height="300" fill="#131A33"/><rect x="18" y="18" width="28" height="28" rx="8" fill="${a}"/>${[0, 1, 2, 3, 4].map(i => `<rect x="22" y="${70 + i * 34}" width="20" height="20" rx="5" fill="${i ? "#2A3358" : a}" opacity="${i ? 1 : .6}"/>`).join("")}
+    <text x="80" y="32" fill="#fff" style="font:800 13px var(--font-display)">Bonjour Awa</text><text x="80" y="45" fill="#8C93B0" style="font:500 7px var(--font-body)">Voici tes ventes de la semaine</text>
+    ${[["Ventes", "1,2 M F", "+18 %"], ["Commandes", "86", "+9 %"], ["Panier moyen", "14 000 F", "+4 %"]].map(([k, v, d], i) => `<g transform="translate(${80 + i * 104} 58)"><rect width="96" height="52" rx="8" fill="#161E3D"/><text x="10" y="16" fill="#8C93B0" style="font:500 7px var(--font-body)">${k}</text><text x="10" y="34" fill="#fff" style="font:800 13px var(--font-display)">${v}</text><text x="10" y="46" fill="${b}" style="font:700 7px var(--font-body)">▲ ${d}</text></g>`).join("")}
+    <rect x="80" y="120" width="200" height="164" rx="8" fill="#161E3D"/><text x="92" y="138" fill="#fff" style="font:700 8px var(--font-body)">Évolution des ventes</text>
+    <defs><linearGradient id="pfdg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${a}" stop-opacity=".55"/><stop offset="1" stop-color="${a}" stop-opacity="0"/></linearGradient></defs>
+    ${[0, 1, 2, 3].map(i => `<line x1="92" x2="268" y1="${160 + i * 28}" y2="${160 + i * 28}" stroke="#ffffff10"/>`).join("")}
+    <path d="M92 250 L117 236 L142 242 L167 214 L192 222 L217 190 L242 196 L268 164 L268 270 L92 270z" fill="url(#pfdg)"/><path d="M92 250 L117 236 L142 242 L167 214 L192 222 L217 190 L242 196 L268 164" fill="none" stroke="${a}" stroke-width="2.5"/><circle cx="268" cy="164" r="4" fill="#fff" stroke="${a}" stroke-width="2"/>
+    <rect x="288" y="120" width="96" height="78" rx="8" fill="#161E3D"/><circle cx="336" cy="160" r="24" fill="none" stroke="#2A3358" stroke-width="9"/><circle cx="336" cy="160" r="24" fill="none" stroke="${b}" stroke-width="9" stroke-dasharray="105 151" transform="rotate(-90 336 160)"/><text x="336" y="164" text-anchor="middle" fill="#fff" style="font:800 9px var(--font-display)">70 %</text>
+    <rect x="288" y="206" width="96" height="78" rx="8" fill="#161E3D"/><text x="298" y="222" fill="#fff" style="font:700 7px var(--font-body)">Stock faible</text>${[0, 1, 2].map(i => `<rect x="298" y="${232 + i * 15}" width="${60 - i * 14}" height="6" rx="3" fill="${i ? "#2A3358" : "#EF4444"}"/>`).join("")}`,
+  pack: (a, b, c) => `<defs><linearGradient id="pfpk" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity=".18"/><stop offset=".45" stop-color="#fff" stop-opacity=".14"/><stop offset="1" stop-color="#000" stop-opacity=".22"/></linearGradient></defs>
+    <rect width="400" height="300" fill="#EDE5D6"/><rect y="236" width="400" height="64" fill="#DCD2BF"/><ellipse cx="190" cy="262" rx="96" ry="10" fill="#0003"/><ellipse cx="305" cy="258" rx="58" ry="7" fill="#0002"/>
+    <g transform="translate(276 120)"><path d="M0 8 L64 8 L70 136 Q34 144 -6 136z" fill="${a}"/><rect y="0" width="64" height="12" fill="#9E7520"/><text x="32" y="64" text-anchor="middle" fill="${b}" style="font:800 9px var(--font-display)">GARI</text><text x="32" y="76" text-anchor="middle" fill="${b}" style="font:800 9px var(--font-display)">ROYAL</text><text x="32" y="118" text-anchor="middle" fill="${b}" style="font:700 7px var(--font-body)">500 g</text><path d="M0 8 L64 8 L70 136 Q34 144 -6 136z" fill="url(#pfpk)"/></g>
+    <g transform="translate(132 40)"><path d="M0 14 L116 14 L128 220 Q58 232 -12 220z" fill="${b}"/><rect x="0" y="0" width="116" height="20" fill="#163024"/>${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(i => `<line x1="${6 + i * 10.5}" y1="3" x2="${6 + i * 10.5}" y2="17" stroke="#0E2219" stroke-width="2"/>`).join("")}
+      <path d="M40 54 l9 -12 l9 10 l9 -10 l9 12 l-4 12 h-28z" fill="${a}"/><text x="58" y="94" text-anchor="middle" fill="${c}" style="font:800 20px var(--font-display)">GARI</text><text x="58" y="114" text-anchor="middle" fill="${a}" style="font:800 15px var(--font-display);letter-spacing:3px">ROYAL</text>
+      <rect x="22" y="126" width="72" height="44" rx="22" fill="${c}" opacity=".95"/>${Array.from({ length: 22 }, (_, i) => `<circle cx="${30 + (i * 37) % 58}" cy="${134 + (i * 13) % 28}" r="2.2" fill="#E9DCC0"/>`).join("")}
+      <text x="58" y="190" text-anchor="middle" fill="${c}" style="font:600 7.5px var(--font-body)">Gari de manioc extra fin</text><text x="58" y="204" text-anchor="middle" fill="${a}" style="font:800 10px var(--font-display)">1 kg</text><path d="M0 14 L116 14 L128 220 Q58 232 -12 220z" fill="url(#pfpk)"/></g>`,
+  feed: (a, b, c) => `<rect width="400" height="300" fill="#F4F1EC"/><g transform="translate(120 10)"><rect width="160" height="290" rx="22" fill="#111"/><rect x="6" y="8" width="148" height="282" rx="17" fill="#fff"/>
+      <circle cx="28" cy="38" r="13" fill="${a}"/><text x="28" y="42" text-anchor="middle" fill="#fff" style="font:800 9px var(--font-display)">L</text><text x="48" y="35" fill="#111" style="font:700 7.5px var(--font-body)">librairie.horizon</text><text x="48" y="45" fill="#888" style="font:500 6px var(--font-body)">Librairie · Porto-Novo</text>
+      <rect x="16" y="58" width="128" height="14" rx="4" fill="#EFEFEF"/><text x="80" y="68" text-anchor="middle" fill="#111" style="font:700 6.5px var(--font-body)">Suivre</text>
+      ${Array.from({ length: 9 }, (_, i) => { const x = 8 + (i % 3) * 48, y = 80 + Math.floor(i / 3) * 61, col = [a, b, c][(i + Math.floor(i / 3)) % 3];
+        const inner = [`<text x="22" y="34" text-anchor="middle" fill="#fff" style="font:800 15px var(--font-display)">J-7</text>`, `<rect x="10" y="14" width="26" height="32" rx="2" fill="#fff"/><rect x="14" y="20" width="18" height="3" fill="${b}"/><rect x="14" y="26" width="14" height="3" fill="#ccc"/>`, `<text x="22" y="30" text-anchor="middle" fill="#111" style="font:800 13px var(--font-display)">-20%</text><text x="22" y="42" text-anchor="middle" fill="#111" style="font:600 5px var(--font-body)">CAHIERS</text>`,
+          `<circle cx="22" cy="28" r="13" fill="#fff" opacity=".9"/><path d="M15 28 l5 5 l9 -11" stroke="${a}" stroke-width="3" fill="none"/>`, `<text x="22" y="26" text-anchor="middle" fill="#fff" style="font:800 7px var(--font-display)">LA LISTE</text><text x="22" y="36" text-anchor="middle" fill="#fff" style="font:600 5.5px var(--font-body)">CM1 · CM2</text>`, `<rect x="8" y="34" width="28" height="12" rx="6" fill="#fff"/><text x="22" y="42" text-anchor="middle" fill="${a}" style="font:800 6px var(--font-body)">AVIS</text><text x="22" y="26" text-anchor="middle" fill="#111" style="font:800 13px var(--font-display)">“ ”</text>`,
+          `<path d="M8 50 L22 18 L36 50z" fill="#fff" opacity=".85"/>`, `<text x="22" y="34" text-anchor="middle" fill="#fff" style="font:800 15px var(--font-display)">J-1</text>`, `<rect x="9" y="14" width="26" height="22" rx="3" fill="#fff"/><text x="22" y="46" text-anchor="middle" fill="#fff" style="font:700 6px var(--font-body)">OUVERT</text>`][i];
+        return `<g transform="translate(${x} ${y})"><rect width="46" height="59" fill="${col}"/>${inner}</g>`; }).join("")}</g>
+    <g transform="translate(296 70)"><rect width="88" height="40" rx="10" fill="#fff" filter="drop-shadow(0 4px 8px #0001)"/><text x="12" y="17" fill="#888" style="font:600 6.5px var(--font-body)">Portée</text><text x="12" y="32" fill="#111" style="font:800 12px var(--font-display)">12,4 k</text></g>
+    <g transform="translate(16 170)"><rect width="88" height="40" rx="10" fill="#fff" filter="drop-shadow(0 4px 8px #0001)"/><text x="12" y="17" fill="#888" style="font:600 6.5px var(--font-body)">Messages reçus</text><text x="12" y="32" fill="${a}" style="font:800 12px var(--font-display)">+48</text></g>`,
+  agojie: (a, b, c) => `<defs><linearGradient id="pfsk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c}"/><stop offset=".62" stop-color="#5A2A3A"/><stop offset="1" stop-color="${b}"/></linearGradient></defs>
+    <rect width="400" height="300" fill="url(#pfsk)"/>${Array.from({ length: 26 }, (_, i) => `<circle cx="${(i * 71) % 400}" cy="${(i * 37) % 120}" r="${i % 4 ? .8 : 1.4}" fill="#fff" opacity=".7"/>`).join("")}
+    <circle cx="200" cy="176" r="92" fill="${b}" opacity=".95"/><circle cx="200" cy="176" r="110" fill="${b}" opacity=".18"/>
+    <path d="M0 230 Q 80 200 160 222 T 400 214 V300 H0z" fill="#3A1726"/><path d="M290 226 l6 -50 l4 50z M300 180 q-20 -14 -34 -8 q18 -4 34 8z M300 180 q20 -16 36 -8 q-20 -2 -36 8z M300 182 q-6 -22 4 -32 q-6 14 -4 32z" fill="#2A0F1C"/>
+    <g fill="#1A0B14"><circle cx="196" cy="104" r="13"/><path d="M186 100 q10 -18 22 -4 l-4 -10 q-12 -6 -18 14z"/><path d="M182 118 h28 l10 52 l-8 2 l-8 -30 l-2 40 l12 56 h-12 l-12 -48 l-12 48 h-12 l12 -56 l-2 -40 l-8 30 l-8 -2z"/>
+      <path d="M224 70 L230 70 L226 250 L222 250z"/><path d="M227 58 l6 14 h-12z"/><ellipse cx="162" cy="160" rx="17" ry="27"/></g>
+    <g fill="none" stroke="${b}" stroke-width="1.5" opacity=".8"><ellipse cx="162" cy="160" rx="10" ry="18"/><path d="M162 142 v36"/></g>
+    <rect y="270" width="400" height="30" fill="${a}"/>${Array.from({ length: 20 }, (_, i) => `<path d="M${i * 20} 300 l10 -16 l10 16z" fill="${i % 2 ? b : "#F6E7CB"}"/>`).join("")}
+    <text x="20" y="34" fill="#F6E7CB" style="font:800 20px var(--font-display);letter-spacing:2px">AGOJIE</text><text x="20" y="48" fill="${b}" style="font:600 7.5px var(--font-mono)">ILLUSTRATION · KRITA</text>`,
+  bd: (a, b, c) => `<rect width="400" height="300" fill="#E3DED2"/><rect x="40" y="10" width="320" height="280" fill="${c}"/>
+    <g stroke="#111" stroke-width="3"><rect x="52" y="22" width="190" height="122" fill="${b}"/><rect x="252" y="22" width="96" height="122" fill="#F6D7B0"/><rect x="52" y="154" width="120" height="124" fill="#2E2240"/><rect x="182" y="154" width="166" height="124" fill="${a}"/></g>
+    ${Array.from({ length: 14 }, (_, i) => `<circle cx="${60 + (i * 53) % 176}" cy="${30 + (i * 29) % 50}" r="1" fill="#fff"/>`).join("")}<circle cx="212" cy="46" r="14" fill="#F7F3E9"/>
+    <path d="M90 142 L118 70 L146 142z" fill="#B8642B"/>${Array.from({ length: 10 }, (_, i) => `<line x1="${96 + i * 5.4}" y1="142" x2="${112 + i * 1.4}" y2="${84 + Math.abs(5 - i) * 3}" stroke="#7A3E14" stroke-width="1.4"/>`).join("")}<path d="M108 76 q10 -14 20 0z" fill="#6B2E0E"/>
+    <rect x="52" y="122" width="190" height="22" fill="#141020" opacity=".55"/>
+    <path d="M262 40 h76 a8 8 0 0 1 8 8 v26 a8 8 0 0 1 -8 8 h-50 l-14 12 l2 -12 h-14 a8 8 0 0 1 -8 -8 v-26 a8 8 0 0 1 8 -8z" fill="#fff" stroke="#111" stroke-width="2"/><text x="300" y="58" text-anchor="middle" fill="#111" style="font:800 8px var(--font-display)">IL ARRIVE…</text><text x="300" y="71" text-anchor="middle" fill="#111" style="font:800 8px var(--font-display)">CACHE-TOI !</text>
+    <circle cx="276" cy="118" r="12" fill="#5B3A29"/><circle cx="320" cy="114" r="12" fill="#5B3A29"/>
+    <ellipse cx="96" cy="214" rx="26" ry="12" fill="#fff"/><ellipse cx="128" cy="214" rx="26" ry="12" fill="#fff"/><circle cx="98" cy="214" r="7" fill="#111"/><circle cx="130" cy="214" r="7" fill="#111"/>
+    <path d="M265 170 l12 26 l28 -14 l-8 28 l30 6 l-28 12 l14 26 l-28 -12 l-6 30 l-12 -28 l-26 18 l6 -30 l-30 -4 l26 -16 l-18 -24 l30 6z" fill="${b === "#2B2D42" ? "#FFD23F" : b}" stroke="#111" stroke-width="2.5"/><text x="268" y="230" text-anchor="middle" fill="#111" transform="rotate(-8 268 230)" style="font:800 17px var(--font-display)">BOUM !</text>`,
+  game: (a, b, c) => `<defs><linearGradient id="pfgs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7EC8F2"/><stop offset="1" stop-color="#CDEBFA"/></linearGradient></defs>
+    <rect width="400" height="300" fill="url(#pfgs)"/><g fill="#fff" opacity=".9"><rect x="40" y="40" width="40" height="10"/><rect x="50" y="32" width="24" height="8"/><rect x="250" y="60" width="48" height="10"/><rect x="262" y="52" width="26" height="8"/></g>
+    ${[0, 1, 2, 3].map(i => `<g transform="translate(${10 + i * 100} 140)"><rect width="80" height="110" fill="${["#E9C46A", "#F4A261", "#E76F51", "#2A9D8F"][i]}"/>${[0, 1, 2, 3, 4, 5, 6, 7].map(k => `<rect x="${-6 + k * 11.5}" y="-10" width="11.5" height="16" fill="${k % 2 ? "#fff" : ["#D62828", "#2A6FDB", "#3BA55D", "#7B2CBF"][i]}"/>`).join("")}<rect x="12" y="40" width="56" height="40" fill="#0002"/>${[0, 1, 2].map(k => `<circle cx="${22 + k * 18}" cy="34" r="6" fill="${["#FB8500", "#8AC926", "#FFCA3A"][k]}"/>`).join("")}</g>`).join("")}
+    <g>${Array.from({ length: 25 }, (_, i) => `<rect x="${i * 16}" y="250" width="16" height="16" fill="${a}" stroke="#2D7A45"/><rect x="${i * 16}" y="266" width="16" height="34" fill="#8B5A2B" stroke="#6E4520"/>`).join("")}</g>
+    ${[[150, 196], [182, 196], [214, 196]].map(([x, y]) => `<rect x="${x}" y="${y}" width="32" height="12" fill="#8B5A2B" stroke="#6E4520"/>`).join("")}${[[166, 180], [198, 180], [230, 180], [300, 226]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="5" fill="${b}" stroke="#C77D00" stroke-width="2"/>`).join("")}
+    <g transform="translate(96 214)"><rect x="4" y="0" width="16" height="14" fill="#6B3F1D"/><rect x="2" y="14" width="20" height="16" fill="#FF5A36"/><rect x="2" y="30" width="8" height="6" fill="${c}"/><rect x="14" y="30" width="8" height="6" fill="${c}"/><rect x="14" y="4" width="4" height="4" fill="#fff"/></g>
+    <rect x="330" y="232" width="18" height="18" fill="#A0522D" stroke="#5C2E0E" stroke-width="2"/>
+    <rect width="400" height="26" fill="${c}" opacity=".85"/><text x="12" y="17" fill="#fff" style="font:700 10px var(--font-mono)">SCORE 01250</text><text x="160" y="17" fill="${b}" style="font:700 10px var(--font-mono)">● × 17</text><text x="250" y="17" fill="#FF5A6E" style="font:700 10px var(--font-mono)">♥♥♥</text><text x="330" y="17" fill="#fff" style="font:700 10px var(--font-mono)">⏱ 1:24</text>`,
+  infog: (a, b, c) => `<rect width="400" height="300" fill="#E8F4FA"/><g transform="translate(110 8)"><rect width="180" height="284" rx="6" fill="#fff" filter="drop-shadow(0 6px 12px #0001)"/>
+      <rect width="180" height="66" rx="6" fill="${a}"/><rect y="56" width="180" height="10" fill="${a}"/><path d="M160 16 q-9 12 -9 20 a9 9 0 0 0 18 0 q0 -8 -9 -20z" fill="${b}"/>
+      <text x="14" y="30" fill="#fff" style="font:800 11px var(--font-display)">ÉCONOMISER</text><text x="14" y="47" fill="${b}" style="font:800 11px var(--font-display)">L'EAU</text><text x="14" y="59" fill="#fff" opacity=".85" style="font:500 6.5px var(--font-body)">4 gestes simples à la maison</text>
+      ${[["Fermer le robinet", "pendant le brossage des dents"], ["Réparer les fuites", "un robinet qui goutte gaspille beaucoup"], ["Laver au seau", "plutôt qu'au tuyau d'arrosage"], ["Récupérer la pluie", "pour arroser et nettoyer"]].map(([t, d], i) => `<g transform="translate(12 ${80 + i * 50})"><circle cx="16" cy="18" r="16" fill="${i % 2 ? b : a}"/><text x="16" y="23" text-anchor="middle" fill="${i % 2 ? c : "#fff"}" style="font:800 13px var(--font-display)">${i + 1}</text>
+        <text x="40" y="15" fill="${c}" style="font:800 8.5px var(--font-display)">${t}</text><text x="40" y="27" fill="#5A6B7B" style="font:500 6.5px var(--font-body)">${d}</text><rect x="40" y="34" width="${100 - i * 12}" height="3" rx="1.5" fill="${b}"/></g>`).join("")}</g>
+    <g opacity=".9"><path d="M60 120 q-22 30 -22 48 a22 22 0 0 0 44 0 q0 -18 -22 -48z" fill="${a}"/><path d="M340 170 q-16 22 -16 34 a16 16 0 0 0 32 0 q0 -12 -16 -34z" fill="${b}"/></g>`,
+  brandboard: (a, b, c) => `<rect width="400" height="300" fill="#F5F0E6"/><rect x="16" y="16" width="176" height="150" rx="8" fill="${c}"/>
+    <g transform="translate(104 70)"><ellipse cx="0" cy="8" rx="20" ry="24" fill="${b}"/><path d="M0 -16 q26 -28 44 -10 q-18 22 -44 10z" fill="${a}"/><path d="M0 -16 q-26 -28 -44 -10 q18 22 44 10z" fill="${a}" opacity=".8"/></g>
+    <text x="104" y="132" text-anchor="middle" fill="#F5F0E6" style="font:800 12px var(--font-display);letter-spacing:1px">KARITÉ NORD</text><text x="104" y="146" text-anchor="middle" fill="${b}" style="font:600 6.5px var(--font-mono)">COOPÉRATIVE DE FEMMES</text>
+    ${[[a, "#6B8F3A"], [b, "#E8C468"], [c, "#3D2B1F"], ["#F5F0E6", "#F5F0E6"]].map(([col, hex], i) => `<g transform="translate(${204 + i * 46} 16)"><rect width="40" height="56" rx="6" fill="${col}" stroke="#0001"/><text x="4" y="68" fill="#555" style="font:600 6px var(--font-mono)">${hex}</text></g>`).join("")}
+    <g transform="translate(204 90)"><rect width="180" height="76" rx="8" fill="#fff"/><text x="12" y="44" fill="${c}" style="font:800 34px var(--font-display)">Aa</text><text x="88" y="30" fill="${c}" style="font:700 8px var(--font-body)">Titres · Syne</text><text x="88" y="44" fill="#666" style="font:500 7px var(--font-body)">Textes · DM Sans</text><text x="88" y="58" fill="#999" style="font:500 6px var(--font-mono)">ABCDEFGH 0123</text></g>
+    <g transform="translate(16 178)"><rect width="176" height="106" rx="8" fill="${a}"/>${Array.from({ length: 24 }, (_, i) => `<path d="M${14 + (i % 6) * 28} ${18 + Math.floor(i / 6) * 24} q8 -10 14 0 q-6 8 -14 0z" fill="${b}" opacity=".6"/>`).join("")}</g>
+    <g transform="translate(212 186) rotate(-6)"><rect width="104" height="62" rx="4" fill="#fff" filter="drop-shadow(0 4px 6px #0002)"/><ellipse cx="20" cy="28" rx="7" ry="8" fill="${b}"/><path d="M20 20 q9 -10 15 -4 q-6 8 -15 4z" fill="${a}"/><text x="38" y="30" fill="${c}" style="font:800 7px var(--font-display)">KARITÉ NORD</text><rect x="38" y="38" width="44" height="3" fill="#ccc"/><rect x="38" y="45" width="34" height="3" fill="#ccc"/></g>
+    <g transform="translate(300 214) rotate(8)"><rect width="66" height="76" rx="6" fill="${b}" filter="drop-shadow(0 4px 6px #0002)"/><rect x="8" y="22" width="50" height="32" rx="3" fill="#F5F0E6"/><text x="33" y="36" text-anchor="middle" fill="${c}" style="font:800 6px var(--font-display)">BEURRE</text><text x="33" y="46" text-anchor="middle" fill="${a}" style="font:700 5.5px var(--font-body)">DE KARITÉ 100 %</text></g>`,
+  concert: (a, b, c) => `<rect width="400" height="300" fill="${c}"/><circle cx="270" cy="128" r="104" fill="${a}"/>
+    ${Array.from({ length: 140 }, (_, i) => { const x = 170 + (i % 14) * 15, y = 30 + Math.floor(i / 14) * 21, d = Math.hypot(x - 300, y - 110); return d < 130 ? `<circle cx="${x}" cy="${y}" r="${Math.max(.6, 5 - d / 30)}" fill="${b}" opacity=".9"/>` : ""; }).join("")}
+    <g fill="${c}"><circle cx="276" cy="92" r="24"/><path d="M240 230 q4 -90 36 -110 q34 18 40 110z"/><path d="M296 116 l30 -36 l8 6 l-30 38z"/><circle cx="332" cy="80" r="9"/></g><path d="M262 84 q14 -26 30 -4" stroke="${a}" stroke-width="5" fill="none"/>
+    <text x="22" y="74" fill="#fff" style="font:800 40px var(--font-display);letter-spacing:-1px">AFRO</text><text x="22" y="120" fill="${b}" style="font:800 40px var(--font-display);letter-spacing:-1px">VIBES</text>
+    <text x="22" y="168" fill="none" stroke="#fff" stroke-width="1.6" style="font:800 40px var(--font-display);letter-spacing:-1px">LIVE</text>
+    <rect x="22" y="236" width="356" height="1" fill="#ffffff40"/><text x="22" y="256" fill="#fff" style="font:700 11px var(--font-body)">SAMEDI 14 DÉC. · 20 H</text><text x="22" y="272" fill="${b}" style="font:600 9px var(--font-mono)">COTONOU · ENTRÉE 3 000 F</text>
+    ${[0, 1, 2].map(i => `<rect x="${290 + i * 30}" y="254" width="22" height="18" rx="3" fill="#ffffff22"/>`).join("")}`,
+  titles: (a, b, c) => `<rect width="400" height="300" fill="#0E0B1A"/>${[0, 1, 2].map(i => `<g transform="translate(${18 + i * 126} 20)"><rect width="114" height="70" rx="6" fill="#1A1530" stroke="#ffffff14"/>
+      ${[`<circle cx="57" cy="35" r="${10 + i * 4}" fill="${a}"/>`, `<rect x="30" y="18" width="54" height="34" rx="4" fill="${b}" transform="rotate(12 57 35)"/><circle cx="57" cy="35" r="8" fill="${a}"/>`, `<text x="57" y="42" text-anchor="middle" fill="#fff" style="font:800 18px var(--font-display)">ÉPISODE</text><rect x="22" y="48" width="70" height="4" fill="${c}"/>`][i]}
+      <text x="6" y="64" fill="#ffffff70" style="font:600 6px var(--font-mono)">0${i * 4}:00</text></g>`).join("")}
+    <rect x="18" y="104" width="364" height="110" rx="6" fill="#140F26" stroke="#ffffff14"/><text x="28" y="120" fill="#ffffff80" style="font:600 7px var(--font-mono)">ÉDITEUR DE GRAPHIQUES · VITESSE</text>
+    ${[0, 1, 2, 3].map(i => `<line x1="28" x2="372" y1="${134 + i * 22}" y2="${134 + i * 22}" stroke="#ffffff0d"/>`).join("")}
+    <path d="M30 200 C 110 200, 120 130, 200 130 S 300 200, 370 200" stroke="${b}" stroke-width="2.5" fill="none"/><path d="M30 200 C 70 200, 80 150, 120 150" stroke="${a}" stroke-width="1" stroke-dasharray="3 3" fill="none"/>
+    ${[[30, 200], [200, 130], [370, 200]].map(([x, y]) => `<rect x="${x - 5}" y="${y - 5}" width="10" height="10" fill="${c}" transform="rotate(45 ${x} ${y})"/>`).join("")}<line x1="120" y1="130" x2="280" y2="130" stroke="#fff" stroke-opacity=".4"/><circle cx="120" cy="130" r="3" fill="#fff"/><circle cx="280" cy="130" r="3" fill="#fff"/>
+    <rect x="18" y="224" width="364" height="64" rx="6" fill="#140F26" stroke="#ffffff14"/>${[0, 1, 2].map(i => `<text x="26" y="${244 + i * 16}" fill="#ffffff80" style="font:600 6.5px var(--font-mono)">${["Titre", "Formes", "Fond"][i]}</text><rect x="${70 + i * 30}" y="${236 + i * 16}" width="${180 - i * 30}" height="10" rx="3" fill="${[a, b, c][i]}" opacity=".75"/>${[0, 1].map(k => `<rect x="${(70 + i * 30) + k * (176 - i * 30)}" y="${238 + i * 16}" width="5" height="5" transform="rotate(45 ${(72 + i * 30) + k * (176 - i * 30)} ${240 + i * 16})" fill="#fff"/>`).join("")}`).join("")}<line x1="230" y1="228" x2="230" y2="286" stroke="#FF5A5A" stroke-width="1.5"/>`,
+  docu: (a, b, c) => `<rect width="400" height="300" fill="#0B0E17"/><g transform="translate(20 16)"><rect width="360" height="168" fill="#2B1A12"/><rect width="360" height="168" fill="${a}" opacity=".35"/>
+      ${Array.from({ length: 30 }, (_, i) => `<line x1="${40 + i * 9}" y1="0" x2="${40 + i * 9}" y2="168" stroke="${["#F6E7CB", "#E9A23B", a, b][i % 4]}" stroke-width="2.4" opacity=".85"/>`).join("")}
+      <rect x="30" y="74" width="300" height="12" fill="#5C3A1E"/><path d="M110 168 q10 -60 40 -70 q30 4 30 30 l-20 40z" fill="#8A5634"/><path d="M220 168 q0 -50 30 -66 q26 6 22 34 l-12 32z" fill="#7A4A2C"/>
+      <rect y="0" width="360" height="22" fill="#000"/><rect y="146" width="360" height="22" fill="#000"/><text x="180" y="140" text-anchor="middle" fill="#fff" style="font:600 10px var(--font-body)">« Mon grand-père tissait déjà ici. »</text></g>
+    <g transform="translate(20 196)"><rect width="360" height="90" rx="6" fill="#151A28"/>${["V2", "V1", "A1", "A2"].map((t, i) => `<text x="8" y="${18 + i * 20}" fill="#8C93B0" style="font:600 7px var(--font-mono)">${t}</text>`).join("")}
+      <rect x="40" y="8" width="70" height="14" rx="3" fill="${c}" opacity=".7"/><rect x="190" y="8" width="60" height="14" rx="3" fill="${c}" opacity=".7"/>
+      ${[[40, 90], [134, 70], [208, 104], [316, 36]].map(([x, w], i) => `<rect x="${x}" y="28" width="${w}" height="14" rx="3" fill="${i % 2 ? b : "#4A6FA5"}"/>`).join("")}
+      <rect x="40" y="48" width="312" height="14" rx="3" fill="#1F5F4A"/>${Array.from({ length: 78 }, (_, i) => `<rect x="${42 + i * 4}" y="${55 - (Math.abs(Math.sin(i * 1.7)) * 5)}" width="2" height="${1 + Math.abs(Math.sin(i * 1.7)) * 10}" fill="#7FE0B5"/>`).join("")}
+      <rect x="40" y="68" width="312" height="14" rx="3" fill="#3D2F5C"/><line x1="176" y1="4" x2="176" y2="86" stroke="#F2612D" stroke-width="2"/></g>`,
+  iso: (a, b, c) => `<rect width="400" height="300" fill="#EDEBE6"/>${Array.from({ length: 14 }, (_, i) => `<path d="M${-100 + i * 40} 300 L${100 + i * 40} 184" stroke="#0000000a"/><path d="M${-60 + i * 40} 184 L${140 + i * 40} 300" stroke="#0000000a"/>`).join("")}
+    <path d="M200 270 L340 190 L200 110 L60 190z" fill="#CFC8B8"/><path d="M60 190 v8 L200 278 v-8z" fill="#B5AD9B"/><path d="M200 278 v-8 L340 190 v8z" fill="#A69E8B"/>
+    <path d="M110 186 L200 238 L200 160 L110 108z" fill="${a}"/><path d="M200 238 L290 186 L290 108 L200 160z" fill="#CBC3B1"/>
+    ${[0, 1, 2].map(i => `<path d="M${212 + i * 26} ${172 - i * 15 + 0} l18 -10 v40 l-18 10z" fill="${c}" opacity=".8"/>`).join("")}${[0, 1, 2].map(i => `<path d="M${120 + i * 26} ${130 + i * 15} l16 9 v40 l-16 -9z" fill="#9FB3C2"/>`).join("")}
+    <path d="M90 108 L200 172 L310 108 L200 44z" fill="${b}"/><path d="M90 108 v6 L200 178 v-6z" fill="#9A5530"/><path d="M200 178 v-6 L310 108 v6z" fill="#8A4A28"/>
+    ${[[80, 220], [320, 226], [104, 240]].map(([x, y]) => `<ellipse cx="${x}" cy="${y + 12}" rx="12" ry="5" fill="#0002"/><rect x="${x - 2}" y="${y}" width="4" height="12" fill="#6B4A2E"/><circle cx="${x}" cy="${y - 6}" r="12" fill="#6E9B4E"/><circle cx="${x + 4}" cy="${y - 10}" r="6" fill="#86B562"/>`).join("")}
+    ${[[230, 250], [244, 244]].map(([x, y]) => `<circle cx="${x}" cy="${y - 14}" r="2.5" fill="${c}"/><rect x="${x - 2}" y="${y - 11}" width="4" height="11" rx="2" fill="${c}"/>`).join("")}
+    <path d="M60 206 L200 286" stroke="${c}" stroke-width=".8"/><path d="M60 202 v8 M200 282 v8" stroke="${c}"/><text x="118" y="262" fill="${c}" transform="rotate(30 118 262)" style="font:600 7px var(--font-mono)">18,00 m</text>
+    <text x="20" y="28" fill="${c}" style="font:800 13px var(--font-display)">PAVILLON CULTUREL</text><text x="20" y="42" fill="#7A7468" style="font:600 7px var(--font-mono)">VUE ISOMÉTRIQUE · ÉCHELLE 1:200</text>`,
+  cover: (a, b, c) => `<rect width="400" height="300" fill="#D9D4CC"/><g transform="translate(232 40) rotate(6)"><rect width="140" height="190" fill="#fff" filter="drop-shadow(0 6px 10px #0002)"/><rect x="10" y="10" width="120" height="80" fill="${b}" opacity=".85"/>${[0, 1, 2, 3, 4, 5].map(i => `<rect x="10" y="${100 + i * 12}" width="${i % 2 ? 100 : 120}" height="5" fill="#ccc"/>`).join("")}</g>
+    <g transform="translate(70 14)"><rect width="190" height="272" fill="#F2E6DA" filter="drop-shadow(0 10px 16px #0003)"/>
+      <path d="M50 272 q6 -70 45 -86 q39 16 45 86z" fill="#4A2A1A"/><path d="M58 272 q10 -54 37 -62 q27 8 37 62z" fill="${b}"/>${Array.from({ length: 10 }, (_, i) => `<circle cx="${70 + (i * 23) % 52}" cy="${226 + (i * 17) % 40}" r="5" fill="${c}" opacity=".8"/>`).join("")}
+      <rect x="86" y="160" width="18" height="26" fill="#5C3522"/><ellipse cx="95" cy="140" rx="22" ry="27" fill="#6B3E26"/><path d="M68 132 q27 -60 56 -4 q-6 -18 -28 -20 q-22 0 -28 24z" fill="${b}"/><path d="M70 120 q25 -36 52 -6" stroke="#FFD23F" stroke-width="3" fill="none"/>
+      <text x="12" y="48" fill="${a}" style="font:800 37px var(--font-display);letter-spacing:-2px">CMODE</text><text x="12" y="62" fill="${b}" style="font:700 7px var(--font-mono)">COTONOU MODE · N° 12</text>
+      <text x="12" y="96" fill="${a}" style="font:800 11px var(--font-display)">LA NOUVELLE</text><text x="12" y="109" fill="${b}" style="font:800 11px var(--font-display)">VAGUE DU PAGNE</text><text x="12" y="122" fill="${a}" style="font:500 6.5px var(--font-body)">10 créateurs à suivre</text>
+      <text x="178" y="200" text-anchor="end" fill="${a}" style="font:800 9px var(--font-display)">STYLE</text><text x="178" y="211" text-anchor="end" fill="${a}" style="font:500 6.5px var(--font-body)">Le wax au bureau</text>
+      <rect x="150" y="238" width="30" height="24" fill="#fff"/>${Array.from({ length: 12 }, (_, i) => `<rect x="${153 + i * 2.2}" y="241" width="${i % 3 ? 1 : 1.6}" height="16" fill="#111"/>`).join("")}</g>`,
+  signs: (a, b, c) => `<rect width="400" height="300" fill="#D8D2C6"/><rect y="230" width="400" height="70" fill="#B9B1A2"/>${[0, 1, 2, 3, 4, 5].map(i => `<rect x="${i * 70}" y="230" width="68" height="70" fill="#0000000a"/>`).join("")}
+    <rect x="96" y="40" width="6" height="220" fill="#555"/><g transform="translate(30 40)"><rect width="250" height="56" rx="6" fill="${a}"/><rect width="56" height="56" rx="6" fill="${b}"/><text x="28" y="38" text-anchor="middle" fill="${a}" style="font:800 28px var(--font-display)">A</text>
+      <text x="70" y="25" fill="${c}" style="font:800 10.5px var(--font-display)">Poissons · Viandes</text><text x="70" y="42" fill="${b}" style="font:600 8px var(--font-body)">Fish · Meat</text><path d="M222 28 h18 m-8 -8 l8 8 l-8 8" stroke="${c}" stroke-width="3.5" fill="none" stroke-linecap="round"/></g>
+    <g transform="translate(30 104)"><rect width="250" height="56" rx="6" fill="${a}"/><rect width="56" height="56" rx="6" fill="#2A9D8F"/><text x="28" y="38" text-anchor="middle" fill="${c}" style="font:800 28px var(--font-display)">B</text>
+      <text x="70" y="25" fill="${c}" style="font:800 10.5px var(--font-display)">Fruits · Légumes</text><text x="70" y="42" fill="#8ED1C6" style="font:600 8px var(--font-body)">Fruits · Vegetables</text><path d="M240 28 h-18 m8 -8 l-8 8 l8 8" stroke="${c}" stroke-width="3.5" fill="none" stroke-linecap="round"/></g>
+    <g transform="translate(30 168)"><rect width="250" height="56" rx="6" fill="${a}"/><rect width="56" height="56" rx="6" fill="#E76F51"/><text x="28" y="38" text-anchor="middle" fill="${c}" style="font:800 28px var(--font-display)">C</text>
+      <text x="70" y="25" fill="${c}" style="font:800 10.5px var(--font-display)">Tissus · Pagnes</text><text x="70" y="42" fill="#F5B7A5" style="font:600 8px var(--font-body)">Fabrics</text><path d="M231 40 v-18 m-8 8 l8 -8 l8 8" stroke="${c}" stroke-width="3.5" fill="none" stroke-linecap="round"/></g>
+    <g transform="translate(300 40)">${[["#F4A261", `<path d="M10 26 q14 -14 30 0 q-16 14 -30 0z M38 26 l8 -6 v12z" fill="#1D3557"/>`], ["#2A9D8F", `<circle cx="22" cy="28" r="10" fill="#fff"/><path d="M26 16 q6 -6 12 -2" stroke="#fff" stroke-width="3" fill="none"/>`], ["#E76F51", `<path d="M10 14 h30 l-6 26 h-18z" fill="#fff"/><path d="M14 22 h22 M13 30 h24" stroke="#E76F51" stroke-width="2"/>`]].map(([col, g], i) => `<g transform="translate(0 ${i * 64})"><rect width="54" height="54" rx="10" fill="${col}"/><g transform="translate(2 0)">${g}</g></g>`).join("")}
+      <text x="27" y="206" text-anchor="middle" fill="#1D3557" style="font:700 7px var(--font-mono)">PICTOS</text></g>`,
+  story: (a, b, c) => `<rect width="400" height="300" fill="${c}"/><text x="20" y="28" fill="${a}" style="font:800 13px var(--font-display)">STORYBOARD · SPOT 20 s · 9:16</text>
+    ${[["0-3 s", "ACCROCHE", "Peau sèche ?"], ["3-8 s", "PROBLÈME", "Savons qui tirent"], ["8-15 s", "PRODUIT", "Karité pur"], ["15-20 s", "ACTION", "Commande ici"]].map(([tc, k, t], i) => `<g transform="translate(${20 + i * 92} 44)">
+      <rect width="84" height="150" rx="8" fill="${[b, "#7A6A58", a, b][i]}"/>${[
+        `<circle cx="42" cy="62" r="24" fill="#E8C9A8"/><path d="M30 60 q12 10 24 0" stroke="#5E503F" stroke-width="2" fill="none"/><text x="42" y="118" text-anchor="middle" fill="#fff" style="font:800 7px var(--font-display)">${t}</text>`,
+        `<rect x="22" y="40" width="40" height="26" rx="6" fill="#C9C1B4"/><path d="M28 74 l28 -6" stroke="#E76F51" stroke-width="3"/><text x="42" y="118" text-anchor="middle" fill="#fff" style="font:800 6.5px var(--font-display)">${t}</text>`,
+        `${Array.from({ length: 8 }, (_, k) => `<circle cx="${18 + (k * 23) % 56}" cy="${28 + (k * 17) % 50}" r="${3 + k % 3}" fill="#fff" opacity=".7" stroke="#A3B18A"/>`).join("")}<rect x="18" y="62" width="48" height="30" rx="12" fill="#F6EFE4" stroke="#5E503F"/><text x="42" y="80" text-anchor="middle" fill="#5E503F" style="font:800 6px var(--font-display)">KARITÉ PUR</text><text x="42" y="118" text-anchor="middle" fill="#5E503F" style="font:800 7px var(--font-display)">${t}</text>`,
+        `<rect x="14" y="56" width="56" height="20" rx="10" fill="#fff"/><text x="42" y="69" text-anchor="middle" fill="#5E503F" style="font:800 7px var(--font-body)">${t}</text><text x="42" y="118" text-anchor="middle" fill="#fff" style="font:700 7px var(--font-body)">1 500 F</text>`][i]}
+      <text x="0" y="168" fill="${a}" style="font:700 8px var(--font-mono)">${tc}</text><text x="0" y="181" fill="${b}" style="font:800 8px var(--font-display)">${k}</text></g>`).join("")}
+    <path d="M20 268 H380" stroke="${a}" stroke-opacity=".3" stroke-width="6" stroke-linecap="round"/><path d="M20 268 H250" stroke="${b}" stroke-width="6" stroke-linecap="round"/><circle cx="250" cy="268" r="7" fill="${a}"/>`,
+  construct: (a, b, c) => `<rect width="400" height="300" fill="${a}"/>${Array.from({ length: 21 }, (_, i) => `<line x1="${i * 20}" y1="0" x2="${i * 20}" y2="300" stroke="#ffffff0c"/>`).join("")}${Array.from({ length: 16 }, (_, i) => `<line x1="0" y1="${i * 20}" x2="400" y2="${i * 20}" stroke="#ffffff0c"/>`).join("")}
+    <g fill="none" stroke="${b}" stroke-opacity=".45" stroke-dasharray="3 4"><circle cx="150" cy="120" r="60"/><circle cx="150" cy="120" r="36"/><line x1="70" y1="120" x2="230" y2="120"/><line x1="150" y1="40" x2="150" y2="200"/><line x1="90" y1="60" x2="210" y2="180"/></g>
+    <path d="M150 60 a60 60 0 0 1 52 30 l-31 18 a24 24 0 0 0 -21 -12 a24 24 0 0 0 0 48 a60 60 0 0 1 0 -84z" fill="${b}"/><path d="M150 180 a60 60 0 0 1 -52 -30 l31 -18 a24 24 0 0 0 21 12 a24 24 0 0 0 0 -48 a60 60 0 0 1 0 84z" fill="${c}"/>
+    <text x="150" y="232" text-anchor="middle" fill="${c}" style="font:800 17px var(--font-display);letter-spacing:2px">LAGUNE</text><text x="150" y="248" text-anchor="middle" fill="${b}" style="font:600 8px var(--font-mono);letter-spacing:4px">TECH HUB</text>
+    <g transform="translate(276 40)"><rect width="88" height="88" rx="20" fill="${c}"/><g transform="translate(44 44) scale(.42) translate(-150 -120)"><path d="M150 60 a60 60 0 0 1 52 30 l-31 18 a24 24 0 0 0 -21 -12 a24 24 0 0 0 0 48 a60 60 0 0 1 0 -84z" fill="${b}"/><path d="M150 180 a60 60 0 0 1 -52 -30 l31 -18 a24 24 0 0 0 21 12 a24 24 0 0 0 0 -48 a60 60 0 0 1 0 84z" fill="${a}"/></g><text x="44" y="104" text-anchor="middle" fill="${c}" opacity=".7" style="font:600 7px var(--font-mono)">ICÔNE</text></g>
+    <g transform="translate(276 156)"><rect width="88" height="56" rx="8" fill="#fff"/><g transform="translate(28 28) scale(.26) translate(-150 -120)"><path d="M150 60 a60 60 0 0 1 52 30 l-31 18 a24 24 0 0 0 -21 -12 a24 24 0 0 0 0 48 a60 60 0 0 1 0 -84z M150 180 a60 60 0 0 1 -52 -30 l31 -18 a24 24 0 0 0 21 12 a24 24 0 0 0 0 -48 a60 60 0 0 1 0 84z" fill="#111"/></g><text x="48" y="32" fill="#111" style="font:800 7px var(--font-display)">LAGUNE</text><text x="44" y="68" text-anchor="middle" fill="${c}" opacity=".7" style="font:600 7px var(--font-mono)">MONOCHROME</text></g>
+    <g transform="translate(276 236)"><rect width="88" height="34" rx="8" fill="${c}" opacity=".08" stroke="${c}" stroke-opacity=".3"/><g transform="translate(16 17) scale(.11) translate(-150 -120)"><path d="M150 60 a60 60 0 0 1 52 30 l-31 18 a24 24 0 0 0 -21 -12 a24 24 0 0 0 0 48 a60 60 0 0 1 0 -84z" fill="${b}"/><path d="M150 180 a60 60 0 0 1 -52 -30 l31 -18 a24 24 0 0 0 21 12 a24 24 0 0 0 0 -48 a60 60 0 0 1 0 84z" fill="${c}"/></g><text x="30" y="21" fill="${c}" style="font:600 7px var(--font-mono)">16 px ✓</text></g>`
+};
 function portfolioArt(p) {
   const [a, b, c] = p.palette;
   const arts = {
@@ -3301,7 +3549,7 @@ function portfolioArt(p) {
     ad: `<rect width="400" height="300" fill="${b}"/><rect x="130" y="20" width="140" height="260" rx="14" fill="#111"/><rect x="138" y="30" width="124" height="240" rx="8" fill="${a}"/><rect x="180" y="90" width="40" height="110" rx="10" fill="${c}"/><rect x="186" y="74" width="28" height="20" rx="4" fill="${b}"/><text x="200" y="240" text-anchor="middle" fill="#12141C" style="font:800 16px var(--font-display)">100 % ANANAS</text>`,
     motion: `<rect width="400" height="300" fill="#0B0E17"/>${[0, 1, 2, 3].map(i => `<circle cx="${110 + i * 60}" cy="150" r="${16 + i * 6}" fill="none" stroke="${a}" opacity="${.25 + i * .2}" stroke-width="3"/>`).join("")}<text x="290" y="160" fill="${b}" style="font:800 28px var(--font-display)">TOB</text><path d="M60 230 C 140 230, 160 180, 340 180" stroke="${c}" stroke-width="2" fill="none"/>`
   };
-  return `<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Visuel d'exemple : ${esc(p.title)}">${arts[p.art]}</svg>`;
+  return `<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Visuel d'exemple : ${esc(p.title)}">${arts[p.art] ?? PF_ART[p.art](a, b, c)}</svg>`;
 }
 
 /* ==========================================================================
@@ -3397,7 +3645,7 @@ function renderHome(main) {
 
   <section class="section section-alt"><div class="wrap">
     <div class="head-row"><div class="head"><span class="eyebrow">Portfolio des apprenants</span><h2>Montre ce que tu sais faire</h2><p>Les projets ci-dessous sont des <strong>exemples réalisés par l'équipe TOB-MAQ</strong>. Les réalisations des apprenants apparaîtront ici après modération.</p></div><a class="btn btn-outline" href="#/portfolio">Voir le portfolio ${icon("arrow")}</a></div>
-    <div class="grid g4">${PORTFOLIO.slice(0, 4).map(pfCard).join("")}</div>
+    <div class="grid g4">${PORTFOLIO.filter(p => p.featured).slice(0, 4).map(pfCard).join("")}</div>
   </div></section>
 
   <section class="section"><div class="wrap">
@@ -4050,16 +4298,27 @@ function renderPortfolio(main) {
 function renderProject(main, id) {
   const p = PORTFOLIO.find(x => x.id === id);
   if (!p) return renderNotFound(main);
+  const f = p.formation && FORMATIONS.find(x => x.id === p.formation), idx = PORTFOLIO.indexOf(p);
+  const prev = PORTFOLIO[(idx - 1 + PORTFOLIO.length) % PORTFOLIO.length], next = PORTFOLIO[(idx + 1) % PORTFOLIO.length];
   main.innerHTML = pageHead({ crumbs: [["Portfolio", "#/portfolio"], [esc(p.title)]], eyebrow: p.discipline, title: esc(p.title) }) + `
   <section class="section-sm"><div class="wrap split">
     <div class="card" style="padding:0;overflow:hidden"><div class="pf-thumb">${portfolioArt(p)}</div></div>
     <aside class="stack">
       <div class="card"><span class="demo">Exemple TOB-MAQ</span><p style="margin-top:12px;color:var(--ink)">${esc(p.desc)}</p>
         <dl class="specs" style="margin-top:14px"><dt>Outils</dt><dd>${p.tools.join(", ")}</dd><dt>Discipline</dt><dd>${p.discipline}</dd><dt>Visibilité</dt><dd>Public</dd></dl></div>
+      ${f ? `<div class="card"><h3>Apprendre à le faire</h3><p class="small muted">La formation qui enseigne les techniques de ce projet.</p><a class="btn btn-grad btn-sm" style="white-space:normal;text-align:left;height:auto;padding-block:8px" href="#/formation/${f.id}">${esc(f.title)} ${icon("arrow")}</a></div>` : ""}
       <form class="card" id="report" novalidate><h3>${icon("flag")} Signaler ce projet</h3>
         <div class="field"><label for="rr">Motif</label><select class="input" id="rr"><option>Contenu inapproprié</option><option>Non-respect des droits d'auteur</option><option>Données personnelles visibles</option><option>Autre</option></select></div>
         <div id="rMsg" aria-live="polite"></div><button class="btn btn-outline btn-sm" type="submit">Envoyer le signalement</button></form>
-    </aside></div></section>`;
+    </aside></div></section>
+  ${p.brief ? `<section class="section-sm section-alt"><div class="wrap pf-case">
+    <div><span class="eyebrow">Étude de cas</span><h2>Le brief</h2><p class="lead" style="font-size:1.05rem">${esc(p.brief)}</p><p class="small muted">Brief fictif, créé pour l'exercice : aucun vrai client n'est cité.</p>
+      <h3 style="margin-top:22px">Livrables</h3><ul class="checks">${p.deliverables.map(d => `<li>${icon("check")}<span>${esc(d)}</span></li>`).join("")}</ul></div>
+    <div><h2>La démarche</h2><ol class="howto">${p.steps.map((t, i) => `<li><b>Étape ${i + 1}</b><p>${esc(t)}</p></li>`).join("")}</ol></div>
+  </div></section>` : ""}
+  <section class="section-sm"><div class="wrap row" style="justify-content:space-between;gap:12px;flex-wrap:wrap">
+    <a class="btn btn-ghost" href="#/projet/${prev.id}">← ${esc(prev.title)}</a><a class="btn btn-ghost" href="#/projet/${next.id}">${esc(next.title)} →</a>
+  </div></section>`;
   $("#report").addEventListener("submit", async e => {
     e.preventDefault();
     await withLoading(e.currentTarget, "Envoi…", $("#rMsg"), async () => {
