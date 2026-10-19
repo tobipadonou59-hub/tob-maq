@@ -24,6 +24,11 @@
 <link rel="icon" href="icones/icone-512.png" sizes="512x512" type="image/png">
 <link rel="apple-touch-icon" href="icones/apple-touch-icon.png">
 <meta name="theme-color" content="#0B0E17">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="TOB-MAQ">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="description" content="TOB-MAQ, l'académie en ligne des métiers du numérique au Bénin : graphisme, montage vidéo, création web, programmation, jeux vidéo, informatique, cybersécurité, marketing digital et e-commerce. 38 formations, 63 jeux, cahiers d'exercices PDF. Inscription gratuite.">
 <script>
 /* Applique le thème mémorisé avant l'affichage (évite un flash de couleur). */
@@ -315,6 +320,19 @@ textarea.input{min-height:110px;resize:vertical;line-height:1.5}
 .soft span{font-size:.8rem;color:var(--muted)}
 .cta-final{background:var(--grad);color:#fff;border-radius:var(--radius-lg);padding:52px 44px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
 .cta-final h2{color:#fff;margin:0 0 .3em}
+.app-band{background:var(--night);color:var(--night-ink);border-radius:var(--radius-lg);padding:36px 40px;display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:center}
+.app-band h2{color:#fff;margin:0 0 .3em}.app-band p{color:var(--night-muted);margin:0}
+.app-band img,.app-hero img{width:88px;height:88px;border-radius:22px;box-shadow:0 10px 30px #0006}
+.app-hero{display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin-top:18px}
+.app-hero img{width:104px;height:104px;border-radius:26px}
+.app-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:18px}
+.app-card{border:1px solid var(--line);background:var(--surface);border-radius:var(--radius);padding:22px}
+.app-card h3{margin:.2em 0 .6em;display:flex;gap:10px;align-items:center}
+.app-card ol{margin:0;padding-left:1.2em}.app-card li{margin:.35em 0}
+.app-card.is-you{outline:2px solid var(--accent);outline-offset:2px}
+.app-perks{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:14px;margin:0;padding:0;list-style:none}
+.app-perks li{display:flex;gap:10px;align-items:flex-start}
+@media (max-width:720px){.app-band{grid-template-columns:1fr;padding:28px 22px;text-align:left}.app-band img{width:64px;height:64px;border-radius:16px}}
 .cta-final p{margin:0;opacity:.92}
 .btn-white{background:#fff;color:#12141C}
 .interest-pills .pills span{padding:.6rem 1rem}
@@ -706,7 +724,7 @@ dialog::backdrop{background:rgb(11 14 23 / .6)}
         <li><a href="#/tableau-de-bord">Tableau de bord</a></li><li><a href="#/profil">Profil</a></li>
         <li><a href="#/parametres">Paramètres et thème</a></li><li><a href="#/admin">Administration</a></li></ul></div>
       <div><h3>Informations</h3><ul>
-        <li><a href="#/aide">Aide et contact</a></li><li><a href="#/conditions">Conditions d'utilisation</a></li>
+        <li><a href="#/application">Télécharger l'application</a></li><li><a href="#/aide">Aide et contact</a></li><li><a href="#/conditions">Conditions d'utilisation</a></li>
         <li><a href="#/confidentialite">Confidentialité</a></li></ul></div>
     </div>
     <div class="foot-bottom"><span>© <span id="year"></span> TOB-MAQ · Bénin</span><span>Contenus marqués « Démo » : exemples en cours de validation.</span></div>
@@ -3384,6 +3402,12 @@ function renderHome(main) {
     ${emptyState({ ic: "users", title: "Les premiers témoignages arrivent", text: "Nous publierons uniquement des avis réels d'apprenants, avec leur accord. Aucun témoignage inventé." })}
   </div></section>
 
+  <section class="section-sm"><div class="wrap"><div class="app-band">
+    <img src="icones/icone-192.png" alt="" width="88" height="88">
+    <div><h2>TOB-MAQ dans ta poche</h2><p>Installe l'application gratuite sur ton téléphone ou ton ordinateur : une icône sur l'écran d'accueil, plein écran, et les leçons et jeux déjà ouverts restent disponibles sans connexion.</p></div>
+    <a class="btn btn-grad btn-lg" href="#/application">${icon("download")} Télécharger l'appli</a>
+  </div></div></section>
+
   <section class="section-sm"><div class="wrap"><div class="cta-final">
     <div><h2>Prêt à créer ton premier projet pro ?</h2><p>Inscription gratuite. Formations gratuites, jeux et ressources dès aujourd'hui.</p></div>
     <a class="btn btn-white btn-lg" href="#/inscription">S'inscrire gratuitement ${icon("arrow")}</a>
@@ -4043,9 +4067,75 @@ function renderProject(main, id) {
 }
 
 /* ---------- Aide et contact ---------- */
+/* ---------- Application installable (PWA) ---------- */
+const appInstall = { prompt: null, installed: false };
+const isStandalone = () => matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+function appPlatform() {
+  const ua = navigator.userAgent;
+  if (/iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1)) return "ios";
+  if (/Android/.test(ua)) return "android";
+  return "desktop";
+}
+if ("serviceWorker" in navigator && location.protocol !== "file:") {
+  window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));
+}
+window.addEventListener("beforeinstallprompt", e => {
+  e.preventDefault(); appInstall.prompt = e;
+  if (currentPath === "application") renderApp($("#main"));
+});
+window.addEventListener("appinstalled", () => {
+  appInstall.prompt = null; appInstall.installed = true;
+  toast("Application TOB-MAQ installée");
+  if (currentPath === "application") renderApp($("#main"));
+});
+async function installApp() {
+  const p = appInstall.prompt;
+  if (!p) return;
+  p.prompt();
+  const { outcome } = await p.userChoice;
+  appInstall.prompt = null;
+  if (outcome !== "accepted") toast("Installation annulée. Tu peux réessayer quand tu veux.", "info");
+  renderApp($("#main"));
+}
+function renderApp(main) {
+  const plat = appPlatform(), standalone = isStandalone();
+  const status = standalone
+    ? alertBox("ok", "<p><strong>Tu utilises déjà l'application TOB-MAQ.</strong> Elle se met à jour toute seule à chaque ouverture avec Internet.</p>")
+    : appInstall.installed
+      ? alertBox("ok", "<p><strong>C'est installé !</strong> Retrouve l'icône TOB-MAQ sur ton écran d'accueil ou dans tes applications.</p>")
+      : appInstall.prompt
+        ? `<button class="btn btn-grad btn-lg" type="button" id="appInstallBtn">${icon("download")} Installer l'application</button>`
+        : plat === "ios"
+          ? alertBox("info", "<p>Sur iPhone et iPad, l'installation se fait depuis <strong>Safari</strong> : suis les 3 étapes ci-dessous.</p>")
+          : alertBox("info", "<p>Si le bouton d'installation n'apparaît pas, utilise le menu de ton navigateur (étapes ci-dessous). Sur Android, ouvre le site avec <strong>Chrome</strong>.</p>");
+  const card = (id, ic, title, steps) => `<div class="app-card${plat === id ? " is-you" : ""}"><h3>${icon(ic)} ${title}${plat === id ? ` <span class="chip chip-accent">Ton appareil</span>` : ""}</h3><ol>${steps.map(t => `<li>${t}</li>`).join("")}</ol></div>`;
+  main.innerHTML = pageHead({ crumbs: [["Télécharger l'application"]], eyebrow: "Gratuit · Android · iPhone · Ordinateur", title: "L'application TOB-MAQ",
+    lead: "Toutes les formations, les jeux et les ressources dans une vraie application : une icône sur ton écran d'accueil, en plein écran, sans passer par le navigateur.",
+    extra: `<div class="app-hero"><img src="icones/icone-512.png" alt="Icône de l'application TOB-MAQ" width="104" height="104"><div style="flex:1;min-width:240px">${status}</div></div>` }) + `
+  <section class="section-sm"><div class="wrap">
+    <h2>Comment l'installer</h2>
+    <div class="app-grid">
+      ${card("android", "download", "Android", ["Ouvre <strong>tob-maq.onrender.com</strong> dans Chrome.", "Appuie sur <strong>Installer l'application</strong> en haut de cette page, ou sur le menu <strong>⋮</strong> puis <strong>Installer l'application</strong> (ou « Ajouter à l'écran d'accueil »).", "Confirme : l'icône TOB-MAQ apparaît avec tes autres applis."])}
+      ${card("ios", "download", "iPhone et iPad", ["Ouvre <strong>tob-maq.onrender.com</strong> dans <strong>Safari</strong>.", "Appuie sur le bouton <strong>Partager</strong> (le carré avec une flèche vers le haut).", "Choisis <strong>Sur l'écran d'accueil</strong>, puis <strong>Ajouter</strong>."])}
+      ${card("desktop", "download", "Ordinateur (Chrome, Edge)", ["Ouvre le site dans Chrome ou Microsoft Edge.", "Clique sur l'icône d'installation à droite de la barre d'adresse, ou sur le bouton <strong>Installer l'application</strong> ci-dessus.", "TOB-MAQ s'ouvre dans sa propre fenêtre, comme un logiciel."])}
+    </div>
+  </div></section>
+  <section class="section-sm section-alt"><div class="wrap">
+    <h2>Ce que l'application t'apporte</h2>
+    <ul class="app-perks">
+      <li>${icon("check")}<span><strong>Légère</strong> : moins de 1 Mo, rien à voir avec une appli classique de 50 Mo.</span></li>
+      <li>${icon("check")}<span><strong>Hors connexion</strong> : les leçons et les jeux déjà ouverts restent disponibles sans Internet.</span></li>
+      <li>${icon("check")}<span><strong>Toujours à jour</strong> : chaque nouvelle formation arrive automatiquement, sans mise à jour à télécharger.</span></li>
+      <li>${icon("check")}<span><strong>Même compte</strong> : ta progression, tes scores et ton Premium sont les mêmes que sur le site.</span></li>
+    </ul>
+    <p class="small muted" style="margin-top:18px">Le compte, le Premium, le studio IA et les vidéos demandent une connexion Internet. L'application ne demande ni ta position, ni ton micro, ni ta caméra.</p>
+  </div></section>`;
+  $("#appInstallBtn")?.addEventListener("click", installApp);
+}
 function renderHelp(main) {
   const faq = [
     ["Comment rejoindre une formation ?", "Ouvre Domaines dans le menu, choisis ton domaine, puis une formation, et clique sur Commencer. Crée ton compte gratuit pour garder ta progression. La vidéo « Rejoindre une formation » ci-dessus montre chaque étape."],
+    ["Existe-t-il une application TOB-MAQ ?", "Oui, gratuite. Ouvre la page « Télécharger l'application » (lien en bas de chaque page) et appuie sur Installer. Sur iPhone : bouton Partager de Safari, puis « Sur l'écran d'accueil ». L'appli se met à jour toute seule."],
     ["TOB-MAQ est-il gratuit ?", "Oui : les formations gratuites, les jeux et les ressources en accès libre ne demandent aucun paiement. L'abonnement Premium donne accès aux leçons avancées, avec un essai gratuit sans moyen de paiement ; ses tarifs en FCFA sont affichés sur la page Premium."],
     ["Quel logiciel dois-je installer ?", "Tu peux commencer sans rien payer : GIMP, Inkscape, DaVinci Resolve (version gratuite), Canva et CapCut ont des versions gratuites. Chaque tutoriel indique le logiciel utilisé."],
     ["Pourquoi le studio IA ne génère-t-il rien ?", "La génération nécessite un service d'IA connecté au serveur de TOB-MAQ. Tant qu'il n'est pas configuré, l'interface est en aperçu et rien n'est simulé."],
@@ -5946,7 +6036,7 @@ const ROUTES = [
   [/^ressources$/, (m, p, q) => renderResources(m, q)], [/^ressource\/([\w-]+)$/, (m, p) => renderResource(m, p[1])],
   [/^inscription$/, m => renderSignup(m)], [/^connexion$/, m => renderLogin(m)], [/^tableau-de-bord$/, (m, p, q) => renderDashboard(m, q)], [/^premium$/, m => renderPremium(m)],
   [/^portfolio$/, m => renderPortfolio(m)], [/^projet\/([\w-]+)$/, (m, p) => renderProject(m, p[1])], [/^profil$/, m => renderProfile(m)],
-  [/^parametres$/, m => renderSettings(m)], [/^aide$/, m => renderHelp(m)], [/^(conditions|confidentialite)$/, (m, p) => renderLegal(m, p[1])],
+  [/^parametres$/, m => renderSettings(m)], [/^aide$/, m => renderHelp(m)], [/^application$/, m => renderApp(m)], [/^(conditions|confidentialite)$/, (m, p) => renderLegal(m, p[1])],
   [/^admin$/, m => renderAdmin(m)], [/^reinitialiser$/, (m, p, q) => renderReset(m, q)], [/^recherche$/, (m, p, q) => renderSearch(m, q)]
 ];
 const stripHash = h => String(h || "").replace(/^#\/?/, "");

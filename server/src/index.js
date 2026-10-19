@@ -447,6 +447,9 @@ export function createApp() {
   app.get("/robots.txt", (req, res) => res.type("text").send(`User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: ${config.publicUrl}/sitemap.xml\n`));
   app.get("/sitemap.xml", (req, res) => res.type("application/xml").send(
     `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>${config.publicUrl}/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>\n</urlset>\n`));
+  /* Application installable (PWA) : manifeste et service worker servis depuis la racine. */
+  app.get("/manifest.webmanifest", (req, res) => res.set("Cache-Control", "public, max-age=3600").type("application/manifest+json").sendFile(path.join(SITE_DIR, "pwa", "manifest.webmanifest")));
+  app.get("/sw.js", (req, res) => res.set({ "Cache-Control": "no-cache", "Service-Worker-Allowed": "/" }).type("application/javascript").sendFile(path.join(SITE_DIR, "pwa", "sw.js")));
   app.use("/videos", express.static(path.join(SITE_DIR, "videos"), { maxAge: "7d", fallthrough: false }));
   app.use("/icones", express.static(path.join(SITE_DIR, "icones"), { maxAge: "7d", fallthrough: false }));
   app.get("/favicon.ico", (req, res) => res.set("Cache-Control", "public, max-age=604800").type("image/x-icon").sendFile(path.join(SITE_DIR, "icones", "favicon.ico")));

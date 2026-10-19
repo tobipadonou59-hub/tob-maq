@@ -7,6 +7,7 @@ COPY index.html ./
 COPY ressources ressources
 COPY apercus apercus
 COPY icones icones
+COPY pwa pwa
 COPY videos videos
 COPY server/src server/src
 # /data contient la base SQLite et les fichiers envoyés : à monter sur un volume persistant.

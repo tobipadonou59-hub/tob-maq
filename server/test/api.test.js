@@ -47,6 +47,17 @@ test("le site est servi avec l'adresse de l'API injectée et des en-têtes de s�
   assert.equal((await client()("GET", "/server/src/config.js")).status, 404, "le code du serveur n'est jamais exposé");
 });
 
+test("application installable : manifeste, service worker et icônes", async () => {
+  const m = await client()("GET", "/manifest.webmanifest");
+  assert.equal(m.status, 200);
+  assert.match(m.headers.get("content-type"), /application\/manifest\+json/);
+  const manifest = typeof m.data === "string" ? JSON.parse(m.data) : m.data;
+  for (const i of [...manifest.icons, ...manifest.screenshots]) assert.equal((await client()("GET", i.src)).status, 200, i.src);
+  const sw = await client()("GET", "/sw.js");
+  assert.equal(sw.status, 200);
+  assert.equal(sw.headers.get("service-worker-allowed"), "/");
+});
+
 test("inscription, session, déconnexion et connexion", async () => {
   const c = client();
   assert.equal((await c("GET", "/api/auth/me")).status, 401);
