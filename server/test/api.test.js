@@ -206,3 +206,11 @@ test("validation Google : le code est extrait même si la balise complète est c
   assert.equal(googleVerificationTag("content='AbC-12_xY'"), attendu);
   assert.equal(googleVerificationTag(""), "");
 });
+
+test("appli Android : empreintes de certificat filtrées et assetlinks absent sans configuration", async () => {
+  const { androidFingerprints } = await import("../src/index.js");
+  const fp = Array.from({ length: 32 }, (_, i) => (i * 7 % 256).toString(16).padStart(2, "0")).join(":");
+  assert.deepEqual(androidFingerprints(` ${fp}, n'importe quoi `), [fp.toUpperCase()]);
+  assert.deepEqual(androidFingerprints(""), []);
+  assert.equal((await client()("GET", "/.well-known/assetlinks.json")).status, 404);
+});

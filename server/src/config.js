@@ -28,6 +28,9 @@ export const config = {
   adminEmails: env("ADMIN_EMAILS").split(",").map(s => s.trim().toLowerCase()).filter(Boolean),
   contactEmail: env("CONTACT_EMAIL"),
   googleSiteVerification: env("GOOGLE_SITE_VERIFICATION"),
+  // Appli Android (PWABuilder / TWA) : nom du paquet et empreinte(s) SHA-256 du certificat de signature (publiques).
+  androidPackage: env("ANDROID_PACKAGE", "com.onrender.tob_maq.twa"),
+  androidCertSha256: env("ANDROID_CERT_SHA256"),
   mailFrom: env("MAIL_FROM", "no-reply@tob-maq.local"),
   brevoKey: env("BREVO_API_KEY"),
   openaiKey: env("OPENAI_API_KEY"),

@@ -31,6 +31,10 @@ const ip = req => req.ip || req.socket.remoteAddress || "?";
 
 /* Balise de validation Google Search Console. Accepte le code seul, le code entre guillemets
    ou la balise complète collée telle quelle dans les réglages de l'hébergeur. */
+export function androidFingerprints(raw) {
+  return String(raw || "").split(/[\s,;]+/).map(v => v.trim().toUpperCase()).filter(v => /^([0-9A-F]{2}:){31}[0-9A-F]{2}$/.test(v));
+}
+
 export function googleVerificationTag(raw) {
   const value = String(raw || "").trim();
   if (!value) return "";
@@ -444,6 +448,13 @@ export function createApp() {
   app.get(["/", "/index.html"], (req, res) => res.set("Cache-Control", "no-cache").type("html").send(renderIndex()));
   app.use("/ressources", express.static(path.join(SITE_DIR, "ressources"), { maxAge: "7d", fallthrough: false }));
   /* Référencement : autoriser les moteurs de recherche sur le site public, pas sur l'API. */
+  /* Lien de confiance site <-> appli Android : sans lui, l'appli affiche une barre d'adresse. */
+  app.get("/.well-known/assetlinks.json", (req, res) => {
+    const prints = androidFingerprints(config.androidCertSha256);
+    if (!prints.length) return res.status(404).type("text").send("Page introuvable.");
+    res.set("Cache-Control", "public, max-age=3600").json([{ relation: ["delegate_permission/common.handle_all_urls"],
+      target: { namespace: "android_app", package_name: config.androidPackage, sha256_cert_fingerprints: prints } }]);
+  });
   app.get("/robots.txt", (req, res) => res.type("text").send(`User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: ${config.publicUrl}/sitemap.xml\n`));
   app.get("/sitemap.xml", (req, res) => res.type("application/xml").send(
     `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>${config.publicUrl}/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>\n</urlset>\n`));
