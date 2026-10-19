@@ -328,6 +328,9 @@ textarea.input{min-height:110px;resize:vertical;line-height:1.5}
 .app-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:18px}
 .app-card{border:1px solid var(--line);background:var(--surface);border-radius:var(--radius);padding:22px}
 .app-card h3{margin:.2em 0 .6em;display:flex;gap:10px;align-items:center}
+.app-video{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center}
+.app-video video{width:min(100%,320px);aspect-ratio:9/16;border-radius:var(--radius);background:#0B0E17;justify-self:center}
+@media (max-width:720px){.app-video{grid-template-columns:1fr}}
 .app-card ol{margin:0;padding-left:1.2em}.app-card li{margin:.35em 0}
 .app-card.is-you{outline:2px solid var(--accent);outline-offset:2px}
 .app-perks{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:14px;margin:0;padding:0;list-style:none}
@@ -4116,9 +4119,14 @@ function renderApp(main) {
     <h2>Comment l'installer</h2>
     <div class="app-grid">
       ${card("android", "download", "Android", ["Ouvre <strong>tob-maq.onrender.com</strong> dans Chrome.", "Appuie sur <strong>Installer l'application</strong> en haut de cette page, ou sur le menu <strong>⋮</strong> puis <strong>Installer l'application</strong> (ou « Ajouter à l'écran d'accueil »).", "Confirme : l'icône TOB-MAQ apparaît avec tes autres applis."])}
-      ${card("ios", "download", "iPhone et iPad", ["Ouvre <strong>tob-maq.onrender.com</strong> dans <strong>Safari</strong>.", "Appuie sur le bouton <strong>Partager</strong> (le carré avec une flèche vers le haut).", "Choisis <strong>Sur l'écran d'accueil</strong>, puis <strong>Ajouter</strong>."])}
+      ${card("ios", "download", "iPhone et iPad", ["Ouvre <strong>tob-maq.onrender.com</strong> dans <strong>Safari</strong>.", "Appuie sur le bouton <strong>Partager</strong> (le carré avec une flèche vers le haut ; sur iOS 26, il est dans le menu <strong>⋯</strong>).", "Choisis <strong>Sur l'écran d'accueil</strong>, puis <strong>Ajouter</strong>."])}
       ${card("desktop", "download", "Ordinateur (Chrome, Edge)", ["Ouvre le site dans Chrome ou Microsoft Edge.", "Clique sur l'icône d'installation à droite de la barre d'adresse, ou sur le bouton <strong>Installer l'application</strong> ci-dessus.", "TOB-MAQ s'ouvre dans sa propre fenêtre, comme un logiciel."])}
     </div>
+  </div></section>
+  <section class="section-sm"><div class="wrap app-video">
+    <div><h2>Le tutoriel en vidéo</h2><p class="muted">Une minute pour voir chaque geste, sur Android puis sur iPhone.</p>
+      <a class="btn btn-ghost btn-sm" href="videos/installer-application.mp4" download>${icon("download")} Télécharger la vidéo</a></div>
+    <video controls preload="none" playsinline poster="videos/installer-application.jpg" src="videos/installer-application.mp4" aria-label="Tutoriel : installer l'application TOB-MAQ"></video>
   </div></section>
   <section class="section-sm section-alt"><div class="wrap">
     <h2>Ce que l'application t'apporte</h2>
@@ -4144,6 +4152,7 @@ function renderHelp(main) {
     ["Puis-je utiliser les ressources pour mes clients ?", "Les ressources sous licence CC BY 4.0 peuvent être utilisées commercialement en mentionnant TOB-MAQ. Vérifie la licence indiquée sur chaque ressource."]];
   const videos = [
     ["tutoriel-rejoindre-une-formation", "Rejoindre une formation", "Tutoriel · 2 min 14", "Entrer dans un domaine, choisir une formation, créer son compte et commencer la première leçon.", false],
+    ["installer-application", "Installer l'application", "Tutoriel · 1 min · vertical", "Installer TOB-MAQ sur Android (Chrome) et sur iPhone (Safari), étape par étape.", true],
     ["publicite-telephone", "Publicité TOB-MAQ (téléphone)", "25 s · format vertical", "Pour les statuts WhatsApp, TikTok, Reels et Shorts.", true],
     ["publicite-ordinateur", "Publicité TOB-MAQ (ordinateur)", "25 s · format 16:9", "Pour YouTube, Facebook et les présentations.", false],
     ["presentation-du-site", "Présentation du site", "4 min 53 · visite guidée", "La visite de la première version du site : formations, jeux, ressources, inscription et tableau de bord.", false]];
