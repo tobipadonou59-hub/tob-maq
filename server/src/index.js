@@ -29,6 +29,16 @@ const publicUser = u => ({
 const authorName = u => u.age_group === "mineur" ? "Apprenant TOB-MAQ" : u.display_name; // jamais de nom affiché pour un mineur
 const ip = req => req.ip || req.socket.remoteAddress || "?";
 
+/* Balise de validation Google Search Console. Accepte le code seul, le code entre guillemets
+   ou la balise complète collée telle quelle dans les réglages de l'hébergeur. */
+export function googleVerificationTag(raw) {
+  const value = String(raw || "").trim();
+  if (!value) return "";
+  const m = value.match(/content\s*=\s*["']?([^"'\s>]+)/i);
+  const code = (m ? m[1] : value).replace(/[^\w-]/g, "");
+  return code ? `<meta name="google-site-verification" content="${code}">` : "";
+}
+
 export function createApp() {
   const app = express();
   app.disable("x-powered-by");
@@ -427,7 +437,7 @@ export function createApp() {
     const html = fs.readFileSync(indexPath, "utf8");
     const out = html.replace('API_BASE_URL: "",', 'API_BASE_URL: "/api",').replace('CONTACT_EMAIL: "",', `CONTACT_EMAIL: ${JSON.stringify(config.contactEmail)},`);
     if (out === html) throw new Error("index.html : impossible d'injecter l'adresse de l'API (CONFIG modifié ?).");
-    const verif = config.googleSiteVerification ? `<meta name="google-site-verification" content="${config.googleSiteVerification.replace(/[^\w-]/g, "")}">` : "";
+    const verif = googleVerificationTag(config.googleSiteVerification);
     return out.replaceAll("https://tob-maq.onrender.com/", config.publicUrl + "/").replace("<!--GOOGLE_SITE_VERIFICATION-->", verif);
   };
   renderIndex(); // vérification au démarrage

@@ -185,3 +185,13 @@ test("une adresse ajoutée à ADMIN_EMAILS après l'inscription devient administ
   assert.equal((await c("GET", "/api/auth/me")).data.user.role, "admin");
   assert.equal((await c("GET", "/api/admin/stats")).status, 200);
 });
+
+test("validation Google : le code est extrait même si la balise complète est collée", async () => {
+  const { googleVerificationTag } = await import("../src/index.js");
+  const attendu = '<meta name="google-site-verification" content="AbC-12_xY">';
+  assert.equal(googleVerificationTag("AbC-12_xY"), attendu);
+  assert.equal(googleVerificationTag(' "AbC-12_xY" '), attendu);
+  assert.equal(googleVerificationTag('<meta name="google-site-verification" content="AbC-12_xY" />'), attendu);
+  assert.equal(googleVerificationTag("content='AbC-12_xY'"), attendu);
+  assert.equal(googleVerificationTag(""), "");
+});
