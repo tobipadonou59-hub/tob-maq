@@ -74,32 +74,52 @@
   ],
   "shortcuts": [
     {
+      "name": "Défi du jour",
+      "short_name": "Défi",
+      "description": "Relever le défi du jour",
+      "url": "/#/defi",
+      "icons": [
+        {
+          "src": "/icones/raccourci-defi.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Reprendre ma leçon",
+      "short_name": "Reprendre",
+      "description": "Continuer là où tu t'es arrêté",
+      "url": "/#/reprendre",
+      "icons": [
+        {
+          "src": "/icones/raccourci-reprendre.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
       "name": "Formations",
+      "short_name": "Formations",
       "url": "/#/formations",
       "icons": [
         {
-          "src": "/icones/icone-192.png",
-          "sizes": "192x192"
+          "src": "/icones/raccourci-formations.png",
+          "sizes": "96x96",
+          "type": "image/png"
         }
       ]
     },
     {
       "name": "Jeux et défis",
+      "short_name": "Jeux",
       "url": "/#/jeux",
       "icons": [
         {
-          "src": "/icones/icone-192.png",
-          "sizes": "192x192"
-        }
-      ]
-    },
-    {
-      "name": "Ressources",
-      "url": "/#/ressources",
-      "icons": [
-        {
-          "src": "/icones/icone-192.png",
-          "sizes": "192x192"
+          "src": "/icones/raccourci-jeux.png",
+          "sizes": "96x96",
+          "type": "image/png"
         }
       ]
     }

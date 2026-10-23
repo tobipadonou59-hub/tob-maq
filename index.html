@@ -407,6 +407,29 @@ textarea.input{min-height:110px;resize:vertical;line-height:1.5}
 .game-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
 .game-body h3{margin:0;font-size:1.05rem}
 .game-body .foot{margin-top:auto;padding-top:8px;display:flex;justify-content:space-between;align-items:center;font-size:.84rem;color:var(--muted)}
+.wgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media (max-width:900px){.wgrid{grid-template-columns:repeat(2,1fr)}}
+.widget{position:relative;border-radius:26px;padding:16px;min-height:170px;display:flex;flex-direction:column;gap:6px;color:#ECEEF5;background:var(--night);border:1px solid var(--night-line);overflow:hidden;text-decoration:none;box-shadow:0 10px 30px #0b0e1726;transition:transform .15s}
+a.widget:hover{transform:translateY(-2px)}
+.widget .wk{font:600 .66rem var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:#FF9A6B;display:flex;align-items:center;gap:6px}
+.widget .wk svg{width:14px;height:14px}
+.widget h3{color:#fff;font-size:1.02rem;line-height:1.2;margin:2px 0 0}
+.widget p{margin:0;color:var(--night-muted);font-size:.82rem;line-height:1.35}
+.widget .wfoot{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;gap:8px;font-size:.78rem;color:var(--night-muted)}
+.widget .big{font:800 2rem/1 var(--font-display);color:#fff}
+.w-defi{background:linear-gradient(150deg,#2A1E5C,#0B0E17 70%)}
+.w-defi .wart{position:absolute;right:-16px;bottom:-12px;width:96px;opacity:.22;pointer-events:none}
+.w-defi .wart svg{width:100%;height:auto}
+.w-resume{background:var(--grad);border:0}
+.w-resume .wk{color:#fff}.w-resume p{color:#ffffffd9}
+.w-resume .bar{height:6px;border-radius:3px;background:#ffffff40;overflow:hidden}.w-resume .bar i{display:block;height:100%;background:#fff}
+.w-prog .ring{width:74px;height:74px;flex:none}
+.w-prog .row2{display:flex;align-items:center;gap:12px}
+.w-astuce{background:#F6EFE4;color:#2A1A10;border-color:#E8DCC8}
+.w-astuce .wk{color:#B4441C}.w-astuce h3{color:#2A1A10}.w-astuce p{color:#5E503F;font-size:.86rem}
+.w-astuce .wfoot{color:#8A7A66}
+.widgets-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:12px}
+.widgets-head h2{margin:0;font-size:1.25rem}
 .challenge{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px;margin-bottom:28px}
 .challenge .card{display:flex;gap:16px;align-items:center;background:var(--night);color:var(--night-ink);border-color:var(--night-line)}
 .challenge .card p{color:var(--night-muted)}
@@ -3565,11 +3588,90 @@ function interestScore(f) {
   return s;
 }
 
+/* ---------- Widgets : défi du jour, reprise, progression, astuce ---------- */
+const TIPS = [
+  ["Graphisme", "Choisis 2 polices maximum par visuel : une pour les titres, une pour le texte."],
+  ["Graphisme", "Pour vérifier une hiérarchie, plisse les yeux : ce que tu vois en premier doit être le plus important."],
+  ["Graphisme", "Exporte pour l'impression en CMJN à 300 dpi, avec 3 mm de fonds perdus."],
+  ["Graphisme", "Un logo doit rester lisible à 16 pixels : teste-le en tout petit avant de le livrer."],
+  ["Couleur", "La règle 60-30-10 : 60 % couleur dominante, 30 % secondaire, 10 % couleur d'accent."],
+  ["Couleur", "Texte sur fond : vise un contraste d'au moins 4,5:1 pour qu'il reste lisible au soleil."],
+  ["Maquette", "Aligne tout sur une grille : même un visuel simple paraît alors plus professionnel."],
+  ["Maquette", "Laisse respirer : l'espace vide n'est pas perdu, il guide le regard."],
+  ["Montage", "Coupe sur le mouvement : une coupe pendant un geste passe presque inaperçue."],
+  ["Montage", "Les 3 premières secondes décident si on regarde ta vidéo : commence par le plus fort."],
+  ["Montage", "Le son compte autant que l'image : un mauvais son fait fuir plus vite qu'une image floue."],
+  ["Montage", "Ajoute des sous-titres : beaucoup de gens regardent les vidéos sans le son."],
+  ["Vidéo", "Filme toujours dos à la fenêtre, jamais face à elle : la lumière doit éclairer le visage."],
+  ["Vidéo", "Règle des 180° : la caméra reste du même côté de l'axe entre deux personnes qui se parlent."],
+  ["Web", "Conçois d'abord pour le téléphone : la plupart de tes visiteurs viendront de là."],
+  ["Web", "Compresse tes images : une photo de plus de 300 Ko ralentit ton site sur les réseaux mobiles."],
+  ["Web", "Un bouton WhatsApp bien visible vaut mieux qu'un long formulaire de contact."],
+  ["Code", "Nomme tes variables en clair : prixTotal se comprend mieux que pt."],
+  ["Code", "Quand un bug résiste, explique ton code ligne par ligne à voix haute : souvent la solution apparaît."],
+  ["Jeux vidéo", "Fais tester ton jeu tôt, et regarde les joueurs sans les aider : tu verras tout de suite ce qui bloque."],
+  ["Dessin", "Commence par les grandes formes, les détails viennent en dernier."],
+  ["Dessin", "Travaille tes valeurs en noir et blanc avant d'ajouter la couleur."],
+  ["Marketing", "Parle des bénéfices pour le client, pas seulement des caractéristiques du produit."],
+  ["Marketing", "Publie régulièrement plutôt que beaucoup d'un coup : la régularité construit l'audience."],
+  ["Marketing", "Une seule action par publication : « Écris-nous sur WhatsApp » marche mieux que trois liens."],
+  ["Freelance", "Demande toujours un acompte (30 à 50 %) avant de commencer un travail pour un client."],
+  ["Freelance", "Écris ce qui est compris dans ton devis, et combien de retouches sont incluses."],
+  ["Informatique", "Active la double authentification sur ton e-mail : c'est la clé de tous tes comptes."],
+  ["Informatique", "Sauvegarde tes projets à deux endroits : un disque et un stockage en ligne."],
+  ["Productivité", "Apprends 5 raccourcis clavier de ton logiciel principal : tu gagneras des heures chaque mois."]
+];
+const dayIndex = () => { const n = new Date(); return Math.floor(Date.UTC(n.getFullYear(), n.getMonth(), n.getDate()) / 864e5); };
+const dayKey = d => { const x = new Date(d); return `${x.getFullYear()}-${x.getMonth() + 1}-${x.getDate()}`; };
+function activityStreak() {
+  const days = new Set([...Object.values(state.lessonsDone), ...Object.values(state.games).map(g => g.lastAt)].filter(Boolean).map(dayKey));
+  const d = new Date(); let n = 0;
+  if (!days.has(dayKey(d))) d.setDate(d.getDate() - 1);
+  while (days.has(dayKey(d))) { n++; d.setDate(d.getDate() - 1); }
+  return n;
+}
+function resumeTarget() {
+  const playable = l => LESSONS[l] && !LESSONS[l].soon;
+  const recent = Object.entries(state.lessonsDone).sort((a, b) => String(b[1]).localeCompare(String(a[1])));
+  for (const [lid] of recent) {
+    const f = formationOfLesson(lid); if (!f) continue;
+    const next = f.modules.flatMap(m => m.lessons).find(l => !state.lessonsDone[l] && playable(l));
+    if (next) return { f, lid: next, started: true };
+  }
+  const f = FORMATIONS.slice().sort((a, b) => interestScore(b) - interestScore(a)).find(x => x.price === "gratuit" && x.modules.some(m => m.lessons.some(playable)));
+  return f ? { f, lid: f.modules.flatMap(m => m.lessons).find(playable), started: false } : null;
+}
+function widgetsHTML({ title = "Tes widgets du jour", sub = "" } = {}) {
+  const [c] = dailyChallenges(), done = state.challenges[c.key];
+  const r = resumeTarget(), rp = r ? formationProgress(r.f) : null;
+  const lessons = Object.keys(state.lessonsDone).length, streak = activityStreak();
+  const points = Object.values(state.games).reduce((n, g) => n + Math.max(0, ...Object.values(g.best || {})), 0);
+  const goal = 3, weekDone = Object.values(state.lessonsDone).filter(d => Date.now() - new Date(d) < 7 * 864e5).length, pct = Math.min(1, weekDone / goal);
+  const [cat, tip] = TIPS[dayIndex() % TIPS.length];
+  const left = (() => { const n = new Date(), m = new Date(n); m.setHours(24, 0, 0, 0); const h = Math.floor((m - n) / 36e5); return h ? `${h} h` : "moins d'1 h"; })();
+  return `<div class="widgets-head"><h2>${title}</h2>${sub}</div><div class="wgrid">
+    <a class="widget w-defi" href="#/jeux/${c.game.id}?niveau=${c.level}&defi=${c.key}"><div class="wart">${gameArt(c.game.art)}</div>
+      <span class="wk">${icon("game")} Défi du jour</span><h3>${esc(c.game.title)}</h3><p>Niveau moyen · points ×${String(LEVEL_INFO[c.level].mult).replace(".", ",")}</p>
+      <div class="wfoot"><span>${done ? `Réussi : <b style="color:#fff">${nf(done)} pts</b>` : "À relever aujourd'hui"}</span><span>${done ? "✓" : `encore ${left}`}</span></div></a>
+    ${r ? `<a class="widget w-resume" href="#/cours/${r.lid}"><span class="wk">${icon("play")} ${r.started ? "Reprendre" : "Commencer"}</span><h3>${esc(LESSONS[r.lid].title)}</h3><p>${esc(r.f.title)}</p>
+      <div class="wfoot" style="flex-direction:column;align-items:stretch;color:#fff"><div class="bar"><i style="width:${Math.round(rp.pct * 100)}%"></i></div><span>${rp.done}/${rp.total} leçons</span></div></a>` : ""}
+    <a class="widget w-prog" href="#/tableau-de-bord"><span class="wk">${icon("star")} Ma progression</span>
+      <div class="row2"><svg class="ring" viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="32" fill="none" stroke="#ffffff1a" stroke-width="8"/><circle cx="40" cy="40" r="32" fill="none" stroke="url(#wgr)" stroke-width="8" stroke-linecap="round" stroke-opacity="${pct ? 1 : 0}" stroke-dasharray="${(201 * pct).toFixed(1)} 201" transform="rotate(-90 40 40)"/><defs><linearGradient id="wgr"><stop offset="0" stop-color="#7C5CFF"/><stop offset="1" stop-color="#F2612D"/></linearGradient></defs><text x="40" y="45" text-anchor="middle" fill="#fff" style="font:800 15px var(--font-display)">${weekDone}/${goal}</text></svg>
+        <div><div class="big">${streak}</div><p>jour${streak > 1 ? "s" : ""} d'affilée</p></div></div>
+      <div class="wfoot"><span>Objectif : ${goal} leçons / semaine</span></div>
+      <div class="wfoot" style="margin-top:0"><span>${lessons} leçon${lessons > 1 ? "s" : ""} · ${nf(points)} pts</span></div></a>
+    <div class="widget w-astuce"><span class="wk">${icon("spark")} Astuce du jour</span><h3>${esc(cat)}</h3><p>${esc(tip)}</p><div class="wfoot"><span>Une nouvelle astuce chaque jour</span></div></div>
+  </div>`;
+}
+/* Raccourcis de l'appli (appui long sur l'icône) */
+function goDefi() { const [c] = dailyChallenges(); location.replace(`#/jeux/${c.game.id}?niveau=${c.level}&defi=${c.key}`); }
+function goResume() { const r = resumeTarget(); location.replace(r ? `#/cours/${r.lid}` : "#/formations"); }
+
 /* ---------- Accueil ---------- */
 function renderHome(main) {
   const popular = FORMATIONS.slice().sort((a, b) => interestScore(b) - interestScore(a)).slice(0, 6);
   const daily = dailyChallenges();
-  main.innerHTML = `
+  main.innerHTML = (isStandalone() ? `<section class="section-sm"><div class="wrap">${widgetsHTML({ title: "Ton espace du jour" })}</div></section>` : "") + `
   <section class="hero"><div class="wrap hero-grid">
     <div>
       <span class="eyebrow">Imagine. Crée. Maîtrise.</span>
@@ -4146,6 +4248,7 @@ function renderDashboard(main, q = new URLSearchParams()) {
     ${u ? "" : `<div style="margin-bottom:16px">${alertBox("warn", `<p><strong>Aperçu de démonstration.</strong> Tu n'es pas connecté : ces données viennent de <strong>cet appareil</strong>. <a href="#/connexion">Se connecter</a> ou <a href="#/inscription">s'inscrire</a> pour les retrouver partout.</p>`)}</div>`}
     <div class="welcome"><div><h1 tabindex="-1">Salut ${esc(u ? u.displayName : "créatif")} !</h1><p>${u?.pendingParentalConsent ? "Compte en attente de l'accord parental. " : ""}Continue là où tu t'es arrêté.</p></div>
       <div class="row"><a class="btn btn-grad" href="#/formations">Reprendre une formation</a><a class="btn btn-night" href="#/jeux">${icon("game")} Jouer</a></div></div>
+    <div style="margin-top:22px">${widgetsHTML({ title: "Mes widgets", sub: `<a class="small" href="#/application">Avoir TOB-MAQ en appli</a>` })}</div>
     <div class="grid g4" style="margin-top:18px">
       ${[["check", "ok", Object.keys(state.lessonsDone).length, "cours terminés"], ["game", "", played.length, "jeux réalisés"], ["star", "or", nf(points), "points (meilleurs scores)"], ["download", "", state.downloads.length, "téléchargements"]]
         .map(([ic, t, v, l]) => `<div class="card stat"><div class="badge-ic ${t}">${icon(ic)}</div><div><b>${v}</b><span>${l}</span></div></div>`).join("")}</div>
@@ -4393,6 +4496,7 @@ function renderApp(main) {
       <li>${icon("check")}<span><strong>Légère</strong> : moins de 1 Mo, rien à voir avec une appli classique de 50 Mo.</span></li>
       <li>${icon("check")}<span><strong>Hors connexion</strong> : les leçons et les jeux déjà ouverts restent disponibles sans Internet.</span></li>
       <li>${icon("check")}<span><strong>Toujours à jour</strong> : chaque nouvelle formation arrive automatiquement, sans mise à jour à télécharger.</span></li>
+      <li>${icon("check")}<span><strong>4 widgets</strong> à l'ouverture : défi du jour, reprise de ta leçon, progression et astuce du jour. Et un appui long sur l'icône ouvre directement le défi ou ta leçon.</span></li>
       <li>${icon("check")}<span><strong>Même compte</strong> : ta progression, tes scores et ton Premium sont les mêmes que sur le site.</span></li>
     </ul>
     <p class="small muted" style="margin-top:18px">Le compte, le Premium, le studio IA et les vidéos demandent une connexion Internet. L'application ne demande ni ta position, ni ton micro, ni ta caméra.</p>
@@ -6304,7 +6408,7 @@ const ROUTES = [
   [/^ressources$/, (m, p, q) => renderResources(m, q)], [/^ressource\/([\w-]+)$/, (m, p) => renderResource(m, p[1])],
   [/^inscription$/, m => renderSignup(m)], [/^connexion$/, m => renderLogin(m)], [/^tableau-de-bord$/, (m, p, q) => renderDashboard(m, q)], [/^premium$/, m => renderPremium(m)],
   [/^portfolio$/, m => renderPortfolio(m)], [/^projet\/([\w-]+)$/, (m, p) => renderProject(m, p[1])], [/^profil$/, m => renderProfile(m)],
-  [/^parametres$/, m => renderSettings(m)], [/^aide$/, m => renderHelp(m)], [/^application$/, m => renderApp(m)], [/^(conditions|confidentialite)$/, (m, p) => renderLegal(m, p[1])],
+  [/^parametres$/, m => renderSettings(m)], [/^aide$/, m => renderHelp(m)], [/^application$/, m => renderApp(m)], [/^defi$/, () => goDefi()], [/^reprendre$/, () => goResume()], [/^(conditions|confidentialite)$/, (m, p) => renderLegal(m, p[1])],
   [/^admin$/, m => renderAdmin(m)], [/^reinitialiser$/, (m, p, q) => renderReset(m, q)], [/^recherche$/, (m, p, q) => renderSearch(m, q)]
 ];
 const stripHash = h => String(h || "").replace(/^#\/?/, "");

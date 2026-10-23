@@ -2,7 +2,7 @@
    - Pages : réseau d'abord, copie locale si pas de connexion (leçons et jeux restent ouverts hors ligne).
    - Icônes et aperçus : copie locale d'abord, mise à jour en arrière-plan.
    - L'API, les vidéos et les PDF ne sont jamais mis en cache ici. */
-const VERSION = "tobmaq-v1";
+const VERSION = "tobmaq-v2";
 const SHELL = ["/", "/manifest.webmanifest", "/icones/favicon.svg", "/icones/icone-192.png", "/icones/icone-512.png"];
 
 self.addEventListener("install", e => {
