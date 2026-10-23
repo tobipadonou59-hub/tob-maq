@@ -1,0 +1,86 @@
+[
+  {
+    "q": "Sur le cercle chromatique traditionnel du peintre, quelles sont les trois couleurs primaires ?",
+    "choices": [
+      "Vert, orange et violet",
+      "Rouge, jaune et bleu",
+      "Noir, blanc et gris"
+    ],
+    "answer": 1,
+    "explain": "Sur le cercle traditionnel, le rouge, le jaune et le bleu sont les primaires : on les mélange pour obtenir les autres couleurs."
+  },
+  {
+    "q": "Une harmonie triadique associe…",
+    "choices": [
+      "deux couleurs opposées sur le cercle",
+      "plusieurs nuances d'une seule couleur",
+      "trois couleurs régulièrement espacées sur le cercle"
+    ],
+    "answer": 2,
+    "explain": "La triade utilise trois couleurs séparées de 120° : un équilibre vivant et coloré."
+  },
+  {
+    "q": "Dans la règle 60-30-10, quelle couleur occupe environ 60 % de la surface du visuel ?",
+    "choices": [
+      "La couleur dominante",
+      "La couleur d'accent",
+      "La couleur des boutons"
+    ],
+    "answer": 0,
+    "explain": "La couleur dominante couvre la plus grande surface, souvent le fond ; la secondaire fait 30 % et l'accent 10 %."
+  },
+  {
+    "q": "À quoi reconnaît-on une police à empattements (serif) ?",
+    "choices": [
+      "Elle est toujours écrite en gras",
+      "Ses lettres ont de petites extensions au bout des traits",
+      "Elle n'existe qu'en majuscules",
+      "Ses lettres sont toujours penchées"
+    ],
+    "answer": 1,
+    "explain": "Les empattements sont les petits pieds au bout des traits des lettres ; les polices sans empattements (sans serif) n'en ont pas."
+  },
+  {
+    "q": "Pour faire ressortir le titre d'un flyer par rapport au reste du texte, sur quoi joue-t-on ?",
+    "choices": [
+      "Sur le nombre de polices différentes utilisées",
+      "Sur les effets ajoutés à tous les textes",
+      "Sur l'écart de taille, de graisse et de couleur",
+      "Sur la longueur du texte courant"
+    ],
+    "answer": 2,
+    "explain": "La hiérarchie vient du contraste : un titre nettement plus grand, plus gras ou d'une autre couleur se lit en premier."
+  },
+  {
+    "q": "Un client veut écrire son texte en jaune pâle sur un fond blanc. Quel problème cela pose-t-il ?",
+    "choices": [
+      "Le contraste est trop faible : le texte sera difficile à lire",
+      "Le fichier sera trop lourd",
+      "Le texte sera trop visible",
+      "Les couleurs ne s'impriment pas"
+    ],
+    "answer": 0,
+    "explain": "Pour être lisible, un texte doit fortement contraster avec son fond, par exemple foncé sur clair."
+  },
+  {
+    "q": "Pourquoi laisser de l'espace vide autour des éléments d'un visuel ?",
+    "choices": [
+      "Pour économiser de l'encre uniquement",
+      "Pour aérer la composition et mettre en valeur les informations",
+      "Parce que le logiciel l'impose"
+    ],
+    "answer": 1,
+    "explain": "L'espace blanc fait respirer le visuel : chaque élément ressort mieux et l'œil circule plus facilement."
+  },
+  {
+    "q": "Un client veut écrire tout le texte de son flyer en majuscules. Que lui conseilles-tu ?",
+    "choices": [
+      "De tout écrire en majuscules pour être plus lisible",
+      "De supprimer tous les titres",
+      "D'utiliser une police différente pour chaque ligne",
+      "De garder les majuscules pour les titres courts, car un long texte en capitales se lit moins bien"
+    ],
+    "answer": 3,
+    "explain": "Les majuscules attirent l'œil sur quelques mots, mais un paragraphe entier en capitales fatigue la lecture."
+  }
+]

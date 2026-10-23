@@ -1,0 +1,120 @@
+[
+  {
+    "q": "Dans une mise en page, les marges correspondent à…",
+    "choices": [
+      "l'espace entre le bord de la page et la zone de contenu",
+      "l'espace entre deux colonnes",
+      "la zone qui sera coupée"
+    ],
+    "answer": 0,
+    "explain": "Les marges encadrent la zone où l'on place le texte et les images."
+  },
+  {
+    "q": "Comment appelle-t-on l'espace entre deux colonnes ?",
+    "choices": [
+      "Le fond perdu",
+      "La gouttière",
+      "L'interlignage",
+      "Le gabarit"
+    ],
+    "answer": 1,
+    "explain": "La gouttière sépare les colonnes pour que les textes voisins ne se touchent pas."
+  },
+  {
+    "q": "À quoi sert la grille de ligne de base ?",
+    "choices": [
+      "À aligner les lignes de texte d'une colonne à l'autre",
+      "À changer la couleur du fond",
+      "À numéroter les pages",
+      "À importer des images"
+    ],
+    "answer": 0,
+    "explain": "Les lignes de texte s'appuient sur la même grille horizontale : les colonnes restent alignées entre elles."
+  },
+  {
+    "q": "Dans quel menu affiche-t-on la grille de ligne de base ?",
+    "choices": [
+      "Fichier > Exporter",
+      "Objet > Grouper",
+      "Affichage > Grilles et repères",
+      "Texte > Police"
+    ],
+    "answer": 2,
+    "explain": "Affichage > Grilles et repères > Afficher la grille de ligne de base."
+  },
+  {
+    "q": "L'option « Pages en vis-à-vis » est adaptée pour…",
+    "choices": [
+      "une affiche d'une seule page",
+      "un magazine ou une brochure en doubles pages",
+      "une bannière web",
+      "une carte de visite"
+    ],
+    "answer": 1,
+    "explain": "Elle crée des doubles pages (gauche et droite), comme dans un document relié."
+  },
+  {
+    "q": "Pour que le numéro de page apparaisse automatiquement sur toutes les pages, où insère-t-on le numéro de page actif ?",
+    "choices": [
+      "À la main sur chaque page",
+      "Dans le fond perdu",
+      "Dans le nom du fichier",
+      "Sur le gabarit"
+    ],
+    "answer": 3,
+    "explain": "Placé sur le gabarit, le numéro de page actif s'affiche et se met à jour sur toutes les pages qui l'utilisent."
+  },
+  {
+    "q": "Que se passe-t-il quand tu modifies un élément du gabarit ?",
+    "choices": [
+      "Seule la première page change",
+      "Le changement s'applique à toutes les pages basées sur ce gabarit",
+      "Le document est exporté en PDF",
+      "Rien, il faut tout refaire page par page"
+    ],
+    "answer": 1,
+    "explain": "C'est tout l'intérêt du gabarit : une seule modification met à jour l'ensemble du document."
+  },
+  {
+    "q": "Pour donner la même mise en forme à tous les intertitres et pouvoir la modifier d'un coup, on utilise…",
+    "choices": [
+      "des styles de paragraphe",
+      "la gomme",
+      "des calques Photoshop"
+    ],
+    "answer": 0,
+    "explain": "Modifier le style de paragraphe met à jour instantanément tous les textes qui l'utilisent."
+  },
+  {
+    "q": "Quel raccourci ouvre la commande Fichier > Importer pour placer une image dans InDesign (sous Windows) ?",
+    "choices": [
+      "Ctrl+P",
+      "Ctrl+N",
+      "Ctrl+D"
+    ],
+    "answer": 2,
+    "explain": "Ctrl+D (Cmd+D sur Mac) importe un fichier : image ou texte."
+  },
+  {
+    "q": "Un petit signe + rouge apparaît en bas à droite d'un bloc de texte. Que signifie-t-il ?",
+    "choices": [
+      "Le texte contient une faute",
+      "Il y a du texte en excès qui ne tient pas dans le bloc",
+      "La police est manquante",
+      "Le bloc est verrouillé"
+    ],
+    "answer": 1,
+    "explain": "Il faut agrandir le bloc, réduire le texte ou le chaîner vers un autre bloc."
+  },
+  {
+    "q": "Une boutique de pagnes de Cotonou te commande un catalogue de 16 pages. Pourquoi commencer par construire une grille ?",
+    "choices": [
+      "Pour réduire le prix de l'impression",
+      "Pour garder une mise en page cohérente et régulière sur toutes les pages",
+      "Pour que le logiciel écrive les textes",
+      "Parce qu'InDesign refuse de travailler sans grille"
+    ],
+    "answer": 1,
+    "explain": "La grille structure chaque page de la même façon : le catalogue paraît professionnel et se monte plus vite."
+  }
+]

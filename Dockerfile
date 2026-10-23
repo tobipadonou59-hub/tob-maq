@@ -10,6 +10,8 @@ COPY icones icones
 COPY pwa pwa
 COPY videos videos
 COPY server/src server/src
+COPY server/assets server/assets
+COPY server/contenus server/contenus
 # /data contient la base SQLite et les fichiers envoyés : à monter sur un volume persistant.
 # Les volumes de Render et Railway sont montés au nom de root : le processus doit pouvoir y écrire.
 RUN mkdir -p /data

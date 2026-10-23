@@ -1,0 +1,119 @@
+[
+  {
+    "q": "Dans quelle page de DaVinci Resolve fait-on l'étalonnage ?",
+    "choices": [
+      "Edit",
+      "Fairlight",
+      "Color",
+      "Deliver"
+    ],
+    "answer": 2,
+    "explain": "La page Color regroupe les roues, les nœuds et les scopes d'étalonnage."
+  },
+  {
+    "q": "Les noirs et les blancs sont corrects, mais les visages paraissent trop sombres. Quelle roue ajuster en priorité ?",
+    "choices": [
+      "Lift",
+      "Gamma",
+      "Gain"
+    ],
+    "answer": 1,
+    "explain": "Gamma agit sur les tons moyens, là où se trouvent la plupart des peaux et des détails."
+  },
+  {
+    "q": "Le ciel de ton plan est trop lumineux et perd ses détails. Quelle roue baisser ?",
+    "choices": [
+      "Lift",
+      "Gamma",
+      "Gain"
+    ],
+    "answer": 2,
+    "explain": "Gain contrôle les hautes lumières : le baisser récupère les zones les plus claires."
+  },
+  {
+    "q": "Quel raccourci ajoute un nœud en série dans la page Color ?",
+    "choices": [
+      "Alt+S",
+      "Ctrl+K",
+      "Ctrl+J",
+      "Alt+F4"
+    ],
+    "answer": 0,
+    "explain": "Alt+S (Option+S sur Mac) crée un nouveau nœud série après le nœud sélectionné."
+  },
+  {
+    "q": "Pourquoi répartir ses corrections sur plusieurs nœuds ?",
+    "choices": [
+      "Pour exporter plus vite",
+      "Pour pouvoir régler ou désactiver chaque correction séparément",
+      "Pour augmenter la résolution",
+      "Pour ajouter de la musique"
+    ],
+    "answer": 1,
+    "explain": "Chaque nœud a son rôle : on peut ensuite modifier une étape sans toucher aux autres."
+  },
+  {
+    "q": "Sur le scope Forme d'onde (Waveform), que représente le bas de l'échelle ?",
+    "choices": [
+      "Les hautes lumières",
+      "Les couleurs saturées",
+      "Le son",
+      "Les noirs"
+    ],
+    "answer": 3,
+    "explain": "La forme d'onde va des noirs (en bas) aux blancs (en haut) : on y lit l'exposition de l'image."
+  },
+  {
+    "q": "Sur la forme d'onde, une trace écrasée tout en haut de l'échelle signale…",
+    "choices": [
+      "des hautes lumières brûlées, sans détails",
+      "une image trop sombre",
+      "un son trop fort"
+    ],
+    "answer": 0,
+    "explain": "Au-delà du maximum, les détails sont perdus : il faut baisser le Gain."
+  },
+  {
+    "q": "Sur une zone qui devrait être blanche ou grise, que cherches-tu à obtenir sur la Parade RVB pour neutraliser une dominante ?",
+    "choices": [
+      "Le rouge nettement au-dessus des autres",
+      "Les trois composantes rouge, verte et bleue au même niveau",
+      "Uniquement la composante bleue",
+      "Des courbes collées en bas"
+    ],
+    "answer": 1,
+    "explain": "Quand R, V et B sont alignés sur une zone neutre, l'image n'a plus de dominante de couleur."
+  },
+  {
+    "q": "Pourquoi comparer régulièrement l'image avant et après correction ?",
+    "choices": [
+      "Pour vérifier que la correction améliore l'image sans l'exagérer",
+      "Pour accélérer le rendu",
+      "Pour changer la cadence de la vidéo"
+    ],
+    "answer": 0,
+    "explain": "Après de longues minutes, l'œil s'habitue : la comparaison remet les choses en perspective."
+  },
+  {
+    "q": "Tu étalonnes l'interview d'une entrepreneuse de Cotonou. Quel scope affiche la ligne de référence des tons chair ?",
+    "choices": [
+      "La forme d'onde",
+      "L'histogramme",
+      "Le vectorscope",
+      "La Parade RVB"
+    ],
+    "answer": 2,
+    "explain": "Le vectorscope montre la teinte et la saturation, avec une ligne indicative pour les peaux."
+  },
+  {
+    "q": "La roue Offset agit sur…",
+    "choices": [
+      "uniquement les noirs",
+      "l'ensemble de l'image",
+      "uniquement le son",
+      "uniquement les hautes lumières"
+    ],
+    "answer": 1,
+    "explain": "Offset décale toute l'image à la fois, des noirs aux hautes lumières."
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "q": "Quelle ligne affiche « Bonjour » à l'écran en Python ?",
+    "choices": [
+      "echo \"Bonjour\"",
+      "print(\"Bonjour\")",
+      "console.log(\"Bonjour\")"
+    ],
+    "answer": 1,
+    "explain": "print() est la fonction d'affichage de Python ; echo et console.log viennent d'autres langages."
+  },
+  {
+    "q": "Comment ajouter « savon » à la fin de la liste produits ?",
+    "choices": [
+      "produits.add(\"savon\")",
+      "produits.push(\"savon\")",
+      "produits.append(\"savon\")"
+    ],
+    "answer": 2,
+    "explain": "append() ajoute un élément à la fin d'une liste Python."
+  },
+  {
+    "q": "Comment fixer à 20 la quantité de « riz » dans le dictionnaire stock ?",
+    "choices": [
+      "stock[\"riz\"] = 20",
+      "stock.riz = 20",
+      "stock(\"riz\") = 20"
+    ],
+    "answer": 0,
+    "explain": "On accède à une valeur d'un dictionnaire avec sa clé entre crochets."
+  },
+  {
+    "q": "Que vaut 7 // 2 en Python ?",
+    "choices": [
+      "3.5",
+      "3",
+      "1"
+    ],
+    "answer": 1,
+    "explain": "L'opérateur // fait une division entière : il garde seulement la partie entière du résultat."
+  },
+  {
+    "q": "Quel mot-clé sert à créer une fonction en Python ?",
+    "choices": [
+      "def",
+      "function",
+      "func"
+    ],
+    "answer": 0,
+    "explain": "Une fonction Python commence par def, suivi de son nom, de parenthèses et de deux-points."
+  },
+  {
+    "q": "Quelle condition teste correctement une rupture de stock ?",
+    "choices": [
+      "if quantite = 0:",
+      "if quantite => 0:",
+      "if quantite == 0:"
+    ],
+    "answer": 2,
+    "explain": "== compare deux valeurs ; un seul = sert à affecter une valeur et provoque une erreur dans un if."
+  }
+]

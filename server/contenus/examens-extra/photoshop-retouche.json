@@ -1,0 +1,119 @@
+[
+  {
+    "q": "Quel raccourci duplique le calque actif dans Photoshop (sous Windows) ?",
+    "choices": [
+      "Ctrl+S",
+      "Ctrl+J",
+      "Ctrl+Z"
+    ],
+    "answer": 1,
+    "explain": "Ctrl+J (Cmd+J sur Mac) duplique le calque : on garde ainsi l'original intact en dessous."
+  },
+  {
+    "q": "Pourquoi dupliquer le calque de la photo avant de commencer le détourage ?",
+    "choices": [
+      "Pour garder une copie intacte de l'original",
+      "Pour doubler la résolution de l'image",
+      "Pour changer le format du fichier",
+      "Pour activer les couleurs CMJN"
+    ],
+    "answer": 0,
+    "explain": "Travailler sur une copie permet de revenir à la photo d'origine à tout moment."
+  },
+  {
+    "q": "Sur un masque de fusion, que produit une zone peinte en gris ?",
+    "choices": [
+      "Elle supprime définitivement les pixels",
+      "Elle rend la zone totalement opaque",
+      "Elle rend la zone partiellement transparente",
+      "Elle change la couleur du calque en gris"
+    ],
+    "answer": 2,
+    "explain": "Blanc révèle, noir cache, et le gris donne une transparence partielle : utile pour des bords doux."
+  },
+  {
+    "q": "À quoi sert l'espace de travail Sélection > Sélectionner et masquer ?",
+    "choices": [
+      "À redimensionner l'image",
+      "À affiner les contours d'une sélection, notamment les cheveux",
+      "À exporter l'image en PDF"
+    ],
+    "answer": 1,
+    "explain": "Il permet de corriger finement les bords d'une sélection avant de la transformer en masque."
+  },
+  {
+    "q": "À la fin de Sélectionner et masquer, quelle option de « Sortie vers » garde un travail non destructif ?",
+    "choices": [
+      "Masque de fusion",
+      "Nouveau document aplati",
+      "Impression"
+    ],
+    "answer": 0,
+    "explain": "La sortie en masque de fusion cache l'arrière-plan sans effacer de pixels : on peut toujours corriger."
+  },
+  {
+    "q": "Pour corriger le bord d'un masque autour des cheveux, quel pinceau est le plus adapté ?",
+    "choices": [
+      "Un pinceau très dur de grande taille",
+      "Un pinceau de couleur rouge",
+      "Un pinceau à bords doux, de taille adaptée",
+      "La gomme à 100 %"
+    ],
+    "answer": 2,
+    "explain": "Un pinceau doux crée une transition naturelle entre le sujet et le fond."
+  },
+  {
+    "q": "Quelle touche intervertit les couleurs de premier plan et d'arrière-plan, pratique pour passer du noir au blanc sur un masque ?",
+    "choices": [
+      "X",
+      "B",
+      "M",
+      "T"
+    ],
+    "answer": 0,
+    "explain": "X échange les deux couleurs ; D les remet par défaut en noir et blanc."
+  },
+  {
+    "q": "Tu places un sujet détouré sur un nouveau fond pour la pub d'une boutique de Cotonou. Que vérifies-tu pour un rendu crédible ?",
+    "choices": [
+      "Que le fichier fait moins de 1 Mo",
+      "Que le sujet est toujours au centre exact",
+      "Que la police du logo est en gras",
+      "Que la lumière et les couleurs du sujet s'accordent avec le fond"
+    ],
+    "answer": 3,
+    "explain": "Pour bien intégrer le sujet, sa lumière, ses couleurs et ses ombres doivent correspondre au nouveau décor."
+  },
+  {
+    "q": "Le client veut son produit détouré sur fond transparent pour son site web. Quel format d'export choisis-tu ?",
+    "choices": [
+      "JPEG",
+      "PNG",
+      "BMP"
+    ],
+    "answer": 1,
+    "explain": "Le PNG conserve la transparence, alors que le JPEG remplit le fond d'une couleur unie."
+  },
+  {
+    "q": "Pour conserver les calques et les masques afin de retravailler l'image plus tard, on enregistre en…",
+    "choices": [
+      "JPEG",
+      "GIF",
+      "PSD",
+      "MP4"
+    ],
+    "answer": 2,
+    "explain": "Le format PSD, natif de Photoshop, garde toute la structure du document : calques, masques, réglages."
+  },
+  {
+    "q": "Dans le panneau Calques, un calque placé au-dessus d'un autre…",
+    "choices": [
+      "s'affiche par-dessus celui du dessous",
+      "est toujours masqué",
+      "est automatiquement supprimé à l'export",
+      "change de couleur"
+    ],
+    "answer": 0,
+    "explain": "L'ordre des calques fonctionne comme une pile : ce qui est en haut recouvre ce qui est en dessous."
+  }
+]

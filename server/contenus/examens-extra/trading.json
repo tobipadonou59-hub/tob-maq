@@ -1,0 +1,62 @@
+[
+  {
+    "q": "Tu achètes un actif à 50 000 FCFA et tu le revends à 55 000 FCFA. Quel est ton gain en pourcentage, avant frais ?",
+    "choices": [
+      "5 %",
+      "10 %",
+      "15 %"
+    ],
+    "answer": 1,
+    "explain": "Gain = 5 000 ÷ 50 000 × 100 = 10 %."
+  },
+  {
+    "q": "Avec un effet de levier de 20, quelle baisse du prix suffit à faire perdre la totalité du capital engagé ?",
+    "choices": [
+      "20 %",
+      "50 %",
+      "5 %"
+    ],
+    "answer": 2,
+    "explain": "Avec un levier de 20, la position vaut 20 fois le capital : une baisse de 5 % × 20 = 100 % du capital."
+  },
+  {
+    "q": "Pourquoi diversifier ses placements ?",
+    "choices": [
+      "Pour réduire l'impact d'un seul mauvais placement sur l'ensemble",
+      "Pour être sûr de gagner",
+      "Pour supprimer tous les frais"
+    ],
+    "answer": 0,
+    "explain": "La diversification réduit le risque lié à un seul actif, mais elle ne garantit aucun gain."
+  },
+  {
+    "q": "Ton capital est de 200 000 FCFA et tu t'imposes de ne pas risquer plus de 1 % par position. Quelle perte maximale acceptes-tu sur une position ?",
+    "choices": [
+      "20 000 FCFA",
+      "2 000 FCFA",
+      "200 FCFA"
+    ],
+    "answer": 1,
+    "explain": "1 % de 200 000 = 2 000 FCFA : limiter le risque par position protège le capital."
+  },
+  {
+    "q": "Avant d'ouvrir un compte chez un intermédiaire de trading, que dois-tu vérifier en priorité ?",
+    "choices": [
+      "Le nombre d'abonnés de sa page Facebook",
+      "Les captures de gains publiées par ses clients",
+      "Qu'il est agréé par une autorité de régulation financière officielle"
+    ],
+    "answer": 2,
+    "explain": "Un intermédiaire sérieux est agréé par un régulateur ; les abonnés et captures d'écran se falsifient facilement."
+  },
+  {
+    "q": "Un placement affiche un rendement potentiel beaucoup plus élevé que les autres. En général, cela signifie :",
+    "choices": [
+      "Que le risque de perte est aussi plus élevé",
+      "Que le gain est garanti",
+      "Qu'il n'y a aucun frais"
+    ],
+    "answer": 0,
+    "explain": "Rendement et risque sont liés : plus le gain possible est élevé, plus la perte possible l'est aussi."
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "q": "Quelle commande affiche le dossier dans lequel tu te trouves ?",
+    "choices": [
+      "pwd",
+      "ls",
+      "cd"
+    ],
+    "answer": 0,
+    "explain": "pwd (print working directory) affiche le chemin du dossier courant ; ls liste son contenu."
+  },
+  {
+    "q": "Quelle commande crée l'utilisateur marie avec son dossier personnel sous Ubuntu ?",
+    "choices": [
+      "sudo chmod marie",
+      "sudo adduser marie",
+      "sudo mkdir marie"
+    ],
+    "answer": 1,
+    "explain": "adduser crée le compte, son dossier personnel et demande un mot de passe."
+  },
+  {
+    "q": "Quelle commande redémarre le service SSH ?",
+    "choices": [
+      "sudo apt restart ssh",
+      "sudo ssh reboot",
+      "sudo systemctl restart ssh"
+    ],
+    "answer": 2,
+    "explain": "systemctl pilote les services : start, stop, restart, status, enable."
+  },
+  {
+    "q": "Quel port utilise SSH par défaut ?",
+    "choices": [
+      "22",
+      "80",
+      "443"
+    ],
+    "answer": 0,
+    "explain": "SSH écoute sur le port 22 ; 80 et 443 servent au web (HTTP et HTTPS)."
+  },
+  {
+    "q": "Quel est le rôle d'un serveur DNS ?",
+    "choices": [
+      "Distribuer automatiquement les adresses IP",
+      "Traduire un nom en adresse IP",
+      "Partager des dossiers avec Windows"
+    ],
+    "answer": 1,
+    "explain": "Le DNS fait la correspondance nom ↔ adresse IP ; c'est le DHCP qui distribue les adresses."
+  },
+  {
+    "q": "Comment être sûr qu'une sauvegarde fonctionne vraiment ?",
+    "choices": [
+      "En restaurant un fichier pour vérifier qu'il est complet et lisible",
+      "En vérifiant seulement que la tâche cron existe",
+      "En regardant l'heure du serveur"
+    ],
+    "answer": 0,
+    "explain": "Seul un test de restauration prouve que la sauvegarde est utilisable le jour où on en a besoin."
+  }
+]

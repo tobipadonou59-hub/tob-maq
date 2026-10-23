@@ -1,0 +1,62 @@
+[
+  {
+    "q": "Quel raccourci annule la dernière action dans Krita ?",
+    "choices": [
+      "Ctrl+S",
+      "Ctrl+Z",
+      "Ctrl+P"
+    ],
+    "answer": 1,
+    "explain": "Ctrl+Z annule ; Ctrl+S enregistre et Ctrl+P imprime."
+  },
+  {
+    "q": "Quel format exporter pour publier ton illustration sur les réseaux sociaux ?",
+    "choices": [
+      "PNG ou JPG",
+      ".kra",
+      ".txt"
+    ],
+    "answer": 0,
+    "explain": "Le .kra garde les calques pour travailler ; PNG et JPG sont lus partout pour la diffusion."
+  },
+  {
+    "q": "Quelle touche active le mode gomme du pinceau dans Krita ?",
+    "choices": [
+      "G",
+      "Z",
+      "E"
+    ],
+    "answer": 2,
+    "explain": "La touche E bascule le pinceau en mode gomme et revient au pinceau en appuyant à nouveau."
+  },
+  {
+    "q": "Pourquoi régler la courbe de pression de la tablette ?",
+    "choices": [
+      "Pour que l'épaisseur du trait suive bien la force d'appui du stylet",
+      "Pour changer la couleur de l'écran",
+      "Pour agrandir la taille de la toile"
+    ],
+    "answer": 0,
+    "explain": "Une courbe adaptée à ta main donne des traits fins et épais contrôlés."
+  },
+  {
+    "q": "À quoi sert une planche de références (moodboard) lors de la recherche ?",
+    "choices": [
+      "À remplacer le dessin du personnage",
+      "À rassembler des images qui guident le style, les formes et les couleurs",
+      "À exporter la fiche finale"
+    ],
+    "answer": 1,
+    "explain": "Les références nourrissent les idées et évitent de dessiner uniquement de mémoire."
+  },
+  {
+    "q": "Pourquoi tracer des lignes horizontales de repère sur un turnaround ?",
+    "choices": [
+      "Pour décorer le fond de la fiche",
+      "Pour séparer les couleurs des ombres",
+      "Pour garder les mêmes hauteurs (yeux, épaules, taille) d'une vue à l'autre"
+    ],
+    "answer": 2,
+    "explain": "Les repères alignent chaque partie du corps entre la face, le profil et le dos."
+  }
+]

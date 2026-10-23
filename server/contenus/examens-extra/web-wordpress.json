@@ -1,0 +1,62 @@
+[
+  {
+    "q": "Quel enregistrement DNS fait pointer un nom de domaine vers l'adresse IP de l'hébergement ?",
+    "choices": [
+      "L'enregistrement MX",
+      "L'enregistrement A",
+      "L'enregistrement TXT"
+    ],
+    "answer": 1,
+    "explain": "L'enregistrement A associe un nom de domaine à une adresse IPv4 ; MX sert aux e-mails."
+  },
+  {
+    "q": "Dans Réglages > Permaliens, quel réglage donne des adresses de pages lisibles ?",
+    "choices": [
+      "Titre de la publication",
+      "Simple (?p=123)",
+      "Numérique"
+    ],
+    "answer": 0,
+    "explain": "Avec « Titre de la publication », l'adresse reprend le nom de la page, ce qui est clair pour les visiteurs et pour Google."
+  },
+  {
+    "q": "Quel réglage limite les attaques qui essaient des milliers de mots de passe ?",
+    "choices": [
+      "Afficher l'e-mail de l'administrateur sur le site",
+      "Désactiver le HTTPS",
+      "Limiter le nombre de tentatives de connexion"
+    ],
+    "answer": 2,
+    "explain": "Bloquer après quelques échecs rend inefficaces les attaques par force brute."
+  },
+  {
+    "q": "Pourquoi supprimer les thèmes et extensions qu'on n'utilise pas ?",
+    "choices": [
+      "Ils peuvent contenir des failles même s'ils sont désactivés",
+      "Ils changent la couleur du site",
+      "Ils empêchent d'écrire des pages"
+    ],
+    "answer": 0,
+    "explain": "Un code présent sur le serveur mais non mis à jour reste une porte d'entrée possible pour les pirates."
+  },
+  {
+    "q": "Quel format d'image privilégier pour des photos légères sur un site web ?",
+    "choices": [
+      "BMP",
+      "WebP",
+      "TIFF"
+    ],
+    "answer": 1,
+    "explain": "Le WebP offre une bonne qualité pour un poids bien plus faible que le BMP ou le TIFF."
+  },
+  {
+    "q": "Avant de livrer le site au client, que faut-il tester ?",
+    "choices": [
+      "Seulement la couleur du logo",
+      "Uniquement l'affichage sur ton propre ordinateur",
+      "L'affichage sur téléphone, les liens et le bouton de contact"
+    ],
+    "answer": 2,
+    "explain": "La plupart des visiteurs arrivent sur mobile : chaque page, chaque lien et le contact doivent fonctionner partout."
+  }
+]

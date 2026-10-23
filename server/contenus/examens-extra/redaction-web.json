@@ -1,0 +1,62 @@
+[
+  {
+    "q": "Quel élément donne le titre affiché dans l'onglet du navigateur et dans les résultats Google ?",
+    "choices": [
+      "Le texte alternatif d'une image",
+      "La balise title",
+      "Le pied de page"
+    ],
+    "answer": 1,
+    "explain": "La balise title est le titre de la page que Google affiche en lien cliquable."
+  },
+  {
+    "q": "À quoi sert le texte alternatif (alt) d'une image ?",
+    "choices": [
+      "À agrandir l'image",
+      "À changer la couleur de l'image",
+      "À décrire l'image pour les personnes malvoyantes et pour Google"
+    ],
+    "answer": 2,
+    "explain": "Le texte alternatif décrit l'image quand elle n'est pas vue, ce qui aide l'accessibilité et le référencement."
+  },
+  {
+    "q": "Qu'est-ce qu'un lien interne ?",
+    "choices": [
+      "Un lien vers une autre page du même site",
+      "Un lien vers le site d'un concurrent",
+      "Un lien envoyé par WhatsApp"
+    ],
+    "answer": 0,
+    "explain": "Les liens internes relient les pages d'un même site et aident le lecteur comme Google à s'y retrouver."
+  },
+  {
+    "q": "Quand est-il utile d'utiliser une liste à puces ?",
+    "choices": [
+      "Pour écrire une seule longue phrase",
+      "Pour présenter plusieurs éléments, comme des étapes ou des avantages",
+      "Pour cacher des informations"
+    ],
+    "answer": 1,
+    "explain": "Une liste rend plusieurs éléments faciles à parcourir sur écran."
+  },
+  {
+    "q": "Quelle phrase est la mieux adaptée à une page web ?",
+    "choices": [
+      "Il est porté à la connaissance de notre aimable clientèle que des frais pourraient éventuellement ne pas être appliqués.",
+      "Des frais de livraison, dans certains cas et selon certaines conditions, peuvent être offerts.",
+      "Livraison gratuite à Cotonou dès 10 000 FCFA d'achat."
+    ],
+    "answer": 2,
+    "explain": "Une phrase courte, directe et précise se lit vite et se comprend tout de suite."
+  },
+  {
+    "q": "Pour une boutique de pagnes à Porto-Novo, quel mot-clé est le plus précis ?",
+    "choices": [
+      "Tissu",
+      "Acheter pagne wax Porto-Novo",
+      "Mode"
+    ],
+    "answer": 1,
+    "explain": "Un mot-clé précis correspond à une intention claire et attire des visiteurs vraiment intéressés."
+  }
+]

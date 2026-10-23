@@ -1,0 +1,62 @@
+[
+  {
+    "q": "Tu mises 2 000 FCFA à une cote décimale de 3,00 et ton pari est gagnant. Combien reçois-tu au total, mise comprise ?",
+    "choices": [
+      "6 000 FCFA",
+      "4 000 FCFA",
+      "3 000 FCFA"
+    ],
+    "answer": 0,
+    "explain": "Avec une cote décimale, le montant reçu = mise × cote = 2 000 × 3,00 = 6 000 FCFA (dont 4 000 FCFA de bénéfice)."
+  },
+  {
+    "q": "Que signifie une espérance mathématique négative pour un pari ?",
+    "choices": [
+      "Que tu gagneras le prochain pari",
+      "Qu'en moyenne, sur un grand nombre de paris, tu perds de l'argent",
+      "Que le pari est sans risque"
+    ],
+    "answer": 1,
+    "explain": "Une espérance négative veut dire que, répété souvent, ce pari fait perdre de l'argent en moyenne."
+  },
+  {
+    "q": "Un match à deux issues est coté 1,90 pour chaque équipe. Que révèle la somme des probabilités implicites (environ 105,3 %) ?",
+    "choices": [
+      "Que le match est truqué",
+      "Que les deux équipes vont gagner",
+      "Une marge du bookmaker d'environ 5 %"
+    ],
+    "answer": 2,
+    "explain": "1 ÷ 1,90 ≈ 52,6 % par issue ; 2 × 52,6 % ≈ 105,3 %, les 5,3 points au-dessus de 100 % sont la marge."
+  },
+  {
+    "q": "Un coupon combine 3 matchs indépendants, chacun avec 50 % de chances réelles d'être gagné. Quelle est la probabilité que les trois soient gagnés ?",
+    "choices": [
+      "50 %",
+      "12,5 %",
+      "150 %"
+    ],
+    "answer": 1,
+    "explain": "Il faut multiplier les probabilités : 0,5 × 0,5 × 0,5 = 0,125, soit 12,5 %."
+  },
+  {
+    "q": "Tu as perdu 10 000 FCFA ce soir et tu veux miser 20 000 FCFA pour « te refaire ». Quelle est la bonne décision ?",
+    "choices": [
+      "Doubler la mise pour récupérer plus vite",
+      "Emprunter de l'argent pour continuer",
+      "T'arrêter : chercher à se refaire augmente généralement les pertes"
+    ],
+    "answer": 2,
+    "explain": "Courir après ses pertes est un piège classique : la marge du bookmaker joue toujours contre toi."
+  },
+  {
+    "q": "Un « pronostiqueur » montre des captures de gains et promet 100 % de réussite contre un abonnement payant. Que conclure ?",
+    "choices": [
+      "C'est un signal d'arnaque : personne ne peut garantir le résultat d'un match",
+      "C'est une bonne affaire à saisir vite",
+      "Il faut payer pour tester une semaine"
+    ],
+    "answer": 0,
+    "explain": "Aucun pronostic n'est sûr, et les captures d'écran se truquent facilement : c'est une arnaque typique."
+  }
+]

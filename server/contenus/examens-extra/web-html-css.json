@@ -1,0 +1,22 @@
+[
+  {
+    "q": "Quelle ligne, placée dans le <head>, relie le fichier style.css à la page HTML ?",
+    "choices": [
+      "<style src=\"style.css\">",
+      "<link rel=\"stylesheet\" href=\"style.css\">",
+      "<css href=\"style.css\">"
+    ],
+    "answer": 1,
+    "explain": "La balise <link> avec rel=\"stylesheet\" indique au navigateur de charger la feuille de style."
+  },
+  {
+    "q": "Dans un conteneur en display: flex, quelle propriété répartit les cartes sur l'axe principal (horizontal par défaut) ?",
+    "choices": [
+      "align-items",
+      "flex-wrap",
+      "justify-content"
+    ],
+    "answer": 2,
+    "explain": "justify-content gère la répartition sur l'axe principal ; align-items gère l'axe secondaire."
+  }
+]

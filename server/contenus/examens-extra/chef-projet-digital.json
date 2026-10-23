@@ -1,0 +1,62 @@
+[
+  {
+    "q": "Lequel de ces objectifs de projet est mesurable ?",
+    "choices": [
+      "Avoir un beau site",
+      "Être plus visible",
+      "Recevoir 50 demandes de devis via le site d'ici 3 mois"
+    ],
+    "answer": 2,
+    "explain": "Un objectif mesurable a un chiffre et une échéance qui permettent de vérifier s'il est atteint."
+  },
+  {
+    "q": "Qu'est-ce qu'une partie prenante d'un projet ?",
+    "choices": [
+      "Une personne ou un groupe concerné par le projet ou qui peut l'influencer",
+      "Uniquement le développeur",
+      "Un outil de gestion de tâches"
+    ],
+    "answer": 0,
+    "explain": "Client, utilisateurs, équipe, fournisseurs… toutes les personnes concernées sont des parties prenantes."
+  },
+  {
+    "q": "Que contient le carnet de tâches (backlog) ?",
+    "choices": [
+      "Les factures du projet",
+      "La liste priorisée de tout ce qu'il faut réaliser",
+      "Les coordonnées des clients"
+    ],
+    "answer": 1,
+    "explain": "Le backlog regroupe toutes les tâches à faire, classées par priorité."
+  },
+  {
+    "q": "Quelles colonnes utilise-t-on dans un tableau Trello simple ?",
+    "choices": [
+      "Lundi, Mardi, Mercredi",
+      "Client, Fournisseur, Banque",
+      "À faire, En cours, Terminé"
+    ],
+    "answer": 2,
+    "explain": "Ces trois colonnes montrent d'un coup d'œil l'avancement de chaque tâche."
+  },
+  {
+    "q": "Quelle durée a généralement un sprint court en méthode agile ?",
+    "choices": [
+      "Une journée",
+      "Une à deux semaines",
+      "Six mois"
+    ],
+    "answer": 1,
+    "explain": "Un sprint court dure souvent une à deux semaines pour livrer et ajuster régulièrement."
+  },
+  {
+    "q": "Tu estimes un projet à 2 000 000 FCFA et tu ajoutes 10 % de réserve pour les imprévus. Quel budget total annonces-tu ?",
+    "choices": [
+      "2 200 000 FCFA",
+      "2 010 000 FCFA",
+      "2 100 000 FCFA"
+    ],
+    "answer": 0,
+    "explain": "10 % de 2 000 000 = 200 000 FCFA, soit 2 200 000 FCFA au total."
+  }
+]

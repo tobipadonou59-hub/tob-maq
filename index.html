@@ -781,6 +781,29 @@ h3,.card h3,.course-body h3,.pf-body h3{font-family:var(--font-body);font-weight
 .theme-switch:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 .ts-row{display:none;align-items:center;justify-content:space-between;padding:.7rem .6rem;border-top:1px solid var(--line);margin-top:6px;font-weight:600}
 @media (max-width:980px){.ts-row{display:flex}#themeBtn{display:none}}
+
+/* ---------- Examen final et certificats ---------- */
+.exam-card{position:relative;overflow:hidden;border-color:color-mix(in srgb,#C9962F 45%,var(--line))}
+.exam-card::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:linear-gradient(90deg,#9C6B1E,#F3D98B,#B8862B)}
+.exam-medal{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#5B3B08;background:radial-gradient(circle at 35% 30%,#FFF1BF,#E9C46A 45%,#A6741F);box-shadow:0 6px 14px -6px #A6741F;margin-bottom:10px}
+.exam-medal.big{width:76px;height:76px;margin:0 auto 14px}.exam-medal.big .ic{width:34px;height:34px}
+.exam-state{margin-top:12px}
+.exam-wrap{max-width:820px}
+.exam-bar{position:sticky;top:calc(var(--hdr,64px) + 8px);z-index:5;display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin-bottom:16px;box-shadow:var(--shadow);font-weight:700;font-size:.9rem}
+.exam-bar .meter{flex:1}
+.exam-q{margin:0 0 14px;border:1px solid var(--line)}
+.exam-q legend{display:flex;gap:12px;align-items:baseline;font-weight:700;font-size:1.02rem;padding:0;float:left;width:100%;margin-bottom:12px}
+.exam-q legend .mono{color:var(--orange)}
+.exam-choices{clear:both;display:grid;gap:8px}
+.exam-choice{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;cursor:pointer;transition:border-color .15s,background .15s}
+.exam-choice:hover{border-color:var(--accent)}
+.exam-choice input{margin-top:3px;accent-color:var(--accent)}
+.exam-choice:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+.exam-result{text-align:center;padding:36px 28px}
+.exam-result.ok{border-color:color-mix(in srgb,#C9962F 50%,var(--line));background:radial-gradient(80% 60% at 50% 0%,#F3D98B22,transparent),var(--surface)}
+.exam-review{list-style:none;padding:0;margin:18px auto 0;max-width:560px;text-align:left;display:grid;gap:8px}
+.exam-review li{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:10px;background:var(--surface-2)}
+.exam-review li.ok .ic{color:var(--ok)}.exam-review li.ko .ic{color:var(--err)}
 /* ---------- Tableau de bord administrateur (couleurs TOB-MAQ) ---------- */
 .adm{--a-bg:var(--bg);--a-card:var(--surface);--a-ink:var(--ink);--a-muted:var(--muted);--a-line:var(--line);--a-gold:var(--accent);background:radial-gradient(90% 70% at 100% 0%,rgb(91 61 245 / .10) 0%,transparent 60%),radial-gradient(60% 50% at 0% 100%,rgb(242 97 45 / .07) 0%,transparent 60%),var(--bg);color:var(--ink);padding-block:44px 64px}
 .adm-head{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:28px}
@@ -4062,8 +4085,68 @@ function renderFormation(main, id) {
       <div class="card"><h3>Objectifs</h3><ul class="checks">${f.goals.map(g => `<li>${icon("check")}<span>${esc(g)}</span></li>`).join("")}</ul></div>
       <div class="card"><h3>Ta progression</h3><div class="meter" role="progressbar" aria-label="Progression" aria-valuemin="0" aria-valuemax="${p.total}" aria-valuenow="${p.done}"><i style="width:${p.pct * 100}%"></i></div>
         <p class="small" style="margin-top:8px">${p.done} leçon${p.done > 1 ? "s" : ""} terminée${p.done > 1 ? "s" : ""} sur ${p.total}${state.user ? "" : " · enregistrée sur cet appareil"}</p></div>
+      <div class="card exam-card" id="examCard"><span class="exam-medal" aria-hidden="true">${icon("star")}</span><h3>Examen final et certificat</h3><p class="small">Termine toutes les leçons, puis réussis l'examen final (10 questions, 10/10 exigé) pour recevoir ton certificat de mérite en PDF.</p></div>
     </aside>
   </div></section>`;
+  examCard(f);
+}
+/* ---------- Examen final et certificat ---------- */
+async function examCard(f) {
+  const box = $("#examCard"); if (!box) return;
+  const set = html => { if ($("#examCard")) $("#examCard").insertAdjacentHTML("beforeend", `<div class="exam-state">${html}</div>`); };
+  if (!api.configured) return set(`<p class="small muted">Disponible sur le site en ligne.</p>`);
+  if (!state.user) return set(`<a class="btn btn-grad btn-sm btn-block" href="#/inscription">Créer mon compte gratuit</a><p class="small muted" style="margin-top:8px">Un compte est nécessaire pour passer l'examen et recevoir le certificat à ton nom.</p>`);
+  try {
+    const st = await api.request(`/exams/${f.id}`);
+    if (st.certificate) return set(`<p class="small"><span class="chip chip-ok">${icon("check")} Certificat obtenu</span></p><a class="btn btn-grad btn-sm btn-block" href="/api/certificates/${esc(st.certificate.id)}/pdf" download>${icon("download")} Télécharger le certificat</a><p class="small muted" style="margin-top:6px">N° ${esc(st.certificate.id)}</p>`);
+    if (!st.eligible) return set(`<div class="meter" style="margin:6px 0"><i style="width:${Math.round((st.lessons - st.missing.length) / st.lessons * 100)}%"></i></div><p class="small">Encore <b>${st.missing.length}</b> leçon${st.missing.length > 1 ? "s" : ""} à terminer :</p><ul class="small" style="margin:6px 0 0;padding-left:18px">${st.missing.map(l => `<li><a href="#/cours/${l}">${esc(LESSONS[l]?.title || l)}</a></li>`).join("")}</ul>`);
+    set(st.attemptsLeft ? `<a class="btn btn-grad btn-sm btn-block" href="#/examen/${f.id}">${icon("star")} Passer l'examen final</a><p class="small muted" style="margin-top:6px">${st.attemptsLeft} essai${st.attemptsLeft > 1 ? "s" : ""} restant${st.attemptsLeft > 1 ? "s" : ""} aujourd'hui</p>`
+      : `<p class="small">Tu as utilisé tes essais du jour. Révise les leçons et reviens demain.</p>`);
+  } catch (e) { set(e.status === 404 ? `<p class="small muted">L'examen ouvrira quand les leçons de cette formation seront publiées.</p>` : `<p class="small muted">${esc(e.message)}</p>`); }
+}
+function renderExam(main, fid) {
+  const f = FORMATIONS.find(x => x.id === fid);
+  if (!f) return renderNotFound(main);
+  main.innerHTML = pageHead({ crumbs: [["Formations", "#/formations"], [esc(f.title), `#/formation/${f.id}`], ["Examen final"]], eyebrow: "Examen final · 10 questions", title: "Examen final",
+    lead: `${esc(f.title)} · réponds correctement aux 10 questions pour recevoir ton certificat de mérite.` }) + `<section class="section-sm"><div class="wrap exam-wrap" id="exam"><div class="boot" style="min-height:160px"><span class="spinner"></span></div></div></section>`;
+  const box = $("#exam");
+  if (!state.user) { box.innerHTML = emptyState({ ic: "lock", title: "Connecte-toi pour passer l'examen", text: "Le certificat est délivré au nom de ton compte.", action: `<a class="btn btn-primary" href="#/connexion">Se connecter</a>` }); return; }
+  api.request(`/exams/${fid}/start`, { method: "POST" }).then(ex => {
+    box.innerHTML = `<form id="examForm" novalidate>
+      <div class="exam-bar"><span id="examCount">0 / ${ex.questions.length} répondues</span><div class="meter"><i id="examMeter" style="width:0"></i></div></div>
+      ${ex.questions.map((q, i) => `<fieldset class="card exam-q"><legend><span class="mono">${String(i + 1).padStart(2, "0")}</span>${esc(q.q)}</legend>
+        <div class="exam-choices">${q.choices.map((c, k) => `<label class="exam-choice"><input type="radio" name="q${i}" value="${k}"><span>${esc(c)}</span></label>`).join("")}</div></fieldset>`).join("")}
+      <div class="card exam-q"><div class="field" style="margin:0"><label for="certName">Ton nom complet, tel qu'il apparaîtra sur le certificat</label><input class="input" id="certName" maxlength="60" value="${esc(state.user.displayName)}" autocomplete="name"><p class="hint">Prénom et nom, sans abréviation. Il ne pourra plus être modifié ensuite.</p></div></div>
+      <div id="examMsg" aria-live="assertive"></div>
+      <button class="btn btn-grad btn-lg btn-block" type="submit">Valider mes réponses</button></form>`;
+    const form = $("#examForm");
+    form.addEventListener("change", () => { const n = ex.questions.filter((_, i) => form[`q${i}`].value !== "").length; $("#examCount").textContent = `${n} / ${ex.questions.length} répondues`; $("#examMeter").style.width = `${n / ex.questions.length * 100}%`; });
+    form.addEventListener("submit", async e => {
+      e.preventDefault();
+      const answers = ex.questions.map((_, i) => form[`q${i}`].value === "" ? -1 : +form[`q${i}`].value);
+      if (answers.includes(-1)) { $("#examMsg").innerHTML = alertBox("warn", "<p>Réponds à toutes les questions avant de valider.</p>") + "<div style='height:12px'></div>"; return; }
+      if ($("#certName").value.trim().length < 2) { $("#examMsg").innerHTML = alertBox("warn", "<p>Indique ton nom complet pour le certificat.</p>") + "<div style='height:12px'></div>"; return; }
+      await withLoading(form, "Correction…", $("#examMsg"), async () => {
+        const r = await api.request(`/exams/attempts/${ex.attempt}/submit`, { method: "POST", body: { answers, fullName: $("#certName").value.trim() } });
+        window.scrollTo(0, 0);
+        box.innerHTML = r.passed
+          ? `<div class="card exam-result ok"><div class="exam-medal big" aria-hidden="true">${icon("star")}</div><h2>Félicitations, 10/10 !</h2><p>Tu as réussi l'examen final de <b>${esc(f.title)}</b>. Ton certificat de mérite est prêt.</p>
+              <div class="row" style="justify-content:center;margin-top:18px"><a class="btn btn-grad btn-lg" href="/api/certificates/${esc(r.certificate)}/pdf" download>${icon("download")} Télécharger mon certificat (PDF)</a><a class="btn btn-outline btn-lg" href="#/certificat/${esc(r.certificate)}">Page de vérification</a></div>
+              <p class="small muted" style="margin-top:14px">N° ${esc(r.certificate)} · tu le retrouves à tout moment dans Mon espace.</p></div>`
+          : `<div class="card exam-result"><h2>${r.score}/${r.total} : presque !</h2><p>Le certificat demande <b>10 bonnes réponses sur 10</b>. Révise les leçons, puis retente : les questions changent à chaque essai.</p>
+              <ol class="exam-review">${r.results.map((x, i) => `<li class="${x.ok ? "ok" : "ko"}">${icon(x.ok ? "check" : "x")}<span><b>Question ${i + 1}</b> ${x.ok ? "· juste" : "· à revoir"}${x.explain ? `<br><span class="muted small">${esc(x.explain)}</span>` : ""}</span></li>`).join("")}</ol>
+              <div class="row" style="justify-content:center;margin-top:16px"><a class="btn btn-primary" href="#/formation/${f.id}">Revoir la formation</a><a class="btn btn-outline" href="#/examen/${f.id}" onclick="setTimeout(()=>route(),0)">Nouvel essai</a></div></div>`;
+      });
+    });
+  }).catch(e => { box.innerHTML = emptyState({ ic: "info", title: "L'examen n'est pas encore disponible", text: esc(e.message), action: `<a class="btn btn-primary" href="#/formation/${f.id}">Retour à la formation</a>` }); });
+}
+function renderVerify(main, id) {
+  main.innerHTML = pageHead({ crumbs: [["Vérifier un certificat"]], eyebrow: "Authenticité", title: "Vérifier un certificat", lead: "Chaque certificat TOB-MAQ porte un numéro unique." }) + `<section class="section-sm"><div class="wrap" style="max-width:760px" id="verif"><div class="boot" style="min-height:120px"><span class="spinner"></span></div></div></section>`;
+  if (!api.configured) { $("#verif").innerHTML = alertBox("info", "<p>La vérification fonctionne sur le site en ligne.</p>"); return; }
+  api.request(`/certificates/${encodeURIComponent(id)}`).then(c => {
+    $("#verif").innerHTML = `<div class="card exam-result ok"><div class="exam-medal big" aria-hidden="true">${icon("check")}</div><h2>Certificat authentique</h2>
+      <dl class="specs" style="text-align:left;max-width:420px;margin:16px auto 0"><dt>Titulaire</dt><dd>${esc(c.fullName)}</dd><dt>Formation</dt><dd>${esc(c.formation)}</dd><dt>Note</dt><dd>${c.score}/${c.total}</dd><dt>Délivré le</dt><dd>${fmtDate(c.issuedAt)}</dd><dt>Numéro</dt><dd class="mono">${esc(c.id)}</dd></dl></div>`;
+  }).catch(() => { $("#verif").innerHTML = alertBox("error", `<p><strong>Aucun certificat ne correspond au numéro ${esc(id)}.</strong> Vérifie l'orthographe (format TM-XXXXX-XXXXX).</p>`); });
 }
 
 /* ---------- Lecteur de cours ---------- */
@@ -4431,12 +4514,18 @@ function renderDashboard(main, q = new URLSearchParams()) {
         <div class="card"><h2 style="font-size:1.2rem">Projets enregistrés</h2>${u ? `<div id="myProjects">${emptyState({ ic: "layers", title: "Chargement…", text: "" })}</div>` : emptyState({ ic: "layers", title: "Connecte-toi pour enregistrer tes projets", text: "Tes créations IA et tes projets de portfolio sont stockés sur le serveur, liés à ton compte." })}</div>
       </div>
       <div class="stack">
+        <div class="card"><h2 style="font-size:1.2rem">${icon("star")} Mes certificats</h2><div id="myCerts">${u ? `<p class="small">Chargement…</p>` : `<p class="small">Connecte-toi pour passer les examens finaux et obtenir tes certificats.</p>`}</div></div>
         <div class="card"><h2 style="font-size:1.2rem">Abonnement</h2><div id="premiumBox">${u ? `<p class="small">Chargement…</p>` : `<p class="small">Formule gratuite.</p><a class="btn btn-outline btn-sm" href="#/premium">Découvrir Premium</a>`}</div></div>
         <div class="card"><h2 style="font-size:1.2rem">Ressources favorites</h2>${favs.length ? `<ul class="list">${favs.map(r => `<li><a href="#/ressource/${r.id}">${esc(r.title)}</a></li>`).join("")}</ul>` : `<p class="small">Touche l'étoile d'une ressource pour l'ajouter ici.</p>`}</div>
         <div class="card"><h2 style="font-size:1.2rem">Historique des téléchargements</h2>${state.downloads.length ? `<ul class="list">${state.downloads.slice(0, 8).map(d => `<li><span>${esc(d.title)}</span><span class="small muted">${fmtDate(d.at)}</span></li>`).join("")}</ul>` : `<p class="small">Aucun téléchargement pour l'instant.</p>`}</div>
         <div class="card"><h2 style="font-size:1.2rem">Préférences</h2><p class="small">Thème, taille du texte, contraste et animations.</p><a class="btn btn-outline btn-sm" href="#/parametres" style="margin-top:10px">${icon("settings")} Paramètres</a></div>
       </div>
     </div></div></section>`;
+  if (u) api.request("/me/certificates").then(cs => {
+    const box = $("#myCerts"); if (!box) return;
+    box.innerHTML = cs.length ? `<ul class="list">${cs.map(c => `<li style="display:block"><b>${esc(c.title)}</b><span class="small muted"> · ${fmtDate(c.issuedAt)}</span><div class="row" style="margin-top:6px"><a class="btn btn-grad btn-sm" href="/api/certificates/${esc(c.id)}/pdf" download>${icon("download")} PDF</a><a class="btn btn-ghost btn-sm" href="#/certificat/${esc(c.id)}">Vérifier</a></div></li>`).join("")}</ul>`
+      : `<p class="small">Termine une formation et réussis son examen final (10/10) pour obtenir ton premier certificat.</p><a class="btn btn-outline btn-sm" href="#/formations" style="margin-top:8px">Voir les formations</a>`;
+  }).catch(() => {});
   if (u) api.request("/me/billing").then(b => {
     state.user.premium = b.premium; state.user.premiumUntil = b.premiumUntil;
     const box = $("#premiumBox"); if (!box) return;
@@ -6651,7 +6740,7 @@ const ROUTES = [
   [/^ressources$/, (m, p, q) => renderResources(m, q)], [/^ressource\/([\w-]+)$/, (m, p) => renderResource(m, p[1])],
   [/^inscription$/, m => renderSignup(m)], [/^connexion$/, m => renderLogin(m)], [/^tableau-de-bord$/, (m, p, q) => renderDashboard(m, q)], [/^premium$/, m => renderPremium(m)],
   [/^portfolio$/, m => renderPortfolio(m)], [/^projet\/([\w-]+)$/, (m, p) => renderProject(m, p[1])], [/^profil$/, m => renderProfile(m)],
-  [/^parametres$/, m => renderSettings(m)], [/^aide$/, m => renderHelp(m)], [/^application$/, m => renderApp(m)], [/^defi$/, () => goDefi()], [/^reprendre$/, () => goResume()], [/^(conditions|confidentialite)$/, (m, p) => renderLegal(m, p[1])],
+  [/^parametres$/, m => renderSettings(m)], [/^aide$/, m => renderHelp(m)], [/^application$/, m => renderApp(m)], [/^examen\/([\w-]+)$/, (m, p) => renderExam(m, p[1])], [/^certificat\/([\w-]+)$/, (m, p) => renderVerify(m, p[1])], [/^defi$/, () => goDefi()], [/^reprendre$/, () => goResume()], [/^(conditions|confidentialite)$/, (m, p) => renderLegal(m, p[1])],
   [/^admin$/, m => renderAdmin(m)], [/^reinitialiser$/, (m, p, q) => renderReset(m, q)], [/^recherche$/, (m, p, q) => renderSearch(m, q)]
 ];
 const stripHash = h => String(h || "").replace(/^#\/?/, "");

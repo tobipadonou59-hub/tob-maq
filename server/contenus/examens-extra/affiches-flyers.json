@@ -1,0 +1,117 @@
+[
+  {
+    "q": "Quelles sont les dimensions d'un flyer au format A5 ?",
+    "choices": [
+      "210 × 297 mm",
+      "100 × 150 mm",
+      "148 × 210 mm",
+      "297 × 420 mm"
+    ],
+    "answer": 2,
+    "explain": "L'A5 mesure 148 × 210 mm, soit la moitié d'une feuille A4."
+  },
+  {
+    "q": "Quelle valeur de fond perdu est la plus couramment demandée par les imprimeurs ?",
+    "choices": [
+      "3 mm",
+      "3 cm",
+      "0 mm"
+    ],
+    "answer": 0,
+    "explain": "3 mm est la valeur la plus courante, mais on vérifie toujours la fiche technique de l'imprimeur."
+  },
+  {
+    "q": "Quelle résolution viser pour les photos d'un flyer imprimé à taille réelle ?",
+    "choices": [
+      "72 ppp",
+      "300 ppp",
+      "20 ppp"
+    ],
+    "answer": 1,
+    "explain": "300 ppp à la taille d'impression donne une image nette ; 72 ppp convient seulement à l'écran."
+  },
+  {
+    "q": "Quel mode colorimétrique utilise-t-on pour l'impression en quadrichromie ?",
+    "choices": [
+      "RVB",
+      "Niveaux de gris uniquement",
+      "CMJN"
+    ],
+    "answer": 2,
+    "explain": "L'imprimerie travaille avec quatre encres : cyan, magenta, jaune et noir (CMJN)."
+  },
+  {
+    "q": "Le « format fini » d'un flyer, c'est…",
+    "choices": [
+      "sa taille après la coupe",
+      "sa taille avec les fonds perdus",
+      "le poids du fichier PDF",
+      "le nombre d'exemplaires"
+    ],
+    "answer": 0,
+    "explain": "Le format fini est la taille du flyer que le client aura en main, une fois coupé."
+  },
+  {
+    "q": "La photo de fond de ton flyer s'arrête exactement au bord de la page. Que dois-tu faire ?",
+    "choices": [
+      "La réduire pour laisser une marge blanche",
+      "L'étendre jusqu'au trait de fond perdu",
+      "La supprimer",
+      "La convertir en noir et blanc"
+    ],
+    "answer": 1,
+    "explain": "Tout fond qui touche le bord doit déborder jusqu'au fond perdu pour éviter un liseré blanc après la coupe."
+  },
+  {
+    "q": "Un client te donne un petit logo récupéré sur sa page Facebook pour une grande affiche. Quel est le risque ?",
+    "choices": [
+      "Le logo sera trop net",
+      "Les couleurs seront plus vives",
+      "Le logo sera flou ou pixelisé à l'impression",
+      "Aucun risque"
+    ],
+    "answer": 2,
+    "explain": "Une petite image web manque de pixels pour l'impression : il faut demander une version vectorielle ou en haute définition."
+  },
+  {
+    "q": "Pour une affiche de concert collée dans les rues de Cotonou, quelle est la priorité ?",
+    "choices": [
+      "Un titre court, grand et contrasté, lisible de loin",
+      "Un long texte détaillé en petits caractères",
+      "Le plus grand nombre de polices possible"
+    ],
+    "answer": 0,
+    "explain": "Une affiche se lit en quelques secondes et à distance : le message principal doit sauter aux yeux."
+  },
+  {
+    "q": "Quelles informations un flyer événementiel doit-il absolument contenir ?",
+    "choices": [
+      "La biographie complète de chaque artiste",
+      "Le prix de revient de l'impression",
+      "La liste des fournisseurs",
+      "Le nom de l'événement, la date, l'heure et le lieu"
+    ],
+    "answer": 3,
+    "explain": "Le public doit savoir immédiatement quoi, quand et où ; un contact est aussi conseillé."
+  },
+  {
+    "q": "Pourquoi les polices doivent-elles être incorporées dans le PDF envoyé à l'imprimeur ?",
+    "choices": [
+      "Pour que le texte s'imprime exactement comme prévu, même si l'imprimeur n'a pas la police",
+      "Pour réduire le nombre de pages",
+      "Pour transformer le texte en couleur RVB"
+    ],
+    "answer": 0,
+    "explain": "Sans police incorporée, l'ordinateur de l'imprimeur la remplacerait par une autre et la mise en page changerait."
+  },
+  {
+    "q": "Que signifie le BAT que l'imprimeur te demande de valider ?",
+    "choices": [
+      "Bande À Trancher",
+      "Bon À Tirer : la validation finale avant impression",
+      "Bordure Automatique de Texte"
+    ],
+    "answer": 1,
+    "explain": "Le Bon À Tirer est l'épreuve que le client ou le graphiste valide avant le lancement de l'impression."
+  }
+]

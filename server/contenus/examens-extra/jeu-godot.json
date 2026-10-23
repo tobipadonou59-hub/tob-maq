@@ -1,0 +1,62 @@
+[
+  {
+    "q": "Quelle fonction est appelée à chaque image pour gérer le mouvement et la physique ?",
+    "choices": [
+      "_ready()",
+      "_physics_process(delta)",
+      "queue_free()"
+    ],
+    "answer": 1,
+    "explain": "_physics_process(delta) s'exécute à intervalle régulier, idéal pour déplacer un personnage."
+  },
+  {
+    "q": "Dans Godot 4, quelle méthode déplace un CharacterBody2D en tenant compte des collisions ?",
+    "choices": [
+      "move_and_slide()",
+      "add_child()",
+      "queue_free()"
+    ],
+    "answer": 0,
+    "explain": "move_and_slide() applique la variable velocity et fait glisser le personnage contre les obstacles."
+  },
+  {
+    "q": "Que permet `@export` devant une variable comme `@export var vitesse = 200` ?",
+    "choices": [
+      "D'exporter le jeu sur téléphone",
+      "De supprimer la variable au lancement",
+      "De régler sa valeur dans l'Inspecteur sans toucher au code"
+    ],
+    "answer": 2,
+    "explain": "Une variable exportée apparaît dans l'Inspecteur, ce qui rend la vitesse réglable facilement."
+  },
+  {
+    "q": "Quel nœud utiliser pour une pièce qui détecte le passage du joueur ?",
+    "choices": [
+      "Area2D",
+      "Camera2D",
+      "Label"
+    ],
+    "answer": 0,
+    "explain": "Area2D détecte les corps qui entrent dans sa zone et émet le signal body_entered."
+  },
+  {
+    "q": "Quel nœud convient à un mur qui ne bouge jamais ?",
+    "choices": [
+      "Area2D",
+      "StaticBody2D",
+      "Sprite2D"
+    ],
+    "answer": 1,
+    "explain": "StaticBody2D est un corps physique immobile qui bloque les autres corps, avec sa CollisionShape2D."
+  },
+  {
+    "q": "Quelle fonction lit en une ligne la direction donnée par les touches fléchées ?",
+    "choices": [
+      "print(\"ui_left\")",
+      "get_tree().quit()",
+      "Input.get_vector(\"ui_left\", \"ui_right\", \"ui_up\", \"ui_down\")"
+    ],
+    "answer": 2,
+    "explain": "Input.get_vector() renvoie un vecteur de direction à partir de quatre actions d'entrée."
+  }
+]

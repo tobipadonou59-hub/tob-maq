@@ -1,0 +1,62 @@
+[
+  {
+    "q": "Que faut-il privilégier pour une bonne photo produit ?",
+    "choices": [
+      "Une photo floue prise de loin",
+      "Une lumière naturelle et un fond neutre",
+      "Une photo trouvée sur Internet"
+    ],
+    "answer": 1,
+    "explain": "Une lumière douce et un fond simple mettent le produit en valeur et inspirent confiance."
+  },
+  {
+    "q": "Tu vends un article 10 000 FCFA et tu paies 2 % de frais de paiement. Combien reçois-tu ?",
+    "choices": [
+      "10 200 FCFA",
+      "8 000 FCFA",
+      "9 800 FCFA"
+    ],
+    "answer": 2,
+    "explain": "2 % de 10 000 = 200 FCFA de frais, donc tu reçois 9 800 FCFA."
+  },
+  {
+    "q": "Quelle action aide à augmenter le panier moyen ?",
+    "choices": [
+      "Proposer un produit complémentaire ou un lot",
+      "Supprimer la moitié du catalogue",
+      "Répondre aux clients le lendemain"
+    ],
+    "answer": 0,
+    "explain": "Un produit complémentaire ou un lot incite le client à acheter un peu plus à chaque commande."
+  },
+  {
+    "q": "Que dois-tu annoncer clairement au client avant qu'il commande ?",
+    "choices": [
+      "Le nom de ton fournisseur",
+      "Le prix, les zones et le délai de livraison",
+      "Ton chiffre d'affaires"
+    ],
+    "answer": 1,
+    "explain": "Le client doit connaître le coût total et le délai avant de s'engager."
+  },
+  {
+    "q": "Ton coût de revient est de 4 000 FCFA. Tu veux une marge égale à 50 % de ce coût. Quel est ton prix de vente ?",
+    "choices": [
+      "8 000 FCFA",
+      "4 500 FCFA",
+      "6 000 FCFA"
+    ],
+    "answer": 2,
+    "explain": "50 % de 4 000 = 2 000 FCFA de marge, donc 4 000 + 2 000 = 6 000 FCFA."
+  },
+  {
+    "q": "Une cliente de Cotonou reçoit un article défectueux. Quelle est la bonne réaction ?",
+    "choices": [
+      "T'excuser et proposer un échange ou un remboursement selon ta politique de retour",
+      "Lui dire que ce n'est pas ton problème",
+      "Bloquer son numéro"
+    ],
+    "answer": 0,
+    "explain": "Un service après-vente sérieux protège ta réputation et fidélise les clients."
+  }
+]

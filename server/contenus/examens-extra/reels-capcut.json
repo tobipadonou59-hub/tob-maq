@@ -1,0 +1,119 @@
+[
+  {
+    "q": "Tu montes une vidéo pour la page TikTok d'un salon de coiffure de Cotonou. Quel format de projet choisis-tu ?",
+    "choices": [
+      "16:9",
+      "9:16",
+      "4:3",
+      "21:9"
+    ],
+    "answer": 1,
+    "explain": "TikTok, Reels et Shorts sont regardés en plein écran sur téléphone, en vertical 9:16."
+  },
+  {
+    "q": "Pourquoi soigner particulièrement les toutes premières secondes d'un Reel ?",
+    "choices": [
+      "C'est là que le spectateur décide de regarder ou de faire défiler",
+      "Parce que la fin n'est jamais vue",
+      "Pour alléger le fichier",
+      "Parce que l'application les coupe toujours"
+    ],
+    "answer": 0,
+    "explain": "Une accroche forte dès le début retient l'attention avant que la personne ne passe à la vidéo suivante."
+  },
+  {
+    "q": "Après avoir généré des sous-titres automatiques dans CapCut, que dois-tu faire ?",
+    "choices": [
+      "Rien, ils sont toujours parfaits",
+      "Les supprimer",
+      "Les relire et corriger les erreurs",
+      "Les traduire en image"
+    ],
+    "answer": 2,
+    "explain": "La reconnaissance vocale se trompe parfois, surtout sur les noms propres : on relit toujours."
+  },
+  {
+    "q": "Comment rendre des sous-titres bien lisibles sur toutes les images ?",
+    "choices": [
+      "Texte fin et gris clair",
+      "Texte très petit en bas de l'écran",
+      "Texte de la même couleur que le fond",
+      "Texte contrasté, avec un contour ou un fond derrière"
+    ],
+    "answer": 3,
+    "explain": "Un contour ou un fond garantit la lecture, même quand l'image derrière change."
+  },
+  {
+    "q": "Pourquoi vérifier ta vidéo sur un téléphone avant de la publier ?",
+    "choices": [
+      "Pour contrôler la lisibilité des textes et le cadrage, comme le verra le public",
+      "Parce que CapCut l'exige",
+      "Pour réduire la durée de la vidéo"
+    ],
+    "answer": 0,
+    "explain": "Le public regarde sur petit écran : ce qui semble lisible sur ordinateur peut ne pas l'être sur téléphone."
+  },
+  {
+    "q": "Tu places un rush filmé à l'horizontale dans un projet 9:16. Que se passe-t-il si tu ne fais rien ?",
+    "choices": [
+      "La vidéo devient automatiquement verticale sans perte",
+      "Des bandes vides apparaissent en haut et en bas",
+      "Le son disparaît",
+      "La vidéo est refusée à l'export"
+    ],
+    "answer": 1,
+    "explain": "Il faut agrandir et recadrer le plan, ou mieux, filmer directement à la verticale."
+  },
+  {
+    "q": "Comment tenir le téléphone pour filmer un Reel ?",
+    "choices": [
+      "À l'horizontale",
+      "En diagonale",
+      "À la verticale"
+    ],
+    "answer": 2,
+    "explain": "Filmer à la verticale remplit l'écran 9:16 sans avoir à recadrer ni perdre de qualité."
+  },
+  {
+    "q": "Tu veux ajouter une chanson célèbre à la vidéo d'un client sans en avoir les droits. Quel est le risque ?",
+    "choices": [
+      "La vidéo peut être rendue muette ou bloquée par la plateforme",
+      "La vidéo sera mieux mise en avant",
+      "Aucun risque",
+      "La qualité de l'image baisse"
+    ],
+    "answer": 0,
+    "explain": "Il vaut mieux utiliser les musiques proposées par la bibliothèque de l'application ou des musiques libres de droits."
+  },
+  {
+    "q": "Comment rendre le montage d'un Reel plus dynamique ?",
+    "choices": [
+      "Allonger chaque plan au maximum",
+      "Supprimer les temps morts et enchaîner des plans courts",
+      "Ajouter une longue introduction",
+      "Garder toutes les hésitations"
+    ],
+    "answer": 1,
+    "explain": "Des coupes franches et sans temps morts gardent l'attention jusqu'à la fin."
+  },
+  {
+    "q": "Quelle résolution choisir à l'export pour une vidéo nette sur les réseaux sociaux ?",
+    "choices": [
+      "360p",
+      "480p",
+      "1080p"
+    ],
+    "answer": 2,
+    "explain": "La 1080p (Full HD) est nette sur téléphone tout en restant légère à publier."
+  },
+  {
+    "q": "Quelle taille donner aux textes affichés dans une vidéo verticale ?",
+    "choices": [
+      "Assez grande pour être lue facilement sur un petit écran",
+      "La plus petite possible pour ne rien cacher",
+      "Peu importe, personne ne les lit"
+    ],
+    "answer": 0,
+    "explain": "Sur téléphone, un texte trop petit est ignoré : il doit se lire d'un coup d'œil."
+  }
+]

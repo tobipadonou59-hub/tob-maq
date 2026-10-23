@@ -1,0 +1,121 @@
+[
+  {
+    "q": "Dans le moniteur source, quelles touches marquent le point d'entrée et le point de sortie d'un plan ?",
+    "choices": [
+      "I et O",
+      "A et Z",
+      "E et S",
+      "P et L"
+    ],
+    "answer": 0,
+    "explain": "I (In) marque l'entrée, O (Out) marque la sortie : seule cette portion sera envoyée dans la timeline."
+  },
+  {
+    "q": "Quel est l'avantage de créer la séquence à partir d'un clip ?",
+    "choices": [
+      "Elle ajoute automatiquement de la musique",
+      "Elle reprend automatiquement les réglages du clip (taille d'image, cadence)",
+      "Elle exporte directement la vidéo",
+      "Elle supprime les plans ratés"
+    ],
+    "answer": 1,
+    "explain": "La séquence correspond ainsi exactement aux rushes, sans bandes noires ni problème de cadence."
+  },
+  {
+    "q": "Quel raccourci sélectionne l'outil Cutter (rasoir) dans Premiere Pro ?",
+    "choices": [
+      "V",
+      "C",
+      "H",
+      "R"
+    ],
+    "answer": 1,
+    "explain": "C active le Cutter, qui coupe un plan à l'endroit où l'on clique."
+  },
+  {
+    "q": "Quelle touche revient à l'outil Sélection après avoir utilisé le Cutter ?",
+    "choices": [
+      "V",
+      "Q",
+      "K"
+    ],
+    "answer": 0,
+    "explain": "V est l'outil Sélection, celui qu'on utilise la plupart du temps pour déplacer les plans."
+  },
+  {
+    "q": "Après avoir supprimé un plan, un trou noir reste dans la timeline. Comment le fermer proprement ?",
+    "choices": [
+      "Ajouter un fondu au noir",
+      "Exporter la vidéo",
+      "Faire un clic droit sur le trou et choisir de le supprimer : les plans suivants se raccordent",
+      "Fermer le projet"
+    ],
+    "answer": 2,
+    "explain": "Supprimer l'espace vide décale les plans suivants pour qu'il n'y ait plus de trou."
+  },
+  {
+    "q": "Que font les touches J, K et L pendant le montage ?",
+    "choices": [
+      "Lecture arrière, pause, lecture avant",
+      "Couper, copier, coller",
+      "Zoom, dézoom, plein écran",
+      "Ajouter titre, transition, effet"
+    ],
+    "answer": 0,
+    "explain": "J lit en arrière, K met en pause et L lit en avant ; appuyer plusieurs fois accélère la lecture."
+  },
+  {
+    "q": "Dans le panneau Projet, dans quoi range-t-on ses rushes pour bien les organiser ?",
+    "choices": [
+      "Dans des calques",
+      "Dans des gabarits",
+      "Dans des chutiers"
+    ],
+    "answer": 2,
+    "explain": "Les chutiers sont les dossiers de Premiere Pro : par exemple « Interviews », « Plans de coupe », « Musique »."
+  },
+  {
+    "q": "Tu montes un clip dynamique sur une musique. Où placer tes coupes de préférence ?",
+    "choices": [
+      "Au hasard",
+      "Sur les temps forts de la musique",
+      "Uniquement au début de la vidéo",
+      "Toujours au milieu d'une phrase"
+    ],
+    "answer": 1,
+    "explain": "Couper sur le rythme donne un montage fluide et énergique."
+  },
+  {
+    "q": "Quel format choisir pour exporter une vidéo destinée aux réseaux sociaux ?",
+    "choices": [
+      "H.264",
+      "PSD",
+      "PDF",
+      "WAV"
+    ],
+    "answer": 0,
+    "explain": "Le H.264 (fichier .mp4) offre un bon équilibre entre qualité et poids, accepté par toutes les plateformes."
+  },
+  {
+    "q": "Que sont les « rushes » ?",
+    "choices": [
+      "Les effets spéciaux ajoutés au montage",
+      "Les sous-titres de la vidéo",
+      "La vidéo finale exportée",
+      "Les fichiers bruts filmés, avant montage"
+    ],
+    "answer": 3,
+    "explain": "Les rushes sont toute la matière filmée ; le montage consiste à y choisir les meilleurs moments."
+  },
+  {
+    "q": "Pour la vidéo promo d'un restaurant de Cotonou, un plan est flou et n'apporte rien. Que fais-tu ?",
+    "choices": [
+      "Tu le gardes pour rallonger la vidéo",
+      "Tu le retires pour garder un rythme efficace",
+      "Tu le répètes deux fois",
+      "Tu le places en ouverture"
+    ],
+    "answer": 1,
+    "explain": "Supprimer les plans inutiles rend la vidéo plus courte, plus claire et plus agréable à regarder."
+  }
+]

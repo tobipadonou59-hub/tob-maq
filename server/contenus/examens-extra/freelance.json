@@ -1,0 +1,62 @@
+[
+  {
+    "q": "Que doit contenir un bon portfolio ?",
+    "choices": [
+      "Tes meilleurs travaux, avec le contexte et le résultat obtenu",
+      "Tous tes travaux, même ratés",
+      "Uniquement ton CV scolaire"
+    ],
+    "answer": 0,
+    "explain": "Quelques réalisations bien choisies et expliquées montrent ce que tu sais faire pour un client."
+  },
+  {
+    "q": "Quel titre de profil LinkedIn est le plus efficace pour un freelance ?",
+    "choices": [
+      "Disponible",
+      "Étudiant",
+      "Graphiste | Identités visuelles pour restaurants à Cotonou"
+    ],
+    "answer": 2,
+    "explain": "Un titre précis dit tout de suite ce que tu fais et pour qui."
+  },
+  {
+    "q": "Pourquoi fixer un nombre de retouches dans le devis ?",
+    "choices": [
+      "Pour refuser toute modification",
+      "Pour éviter un travail sans fin non payé ; les retouches en plus sont facturées",
+      "Pour finir le travail plus tard"
+    ],
+    "answer": 1,
+    "explain": "Des retouches limitées et écrites protègent ton temps et clarifient l'accord."
+  },
+  {
+    "q": "Une facture est impayée cinq jours après la date prévue. Que fais-tu ?",
+    "choices": [
+      "Tu publies le nom du client sur les réseaux sociaux",
+      "Tu attends sans rien dire",
+      "Tu relances poliment par écrit en rappelant le numéro de facture et le montant"
+    ],
+    "answer": 2,
+    "explain": "Une relance courtoise et précise est la façon professionnelle d'obtenir le paiement."
+  },
+  {
+    "q": "Ton devis comprend 3 affiches à 25 000 FCFA chacune et un logo à 80 000 FCFA. Quel est le total ?",
+    "choices": [
+      "105 000 FCFA",
+      "155 000 FCFA",
+      "130 000 FCFA"
+    ],
+    "answer": 1,
+    "explain": "3 × 25 000 = 75 000 FCFA, plus 80 000 FCFA, soit 155 000 FCFA."
+  },
+  {
+    "q": "Un client change d'avis sans arrêt et devient irrespectueux. Quelle est la bonne attitude ?",
+    "choices": [
+      "Rester professionnel, t'appuyer sur le contrat écrit et y mettre fin si nécessaire selon ses clauses",
+      "Lui répondre sur le même ton",
+      "Faire gratuitement tout ce qu'il demande"
+    ],
+    "answer": 0,
+    "explain": "Le contrat fixe le cadre : il te permet de rester calme et de te protéger."
+  }
+]

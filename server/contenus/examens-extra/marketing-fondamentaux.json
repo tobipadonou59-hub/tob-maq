@@ -1,0 +1,62 @@
+[
+  {
+    "q": "Quelle est la façon la plus simple de mener une étude de marché quand on démarre ?",
+    "choices": [
+      "Interroger une vingtaine de clients potentiels et observer les concurrents",
+      "Copier les prix du concurrent le plus connu",
+      "Lancer le produit sans parler à personne"
+    ],
+    "answer": 0,
+    "explain": "Questionner de vrais clients et observer le marché donne des informations concrètes sans gros budget."
+  },
+  {
+    "q": "Que signifie segmenter son marché ?",
+    "choices": [
+      "Baisser ses prix pour tout le monde",
+      "Diviser les clients en groupes ayant des besoins ou des caractéristiques proches",
+      "Vendre dans plusieurs villes à la fois"
+    ],
+    "answer": 1,
+    "explain": "La segmentation regroupe les clients qui se ressemblent pour mieux choisir à qui s'adresser."
+  },
+  {
+    "q": "Pour une tenue, tu paies 3 000 FCFA de tissu, 1 500 FCFA de couture et 500 FCFA d'emballage. Quel est ton coût de revient ?",
+    "choices": [
+      "4 500 FCFA",
+      "3 000 FCFA",
+      "5 000 FCFA"
+    ],
+    "answer": 2,
+    "explain": "Le coût de revient additionne toutes les dépenses : 3 000 + 1 500 + 500 = 5 000 FCFA."
+  },
+  {
+    "q": "Que désigne le positionnement d'une marque ?",
+    "choices": [
+      "La place qu'elle occupe dans l'esprit des clients par rapport aux concurrents",
+      "L'adresse de sa boutique",
+      "Le nombre de produits qu'elle vend"
+    ],
+    "answer": 0,
+    "explain": "Se positionner, c'est choisir comment on veut être perçu face aux concurrents."
+  },
+  {
+    "q": "Que doit préciser un plan de communication simple ?",
+    "choices": [
+      "Uniquement le logo de la marque",
+      "Le nom des fournisseurs",
+      "Le message, les canaux, le calendrier et le budget"
+    ],
+    "answer": 2,
+    "explain": "Un plan de communication dit quoi dire, où, quand et avec quel budget."
+  },
+  {
+    "q": "Que signifie vérifier la cohérence des 4P ?",
+    "choices": [
+      "Avoir le prix le plus bas possible",
+      "S'assurer que produit, prix, distribution et communication vont dans le même sens pour la même cible",
+      "Utiliser les quatre réseaux sociaux les plus connus"
+    ],
+    "answer": 1,
+    "explain": "Les 4P doivent se renforcer : un produit haut de gamme, par exemple, ne se vend pas au prix le plus bas."
+  }
+]

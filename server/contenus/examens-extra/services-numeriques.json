@@ -1,0 +1,62 @@
+[
+  {
+    "q": "Pourquoi présenter ton offre en trois formules (par exemple Essentiel, Pro, Premium) ?",
+    "choices": [
+      "Pour compliquer le choix du client",
+      "Pour que le client choisisse selon son budget et ses besoins",
+      "Pour éviter d'afficher les prix"
+    ],
+    "answer": 1,
+    "explain": "Trois formules claires aident chaque PME à trouver l'offre qui lui convient."
+  },
+  {
+    "q": "Tu as 8 clients en forfait mensuel à 35 000 FCFA. Quel est ton revenu mensuel régulier ?",
+    "choices": [
+      "280 000 FCFA",
+      "245 000 FCFA",
+      "350 000 FCFA"
+    ],
+    "answer": 0,
+    "explain": "8 × 35 000 = 280 000 FCFA par mois."
+  },
+  {
+    "q": "Que noter dans le fichier de suivi des clients ?",
+    "choices": [
+      "Uniquement leur prénom",
+      "Leurs opinions politiques",
+      "Les coordonnées, la formule souscrite, la date de renouvellement et les paiements"
+    ],
+    "answer": 2,
+    "explain": "Ce fichier permet de savoir à tout moment qui a quoi, jusqu'à quand et ce qui reste à payer."
+  },
+  {
+    "q": "Ce mois-ci, tu as facturé 500 000 FCFA mais tes clients n'ont payé que 300 000 FCFA. Combien est réellement entré dans ta trésorerie ?",
+    "choices": [
+      "500 000 FCFA",
+      "300 000 FCFA",
+      "800 000 FCFA"
+    ],
+    "answer": 1,
+    "explain": "La trésorerie ne compte que l'argent réellement encaissé, pas les factures en attente."
+  },
+  {
+    "q": "Quand est-il pertinent de sous-traiter une partie du travail ?",
+    "choices": [
+      "Dès le premier client, pour ne rien faire soi-même",
+      "Jamais, même si tu es débordé",
+      "Quand la demande dépasse ta capacité ou exige une compétence que tu n'as pas"
+    ],
+    "answer": 2,
+    "explain": "Sous-traiter permet de tenir tes engagements sans refuser de clients, tout en restant responsable de la qualité."
+  },
+  {
+    "q": "Comment garantir une bonne qualité de service à tes clients PME ?",
+    "choices": [
+      "Fixer des délais de réponse clairs, les respecter et demander régulièrement l'avis des clients",
+      "Répondre seulement quand tu as le temps",
+      "Changer de prix chaque mois sans prévenir"
+    ],
+    "answer": 0,
+    "explain": "Des engagements clairs, tenus et vérifiés auprès des clients construisent la confiance."
+  }
+]

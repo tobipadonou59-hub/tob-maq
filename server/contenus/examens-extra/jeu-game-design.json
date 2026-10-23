@@ -1,0 +1,62 @@
+[
+  {
+    "q": "Que doit dire l'idée du jeu résumée en une phrase ?",
+    "choices": [
+      "La liste complète de tous les niveaux",
+      "Qui est le joueur, ce qu'il fait et quel est son but",
+      "Le prix de vente du jeu"
+    ],
+    "answer": 1,
+    "explain": "Une phrase courte qui donne le personnage, l'action et l'objectif permet de garder le cap pendant toute la conception."
+  },
+  {
+    "q": "Qu'est-ce qu'une condition de défaite ?",
+    "choices": [
+      "Ce qui fait perdre la partie",
+      "Le score le plus élevé",
+      "Le menu de pause"
+    ],
+    "answer": 0,
+    "explain": "Définir clairement comment on perd fait partie des règles de base du jeu, avec l'objectif."
+  },
+  {
+    "q": "Pourquoi placer un point de sauvegarde juste avant un passage difficile ?",
+    "choices": [
+      "Pour rendre le niveau plus long",
+      "Pour cacher des objets secrets",
+      "Pour que le joueur n'ait pas à refaire tout le niveau après un échec"
+    ],
+    "answer": 2,
+    "explain": "Un point de sauvegarde bien placé évite la frustration de recommencer de loin."
+  },
+  {
+    "q": "Comment guider le regard du joueur vers le bon chemin ?",
+    "choices": [
+      "Avec la lumière, des couleurs contrastées et des éléments qui attirent l'œil",
+      "Avec un long texte d'explication au début",
+      "En cachant la sortie dans l'ombre"
+    ],
+    "answer": 0,
+    "explain": "Le décor lui-même oriente le joueur sans qu'il ait besoin de lire des instructions."
+  },
+  {
+    "q": "Comment récompenser la curiosité du joueur ?",
+    "choices": [
+      "En faisant perdre une vie à ceux qui explorent",
+      "En cachant un bonus ou un secret hors du chemin principal",
+      "En bloquant tous les chemins secondaires"
+    ],
+    "answer": 1,
+    "explain": "Un bonus caché donne envie d'explorer et rend le niveau plus riche."
+  },
+  {
+    "q": "Pendant une séance de test, quelle attitude adopter avec le testeur ?",
+    "choices": [
+      "Lui expliquer quoi faire à chaque difficulté",
+      "Prendre la manette à sa place",
+      "Observer sans l'aider et noter où il bloque"
+    ],
+    "answer": 2,
+    "explain": "Si tu aides le testeur, tu ne vois plus les vrais problèmes de ton niveau."
+  }
+]

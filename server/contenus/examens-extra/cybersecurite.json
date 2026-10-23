@@ -1,0 +1,62 @@
+[
+  {
+    "q": "Quel est le principal avantage d'un gestionnaire de mots de passe ?",
+    "choices": [
+      "Il rend la double authentification inutile",
+      "Il partage tes mots de passe avec tes amis",
+      "Il crée et retient un mot de passe fort et différent pour chaque compte"
+    ],
+    "answer": 2,
+    "explain": "Tu n'as plus qu'un seul mot de passe maître à retenir, et chaque compte a le sien, solide et unique."
+  },
+  {
+    "q": "Quelle phrase de passe est la plus solide ?",
+    "choices": [
+      "123456",
+      "Moto-Mangue-Pluie-Lagune-47",
+      "Cotonou2024"
+    ],
+    "answer": 1,
+    "explain": "Plusieurs mots sans lien, assez longs, sont bien plus difficiles à deviner qu'un mot connu suivi d'une année."
+  },
+  {
+    "q": "Avant de saisir tes identifiants sur un site ouvert depuis un lien, que vérifies-tu ?",
+    "choices": [
+      "Le nom de domaine exact dans la barre d'adresse",
+      "La couleur du logo",
+      "Le nombre d'images sur la page"
+    ],
+    "answer": 0,
+    "explain": "Un faux site peut copier le logo à l'identique, mais pas le vrai nom de domaine."
+  },
+  {
+    "q": "Pourquoi installer rapidement les mises à jour du téléphone et de l'ordinateur ?",
+    "choices": [
+      "Elles suppriment les mots de passe enregistrés",
+      "Elles désactivent l'antivirus",
+      "Elles corrigent des failles de sécurité connues"
+    ],
+    "answer": 2,
+    "explain": "Une fois une faille publiée, les pirates l'exploitent sur les appareils non mis à jour."
+  },
+  {
+    "q": "Pourquoi commencer par faire l'inventaire du matériel et des comptes de l'entreprise ?",
+    "choices": [
+      "Parce qu'on ne peut protéger que ce qu'on connaît",
+      "Pour revendre le vieux matériel",
+      "Pour supprimer toutes les sauvegardes"
+    ],
+    "answer": 0,
+    "explain": "L'inventaire révèle les appareils, logiciels et comptes à sécuriser, y compris ceux qu'on avait oubliés."
+  },
+  {
+    "q": "Un employé quitte l'entreprise. Que fais-tu de ses accès ?",
+    "choices": [
+      "Tu laisses ses comptes actifs au cas où il reviendrait",
+      "Tu désactives ses comptes et changes les mots de passe partagés dès son départ",
+      "Tu donnes ses identifiants au stagiaire"
+    ],
+    "answer": 1,
+    "explain": "Des accès oubliés restent une porte ouverte, même sans mauvaise intention de l'ancien employé."
+  }
+]

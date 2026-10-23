@@ -1,0 +1,62 @@
+[
+  {
+    "q": "Que signifie le « M » de SMART dans un objectif ?",
+    "choices": [
+      "Motivant",
+      "Mesurable",
+      "Moderne"
+    ],
+    "answer": 1,
+    "explain": "Un objectif SMART est Spécifique, Mesurable, Atteignable, Réaliste et Temporel (limité dans le temps)."
+  },
+  {
+    "q": "Tu veux faire connaître ta nouvelle boutique au plus grand nombre de personnes à Cotonou. Quel objectif de campagne choisis-tu ?",
+    "choices": [
+      "Notoriété",
+      "Promotion de l'application",
+      "Ventes du catalogue"
+    ],
+    "answer": 0,
+    "explain": "L'objectif Notoriété sert à montrer la publicité au maximum de personnes de l'audience."
+  },
+  {
+    "q": "Que désigne l'emplacement d'une publicité Facebook et Instagram ?",
+    "choices": [
+      "Le pays où se trouve l'annonceur",
+      "L'heure de publication",
+      "L'endroit où elle s'affiche : fil d'actualité, Stories, Reels…"
+    ],
+    "answer": 2,
+    "explain": "Les emplacements sont les espaces où la publicité apparaît sur Facebook et Instagram."
+  },
+  {
+    "q": "Ta publicité a été vue 5 000 fois (impressions) et a reçu 100 clics. Quel est son taux de clics (CTR) ?",
+    "choices": [
+      "5 %",
+      "2 %",
+      "20 %"
+    ],
+    "answer": 1,
+    "explain": "CTR = clics ÷ impressions × 100 = 100 ÷ 5 000 × 100 = 2 %."
+  },
+  {
+    "q": "Quelle fonction de WhatsApp Business répond automatiquement aux clients en dehors de tes heures d'ouverture ?",
+    "choices": [
+      "Le statut",
+      "Les étiquettes",
+      "Le message d'absence"
+    ],
+    "answer": 2,
+    "explain": "Le message d'absence s'envoie automatiquement quand tu n'es pas disponible."
+  },
+  {
+    "q": "Chaque mois, tes vidéos obtiennent trois fois plus de réactions que tes images. Que fais-tu ?",
+    "choices": [
+      "Tu publies davantage de vidéos le mois suivant et tu continues à mesurer",
+      "Tu arrêtes complètement de publier",
+      "Tu ne changes rien à ton calendrier"
+    ],
+    "answer": 0,
+    "explain": "Mesurer sert à ajuster : on renforce ce qui marche et on vérifie le mois suivant."
+  }
+]

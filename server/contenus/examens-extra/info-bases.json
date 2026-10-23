@@ -1,0 +1,62 @@
+[
+  {
+    "q": "Quel composant exécute les instructions des programmes ?",
+    "choices": [
+      "L'alimentation",
+      "Le processeur (CPU)",
+      "Le disque dur"
+    ],
+    "answer": 1,
+    "explain": "Le processeur est le « cerveau » qui fait les calculs ; le stockage garde les fichiers et l'alimentation fournit le courant."
+  },
+  {
+    "q": "Que se passe-t-il quand la mémoire vive (RAM) est saturée ?",
+    "choices": [
+      "L'ordinateur ralentit car il utilise le disque comme mémoire d'appoint",
+      "Les fichiers personnels sont effacés",
+      "L'écran s'éteint définitivement"
+    ],
+    "answer": 0,
+    "explain": "Quand la RAM est pleine, Windows déplace des données vers le disque, beaucoup plus lent."
+  },
+  {
+    "q": "Que signale un point d'exclamation jaune dans le Gestionnaire de périphériques ?",
+    "choices": [
+      "Un appareil neuf et fonctionnel",
+      "Une mise à jour terminée avec succès",
+      "Un périphérique mal reconnu ou sans pilote correct"
+    ],
+    "answer": 2,
+    "explain": "Il faut alors installer ou mettre à jour le pilote de ce périphérique."
+  },
+  {
+    "q": "Avant de réinstaller Windows, que dois-tu faire absolument ?",
+    "choices": [
+      "Sauvegarder les fichiers personnels sur un autre support",
+      "Supprimer l'antivirus",
+      "Débrancher l'écran"
+    ],
+    "answer": 0,
+    "explain": "La réinstallation peut effacer le disque : sans sauvegarde, documents et photos sont perdus."
+  },
+  {
+    "q": "Quel outil intégré à Windows libère de l'espace en supprimant les fichiers temporaires ?",
+    "choices": [
+      "Paint",
+      "Le Nettoyage de disque",
+      "La Calculatrice"
+    ],
+    "answer": 1,
+    "explain": "Le Nettoyage de disque (ou l'Assistant de stockage) supprime sans risque les fichiers temporaires et inutiles."
+  },
+  {
+    "q": "Pourquoi installer régulièrement les mises à jour de Windows ?",
+    "choices": [
+      "Elles effacent les fichiers inutiles du bureau",
+      "Elles augmentent la taille de l'écran",
+      "Elles corrigent des failles de sécurité et des bugs"
+    ],
+    "answer": 2,
+    "explain": "Les mises à jour bouchent les failles que les virus exploitent et améliorent la stabilité."
+  }
+]

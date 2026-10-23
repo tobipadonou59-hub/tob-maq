@@ -1,0 +1,62 @@
+[
+  {
+    "q": "Pourquoi demander un brief écrit au client ?",
+    "choices": [
+      "Pour pouvoir facturer plus cher",
+      "Pour garder une trace claire de ses attentes et éviter les malentendus",
+      "Pour ne plus avoir à lui parler"
+    ],
+    "answer": 1,
+    "explain": "Le brief écrit sert de référence commune pendant tout le projet."
+  },
+  {
+    "q": "Quelle résolution viser pour un flyer imprimé, vu de près ?",
+    "choices": [
+      "300 ppp à taille réelle",
+      "72 ppp",
+      "30 ppp"
+    ],
+    "answer": 0,
+    "explain": "Un document imprimé et regardé de près demande environ 300 ppp pour rester net."
+  },
+  {
+    "q": "Qu'est-ce que la zone sûre d'un format ?",
+    "choices": [
+      "La partie du fond perdu réservée au texte",
+      "Le coin où l'on met la signature de l'infographiste",
+      "L'espace où placer textes et logo pour qu'ils ne soient ni coupés ni masqués"
+    ],
+    "answer": 2,
+    "explain": "Hors de la zone sûre, un élément risque d'être rogné à l'impression ou caché par l'interface d'une application."
+  },
+  {
+    "q": "Pourquoi préparer un gabarit pour chaque format de la campagne ?",
+    "choices": [
+      "Pour partir des bonnes dimensions, marges et zones sûres dès le début",
+      "Pour utiliser une police différente sur chaque support",
+      "Pour éviter de montrer le travail au client"
+    ],
+    "answer": 0,
+    "explain": "Un gabarit fiable évite de refaire une déclinaison à cause d'une mauvaise taille."
+  },
+  {
+    "q": "Lors du contrôle de cohérence d'une campagne, que vérifies-tu ?",
+    "choices": [
+      "Que chaque support a un slogan différent",
+      "Que couleurs, polices, logo et message sont identiques sur tous les supports",
+      "Que les fichiers ont tous le même poids"
+    ],
+    "answer": 1,
+    "explain": "Une campagne doit être reconnaissable au premier coup d'œil, quel que soit le support."
+  },
+  {
+    "q": "Quelle est la taille d'une publication carrée Instagram ?",
+    "choices": [
+      "1920 × 1080 px",
+      "595 × 842 px",
+      "1080 × 1080 px"
+    ],
+    "answer": 2,
+    "explain": "Le format carré standard d'Instagram fait 1080 pixels de côté."
+  }
+]

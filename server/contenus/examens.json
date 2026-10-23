@@ -1,0 +1,4366 @@
+{
+ "fondamentaux-graphisme": {
+  "title": "Les fondamentaux du graphisme",
+  "lessons": [
+   "couleurs-cercle",
+   "typo-hierarchie"
+  ],
+  "questions": [
+   {
+    "q": "Deux couleurs opposées sur le cercle sont…",
+    "choices": [
+     "analogues",
+     "complémentaires",
+     "monochromes"
+    ],
+    "answer": 1,
+    "explain": "Les complémentaires sont séparées de 180° : elles créent le contraste le plus fort."
+   },
+   {
+    "q": "Dans la règle 60-30-10, les 10 % correspondent à…",
+    "choices": [
+     "la couleur d'accent",
+     "la couleur du fond",
+     "la couleur des textes courants"
+    ],
+    "answer": 0,
+    "explain": "L'accent attire l'œil : il doit rester rare."
+   },
+   {
+    "q": "Une harmonie analogue utilise…",
+    "choices": [
+     "des couleurs voisines",
+     "des couleurs à 120°",
+     "uniquement du noir et blanc"
+    ],
+    "answer": 0,
+    "explain": "Analogue = voisines sur le cercle."
+   },
+   {
+    "q": "Combien de familles de polices conseille-t-on au maximum sur un flyer ?",
+    "choices": [
+     "2",
+     "4",
+     "6"
+    ],
+    "answer": 0,
+    "explain": "Deux familles suffisent ; la hiérarchie vient de la taille, de la graisse et de la couleur."
+   },
+   {
+    "q": "Quel interlignage est confortable pour un texte courant ?",
+    "choices": [
+     "0,8 fois la taille",
+     "1,2 à 1,5 fois la taille",
+     "3 fois la taille"
+    ],
+    "answer": 1,
+    "explain": "En dessous, les lignes se touchent ; au-dessus, le texte se disperse."
+   },
+   {
+    "q": "Le niveau 1 de la hiérarchie, c'est…",
+    "choices": [
+     "les mentions légales",
+     "le message principal",
+     "le numéro de téléphone"
+    ],
+    "answer": 1,
+    "explain": "Le message principal doit se lire en premier, même de loin."
+   },
+   {
+    "q": "Sur le cercle chromatique traditionnel du peintre, quelles sont les trois couleurs primaires ?",
+    "choices": [
+     "Vert, orange et violet",
+     "Rouge, jaune et bleu",
+     "Noir, blanc et gris"
+    ],
+    "answer": 1,
+    "explain": "Sur le cercle traditionnel, le rouge, le jaune et le bleu sont les primaires : on les mélange pour obtenir les autres couleurs."
+   },
+   {
+    "q": "Une harmonie triadique associe…",
+    "choices": [
+     "deux couleurs opposées sur le cercle",
+     "plusieurs nuances d'une seule couleur",
+     "trois couleurs régulièrement espacées sur le cercle"
+    ],
+    "answer": 2,
+    "explain": "La triade utilise trois couleurs séparées de 120° : un équilibre vivant et coloré."
+   },
+   {
+    "q": "Dans la règle 60-30-10, quelle couleur occupe environ 60 % de la surface du visuel ?",
+    "choices": [
+     "La couleur dominante",
+     "La couleur d'accent",
+     "La couleur des boutons"
+    ],
+    "answer": 0,
+    "explain": "La couleur dominante couvre la plus grande surface, souvent le fond ; la secondaire fait 30 % et l'accent 10 %."
+   },
+   {
+    "q": "À quoi reconnaît-on une police à empattements (serif) ?",
+    "choices": [
+     "Elle est toujours écrite en gras",
+     "Ses lettres ont de petites extensions au bout des traits",
+     "Elle n'existe qu'en majuscules",
+     "Ses lettres sont toujours penchées"
+    ],
+    "answer": 1,
+    "explain": "Les empattements sont les petits pieds au bout des traits des lettres ; les polices sans empattements (sans serif) n'en ont pas."
+   },
+   {
+    "q": "Pour faire ressortir le titre d'un flyer par rapport au reste du texte, sur quoi joue-t-on ?",
+    "choices": [
+     "Sur le nombre de polices différentes utilisées",
+     "Sur les effets ajoutés à tous les textes",
+     "Sur l'écart de taille, de graisse et de couleur",
+     "Sur la longueur du texte courant"
+    ],
+    "answer": 2,
+    "explain": "La hiérarchie vient du contraste : un titre nettement plus grand, plus gras ou d'une autre couleur se lit en premier."
+   },
+   {
+    "q": "Un client veut écrire son texte en jaune pâle sur un fond blanc. Quel problème cela pose-t-il ?",
+    "choices": [
+     "Le contraste est trop faible : le texte sera difficile à lire",
+     "Le fichier sera trop lourd",
+     "Le texte sera trop visible",
+     "Les couleurs ne s'impriment pas"
+    ],
+    "answer": 0,
+    "explain": "Pour être lisible, un texte doit fortement contraster avec son fond, par exemple foncé sur clair."
+   },
+   {
+    "q": "Pourquoi laisser de l'espace vide autour des éléments d'un visuel ?",
+    "choices": [
+     "Pour économiser de l'encre uniquement",
+     "Pour aérer la composition et mettre en valeur les informations",
+     "Parce que le logiciel l'impose"
+    ],
+    "answer": 1,
+    "explain": "L'espace blanc fait respirer le visuel : chaque élément ressort mieux et l'œil circule plus facilement."
+   },
+   {
+    "q": "Un client veut écrire tout le texte de son flyer en majuscules. Que lui conseilles-tu ?",
+    "choices": [
+     "De tout écrire en majuscules pour être plus lisible",
+     "De supprimer tous les titres",
+     "D'utiliser une police différente pour chaque ligne",
+     "De garder les majuscules pour les titres courts, car un long texte en capitales se lit moins bien"
+    ],
+    "answer": 3,
+    "explain": "Les majuscules attirent l'œil sur quelques mots, mais un paragraphe entier en capitales fatigue la lecture."
+   }
+  ]
+ },
+ "photoshop-retouche": {
+  "title": "Photoshop : retouche et détourage",
+  "lessons": [
+   "ps-detourage"
+  ],
+  "questions": [
+   {
+    "q": "Sur un masque de fusion, peindre en noir…",
+    "choices": [
+     "supprime les pixels",
+     "cache la zone",
+     "révèle la zone"
+    ],
+    "answer": 1,
+    "explain": "Le masque cache sans détruire : on peut toujours repeindre en blanc."
+   },
+   {
+    "q": "Quel menu détecte automatiquement le sujet ?",
+    "choices": [
+     "Sélection > Sujet",
+     "Image > Taille de l'image",
+     "Filtre > Flou"
+    ],
+    "answer": 0,
+    "explain": "Sélection > Sujet crée une première sélection automatique."
+   },
+   {
+    "q": "Pourquoi utiliser un masque plutôt que la gomme ?",
+    "choices": [
+     "C'est plus rapide à imprimer",
+     "Pour pouvoir corriger sans perte",
+     "Pour réduire le poids du fichier"
+    ],
+    "answer": 1,
+    "explain": "C'est le principe du travail non destructif."
+   },
+   {
+    "q": "Quel raccourci duplique le calque actif dans Photoshop (sous Windows) ?",
+    "choices": [
+     "Ctrl+S",
+     "Ctrl+J",
+     "Ctrl+Z"
+    ],
+    "answer": 1,
+    "explain": "Ctrl+J (Cmd+J sur Mac) duplique le calque : on garde ainsi l'original intact en dessous."
+   },
+   {
+    "q": "Pourquoi dupliquer le calque de la photo avant de commencer le détourage ?",
+    "choices": [
+     "Pour garder une copie intacte de l'original",
+     "Pour doubler la résolution de l'image",
+     "Pour changer le format du fichier",
+     "Pour activer les couleurs CMJN"
+    ],
+    "answer": 0,
+    "explain": "Travailler sur une copie permet de revenir à la photo d'origine à tout moment."
+   },
+   {
+    "q": "Sur un masque de fusion, que produit une zone peinte en gris ?",
+    "choices": [
+     "Elle supprime définitivement les pixels",
+     "Elle rend la zone totalement opaque",
+     "Elle rend la zone partiellement transparente",
+     "Elle change la couleur du calque en gris"
+    ],
+    "answer": 2,
+    "explain": "Blanc révèle, noir cache, et le gris donne une transparence partielle : utile pour des bords doux."
+   },
+   {
+    "q": "À quoi sert l'espace de travail Sélection > Sélectionner et masquer ?",
+    "choices": [
+     "À redimensionner l'image",
+     "À affiner les contours d'une sélection, notamment les cheveux",
+     "À exporter l'image en PDF"
+    ],
+    "answer": 1,
+    "explain": "Il permet de corriger finement les bords d'une sélection avant de la transformer en masque."
+   },
+   {
+    "q": "À la fin de Sélectionner et masquer, quelle option de « Sortie vers » garde un travail non destructif ?",
+    "choices": [
+     "Masque de fusion",
+     "Nouveau document aplati",
+     "Impression"
+    ],
+    "answer": 0,
+    "explain": "La sortie en masque de fusion cache l'arrière-plan sans effacer de pixels : on peut toujours corriger."
+   },
+   {
+    "q": "Pour corriger le bord d'un masque autour des cheveux, quel pinceau est le plus adapté ?",
+    "choices": [
+     "Un pinceau très dur de grande taille",
+     "Un pinceau de couleur rouge",
+     "Un pinceau à bords doux, de taille adaptée",
+     "La gomme à 100 %"
+    ],
+    "answer": 2,
+    "explain": "Un pinceau doux crée une transition naturelle entre le sujet et le fond."
+   },
+   {
+    "q": "Quelle touche intervertit les couleurs de premier plan et d'arrière-plan, pratique pour passer du noir au blanc sur un masque ?",
+    "choices": [
+     "X",
+     "B",
+     "M",
+     "T"
+    ],
+    "answer": 0,
+    "explain": "X échange les deux couleurs ; D les remet par défaut en noir et blanc."
+   },
+   {
+    "q": "Tu places un sujet détouré sur un nouveau fond pour la pub d'une boutique de Cotonou. Que vérifies-tu pour un rendu crédible ?",
+    "choices": [
+     "Que le fichier fait moins de 1 Mo",
+     "Que le sujet est toujours au centre exact",
+     "Que la police du logo est en gras",
+     "Que la lumière et les couleurs du sujet s'accordent avec le fond"
+    ],
+    "answer": 3,
+    "explain": "Pour bien intégrer le sujet, sa lumière, ses couleurs et ses ombres doivent correspondre au nouveau décor."
+   },
+   {
+    "q": "Le client veut son produit détouré sur fond transparent pour son site web. Quel format d'export choisis-tu ?",
+    "choices": [
+     "JPEG",
+     "PNG",
+     "BMP"
+    ],
+    "answer": 1,
+    "explain": "Le PNG conserve la transparence, alors que le JPEG remplit le fond d'une couleur unie."
+   },
+   {
+    "q": "Pour conserver les calques et les masques afin de retravailler l'image plus tard, on enregistre en…",
+    "choices": [
+     "JPEG",
+     "GIF",
+     "PSD",
+     "MP4"
+    ],
+    "answer": 2,
+    "explain": "Le format PSD, natif de Photoshop, garde toute la structure du document : calques, masques, réglages."
+   },
+   {
+    "q": "Dans le panneau Calques, un calque placé au-dessus d'un autre…",
+    "choices": [
+     "s'affiche par-dessus celui du dessous",
+     "est toujours masqué",
+     "est automatiquement supprimé à l'export",
+     "change de couleur"
+    ],
+    "answer": 0,
+    "explain": "L'ordre des calques fonctionne comme une pile : ce qui est en haut recouvre ce qui est en dessous."
+   }
+  ]
+ },
+ "affiches-flyers": {
+  "title": "Affiches et flyers événementiels",
+  "lessons": [
+   "print-flyer"
+  ],
+  "questions": [
+   {
+    "q": "Le fond perdu sert à…",
+    "choices": [
+     "éviter un liseré blanc après la coupe",
+     "ajouter une marge décorative",
+     "réduire le poids du fichier"
+    ],
+    "answer": 0,
+    "explain": "La coupe n'est jamais parfaite au millimètre : le fond perdu absorbe ce décalage."
+   },
+   {
+    "q": "Où placer le numéro de téléphone ?",
+    "choices": [
+     "Dans le fond perdu",
+     "Dans la zone de sécurité",
+     "À cheval sur le trait de coupe"
+    ],
+    "answer": 1,
+    "explain": "Tout texte important reste dans la zone de sécurité."
+   },
+   {
+    "q": "Qui fixe les valeurs définitives (fonds perdus, profil) ?",
+    "choices": [
+     "Le client",
+     "L'imprimeur",
+     "Le logiciel"
+    ],
+    "answer": 1,
+    "explain": "Chaque imprimeur publie sa fiche technique."
+   },
+   {
+    "q": "Quelles sont les dimensions d'un flyer au format A5 ?",
+    "choices": [
+     "210 × 297 mm",
+     "100 × 150 mm",
+     "148 × 210 mm",
+     "297 × 420 mm"
+    ],
+    "answer": 2,
+    "explain": "L'A5 mesure 148 × 210 mm, soit la moitié d'une feuille A4."
+   },
+   {
+    "q": "Quelle valeur de fond perdu est la plus couramment demandée par les imprimeurs ?",
+    "choices": [
+     "3 mm",
+     "3 cm",
+     "0 mm"
+    ],
+    "answer": 0,
+    "explain": "3 mm est la valeur la plus courante, mais on vérifie toujours la fiche technique de l'imprimeur."
+   },
+   {
+    "q": "Quelle résolution viser pour les photos d'un flyer imprimé à taille réelle ?",
+    "choices": [
+     "72 ppp",
+     "300 ppp",
+     "20 ppp"
+    ],
+    "answer": 1,
+    "explain": "300 ppp à la taille d'impression donne une image nette ; 72 ppp convient seulement à l'écran."
+   },
+   {
+    "q": "Quel mode colorimétrique utilise-t-on pour l'impression en quadrichromie ?",
+    "choices": [
+     "RVB",
+     "Niveaux de gris uniquement",
+     "CMJN"
+    ],
+    "answer": 2,
+    "explain": "L'imprimerie travaille avec quatre encres : cyan, magenta, jaune et noir (CMJN)."
+   },
+   {
+    "q": "Le « format fini » d'un flyer, c'est…",
+    "choices": [
+     "sa taille après la coupe",
+     "sa taille avec les fonds perdus",
+     "le poids du fichier PDF",
+     "le nombre d'exemplaires"
+    ],
+    "answer": 0,
+    "explain": "Le format fini est la taille du flyer que le client aura en main, une fois coupé."
+   },
+   {
+    "q": "La photo de fond de ton flyer s'arrête exactement au bord de la page. Que dois-tu faire ?",
+    "choices": [
+     "La réduire pour laisser une marge blanche",
+     "L'étendre jusqu'au trait de fond perdu",
+     "La supprimer",
+     "La convertir en noir et blanc"
+    ],
+    "answer": 1,
+    "explain": "Tout fond qui touche le bord doit déborder jusqu'au fond perdu pour éviter un liseré blanc après la coupe."
+   },
+   {
+    "q": "Un client te donne un petit logo récupéré sur sa page Facebook pour une grande affiche. Quel est le risque ?",
+    "choices": [
+     "Le logo sera trop net",
+     "Les couleurs seront plus vives",
+     "Le logo sera flou ou pixelisé à l'impression",
+     "Aucun risque"
+    ],
+    "answer": 2,
+    "explain": "Une petite image web manque de pixels pour l'impression : il faut demander une version vectorielle ou en haute définition."
+   },
+   {
+    "q": "Pour une affiche de concert collée dans les rues de Cotonou, quelle est la priorité ?",
+    "choices": [
+     "Un titre court, grand et contrasté, lisible de loin",
+     "Un long texte détaillé en petits caractères",
+     "Le plus grand nombre de polices possible"
+    ],
+    "answer": 0,
+    "explain": "Une affiche se lit en quelques secondes et à distance : le message principal doit sauter aux yeux."
+   },
+   {
+    "q": "Quelles informations un flyer événementiel doit-il absolument contenir ?",
+    "choices": [
+     "La biographie complète de chaque artiste",
+     "Le prix de revient de l'impression",
+     "La liste des fournisseurs",
+     "Le nom de l'événement, la date, l'heure et le lieu"
+    ],
+    "answer": 3,
+    "explain": "Le public doit savoir immédiatement quoi, quand et où ; un contact est aussi conseillé."
+   },
+   {
+    "q": "Pourquoi les polices doivent-elles être incorporées dans le PDF envoyé à l'imprimeur ?",
+    "choices": [
+     "Pour que le texte s'imprime exactement comme prévu, même si l'imprimeur n'a pas la police",
+     "Pour réduire le nombre de pages",
+     "Pour transformer le texte en couleur RVB"
+    ],
+    "answer": 0,
+    "explain": "Sans police incorporée, l'ordinateur de l'imprimeur la remplacerait par une autre et la mise en page changerait."
+   },
+   {
+    "q": "Que signifie le BAT que l'imprimeur te demande de valider ?",
+    "choices": [
+     "Bande À Trancher",
+     "Bon À Tirer : la validation finale avant impression",
+     "Bordure Automatique de Texte"
+    ],
+    "answer": 1,
+    "explain": "Le Bon À Tirer est l'épreuve que le client ou le graphiste valide avant le lancement de l'impression."
+   }
+  ]
+ },
+ "indesign-mise-en-page": {
+  "title": "Mise en page professionnelle avec InDesign",
+  "lessons": [
+   "id-grille"
+  ],
+  "questions": [
+   {
+    "q": "Pourquoi une grille à 12 colonnes est-elle pratique ?",
+    "choices": [
+     "Elle se divise en 2, 3, 4 ou 6",
+     "Elle est obligatoire",
+     "Elle réduit le nombre de pages"
+    ],
+    "answer": 0,
+    "explain": "12 a beaucoup de diviseurs : on peut varier les mises en page sans casser la structure."
+   },
+   {
+    "q": "Quel menu modifie les marges et colonnes d'une page existante ?",
+    "choices": [
+     "Page > Marges et colonnes",
+     "Texte > Police",
+     "Objet > Grouper"
+    ],
+    "answer": 0,
+    "explain": "C'est le menu Page d'InDesign."
+   },
+   {
+    "q": "À quoi sert un gabarit ?",
+    "choices": [
+     "À répéter des éléments sur plusieurs pages",
+     "À exporter en JPG",
+     "À changer de langue"
+    ],
+    "answer": 0,
+    "explain": "Numéros de page, en-têtes, pieds de page…"
+   },
+   {
+    "q": "Dans une mise en page, les marges correspondent à…",
+    "choices": [
+     "l'espace entre le bord de la page et la zone de contenu",
+     "l'espace entre deux colonnes",
+     "la zone qui sera coupée"
+    ],
+    "answer": 0,
+    "explain": "Les marges encadrent la zone où l'on place le texte et les images."
+   },
+   {
+    "q": "Comment appelle-t-on l'espace entre deux colonnes ?",
+    "choices": [
+     "Le fond perdu",
+     "La gouttière",
+     "L'interlignage",
+     "Le gabarit"
+    ],
+    "answer": 1,
+    "explain": "La gouttière sépare les colonnes pour que les textes voisins ne se touchent pas."
+   },
+   {
+    "q": "À quoi sert la grille de ligne de base ?",
+    "choices": [
+     "À aligner les lignes de texte d'une colonne à l'autre",
+     "À changer la couleur du fond",
+     "À numéroter les pages",
+     "À importer des images"
+    ],
+    "answer": 0,
+    "explain": "Les lignes de texte s'appuient sur la même grille horizontale : les colonnes restent alignées entre elles."
+   },
+   {
+    "q": "Dans quel menu affiche-t-on la grille de ligne de base ?",
+    "choices": [
+     "Fichier > Exporter",
+     "Objet > Grouper",
+     "Affichage > Grilles et repères",
+     "Texte > Police"
+    ],
+    "answer": 2,
+    "explain": "Affichage > Grilles et repères > Afficher la grille de ligne de base."
+   },
+   {
+    "q": "L'option « Pages en vis-à-vis » est adaptée pour…",
+    "choices": [
+     "une affiche d'une seule page",
+     "un magazine ou une brochure en doubles pages",
+     "une bannière web",
+     "une carte de visite"
+    ],
+    "answer": 1,
+    "explain": "Elle crée des doubles pages (gauche et droite), comme dans un document relié."
+   },
+   {
+    "q": "Pour que le numéro de page apparaisse automatiquement sur toutes les pages, où insère-t-on le numéro de page actif ?",
+    "choices": [
+     "À la main sur chaque page",
+     "Dans le fond perdu",
+     "Dans le nom du fichier",
+     "Sur le gabarit"
+    ],
+    "answer": 3,
+    "explain": "Placé sur le gabarit, le numéro de page actif s'affiche et se met à jour sur toutes les pages qui l'utilisent."
+   },
+   {
+    "q": "Que se passe-t-il quand tu modifies un élément du gabarit ?",
+    "choices": [
+     "Seule la première page change",
+     "Le changement s'applique à toutes les pages basées sur ce gabarit",
+     "Le document est exporté en PDF",
+     "Rien, il faut tout refaire page par page"
+    ],
+    "answer": 1,
+    "explain": "C'est tout l'intérêt du gabarit : une seule modification met à jour l'ensemble du document."
+   },
+   {
+    "q": "Pour donner la même mise en forme à tous les intertitres et pouvoir la modifier d'un coup, on utilise…",
+    "choices": [
+     "des styles de paragraphe",
+     "la gomme",
+     "des calques Photoshop"
+    ],
+    "answer": 0,
+    "explain": "Modifier le style de paragraphe met à jour instantanément tous les textes qui l'utilisent."
+   },
+   {
+    "q": "Quel raccourci ouvre la commande Fichier > Importer pour placer une image dans InDesign (sous Windows) ?",
+    "choices": [
+     "Ctrl+P",
+     "Ctrl+N",
+     "Ctrl+D"
+    ],
+    "answer": 2,
+    "explain": "Ctrl+D (Cmd+D sur Mac) importe un fichier : image ou texte."
+   },
+   {
+    "q": "Un petit signe + rouge apparaît en bas à droite d'un bloc de texte. Que signifie-t-il ?",
+    "choices": [
+     "Le texte contient une faute",
+     "Il y a du texte en excès qui ne tient pas dans le bloc",
+     "La police est manquante",
+     "Le bloc est verrouillé"
+    ],
+    "answer": 1,
+    "explain": "Il faut agrandir le bloc, réduire le texte ou le chaîner vers un autre bloc."
+   },
+   {
+    "q": "Une boutique de pagnes de Cotonou te commande un catalogue de 16 pages. Pourquoi commencer par construire une grille ?",
+    "choices": [
+     "Pour réduire le prix de l'impression",
+     "Pour garder une mise en page cohérente et régulière sur toutes les pages",
+     "Pour que le logiciel écrive les textes",
+     "Parce qu'InDesign refuse de travailler sans grille"
+    ],
+    "answer": 1,
+    "explain": "La grille structure chaque page de la même façon : le catalogue paraît professionnel et se monte plus vite."
+   }
+  ]
+ },
+ "premiere-debuter": {
+  "title": "Débuter le montage avec Premiere Pro",
+  "lessons": [
+   "pr-decoupe"
+  ],
+  "questions": [
+   {
+    "q": "Quel raccourci ajoute un point de montage à la tête de lecture ?",
+    "choices": [
+     "Ctrl+K",
+     "Ctrl+M",
+     "Ctrl+D"
+    ],
+    "answer": 0,
+    "explain": "Ctrl+M exporte, Ctrl+D ajoute la transition vidéo par défaut."
+   },
+   {
+    "q": "Q dans Premiere Pro…",
+    "choices": [
+     "supprime le début du plan jusqu'à la tête de lecture",
+     "quitte le logiciel",
+     "ajoute un titre"
+    ],
+    "answer": 0,
+    "explain": "Q et W raccourcissent le plan en refermant l'espace."
+   },
+   {
+    "q": "Insérer (,) par rapport à Recouvrement (.)…",
+    "choices": [
+     "décale les plans suivants",
+     "efface toute la timeline",
+     "change la cadence"
+    ],
+    "answer": 0,
+    "explain": "Le recouvrement, lui, écrase ce qui est déjà là."
+   },
+   {
+    "q": "Dans le moniteur source, quelles touches marquent le point d'entrée et le point de sortie d'un plan ?",
+    "choices": [
+     "I et O",
+     "A et Z",
+     "E et S",
+     "P et L"
+    ],
+    "answer": 0,
+    "explain": "I (In) marque l'entrée, O (Out) marque la sortie : seule cette portion sera envoyée dans la timeline."
+   },
+   {
+    "q": "Quel est l'avantage de créer la séquence à partir d'un clip ?",
+    "choices": [
+     "Elle ajoute automatiquement de la musique",
+     "Elle reprend automatiquement les réglages du clip (taille d'image, cadence)",
+     "Elle exporte directement la vidéo",
+     "Elle supprime les plans ratés"
+    ],
+    "answer": 1,
+    "explain": "La séquence correspond ainsi exactement aux rushes, sans bandes noires ni problème de cadence."
+   },
+   {
+    "q": "Quel raccourci sélectionne l'outil Cutter (rasoir) dans Premiere Pro ?",
+    "choices": [
+     "V",
+     "C",
+     "H",
+     "R"
+    ],
+    "answer": 1,
+    "explain": "C active le Cutter, qui coupe un plan à l'endroit où l'on clique."
+   },
+   {
+    "q": "Quelle touche revient à l'outil Sélection après avoir utilisé le Cutter ?",
+    "choices": [
+     "V",
+     "Q",
+     "K"
+    ],
+    "answer": 0,
+    "explain": "V est l'outil Sélection, celui qu'on utilise la plupart du temps pour déplacer les plans."
+   },
+   {
+    "q": "Après avoir supprimé un plan, un trou noir reste dans la timeline. Comment le fermer proprement ?",
+    "choices": [
+     "Ajouter un fondu au noir",
+     "Exporter la vidéo",
+     "Faire un clic droit sur le trou et choisir de le supprimer : les plans suivants se raccordent",
+     "Fermer le projet"
+    ],
+    "answer": 2,
+    "explain": "Supprimer l'espace vide décale les plans suivants pour qu'il n'y ait plus de trou."
+   },
+   {
+    "q": "Que font les touches J, K et L pendant le montage ?",
+    "choices": [
+     "Lecture arrière, pause, lecture avant",
+     "Couper, copier, coller",
+     "Zoom, dézoom, plein écran",
+     "Ajouter titre, transition, effet"
+    ],
+    "answer": 0,
+    "explain": "J lit en arrière, K met en pause et L lit en avant ; appuyer plusieurs fois accélère la lecture."
+   },
+   {
+    "q": "Dans le panneau Projet, dans quoi range-t-on ses rushes pour bien les organiser ?",
+    "choices": [
+     "Dans des calques",
+     "Dans des gabarits",
+     "Dans des chutiers"
+    ],
+    "answer": 2,
+    "explain": "Les chutiers sont les dossiers de Premiere Pro : par exemple « Interviews », « Plans de coupe », « Musique »."
+   },
+   {
+    "q": "Tu montes un clip dynamique sur une musique. Où placer tes coupes de préférence ?",
+    "choices": [
+     "Au hasard",
+     "Sur les temps forts de la musique",
+     "Uniquement au début de la vidéo",
+     "Toujours au milieu d'une phrase"
+    ],
+    "answer": 1,
+    "explain": "Couper sur le rythme donne un montage fluide et énergique."
+   },
+   {
+    "q": "Quel format choisir pour exporter une vidéo destinée aux réseaux sociaux ?",
+    "choices": [
+     "H.264",
+     "PSD",
+     "PDF",
+     "WAV"
+    ],
+    "answer": 0,
+    "explain": "Le H.264 (fichier .mp4) offre un bon équilibre entre qualité et poids, accepté par toutes les plateformes."
+   },
+   {
+    "q": "Que sont les « rushes » ?",
+    "choices": [
+     "Les effets spéciaux ajoutés au montage",
+     "Les sous-titres de la vidéo",
+     "La vidéo finale exportée",
+     "Les fichiers bruts filmés, avant montage"
+    ],
+    "answer": 3,
+    "explain": "Les rushes sont toute la matière filmée ; le montage consiste à y choisir les meilleurs moments."
+   },
+   {
+    "q": "Pour la vidéo promo d'un restaurant de Cotonou, un plan est flou et n'apporte rien. Que fais-tu ?",
+    "choices": [
+     "Tu le gardes pour rallonger la vidéo",
+     "Tu le retires pour garder un rythme efficace",
+     "Tu le répètes deux fois",
+     "Tu le places en ouverture"
+    ],
+    "answer": 1,
+    "explain": "Supprimer les plans inutiles rend la vidéo plus courte, plus claire et plus agréable à regarder."
+   }
+  ]
+ },
+ "resolve-etalonnage": {
+  "title": "Étalonnage cinématique avec DaVinci Resolve",
+  "lessons": [
+   "dr-etalonnage"
+  ],
+  "questions": [
+   {
+    "q": "Quelle roue agit d'abord sur les ombres ?",
+    "choices": [
+     "Lift",
+     "Gain",
+     "Offset"
+    ],
+    "answer": 0,
+    "explain": "Lift = noirs, Gamma = tons moyens, Gain = hautes lumières."
+   },
+   {
+    "q": "Pourquoi utiliser les scopes ?",
+    "choices": [
+     "Parce que l'écran peut tromper",
+     "Pour exporter plus vite",
+     "Pour ajouter du son"
+    ],
+    "answer": 0,
+    "explain": "Les scopes mesurent objectivement l'image."
+   },
+   {
+    "q": "Dans quel ordre travailler ?",
+    "choices": [
+     "Look puis correction",
+     "Correction puis look",
+     "Peu importe"
+    ],
+    "answer": 1,
+    "explain": "On crée l'ambiance sur une base juste."
+   },
+   {
+    "q": "Dans quelle page de DaVinci Resolve fait-on l'étalonnage ?",
+    "choices": [
+     "Edit",
+     "Fairlight",
+     "Color",
+     "Deliver"
+    ],
+    "answer": 2,
+    "explain": "La page Color regroupe les roues, les nœuds et les scopes d'étalonnage."
+   },
+   {
+    "q": "Les noirs et les blancs sont corrects, mais les visages paraissent trop sombres. Quelle roue ajuster en priorité ?",
+    "choices": [
+     "Lift",
+     "Gamma",
+     "Gain"
+    ],
+    "answer": 1,
+    "explain": "Gamma agit sur les tons moyens, là où se trouvent la plupart des peaux et des détails."
+   },
+   {
+    "q": "Le ciel de ton plan est trop lumineux et perd ses détails. Quelle roue baisser ?",
+    "choices": [
+     "Lift",
+     "Gamma",
+     "Gain"
+    ],
+    "answer": 2,
+    "explain": "Gain contrôle les hautes lumières : le baisser récupère les zones les plus claires."
+   },
+   {
+    "q": "Quel raccourci ajoute un nœud en série dans la page Color ?",
+    "choices": [
+     "Alt+S",
+     "Ctrl+K",
+     "Ctrl+J",
+     "Alt+F4"
+    ],
+    "answer": 0,
+    "explain": "Alt+S (Option+S sur Mac) crée un nouveau nœud série après le nœud sélectionné."
+   },
+   {
+    "q": "Pourquoi répartir ses corrections sur plusieurs nœuds ?",
+    "choices": [
+     "Pour exporter plus vite",
+     "Pour pouvoir régler ou désactiver chaque correction séparément",
+     "Pour augmenter la résolution",
+     "Pour ajouter de la musique"
+    ],
+    "answer": 1,
+    "explain": "Chaque nœud a son rôle : on peut ensuite modifier une étape sans toucher aux autres."
+   },
+   {
+    "q": "Sur le scope Forme d'onde (Waveform), que représente le bas de l'échelle ?",
+    "choices": [
+     "Les hautes lumières",
+     "Les couleurs saturées",
+     "Le son",
+     "Les noirs"
+    ],
+    "answer": 3,
+    "explain": "La forme d'onde va des noirs (en bas) aux blancs (en haut) : on y lit l'exposition de l'image."
+   },
+   {
+    "q": "Sur la forme d'onde, une trace écrasée tout en haut de l'échelle signale…",
+    "choices": [
+     "des hautes lumières brûlées, sans détails",
+     "une image trop sombre",
+     "un son trop fort"
+    ],
+    "answer": 0,
+    "explain": "Au-delà du maximum, les détails sont perdus : il faut baisser le Gain."
+   },
+   {
+    "q": "Sur une zone qui devrait être blanche ou grise, que cherches-tu à obtenir sur la Parade RVB pour neutraliser une dominante ?",
+    "choices": [
+     "Le rouge nettement au-dessus des autres",
+     "Les trois composantes rouge, verte et bleue au même niveau",
+     "Uniquement la composante bleue",
+     "Des courbes collées en bas"
+    ],
+    "answer": 1,
+    "explain": "Quand R, V et B sont alignés sur une zone neutre, l'image n'a plus de dominante de couleur."
+   },
+   {
+    "q": "Pourquoi comparer régulièrement l'image avant et après correction ?",
+    "choices": [
+     "Pour vérifier que la correction améliore l'image sans l'exagérer",
+     "Pour accélérer le rendu",
+     "Pour changer la cadence de la vidéo"
+    ],
+    "answer": 0,
+    "explain": "Après de longues minutes, l'œil s'habitue : la comparaison remet les choses en perspective."
+   },
+   {
+    "q": "Tu étalonnes l'interview d'une entrepreneuse de Cotonou. Quel scope affiche la ligne de référence des tons chair ?",
+    "choices": [
+     "La forme d'onde",
+     "L'histogramme",
+     "Le vectorscope",
+     "La Parade RVB"
+    ],
+    "answer": 2,
+    "explain": "Le vectorscope montre la teinte et la saturation, avec une ligne indicative pour les peaux."
+   },
+   {
+    "q": "La roue Offset agit sur…",
+    "choices": [
+     "uniquement les noirs",
+     "l'ensemble de l'image",
+     "uniquement le son",
+     "uniquement les hautes lumières"
+    ],
+    "answer": 1,
+    "explain": "Offset décale toute l'image à la fois, des noirs aux hautes lumières."
+   }
+  ]
+ },
+ "reels-capcut": {
+  "title": "Reels, TikTok et Shorts avec CapCut",
+  "lessons": [
+   "capcut-export"
+  ],
+  "questions": [
+   {
+    "q": "Quelle résolution pour une vidéo verticale Full HD ?",
+    "choices": [
+     "1920 × 1080",
+     "1080 × 1920",
+     "1080 × 1080"
+    ],
+    "answer": 1,
+    "explain": "Largeur 1080, hauteur 1920 : format 9:16."
+   },
+   {
+    "q": "Pourquoi sous-titrer ?",
+    "choices": [
+     "Beaucoup regardent sans le son",
+     "C'est obligatoire",
+     "Pour alourdir le fichier"
+    ],
+    "answer": 0,
+    "explain": "Les sous-titres retiennent l'attention même en silence."
+   },
+   {
+    "q": "Où éviter de placer les textes ?",
+    "choices": [
+     "En bas et sur le bord droit",
+     "Au centre",
+     "Dans le tiers supérieur"
+    ],
+    "answer": 0,
+    "explain": "C'est là que l'interface de l'application s'affiche."
+   },
+   {
+    "q": "Tu montes une vidéo pour la page TikTok d'un salon de coiffure de Cotonou. Quel format de projet choisis-tu ?",
+    "choices": [
+     "16:9",
+     "9:16",
+     "4:3",
+     "21:9"
+    ],
+    "answer": 1,
+    "explain": "TikTok, Reels et Shorts sont regardés en plein écran sur téléphone, en vertical 9:16."
+   },
+   {
+    "q": "Pourquoi soigner particulièrement les toutes premières secondes d'un Reel ?",
+    "choices": [
+     "C'est là que le spectateur décide de regarder ou de faire défiler",
+     "Parce que la fin n'est jamais vue",
+     "Pour alléger le fichier",
+     "Parce que l'application les coupe toujours"
+    ],
+    "answer": 0,
+    "explain": "Une accroche forte dès le début retient l'attention avant que la personne ne passe à la vidéo suivante."
+   },
+   {
+    "q": "Après avoir généré des sous-titres automatiques dans CapCut, que dois-tu faire ?",
+    "choices": [
+     "Rien, ils sont toujours parfaits",
+     "Les supprimer",
+     "Les relire et corriger les erreurs",
+     "Les traduire en image"
+    ],
+    "answer": 2,
+    "explain": "La reconnaissance vocale se trompe parfois, surtout sur les noms propres : on relit toujours."
+   },
+   {
+    "q": "Comment rendre des sous-titres bien lisibles sur toutes les images ?",
+    "choices": [
+     "Texte fin et gris clair",
+     "Texte très petit en bas de l'écran",
+     "Texte de la même couleur que le fond",
+     "Texte contrasté, avec un contour ou un fond derrière"
+    ],
+    "answer": 3,
+    "explain": "Un contour ou un fond garantit la lecture, même quand l'image derrière change."
+   },
+   {
+    "q": "Pourquoi vérifier ta vidéo sur un téléphone avant de la publier ?",
+    "choices": [
+     "Pour contrôler la lisibilité des textes et le cadrage, comme le verra le public",
+     "Parce que CapCut l'exige",
+     "Pour réduire la durée de la vidéo"
+    ],
+    "answer": 0,
+    "explain": "Le public regarde sur petit écran : ce qui semble lisible sur ordinateur peut ne pas l'être sur téléphone."
+   },
+   {
+    "q": "Tu places un rush filmé à l'horizontale dans un projet 9:16. Que se passe-t-il si tu ne fais rien ?",
+    "choices": [
+     "La vidéo devient automatiquement verticale sans perte",
+     "Des bandes vides apparaissent en haut et en bas",
+     "Le son disparaît",
+     "La vidéo est refusée à l'export"
+    ],
+    "answer": 1,
+    "explain": "Il faut agrandir et recadrer le plan, ou mieux, filmer directement à la verticale."
+   },
+   {
+    "q": "Comment tenir le téléphone pour filmer un Reel ?",
+    "choices": [
+     "À l'horizontale",
+     "En diagonale",
+     "À la verticale"
+    ],
+    "answer": 2,
+    "explain": "Filmer à la verticale remplit l'écran 9:16 sans avoir à recadrer ni perdre de qualité."
+   },
+   {
+    "q": "Tu veux ajouter une chanson célèbre à la vidéo d'un client sans en avoir les droits. Quel est le risque ?",
+    "choices": [
+     "La vidéo peut être rendue muette ou bloquée par la plateforme",
+     "La vidéo sera mieux mise en avant",
+     "Aucun risque",
+     "La qualité de l'image baisse"
+    ],
+    "answer": 0,
+    "explain": "Il vaut mieux utiliser les musiques proposées par la bibliothèque de l'application ou des musiques libres de droits."
+   },
+   {
+    "q": "Comment rendre le montage d'un Reel plus dynamique ?",
+    "choices": [
+     "Allonger chaque plan au maximum",
+     "Supprimer les temps morts et enchaîner des plans courts",
+     "Ajouter une longue introduction",
+     "Garder toutes les hésitations"
+    ],
+    "answer": 1,
+    "explain": "Des coupes franches et sans temps morts gardent l'attention jusqu'à la fin."
+   },
+   {
+    "q": "Quelle résolution choisir à l'export pour une vidéo nette sur les réseaux sociaux ?",
+    "choices": [
+     "360p",
+     "480p",
+     "1080p"
+    ],
+    "answer": 2,
+    "explain": "La 1080p (Full HD) est nette sur téléphone tout en restant légère à publier."
+   },
+   {
+    "q": "Quelle taille donner aux textes affichés dans une vidéo verticale ?",
+    "choices": [
+     "Assez grande pour être lue facilement sur un petit écran",
+     "La plus petite possible pour ne rien cacher",
+     "Peu importe, personne ne les lit"
+    ],
+    "answer": 0,
+    "explain": "Sur téléphone, un texte trop petit est ignoré : il doit se lire d'un coup d'œil."
+   }
+  ]
+ },
+ "web-html-css": {
+  "title": "Créer son premier site web : HTML et CSS",
+  "lessons": [
+   "web-html",
+   "web-css",
+   "web-responsive"
+  ],
+  "questions": [
+   {
+    "q": "Combien de balises h1 conseille-t-on par page ?",
+    "choices": [
+     "Une seule",
+     "Trois",
+     "Autant qu'on veut"
+    ],
+    "answer": 0,
+    "explain": "Le h1 annonce le sujet principal de la page ; les parties utilisent h2, h3…"
+   },
+   {
+    "q": "À quoi sert l'attribut alt d'une image ?",
+    "choices": [
+     "À décrire l'image à ceux qui ne la voient pas",
+     "À changer sa taille",
+     "À la rendre cliquable"
+    ],
+    "answer": 0,
+    "explain": "Lecteurs d'écran, Google et connexions lentes s'appuient sur le texte alternatif."
+   },
+   {
+    "q": "Où se place le titre affiché dans l'onglet du navigateur ?",
+    "choices": [
+     "Dans <title>, à l'intérieur du <head>",
+     "Dans le premier <h1>",
+     "Dans le <footer>"
+    ],
+    "answer": 0,
+    "explain": "Le <head> contient les informations qui ne s'affichent pas dans la page elle-même."
+   },
+   {
+    "q": "Comment s'appelle le fichier de la page d'accueil ?",
+    "choices": [
+     "index.html",
+     "accueil.txt",
+     "home.doc"
+    ],
+    "answer": 0,
+    "explain": "Les serveurs web cherchent index.html en premier dans un dossier."
+   },
+   {
+    "q": "Quel sélecteur cible les éléments qui ont class=\"carte\" ?",
+    "choices": [
+     ".carte",
+     "#carte",
+     "carte"
+    ],
+    "answer": 0,
+    "explain": "Le point cible une classe, le dièse un id, le nom seul une balise."
+   },
+   {
+    "q": "Quelle propriété éloigne le contenu de sa propre bordure ?",
+    "choices": [
+     "padding",
+     "margin",
+     "border"
+    ],
+    "answer": 0,
+    "explain": "padding = espace intérieur ; margin = espace extérieur."
+   },
+   {
+    "q": "Que fait box-sizing: border-box ?",
+    "choices": [
+     "La largeur inclut le padding et la bordure",
+     "Ajoute une bordure",
+     "Centre la boîte"
+    ],
+    "answer": 0,
+    "explain": "Sans lui, width: 300px + 20px de padding donne une boîte de 340 px."
+   },
+   {
+    "q": "Comment tester une valeur CSS sans modifier le fichier ?",
+    "choices": [
+     "Avec l'inspecteur du navigateur (F12)",
+     "En renommant le fichier",
+     "Impossible"
+    ],
+    "answer": 0,
+    "explain": "L'inspecteur permet d'essayer en direct, puis de recopier la bonne valeur."
+   },
+   {
+    "q": "Quelle balise est indispensable pour un affichage correct sur téléphone ?",
+    "choices": [
+     "<meta name=\"viewport\" …>",
+     "<meta charset=\"UTF-8\">",
+     "<link rel=\"icon\">"
+    ],
+    "answer": 0,
+    "explain": "Sans viewport, le téléphone simule un écran d'ordinateur et réduit tout."
+   },
+   {
+    "q": "Que fait flex-wrap: wrap ?",
+    "choices": [
+     "Fait passer les éléments à la ligne quand la place manque",
+     "Cache les éléments qui dépassent",
+     "Centre les éléments"
+    ],
+    "answer": 0,
+    "explain": "Sans wrap, Flexbox écrase tous les éléments sur une seule ligne."
+   },
+   {
+    "q": "Que signifie « mobile d'abord » ?",
+    "choices": [
+     "Concevoir d'abord la version téléphone, puis l'enrichir",
+     "Faire seulement une application",
+     "Tester sur téléphone à la fin"
+    ],
+    "answer": 0,
+    "explain": "On part du plus contraint ; ajouter des colonnes est plus simple que d'en retirer."
+   },
+   {
+    "q": "Quelle règle empêche une image de dépasser de l'écran ?",
+    "choices": [
+     "max-width: 100%",
+     "width: 2000px",
+     "overflow: scroll"
+    ],
+    "answer": 0,
+    "explain": "L'image ne dépasse jamais la largeur de son conteneur."
+   },
+   {
+    "q": "Quelle ligne, placée dans le <head>, relie le fichier style.css à la page HTML ?",
+    "choices": [
+     "<style src=\"style.css\">",
+     "<link rel=\"stylesheet\" href=\"style.css\">",
+     "<css href=\"style.css\">"
+    ],
+    "answer": 1,
+    "explain": "La balise <link> avec rel=\"stylesheet\" indique au navigateur de charger la feuille de style."
+   },
+   {
+    "q": "Dans un conteneur en display: flex, quelle propriété répartit les cartes sur l'axe principal (horizontal par défaut) ?",
+    "choices": [
+     "align-items",
+     "flex-wrap",
+     "justify-content"
+    ],
+    "answer": 2,
+    "explain": "justify-content gère la répartition sur l'axe principal ; align-items gère l'axe secondaire."
+   }
+  ]
+ },
+ "web-wordpress": {
+  "title": "Sites vitrines pour clients avec WordPress",
+  "lessons": [
+   "wp-installer",
+   "wp-site-vitrine"
+  ],
+  "questions": [
+   {
+    "q": "À quoi sert l'hébergement ?",
+    "choices": [
+     "À stocker le site sur un ordinateur allumé en permanence",
+     "À choisir l'adresse du site",
+     "À dessiner le logo"
+    ],
+    "answer": 0,
+    "explain": "Le domaine est l'adresse ; l'hébergement est le lieu où le site est stocké."
+   },
+   {
+    "q": "Au nom de qui doivent être le domaine et l'hébergement ?",
+    "choices": [
+     "Du client",
+     "Du développeur",
+     "De n'importe qui"
+    ],
+    "answer": 0,
+    "explain": "Le client doit rester propriétaire de son site, même s'il change de prestataire."
+   },
+   {
+    "q": "Pourquoi le HTTPS est-il indispensable ?",
+    "choices": [
+     "Il chiffre les échanges et évite l'avertissement « Non sécurisé »",
+     "Il rend le site plus coloré",
+     "Il est seulement utile aux banques"
+    ],
+    "answer": 0,
+    "explain": "Les navigateurs et Google pénalisent les sites sans HTTPS."
+   },
+   {
+    "q": "Quel identifiant administrateur éviter ?",
+    "choices": [
+     "admin",
+     "Un identifiant personnel",
+     "Une adresse e-mail"
+    ],
+    "answer": 0,
+    "explain": "« admin » est le premier essayé par les robots qui attaquent les sites."
+   },
+   {
+    "q": "Quelles pages forment le cœur d'un site vitrine ?",
+    "choices": [
+     "Accueil, Services, À propos, Contact",
+     "Blog, Forum, Boutique, FAQ",
+     "Une seule page vide"
+    ],
+    "answer": 0,
+    "explain": "Ces quatre pages répondent aux questions : quoi, pour qui, qui êtes-vous, comment vous joindre."
+   },
+   {
+    "q": "Quel lien ouvre une conversation WhatsApp ?",
+    "choices": [
+     "https://wa.me/ suivi du numéro international",
+     "whatsapp.bj/numéro",
+     "Le numéro seul"
+    ],
+    "answer": 0,
+    "explain": "Le format wa.me fonctionne sur téléphone comme sur ordinateur."
+   },
+   {
+    "q": "Quel rôle donner au client pour le quotidien ?",
+    "choices": [
+     "Éditeur",
+     "Administrateur",
+     "Abonné"
+    ],
+    "answer": 0,
+    "explain": "Il peut modifier ses contenus sans risquer de casser les réglages ou les extensions."
+   },
+   {
+    "q": "Pourquoi compresser les images ?",
+    "choices": [
+     "Pour que le site charge vite, surtout sur mobile",
+     "Pour améliorer leurs couleurs",
+     "C'est inutile"
+    ],
+    "answer": 0,
+    "explain": "Les images lourdes sont la première cause de lenteur, et les données mobiles coûtent cher."
+   },
+   {
+    "q": "Quel enregistrement DNS fait pointer un nom de domaine vers l'adresse IP de l'hébergement ?",
+    "choices": [
+     "L'enregistrement MX",
+     "L'enregistrement A",
+     "L'enregistrement TXT"
+    ],
+    "answer": 1,
+    "explain": "L'enregistrement A associe un nom de domaine à une adresse IPv4 ; MX sert aux e-mails."
+   },
+   {
+    "q": "Dans Réglages > Permaliens, quel réglage donne des adresses de pages lisibles ?",
+    "choices": [
+     "Titre de la publication",
+     "Simple (?p=123)",
+     "Numérique"
+    ],
+    "answer": 0,
+    "explain": "Avec « Titre de la publication », l'adresse reprend le nom de la page, ce qui est clair pour les visiteurs et pour Google."
+   },
+   {
+    "q": "Quel réglage limite les attaques qui essaient des milliers de mots de passe ?",
+    "choices": [
+     "Afficher l'e-mail de l'administrateur sur le site",
+     "Désactiver le HTTPS",
+     "Limiter le nombre de tentatives de connexion"
+    ],
+    "answer": 2,
+    "explain": "Bloquer après quelques échecs rend inefficaces les attaques par force brute."
+   },
+   {
+    "q": "Pourquoi supprimer les thèmes et extensions qu'on n'utilise pas ?",
+    "choices": [
+     "Ils peuvent contenir des failles même s'ils sont désactivés",
+     "Ils changent la couleur du site",
+     "Ils empêchent d'écrire des pages"
+    ],
+    "answer": 0,
+    "explain": "Un code présent sur le serveur mais non mis à jour reste une porte d'entrée possible pour les pirates."
+   },
+   {
+    "q": "Quel format d'image privilégier pour des photos légères sur un site web ?",
+    "choices": [
+     "BMP",
+     "WebP",
+     "TIFF"
+    ],
+    "answer": 1,
+    "explain": "Le WebP offre une bonne qualité pour un poids bien plus faible que le BMP ou le TIFF."
+   },
+   {
+    "q": "Avant de livrer le site au client, que faut-il tester ?",
+    "choices": [
+     "Seulement la couleur du logo",
+     "Uniquement l'affichage sur ton propre ordinateur",
+     "L'affichage sur téléphone, les liens et le bouton de contact"
+    ],
+    "answer": 2,
+    "explain": "La plupart des visiteurs arrivent sur mobile : chaque page, chaque lien et le contact doivent fonctionner partout."
+   }
+  ]
+ },
+ "dev-javascript": {
+  "title": "Programmer avec JavaScript",
+  "lessons": [
+   "js-bases",
+   "js-logique",
+   "js-page"
+  ],
+  "questions": [
+   {
+    "q": "Quel mot utiliser pour une valeur qui ne changera pas ?",
+    "choices": [
+     "const",
+     "let",
+     "var"
+    ],
+    "answer": 0,
+    "explain": "const protège la valeur contre une modification accidentelle."
+   },
+   {
+    "q": "Que donne \"5\" + 2 en JavaScript ?",
+    "choices": [
+     "\"52\"",
+     "7",
+     "Une erreur"
+    ],
+    "answer": 0,
+    "explain": "Avec un texte, + colle les morceaux au lieu d'additionner."
+   },
+   {
+    "q": "Où afficher des messages de test ?",
+    "choices": [
+     "Avec console.log(), dans la console",
+     "Dans le <title>",
+     "Dans le fichier CSS"
+    ],
+    "answer": 0,
+    "explain": "La console est l'outil de base pour vérifier ce que fait ton programme."
+   },
+   {
+    "q": "Que signifie l'erreur « total is not defined » ?",
+    "choices": [
+     "La variable n'existe pas ou est mal orthographiée",
+     "Le total vaut zéro",
+     "Le navigateur est trop ancien"
+    ],
+    "answer": 0,
+    "explain": "Vérifie l'orthographe exacte et que la variable est bien déclarée avant."
+   },
+   {
+    "q": "Quel opérateur teste l'égalité stricte ?",
+    "choices": [
+     "===",
+     "=",
+     "=>"
+    ],
+    "answer": 0,
+    "explain": "= affecte une valeur ; === compare sans conversion de type."
+   },
+   {
+    "q": "Que vaut paniers[0] si paniers = [8000, 15000] ?",
+    "choices": [
+     "8000",
+     "15000",
+     "undefined"
+    ],
+    "answer": 0,
+    "explain": "Les tableaux commencent à l'indice 0."
+   },
+   {
+    "q": "À quoi sert return dans une fonction ?",
+    "choices": [
+     "À renvoyer un résultat à celui qui l'appelle",
+     "À recommencer la fonction",
+     "À afficher un message"
+    ],
+    "answer": 0,
+    "explain": "La valeur renvoyée peut ensuite être stockée, affichée ou réutilisée."
+   },
+   {
+    "q": "Pourquoi tester le cas « exactement 20 000 » ?",
+    "choices": [
+     "C'est une limite où les erreurs >= / > apparaissent",
+     "Ce n'est pas utile",
+     "Parce que c'est un nombre rond"
+    ],
+    "answer": 0,
+    "explain": "Les bugs se cachent souvent aux frontières des conditions."
+   },
+   {
+    "q": "Quelle méthode trouve un élément par son id ?",
+    "choices": [
+     "document.querySelector(\"#id\")",
+     "document.find(\"id\")",
+     "console.log(\"#id\")"
+    ],
+    "answer": 0,
+    "explain": "querySelector accepte les mêmes sélecteurs que le CSS."
+   },
+   {
+    "q": "Quel type renvoie champ.value ?",
+    "choices": [
+     "Toujours du texte",
+     "Toujours un nombre",
+     "Un booléen"
+    ],
+    "answer": 0,
+    "explain": "Il faut convertir avec Number() avant de calculer."
+   },
+   {
+    "q": "Pourquoi préférer textContent à innerHTML pour afficher un texte ?",
+    "choices": [
+     "C'est plus sûr : le texte n'est pas interprété comme du code",
+     "C'est plus coloré",
+     "innerHTML n'existe pas"
+    ],
+    "answer": 0,
+    "explain": "innerHTML avec une saisie utilisateur peut permettre d'injecter du code."
+   },
+   {
+    "q": "Que faire si la quantité saisie est négative ?",
+    "choices": [
+     "Afficher un message et arrêter le calcul",
+     "Calculer quand même",
+     "Recharger la page"
+    ],
+    "answer": 0,
+    "explain": "Valider les saisies évite des résultats absurdes et des bugs."
+   },
+   {
+    "q": "Que renvoie typeof 42 ?",
+    "choices": [
+     "\"string\"",
+     "\"integer\"",
+     "\"number\""
+    ],
+    "answer": 2,
+    "explain": "En JavaScript, les entiers et les décimaux ont tous le type number."
+   },
+   {
+    "q": "Combien de fois s'exécute la boucle `for (let i = 0; i < 3; i++)` ?",
+    "choices": [
+     "3 fois",
+     "2 fois",
+     "4 fois"
+    ],
+    "answer": 0,
+    "explain": "i prend les valeurs 0, 1 et 2 ; à 3, la condition i < 3 est fausse et la boucle s'arrête."
+   }
+  ]
+ },
+ "dev-python": {
+  "title": "Python pour débuter",
+  "lessons": [
+   "py-bases",
+   "py-projet"
+  ],
+  "questions": [
+   {
+    "q": "Que renvoie toujours input() ?",
+    "choices": [
+     "Du texte (str)",
+     "Un nombre entier",
+     "Un booléen"
+    ],
+    "answer": 0,
+    "explain": "Il faut convertir avec int() ou float() pour calculer."
+   },
+   {
+    "q": "Quel est le rôle de l'indentation en Python ?",
+    "choices": [
+     "Elle indique quelles lignes appartiennent à un bloc",
+     "Elle est seulement décorative",
+     "Elle ralentit le programme"
+    ],
+    "answer": 0,
+    "explain": "Une indentation incorrecte provoque une IndentationError."
+   },
+   {
+    "q": "Quelle ligne affiche « Total : 7500 FCFA » si total vaut 7500 ?",
+    "choices": [
+     "print(f\"Total : {total} FCFA\")",
+     "print(\"Total : {total} FCFA\")",
+     "print(Total, FCFA)"
+    ],
+    "answer": 0,
+    "explain": "Le f devant les guillemets active le remplacement des {variables}."
+   },
+   {
+    "q": "Quelle erreur provoque int(\"abc\") ?",
+    "choices": [
+     "ValueError",
+     "NameError",
+     "Aucune"
+    ],
+    "answer": 0,
+    "explain": "Le texte « abc » ne peut pas être converti en nombre."
+   },
+   {
+    "q": "Que renvoie stock.get(\"chapeau\", 0) si « chapeau » n'est pas dans le dictionnaire ?",
+    "choices": [
+     "0",
+     "Une erreur KeyError",
+     "None obligatoirement"
+    ],
+    "answer": 0,
+    "explain": "get permet de donner une valeur par défaut au lieu de provoquer une erreur."
+   },
+   {
+    "q": "Comment parcourir les clés et valeurs d'un dictionnaire ?",
+    "choices": [
+     "for cle, valeur in d.items():",
+     "for i in d.length:",
+     "while d:"
+    ],
+    "answer": 0,
+    "explain": "items() fournit les paires (clé, valeur)."
+   },
+   {
+    "q": "Comment sortir d'une boucle while True ?",
+    "choices": [
+     "Avec break",
+     "Avec return seulement hors fonction",
+     "C'est impossible"
+    ],
+    "answer": 0,
+    "explain": "break interrompt immédiatement la boucle la plus proche."
+   },
+   {
+    "q": "Pourquoi une fonction par action (afficher, vendre…) ?",
+    "choices": [
+     "Pour tester et réutiliser chaque partie séparément",
+     "Pour rendre le programme plus long",
+     "Python l'exige"
+    ],
+    "answer": 0,
+    "explain": "Des fonctions courtes et précises rendent le programme fiable et lisible."
+   },
+   {
+    "q": "Quelle ligne affiche « Bonjour » à l'écran en Python ?",
+    "choices": [
+     "echo \"Bonjour\"",
+     "print(\"Bonjour\")",
+     "console.log(\"Bonjour\")"
+    ],
+    "answer": 1,
+    "explain": "print() est la fonction d'affichage de Python ; echo et console.log viennent d'autres langages."
+   },
+   {
+    "q": "Comment ajouter « savon » à la fin de la liste produits ?",
+    "choices": [
+     "produits.add(\"savon\")",
+     "produits.push(\"savon\")",
+     "produits.append(\"savon\")"
+    ],
+    "answer": 2,
+    "explain": "append() ajoute un élément à la fin d'une liste Python."
+   },
+   {
+    "q": "Comment fixer à 20 la quantité de « riz » dans le dictionnaire stock ?",
+    "choices": [
+     "stock[\"riz\"] = 20",
+     "stock.riz = 20",
+     "stock(\"riz\") = 20"
+    ],
+    "answer": 0,
+    "explain": "On accède à une valeur d'un dictionnaire avec sa clé entre crochets."
+   },
+   {
+    "q": "Que vaut 7 // 2 en Python ?",
+    "choices": [
+     "3.5",
+     "3",
+     "1"
+    ],
+    "answer": 1,
+    "explain": "L'opérateur // fait une division entière : il garde seulement la partie entière du résultat."
+   },
+   {
+    "q": "Quel mot-clé sert à créer une fonction en Python ?",
+    "choices": [
+     "def",
+     "function",
+     "func"
+    ],
+    "answer": 0,
+    "explain": "Une fonction Python commence par def, suivi de son nom, de parenthèses et de deux-points."
+   },
+   {
+    "q": "Quelle condition teste correctement une rupture de stock ?",
+    "choices": [
+     "if quantite = 0:",
+     "if quantite => 0:",
+     "if quantite == 0:"
+    ],
+    "answer": 2,
+    "explain": "== compare deux valeurs ; un seul = sert à affecter une valeur et provoque une erreur dans un if."
+   }
+  ]
+ },
+ "jeu-game-design": {
+  "title": "Game design : concevoir un jeu",
+  "lessons": [
+   "gd-boucle",
+   "gd-niveaux"
+  ],
+  "questions": [
+   {
+    "q": "Qu'est-ce que la boucle de jeu ?",
+    "choices": [
+     "L'action principale que le joueur répète",
+     "Le menu de départ",
+     "La musique de fond"
+    ],
+    "answer": 0,
+    "explain": "Si la boucle n'est pas amusante, le reste du jeu ne la sauvera pas."
+   },
+   {
+    "q": "Pourquoi faire un prototype papier ?",
+    "choices": [
+     "Pour tester les règles vite et gratuitement",
+     "Pour remplacer le jeu final",
+     "Pour éviter de jouer"
+    ],
+    "answer": 0,
+    "explain": "On découvre les problèmes de règles avant d'écrire une seule ligne de code."
+   },
+   {
+    "q": "Combien de commandes conseille-t-on pour un premier jeu mobile ?",
+    "choices": [
+     "1 ou 2 gestes",
+     "Au moins 8 boutons",
+     "Aucune"
+    ],
+    "answer": 0,
+    "explain": "Moins de commandes = jeu plus accessible et plus facile à apprendre."
+   },
+   {
+    "q": "À quoi sert le « feedback » ?",
+    "choices": [
+     "À montrer clairement au joueur le résultat de chaque action",
+     "À punir le joueur",
+     "À charger le niveau"
+    ],
+    "answer": 0,
+    "explain": "Sons, animations et points rendent les actions satisfaisantes."
+   },
+   {
+    "q": "Combien de nouvelles mécaniques introduire à la fois ?",
+    "choices": [
+     "Une seule",
+     "Trois",
+     "Toutes dès le début"
+    ],
+    "answer": 0,
+    "explain": "Une nouveauté isolée se comprend ; trois à la fois créent la confusion."
+   },
+   {
+    "q": "Quel est l'ordre de la méthode en 4 temps ?",
+    "choices": [
+     "Présenter, pratiquer, combiner, tester",
+     "Tester, présenter, oublier, recommencer",
+     "Combiner, tester, présenter, pratiquer"
+    ],
+    "answer": 0,
+    "explain": "Le joueur apprend sans danger avant d'être mis à l'épreuve."
+   },
+   {
+    "q": "Pourquoi alterner moments intenses et moments calmes ?",
+    "choices": [
+     "Pour éviter la fatigue et donner du rythme",
+     "Pour rallonger le jeu",
+     "Parce que le moteur l'exige"
+    ],
+    "answer": 0,
+    "explain": "Comme dans un film, le rythme rend les pics plus marquants."
+   },
+   {
+    "q": "Que faire si les testeurs échouent 5 fois au même endroit ?",
+    "choices": [
+     "Simplifier ce passage",
+     "Ajouter un ennemi",
+     "Ne rien changer"
+    ],
+    "answer": 0,
+    "explain": "Un échec répété signale souvent un problème de lisibilité ou de difficulté."
+   },
+   {
+    "q": "Que doit dire l'idée du jeu résumée en une phrase ?",
+    "choices": [
+     "La liste complète de tous les niveaux",
+     "Qui est le joueur, ce qu'il fait et quel est son but",
+     "Le prix de vente du jeu"
+    ],
+    "answer": 1,
+    "explain": "Une phrase courte qui donne le personnage, l'action et l'objectif permet de garder le cap pendant toute la conception."
+   },
+   {
+    "q": "Qu'est-ce qu'une condition de défaite ?",
+    "choices": [
+     "Ce qui fait perdre la partie",
+     "Le score le plus élevé",
+     "Le menu de pause"
+    ],
+    "answer": 0,
+    "explain": "Définir clairement comment on perd fait partie des règles de base du jeu, avec l'objectif."
+   },
+   {
+    "q": "Pourquoi placer un point de sauvegarde juste avant un passage difficile ?",
+    "choices": [
+     "Pour rendre le niveau plus long",
+     "Pour cacher des objets secrets",
+     "Pour que le joueur n'ait pas à refaire tout le niveau après un échec"
+    ],
+    "answer": 2,
+    "explain": "Un point de sauvegarde bien placé évite la frustration de recommencer de loin."
+   },
+   {
+    "q": "Comment guider le regard du joueur vers le bon chemin ?",
+    "choices": [
+     "Avec la lumière, des couleurs contrastées et des éléments qui attirent l'œil",
+     "Avec un long texte d'explication au début",
+     "En cachant la sortie dans l'ombre"
+    ],
+    "answer": 0,
+    "explain": "Le décor lui-même oriente le joueur sans qu'il ait besoin de lire des instructions."
+   },
+   {
+    "q": "Comment récompenser la curiosité du joueur ?",
+    "choices": [
+     "En faisant perdre une vie à ceux qui explorent",
+     "En cachant un bonus ou un secret hors du chemin principal",
+     "En bloquant tous les chemins secondaires"
+    ],
+    "answer": 1,
+    "explain": "Un bonus caché donne envie d'explorer et rend le niveau plus riche."
+   },
+   {
+    "q": "Pendant une séance de test, quelle attitude adopter avec le testeur ?",
+    "choices": [
+     "Lui expliquer quoi faire à chaque difficulté",
+     "Prendre la manette à sa place",
+     "Observer sans l'aider et noter où il bloque"
+    ],
+    "answer": 2,
+    "explain": "Si tu aides le testeur, tu ne vois plus les vrais problèmes de ton niveau."
+   }
+  ]
+ },
+ "jeu-godot": {
+  "title": "Créer un jeu 2D avec Godot",
+  "lessons": [
+   "godot-bases",
+   "godot-joueur"
+  ],
+  "questions": [
+   {
+    "q": "De quoi est faite une scène Godot ?",
+    "choices": [
+     "D'un arbre de nœuds",
+     "D'une seule image",
+     "D'un fichier Excel"
+    ],
+    "answer": 0,
+    "explain": "Chaque nœud a un rôle : image, collision, son, caméra…"
+   },
+   {
+    "q": "Quand s'exécute la fonction _ready() ?",
+    "choices": [
+     "Une fois, quand le nœud apparaît dans la scène",
+     "À chaque image",
+     "Jamais automatiquement"
+    ],
+    "answer": 0,
+    "explain": "On l'utilise pour préparer l'état de départ."
+   },
+   {
+    "q": "À quel langage ressemble GDScript ?",
+    "choices": [
+     "Python",
+     "HTML",
+     "SQL"
+    ],
+    "answer": 0,
+    "explain": "Même logique d'indentation et syntaxe proche."
+   },
+   {
+    "q": "Quelle touche lance la scène principale ?",
+    "choices": [
+     "F5",
+     "F12",
+     "Ctrl+P"
+    ],
+    "answer": 0,
+    "explain": "F6 lance seulement la scène actuellement ouverte."
+   },
+   {
+    "q": "Quel nœud utiliser pour un personnage contrôlé par le joueur ?",
+    "choices": [
+     "CharacterBody2D",
+     "Label",
+     "AudioStreamPlayer"
+    ],
+    "answer": 0,
+    "explain": "Il gère le mouvement et les collisions avec move_and_slide()."
+   },
+   {
+    "q": "Pourquoi le personnage traverse-t-il un mur ?",
+    "choices": [
+     "Il manque une CollisionShape2D au joueur ou au mur",
+     "La vitesse est trop faible",
+     "Le jeu n'est pas enregistré"
+    ],
+    "answer": 0,
+    "explain": "Sans forme de collision, Godot ne sait pas où est le corps."
+   },
+   {
+    "q": "Que fait queue_free() ?",
+    "choices": [
+     "Supprime le nœud de la scène",
+     "Met le jeu en pause",
+     "Ajoute un point"
+    ],
+    "answer": 0,
+    "explain": "La pièce ramassée disparaît proprement."
+   },
+   {
+    "q": "À quoi sert un signal ?",
+    "choices": [
+     "À prévenir d'autres nœuds qu'un événement s'est produit",
+     "À dessiner un sprite",
+     "À changer de langue"
+    ],
+    "answer": 0,
+    "explain": "Les signaux permettent aux nœuds de communiquer sans dépendre les uns des autres."
+   },
+   {
+    "q": "Quelle fonction est appelée à chaque image pour gérer le mouvement et la physique ?",
+    "choices": [
+     "_ready()",
+     "_physics_process(delta)",
+     "queue_free()"
+    ],
+    "answer": 1,
+    "explain": "_physics_process(delta) s'exécute à intervalle régulier, idéal pour déplacer un personnage."
+   },
+   {
+    "q": "Dans Godot 4, quelle méthode déplace un CharacterBody2D en tenant compte des collisions ?",
+    "choices": [
+     "move_and_slide()",
+     "add_child()",
+     "queue_free()"
+    ],
+    "answer": 0,
+    "explain": "move_and_slide() applique la variable velocity et fait glisser le personnage contre les obstacles."
+   },
+   {
+    "q": "Que permet `@export` devant une variable comme `@export var vitesse = 200` ?",
+    "choices": [
+     "D'exporter le jeu sur téléphone",
+     "De supprimer la variable au lancement",
+     "De régler sa valeur dans l'Inspecteur sans toucher au code"
+    ],
+    "answer": 2,
+    "explain": "Une variable exportée apparaît dans l'Inspecteur, ce qui rend la vitesse réglable facilement."
+   },
+   {
+    "q": "Quel nœud utiliser pour une pièce qui détecte le passage du joueur ?",
+    "choices": [
+     "Area2D",
+     "Camera2D",
+     "Label"
+    ],
+    "answer": 0,
+    "explain": "Area2D détecte les corps qui entrent dans sa zone et émet le signal body_entered."
+   },
+   {
+    "q": "Quel nœud convient à un mur qui ne bouge jamais ?",
+    "choices": [
+     "Area2D",
+     "StaticBody2D",
+     "Sprite2D"
+    ],
+    "answer": 1,
+    "explain": "StaticBody2D est un corps physique immobile qui bloque les autres corps, avec sa CollisionShape2D."
+   },
+   {
+    "q": "Quelle fonction lit en une ligne la direction donnée par les touches fléchées ?",
+    "choices": [
+     "print(\"ui_left\")",
+     "get_tree().quit()",
+     "Input.get_vector(\"ui_left\", \"ui_right\", \"ui_up\", \"ui_down\")"
+    ],
+    "answer": 2,
+    "explain": "Input.get_vector() renvoie un vecteur de direction à partir de quatre actions d'entrée."
+   }
+  ]
+ },
+ "infographie-pro": {
+  "title": "Infographiste : de la commande à la livraison",
+  "lessons": [
+   "info-commande",
+   "info-declinaisons"
+  ],
+  "questions": [
+   {
+    "q": "Que signifie la validation du BAT par le client ?",
+    "choices": [
+     "Qu'il a reçu un premier croquis",
+     "Qu'il approuve par écrit la version définitive avant impression",
+     "Qu'il a payé le solde"
+    ],
+    "answer": 1,
+    "explain": "Le bon à tirer est la dernière vérification : une fois signé, il engage le client sur le contenu."
+   },
+   {
+    "q": "Quel nom de fichier est le plus professionnel ?",
+    "choices": [
+     "affiche_final_vraifinal.psd",
+     "nouveau document 3.psd",
+     "tantirose_affiche_v03.psd"
+    ],
+    "answer": 2,
+    "explain": "Le nom indique le client, le support et la version : on retrouve tout sans ouvrir le fichier."
+   },
+   {
+    "q": "Pourquoi limiter le nombre d'aller-retours dans le devis ?",
+    "choices": [
+     "Pour éviter des corrections sans fin non payées",
+     "Parce que Photoshop limite les versions",
+     "Pour aller plus vite à l'impression"
+    ],
+    "answer": 0,
+    "explain": "Un nombre écrit protège ton temps : au-delà, chaque correction est facturée."
+   },
+   {
+    "q": "Quel fichier livrer à un imprimeur pour un flyer ?",
+    "choices": [
+     "Un JPEG en RVB envoyé sur WhatsApp",
+     "Une capture d'écran",
+     "Un PDF haute définition en CMJN avec fond perdu"
+    ],
+    "answer": 2,
+    "explain": "L'imprimeur a besoin d'un fichier fidèle, en couleurs d'impression, qui déborde de la coupe."
+   },
+   {
+    "q": "Quelle résolution suffit pour un kakémono vu à quelques mètres ?",
+    "choices": [
+     "300 ppp obligatoirement",
+     "100 à 150 ppp à taille réelle",
+     "72 ppp à taille réduite de moitié"
+    ],
+    "answer": 1,
+    "explain": "Plus on regarde de loin, moins il faut de pixels par pouce ; 300 ppp alourdirait inutilement le fichier."
+   },
+   {
+    "q": "Quelle est la taille d'une story ?",
+    "choices": [
+     "1080 × 1920 px",
+     "1080 × 1080 px",
+     "1920 × 1080 px"
+    ],
+    "answer": 0,
+    "explain": "La story est verticale, au rapport 9:16."
+   },
+   {
+    "q": "Ton titre est trop large pour une bannière : que fais-tu ?",
+    "choices": [
+     "Tu le déformes en hauteur",
+     "Tu le supprimes",
+     "Tu recomposes la mise en page ou tu passes le titre sur deux lignes"
+    ],
+    "answer": 2,
+    "explain": "On ne déforme jamais un texte ou un logo ; on adapte la composition."
+   },
+   {
+    "q": "Quel mode colorimétrique pour la publication Facebook ?",
+    "choices": [
+     "CMJN",
+     "RVB",
+     "Niveaux de gris"
+    ],
+    "answer": 1,
+    "explain": "Les écrans affichent en RVB ; le CMJN est réservé à l'impression."
+   },
+   {
+    "q": "Pourquoi demander un brief écrit au client ?",
+    "choices": [
+     "Pour pouvoir facturer plus cher",
+     "Pour garder une trace claire de ses attentes et éviter les malentendus",
+     "Pour ne plus avoir à lui parler"
+    ],
+    "answer": 1,
+    "explain": "Le brief écrit sert de référence commune pendant tout le projet."
+   },
+   {
+    "q": "Quelle résolution viser pour un flyer imprimé, vu de près ?",
+    "choices": [
+     "300 ppp à taille réelle",
+     "72 ppp",
+     "30 ppp"
+    ],
+    "answer": 0,
+    "explain": "Un document imprimé et regardé de près demande environ 300 ppp pour rester net."
+   },
+   {
+    "q": "Qu'est-ce que la zone sûre d'un format ?",
+    "choices": [
+     "La partie du fond perdu réservée au texte",
+     "Le coin où l'on met la signature de l'infographiste",
+     "L'espace où placer textes et logo pour qu'ils ne soient ni coupés ni masqués"
+    ],
+    "answer": 2,
+    "explain": "Hors de la zone sûre, un élément risque d'être rogné à l'impression ou caché par l'interface d'une application."
+   },
+   {
+    "q": "Pourquoi préparer un gabarit pour chaque format de la campagne ?",
+    "choices": [
+     "Pour partir des bonnes dimensions, marges et zones sûres dès le début",
+     "Pour utiliser une police différente sur chaque support",
+     "Pour éviter de montrer le travail au client"
+    ],
+    "answer": 0,
+    "explain": "Un gabarit fiable évite de refaire une déclinaison à cause d'une mauvaise taille."
+   },
+   {
+    "q": "Lors du contrôle de cohérence d'une campagne, que vérifies-tu ?",
+    "choices": [
+     "Que chaque support a un slogan différent",
+     "Que couleurs, polices, logo et message sont identiques sur tous les supports",
+     "Que les fichiers ont tous le même poids"
+    ],
+    "answer": 1,
+    "explain": "Une campagne doit être reconnaissable au premier coup d'œil, quel que soit le support."
+   },
+   {
+    "q": "Quelle est la taille d'une publication carrée Instagram ?",
+    "choices": [
+     "1920 × 1080 px",
+     "595 × 842 px",
+     "1080 × 1080 px"
+    ],
+    "answer": 2,
+    "explain": "Le format carré standard d'Instagram fait 1080 pixels de côté."
+   }
+  ]
+ },
+ "dessin-bases": {
+  "title": "Dessinateur : les bases du dessin",
+  "lessons": [
+   "dessin-formes",
+   "dessin-ombres"
+  ],
+  "questions": [
+   {
+    "q": "Où se trouve la ligne d'horizon ?",
+    "choices": [
+     "Toujours au milieu de la feuille",
+     "En bas de la feuille",
+     "À la hauteur des yeux de l'observateur"
+    ],
+    "answer": 2,
+    "explain": "L'horizon se déplace avec ton regard : il monte quand tu montes."
+   },
+   {
+    "q": "Quelle perspective pour un bâtiment vu par l'angle ?",
+    "choices": [
+     "À 2 points de fuite",
+     "À 1 point de fuite",
+     "Sans point de fuite"
+    ],
+    "answer": 0,
+    "explain": "Les deux façades fuient chacune vers leur propre point."
+   },
+   {
+    "q": "En perspective à 2 points, comment restent les arêtes verticales ?",
+    "choices": [
+     "Elles fuient vers le haut",
+     "Elles restent verticales",
+     "Elles deviennent horizontales"
+    ],
+    "answer": 1,
+    "explain": "Seules les lignes horizontales fuient ; les verticales restent verticales."
+   },
+   {
+    "q": "Comment apparaît un cercle vu en perspective ?",
+    "choices": [
+     "Comme un carré",
+     "Comme une ellipse",
+     "Toujours comme un cercle"
+    ],
+    "answer": 1,
+    "explain": "Le cercle s'aplatit en ellipse, d'autant plus qu'il est proche de l'horizon."
+   },
+   {
+    "q": "Qu'est-ce que l'ombre portée ?",
+    "choices": [
+     "L'ombre que l'objet projette sur le sol ou un autre objet",
+     "La partie sombre de l'objet lui-même",
+     "Le reflet de la lumière"
+    ],
+    "answer": 0,
+    "explain": "L'ombre propre est sur l'objet ; l'ombre portée est projetée à côté."
+   },
+   {
+    "q": "Où l'ombre portée est-elle la plus foncée ?",
+    "choices": [
+     "À son extrémité",
+     "Près du point de contact avec l'objet",
+     "Elle est uniforme"
+    ],
+    "answer": 1,
+    "explain": "Plus on s'éloigne de l'objet, plus la lumière ambiante l'éclaircit."
+   },
+   {
+    "q": "Quel crayon pour les valeurs les plus foncées ?",
+    "choices": [
+     "HB",
+     "2H",
+     "6B"
+    ],
+    "answer": 2,
+    "explain": "Les mines B sont plus grasses et plus foncées ; plus le chiffre est grand, plus elles noircissent."
+   },
+   {
+    "q": "Comment obtenir un gris foncé en hachures ?",
+    "choices": [
+     "Avec des hachures croisées et serrées",
+     "Avec des traits très espacés",
+     "Avec la gomme"
+    ],
+    "answer": 0,
+    "explain": "Superposer les directions de hachures densifie la valeur."
+   },
+   {
+    "q": "Quelle unité utilise-t-on souvent pour mesurer les proportions d'un personnage ?",
+    "choices": [
+     "La hauteur de la tête",
+     "La largeur d'un doigt",
+     "Le centimètre exact"
+    ],
+    "answer": 0,
+    "explain": "On compte combien de « têtes » mesure le corps, ce qui garde des proportions justes quelle que soit la taille du dessin."
+   },
+   {
+    "q": "En perspective à 1 point de fuite, où se rejoignent les lignes fuyantes ?",
+    "choices": [
+     "En deux points aux bords de la feuille",
+     "En un seul point situé sur la ligne d'horizon",
+     "Nulle part, elles restent parallèles"
+    ],
+    "answer": 1,
+    "explain": "En perspective à 1 point, toutes les lignes qui s'éloignent convergent vers un unique point de fuite sur l'horizon."
+   },
+   {
+    "q": "Par quoi commencer pour dessiner un objet compliqué ?",
+    "choices": [
+     "Dessiner d'abord tous les détails",
+     "Tracer directement le contour final appuyé",
+     "Le simplifier en formes géométriques simples"
+    ],
+    "answer": 2,
+    "explain": "Cubes, cylindres et sphères donnent une construction solide avant d'ajouter les détails."
+   },
+   {
+    "q": "Qu'est-ce qu'une échelle de valeurs ?",
+    "choices": [
+     "Une gamme de gris qui va du blanc au noir",
+     "Une règle graduée en centimètres",
+     "Un classement des crayons par prix"
+    ],
+    "answer": 0,
+    "explain": "L'échelle de valeurs entraîne à doser la pression pour obtenir chaque nuance de gris."
+   },
+   {
+    "q": "De quel côté d'un objet se trouve sa partie ombrée ?",
+    "choices": [
+     "Du côté tourné vers la lumière",
+     "Du côté opposé à la source de lumière",
+     "Toujours en haut de l'objet"
+    ],
+    "answer": 1,
+    "explain": "Les faces que la lumière n'atteint pas directement sont dans l'ombre propre de l'objet."
+   },
+   {
+    "q": "À quoi sert l'estompe ?",
+    "choices": [
+     "À effacer complètement le trait",
+     "À tailler la mine du crayon",
+     "À fondre le graphite pour obtenir des dégradés doux"
+    ],
+    "answer": 2,
+    "explain": "En frottant le graphite, l'estompe adoucit les passages entre les valeurs."
+   }
+  ]
+ },
+ "illustration-numerique": {
+  "title": "Illustrateur : l'illustration numérique avec Krita",
+  "lessons": [
+   "illus-krita",
+   "illus-personnage"
+  ],
+  "questions": [
+   {
+    "q": "Quelle touche active le pinceau à main levée dans Krita ?",
+    "choices": [
+     "P",
+     "B",
+     "G"
+    ],
+    "answer": 1,
+    "explain": "B (brush) sélectionne l'outil pinceau à main levée."
+   },
+   {
+    "q": "Dans quel format enregistrer ton travail pour garder les calques ?",
+    "choices": [
+     ".kra",
+     ".jpg",
+     ".png"
+    ],
+    "answer": 0,
+    "explain": "Le .kra est le format natif de Krita ; le PNG sert à publier l'image finale."
+   },
+   {
+    "q": "À quoi sert le stabilisateur ?",
+    "choices": [
+     "À accélérer Krita",
+     "À fixer la tablette sur la table",
+     "À lisser le trait pour des courbes nettes"
+    ],
+    "answer": 2,
+    "explain": "Il filtre les petits tremblements de la main pendant le tracé."
+   },
+   {
+    "q": "Pourquoi séparer croquis, encrage et couleurs ?",
+    "choices": [
+     "Pour alourdir le fichier",
+     "Pour modifier chaque étape sans abîmer les autres",
+     "Parce que Krita l'exige"
+    ],
+    "answer": 1,
+    "explain": "Chaque calque se corrige, se masque ou se supprime indépendamment."
+   },
+   {
+    "q": "Pourquoi commencer par des silhouettes noires ?",
+    "choices": [
+     "Pour vérifier que le personnage est reconnaissable par sa seule forme",
+     "Pour gagner de l'encre",
+     "Parce que les couleurs viennent en dernier"
+    ],
+    "answer": 0,
+    "explain": "Une silhouette lisible est la base d'un personnage mémorable."
+   },
+   {
+    "q": "Que montre un turnaround ?",
+    "choices": [
+     "Les expressions du visage",
+     "Le personnage de face, de profil et de dos aux mêmes proportions",
+     "Le décor du personnage"
+    ],
+    "answer": 1,
+    "explain": "Les vues alignées garantissent un personnage identique sous tous les angles."
+   },
+   {
+    "q": "Quelle forme évoque plutôt un personnage doux et sympathique ?",
+    "choices": [
+     "Le triangle",
+     "Le carré",
+     "Le cercle"
+    ],
+    "answer": 2,
+    "explain": "Les formes rondes paraissent douces et accueillantes."
+   },
+   {
+    "q": "Où placer le calque des aplats de couleur ?",
+    "choices": [
+     "Sous le calque d'encrage",
+     "Au-dessus de tous les calques",
+     "Dans le même calque que le croquis"
+    ],
+    "answer": 0,
+    "explain": "Sous l'encrage, les couleurs ne recouvrent pas les traits."
+   },
+   {
+    "q": "Quel raccourci annule la dernière action dans Krita ?",
+    "choices": [
+     "Ctrl+S",
+     "Ctrl+Z",
+     "Ctrl+P"
+    ],
+    "answer": 1,
+    "explain": "Ctrl+Z annule ; Ctrl+S enregistre et Ctrl+P imprime."
+   },
+   {
+    "q": "Quel format exporter pour publier ton illustration sur les réseaux sociaux ?",
+    "choices": [
+     "PNG ou JPG",
+     ".kra",
+     ".txt"
+    ],
+    "answer": 0,
+    "explain": "Le .kra garde les calques pour travailler ; PNG et JPG sont lus partout pour la diffusion."
+   },
+   {
+    "q": "Quelle touche active le mode gomme du pinceau dans Krita ?",
+    "choices": [
+     "G",
+     "Z",
+     "E"
+    ],
+    "answer": 2,
+    "explain": "La touche E bascule le pinceau en mode gomme et revient au pinceau en appuyant à nouveau."
+   },
+   {
+    "q": "Pourquoi régler la courbe de pression de la tablette ?",
+    "choices": [
+     "Pour que l'épaisseur du trait suive bien la force d'appui du stylet",
+     "Pour changer la couleur de l'écran",
+     "Pour agrandir la taille de la toile"
+    ],
+    "answer": 0,
+    "explain": "Une courbe adaptée à ta main donne des traits fins et épais contrôlés."
+   },
+   {
+    "q": "À quoi sert une planche de références (moodboard) lors de la recherche ?",
+    "choices": [
+     "À remplacer le dessin du personnage",
+     "À rassembler des images qui guident le style, les formes et les couleurs",
+     "À exporter la fiche finale"
+    ],
+    "answer": 1,
+    "explain": "Les références nourrissent les idées et évitent de dessiner uniquement de mémoire."
+   },
+   {
+    "q": "Pourquoi tracer des lignes horizontales de repère sur un turnaround ?",
+    "choices": [
+     "Pour décorer le fond de la fiche",
+     "Pour séparer les couleurs des ombres",
+     "Pour garder les mêmes hauteurs (yeux, épaules, taille) d'une vue à l'autre"
+    ],
+    "answer": 2,
+    "explain": "Les repères alignent chaque partie du corps entre la face, le profil et le dos."
+   }
+  ]
+ },
+ "info-bases": {
+  "title": "Informatique : bases et maintenance",
+  "lessons": [
+   "pc-materiel",
+   "pc-maintenance"
+  ],
+  "questions": [
+   {
+    "q": "Quel composant garde tes fichiers quand l'ordinateur est éteint ?",
+    "choices": [
+     "La mémoire vive (RAM)",
+     "Le stockage (HDD ou SSD)",
+     "Le processeur"
+    ],
+    "answer": 1,
+    "explain": "La RAM se vide à l'extinction ; seul le disque conserve les données."
+   },
+   {
+    "q": "Le Gestionnaire des tâches affiche « Disque 100 % » en permanence sur un HDD. Quelle est la solution la plus efficace ?",
+    "choices": [
+     "Ajouter un deuxième écran",
+     "Changer le clavier",
+     "Remplacer le HDD par un SSD"
+    ],
+    "answer": 2,
+    "explain": "Le disque est le goulot d'étranglement ; un SSD est bien plus rapide."
+   },
+   {
+    "q": "Quel raccourci ouvre directement le Gestionnaire des tâches ?",
+    "choices": [
+     "Ctrl+Maj+Échap",
+     "Ctrl+C",
+     "Alt+F4"
+    ],
+    "answer": 0,
+    "explain": "Ctrl+Maj+Échap l'ouvre sans passer par un menu."
+   },
+   {
+    "q": "Où désactiver les programmes qui se lancent au démarrage ?",
+    "choices": [
+     "Dans le Panneau de configuration du clavier",
+     "Dans l'onglet Applications de démarrage du Gestionnaire des tâches",
+     "Dans le BIOS uniquement"
+    ],
+    "answer": 1,
+    "explain": "Cet onglet indique aussi l'impact de chaque programme sur le démarrage."
+   },
+   {
+    "q": "Que signifie la règle de sauvegarde 3-2-1 ?",
+    "choices": [
+     "3 sauvegardes par jour pendant 2 semaines, 1 fois par mois",
+     "3 copies, sur 2 supports différents, dont 1 hors site",
+     "3 antivirus, 2 pare-feu, 1 mot de passe"
+    ],
+    "answer": 1,
+    "explain": "Cette règle protège contre la panne, le vol, l'incendie et les rançongiciels."
+   },
+   {
+    "q": "Pourquoi éviter d'installer deux antivirus en même temps ?",
+    "choices": [
+     "Ils se gênent et ralentissent le PC",
+     "C'est interdit par la loi",
+     "Defender ne fonctionne que sur Windows 7"
+    ],
+    "answer": 0,
+    "explain": "Microsoft Defender suffit pour un usage courant s'il est à jour."
+   },
+   {
+    "q": "Où télécharger l'outil qui crée une clé d'installation de Windows ?",
+    "choices": [
+     "Sur n'importe quel site de téléchargement gratuit",
+     "Dans un groupe WhatsApp",
+     "Sur le site officiel de Microsoft"
+    ],
+    "answer": 2,
+    "explain": "Les copies non officielles peuvent contenir des logiciels malveillants."
+   },
+   {
+    "q": "Pourquoi débrancher le disque de sauvegarde après usage ?",
+    "choices": [
+     "Pour économiser l'électricité",
+     "Pour qu'un rançongiciel ne puisse pas le chiffrer",
+     "Pour accélérer Windows Update"
+    ],
+    "answer": 1,
+    "explain": "Une copie hors ligne reste intacte même si le PC est infecté."
+   },
+   {
+    "q": "Quel composant exécute les instructions des programmes ?",
+    "choices": [
+     "L'alimentation",
+     "Le processeur (CPU)",
+     "Le disque dur"
+    ],
+    "answer": 1,
+    "explain": "Le processeur est le « cerveau » qui fait les calculs ; le stockage garde les fichiers et l'alimentation fournit le courant."
+   },
+   {
+    "q": "Que se passe-t-il quand la mémoire vive (RAM) est saturée ?",
+    "choices": [
+     "L'ordinateur ralentit car il utilise le disque comme mémoire d'appoint",
+     "Les fichiers personnels sont effacés",
+     "L'écran s'éteint définitivement"
+    ],
+    "answer": 0,
+    "explain": "Quand la RAM est pleine, Windows déplace des données vers le disque, beaucoup plus lent."
+   },
+   {
+    "q": "Que signale un point d'exclamation jaune dans le Gestionnaire de périphériques ?",
+    "choices": [
+     "Un appareil neuf et fonctionnel",
+     "Une mise à jour terminée avec succès",
+     "Un périphérique mal reconnu ou sans pilote correct"
+    ],
+    "answer": 2,
+    "explain": "Il faut alors installer ou mettre à jour le pilote de ce périphérique."
+   },
+   {
+    "q": "Avant de réinstaller Windows, que dois-tu faire absolument ?",
+    "choices": [
+     "Sauvegarder les fichiers personnels sur un autre support",
+     "Supprimer l'antivirus",
+     "Débrancher l'écran"
+    ],
+    "answer": 0,
+    "explain": "La réinstallation peut effacer le disque : sans sauvegarde, documents et photos sont perdus."
+   },
+   {
+    "q": "Quel outil intégré à Windows libère de l'espace en supprimant les fichiers temporaires ?",
+    "choices": [
+     "Paint",
+     "Le Nettoyage de disque",
+     "La Calculatrice"
+    ],
+    "answer": 1,
+    "explain": "Le Nettoyage de disque (ou l'Assistant de stockage) supprime sans risque les fichiers temporaires et inutiles."
+   },
+   {
+    "q": "Pourquoi installer régulièrement les mises à jour de Windows ?",
+    "choices": [
+     "Elles effacent les fichiers inutiles du bureau",
+     "Elles augmentent la taille de l'écran",
+     "Elles corrigent des failles de sécurité et des bugs"
+    ],
+    "answer": 2,
+    "explain": "Les mises à jour bouchent les failles que les virus exploitent et améliorent la stabilité."
+   }
+  ]
+ },
+ "reseau-local": {
+  "title": "Réseaux : concevoir et câbler un réseau local",
+  "lessons": [
+   "res-adressage",
+   "res-cablage"
+  ],
+  "questions": [
+   {
+    "q": "Combien d'adresses utilisables contient un réseau /26 ?",
+    "choices": [
+     "64",
+     "62",
+     "126"
+    ],
+    "answer": 1,
+    "explain": "2^6 = 64 adresses, moins l'adresse du réseau et la diffusion : 62."
+   },
+   {
+    "q": "Quelle est l'adresse de diffusion du réseau 192.168.1.0/25 ?",
+    "choices": [
+     "192.168.1.255",
+     "192.168.1.128",
+     "192.168.1.127"
+    ],
+    "answer": 2,
+    "explain": "Le premier /25 va de .0 à .127 ; la dernière adresse est la diffusion."
+   },
+   {
+    "q": "Laquelle de ces adresses est une adresse privée (RFC 1918) ?",
+    "choices": [
+     "172.20.4.10",
+     "172.40.4.10",
+     "8.8.8.8"
+    ],
+    "answer": 0,
+    "explain": "La plage 172.16.0.0/12 va de 172.16.0.0 à 172.31.255.255."
+   },
+   {
+    "q": "ping 8.8.8.8 répond mais ping google.com échoue. Où est le problème ?",
+    "choices": [
+     "Le câble réseau",
+     "La résolution de noms (DNS)",
+     "La carte Wi-Fi"
+    ],
+    "answer": 1,
+    "explain": "La connexion fonctionne, seule la traduction du nom en adresse échoue."
+   },
+   {
+    "q": "Quel équipement relie ton réseau local à Internet ?",
+    "choices": [
+     "Le switch",
+     "Le câble RJ45",
+     "Le routeur"
+    ],
+    "answer": 2,
+    "explain": "Le routeur relie des réseaux différents ; le switch relie les appareils d'un même réseau."
+   },
+   {
+    "q": "Quelle est la première couleur de la norme T568B ?",
+    "choices": [
+     "Blanc-orange",
+     "Blanc-vert",
+     "Bleu"
+    ],
+    "answer": 0,
+    "explain": "T568B commence par blanc-orange, orange ; T568A par blanc-vert, vert."
+   },
+   {
+    "q": "Quel réglage Wi-Fi est le plus sûr parmi ces trois ?",
+    "choices": [
+     "WEP",
+     "WPA3",
+     "WPA2 avec TKIP"
+    ],
+    "answer": 1,
+    "explain": "WEP et TKIP sont cassés ; WPA3 (ou à défaut WPA2-AES) est recommandé."
+   },
+   {
+    "q": "Quelle longueur maximale pour un lien Ethernet en cuivre ?",
+    "choices": [
+     "100 m",
+     "500 m",
+     "1 km"
+    ],
+    "answer": 0,
+    "explain": "Au-delà de 100 m, le signal se dégrade : on ajoute un switch ou de la fibre."
+   },
+   {
+    "q": "Quelle commande affiche la configuration IP d'un PC sous Windows ?",
+    "choices": [
+     "tracert",
+     "ipconfig",
+     "mkdir"
+    ],
+    "answer": 1,
+    "explain": "ipconfig affiche l'adresse IP, le masque et la passerelle de chaque carte réseau."
+   },
+   {
+    "q": "Quel masque de sous-réseau correspond à /24 ?",
+    "choices": [
+     "255.255.255.0",
+     "255.255.0.0",
+     "255.255.255.128"
+    ],
+    "answer": 0,
+    "explain": "/24 signifie 24 bits à 1, soit trois octets à 255 : 255.255.255.0."
+   },
+   {
+    "q": "Quelle est l'adresse réseau de l'hôte 192.168.10.77/24 ?",
+    "choices": [
+     "192.168.10.1",
+     "192.168.10.255",
+     "192.168.10.0"
+    ],
+    "answer": 2,
+    "explain": "Avec un /24, l'adresse réseau garde les trois premiers octets et met le dernier à 0."
+   },
+   {
+    "q": "Quel équipement relie par câble les ordinateurs d'un même réseau local ?",
+    "choices": [
+     "Le switch (commutateur)",
+     "Le serveur DNS",
+     "Le vidéoprojecteur"
+    ],
+    "answer": 0,
+    "explain": "Le switch reçoit les câbles des postes et transmet les trames au bon destinataire."
+   },
+   {
+    "q": "À quoi sert Cisco Packet Tracer dans un projet de réseau ?",
+    "choices": [
+     "À sertir les connecteurs RJ45",
+     "À simuler et tester le réseau avant de l'installer",
+     "À mesurer la longueur des câbles"
+    ],
+    "answer": 1,
+    "explain": "La simulation permet de vérifier le plan d'adressage et les connexions sans acheter de matériel."
+   },
+   {
+    "q": "Pourquoi créer un réseau Wi-Fi invité séparé ?",
+    "choices": [
+     "Pour doubler la vitesse de la connexion",
+     "Pour pouvoir supprimer le mot de passe du Wi-Fi principal",
+     "Pour que les visiteurs aient Internet sans accéder aux appareils internes"
+    ],
+    "answer": 2,
+    "explain": "Le réseau invité isole les visiteurs des ordinateurs, imprimantes et serveurs de l'entreprise."
+   }
+  ]
+ },
+ "admin-sys-reseau": {
+  "title": "Administrateur réseau et système",
+  "lessons": [
+   "admin-linux",
+   "admin-services"
+  ],
+  "questions": [
+   {
+    "q": "Que donne chmod 640 sur un fichier ?",
+    "choices": [
+     "rw-r----- : le propriétaire lit et écrit, le groupe lit, les autres rien",
+     "rwxr-x--- : tout pour le propriétaire",
+     "Lecture seule pour tout le monde"
+    ],
+    "answer": 0,
+    "explain": "6 = 4 + 2 (rw-), 4 = r--, 0 = ---."
+   },
+   {
+    "q": "Pourquoi l'option -a est-elle indispensable dans usermod -aG ?",
+    "choices": [
+     "Elle rend la commande plus rapide",
+     "Elle crée l'utilisateur s'il n'existe pas",
+     "Sans elle, l'utilisateur est retiré de ses autres groupes"
+    ],
+    "answer": 2,
+    "explain": "-a signifie « ajouter » ; -G seul remplace la liste des groupes secondaires."
+   },
+   {
+    "q": "Quelle commande installe les mises à jour après sudo apt update ?",
+    "choices": [
+     "sudo apt remove",
+     "sudo apt upgrade",
+     "sudo apt list"
+    ],
+    "answer": 1,
+    "explain": "update recharge la liste, upgrade installe les nouvelles versions."
+   },
+   {
+    "q": "Quelle commande affiche les journaux du service SSH du jour ?",
+    "choices": [
+     "ls -l ssh",
+     "journalctl -u ssh --since today",
+     "chmod ssh today"
+    ],
+    "answer": 1,
+    "explain": "journalctl lit les journaux de systemd ; -u filtre par service."
+   },
+   {
+    "q": "Que signifie la ligne cron « 30 2 * * * » ?",
+    "choices": [
+     "Toutes les 30 minutes pendant 2 heures",
+     "Le 30 février",
+     "Chaque jour à 2 h 30"
+    ],
+    "answer": 2,
+    "explain": "Les champs sont : minute (30), heure (2), puis jour, mois et jour de semaine quelconques."
+   },
+   {
+    "q": "Pourquoi ne faut-il qu'un seul serveur DHCP par réseau ?",
+    "choices": [
+     "Deux serveurs distribueraient des adresses en conflit",
+     "Le DHCP est payant",
+     "Windows refuse plus d'un serveur"
+    ],
+    "answer": 0,
+    "explain": "Deux serveurs indépendants peuvent attribuer la même adresse à deux appareils."
+   },
+   {
+    "q": "Quelle commande montre l'espace disque restant par partition ?",
+    "choices": [
+     "ls -l",
+     "df -h",
+     "chmod 755"
+    ],
+    "answer": 1,
+    "explain": "df -h affiche taille, utilisé, disponible et pourcentage, en unités lisibles."
+   },
+   {
+    "q": "Quel service rend un dossier Linux accessible depuis l'Explorateur Windows ?",
+    "choices": [
+     "cron",
+     "SSH",
+     "Samba"
+    ],
+    "answer": 2,
+    "explain": "Samba implémente le protocole de partage de fichiers de Windows (SMB)."
+   },
+   {
+    "q": "Quelle commande affiche le dossier dans lequel tu te trouves ?",
+    "choices": [
+     "pwd",
+     "ls",
+     "cd"
+    ],
+    "answer": 0,
+    "explain": "pwd (print working directory) affiche le chemin du dossier courant ; ls liste son contenu."
+   },
+   {
+    "q": "Quelle commande crée l'utilisateur marie avec son dossier personnel sous Ubuntu ?",
+    "choices": [
+     "sudo chmod marie",
+     "sudo adduser marie",
+     "sudo mkdir marie"
+    ],
+    "answer": 1,
+    "explain": "adduser crée le compte, son dossier personnel et demande un mot de passe."
+   },
+   {
+    "q": "Quelle commande redémarre le service SSH ?",
+    "choices": [
+     "sudo apt restart ssh",
+     "sudo ssh reboot",
+     "sudo systemctl restart ssh"
+    ],
+    "answer": 2,
+    "explain": "systemctl pilote les services : start, stop, restart, status, enable."
+   },
+   {
+    "q": "Quel port utilise SSH par défaut ?",
+    "choices": [
+     "22",
+     "80",
+     "443"
+    ],
+    "answer": 0,
+    "explain": "SSH écoute sur le port 22 ; 80 et 443 servent au web (HTTP et HTTPS)."
+   },
+   {
+    "q": "Quel est le rôle d'un serveur DNS ?",
+    "choices": [
+     "Distribuer automatiquement les adresses IP",
+     "Traduire un nom en adresse IP",
+     "Partager des dossiers avec Windows"
+    ],
+    "answer": 1,
+    "explain": "Le DNS fait la correspondance nom ↔ adresse IP ; c'est le DHCP qui distribue les adresses."
+   },
+   {
+    "q": "Comment être sûr qu'une sauvegarde fonctionne vraiment ?",
+    "choices": [
+     "En restaurant un fichier pour vérifier qu'il est complet et lisible",
+     "En vérifiant seulement que la tâche cron existe",
+     "En regardant l'heure du serveur"
+    ],
+    "answer": 0,
+    "explain": "Seul un test de restauration prouve que la sauvegarde est utilisable le jour où on en a besoin."
+   }
+  ]
+ },
+ "cybersecurite": {
+  "title": "Cybersécurité : se protéger et protéger une entreprise",
+  "lessons": [
+   "cyber-hygiene",
+   "cyber-entreprise"
+  ],
+  "questions": [
+   {
+    "q": "Un « agent de l'opérateur » t'appelle et demande ton code PIN mobile money pour « débloquer » ton compte. Que fais-tu ?",
+    "choices": [
+     "Je raccroche sans donner le code",
+     "Je donne le code, c'est l'opérateur",
+     "Je donne seulement les 3 premiers chiffres"
+    ],
+    "answer": 0,
+    "explain": "Aucun opérateur ne demande ton code PIN : c'est toujours une arnaque."
+   },
+   {
+    "q": "Pourquoi un mot de passe unique par compte ?",
+    "choices": [
+     "Pour aller plus vite",
+     "Pour qu'une fuite sur un site ne compromette pas les autres comptes",
+     "C'est obligatoire sur WhatsApp"
+    ],
+    "answer": 1,
+    "explain": "Les pirates testent les mots de passe volés sur d'autres sites."
+   },
+   {
+    "q": "Qu'apporte la double authentification ?",
+    "choices": [
+     "Elle remplace l'antivirus",
+     "Elle rend le téléphone plus rapide",
+     "Un second élément est exigé en plus du mot de passe"
+    ],
+    "answer": 2,
+    "explain": "Même avec ton mot de passe, le pirate est bloqué sans le second facteur."
+   },
+   {
+    "q": "Quel signe doit t'alerter dans un message ?",
+    "choices": [
+     "Il est écrit en français",
+     "Il crée une urgence et demande un code ou un paiement",
+     "Il vient d'un contact enregistré"
+    ],
+    "answer": 1,
+    "explain": "Urgence, gain inattendu et demande de code sont les marques de l'hameçonnage."
+   },
+   {
+    "q": "Pourquoi garder une sauvegarde hors ligne ?",
+    "choices": [
+     "Pour qu'un rançongiciel ne puisse pas la chiffrer",
+     "Pour économiser Internet",
+     "Parce que le cloud est interdit"
+    ],
+    "answer": 0,
+    "explain": "Un rançongiciel chiffre tout ce qui est connecté et accessible."
+   },
+   {
+    "q": "Que signifie le principe du moindre privilège ?",
+    "choices": [
+     "Tout le monde est administrateur pour gagner du temps",
+     "Le patron n'a aucun accès",
+     "Chacun n'a que les droits nécessaires à son travail"
+    ],
+    "answer": 2,
+    "explain": "Moins un compte a de droits, moins un pirate peut nuire en le volant."
+   },
+   {
+    "q": "Un poste semble infecté par un rançongiciel. Quel est le premier geste ?",
+    "choices": [
+     "Payer la rançon rapidement",
+     "L'isoler du réseau",
+     "Le formater sans rien dire"
+    ],
+    "answer": 1,
+    "explain": "Isoler empêche la propagation ; on prévient ensuite le responsable."
+   },
+   {
+    "q": "Un e-mail du « directeur » demande un virement urgent vers un nouveau compte. Que faire ?",
+    "choices": [
+     "Faire le virement, c'est urgent",
+     "Répondre à l'e-mail pour confirmer",
+     "Rappeler le directeur sur un numéro déjà connu"
+    ],
+    "answer": 2,
+    "explain": "Une vérification par un autre canal déjoue la fraude au président."
+   },
+   {
+    "q": "Quel est le principal avantage d'un gestionnaire de mots de passe ?",
+    "choices": [
+     "Il rend la double authentification inutile",
+     "Il partage tes mots de passe avec tes amis",
+     "Il crée et retient un mot de passe fort et différent pour chaque compte"
+    ],
+    "answer": 2,
+    "explain": "Tu n'as plus qu'un seul mot de passe maître à retenir, et chaque compte a le sien, solide et unique."
+   },
+   {
+    "q": "Quelle phrase de passe est la plus solide ?",
+    "choices": [
+     "123456",
+     "Moto-Mangue-Pluie-Lagune-47",
+     "Cotonou2024"
+    ],
+    "answer": 1,
+    "explain": "Plusieurs mots sans lien, assez longs, sont bien plus difficiles à deviner qu'un mot connu suivi d'une année."
+   },
+   {
+    "q": "Avant de saisir tes identifiants sur un site ouvert depuis un lien, que vérifies-tu ?",
+    "choices": [
+     "Le nom de domaine exact dans la barre d'adresse",
+     "La couleur du logo",
+     "Le nombre d'images sur la page"
+    ],
+    "answer": 0,
+    "explain": "Un faux site peut copier le logo à l'identique, mais pas le vrai nom de domaine."
+   },
+   {
+    "q": "Pourquoi installer rapidement les mises à jour du téléphone et de l'ordinateur ?",
+    "choices": [
+     "Elles suppriment les mots de passe enregistrés",
+     "Elles désactivent l'antivirus",
+     "Elles corrigent des failles de sécurité connues"
+    ],
+    "answer": 2,
+    "explain": "Une fois une faille publiée, les pirates l'exploitent sur les appareils non mis à jour."
+   },
+   {
+    "q": "Pourquoi commencer par faire l'inventaire du matériel et des comptes de l'entreprise ?",
+    "choices": [
+     "Parce qu'on ne peut protéger que ce qu'on connaît",
+     "Pour revendre le vieux matériel",
+     "Pour supprimer toutes les sauvegardes"
+    ],
+    "answer": 0,
+    "explain": "L'inventaire révèle les appareils, logiciels et comptes à sécuriser, y compris ceux qu'on avait oubliés."
+   },
+   {
+    "q": "Un employé quitte l'entreprise. Que fais-tu de ses accès ?",
+    "choices": [
+     "Tu laisses ses comptes actifs au cas où il reviendrait",
+     "Tu désactives ses comptes et changes les mots de passe partagés dès son départ",
+     "Tu donnes ses identifiants au stagiaire"
+    ],
+    "answer": 1,
+    "explain": "Des accès oubliés restent une porte ouverte, même sans mauvaise intention de l'ancien employé."
+   }
+  ]
+ },
+ "marketing-fondamentaux": {
+  "title": "Les fondamentaux du marketing",
+  "lessons": [
+   "mkt-cible",
+   "mkt-4p"
+  ],
+  "questions": [
+   {
+    "q": "Qu'est-ce qu'un persona ?",
+    "choices": [
+     "Le logo de la marque",
+     "Un portrait détaillé d'un client type",
+     "La liste des concurrents"
+    ],
+    "answer": 1,
+    "explain": "Le persona représente ton client cible comme une vraie personne, avec ses besoins et ses freins."
+   },
+   {
+    "q": "Quel est un concurrent indirect d'une boutique de tenues prêtes à porter ?",
+    "choices": [
+     "Une autre boutique de tenues au même marché",
+     "Le fournisseur de tissu",
+     "La couturière du quartier qui coud sur mesure"
+    ],
+    "answer": 2,
+    "explain": "Elle répond au même besoin (s'habiller pour une occasion) avec une autre solution."
+   },
+   {
+    "q": "Que doit contenir une bonne proposition de valeur ?",
+    "choices": [
+     "Le besoin du client, le bénéfice et ce qui te distingue",
+     "La liste complète des produits",
+     "Le prix le plus bas du marché"
+    ],
+    "answer": 0,
+    "explain": "Elle dit en une phrase pourquoi ce client précis doit te choisir."
+   },
+   {
+    "q": "Pourquoi choisir un segment prioritaire au début ?",
+    "choices": [
+     "Parce que c'est obligatoire légalement",
+     "Pour concentrer ton budget et tes messages là où tu as le plus de chances",
+     "Pour éviter de parler aux clients"
+    ],
+    "answer": 1,
+    "explain": "Un message précis pour une cible précise convainc mieux qu'un message vague pour tout le monde."
+   },
+   {
+    "q": "Que désigne le P de « Place » dans les 4P ?",
+    "choices": [
+     "L'emplacement du logo",
+     "La distribution : où et comment le client achète",
+     "La place du produit dans le classement"
+    ],
+    "answer": 1,
+    "explain": "Place regroupe les canaux de vente, la livraison et l'accès au produit."
+   },
+   {
+    "q": "Ton coût de revient est de 5 000 FCFA. Que se passe-t-il si tu vends à 4 500 FCFA ?",
+    "choices": [
+     "Tu perds 500 FCFA sur chaque vente",
+     "Tu gagnes plus de clients donc plus d'argent à coup sûr",
+     "Rien, le prix n'a pas d'effet"
+    ],
+    "answer": 0,
+    "explain": "Sous le prix plancher, chaque vente supplémentaire augmente la perte."
+   },
+   {
+    "q": "Quels sont les trois repères pour fixer un prix ?",
+    "choices": [
+     "La couleur, la taille, le poids",
+     "Le loyer, le salaire, la météo",
+     "Les coûts, les prix des concurrents, la valeur perçue"
+    ],
+    "answer": 2,
+    "explain": "Le prix final se situe entre le plancher (coûts) et la valeur perçue, en tenant compte du marché."
+   },
+   {
+    "q": "Pourquoi commencer avec peu de canaux de distribution ?",
+    "choices": [
+     "Pour bien tenir les délais et la qualité de service",
+     "Parce que les autres canaux sont interdits",
+     "Pour payer plus de commissions"
+    ],
+    "answer": 0,
+    "explain": "Un canal mal tenu (retards, messages sans réponse) nuit à ta réputation."
+   },
+   {
+    "q": "Quelle est la façon la plus simple de mener une étude de marché quand on démarre ?",
+    "choices": [
+     "Interroger une vingtaine de clients potentiels et observer les concurrents",
+     "Copier les prix du concurrent le plus connu",
+     "Lancer le produit sans parler à personne"
+    ],
+    "answer": 0,
+    "explain": "Questionner de vrais clients et observer le marché donne des informations concrètes sans gros budget."
+   },
+   {
+    "q": "Que signifie segmenter son marché ?",
+    "choices": [
+     "Baisser ses prix pour tout le monde",
+     "Diviser les clients en groupes ayant des besoins ou des caractéristiques proches",
+     "Vendre dans plusieurs villes à la fois"
+    ],
+    "answer": 1,
+    "explain": "La segmentation regroupe les clients qui se ressemblent pour mieux choisir à qui s'adresser."
+   },
+   {
+    "q": "Pour une tenue, tu paies 3 000 FCFA de tissu, 1 500 FCFA de couture et 500 FCFA d'emballage. Quel est ton coût de revient ?",
+    "choices": [
+     "4 500 FCFA",
+     "3 000 FCFA",
+     "5 000 FCFA"
+    ],
+    "answer": 2,
+    "explain": "Le coût de revient additionne toutes les dépenses : 3 000 + 1 500 + 500 = 5 000 FCFA."
+   },
+   {
+    "q": "Que désigne le positionnement d'une marque ?",
+    "choices": [
+     "La place qu'elle occupe dans l'esprit des clients par rapport aux concurrents",
+     "L'adresse de sa boutique",
+     "Le nombre de produits qu'elle vend"
+    ],
+    "answer": 0,
+    "explain": "Se positionner, c'est choisir comment on veut être perçu face aux concurrents."
+   },
+   {
+    "q": "Que doit préciser un plan de communication simple ?",
+    "choices": [
+     "Uniquement le logo de la marque",
+     "Le nom des fournisseurs",
+     "Le message, les canaux, le calendrier et le budget"
+    ],
+    "answer": 2,
+    "explain": "Un plan de communication dit quoi dire, où, quand et avec quel budget."
+   },
+   {
+    "q": "Que signifie vérifier la cohérence des 4P ?",
+    "choices": [
+     "Avoir le prix le plus bas possible",
+     "S'assurer que produit, prix, distribution et communication vont dans le même sens pour la même cible",
+     "Utiliser les quatre réseaux sociaux les plus connus"
+    ],
+    "answer": 1,
+    "explain": "Les 4P doivent se renforcer : un produit haut de gamme, par exemple, ne se vend pas au prix le plus bas."
+   }
+  ]
+ },
+ "marketing-digital": {
+  "title": "Responsable marketing digital",
+  "lessons": [
+   "mkd-strategie",
+   "mkd-pub-meta"
+  ],
+  "questions": [
+   {
+    "q": "Lequel de ces objectifs est SMART ?",
+    "choices": [
+     "Être plus connu sur Internet",
+     "Avoir beaucoup de likes",
+     "Obtenir 60 commandes WhatsApp en mars, contre 40 en février"
+    ],
+    "answer": 2,
+    "explain": "Il est précis, chiffré, réaliste par rapport au point de départ et daté."
+   },
+   {
+    "q": "À quoi servent les étiquettes de WhatsApp Business ?",
+    "choices": [
+     "À classer les conversations et les clients",
+     "À changer la couleur de l'application",
+     "À publier sur Facebook"
+    ],
+    "answer": 0,
+    "explain": "Elles permettent de suivre chaque client (nouveau, payé, à relancer) et de cibler les envois."
+   },
+   {
+    "q": "Que doit contenir une ligne de calendrier éditorial ?",
+    "choices": [
+     "Seulement la date",
+     "Date, canal, format, thème, appel à l'action, responsable et statut",
+     "Le mot de passe du compte"
+    ],
+    "answer": 1,
+    "explain": "Ces colonnes permettent de préparer à l'avance et de répartir le travail."
+   },
+   {
+    "q": "Pourquoi limiter le nombre de canaux au départ ?",
+    "choices": [
+     "Parce que les algorithmes l'exigent",
+     "Pour tenir un rythme régulier et répondre vite",
+     "Pour dépenser plus en publicité"
+    ],
+    "answer": 1,
+    "explain": "La régularité et la réactivité comptent plus que la présence partout."
+   },
+   {
+    "q": "Tu as dépensé 10 000 FCFA et obtenu 200 clics. Quel est ton CPC ?",
+    "choices": [
+     "2 000 FCFA",
+     "20 FCFA",
+     "50 FCFA"
+    ],
+    "answer": 2,
+    "explain": "CPC = dépense ÷ clics = 10 000 ÷ 200 = 50 FCFA."
+   },
+   {
+    "q": "À quel niveau règle-t-on l'audience et le budget ?",
+    "choices": [
+     "L'ensemble de publicités",
+     "La publicité",
+     "La page Facebook"
+    ],
+    "answer": 0,
+    "explain": "La campagne porte l'objectif, l'ensemble de publicités l'audience, le budget et les emplacements, la publicité le visuel et le texte."
+   },
+   {
+    "q": "Qu'est-ce qu'un bon test A/B ?",
+    "choices": [
+     "Changer le visuel, le texte et l'audience en même temps",
+     "Comparer deux versions qui ne diffèrent que par un seul élément",
+     "Lancer une seule annonce et attendre"
+    ],
+    "answer": 1,
+    "explain": "Une seule variable change, sinon impossible de savoir ce qui explique l'écart."
+   },
+   {
+    "q": "Un ROAS de 3 signifie que…",
+    "choices": [
+     "Chaque franc dépensé en publicité a rapporté 3 francs de chiffre d'affaires",
+     "La campagne a duré 3 jours",
+     "Tu as 3 % de clics"
+    ],
+    "answer": 0,
+    "explain": "ROAS = chiffre d'affaires ÷ dépense. Attention : c'est du chiffre d'affaires, pas du bénéfice."
+   },
+   {
+    "q": "Que signifie le « M » de SMART dans un objectif ?",
+    "choices": [
+     "Motivant",
+     "Mesurable",
+     "Moderne"
+    ],
+    "answer": 1,
+    "explain": "Un objectif SMART est Spécifique, Mesurable, Atteignable, Réaliste et Temporel (limité dans le temps)."
+   },
+   {
+    "q": "Tu veux faire connaître ta nouvelle boutique au plus grand nombre de personnes à Cotonou. Quel objectif de campagne choisis-tu ?",
+    "choices": [
+     "Notoriété",
+     "Promotion de l'application",
+     "Ventes du catalogue"
+    ],
+    "answer": 0,
+    "explain": "L'objectif Notoriété sert à montrer la publicité au maximum de personnes de l'audience."
+   },
+   {
+    "q": "Que désigne l'emplacement d'une publicité Facebook et Instagram ?",
+    "choices": [
+     "Le pays où se trouve l'annonceur",
+     "L'heure de publication",
+     "L'endroit où elle s'affiche : fil d'actualité, Stories, Reels…"
+    ],
+    "answer": 2,
+    "explain": "Les emplacements sont les espaces où la publicité apparaît sur Facebook et Instagram."
+   },
+   {
+    "q": "Ta publicité a été vue 5 000 fois (impressions) et a reçu 100 clics. Quel est son taux de clics (CTR) ?",
+    "choices": [
+     "5 %",
+     "2 %",
+     "20 %"
+    ],
+    "answer": 1,
+    "explain": "CTR = clics ÷ impressions × 100 = 100 ÷ 5 000 × 100 = 2 %."
+   },
+   {
+    "q": "Quelle fonction de WhatsApp Business répond automatiquement aux clients en dehors de tes heures d'ouverture ?",
+    "choices": [
+     "Le statut",
+     "Les étiquettes",
+     "Le message d'absence"
+    ],
+    "answer": 2,
+    "explain": "Le message d'absence s'envoie automatiquement quand tu n'es pas disponible."
+   },
+   {
+    "q": "Chaque mois, tes vidéos obtiennent trois fois plus de réactions que tes images. Que fais-tu ?",
+    "choices": [
+     "Tu publies davantage de vidéos le mois suivant et tu continues à mesurer",
+     "Tu arrêtes complètement de publier",
+     "Tu ne changes rien à ton calendrier"
+    ],
+    "answer": 0,
+    "explain": "Mesurer sert à ajuster : on renforce ce qui marche et on vérifie le mois suivant."
+   }
+  ]
+ },
+ "redaction-web": {
+  "title": "Rédacteur web",
+  "lessons": [
+   "redac-ecrire",
+   "redac-seo"
+  ],
+  "questions": [
+   {
+    "q": "Que dit le principe de la pyramide inversée ?",
+    "choices": [
+     "Garder la conclusion pour la fin",
+     "Écrire en forme de triangle",
+     "Donner l'information la plus importante en premier"
+    ],
+    "answer": 2,
+    "explain": "Le lecteur pressé repart avec l'essentiel, même s'il ne lit que le début."
+   },
+   {
+    "q": "Quel titre est le plus efficace pour une page web ?",
+    "choices": [
+     "Livraison de repas à Calavi en 30 minutes",
+     "Nos services",
+     "Bienvenue"
+    ],
+    "answer": 0,
+    "explain": "Il informe et annonce un bénéfice concret."
+   },
+   {
+    "q": "Quelle formulation utilise un verbe d'action ?",
+    "choices": [
+     "La commande peut être effectuée via WhatsApp",
+     "Commande sur WhatsApp",
+     "Il est possible de passer commande"
+    ],
+    "answer": 1,
+    "explain": "Direct, court, à la voix active : le lecteur sait quoi faire."
+   },
+   {
+    "q": "Pourquoi parle-t-on de lecture en F ?",
+    "choices": [
+     "Parce que les lecteurs parcourent le haut puis le bord gauche de la page",
+     "Parce que les textes doivent commencer par F",
+     "Parce que c'est la forme du logo de Facebook"
+    ],
+    "answer": 0,
+    "explain": "Le regard accroche surtout la première ligne, les titres et les débuts de lignes."
+   },
+   {
+    "q": "Que désigne l'intention de recherche ?",
+    "choices": [
+     "Le nombre de mots de la page",
+     "Ce que l'internaute veut obtenir avec sa recherche",
+     "La couleur du lien dans Google"
+    ],
+    "answer": 1,
+    "explain": "S'informer, trouver un site, comparer ou acheter : la page doit correspondre à cette intention."
+   },
+   {
+    "q": "Combien de H1 recommande-t-on par page ?",
+    "choices": [
+     "Autant que de paragraphes",
+     "Aucun",
+     "Un seul"
+    ],
+    "answer": 2,
+    "explain": "Le H1 annonce le sujet principal ; les parties utilisent H2 et H3."
+   },
+   {
+    "q": "À quoi sert surtout la méta-description ?",
+    "choices": [
+     "À donner envie de cliquer dans les résultats",
+     "À cacher du texte aux lecteurs",
+     "À répéter le mot-clé vingt fois"
+    ],
+    "answer": 0,
+    "explain": "Elle influence le taux de clic, pas directement le classement."
+   },
+   {
+    "q": "Pourquoi éviter le bourrage de mots-clés ?",
+    "choices": [
+     "Parce que Google ne lit pas les textes",
+     "Parce que le texte devient illisible et peut être vu comme du spam",
+     "Parce que les mots-clés sont payants"
+    ],
+    "answer": 1,
+    "explain": "Google privilégie les contenus utiles et naturels pour l'humain."
+   },
+   {
+    "q": "Quel élément donne le titre affiché dans l'onglet du navigateur et dans les résultats Google ?",
+    "choices": [
+     "Le texte alternatif d'une image",
+     "La balise title",
+     "Le pied de page"
+    ],
+    "answer": 1,
+    "explain": "La balise title est le titre de la page que Google affiche en lien cliquable."
+   },
+   {
+    "q": "À quoi sert le texte alternatif (alt) d'une image ?",
+    "choices": [
+     "À agrandir l'image",
+     "À changer la couleur de l'image",
+     "À décrire l'image pour les personnes malvoyantes et pour Google"
+    ],
+    "answer": 2,
+    "explain": "Le texte alternatif décrit l'image quand elle n'est pas vue, ce qui aide l'accessibilité et le référencement."
+   },
+   {
+    "q": "Qu'est-ce qu'un lien interne ?",
+    "choices": [
+     "Un lien vers une autre page du même site",
+     "Un lien vers le site d'un concurrent",
+     "Un lien envoyé par WhatsApp"
+    ],
+    "answer": 0,
+    "explain": "Les liens internes relient les pages d'un même site et aident le lecteur comme Google à s'y retrouver."
+   },
+   {
+    "q": "Quand est-il utile d'utiliser une liste à puces ?",
+    "choices": [
+     "Pour écrire une seule longue phrase",
+     "Pour présenter plusieurs éléments, comme des étapes ou des avantages",
+     "Pour cacher des informations"
+    ],
+    "answer": 1,
+    "explain": "Une liste rend plusieurs éléments faciles à parcourir sur écran."
+   },
+   {
+    "q": "Quelle phrase est la mieux adaptée à une page web ?",
+    "choices": [
+     "Il est porté à la connaissance de notre aimable clientèle que des frais pourraient éventuellement ne pas être appliqués.",
+     "Des frais de livraison, dans certains cas et selon certaines conditions, peuvent être offerts.",
+     "Livraison gratuite à Cotonou dès 10 000 FCFA d'achat."
+    ],
+    "answer": 2,
+    "explain": "Une phrase courte, directe et précise se lit vite et se comprend tout de suite."
+   },
+   {
+    "q": "Pour une boutique de pagnes à Porto-Novo, quel mot-clé est le plus précis ?",
+    "choices": [
+     "Tissu",
+     "Acheter pagne wax Porto-Novo",
+     "Mode"
+    ],
+    "answer": 1,
+    "explain": "Un mot-clé précis correspond à une intention claire et attire des visiteurs vraiment intéressés."
+   }
+  ]
+ },
+ "chef-projet-digital": {
+  "title": "Chef de projet digital",
+  "lessons": [
+   "cpd-cadrage",
+   "cpd-pilotage"
+  ],
+  "questions": [
+   {
+    "q": "Pourquoi écrire ce qui est exclu du périmètre ?",
+    "choices": [
+     "Pour éviter les demandes surprises et les malentendus en cours de projet",
+     "Pour raccourcir la note",
+     "Parce que le client ne lit que cette partie"
+    ],
+    "answer": 0,
+    "explain": "Ce qui n'est pas écrit sera rediscuté plus tard, souvent au détriment du délai et du budget."
+   },
+   {
+    "q": "Qu'est-ce qu'un livrable ?",
+    "choices": [
+     "Une réunion d'équipe",
+     "Un risque probable",
+     "Un élément concret remis au client, comme un site en ligne ou un guide"
+    ],
+    "answer": 2,
+    "explain": "Chaque livrable a un critère d'acceptation qui permet de le valider."
+   },
+   {
+    "q": "Que signifie le « M » de MoSCoW ?",
+    "choices": [
+     "Maybe : peut-être",
+     "Must : indispensable",
+     "Monthly : chaque mois"
+    ],
+    "answer": 1,
+    "explain": "Must, Should, Could, Won't : du plus prioritaire à ce qui est reporté."
+   },
+   {
+    "q": "Qui doit valider la note de cadrage ?",
+    "choices": [
+     "Le développeur seul",
+     "Personne, c'est un document interne",
+     "Le commanditaire du projet"
+    ],
+    "answer": 2,
+    "explain": "Sa validation crée un accord écrit sur ce qui sera fait."
+   },
+   {
+    "q": "Quelles sont les trois questions de la réunion quotidienne ?",
+    "choices": [
+     "Qu'ai-je fait hier, que fais-je aujourd'hui, qu'est-ce qui me bloque ?",
+     "Combien je gagne, quand je pars, qui commande ?",
+     "Quel est le budget, quel est le logo, quel est le nom ?"
+    ],
+    "answer": 0,
+    "explain": "Elle sert à synchroniser l'équipe et à repérer les blocages, en 15 minutes environ."
+   },
+   {
+    "q": "Qu'est-ce que la recette ?",
+    "choices": [
+     "Le chiffre d'affaires du projet",
+     "La phase de tests avant la livraison",
+     "Le premier sprint"
+    ],
+    "answer": 1,
+    "explain": "On vérifie, cas de test à l'appui, que tout fonctionne comme prévu."
+   },
+   {
+    "q": "Tu as consommé 60 % du budget pour 40 % des fonctionnalités. Que fais-tu ?",
+    "choices": [
+     "Rien, cela s'arrangera",
+     "Tu caches l'information au client",
+     "Tu alertes le commanditaire et proposes un arbitrage"
+    ],
+    "answer": 2,
+    "explain": "Réduire le périmètre, décaler un jalon ou ajouter une ressource : la décision se prend tôt et ensemble."
+   },
+   {
+    "q": "Que se passe-t-il à la fin d'un sprint ?",
+    "choices": [
+     "Une démonstration au client et une rétrospective",
+     "La fermeture du tableau Trello",
+     "Le recrutement d'une nouvelle équipe"
+    ],
+    "answer": 0,
+    "explain": "Le client voit le résultat tôt et l'équipe améliore sa façon de travailler."
+   },
+   {
+    "q": "Lequel de ces objectifs de projet est mesurable ?",
+    "choices": [
+     "Avoir un beau site",
+     "Être plus visible",
+     "Recevoir 50 demandes de devis via le site d'ici 3 mois"
+    ],
+    "answer": 2,
+    "explain": "Un objectif mesurable a un chiffre et une échéance qui permettent de vérifier s'il est atteint."
+   },
+   {
+    "q": "Qu'est-ce qu'une partie prenante d'un projet ?",
+    "choices": [
+     "Une personne ou un groupe concerné par le projet ou qui peut l'influencer",
+     "Uniquement le développeur",
+     "Un outil de gestion de tâches"
+    ],
+    "answer": 0,
+    "explain": "Client, utilisateurs, équipe, fournisseurs… toutes les personnes concernées sont des parties prenantes."
+   },
+   {
+    "q": "Que contient le carnet de tâches (backlog) ?",
+    "choices": [
+     "Les factures du projet",
+     "La liste priorisée de tout ce qu'il faut réaliser",
+     "Les coordonnées des clients"
+    ],
+    "answer": 1,
+    "explain": "Le backlog regroupe toutes les tâches à faire, classées par priorité."
+   },
+   {
+    "q": "Quelles colonnes utilise-t-on dans un tableau Trello simple ?",
+    "choices": [
+     "Lundi, Mardi, Mercredi",
+     "Client, Fournisseur, Banque",
+     "À faire, En cours, Terminé"
+    ],
+    "answer": 2,
+    "explain": "Ces trois colonnes montrent d'un coup d'œil l'avancement de chaque tâche."
+   },
+   {
+    "q": "Quelle durée a généralement un sprint court en méthode agile ?",
+    "choices": [
+     "Une journée",
+     "Une à deux semaines",
+     "Six mois"
+    ],
+    "answer": 1,
+    "explain": "Un sprint court dure souvent une à deux semaines pour livrer et ajuster régulièrement."
+   },
+   {
+    "q": "Tu estimes un projet à 2 000 000 FCFA et tu ajoutes 10 % de réserve pour les imprévus. Quel budget total annonces-tu ?",
+    "choices": [
+     "2 200 000 FCFA",
+     "2 010 000 FCFA",
+     "2 100 000 FCFA"
+    ],
+    "answer": 0,
+    "explain": "10 % de 2 000 000 = 200 000 FCFA, soit 2 200 000 FCFA au total."
+   }
+  ]
+ },
+ "ecommerce": {
+  "title": "E-commerce : vendre en ligne",
+  "lessons": [
+   "ecom-boutique",
+   "ecom-ventes"
+  ],
+  "questions": [
+   {
+    "q": "Quel canal est le plus simple pour démarrer sans budget ?",
+    "choices": [
+     "Un site e-commerce développé sur mesure",
+     "Le catalogue WhatsApp Business",
+     "Une application mobile"
+    ],
+    "answer": 1,
+    "explain": "Il est gratuit, rapide à mettre en place et adapté à une clientèle de proximité."
+   },
+   {
+    "q": "Que faut-il éviter dans une fiche produit ?",
+    "choices": [
+     "Indiquer les dimensions",
+     "Afficher le prix en FCFA",
+     "Écrire « prix en privé »"
+    ],
+    "answer": 2,
+    "explain": "Cacher le prix crée de la méfiance et fait perdre des clients pressés."
+   },
+   {
+    "q": "Quel risque principal présente le paiement à la livraison ?",
+    "choices": [
+     "Le refus du colis par le client",
+     "Le vol des photos",
+     "Le blocage du compte WhatsApp"
+    ],
+    "answer": 0,
+    "explain": "Tu paies la livraison et l'emballage pour rien ; un acompte limite ce risque."
+   },
+   {
+    "q": "Avant d'envoyer une commande payée par Mobile Money, tu dois :",
+    "choices": [
+     "Faire confiance à la capture d'écran du client",
+     "Vérifier la réception du paiement sur ton propre compte",
+     "Demander au livreur de vérifier"
+    ],
+    "answer": 1,
+    "explain": "Une capture d'écran peut être fausse : seule la réception sur ton compte compte."
+   },
+   {
+    "q": "Un produit coûte 5 500 FCFA et se vend 8 000 FCFA. Quelle est la marge ?",
+    "choices": [
+     "2 500 FCFA",
+     "8 000 FCFA",
+     "13 500 FCFA"
+    ],
+    "answer": 0,
+    "explain": "Marge = prix de vente − coût de revient = 8 000 − 5 500 = 2 500 FCFA."
+   },
+   {
+    "q": "Comment calcule-t-on le panier moyen ?",
+    "choices": [
+     "Nombre de clients ÷ nombre de produits",
+     "Prix le plus haut ÷ 2",
+     "Chiffre d'affaires ÷ nombre de commandes"
+    ],
+    "answer": 2,
+    "explain": "Il indique combien un client dépense en moyenne par commande."
+   },
+   {
+    "q": "40 commandes pour 400 conversations donnent un taux de conversion de :",
+    "choices": [
+     "4 %",
+     "10 %",
+     "40 %"
+    ],
+    "answer": 1,
+    "explain": "40 ÷ 400 × 100 = 10 %."
+   },
+   {
+    "q": "Que faire face à un avis négatif justifié ?",
+    "choices": [
+     "Le supprimer et bloquer le client",
+     "Répondre calmement et proposer une solution",
+     "L'ignorer"
+    ],
+    "answer": 1,
+    "explain": "Ta réaction montre aux futurs clients qu'ils peuvent te faire confiance."
+   },
+   {
+    "q": "Que faut-il privilégier pour une bonne photo produit ?",
+    "choices": [
+     "Une photo floue prise de loin",
+     "Une lumière naturelle et un fond neutre",
+     "Une photo trouvée sur Internet"
+    ],
+    "answer": 1,
+    "explain": "Une lumière douce et un fond simple mettent le produit en valeur et inspirent confiance."
+   },
+   {
+    "q": "Tu vends un article 10 000 FCFA et tu paies 2 % de frais de paiement. Combien reçois-tu ?",
+    "choices": [
+     "10 200 FCFA",
+     "8 000 FCFA",
+     "9 800 FCFA"
+    ],
+    "answer": 2,
+    "explain": "2 % de 10 000 = 200 FCFA de frais, donc tu reçois 9 800 FCFA."
+   },
+   {
+    "q": "Quelle action aide à augmenter le panier moyen ?",
+    "choices": [
+     "Proposer un produit complémentaire ou un lot",
+     "Supprimer la moitié du catalogue",
+     "Répondre aux clients le lendemain"
+    ],
+    "answer": 0,
+    "explain": "Un produit complémentaire ou un lot incite le client à acheter un peu plus à chaque commande."
+   },
+   {
+    "q": "Que dois-tu annoncer clairement au client avant qu'il commande ?",
+    "choices": [
+     "Le nom de ton fournisseur",
+     "Le prix, les zones et le délai de livraison",
+     "Ton chiffre d'affaires"
+    ],
+    "answer": 1,
+    "explain": "Le client doit connaître le coût total et le délai avant de s'engager."
+   },
+   {
+    "q": "Ton coût de revient est de 4 000 FCFA. Tu veux une marge égale à 50 % de ce coût. Quel est ton prix de vente ?",
+    "choices": [
+     "8 000 FCFA",
+     "4 500 FCFA",
+     "6 000 FCFA"
+    ],
+    "answer": 2,
+    "explain": "50 % de 4 000 = 2 000 FCFA de marge, donc 4 000 + 2 000 = 6 000 FCFA."
+   },
+   {
+    "q": "Une cliente de Cotonou reçoit un article défectueux. Quelle est la bonne réaction ?",
+    "choices": [
+     "T'excuser et proposer un échange ou un remboursement selon ta politique de retour",
+     "Lui dire que ce n'est pas ton problème",
+     "Bloquer son numéro"
+    ],
+    "answer": 0,
+    "explain": "Un service après-vente sérieux protège ta réputation et fidélise les clients."
+   }
+  ]
+ },
+ "freelance": {
+  "title": "Freelance : vivre de ses compétences",
+  "lessons": [
+   "free-demarrer",
+   "free-clients"
+  ],
+  "questions": [
+   {
+    "q": "Pourquoi se spécialiser dans une niche ?",
+    "choices": [
+     "Pour être plus facile à recommander et mieux payé",
+     "Parce que c'est obligatoire",
+     "Pour avoir moins de travail"
+    ],
+    "answer": 0,
+    "explain": "Un spécialiste rassure le client et justifie un tarif plus élevé."
+   },
+   {
+    "q": "Besoin mensuel de 260 000 FCFA, 13 jours facturables : quel tarif journalier ?",
+    "choices": [
+     "13 000 FCFA",
+     "20 000 FCFA",
+     "26 000 FCFA"
+    ],
+    "answer": 1,
+    "explain": "260 000 ÷ 13 = 20 000 FCFA par jour."
+   },
+   {
+    "q": "Pourquoi ne pas compter 22 jours facturables par mois ?",
+    "choices": [
+     "Parce que les clients refusent",
+     "Parce que la loi l'interdit",
+     "Parce qu'une partie du temps sert à prospecter, gérer et se former"
+    ],
+    "answer": 2,
+    "explain": "Ce temps non facturé doit être couvert par tes jours facturés."
+   },
+   {
+    "q": "Où te renseigner sur ton statut et tes impôts de freelance ?",
+    "choices": [
+     "Uniquement sur un groupe Facebook",
+     "Auprès des services officiels ou d'un comptable",
+     "Nulle part, ce n'est pas nécessaire"
+    ],
+    "answer": 1,
+    "explain": "Les règles évoluent : seules des sources officielles ou un professionnel peuvent te répondre avec certitude."
+   },
+   {
+    "q": "Devis de 300 000 FCFA, acompte de 40 %. Quel est le solde à payer ?",
+    "choices": [
+     "120 000 FCFA",
+     "180 000 FCFA",
+     "260 000 FCFA"
+    ],
+    "answer": 1,
+    "explain": "Acompte : 300 000 × 0,40 = 120 000 FCFA. Solde : 300 000 − 120 000 = 180 000 FCFA."
+   },
+   {
+    "q": "Le client demande une nouvelle fonctionnalité non prévue au devis. Que fais-tu ?",
+    "choices": [
+     "Tu proposes un avenant ou un nouveau devis",
+     "Tu l'ajoutes gratuitement",
+     "Tu arrêtes le projet sans prévenir"
+    ],
+    "answer": 0,
+    "explain": "Une nouvelle demande est une nouvelle prestation : elle se chiffre et se valide."
+   },
+   {
+    "q": "Lequel est un signal d'alerte avant d'accepter une mission ?",
+    "choices": [
+     "Le client pose des questions sur ton processus",
+     "Le client valide le devis par écrit",
+     "Le client refuse tout acompte et veut un test gratuit"
+    ],
+    "answer": 2,
+    "explain": "Ce sont des signes fréquents de risque d'impayé ou d'abus."
+   },
+   {
+    "q": "Que doit porter chaque facture ?",
+    "choices": [
+     "Uniquement le montant",
+     "Un numéro unique, la date, les parties, le détail et le montant",
+     "Le logo du client"
+    ],
+    "answer": 1,
+    "explain": "Ces éléments permettent le suivi et servent de preuve ; vérifie aussi les mentions liées à ton statut."
+   },
+   {
+    "q": "Que doit contenir un bon portfolio ?",
+    "choices": [
+     "Tes meilleurs travaux, avec le contexte et le résultat obtenu",
+     "Tous tes travaux, même ratés",
+     "Uniquement ton CV scolaire"
+    ],
+    "answer": 0,
+    "explain": "Quelques réalisations bien choisies et expliquées montrent ce que tu sais faire pour un client."
+   },
+   {
+    "q": "Quel titre de profil LinkedIn est le plus efficace pour un freelance ?",
+    "choices": [
+     "Disponible",
+     "Étudiant",
+     "Graphiste | Identités visuelles pour restaurants à Cotonou"
+    ],
+    "answer": 2,
+    "explain": "Un titre précis dit tout de suite ce que tu fais et pour qui."
+   },
+   {
+    "q": "Pourquoi fixer un nombre de retouches dans le devis ?",
+    "choices": [
+     "Pour refuser toute modification",
+     "Pour éviter un travail sans fin non payé ; les retouches en plus sont facturées",
+     "Pour finir le travail plus tard"
+    ],
+    "answer": 1,
+    "explain": "Des retouches limitées et écrites protègent ton temps et clarifient l'accord."
+   },
+   {
+    "q": "Une facture est impayée cinq jours après la date prévue. Que fais-tu ?",
+    "choices": [
+     "Tu publies le nom du client sur les réseaux sociaux",
+     "Tu attends sans rien dire",
+     "Tu relances poliment par écrit en rappelant le numéro de facture et le montant"
+    ],
+    "answer": 2,
+    "explain": "Une relance courtoise et précise est la façon professionnelle d'obtenir le paiement."
+   },
+   {
+    "q": "Ton devis comprend 3 affiches à 25 000 FCFA chacune et un logo à 80 000 FCFA. Quel est le total ?",
+    "choices": [
+     "105 000 FCFA",
+     "155 000 FCFA",
+     "130 000 FCFA"
+    ],
+    "answer": 1,
+    "explain": "3 × 25 000 = 75 000 FCFA, plus 80 000 FCFA, soit 155 000 FCFA."
+   },
+   {
+    "q": "Un client change d'avis sans arrêt et devient irrespectueux. Quelle est la bonne attitude ?",
+    "choices": [
+     "Rester professionnel, t'appuyer sur le contrat écrit et y mettre fin si nécessaire selon ses clauses",
+     "Lui répondre sur le même ton",
+     "Faire gratuitement tout ce qu'il demande"
+    ],
+    "answer": 0,
+    "explain": "Le contrat fixe le cadre : il te permet de rester calme et de te protéger."
+   }
+  ]
+ },
+ "services-numeriques": {
+  "title": "Services numériques : créer son activité",
+  "lessons": [
+   "srv-offre",
+   "srv-gestion"
+  ],
+  "questions": [
+   {
+    "q": "Pourquoi proposer un forfait mensuel ?",
+    "choices": [
+     "Pour travailler moins",
+     "Pour avoir des revenus réguliers et fidéliser le client",
+     "Parce que les clients préfèrent payer plus cher"
+    ],
+    "answer": 1,
+    "explain": "Le récurrent stabilise ta trésorerie et crée une relation durable."
+   },
+   {
+    "q": "Quelle est la meilleure façon d'identifier les besoins des PME ?",
+    "choices": [
+     "Observer leur présence en ligne et interroger les gérants",
+     "Copier l'offre d'un concurrent",
+     "Proposer tous les services possibles"
+    ],
+    "answer": 0,
+    "explain": "Le terrain révèle les vrais problèmes et les mots des clients."
+   },
+   {
+    "q": "Qu'est-ce qui doit figurer dans chaque formule ?",
+    "choices": [
+     "Uniquement le prix",
+     "La liste de tes diplômes",
+     "Ce qui est inclus, ce qui ne l'est pas, le délai et le prix"
+    ],
+    "answer": 2,
+    "explain": "Une formule claire évite les malentendus et facilite la décision."
+   },
+   {
+    "q": "Pourquoi choisir une cible précise ?",
+    "choices": [
+     "Pour refuser les autres clients par principe",
+     "Pour adapter l'offre et être recommandé d'un client à l'autre",
+     "Parce qu'une offre générale est interdite"
+    ],
+    "answer": 1,
+    "explain": "Les gérants d'un même secteur se connaissent et se recommandent."
+   },
+   {
+    "q": "Qu'est-ce que la trésorerie ?",
+    "choices": [
+     "Le chiffre d'affaires annuel",
+     "L'argent réellement disponible à un moment donné",
+     "Le montant des devis envoyés"
+    ],
+    "answer": 1,
+    "explain": "On peut avoir beaucoup de ventes et pas de trésorerie si les clients paient en retard."
+   },
+   {
+    "q": "Quand facturer un forfait mensuel ?",
+    "choices": [
+     "En début de mois",
+     "Une fois par an",
+     "Seulement quand le client le demande"
+    ],
+    "answer": 0,
+    "explain": "Facturer en début de période sécurise ta trésorerie."
+   },
+   {
+    "q": "Tu sous-traites une intervention. Qui est responsable face au client ?",
+    "choices": [
+     "Le sous-traitant uniquement",
+     "Personne",
+     "Toi"
+    ],
+    "answer": 2,
+    "explain": "Le client a signé avec toi : contrôle le travail avant de livrer."
+   },
+   {
+    "q": "Que doit préciser un contrat de maintenance ?",
+    "choices": [
+     "Uniquement le prix",
+     "Le périmètre, les interventions incluses, le délai de réponse, la durée et le préavis",
+     "La liste de tes autres clients"
+    ],
+    "answer": 1,
+    "explain": "Ces éléments évitent les malentendus et rendent le service mesurable."
+   },
+   {
+    "q": "Pourquoi présenter ton offre en trois formules (par exemple Essentiel, Pro, Premium) ?",
+    "choices": [
+     "Pour compliquer le choix du client",
+     "Pour que le client choisisse selon son budget et ses besoins",
+     "Pour éviter d'afficher les prix"
+    ],
+    "answer": 1,
+    "explain": "Trois formules claires aident chaque PME à trouver l'offre qui lui convient."
+   },
+   {
+    "q": "Tu as 8 clients en forfait mensuel à 35 000 FCFA. Quel est ton revenu mensuel régulier ?",
+    "choices": [
+     "280 000 FCFA",
+     "245 000 FCFA",
+     "350 000 FCFA"
+    ],
+    "answer": 0,
+    "explain": "8 × 35 000 = 280 000 FCFA par mois."
+   },
+   {
+    "q": "Que noter dans le fichier de suivi des clients ?",
+    "choices": [
+     "Uniquement leur prénom",
+     "Leurs opinions politiques",
+     "Les coordonnées, la formule souscrite, la date de renouvellement et les paiements"
+    ],
+    "answer": 2,
+    "explain": "Ce fichier permet de savoir à tout moment qui a quoi, jusqu'à quand et ce qui reste à payer."
+   },
+   {
+    "q": "Ce mois-ci, tu as facturé 500 000 FCFA mais tes clients n'ont payé que 300 000 FCFA. Combien est réellement entré dans ta trésorerie ?",
+    "choices": [
+     "500 000 FCFA",
+     "300 000 FCFA",
+     "800 000 FCFA"
+    ],
+    "answer": 1,
+    "explain": "La trésorerie ne compte que l'argent réellement encaissé, pas les factures en attente."
+   },
+   {
+    "q": "Quand est-il pertinent de sous-traiter une partie du travail ?",
+    "choices": [
+     "Dès le premier client, pour ne rien faire soi-même",
+     "Jamais, même si tu es débordé",
+     "Quand la demande dépasse ta capacité ou exige une compétence que tu n'as pas"
+    ],
+    "answer": 2,
+    "explain": "Sous-traiter permet de tenir tes engagements sans refuser de clients, tout en restant responsable de la qualité."
+   },
+   {
+    "q": "Comment garantir une bonne qualité de service à tes clients PME ?",
+    "choices": [
+     "Fixer des délais de réponse clairs, les respecter et demander régulièrement l'avis des clients",
+     "Répondre seulement quand tu as le temps",
+     "Changer de prix chaque mois sans prévenir"
+    ],
+    "answer": 0,
+    "explain": "Des engagements clairs, tenus et vérifiés auprès des clients construisent la confiance."
+   }
+  ]
+ },
+ "trading": {
+  "title": "Trading : comprendre les marchés et éviter les arnaques (18+)",
+  "lessons": [
+   "trading-bases",
+   "trading-risques"
+  ],
+  "questions": [
+   {
+    "q": "Qu'est-ce qu'une obligation ?",
+    "choices": [
+     "Une part de propriété d'une entreprise",
+     "Un prêt à une entreprise ou à un État, rémunéré par des intérêts",
+     "Une monnaie numérique"
+    ],
+    "answer": 1,
+    "explain": "Détenir une obligation, c'est prêter de l'argent, avec un risque de non-remboursement."
+   },
+   {
+    "q": "Un placement promet 20 % par mois « garanti ». Qu'en conclus-tu ?",
+    "choices": [
+     "C'est un signal d'arnaque : aucun rendement élevé n'est garanti",
+     "C'est une bonne affaire à saisir vite",
+     "C'est normal pour les cryptomonnaies"
+    ],
+    "answer": 0,
+    "explain": "Rendement et risque sont toujours liés : un rendement élevé garanti n'existe pas."
+   },
+   {
+    "q": "Avec 0,5 % de frais par opération sur 100 000 FCFA, combien coûtent 50 allers-retours (achat + vente) ?",
+    "choices": [
+     "5 000 FCFA",
+     "25 000 FCFA",
+     "50 000 FCFA"
+    ],
+    "answer": 2,
+    "explain": "Un aller-retour = 2 opérations × 500 FCFA = 1 000 FCFA ; 50 allers-retours = 50 000 FCFA."
+   },
+   {
+    "q": "Quelle est la différence principale entre investir et spéculer ?",
+    "choices": [
+     "Il n'y en a aucune",
+     "Investir vise le long terme avec une épargne disponible, spéculer joue sur des mouvements de prix à court terme",
+     "Spéculer est sans risque"
+    ],
+    "answer": 1,
+    "explain": "La spéculation à court terme ressemble à un pari et multiplie les frais."
+   },
+   {
+    "q": "Ton capital passe de 100 000 à 50 000 FCFA. Quel gain faut-il pour revenir à 100 000 FCFA ?",
+    "choices": [
+     "+50 %",
+     "+75 %",
+     "+100 %"
+    ],
+    "answer": 2,
+    "explain": "50 000 FCFA doivent doubler : il faut +100 %."
+   },
+   {
+    "q": "Avec 100 000 FCFA et un levier de 10, le prix baisse de 5 %. Que perds-tu ?",
+    "choices": [
+     "50 000 FCFA, soit 50 % du capital",
+     "5 000 FCFA, soit 5 % du capital",
+     "Rien, le levier protège"
+    ],
+    "answer": 0,
+    "explain": "Exposition de 1 000 000 FCFA × 5 % = 50 000 FCFA, la moitié du capital."
+   },
+   {
+    "q": "Que garantit un stop-loss ?",
+    "choices": [
+     "Un gain minimum",
+     "Il limite la perte visée, mais l'exécution peut se faire à un prix plus bas en cas de chute brutale",
+     "Le remboursement de toute perte"
+    ],
+    "answer": 1,
+    "explain": "C'est un outil utile mais pas une protection absolue."
+   },
+   {
+    "q": "Une plateforme affiche de beaux gains mais exige des « frais de déblocage » pour retirer ton argent. C'est :",
+    "choices": [
+     "Une procédure normale",
+     "Un signe que tu as très bien tradé",
+     "Un signal typique d'arnaque"
+    ],
+    "answer": 2,
+    "explain": "Les fausses plateformes affichent des gains fictifs et inventent des frais pour soutirer encore de l'argent."
+   },
+   {
+    "q": "Tu achètes un actif à 50 000 FCFA et tu le revends à 55 000 FCFA. Quel est ton gain en pourcentage, avant frais ?",
+    "choices": [
+     "5 %",
+     "10 %",
+     "15 %"
+    ],
+    "answer": 1,
+    "explain": "Gain = 5 000 ÷ 50 000 × 100 = 10 %."
+   },
+   {
+    "q": "Avec un effet de levier de 20, quelle baisse du prix suffit à faire perdre la totalité du capital engagé ?",
+    "choices": [
+     "20 %",
+     "50 %",
+     "5 %"
+    ],
+    "answer": 2,
+    "explain": "Avec un levier de 20, la position vaut 20 fois le capital : une baisse de 5 % × 20 = 100 % du capital."
+   },
+   {
+    "q": "Pourquoi diversifier ses placements ?",
+    "choices": [
+     "Pour réduire l'impact d'un seul mauvais placement sur l'ensemble",
+     "Pour être sûr de gagner",
+     "Pour supprimer tous les frais"
+    ],
+    "answer": 0,
+    "explain": "La diversification réduit le risque lié à un seul actif, mais elle ne garantit aucun gain."
+   },
+   {
+    "q": "Ton capital est de 200 000 FCFA et tu t'imposes de ne pas risquer plus de 1 % par position. Quelle perte maximale acceptes-tu sur une position ?",
+    "choices": [
+     "20 000 FCFA",
+     "2 000 FCFA",
+     "200 FCFA"
+    ],
+    "answer": 1,
+    "explain": "1 % de 200 000 = 2 000 FCFA : limiter le risque par position protège le capital."
+   },
+   {
+    "q": "Avant d'ouvrir un compte chez un intermédiaire de trading, que dois-tu vérifier en priorité ?",
+    "choices": [
+     "Le nombre d'abonnés de sa page Facebook",
+     "Les captures de gains publiées par ses clients",
+     "Qu'il est agréé par une autorité de régulation financière officielle"
+    ],
+    "answer": 2,
+    "explain": "Un intermédiaire sérieux est agréé par un régulateur ; les abonnés et captures d'écran se falsifient facilement."
+   },
+   {
+    "q": "Un placement affiche un rendement potentiel beaucoup plus élevé que les autres. En général, cela signifie :",
+    "choices": [
+     "Que le risque de perte est aussi plus élevé",
+     "Que le gain est garanti",
+     "Qu'il n'y a aucun frais"
+    ],
+    "answer": 0,
+    "explain": "Rendement et risque sont liés : plus le gain possible est élevé, plus la perte possible l'est aussi."
+   }
+  ]
+ },
+ "paris-sportifs": {
+  "title": "Paris sportifs : comprendre les cotes et les risques (18+)",
+  "lessons": [
+   "paris-cotes",
+   "paris-responsable"
+  ],
+  "questions": [
+   {
+    "q": "Quelle est la probabilité implicite d'une cote de 4,00 ?",
+    "choices": [
+     "40 %",
+     "25 %",
+     "4 %"
+    ],
+    "answer": 1,
+    "explain": "Probabilité implicite = 1 ÷ 4,00 = 0,25, soit 25 %."
+   },
+   {
+    "q": "Les cotes d'un match donnent 47,62 % + 31,25 % + 27,78 %. Que représentent les 6,65 points au-dessus de 100 % ?",
+    "choices": [
+     "Une erreur de calcul",
+     "La chance du parieur",
+     "La marge du bookmaker"
+    ],
+    "answer": 2,
+    "explain": "La somme dépasse 100 % parce que le bookmaker intègre sa marge dans les cotes."
+   },
+   {
+    "q": "Après cinq défaites d'affilée, la prochaine issue a-t-elle plus de chances de tomber ?",
+    "choices": [
+     "Non, chaque événement est indépendant : c'est l'erreur du parieur de croire le contraire",
+     "Oui, la chance doit tourner",
+     "Oui, mais seulement sur un combiné"
+    ],
+    "answer": 0,
+    "explain": "Les résultats passés ne modifient pas les probabilités d'un événement indépendant."
+   },
+   {
+    "q": "Pourquoi un coupon combiné est-il en moyenne plus défavorable qu'un pari simple ?",
+    "choices": [
+     "Parce qu'il est interdit",
+     "Parce que les marges se multiplient avec les cotes",
+     "Parce que les cotes y sont toujours plus basses"
+    ],
+    "answer": 1,
+    "explain": "Dans l'exemple, l'espérance passe de −5 % pour un pari à environ −18,5 % pour un combiné de 4."
+   },
+   {
+    "q": "Quelle somme peut-on consacrer au jeu de façon responsable ?",
+    "choices": [
+     "L'argent du loyer si on est sûr de gagner",
+     "Une petite somme de loisirs qu'on accepte de perdre entièrement",
+     "Un emprunt remboursable avec les gains"
+    ],
+    "answer": 1,
+    "explain": "Le jeu doit rester un loisir payant : seule une somme qu'on peut perdre sans conséquence peut y aller."
+   },
+   {
+    "q": "Un groupe Telegram vend un « match truqué » à 15 000 FCFA. Que fais-tu ?",
+    "choices": [
+     "Je paie une seule fois pour tester",
+     "Je partage l'offre à mes amis",
+     "Je ne paie pas, je quitte le groupe et je le signale"
+    ],
+    "answer": 2,
+    "explain": "Personne ne vend un vrai résultat connu d'avance à des inconnus : le vendeur gagne sur ton paiement."
+   },
+   {
+    "q": "Après avoir atteint ta limite de perte du mois, quelle est la bonne réaction ?",
+    "choices": [
+     "S'arrêter jusqu'au mois suivant",
+     "Doubler la mise pour se refaire",
+     "Emprunter à un proche"
+    ],
+    "answer": 0,
+    "explain": "Chercher à se refaire est un piège : une perte se constate, elle ne se rattrape pas."
+   },
+   {
+    "q": "Lequel de ces comportements est un signe d'alerte de jeu problématique ?",
+    "choices": [
+     "Fixer une limite de temps",
+     "Cacher à ses proches les sommes misées",
+     "Noter ses résultats dans un carnet"
+    ],
+    "answer": 1,
+    "explain": "Mentir ou cacher ses dépenses de jeu est un signal à prendre au sérieux : il est temps d'en parler."
+   },
+   {
+    "q": "Tu mises 2 000 FCFA à une cote décimale de 3,00 et ton pari est gagnant. Combien reçois-tu au total, mise comprise ?",
+    "choices": [
+     "6 000 FCFA",
+     "4 000 FCFA",
+     "3 000 FCFA"
+    ],
+    "answer": 0,
+    "explain": "Avec une cote décimale, le montant reçu = mise × cote = 2 000 × 3,00 = 6 000 FCFA (dont 4 000 FCFA de bénéfice)."
+   },
+   {
+    "q": "Que signifie une espérance mathématique négative pour un pari ?",
+    "choices": [
+     "Que tu gagneras le prochain pari",
+     "Qu'en moyenne, sur un grand nombre de paris, tu perds de l'argent",
+     "Que le pari est sans risque"
+    ],
+    "answer": 1,
+    "explain": "Une espérance négative veut dire que, répété souvent, ce pari fait perdre de l'argent en moyenne."
+   },
+   {
+    "q": "Un match à deux issues est coté 1,90 pour chaque équipe. Que révèle la somme des probabilités implicites (environ 105,3 %) ?",
+    "choices": [
+     "Que le match est truqué",
+     "Que les deux équipes vont gagner",
+     "Une marge du bookmaker d'environ 5 %"
+    ],
+    "answer": 2,
+    "explain": "1 ÷ 1,90 ≈ 52,6 % par issue ; 2 × 52,6 % ≈ 105,3 %, les 5,3 points au-dessus de 100 % sont la marge."
+   },
+   {
+    "q": "Un coupon combine 3 matchs indépendants, chacun avec 50 % de chances réelles d'être gagné. Quelle est la probabilité que les trois soient gagnés ?",
+    "choices": [
+     "50 %",
+     "12,5 %",
+     "150 %"
+    ],
+    "answer": 1,
+    "explain": "Il faut multiplier les probabilités : 0,5 × 0,5 × 0,5 = 0,125, soit 12,5 %."
+   },
+   {
+    "q": "Tu as perdu 10 000 FCFA ce soir et tu veux miser 20 000 FCFA pour « te refaire ». Quelle est la bonne décision ?",
+    "choices": [
+     "Doubler la mise pour récupérer plus vite",
+     "Emprunter de l'argent pour continuer",
+     "T'arrêter : chercher à se refaire augmente généralement les pertes"
+    ],
+    "answer": 2,
+    "explain": "Courir après ses pertes est un piège classique : la marge du bookmaker joue toujours contre toi."
+   },
+   {
+    "q": "Un « pronostiqueur » montre des captures de gains et promet 100 % de réussite contre un abonnement payant. Que conclure ?",
+    "choices": [
+     "C'est un signal d'arnaque : personne ne peut garantir le résultat d'un match",
+     "C'est une bonne affaire à saisir vite",
+     "Il faut payer pour tester une semaine"
+    ],
+    "answer": 0,
+    "explain": "Aucun pronostic n'est sûr, et les captures d'écran se truquent facilement : c'est une arnaque typique."
+   }
+  ]
+ }
+}

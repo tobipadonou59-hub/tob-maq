@@ -1,0 +1,62 @@
+[
+  {
+    "q": "Quelle commande affiche la configuration IP d'un PC sous Windows ?",
+    "choices": [
+      "tracert",
+      "ipconfig",
+      "mkdir"
+    ],
+    "answer": 1,
+    "explain": "ipconfig affiche l'adresse IP, le masque et la passerelle de chaque carte réseau."
+  },
+  {
+    "q": "Quel masque de sous-réseau correspond à /24 ?",
+    "choices": [
+      "255.255.255.0",
+      "255.255.0.0",
+      "255.255.255.128"
+    ],
+    "answer": 0,
+    "explain": "/24 signifie 24 bits à 1, soit trois octets à 255 : 255.255.255.0."
+  },
+  {
+    "q": "Quelle est l'adresse réseau de l'hôte 192.168.10.77/24 ?",
+    "choices": [
+      "192.168.10.1",
+      "192.168.10.255",
+      "192.168.10.0"
+    ],
+    "answer": 2,
+    "explain": "Avec un /24, l'adresse réseau garde les trois premiers octets et met le dernier à 0."
+  },
+  {
+    "q": "Quel équipement relie par câble les ordinateurs d'un même réseau local ?",
+    "choices": [
+      "Le switch (commutateur)",
+      "Le serveur DNS",
+      "Le vidéoprojecteur"
+    ],
+    "answer": 0,
+    "explain": "Le switch reçoit les câbles des postes et transmet les trames au bon destinataire."
+  },
+  {
+    "q": "À quoi sert Cisco Packet Tracer dans un projet de réseau ?",
+    "choices": [
+      "À sertir les connecteurs RJ45",
+      "À simuler et tester le réseau avant de l'installer",
+      "À mesurer la longueur des câbles"
+    ],
+    "answer": 1,
+    "explain": "La simulation permet de vérifier le plan d'adressage et les connexions sans acheter de matériel."
+  },
+  {
+    "q": "Pourquoi créer un réseau Wi-Fi invité séparé ?",
+    "choices": [
+      "Pour doubler la vitesse de la connexion",
+      "Pour pouvoir supprimer le mot de passe du Wi-Fi principal",
+      "Pour que les visiteurs aient Internet sans accéder aux appareils internes"
+    ],
+    "answer": 2,
+    "explain": "Le réseau invité isole les visiteurs des ordinateurs, imprimantes et serveurs de l'entreprise."
+  }
+]

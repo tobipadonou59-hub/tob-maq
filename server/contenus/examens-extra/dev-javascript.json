@@ -1,0 +1,22 @@
+[
+  {
+    "q": "Que renvoie typeof 42 ?",
+    "choices": [
+      "\"string\"",
+      "\"integer\"",
+      "\"number\""
+    ],
+    "answer": 2,
+    "explain": "En JavaScript, les entiers et les décimaux ont tous le type number."
+  },
+  {
+    "q": "Combien de fois s'exécute la boucle `for (let i = 0; i < 3; i++)` ?",
+    "choices": [
+      "3 fois",
+      "2 fois",
+      "4 fois"
+    ],
+    "answer": 0,
+    "explain": "i prend les valeurs 0, 1 et 2 ; à 3, la condition i < 3 est fausse et la boucle s'arrête."
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "q": "Quelle unité utilise-t-on souvent pour mesurer les proportions d'un personnage ?",
+    "choices": [
+      "La hauteur de la tête",
+      "La largeur d'un doigt",
+      "Le centimètre exact"
+    ],
+    "answer": 0,
+    "explain": "On compte combien de « têtes » mesure le corps, ce qui garde des proportions justes quelle que soit la taille du dessin."
+  },
+  {
+    "q": "En perspective à 1 point de fuite, où se rejoignent les lignes fuyantes ?",
+    "choices": [
+      "En deux points aux bords de la feuille",
+      "En un seul point situé sur la ligne d'horizon",
+      "Nulle part, elles restent parallèles"
+    ],
+    "answer": 1,
+    "explain": "En perspective à 1 point, toutes les lignes qui s'éloignent convergent vers un unique point de fuite sur l'horizon."
+  },
+  {
+    "q": "Par quoi commencer pour dessiner un objet compliqué ?",
+    "choices": [
+      "Dessiner d'abord tous les détails",
+      "Tracer directement le contour final appuyé",
+      "Le simplifier en formes géométriques simples"
+    ],
+    "answer": 2,
+    "explain": "Cubes, cylindres et sphères donnent une construction solide avant d'ajouter les détails."
+  },
+  {
+    "q": "Qu'est-ce qu'une échelle de valeurs ?",
+    "choices": [
+      "Une gamme de gris qui va du blanc au noir",
+      "Une règle graduée en centimètres",
+      "Un classement des crayons par prix"
+    ],
+    "answer": 0,
+    "explain": "L'échelle de valeurs entraîne à doser la pression pour obtenir chaque nuance de gris."
+  },
+  {
+    "q": "De quel côté d'un objet se trouve sa partie ombrée ?",
+    "choices": [
+      "Du côté tourné vers la lumière",
+      "Du côté opposé à la source de lumière",
+      "Toujours en haut de l'objet"
+    ],
+    "answer": 1,
+    "explain": "Les faces que la lumière n'atteint pas directement sont dans l'ombre propre de l'objet."
+  },
+  {
+    "q": "À quoi sert l'estompe ?",
+    "choices": [
+      "À effacer complètement le trait",
+      "À tailler la mine du crayon",
+      "À fondre le graphite pour obtenir des dégradés doux"
+    ],
+    "answer": 2,
+    "explain": "En frottant le graphite, l'estompe adoucit les passages entre les valeurs."
+  }
+]

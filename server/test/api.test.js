@@ -224,3 +224,32 @@ test("appli Android : empreintes de certificat filtrées et assetlinks absent sa
   assert.deepEqual(androidFingerprints(""), []);
   assert.equal((await client()("GET", "/.well-known/assetlinks.json")).status, 404);
 });
+
+test("examen final : leçons requises, correction côté serveur, certificat PDF vérifiable", async () => {
+  const bank = JSON.parse(fs.readFileSync(new URL("../contenus/examens.json", import.meta.url), "utf8"));
+  const fid = "reels-capcut", f = bank[fid];
+  const u = client();
+  await u("POST", "/api/auth/register", { ...adult, displayName: "Afi", email: "afi.exam@exemple.bj" });
+  assert.equal((await u("POST", `/api/exams/${fid}/start`)).status, 403, "examen fermé tant que les leçons ne sont pas terminées");
+  for (const l of f.lessons) assert.equal((await u("POST", "/api/me/lessons", { lessonId: l })).status, 204);
+  const st = await u("GET", `/api/exams/${fid}`);
+  assert.equal(st.data.eligible, true);
+  // Mauvaises réponses : pas de certificat
+  let ex = await u("POST", `/api/exams/${fid}/start`);
+  assert.equal(ex.status, 201); assert.equal(ex.data.questions.length, 10);
+  assert.ok(!JSON.stringify(ex.data).includes('"answer"'), "les réponses ne sont jamais envoyées au navigateur");
+  let r = await u("POST", `/api/exams/attempts/${ex.data.attempt}/submit`, { answers: ex.data.questions.map(() => 99) });
+  assert.equal(r.data.passed, false); assert.equal(r.data.certificate, null);
+  assert.equal((await u("POST", `/api/exams/attempts/${ex.data.attempt}/submit`, { answers: [] })).status, 409, "un essai ne se corrige qu'une fois");
+  // Bonnes réponses : certificat
+  ex = await u("POST", `/api/exams/${fid}/start`);
+  const answers = ex.data.questions.map(q => { const src = f.questions.find(x => x.q === q.q); return q.choices.indexOf(src.choices[src.answer]); });
+  r = await u("POST", `/api/exams/attempts/${ex.data.attempt}/submit`, { answers, fullName: "Afi Houngbédji" });
+  assert.equal(r.data.passed, true); assert.equal(r.data.score, 10); assert.match(r.data.certificate, /^TM-[A-Z0-9]{5}-[A-Z0-9]{5}$/);
+  const pub = await client()("GET", `/api/certificates/${r.data.certificate}`);
+  assert.equal(pub.data.fullName, "Afi Houngbédji"); assert.equal(pub.data.formation, f.title);
+  assert.equal((await client()("GET", `/api/certificates/${r.data.certificate}/pdf`)).status, 401, "le PDF est réservé à son titulaire");
+  const pdf = await u("GET", `/api/certificates/${r.data.certificate}/pdf`);
+  assert.equal(pdf.status, 200); assert.equal(pdf.headers.get("content-type"), "application/pdf"); assert.ok(pdf.data.startsWith("%PDF"));
+  assert.equal((await u("GET", "/api/me/certificates")).data.length, 1);
+});
