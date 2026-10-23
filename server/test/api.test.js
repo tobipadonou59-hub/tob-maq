@@ -148,6 +148,10 @@ test("portfolio : envoi, modération par l'admin, publication et confidentialit�
   assert.equal(one("SELECT visibility FROM projects WHERE id = ?", p2.data.id).visibility, "membres", "un mineur ne publie jamais en public");
   assert.equal((await visiteur("GET", "/api/portfolio")).data.length, 0, "rien n'est visible avant modération");
   assert.equal((await kofi("GET", "/api/admin/projects")).status, 403);
+  for (const path of ["/api/admin/stats", "/api/admin/users", "/api/admin/payments", "/api/admin/billing", "/api/admin/ai-config"]) {
+    assert.equal((await kofi("GET", path)).status, 403, path + " refusé à un membre");
+    assert.equal((await visiteur("GET", path)).status, 401, path + " refusé à un visiteur");
+  }
   const ar = await admin("POST", "/api/auth/register", { ...adult, displayName: "Admin", email: "admin@tob-maq.test" });
   assert.equal(ar.data.user.role, "admin");
   const pending = await admin("GET", "/api/admin/projects?status=pending");
