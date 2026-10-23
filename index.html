@@ -759,7 +759,6 @@ h3,.card h3,.course-body h3,.pf-body h3{font-family:var(--font-body);font-weight
 }
 @media (max-width:560px){
   .course-cover{height:128px}
-  #themeBtn{display:none}
 }
 @media (max-width:380px){
   .bar{gap:6px}
@@ -771,6 +770,17 @@ h3,.card h3,.course-body h3,.pf-body h3{font-family:var(--font-body);font-weight
 .update-bar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--tabbar) + 14px + env(safe-area-inset-bottom,0px));z-index:80;display:flex;align-items:center;gap:12px;background:var(--night);color:#fff;border:1px solid var(--night-line);border-radius:18px;padding:10px 10px 10px 16px;box-shadow:var(--shadow-lg);width:max-content;max-width:calc(100% - 24px);font-size:.9rem}
 .update-bar .ic{color:#FF9A6B}
 .update-bar .btn{white-space:nowrap;flex:none}
+.theme-switch{position:relative;display:inline-flex;align-items:center;height:44px;width:158px;padding:0;border-radius:999px;border:1px solid #D5D7DE;background:#E6E7EB;color:#12141C;cursor:pointer;flex:none;transition:background .35s,border-color .35s;box-shadow:inset 0 1px 2px #0000000f}
+.theme-switch .ts-label{position:absolute;left:18px;right:52px;font:800 .74rem/1 var(--font-body);letter-spacing:.06em;text-transform:uppercase;text-align:center;white-space:nowrap;transition:left .35s,right .35s,color .35s}
+.theme-switch .ts-knob{position:absolute;top:3px;left:calc(100% - 39px);width:36px;height:36px;border-radius:50%;background:#fff;color:#12141C;display:grid;place-items:center;box-shadow:-2px 2px 6px #0000002e,0 0 0 1px #0000000d;transition:left .35s cubic-bezier(.5,1.6,.5,1)}
+.theme-switch .ts-knob svg{width:22px;height:22px}
+.theme-switch.is-night{background:#0B0E17;border-color:#3A4160;color:#fff;box-shadow:inset 0 1px 2px #0006,0 0 0 1px #ffffff0d}
+.theme-switch.is-night .ts-label{left:52px;right:18px}
+.theme-switch.is-night .ts-knob{left:3px;box-shadow:2px 2px 6px #0000004d}
+.theme-switch:hover{border-color:var(--accent)}
+.theme-switch:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.ts-row{display:none;align-items:center;justify-content:space-between;padding:.7rem .6rem;border-top:1px solid var(--line);margin-top:6px;font-weight:600}
+@media (max-width:980px){.ts-row{display:flex}#themeBtn{display:none}}
 /* ---------- Tableau de bord administrateur (couleurs TOB-MAQ) ---------- */
 .adm{--a-bg:var(--bg);--a-card:var(--surface);--a-ink:var(--ink);--a-muted:var(--muted);--a-line:var(--line);--a-gold:var(--accent);background:radial-gradient(90% 70% at 100% 0%,rgb(91 61 245 / .10) 0%,transparent 60%),radial-gradient(60% 50% at 0% 100%,rgb(242 97 45 / .07) 0%,transparent 60%),var(--bg);color:var(--ink);padding-block:44px 64px}
 .adm-head{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:28px}
@@ -853,7 +863,7 @@ h3,.card h3,.course-body h3,.pf-body h3{font-family:var(--font-body);font-weight
     </form>
     <div class="bar-actions">
       <button class="icon-btn search-toggle" id="searchToggle" type="button" aria-label="Rechercher" aria-expanded="false" aria-controls="searchForm"><span data-icon="search"></span></button>
-      <button class="icon-btn" id="themeBtn" type="button" aria-label="Passer en mode sombre"><span data-icon="moon"></span></button>
+      <button class="theme-switch" id="themeBtn" type="button" role="switch" aria-checked="false" aria-label="Mode nuit"><span class="ts-label">Mode jour</span><span class="ts-knob" aria-hidden="true"></span></button>
       <span id="authActions" class="row"></span>
       <button class="icon-btn nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="mainNav"><span class="sr-only">Menu</span><span data-icon="menu"></span></button>
     </div>
@@ -867,6 +877,7 @@ h3,.card h3,.course-body h3,.pf-body h3{font-family:var(--font-body);font-weight
       <li><a href="#/jeux" data-nav="jeux">Jeux et défis</a></li>
       <li><a href="#/ressources" data-nav="ressources">Ressources</a></li>
       <li><a href="#/portfolio" data-nav="portfolio">Portfolio</a></li>
+      <li class="only-mobile ts-row"><span>Apparence</span><button class="theme-switch" type="button" role="switch" aria-checked="false" aria-label="Mode nuit"><span class="ts-label">Mode jour</span><span class="ts-knob" aria-hidden="true"></span></button></li>
       <li class="only-mobile" id="mobileAuth"></li>
     </ul>
   </nav>
@@ -6563,6 +6574,9 @@ function effectiveTheme() {
   if (a === "dark" || a === "light") return a;
   return window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
+/* Interrupteur jour / nuit */
+const THEME_SUN = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg>`;
+const THEME_MOON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M14.5 19.5A8 8 0 0 1 9.6 4.2a8.6 8.6 0 1 0 9.9 12.1 8 8 0 0 1-5 3.2z"/><path d="M17.2 4.2l.55 1.45 1.45.55-1.45.55-.55 1.45-.55-1.45-1.45-.55 1.45-.55zM20.6 8.6l.35.9.9.35-.9.35-.35.9-.35-.9-.9-.35.9-.35z"/></svg>`;
 function applyPrefs() {
   const p = state.prefs;
   if (p.theme === "light" || p.theme === "dark") root.setAttribute("data-theme", p.theme);
@@ -6570,9 +6584,12 @@ function applyPrefs() {
   p.size ? root.setAttribute("data-size", p.size) : root.removeAttribute("data-size");
   p.contrast ? root.setAttribute("data-contrast", "high") : root.removeAttribute("data-contrast");
   p.motion ? root.setAttribute("data-motion", "reduce") : root.removeAttribute("data-motion");
-  const dark = effectiveTheme() === "dark", b = $("#themeBtn");
-  b.innerHTML = icon(dark ? "sun" : "moon");
-  b.setAttribute("aria-label", dark ? "Passer en mode clair" : "Passer en mode sombre");
+  const dark = effectiveTheme() === "dark";
+  $$(".theme-switch").forEach(b => {
+    b.classList.toggle("is-night", dark); b.setAttribute("aria-checked", String(dark));
+    $(".ts-label", b).textContent = dark ? "Mode nuit" : "Mode jour";
+    $(".ts-knob", b).innerHTML = dark ? THEME_MOON : THEME_SUN;
+  });
 }
 function renderAuth() {
   const u = state.user;
@@ -6621,7 +6638,7 @@ document.addEventListener("click", async e => {
     finally { t.disabled = false; t.innerHTML = label; }
   }
 });
-$("#themeBtn").addEventListener("click", () => { state.prefs.theme = effectiveTheme() === "dark" ? "light" : "dark"; save("prefs"); applyPrefs(); });
+$$(".theme-switch").forEach(b => b.addEventListener("click", () => { state.prefs.theme = effectiveTheme() === "dark" ? "light" : "dark"; save("prefs"); applyPrefs(); }));
 if (window.matchMedia) matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", applyPrefs);
 $("#navToggle").addEventListener("click", () => { const n = $("#mainNav"), open = !n.classList.contains("open"); n.classList.toggle("open", open); $("#navToggle").setAttribute("aria-expanded", String(open)); });
 $("#searchToggle").addEventListener("click", () => { const h = $(".site-header"), open = !h.classList.contains("searching"); h.classList.toggle("searching", open); $("#searchToggle").setAttribute("aria-expanded", String(open)); if (open) $("#q").focus(); });
