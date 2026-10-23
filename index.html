@@ -710,8 +710,7 @@ h3,.card h3,.course-body h3,.pf-body h3{font-family:var(--font-body);font-weight
 /* Accueil */
 .hero::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgb(255 255 255 / .035) 1px,transparent 1px),linear-gradient(90deg,rgb(255 255 255 / .035) 1px,transparent 1px);background-size:40px 40px;mask-image:radial-gradient(70% 70% at 70% 40%,#000,transparent);pointer-events:none}
 .hero h1{font-size:clamp(2.2rem,3.7vw,3.45rem);letter-spacing:-.03em;line-height:1.05}
-.hero-grid{grid-template-columns:1fr 1fr}
-.hero-art{max-width:600px}
+@media (min-width:981px){.hero-grid{grid-template-columns:1fr 1fr}.hero-art{max-width:600px}}
 .hero-grid{padding-block:84px 92px}
 
 /* Couvertures des formations */
@@ -765,6 +764,9 @@ h3,.card h3,.course-body h3,.pf-body h3{font-family:var(--font-body);font-weight
   .icon-btn{width:36px;height:36px}
 }
 
+.update-bar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--tabbar) + 14px + env(safe-area-inset-bottom,0px));z-index:80;display:flex;align-items:center;gap:12px;background:var(--night);color:#fff;border:1px solid var(--night-line);border-radius:18px;padding:10px 10px 10px 16px;box-shadow:var(--shadow-lg);width:max-content;max-width:calc(100% - 24px);font-size:.9rem}
+.update-bar .ic{color:#FF9A6B}
+.update-bar .btn{white-space:nowrap;flex:none}
 /* ---------- Tableau de bord administrateur (couleurs TOB-MAQ) ---------- */
 .adm{--a-bg:var(--bg);--a-card:var(--surface);--a-ink:var(--ink);--a-muted:var(--muted);--a-line:var(--line);--a-gold:var(--accent);background:radial-gradient(90% 70% at 100% 0%,rgb(91 61 245 / .10) 0%,transparent 60%),radial-gradient(60% 50% at 0% 100%,rgb(242 97 45 / .07) 0%,transparent 60%),var(--bg);color:var(--ink);padding-block:44px 64px}
 .adm-head{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:28px}
@@ -925,6 +927,7 @@ h3,.card h3,.course-body h3,.pf-body h3{font-family:var(--font-body);font-weight
 const CONFIG = {
   API_BASE_URL: "",        // "/api" (injecté automatiquement par le serveur TOB-MAQ) ou "https://api.exemple.bj" ; vide = aucun serveur
   CONTACT_EMAIL: "",       // affiché dans Aide et contact quand il est renseigné
+  VERSION: "",             // empreinte de cette page (injectée par le serveur) pour détecter les mises à jour
   HOSTED: false,           // true pour la version publiée sur claude.ai (outil de construction)
   CURRENCY: "FCFA",
   PAYMENTS_ENABLED: false, // aucun paiement réel sans prestataire sécurisé configuré
@@ -4397,7 +4400,7 @@ function renderDashboard(main, q = new URLSearchParams()) {
   main.innerHTML = `<section class="section-sm"><div class="wrap">
     ${u ? "" : `<div style="margin-bottom:16px">${alertBox("warn", `<p><strong>Aperçu de démonstration.</strong> Tu n'es pas connecté : ces données viennent de <strong>cet appareil</strong>. <a href="#/connexion">Se connecter</a> ou <a href="#/inscription">s'inscrire</a> pour les retrouver partout.</p>`)}</div>`}
     <div class="welcome"><div><h1 tabindex="-1">Salut ${esc(u ? u.displayName : "créatif")} !</h1><p>${u?.pendingParentalConsent ? "Compte en attente de l'accord parental. " : ""}Continue là où tu t'es arrêté.</p></div>
-      <div class="row"><a class="btn btn-grad" href="#/formations">Reprendre une formation</a><a class="btn btn-night" href="#/jeux">${icon("game")} Jouer</a></div></div>
+      <div class="row">${u?.role === "admin" ? `<a class="btn btn-grad" href="#/admin">${icon("shield")} Tableau de bord administrateur</a>` : ""}<a class="btn ${u?.role === "admin" ? "btn-night" : "btn-grad"}" href="#/formations">Reprendre une formation</a><a class="btn btn-night" href="#/jeux">${icon("game")} Jouer</a></div></div>
     <div style="margin-top:22px">${widgetsHTML({ title: "Mes widgets", sub: `<a class="small" href="#/application">Avoir TOB-MAQ en appli</a>` })}</div>
     <div class="grid g4" style="margin-top:18px">
       ${[["check", "ok", Object.keys(state.lessonsDone).length, "cours terminés"], ["game", "", played.length, "jeux réalisés"], ["star", "or", nf(points), "points (meilleurs scores)"], ["download", "", state.downloads.length, "téléchargements"]]
@@ -4594,6 +4597,24 @@ function appPlatform() {
 if ("serviceWorker" in navigator && location.protocol !== "file:") {
   window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));
 }
+/* Mise à jour : une appli restée ouverte en arrière-plan propose de charger la nouvelle version. */
+let updateShown = false;
+async function checkUpdate() {
+  if (!CONFIG.VERSION || !api.configured || updateShown || document.visibilityState !== "visible") return;
+  try {
+    const r = await fetch("/api/version", { cache: "no-store" }); if (!r.ok) return;
+    const { version } = await r.json();
+    if (version && version !== CONFIG.VERSION) {
+      updateShown = true;
+      const bar = document.createElement("div"); bar.className = "update-bar"; bar.setAttribute("role", "status");
+      bar.innerHTML = `${icon("refresh")}<span>Une nouvelle version de TOB-MAQ est disponible.</span><button class="btn btn-grad btn-sm" type="button">Mettre à jour</button>`;
+      bar.querySelector("button").addEventListener("click", () => location.reload());
+      document.body.appendChild(bar);
+    }
+  } catch { /* hors ligne */ }
+}
+document.addEventListener("visibilitychange", checkUpdate);
+setInterval(checkUpdate, 30 * 60 * 1000);
 window.addEventListener("beforeinstallprompt", e => {
   e.preventDefault(); appInstall.prompt = e;
   if (currentPath === "application") renderApp($("#main"));

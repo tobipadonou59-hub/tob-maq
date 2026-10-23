@@ -459,13 +459,16 @@ export function createApp() {
   api.get("/health", (req, res) => res.json({ ok: true, ai: { images: Boolean(imageProvider), videos: Boolean(videoProvider) } }));
 
   api.use((req, res) => res.status(404).json({ message: "Route inconnue.", code: "NOT_FOUND" }));
+  /* Version du site : l'appli installée la compare pour proposer la mise à jour. */
+  app.get("/api/version", (req, res) => res.set("Cache-Control", "no-store").json({ version: sha256(fs.readFileSync(indexPath, "utf8")).slice(0, 12) }));
   app.use("/api", api);
 
   /* ---------------- Site ---------------- */
   const indexPath = path.join(SITE_DIR, "index.html");
   const renderIndex = () => {
     const html = fs.readFileSync(indexPath, "utf8");
-    const out = html.replace('API_BASE_URL: "",', 'API_BASE_URL: "/api",').replace('CONTACT_EMAIL: "",', `CONTACT_EMAIL: ${JSON.stringify(config.contactEmail)},`);
+    const appVersion = sha256(html).slice(0, 12);
+    const out = html.replace('API_BASE_URL: "",', 'API_BASE_URL: "/api",').replace('VERSION: "",', `VERSION: "${appVersion}",`).replace('CONTACT_EMAIL: "",', `CONTACT_EMAIL: ${JSON.stringify(config.contactEmail)},`);
     if (out === html) throw new Error("index.html : impossible d'injecter l'adresse de l'API (CONFIG modifié ?).");
     const verif = googleVerificationTag(config.googleSiteVerification);
     return out.replaceAll("https://tob-maq.onrender.com/", config.publicUrl + "/").replace("<!--GOOGLE_SITE_VERIFICATION-->", verif);

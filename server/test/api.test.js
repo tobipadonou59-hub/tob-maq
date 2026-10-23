@@ -42,6 +42,9 @@ test("le site est servi avec l'adresse de l'API injectée et des en-têtes de s�
   const r = await client()("GET", "/");
   assert.equal(r.status, 200);
   assert.match(r.data, /API_BASE_URL: "\/api"/);
+  const v = await client()("GET", "/api/version");
+  assert.match(v.data.version, /^[0-9a-f]{12}$/);
+  assert.ok(r.data.includes(`VERSION: "${v.data.version}"`), "la page porte la même version que l'API");
   assert.match(r.headers.get("content-security-policy"), /frame-ancestors 'none'/);
   assert.equal((await client()("GET", "/ressources/tobmaq-checklist-impression.pdf")).status, 200);
   assert.equal((await client()("GET", "/server/src/config.js")).status, 404, "le code du serveur n'est jamais exposé");
