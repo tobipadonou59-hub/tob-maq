@@ -1,89 +1,82 @@
 <!doctype html><html><head><meta charset="utf-8">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Sans:opsz,wght@9..40,500;9..40,700&family=Mr+Dafoe&display=swap">
-<style>
-html,body{margin:0;width:842px;height:595px;overflow:hidden;background:transparent}
-svg{display:block}
-</style></head><body>
-<!-- Fond du certificat TOB-MAQ (A4 paysage, 842 × 595 pt). Les textes variables sont ajoutés par le serveur. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,500;0,9..40,700;1,9..40,800;1,9..40,900&family=Mr+Dafoe&display=swap">
+<style>html,body{margin:0;width:842px;height:595px;overflow:hidden;background:#fff}svg{display:block}</style></head><body>
+<!-- Fond du certificat TOB-MAQ (A4 paysage, 842 × 595 pt). Nom, texte, date et numéro sont ajoutés par le serveur. -->
 <svg id="fond" width="842" height="595" viewBox="0 0 842 595" xmlns="http://www.w3.org/2000/svg">
 <defs>
-  <linearGradient id="or" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9C6B1E"/><stop offset=".25" stop-color="#E9C46A"/><stop offset=".5" stop-color="#B8862B"/><stop offset=".75" stop-color="#F3D98B"/><stop offset="1" stop-color="#A6741F"/></linearGradient>
-  <linearGradient id="orV" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9C6B1E"/><stop offset=".35" stop-color="#F3D98B"/><stop offset=".6" stop-color="#C9962F"/><stop offset="1" stop-color="#8E5F18"/></linearGradient>
-  <linearGradient id="ruban" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2A1E5C"/><stop offset=".55" stop-color="#151A2E"/><stop offset="1" stop-color="#0B0E17"/></linearGradient>
-  <radialGradient id="papier" cx=".6" cy=".4" r=".9"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F6F3EE"/></radialGradient>
-  <pattern id="trame" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(35)"><line x1="0" y1="0" x2="0" y2="14" stroke="#E9E4DA" stroke-width=".6"/></pattern>
-  <clipPath id="ic"><rect x="-26" y="-26" width="52" height="52" rx="12"/></clipPath>
-  <filter id="ombre" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000" flood-opacity=".35"/></filter>
+  <linearGradient id="or" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8F5E14"/><stop offset=".22" stop-color="#E8C35E"/><stop offset=".45" stop-color="#B07D22"/><stop offset=".7" stop-color="#F6DC8C"/><stop offset="1" stop-color="#9C6A1A"/></linearGradient>
+  <linearGradient id="orH" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#B07D22" stop-opacity="0"/><stop offset=".2" stop-color="#C9962F"/><stop offset=".5" stop-color="#F3D98B"/><stop offset=".8" stop-color="#C9962F"/><stop offset="1" stop-color="#B07D22" stop-opacity="0"/></linearGradient>
+  <linearGradient id="nuit" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1B2A6B"/><stop offset="1" stop-color="#0B1440"/></linearGradient>
+  <pattern id="raies" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(-40)"><rect width="11" height="22" fill="#F1F2F5"/></pattern>
+  <clipPath id="ic"><rect x="-30" y="-30" width="60" height="60" rx="13"/></clipPath>
+  <filter id="ombre" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000" flood-opacity=".3"/></filter>
 </defs>
-<rect width="842" height="595" fill="url(#papier)"/>
-<rect x="30" y="30" width="782" height="535" fill="url(#trame)" opacity=".55"/>
-<!-- Guillochis discret -->
-<g fill="none" stroke="#EDE6D8" stroke-width=".7" opacity=".9">
-
-</g>
-<!-- Cadres dorés -->
-<rect x="16" y="16" width="810" height="563" fill="none" stroke="url(#or)" stroke-width="4"/>
-<rect x="26" y="26" width="790" height="543" fill="none" stroke="url(#or)" stroke-width="1.2"/>
-<!-- Ruban vertical -->
+<rect width="842" height="595" fill="#fff"/>
+<!-- Raies grises discrètes (angles libres) -->
+<path d="M0 0 H300 L0 260z" fill="url(#raies)" opacity=".9"/><path d="M842 595 H540 L842 330z" fill="url(#raies)" opacity=".9"/>
+<!-- Angle haut-droit : bleu nuit + bandes dorées -->
 <g filter="url(#ombre)">
-  <rect x="70" y="0" width="86" height="595" fill="url(#ruban)"/>
-  <rect x="70" y="0" width="4" height="595" fill="url(#orV)"/><rect x="152" y="0" width="4" height="595" fill="url(#orV)"/>
-  <rect x="96" y="250" width="34" height="345" fill="url(#orV)"/>
+  <path d="M560 0 H842 V230z" fill="url(#nuit)"/>
+  <path d="M530 0 H560 L842 230 V262z" fill="url(#or)"/>
+  <path d="M600 0 C 700 40, 780 90, 842 170" fill="none" stroke="url(#or)" stroke-width="2.4"/>
+  <path d="M842 0 V0" />
 </g>
-<!-- Médaille : logo de l'application -->
-<g transform="translate(113 196)" filter="url(#ombre)">
-  <path id="festons" fill="url(#or)" d=""/>
-  <circle r="47" fill="#0B0E17" stroke="url(#or)" stroke-width="3"/>
-  <circle r="41" fill="none" stroke="#E9C46A" stroke-width=".8" stroke-dasharray="2 2.4"/>
-  <g transform="translate(0 -6)"><image href="icone.png" x="-26" y="-26" width="52" height="52" clip-path="url(#ic)"/></g>
-  <text x="0" y="33" text-anchor="middle" fill="#E9C46A" style="font:700 7px 'DM Sans';letter-spacing:2.2px">★ ★ ★ ★ ★</text>
+<path d="M790 0 V120 M842 60 H700" stroke="url(#or)" stroke-width="1.6" opacity=".9"/>
+<!-- Angle bas-gauche (miroir) -->
+<g filter="url(#ombre)">
+  <path d="M282 595 H0 V365z" fill="url(#nuit)"/>
+  <path d="M312 595 H282 L0 365 V333z" fill="url(#or)"/>
+  <path d="M242 595 C 142 555, 62 505, 0 425" fill="none" stroke="url(#or)" stroke-width="2.4"/>
 </g>
+<path d="M52 595 V475 M0 535 H142" stroke="url(#or)" stroke-width="1.6" opacity=".9"/>
+<!-- Cadre doré -->
+<rect x="58" y="40" width="726" height="515" fill="none" stroke="url(#or)" stroke-width="3.2"/>
+<rect x="66" y="48" width="710" height="499" fill="none" stroke="#E2C27A" stroke-width=".8"/>
 <!-- Titre -->
-<text x="495" y="112" text-anchor="middle" fill="#12141C" style="font:800 56px 'Syne';letter-spacing:1px">CERTIFICAT</text>
-<text x="495" y="140" text-anchor="middle" fill="#2A1E5C" style="font:700 14px 'DM Sans';letter-spacing:6px">DE MÉRITE</text>
-<!-- Bandeau doré -->
-<g transform="translate(495 172)">
-  <path d="M-200 -13 H200 L188 0 L200 13 H-200 L-188 0z" fill="url(#or)"/>
-  <path d="M-190 -13 H190 L178 0 L190 13 H-190 L-178 0z" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width=".8"/>
-  <text x="0" y="4" text-anchor="middle" fill="#fff" style="font:700 10.5px 'DM Sans';letter-spacing:2.2px">CE CERTIFICAT EST FIÈREMENT DÉCERNÉ À</text>
+<text x="421" y="118" text-anchor="middle" fill="#0E1222" style="font:italic 900 52px 'DM Sans';letter-spacing:-.5px">CERTIFICAT</text>
+<text x="421" y="146" text-anchor="middle" fill="#B07D22" style="font:italic 800 15px 'DM Sans';letter-spacing:5px">DE MÉRITE</text>
+<rect x="311" y="158" width="220" height="2.4" fill="url(#orH)"/>
+<text x="421" y="190" text-anchor="middle" fill="#0E1222" style="font:700 10.5px 'DM Sans';letter-spacing:2.2px">CE CERTIFICAT EST FIÈREMENT DÉCERNÉ À</text>
+<!-- Médaille : logo de l'application (bleu et or, agrandie) -->
+<g transform="translate(421 470)" filter="url(#ombre)">
+  <path id="festons" fill="url(#or)" d=""/>
+  <circle r="54" fill="url(#nuit)" stroke="url(#or)" stroke-width="3.4"/>
+  <circle r="47" fill="none" stroke="#E8C35E" stroke-width=".9" stroke-dasharray="2 2.6"/>
+  <g transform="translate(0 -5)"><image href="icone.png" x="-30" y="-30" width="60" height="60" clip-path="url(#ic)"/></g>
+  <text x="0" y="39" text-anchor="middle" fill="#E8C35E" style="font:700 7.5px 'DM Sans';letter-spacing:2.4px">★ ★ ★ ★ ★</text>
 </g>
-<!-- Lignes date / signature -->
-<line x1="290" y1="478" x2="430" y2="478" stroke="#B9B2A4" stroke-width=".8"/>
-<text x="360" y="496" text-anchor="middle" fill="#12141C" style="font:700 10.5px 'DM Sans';letter-spacing:2px">DATE</text>
-<text x="640" y="470" text-anchor="middle" fill="#1B2A6B" style="font:400 40px 'Mr Dafoe'" transform="rotate(-4 640 470)">Oluwatobi</text>
-<line x1="560" y1="478" x2="720" y2="478" stroke="#B9B2A4" stroke-width=".8"/>
-<text x="640" y="496" text-anchor="middle" fill="#12141C" style="font:700 10.5px 'DM Sans';letter-spacing:2px">PDG OLUWATOBI</text>
-<text x="640" y="509" text-anchor="middle" fill="#6B6457" style="font:500 8px 'DM Sans';letter-spacing:1px">Fondateur de TOB-MAQ</text>
-<!-- Cachet rouge -->
-<g transform="translate(748 446) rotate(-14)" opacity=".86">
+<!-- Date (valeur ajoutée par le serveur) -->
+<line x1="170" y1="480" x2="320" y2="480" stroke="#3A3D48" stroke-width=".8"/>
+<text x="245" y="496" text-anchor="middle" fill="#3A3D48" style="font:700 9.5px 'DM Sans';letter-spacing:2px">DATE DE DÉLIVRANCE</text>
+<!-- Signature de style manuscrit : Oluwatobi -->
+<g transform="translate(500 418) scale(.78)" fill="none" stroke="#14204A" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M0 58 C 26 66, 92 64, 126 52 C 146 45, 96 46, 46 53 C 18 57, 6 60, 10 57" stroke-width="1.5"/>
+  <path d="M126 52 C 112 30, 116 2, 136 -2 C 158 -6, 160 26, 140 50 C 128 64, 114 58, 122 44 C 128 34, 140 28, 150 30" stroke-width="1.9"/>
+  <path d="M60 78 C 80 46, 96 24, 112 8" stroke-width="1.2"/>
+  <text x="146" y="40" fill="#14204A" stroke="none" transform="rotate(-9 146 40)" style="font:400 30px 'Mr Dafoe'">luwatobi</text>
+  <path d="M150 54 C 190 44, 228 38, 256 40" stroke-width="1.3"/>
+  <path d="M250 4 C 258 26, 258 66, 240 66 C 226 66, 230 44, 268 46" stroke-width="1.6"/>
+  <circle cx="262" cy="18" r="1.6" fill="#14204A" stroke="none"/>
+</g>
+<line x1="520" y1="480" x2="690" y2="480" stroke="#3A3D48" stroke-width=".8"/>
+<text x="605" y="496" text-anchor="middle" fill="#0E1222" style="font:700 10px 'DM Sans';letter-spacing:2px">PDG OLUWATOBI</text>
+<text x="605" y="508" text-anchor="middle" fill="#6B6F7B" style="font:500 7.5px 'DM Sans';letter-spacing:1px">Fondateur de TOB-MAQ</text>
+<!-- Cachet rouge avec le logo de l'application -->
+<g id="cachet" transform="translate(728 486) rotate(-14) scale(.84)" opacity=".86">
   <defs><path id="arc" d="M -37 0 A 37 37 0 1 1 37 0 A 37 37 0 1 1 -37 0"/></defs>
-  <circle r="52" fill="none" stroke="#C8102E" stroke-width="3.2"/>
-  <circle r="47" fill="none" stroke="#C8102E" stroke-width="1"/>
-  <circle r="31" fill="none" stroke="#C8102E" stroke-width="1.6"/>
-  <text fill="#C8102E" style="font:700 7.4px 'DM Sans';letter-spacing:1.35px"><textPath href="#arc" startOffset="0">TOB-MAQ · ACADÉMIE NUMÉRIQUE · BÉNIN ·</textPath></text>
-  <!-- Logo de l'application en monochrome rouge : coins de cadrage + T -->
-  <g fill="none" stroke="#C8102E" stroke-width="3.4" stroke-linecap="square">
-    <path d="M-20 -12 V-20 H-12"/><path d="M12 -20 H20 V-12"/><path d="M-20 12 V20 H-12"/><path d="M12 20 H20 V12"/>
-  </g>
-  <path d="M-12 -12 H12 V-6 H3 V13 H-3 V-6 H-12z" fill="#C8102E"/>
-  <rect x="-9" y="15" width="18" height="2.6" fill="#C8102E"/>
-  <!-- grain du tampon -->
-
+  <circle r="50" fill="none" stroke="#C8102E" stroke-width="3.2"/>
+  <circle r="45" fill="none" stroke="#C8102E" stroke-width="1"/>
+  <circle r="30" fill="none" stroke="#C8102E" stroke-width="1.6"/>
+  <text fill="#C8102E" style="font:700 7.2px 'DM Sans';letter-spacing:1.3px"><textPath href="#arc">TOB-MAQ · ACADÉMIE NUMÉRIQUE · BÉNIN ·</textPath></text>
+  <g fill="none" stroke="#C8102E" stroke-width="3.2" stroke-linecap="square"><path d="M-19 -11 V-19 H-11"/><path d="M11 -19 H19 V-11"/><path d="M-19 11 V19 H-11"/><path d="M11 19 H19 V11"/></g>
+  <path d="M-11 -11 H11 V-5 H3 V12 H-3 V-5 H-11z" fill="#C8102E"/><rect x="-8.5" y="14" width="17" height="2.4" fill="#C8102E"/>
 </g>
-<!-- Pied -->
-<text x="495" y="545" text-anchor="middle" fill="#9A9284" style="font:500 7.5px 'DM Sans';letter-spacing:1.4px">TOB-MAQ · L'ACADÉMIE DES MÉTIERS CRÉATIFS ET DU NUMÉRIQUE · BÉNIN</text>
 </svg>
 <script>
-// Festons de la médaille et usure du cachet
-const n = 28, R1 = 60, R2 = 54; let d = "";
+const n = 30, R1 = 66, R2 = 60; let d = "";
 for (let i = 0; i <= n * 2; i++) { const a = i * Math.PI / n, r = i % 2 ? R2 : R1; d += (i ? "L" : "M") + (r * Math.cos(a)).toFixed(2) + " " + (r * Math.sin(a)).toFixed(2); }
 document.getElementById("festons").setAttribute("d", d + "Z");
-const st = document.querySelector('g[transform^="translate(748"]'); let s = "";
-for (let i = 0; i < 260; i++) { const a = Math.random() * 6.283, r = Math.sqrt(Math.random()) * 54; s += `<circle cx="${(r * Math.cos(a)).toFixed(1)}" cy="${(r * Math.sin(a)).toFixed(1)}" r="${(Math.random() * 1.3 + .3).toFixed(2)}" fill="#FFF8F0"/>`; }
-st.insertAdjacentHTML("beforeend", s);
-// Guillochis
-const gl = document.querySelector('g[stroke="#EDE6D8"]'); let gs = "";
-for (let k = 0; k < 18; k++) { let p = ""; for (let x = 170; x <= 800; x += 6) { const y = 398 + k * 2.2 + 26 * Math.sin((x + k * 14) / 38) * Math.cos((x - k * 9) / 120); p += (x === 170 ? "M" : "L") + x + " " + y.toFixed(1); } gs += `<path d="${p}" opacity="${.35 + (k % 3) * .2}"/>`; }
-gl.innerHTML = gs;
+let s = ""; for (let i = 0; i < 240; i++) { const a = Math.random() * 6.283, r = Math.sqrt(Math.random()) * 52; s += `<circle cx="${(r * Math.cos(a)).toFixed(1)}" cy="${(r * Math.sin(a)).toFixed(1)}" r="${(Math.random() * 1.2 + .3).toFixed(2)}" fill="#fff"/>`; }
+document.getElementById("cachet").insertAdjacentHTML("beforeend", s);
 </script>
 </body></html>

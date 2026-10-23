@@ -51,22 +51,25 @@ export async function certificatePdf(c) {
   doc.registerFont("texte", path.join(ASSETS, "DMSans-Regular.woff"));
   doc.registerFont("gras", path.join(ASSETS, "DMSans-Bold.woff"));
   doc.image(path.join(ASSETS, "fond.jpg"), 0, 0, { width: 842, height: 595 });
-  // Nom de l'apprenant (réduit si très long)
-  let size = 50; doc.font("nom");
-  while (size > 26 && doc.fontSize(size).widthOfString(c.full_name) > 560) size -= 2;
-  doc.fillColor("#12141C").fontSize(size).text(c.full_name, 190, 214 + (50 - size) * .5, { width: 610, align: "center", lineBreak: false });
-  doc.moveTo(330, 286).lineTo(660, 286).lineWidth(.8).strokeColor("#C9962F").stroke();
-  // Petit texte
-  doc.font("texte").fontSize(11.2).fillColor("#3A3D48").text(
-    `Pour avoir suivi avec succès la formation « ${f.title} » sur TOB-MAQ et réussi l'examen final avec la note de ${c.score}/${c.total}. ` +
-    "Nous saluons sa rigueur, sa curiosité et sa créativité, et lui souhaitons une belle réussite dans les métiers du numérique.",
-    225, 302, { width: 540, align: "center", lineGap: 3.5 });
-  // Date
-  doc.font("gras").fontSize(12).fillColor("#12141C").text(fmtDate(c.issued_at), 290, 458, { width: 140, align: "center" });
+  // Nom de l'apprenant en lettres dorées (réduit si très long)
+  let size = 46; doc.font("nom");
+  while (size > 24 && doc.fontSize(size).widthOfString(c.full_name) > 520) size -= 2;
+  doc.fillColor("#B07D22").fontSize(size).text(c.full_name, 121, 202 + (46 - size) * .5, { width: 600, align: "center", lineBreak: false });
+  doc.moveTo(266, 262).lineTo(576, 262).lineWidth(.8).strokeColor("#3A3D48").stroke();
+  // Texte officiel
+  doc.font("texte").fontSize(10.4).fillColor("#3A3D48").text(
+    `En reconnaissance de l'excellence de son parcours, ce certificat atteste que le ou la titulaire a suivi avec assiduité ` +
+    `l'intégralité de la formation « ${f.title} » dispensée par TOB-MAQ, et a réussi avec brio l'examen final de certification ` +
+    `en obtenant la note parfaite de ${c.score}/${c.total}. Il confirme la maîtrise des compétences enseignées, ainsi que la rigueur, ` +
+    "la persévérance et la créativité dont il ou elle a fait preuve. Toute notre équipe lui adresse ses plus sincères félicitations " +
+    "et lui souhaite une brillante carrière dans les métiers créatifs et du numérique.",
+    136, 276, { width: 570, align: "center", lineGap: 3.2 });
+  // Date de délivrance
+  doc.font("gras").fontSize(11.5).fillColor("#0E1222").text(fmtDate(c.issued_at), 170, 462, { width: 150, align: "center" });
   // Numéro et vérification
   const verify = `${config.publicUrl.replace(/^https?:\/\//, "")}/#/certificat/${c.id}`;
-  doc.font("gras").fontSize(8).fillColor("#6B6457").text(`N° ${c.id}`, 190, 511, { width: 610, align: "center", characterSpacing: 1 });
-  doc.font("texte").fontSize(7.5).fillColor("#9A9284").text(`Vérifier l'authenticité : ${verify}`, 190, 523, { width: 610, align: "center" });
+  doc.font("gras").fontSize(7.5).fillColor("#6B6F7B").text(`N° ${c.id}`, 80, 62, { width: 260, characterSpacing: .8 });
+  doc.font("texte").fontSize(6.6).fillColor("#8A8E99").text(`Vérification : ${verify}`, 80, 73, { width: 300 });
   doc.end();
   return done;
 }
