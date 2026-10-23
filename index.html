@@ -716,6 +716,9 @@ h3,.card h3,.course-body h3,.pf-body h3{font-family:var(--font-body);font-weight
 /* Couvertures des formations */
 .course-cover{height:148px;padding:14px 16px}
 .course-cover .cover-tag{position:relative;z-index:1;font:600 .68rem var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:#fff;background:rgb(11 14 23 / .45);border:1px solid rgb(255 255 255 / .16);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);padding:5px 10px;border-radius:999px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.course-cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;transition:transform .5s}
+.card.link:hover .course-cover img{transform:scale(1.04)}
+.course-cover{overflow:hidden}
 .course-body{padding:18px 20px 20px}
 .course-body h3{font-size:1.06rem;line-height:1.3}
 
@@ -3386,7 +3389,7 @@ function cover(f) {
 function courseCard(f) {
   const p = formationProgress(f);
   return `<article class="card link course-card">
-    <div class="course-cover">${cover(f)}<span class="cover-tag">${f.software.length ? f.software.map(s => softwareById(s).tag).join(" · ") : "Tous logiciels"} · ${domainName(f.domain)}</span></div>
+    <div class="course-cover">${cover(f)}<img src="apercus/formations/${f.id}.webp" alt="" width="800" height="320" loading="lazy" decoding="async" onerror="this.remove()"></div>
     <div class="course-body">
       <div class="row">${priceChip(f.price)}<span class="chip">${f.level}</span>${demoTag(isDemoFormation(f))}</div>
       <h3><a class="stretch" href="#/formation/${f.id}">${esc(f.title)}</a></h3>
