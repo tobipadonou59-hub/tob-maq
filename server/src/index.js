@@ -31,6 +31,31 @@ const ip = req => req.ip || req.socket.remoteAddress || "?";
 
 /* Balise de validation Google Search Console. Accepte le code seul, le code entre guillemets
    ou la balise complète collée telle quelle dans les réglages de l'hébergeur. */
+/* Tableau de bord administrateur : chiffres réels de la base (aucune valeur inventée). */
+function dashboardStats() {
+  const nowIso = new Date().toISOString(), month = nowIso.slice(0, 7);
+  const months = Array.from({ length: 6 }, (_, i) => { const d = new Date(); d.setUTCDate(1); d.setUTCMonth(d.getUTCMonth() - 5 + i); return d.toISOString().slice(0, 7); });
+  const byMonth = (sql, ...args) => { const rows = all(sql, ...args); return months.map(m => (rows.find(r => r.m === m) || { n: 0 }).n); };
+  const since = months[0] + "-01";
+  return {
+    learners: one("SELECT COUNT(*) AS n FROM users WHERE role != 'admin'").n,
+    minors: one("SELECT COUNT(*) AS n FROM users WHERE role != 'admin' AND age_group = 'mineur'").n,
+    admins: one("SELECT COUNT(*) AS n FROM users WHERE role = 'admin'").n,
+    premiumActive: one("SELECT COUNT(*) AS n FROM users WHERE role != 'admin' AND premium_until > ?", nowIso).n,
+    activeLearners30: one("SELECT COUNT(DISTINCT user_id) AS n FROM lessons WHERE done_at > ?", new Date(Date.now() - 30 * 864e5).toISOString()).n,
+    revenueTotal: one("SELECT COALESCE(SUM(amount), 0) AS n FROM payments WHERE status = 'approved'").n,
+    revenueMonth: one("SELECT COALESCE(SUM(amount), 0) AS n FROM payments WHERE status = 'approved' AND substr(COALESCE(approved_at, created_at), 1, 7) = ?", month).n,
+    paidSubscriptions: one("SELECT COUNT(*) AS n FROM payments WHERE status = 'approved' AND amount > 0").n,
+    gamesPlayed: one("SELECT COALESCE(SUM(plays), 0) AS n FROM games").n,
+    series: {
+      months,
+      signups: byMonth("SELECT substr(created_at, 1, 7) AS m, COUNT(*) AS n FROM users WHERE created_at >= ? GROUP BY m", since),
+      lessons: byMonth("SELECT substr(done_at, 1, 7) AS m, COUNT(*) AS n FROM lessons WHERE done_at >= ? GROUP BY m", since),
+      revenue: byMonth("SELECT substr(COALESCE(approved_at, created_at), 1, 7) AS m, SUM(amount) AS n FROM payments WHERE status = 'approved' AND COALESCE(approved_at, created_at) >= ? GROUP BY m", since)
+    }
+  };
+}
+
 export function androidFingerprints(raw) {
   return String(raw || "").split(/[\s,;]+/).map(v => v.trim().toUpperCase()).filter(v => /^([0-9A-F]{2}:){31}[0-9A-F]{2}$/.test(v));
 }
@@ -389,7 +414,8 @@ export function createApp() {
     users: one("SELECT COUNT(*) AS n FROM users").n, lessonsCompleted: one("SELECT COUNT(*) AS n FROM lessons").n,
     downloads: one("SELECT COUNT(*) AS n FROM downloads").n,
     aiGenerations: one("SELECT COUNT(*) AS n FROM ai_usage WHERE substr(at, 1, 7) = ?", today().slice(0, 7)).n,
-    pendingProjects: one("SELECT COUNT(*) AS n FROM projects WHERE status = 'pending'").n, monthCostFcfa: monthCost()
+    pendingProjects: one("SELECT COUNT(*) AS n FROM projects WHERE status = 'pending'").n, monthCostFcfa: monthCost(),
+    ...dashboardStats()
   }));
   api.get("/admin/formations", needAdmin, (req, res) => res.json(all("SELECT lesson_id AS lessonId, COUNT(*) AS count FROM lessons GROUP BY lesson_id ORDER BY count DESC")));
   api.post("/admin/resources", needAdmin, upload.single("file"), (req, res) => {

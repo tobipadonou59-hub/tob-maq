@@ -161,6 +161,9 @@ test("portfolio : envoi, mod√©ration par l'admin, publication et confidentialit√
   assert.equal((await kofi("GET", `/api/projects/${p2.data.id}/file`)).status, 200);
   const stats = await admin("GET", "/api/admin/stats");
   assert.equal(stats.data.users, 3);
+  assert.equal(stats.data.series.months.length, 6);
+  assert.equal(stats.data.learners + stats.data.admins, 3);
+  assert.equal(typeof stats.data.revenueTotal, "number");
   const q = await admin("PATCH", "/api/admin/ai-config", { dailyImageQuota: 10, dailyVideoQuota: 0, monthlyBudget: 20000, imageEnabled: true, videoEnabled: false });
   assert.equal(q.data.dailyImageQuota, 10);
   assert.equal((await admin("POST", "/api/reports", { projectId: p1.data.id, reason: "Autre" })).status, 201);

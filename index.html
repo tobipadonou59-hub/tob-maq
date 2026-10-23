@@ -764,6 +764,48 @@ h3,.card h3,.course-body h3,.pf-body h3{font-family:var(--font-body);font-weight
   .bar-actions .btn{padding:.3rem .65rem;font-size:.8rem;min-height:36px}
   .icon-btn{width:36px;height:36px}
 }
+
+/* ---------- Tableau de bord administrateur ---------- */
+.adm{--a-bg:#F5F1E8;--a-card:#FBF8F2;--a-ink:#24211C;--a-muted:#6B6457;--a-line:#E6DFD1;--a-gold:#F5B800;--a-gold-ink:#24211C;background:radial-gradient(120% 80% at 100% 0%,#EFE7D6 0%,transparent 55%),var(--a-bg);color:var(--a-ink);padding-block:44px 64px}
+:root[data-theme="dark"] .adm{--a-bg:#13110D;--a-card:#1C1914;--a-ink:#F3EEE4;--a-muted:#B3AA98;--a-line:#332D23;background:radial-gradient(120% 80% at 100% 0%,#2A2316 0%,transparent 55%),var(--a-bg)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .adm{--a-bg:#13110D;--a-card:#1C1914;--a-ink:#F3EEE4;--a-muted:#B3AA98;--a-line:#332D23;background:radial-gradient(120% 80% at 100% 0%,#2A2316 0%,transparent 55%),var(--a-bg)}}
+.adm-head{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:28px}
+.adm-title{font:700 italic clamp(2.4rem,5.6vw,4.6rem)/.95 var(--font-body);text-transform:uppercase;letter-spacing:-.045em;color:var(--a-ink);margin:0}
+.adm-title span{color:var(--a-gold)}
+.adm-sub{font-style:italic;font-size:1.12rem;color:var(--a-muted);margin:.5rem 0 0}
+.adm-actions{display:flex;gap:12px;align-items:center}
+.adm-pill{font:700 italic .74rem var(--font-body);letter-spacing:.16em;text-transform:uppercase;color:var(--a-ink);background:transparent;border:1px solid var(--a-line);border-radius:999px;padding:.9rem 1.5rem;cursor:pointer}
+.adm-pill:hover{border-color:var(--a-ink)}
+.adm-plus{width:58px;height:58px;border-radius:18px;border:0;background:var(--a-gold);color:var(--a-gold-ink);display:grid;place-items:center;cursor:pointer;box-shadow:0 12px 26px -10px #F5B800cc}
+.adm-plus .ic{width:26px;height:26px;stroke-width:2.6}
+.adm .tabs{border-color:var(--a-line);margin-bottom:28px}
+.adm .tabs button{color:var(--a-muted);font-style:italic;text-transform:uppercase;font-size:.78rem;letter-spacing:.1em}
+.adm .tabs button[aria-selected="true"]{color:var(--a-ink);border-color:var(--a-gold)}
+.adm .card{background:var(--a-card);border-color:var(--a-line);color:var(--a-ink)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:20px}
+@media (max-width:1000px){.kpis{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.kpis{grid-template-columns:1fr 1fr;gap:12px}}
+.kpi{background:var(--a-card);border:1px solid var(--a-line);border-radius:26px;padding:24px 26px;box-shadow:0 1px 0 #fff8 inset,0 10px 30px -18px #6b5a3a55;min-width:0}
+.kpi .k{display:flex;align-items:center;gap:12px;font:800 italic .74rem var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--a-ink)}
+.kpi .k i{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;flex:none}
+.kpi .k i .ic{width:18px;height:18px}
+.kpi .v{font:700 italic clamp(1.8rem,2.8vw,2.5rem)/1 var(--font-body);letter-spacing:-.04em;margin-top:18px;color:var(--a-ink);white-space:nowrap}
+.kpi .v small{font-size:.42em;letter-spacing:.06em;margin-left:4px}
+.kpi .h{font-size:.8rem;color:var(--a-muted);margin-top:8px}
+.kpi.row{display:flex;flex-wrap:nowrap;justify-content:space-between;align-items:center;gap:12px}
+.kpi.row .k{gap:0}.kpi.row .v{margin-top:12px}
+.kpi.row .bub{width:56px;height:56px;border-radius:18px;display:grid;place-items:center;flex:none}
+.kpi.row .bub .ic{width:24px;height:24px}
+@media (max-width:520px){.kpi{padding:18px;border-radius:20px}.kpi.row .bub{display:none}.kpi .k{font-size:.66rem}}
+.adm-charts{display:grid;grid-template-columns:1.75fr 1fr;gap:20px}
+@media (max-width:1000px){.adm-charts{grid-template-columns:1fr}}
+.chart-card{background:var(--a-card);border:1px solid var(--a-line);border-radius:36px;padding:30px 34px;min-width:0}
+.chart-card h3{display:flex;gap:14px;align-items:center;font:700 italic 1.55rem/1.15 var(--font-body);text-transform:uppercase;letter-spacing:-.03em;margin:0 0 18px;color:var(--a-ink)}
+.chart-card h3 .ic{color:var(--a-gold);width:28px;height:28px;flex:none}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.82rem;color:var(--a-muted);margin-bottom:8px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.chart-card svg text{fill:var(--a-muted)}
+.adm-note{font-size:.82rem;color:var(--a-muted);margin-top:18px;font-style:italic}
 </style>
 </head>
 <body>
@@ -827,10 +869,10 @@ h3,.card h3,.course-body h3,.pf-body h3{font-family:var(--font-body);font-weight
 
 <nav class="tabbar" aria-label="Navigation rapide">
   <a href="#/" data-tab=""><span data-icon="home"></span>Accueil</a>
-  <a href="#/formations" data-tab="formations"><span data-icon="layers"></span>Formations</a>
-  <a href="#/jeux" data-tab="jeux"><span data-icon="game"></span>Jeux</a>
-  <a href="#/portfolio" data-tab="portfolio"><span data-icon="image"></span>Portfolio</a>
-  <a href="#/tableau-de-bord" data-tab="tableau-de-bord" id="tabAccount"><span data-icon="user"></span>Mon espace</a>
+  <a href="#/formations" data-tabbar="formations"><span data-icon="layers"></span>Formations</a>
+  <a href="#/jeux" data-tabbar="jeux"><span data-icon="game"></span>Jeux</a>
+  <a href="#/portfolio" data-tabbar="portfolio"><span data-icon="image"></span>Portfolio</a>
+  <a href="#/tableau-de-bord" data-tabbar="tableau-de-bord" id="tabAccount"><span data-icon="user"></span>Mon espace</a>
 </nav>
 
 <main id="main" tabindex="-1">
@@ -3098,6 +3140,7 @@ const PROFILES = ["Débutant en graphisme", "Graphiste en progression", "Maquett
    3. OUTILS
    ========================================================================== */
 const ICONS = {
+  plus: '<path d="M12 5v14M5 12h14"/>',
   home: '<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v11h5v-6h4v6h5V9"/>',
   search: '<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>',
   moon: '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>',
@@ -4691,12 +4734,60 @@ function renderAdmin(main) {
     return;
   }
   const tabs = { stats: "Statistiques", formations: "Formations", ressources: "Ressources", ia: "IA et quotas", moderation: "Modération", abonnements: "Abonnements", utilisateurs: "Utilisateurs", annonces: "Annonces" };
-  main.innerHTML = pageHead({ crumbs: [["Administration"]], title: "Administration", lead: `Connecté en tant qu'administrateur : ${esc(state.user.displayName)}` }) + `<section class="section-sm"><div class="wrap">
+  main.innerHTML = `<section class="adm"><div class="wrap">
+    <div class="adm-head"><div><h1 class="adm-title" tabindex="-1">Tableau de <span>bord</span></h1><p class="adm-sub">Pilotage centralisé de la plateforme · ${esc(state.user.displayName)}</p></div>
+      <div class="adm-actions"><button class="adm-pill" type="button" data-go="formations">Analyses détaillées</button><button class="adm-plus" type="button" data-go="annonces" aria-label="Nouvelle annonce" title="Nouvelle annonce">${icon("plus")}</button></div></div>
     <div class="tabs" role="tablist">${Object.entries(tabs).map(([k, t], i) => `<button role="tab" data-tab="${k}" aria-selected="${i === 0}">${t}</button>`).join("")}</div><div id="adm" role="tabpanel"></div></div></section>`;
   const panel = $("#adm");
   const table = (rows, cols) => rows && rows.length ? `<div class="card table-wrap"><table><thead><tr>${cols.map(c => `<th>${c[0]}</th>`).join("")}</tr></thead><tbody>${rows.map(r => `<tr>${cols.map(c => `<td>${esc(typeof c[1] === "function" ? c[1](r) : r[c[1]])}</td>`).join("")}</tr>`).join("")}</tbody></table></div>` : `<p class="muted">Aucune donnée.</p>`;
   const views = {
-    async stats() { const d = await api.request("/admin/stats"); panel.innerHTML = `<div class="grid g4">${[["Comptes", d.users], ["Leçons terminées", d.lessonsCompleted], ["Téléchargements", d.downloads], ["Générations IA (mois)", d.aiGenerations], ["Projets à modérer", d.pendingProjects], [`Coût IA du mois (${CONFIG.CURRENCY})`, d.monthCostFcfa]].map(([t, v]) => `<div class="card stat"><div><b>${esc(v ?? "–")}</b><span>${t}</span></div></div>`).join("")}</div>`; },
+    async stats() {
+      const d = await api.request("/admin/stats"), cur = `<small>${CONFIG.CURRENCY}</small>`;
+      const kpi = (ic, col, k, v, h) => `<div class="kpi"><div class="k"><i style="background:${col}22;color:${col}">${icon(ic)}</i>${k}</div><div class="v">${v}</div>${h ? `<div class="h">${h}</div>` : ""}</div>`;
+      const kpiRow = (ic, col, k, v, h) => `<div class="kpi row"><div style="min-width:0"><div class="k">${k}</div><div class="v">${v}</div>${h ? `<div class="h">${h}</div>` : ""}</div><span class="bub" style="background:${col}22;color:${col}">${icon(ic)}</span></div>`;
+      const se = d.series, M = ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."];
+      const labels = se.months.map(m => M[+m.slice(5, 7) - 1]);
+      // Courbe d'évolution (inscriptions et leçons terminées par mois)
+      const W = 640, H = 260, L = 44, B = 30, T = 14, max = Math.max(4, ...se.signups, ...se.lessons), top = Math.ceil(max / 4) * 4;
+      const X = i => L + i * (W - L - 12) / (se.months.length - 1), Y = v => T + (H - T - B) * (1 - v / top);
+      const smooth = pts => pts.map(([x, y], i) => i ? `C${(pts[i - 1][0] + x) / 2} ${pts[i - 1][1]} ${(pts[i - 1][0] + x) / 2} ${y} ${x} ${y}` : `M${x} ${y}`).join(" ");
+      const line = arr => smooth(arr.map((v, i) => [X(i), Y(v)]));
+      const area = arr => `${line(arr)} L${X(arr.length - 1)} ${H - B} L${X(0)} ${H - B}Z`;
+      const chart = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Évolution sur 6 mois : inscriptions et leçons terminées">
+        <defs><linearGradient id="admA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F59E0B" stop-opacity=".35"/><stop offset="1" stop-color="#F59E0B" stop-opacity="0"/></linearGradient>
+        <linearGradient id="admB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5B3DF5" stop-opacity=".22"/><stop offset="1" stop-color="#5B3DF5" stop-opacity="0"/></linearGradient></defs>
+        ${[0, 1, 2, 3, 4].map(i => { const v = top * i / 4; return `<line x1="${L}" x2="${W - 8}" y1="${Y(v)}" y2="${Y(v)}" stroke="currentColor" stroke-opacity=".12" stroke-dasharray="3 4"/><text x="${L - 10}" y="${Y(v) + 4}" text-anchor="end" style="font:12px var(--font-body)">${nf(v)}</text>`; }).join("")}
+        <path d="${area(se.lessons)}" fill="url(#admB)"/><path d="${line(se.lessons)}" fill="none" stroke="#5B3DF5" stroke-width="2.5"/>
+        <path d="${area(se.signups)}" fill="url(#admA)"/><path d="${line(se.signups)}" fill="none" stroke="#F59E0B" stroke-width="3"/>
+        ${se.signups.map((v, i) => `<circle cx="${X(i)}" cy="${Y(v)}" r="4" fill="#FBF8F2" stroke="#F59E0B" stroke-width="2.5"><title>${labels[i]} : ${v} inscription(s)</title></circle>`).join("")}
+        ${labels.map((l, i) => `<text x="${X(i)}" y="${H - 8}" text-anchor="middle" style="font:12px var(--font-body)">${l}</text>`).join("")}</svg>`;
+      // Répartition des utilisateurs
+      const parts = [["Apprenants adultes", Math.max(0, d.learners - d.minors - d.premiumActive), "#F59E0B"], ["Mineurs (15–17 ans)", d.minors, "#3B82F6"], ["Abonnés Premium", d.premiumActive, "#10B981"], ["Administrateurs", d.admins, "#F43F5E"]];
+      const tot = parts.reduce((n, p) => n + p[1], 0) || 1, R = 70, C = 2 * Math.PI * R; let off = 0;
+      const donut = `<svg viewBox="0 0 200 200" style="max-width:260px;margin:0 auto" role="img" aria-label="Répartition des comptes"><circle cx="100" cy="100" r="${R}" fill="none" stroke="currentColor" stroke-opacity=".08" stroke-width="30"/>
+        ${parts.filter(p => p[1]).map(([, n, c]) => { const len = C * n / tot, seg = `<circle cx="100" cy="100" r="${R}" fill="none" stroke="${c}" stroke-width="30" stroke-dasharray="${Math.max(0, len - 3)} ${C}" stroke-dashoffset="${-off}" transform="rotate(-90 100 100)"/>`; off += len; return seg; }).join("")}
+        <text x="100" y="98" text-anchor="middle" style="font:700 italic 34px var(--font-body);fill:var(--a-ink)">${nf(d.users)}</text><text x="100" y="120" text-anchor="middle" style="font:600 11px var(--font-body);letter-spacing:.1em">COMPTES</text></svg>`;
+      panel.innerHTML = `
+        <div class="kpis">
+          ${kpi("users", "#3B82F6", "Apprenants", nf(d.learners), `${nf(d.activeLearners30)} actifs sur 30 jours`)}
+          ${kpi("shield", "#10B981", "Abonnés Premium", nf(d.premiumActive), "abonnements en cours")}
+          ${kpi("user", "#F59E0B", "Mineurs (15–17 ans)", nf(d.minors), "accord parental requis")}
+          ${kpi("layers", "#A855F7", "Leçons terminées", nf(d.lessonsCompleted), `${nf(d.gamesPlayed)} parties de jeux`)}
+        </div>
+        <div class="kpis">
+          ${kpiRow("cart", "#10B981", "Revenus totaux", `${nf(d.revenueTotal)} ${cur}`, "paiements confirmés")}
+          ${kpiRow("chart", "#F5B800", "Revenus du mois", `${nf(d.revenueMonth)} ${cur}`, `${nf(d.paidSubscriptions)} abonnement(s) payé(s) au total`)}
+          ${kpiRow("spark", "#3B82F6", "Coût IA du mois", `${nf(d.monthCostFcfa)} ${cur}`, `${nf(d.aiGenerations)} génération(s)`)}
+          ${kpiRow("flag", "#A855F7", "À modérer", nf(d.pendingProjects), `${nf(d.downloads)} téléchargements`)}
+        </div>
+        <div class="adm-charts">
+          <div class="chart-card"><h3>${icon("chart")} Évolution de TOB-MAQ</h3>
+            <div class="legend"><span><i style="background:#F59E0B"></i>Inscriptions</span><span><i style="background:#5B3DF5"></i>Leçons terminées</span></div>${chart}</div>
+          <div class="chart-card"><h3>${icon("users")} Répartition des utilisateurs</h3>${donut}
+            <div class="legend" style="margin-top:16px;flex-direction:column;gap:8px">${parts.map(([l, n, c]) => `<span style="display:flex;justify-content:space-between"><span><i style="background:${c}"></i>${l}</span><b style="color:var(--a-ink)">${nf(n)}</b></span>`).join("")}</div></div>
+        </div>
+        <p class="adm-note">Chiffres réels de la base de données, sur les 6 derniers mois. Les revenus ne comptent que les paiements confirmés par FedaPay.</p>`;
+    },
     async formations() { panel.innerHTML = `<p class="muted">Leçons terminées par les apprenants inscrits.</p>` + table(await api.request("/admin/formations"), [["Leçon", r => (LESSONS[r.lessonId] || {}).title || r.lessonId], ["Apprenants", "count"]]); },
     async ressources() {
       panel.innerHTML = `<form class="card" id="upRes" novalidate style="max-width:640px"><h3>${icon("upload")} Importer une ressource</h3>
@@ -4800,6 +4891,7 @@ function renderAdmin(main) {
   const show = async k => { $$("[data-tab]", main).forEach(b => b.setAttribute("aria-selected", String(b.dataset.tab === k))); panel.innerHTML = `<div class="boot" style="min-height:140px"><span class="spinner"></span></div>`;
     try { await views[k](); } catch (e) { panel.innerHTML = alertBox("error", `<p>${esc(e.message)}</p>`); } };
   $$("[data-tab]", main).forEach(b => b.addEventListener("click", () => show(b.dataset.tab)));
+  $$("[data-go]", main).forEach(b => b.addEventListener("click", () => show(b.dataset.go)));
   show("stats");
 }
 function renderNotFound(main) {
@@ -6538,7 +6630,7 @@ function route() {
   const navKey = { formation: "formations", cours: "formations", ressource: "ressources", projet: "portfolio" }[section] ?? (DOMAINS.some(d => d.id === section) ? "domaines" : section);
   $$("[data-nav]").forEach(a => a.dataset.nav === navKey ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
   const tabKey = { formation: "formations", cours: "formations", domaines: "formations", projet: "portfolio", connexion: "tableau-de-bord", inscription: "tableau-de-bord", profil: "tableau-de-bord", parametres: "tableau-de-bord" }[section] ?? (DOMAINS.some(d => d.id === section) ? "formations" : section);
-  $$("[data-tab]").forEach(a => a.dataset.tab === tabKey ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
+  $$("[data-tabbar]").forEach(a => a.dataset.tabbar === tabKey ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
   $(".site-header").classList.remove("searching"); $("#searchToggle").setAttribute("aria-expanded", "false");
   $("#mainNav").classList.remove("open"); $("#navToggle").setAttribute("aria-expanded", "false");
   $("#q").value = section === "recherche" ? q.get("q") || "" : "";
