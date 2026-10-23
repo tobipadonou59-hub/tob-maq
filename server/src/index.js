@@ -13,6 +13,7 @@ import { HttpError, fail, hashPassword, verifyPassword, newToken, sha256, uid, r
 import { sendMail } from "./mail.js";
 import { registerBilling, isPremium } from "./billing.js";
 import { registerCertificates } from "./certificats.js";
+import { registerAppDownloads } from "./appli.js";
 import { imageProvider, videoProvider, generateImage, buildImagePrompt, buildDemoPrompt, IMAGE_SIZES, IMAGE_STYLES } from "./ai.js";
 
 const LEVELS = ["Débutant", "Intermédiaire", "Avancé"];
@@ -458,6 +459,7 @@ export function createApp() {
   api.get("/announcements", (req, res) => res.json(all("SELECT title, body, created_at AS createdAt FROM announcements ORDER BY created_at DESC LIMIT 5")));
   registerBilling(api, { needUser, needAdmin, needConsent });
   registerCertificates(api, { needUser, needConsent });
+  registerAppDownloads(app, api, { needAdmin });
   api.get("/health", (req, res) => res.json({ ok: true, ai: { images: Boolean(imageProvider), videos: Boolean(videoProvider) } }));
 
   api.use((req, res) => res.status(404).json({ message: "Route inconnue.", code: "NOT_FOUND" }));

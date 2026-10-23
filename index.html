@@ -331,6 +331,11 @@ textarea.input{min-height:110px;resize:vertical;line-height:1.5}
 .app-video{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center}
 .app-video video{width:min(100%,320px);aspect-ratio:9/16;border-radius:var(--radius);background:#0B0E17;justify-self:center}
 @media (max-width:720px){.app-video{grid-template-columns:1fr}}
+.app-share{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+.app-share img{border-radius:16px;border:1px solid var(--line);background:#fff;padding:8px}
+.share-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.share-link{background:var(--surface-2);border:1px solid var(--line);padding:.5rem .8rem;border-radius:10px;font-size:.9rem}
+@media (max-width:640px){.app-share{grid-template-columns:1fr;justify-items:start}.app-share img{width:150px;height:150px}}
 .app-card ol{margin:0;padding-left:1.2em}.app-card li{margin:.35em 0}
 .app-card.is-you{outline:2px solid var(--accent);outline-offset:2px}
 .app-perks{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:14px;margin:0;padding:0;list-style:none}
@@ -4760,6 +4765,14 @@ function renderApp(main) {
       ${card("desktop", "download", "Ordinateur (Chrome, Edge)", ["Ouvre le site dans Chrome ou Microsoft Edge.", "Clique sur l'icône d'installation à droite de la barre d'adresse, ou sur le bouton <strong>Installer l'application</strong> ci-dessus.", "TOB-MAQ s'ouvre dans sa propre fenêtre, comme un logiciel."])}
     </div>
   </div></section>
+  <section class="section-sm"><div class="wrap"><div class="card app-share">
+    <img src="icones/qr-telecharger.png" alt="Code QR vers la page de téléchargement de TOB-MAQ" width="180" height="180">
+    <div><span class="eyebrow">Lien de téléchargement</span><h2 style="margin:.2em 0 .4em">Partage l'application</h2>
+      <p class="muted">Envoie ce lien sur WhatsApp ou fais scanner le code QR : il ouvre directement cette page d'installation.</p>
+      <div class="share-row"><span class="mono share-link" id="shareLink">tob-maq.onrender.com/telecharger</span><button class="btn btn-primary btn-sm" type="button" id="copyLink">${icon("file")} Copier le lien</button>
+        <a class="btn btn-outline btn-sm" href="https://wa.me/?text=${encodeURIComponent("Installe l'application TOB-MAQ, l'académie du numérique : https://tob-maq.onrender.com/telecharger")}" target="_blank" rel="noopener">Partager sur WhatsApp</a></div>
+      <div id="apkBox" style="margin-top:14px"></div></div>
+  </div></div></section>
   <section class="section-sm"><div class="wrap app-video">
     <div><h2>Le tutoriel en vidéo</h2><p class="muted">Une minute pour voir chaque geste, sur Android puis sur iPhone.</p>
       <a class="btn btn-ghost btn-sm" href="videos/installer-application.mp4" download>${icon("download")} Télécharger la vidéo</a></div>
@@ -4777,6 +4790,8 @@ function renderApp(main) {
     <p class="small muted" style="margin-top:18px">Le compte, le Premium, le studio IA et les vidéos demandent une connexion Internet. L'application ne demande ni ta position, ni ton micro, ni ta caméra.</p>
   </div></section>`;
   $("#appInstallBtn")?.addEventListener("click", installApp);
+  $("#copyLink").addEventListener("click", async () => { try { await navigator.clipboard.writeText("https://tob-maq.onrender.com/telecharger"); toast("Lien copié"); } catch { toast("Copie impossible : sélectionne le lien à la main.", "info"); } });
+  if (api.configured) api.request("/app/info").then(i => { if (i.apk && $("#apkBox")) $("#apkBox").innerHTML = `<a class="btn btn-grad" href="/telecharger/android" download>${icon("download")} Télécharger l'APK Android (${String(i.sizeMb).replace(".", ",")} Mo)</a><p class="small muted" style="margin-top:6px">Sur Android, autorise « l'installation d'applications inconnues » pour Chrome si le téléphone le demande.</p>`; }).catch(() => {});
 }
 function renderHelp(main) {
   const faq = [
@@ -4920,7 +4935,17 @@ function renderAdmin(main) {
         <div class="field"><label for="uT">Titre</label><input class="input" id="uT" name="title" maxlength="120"></div>
         <div class="field"><label for="uL">Licence</label><input class="input" id="uL" name="licence" placeholder="Ex. CC BY 4.0 · TOB-MAQ"></div>
         <div class="field"><label for="uF">Fichier</label><input class="input" id="uF" name="file" type="file"></div>
-        <div id="uMsg" aria-live="assertive"></div><button class="btn btn-primary" type="submit">Importer (non publiée)</button></form>`;
+        <div id="uMsg" aria-live="assertive"></div><button class="btn btn-primary" type="submit">Importer (non publiée)</button></form>
+        <form class="card" id="upApk" novalidate style="max-width:640px;margin-top:20px"><h3>${icon("download")} Application Android (.apk)</h3>
+        <p class="small muted">Le fichier .apk généré par PWABuilder. Il sera téléchargeable à l'adresse <span class="mono">/telecharger/android</span> et sur la page Application. Ne mets jamais le fichier keystore ici.</p>
+        <div id="apkState" class="small" style="margin:8px 0"></div>
+        <div class="field"><label for="apkF">Fichier APK</label><input class="input" id="apkF" name="file" type="file" accept=".apk,application/vnd.android.package-archive"></div>
+        <div id="apkMsg" aria-live="assertive"></div><button class="btn btn-primary" type="submit">Publier l'APK</button></form>`;
+      const apkState = () => api.request("/app/info").then(i => { $("#apkState").innerHTML = i.apk ? `APK en ligne : ${String(i.sizeMb).replace(".", ",")} Mo · mis à jour le ${fmtDate(i.updatedAt)}` : "Aucun APK publié pour l'instant."; }).catch(() => {});
+      apkState();
+      $("#upApk").addEventListener("submit", async e => { e.preventDefault(); const f = e.currentTarget;
+        if (!$("#apkF").files[0]) { $("#apkMsg").innerHTML = alertBox("error", "<p>Choisis le fichier .apk.</p>"); return; }
+        await withLoading(f, "Envoi…", $("#apkMsg"), async () => { await api.request("/admin/app/apk", { method: "POST", form: new FormData(f), timeout: 600000 }); $("#apkMsg").innerHTML = alertBox("ok", "<p>APK publié : il est maintenant téléchargeable.</p>"); apkState(); }); });
       $("#upRes").addEventListener("submit", async e => { e.preventDefault(); const f = e.currentTarget;
         if (!$("#uT").value.trim() || !$("#uL").value.trim() || !$("#uF").files[0]) { $("#uMsg").innerHTML = alertBox("error", "<p>Titre, licence et fichier sont obligatoires.</p>"); return; }
         await withLoading(f, "Import…", $("#uMsg"), async () => { await api.request("/admin/resources", { method: "POST", form: new FormData(f), timeout: 300000 }); $("#uMsg").innerHTML = alertBox("ok", "<p>Ressource importée, en attente de publication.</p>"); }); });

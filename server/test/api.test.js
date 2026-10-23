@@ -253,3 +253,20 @@ test("examen final : leçons requises, correction côté serveur, certificat PDF
   assert.equal(pdf.status, 200); assert.equal(pdf.headers.get("content-type"), "application/pdf"); assert.ok(pdf.data.startsWith("%PDF"));
   assert.equal((await u("GET", "/api/me/certificates")).data.length, 1);
 });
+
+test("téléchargement de l'appli : lien court, APK publié uniquement par l'admin", async () => {
+  const v = client();
+  const r = await v("GET", "/telecharger");
+  assert.equal(r.status, 302); assert.equal(r.headers.get("location"), "/#/application");
+  assert.equal((await v("GET", "/api/app/info")).data.apk, false);
+  assert.equal((await v("GET", "/telecharger/android")).status, 302, "sans APK, retour vers la page d'installation");
+  const fd = () => { const f = new FormData(); f.append("file", new Blob([Buffer.from("504b0304" + "00".repeat(40), "hex")]), "tob-maq.apk"); return f; };
+  assert.equal((await v("POST", "/api/admin/app/apk", null, { form: fd() })).status, 401);
+  const admin = client();
+  await admin("POST", "/api/auth/login", { email: "admin@tob-maq.test", password: adult.password });
+  const bad = new FormData(); bad.append("file", new Blob([Buffer.from("pas un apk")]), "virus.apk");
+  assert.equal((await admin("POST", "/api/admin/app/apk", null, { form: bad })).status, 400);
+  assert.equal((await admin("POST", "/api/admin/app/apk", null, { form: fd() })).status, 201);
+  const dl = await v("GET", "/telecharger/android");
+  assert.equal(dl.status, 200); assert.equal(dl.headers.get("content-type"), "application/vnd.android.package-archive");
+});
