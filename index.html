@@ -174,6 +174,47 @@ button,input,select,textarea{font:inherit;color:inherit}
 .dl-act{display:flex;flex-direction:column;align-items:center;gap:12px}
 .dl-more{font-size:.88rem;color:var(--night-muted);display:inline-flex;align-items:center;gap:6px;text-decoration:none}.dl-more:hover{color:#fff}
 @media (max-width:900px){.dl-band{grid-template-columns:1fr;padding:30px 22px;gap:22px;text-align:left}.dl-art{width:84px;height:84px}.dl-art img{border-radius:20px}.dl-act{align-items:stretch}.dl-act .dlb{align-self:center}}
+/* Raccourcis clavier */
+kbd{display:inline-grid;place-items:center;min-width:1.9em;height:1.9em;padding:0 .5em;border-radius:7px;font:600 .8rem/1 var(--font-mono);color:var(--ink);background:linear-gradient(var(--surface),var(--surface-2));border:1px solid var(--line-2);border-bottom-width:3px;box-shadow:0 1px 0 rgb(0 0 0 / .04);white-space:nowrap}
+.kb-plus{margin:0 3px;color:var(--muted);font-weight:700}
+.kb-or{margin:0 8px;font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.kb-none{font-size:.8rem;color:var(--muted);font-style:italic}
+.kb-tools{display:flex;flex-wrap:wrap;gap:12px 16px;align-items:flex-end}
+.kb-search{flex:1;min-width:220px;margin:0}
+.kb-os{display:inline-flex;padding:4px;border-radius:12px;background:var(--surface-2);border:1px solid var(--line)}
+.kb-os button{border:0;background:none;padding:.55rem 1.1rem;border-radius:9px;font:600 .92rem var(--font-body);color:var(--muted);cursor:pointer}
+.kb-os button[aria-checked=true]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+.kb-cats{position:sticky;top:var(--header-h,64px);z-index:5;display:flex;gap:8px;overflow-x:auto;padding:14px 0;margin-top:6px;background:var(--bg);scrollbar-width:none}
+.kb-cats a{flex:none;padding:.45rem .95rem;border-radius:99px;border:1px solid var(--line-2);font-size:.88rem;font-weight:600;color:var(--ink);text-decoration:none;background:var(--surface)}
+.kb-cats a[aria-current=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.card.kb-train{display:grid;grid-template-columns:1fr auto auto;gap:24px;align-items:center;margin:8px 0 26px;background:var(--night);color:var(--night-ink);border:0}
+.kb-train h2{color:#fff;margin:.2em 0}.kb-train .muted{color:var(--night-muted)!important}.kb-train .eyebrow{color:#FF9A6B}
+.kb-ask{min-width:260px;min-height:96px;padding:14px 18px;border-radius:14px;border:1.5px dashed #ffffff30;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;transition:border-color .2s,background .2s}
+.kb-ask-l{font-weight:700;color:#fff}
+.kb-ask kbd{color:#fff;background:#1C2136;border-color:#ffffff30}
+.kb-ask .kb-plus{color:#8C93B0}
+.kb-ask.ok{border-color:#4ADE95;background:rgb(74 222 149 / .12)}.kb-ask.ko{border-color:#FF6B6B;background:rgb(255 107 107 / .1);animation:kbShake .3s}
+@keyframes kbShake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.kb-score{display:flex;flex-direction:column;align-items:center;gap:6px}.kb-score b{font:800 2rem var(--font-display);color:#fff;line-height:1}.kb-score span{font-size:.8rem;color:var(--night-muted)}
+.kb-sec{margin-bottom:28px;scroll-margin-top:130px}
+.kb-sec header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.kb-sec h3{margin:0;font-size:1.3rem}
+.kb-ic{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:var(--grad);color:#fff}
+.kb-groups{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+.kb-group{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px}
+.kb-group h4{margin:0 0 8px;font-size:.78rem;font-family:var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--orange)}
+.kb-group ul{list-style:none;margin:0;padding:0}
+.kb-group li{display:grid;grid-template-columns:minmax(132px,auto) 1fr;gap:14px;align-items:center;padding:8px 0;border-top:1px solid var(--line)}
+.kb-group li:first-child{border-top:0}
+.kb-keys{display:flex;flex-wrap:wrap;align-items:center;row-gap:4px}
+.kb-desc{font-size:.92rem}
+.kb-note{margin-top:8px}
+.kb-promo{display:flex;align-items:center;gap:18px;padding:16px 20px;margin-bottom:22px;border-radius:var(--radius);background:var(--night);color:#fff;text-decoration:none;transition:transform .2s}
+.kb-promo:hover{transform:translateY(-2px)}
+.kb-promo>span:nth-child(2){flex:1;display:flex;flex-direction:column;gap:2px}.kb-promo .small{color:var(--night-muted)}
+.kb-promo-k{display:flex;align-items:center;gap:4px}.kb-promo kbd{color:#fff;background:#1C2136;border-color:#ffffff30}
+@media (max-width:720px){.kb-train{grid-template-columns:1fr}.kb-ask{min-width:0}.kb-groups{grid-template-columns:1fr}.kb-group li{grid-template-columns:minmax(104px,auto) 1fr;gap:10px}.kb-group kbd{font-size:.72rem;min-width:1.7em;height:1.75em;padding:0 .4em}.kb-desc{font-size:.88rem}.kb-promo-k{display:none}}
+@media print{.site-header,.site-footer,.tabbar,.kb-tools,.kb-cats,.kb-train,.kb-promo,.page-head .crumbs,.update-bar{display:none!important}body{background:#fff}.kb-sec{break-inside:avoid-page}.kb-group{break-inside:avoid}}
 /* Livres */
 .bk-side{display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:start}
 .bk-mini img,.bk-cover img{display:block;width:100%;height:auto;border-radius:3px 6px 6px 3px;box-shadow:inset 6px 0 8px -6px #0008,0 10px 24px -8px rgb(0 0 0 / .45),0 2px 4px rgb(0 0 0 / .2)}
@@ -1095,7 +1136,7 @@ h3,.card h3,.course-body h3,.pf-body h3{font-family:var(--font-body);font-weight
         <li><a href="#/dessin">Dessin et illustration</a></li><li><a href="#/informatique">Informatique et réseaux</a></li><li><a href="#/marketing">Marketing digital</a></li><li><a href="#/business">Business et finance</a></li></ul></div>
       <div><h3>Pratiquer</h3><ul>
         <li><a href="#/ia">IA créative</a></li><li><a href="#/jeux">Jeux et défis</a></li>
-        <li><a href="#/ressources">Ressources</a></li><li><a href="#/portfolio">Portfolio</a></li><li><a href="#/examens">Examens finaux et certificats</a></li></ul></div>
+        <li><a href="#/ressources">Ressources</a></li><li><a href="#/livres">Livres des formations</a></li><li><a href="#/raccourcis">Raccourcis clavier</a></li><li><a href="#/portfolio">Portfolio</a></li><li><a href="#/examens">Examens finaux et certificats</a></li></ul></div>
       <div><h3>Mon compte</h3><ul>
         <li><a href="#/tableau-de-bord">Tableau de bord</a></li><li><a href="#/profil">Profil</a></li>
         <li><a href="#/parametres">Paramètres et thème</a></li><li id="footAdmin" hidden><a href="#/admin">Administration</a></li></ul></div>
@@ -4239,6 +4280,142 @@ function renderFormation(main, id) {
   </div></section>`;
   examCard(f); bookSide(f);
 }
+/* ---------- Guide des raccourcis clavier ---------- */
+/* Chaque ligne : [touches Windows, action, touches Mac]. Mac absent = conversion automatique (Ctrl → ⌘, Alt → ⌥, Maj → ⇧) ;
+   null = sans équivalent. « / » sépare deux combinaisons possibles. */
+const SHORTCUTS = [
+  { id: "windows", name: "Windows", ic: "layout", only: "win", groups: [
+    { t: "Les essentiels", items: [["Ctrl+C", "Copier"], ["Ctrl+X", "Couper"], ["Ctrl+V", "Coller"], ["Ctrl+Z", "Annuler la dernière action"], ["Ctrl+Y", "Rétablir"], ["Ctrl+A", "Tout sélectionner"], ["Ctrl+S", "Enregistrer"], ["Ctrl+P", "Imprimer"], ["Ctrl+F", "Rechercher dans la page ou le document"], ["F2", "Renommer le fichier sélectionné"], ["Suppr", "Mettre à la corbeille"], ["Maj+Suppr", "Supprimer définitivement (sans corbeille)"]] },
+    { t: "Fenêtres et bureau", items: [["Win", "Ouvrir le menu Démarrer"], ["Win+D", "Afficher le bureau"], ["Win+E", "Ouvrir l'Explorateur de fichiers"], ["Alt+Tab", "Passer d'une fenêtre à l'autre"], ["Win+Tab", "Vue des tâches et bureaux virtuels"], ["Win+← / Win+→", "Ancrer la fenêtre à gauche ou à droite"], ["Win+↑", "Agrandir la fenêtre"], ["Win+M", "Réduire toutes les fenêtres"], ["Alt+F4", "Fermer la fenêtre ou l'application"], ["Win+Ctrl+D", "Créer un bureau virtuel"], ["Win+Ctrl+← / Win+Ctrl+→", "Changer de bureau virtuel"]] },
+    { t: "Outils pratiques", items: [["Win+Maj+S", "Capture d'une zone de l'écran"], ["Win+ImpÉcr", "Capture de tout l'écran, enregistrée dans Images"], ["Win+V", "Historique du presse-papiers"], ["Win+.", "Émojis et symboles"], ["Win+H", "Dictée vocale"], ["Win+L", "Verrouiller l'ordinateur"], ["Win+I", "Paramètres"], ["Win+R", "Exécuter une commande"], ["Win+X", "Menu d'accès rapide (gestion de l'ordinateur)"], ["Win+P", "Projeter sur un second écran"], ["Ctrl+Maj+Échap", "Gestionnaire des tâches"]] }
+  ] },
+  { id: "mac", name: "macOS", ic: "layout", only: "mac", groups: [
+    { t: "Les essentiels", items: [["⌘+C", "Copier"], ["⌘+X", "Couper (texte)"], ["⌘+V", "Coller"], ["⌘+Z", "Annuler"], ["⌘+⇧+Z", "Rétablir"], ["⌘+A", "Tout sélectionner"], ["⌘+S", "Enregistrer"], ["⌘+P", "Imprimer"], ["⌘+F", "Rechercher"], ["⌘+Espace", "Spotlight : rechercher une app ou un fichier"], ["⌘+,", "Réglages de l'application"]] },
+    { t: "Fenêtres et applications", items: [["⌘+Tab", "Passer d'une application à l'autre"], ["⌘+W", "Fermer la fenêtre"], ["⌘+Q", "Quitter l'application"], ["⌘+M", "Réduire la fenêtre"], ["⌘+H", "Masquer l'application"], ["⌘+N", "Nouvelle fenêtre ou nouveau document"], ["⌃+↑", "Mission Control"], ["⌘+⌥+Échap", "Forcer une application à quitter"], ["⌃+⌘+Q", "Verrouiller l'écran"]] },
+    { t: "Finder et captures", items: [["Espace", "Aperçu rapide du fichier"], ["↩", "Renommer le fichier"], ["⌘+⌫", "Mettre à la corbeille"], ["⌘+⇧+N", "Nouveau dossier"], ["⌘+I", "Lire les informations"], ["⌘+⇧+.", "Afficher les fichiers cachés"], ["⌘+⇧+3", "Capture de tout l'écran"], ["⌘+⇧+4", "Capture d'une zone"], ["⌘+⇧+5", "Outil de capture et d'enregistrement vidéo"], ["⌃+⌘+Espace", "Émojis et symboles"]] }
+  ] },
+  { id: "navigateur", name: "Navigateur", ic: "eye", groups: [
+    { t: "Onglets et fenêtres", items: [["Ctrl+T", "Nouvel onglet"], ["Ctrl+W", "Fermer l'onglet"], ["Ctrl+Maj+T", "Rouvrir le dernier onglet fermé"], ["Ctrl+Tab", "Onglet suivant", "⌃+Tab"], ["Ctrl+Maj+Tab", "Onglet précédent", "⌃+⇧+Tab"], ["Ctrl+1…8", "Aller à l'onglet 1 à 8"], ["Ctrl+Maj+N", "Fenêtre de navigation privée"]] },
+    { t: "Pages", items: [["Ctrl+L", "Aller dans la barre d'adresse"], ["F5 / Ctrl+R", "Actualiser la page", "⌘+R"], ["Ctrl+Maj+R", "Actualiser sans le cache"], ["Alt+←", "Page précédente", "⌘+["], ["Ctrl+D", "Ajouter aux favoris"], ["Ctrl+H", "Historique", "⌘+Y"], ["Ctrl+J", "Téléchargements", "⌘+⌥+L"], ["Ctrl+Plus / Ctrl+Moins", "Zoomer / dézoomer"], ["Ctrl+0", "Zoom à 100 %"], ["F11", "Plein écran", "⌃+⌘+F"], ["F12", "Outils de développement", "⌘+⌥+I"], ["Ctrl+U", "Voir le code source", "⌘+⌥+U"]] }
+  ] },
+  { id: "texte", name: "Texte et Word", ic: "file", groups: [
+    { t: "Se déplacer et sélectionner", items: [["Ctrl+← / Ctrl+→", "Mot précédent / mot suivant", "⌥+← / ⌥+→"], ["Ctrl+Maj+→", "Sélectionner le mot suivant", "⌥+⇧+→"], ["Début / Fin", "Début / fin de la ligne", "⌘+← / ⌘+→"], ["Maj+Fin", "Sélectionner jusqu'à la fin de la ligne", "⌘+⇧+→"], ["Ctrl+Début / Ctrl+Fin", "Début / fin du document", "⌘+↑ / ⌘+↓"], ["Ctrl+Retour arrière", "Effacer le mot précédent", "⌥+⌫"]] },
+    { t: "Mise en forme", items: [["Ctrl+G", "Gras (Word en français)", "⌘+B"], ["Ctrl+B", "Gras (Google Docs, Word en anglais)"], ["Ctrl+I", "Italique"], ["Ctrl+U", "Souligné"], ["Ctrl+K", "Insérer un lien"], ["Ctrl+Entrée", "Saut de page (Word)"], ["Ctrl+Maj+V", "Coller sans mise en forme (Google Docs, navigateur)", "⌘+⇧+V"]] }
+  ] },
+  { id: "excel", name: "Excel", ic: "chart", groups: [
+    { t: "Cellules et données", items: [["F2", "Modifier la cellule active", "⌃+U"], ["Alt+Entrée", "Retour à la ligne dans une cellule", "⌥+↩"], ["Ctrl+D", "Recopier vers le bas"], ["Ctrl+;", "Insérer la date du jour", "⌃+;"], ["Ctrl+1", "Format de cellule"], ["F4", "Référence absolue ($A$1) dans une formule", "⌘+T"], ["Alt+=", "Somme automatique", "⌘+⇧+T"]] },
+    { t: "Se déplacer", items: [["Ctrl+flèche", "Aller au bord du tableau de données"], ["Ctrl+Maj+flèche", "Sélectionner jusqu'au bord des données"], ["Ctrl+Espace", "Sélectionner la colonne", "⌃+Espace"], ["Maj+Espace", "Sélectionner la ligne"], ["Ctrl+Pg.suiv / Ctrl+Pg.préc", "Feuille suivante / précédente", null]] }
+  ] },
+  { id: "photoshop", name: "Photoshop", ic: "image", groups: [
+    { t: "Outils", items: [["V", "Déplacement"], ["M", "Rectangle de sélection"], ["L", "Lasso"], ["W", "Sélection d'objet / sélection rapide"], ["C", "Recadrage"], ["B", "Pinceau"], ["E", "Gomme"], ["S", "Tampon de duplication"], ["J", "Correcteur"], ["T", "Texte"], ["P", "Plume"], ["I", "Pipette"], ["Espace (maintenir)", "Main : se déplacer dans l'image"], ["[ / ]", "Réduire / agrandir le pinceau"], ["D / X", "Couleurs par défaut / inverser les couleurs"]] },
+    { t: "Calques et sélections", items: [["Ctrl+J", "Dupliquer le calque (ou la sélection)"], ["Ctrl+Maj+N", "Nouveau calque"], ["Ctrl+G", "Grouper les calques"], ["Ctrl+E", "Fusionner le calque avec celui du dessous"], ["Ctrl+Alt+G", "Masque d'écrêtage"], ["Ctrl+Maj+Alt+E", "Fusionner une copie de tous les calques visibles"], ["Ctrl+D", "Désélectionner"], ["Ctrl+Maj+I", "Inverser la sélection"], ["Ctrl+T", "Transformation manuelle"]] },
+    { t: "Réglages et fichiers", items: [["Ctrl+L", "Niveaux"], ["Ctrl+M", "Courbes"], ["Ctrl+U", "Teinte / saturation"], ["Alt+Retour arrière", "Remplir avec la couleur de premier plan"], ["Ctrl+0 / Ctrl+1", "Adapter à l'écran / zoom 100 %"], ["Ctrl+Maj+S", "Enregistrer sous"], ["Ctrl+Maj+Alt+W", "Exporter sous"]] }
+  ] },
+  { id: "illustrator", name: "Illustrator", ic: "pen", groups: [
+    { t: "Outils", items: [["V", "Sélection"], ["A", "Sélection directe (points)"], ["P", "Plume"], ["T", "Texte"], ["M", "Rectangle"], ["L", "Ellipse"], ["Maj+M", "Concepteur de formes"], ["I", "Pipette"], ["R", "Rotation"], ["O", "Symétrie"], ["S", "Mise à l'échelle"], ["Maj+O", "Plan de travail"]] },
+    { t: "Objets", items: [["Ctrl+G / Ctrl+Maj+G", "Grouper / dissocier"], ["Ctrl+7", "Créer un masque d'écrêtage"], ["Ctrl+8", "Créer un tracé transparent"], ["Ctrl+Maj+O", "Vectoriser le texte"], ["Ctrl+2 / Ctrl+Alt+2", "Verrouiller / tout déverrouiller"], ["Ctrl+3", "Masquer la sélection"], ["Ctrl+] / Ctrl+Maj+]", "Avancer / mettre au premier plan"], ["Ctrl+D", "Répéter la dernière transformation"], ["Ctrl+Y", "Mode tracés (contours)"], ["Ctrl+R", "Afficher les règles"]] }
+  ] },
+  { id: "indesign", name: "InDesign", ic: "layers", groups: [
+    { t: "Mise en page", items: [["V / A", "Sélection / sélection directe"], ["T", "Texte"], ["M", "Rectangle"], ["F", "Bloc rectangle (pour une image)"], ["W", "Mode aperçu (masque repères et cadres)"], ["Ctrl+D", "Importer une image ou un texte"], ["Ctrl+J", "Aller à la page…"], ["Ctrl+Maj+> / Ctrl+Maj+<", "Agrandir / réduire le corps du texte"], ["Ctrl+Maj+O", "Vectoriser le texte"], ["Ctrl+E", "Exporter (PDF…)"]] }
+  ] },
+  { id: "premiere", name: "Premiere Pro", ic: "film", groups: [
+    { t: "Lecture et montage", items: [["Espace", "Lecture / pause"], ["J / K / L", "Arrière / pause / avant (appuie plusieurs fois pour accélérer)"], ["I / O", "Point d'entrée / point de sortie"], ["V", "Outil Sélection"], ["C", "Outil Cutter"], ["Ctrl+K", "Couper au niveau de la tête de lecture"], ["Q / W", "Raccourcir le début / la fin du plan jusqu'à la tête de lecture"], ["Maj+Suppr", "Supprimer et refermer le trou", "⇧+fn+⌫"], ["M", "Ajouter un marqueur"], ["Ctrl+D", "Transition vidéo par défaut"], ["Ctrl+Maj+D", "Transition audio par défaut"], ["Plus / Moins", "Zoomer / dézoomer la timeline"], ["\\", "Afficher toute la séquence"], ["Ctrl+M", "Exporter"]] }
+  ] },
+  { id: "resolve", name: "DaVinci Resolve", ic: "film", groups: [
+    { t: "Montage", items: [["Espace", "Lecture / pause"], ["J / K / L", "Arrière / pause / avant"], ["I / O", "Point d'entrée / de sortie"], ["A", "Mode sélection"], ["B", "Mode lame (couper)"], ["Ctrl+B", "Couper sous la tête de lecture"], ["M", "Ajouter un marqueur"], ["Maj+Z", "Adapter la timeline à la fenêtre"]] },
+    { t: "Étalonnage (page Color)", items: [["Alt+S", "Ajouter un nœud en série"], ["Alt+P", "Ajouter un nœud parallèle"], ["Ctrl+D", "Activer / désactiver le nœud"], ["Maj+D", "Comparer avant / après (tout l'étalonnage)"]] }
+  ] },
+  { id: "aftereffects", name: "After Effects", ic: "spark", groups: [
+    { t: "Propriétés et animation", items: [["P / S / R / T / A", "Position / échelle / rotation / opacité / point d'ancrage"], ["U", "Afficher les propriétés animées"], ["F9", "Lissage de vitesse des images clés"], ["J / K", "Image clé précédente / suivante"], ["Espace", "Aperçu"], ["B / N", "Début / fin de la zone de travail"], ["Alt+[ / Alt+]", "Couper le début / la fin du calque"], ["Ctrl+D", "Dupliquer le calque"], ["Ctrl+Maj+D", "Scinder le calque"], ["Ctrl+Maj+C", "Précomposer"], ["Ctrl+M", "Ajouter à la file d'attente de rendu", "⌃+⌘+M"]] }
+  ] },
+  { id: "vscode", name: "VS Code", ic: "code", groups: [
+    { t: "Éditer du code", items: [["Ctrl+P", "Ouvrir un fichier par son nom"], ["Ctrl+Maj+P", "Palette de commandes"], ["Ctrl+B", "Afficher / masquer la barre latérale"], ["Ctrl+ù", "Terminal intégré (clavier AZERTY ; Ctrl+` en QWERTY)", "⌃+`"], ["Ctrl+:", "Commenter la ligne (AZERTY ; Ctrl+/ en QWERTY)", "⌘+/"], ["Alt+↑ / Alt+↓", "Déplacer la ligne"], ["Maj+Alt+↓", "Dupliquer la ligne"], ["Ctrl+D", "Sélectionner l'occurrence suivante"], ["Alt+clic", "Ajouter un curseur"], ["Ctrl+Maj+K", "Supprimer la ligne"], ["Ctrl+Espace", "Suggestions", "⌃+Espace"], ["F2", "Renommer partout"], ["Maj+Alt+F", "Formater le document"], ["Ctrl+Maj+F", "Rechercher dans tous les fichiers"], ["Ctrl+G", "Aller à la ligne…", "⌃+G"]] }
+  ] }
+];
+// Raccourcis utilisables dans l'entraînement (aucun n'est intercepté par le navigateur quand on l'empêche)
+const SC_PRACTICE = [["Ctrl+C", "Copier"], ["Ctrl+V", "Coller"], ["Ctrl+X", "Couper"], ["Ctrl+Z", "Annuler"], ["Ctrl+A", "Tout sélectionner"], ["Ctrl+S", "Enregistrer"], ["Ctrl+F", "Rechercher"], ["Ctrl+P", "Imprimer"], ["Ctrl+Y", "Rétablir (Windows)"], ["Ctrl+J", "Dupliquer le calque (Photoshop)"], ["Ctrl+G", "Grouper les calques (Photoshop)"], ["Ctrl+K", "Couper à la tête de lecture (Premiere)"], ["Ctrl+B", "Couper sous la tête de lecture (Resolve)"], ["V", "Outil Déplacement (Photoshop)"], ["B", "Pinceau (Photoshop)"], ["T", "Outil Texte"], ["P", "Plume"], ["I", "Pipette"], ["C", "Recadrage (Photoshop)"], ["Maj+M", "Concepteur de formes (Illustrator)"], ["Ctrl+D", "Désélectionner (Photoshop)"]];
+const SC_MAC = { Ctrl: "⌘", Alt: "⌥", Maj: "⇧", Entrée: "↩", "Retour arrière": "⌫", Suppr: "⌫", Échap: "esc" };
+const SC_NAMES = { "⌘": "Commande", "⌥": "Option", "⇧": "Majuscule", "⌃": "Contrôle", "↩": "Entrée", "⌫": "Supprimer", Plus: "Plus", Moins: "Moins" };
+const scToMac = combo => combo.split(" / ").map(c => c.split("+").map(k => SC_MAC[k] || k).join("+")).join(" / ");
+function scKeys(combo) {
+  return combo.split(" / ").map(c => c.split(/\+(?!$)/).map(k => {
+    const shown = { Plus: "+", Moins: "−" }[k] || k;
+    return `<kbd${SC_NAMES[k] ? ` title="${SC_NAMES[k]}"` : ""}>${esc(shown)}</kbd>`;
+  }).join(`<span class="kb-plus">+</span>`)).join(`<span class="kb-or">ou</span>`);
+}
+function renderShortcuts(main, q) {
+  let os = store.get("kbOs", appPlatform() === "ios" || /Mac/.test(navigator.platform) ? "mac" : "win");
+  const total = SHORTCUTS.reduce((n, c) => n + c.groups.reduce((m, g) => m + g.items.length, 0), 0);
+  main.innerHTML = pageHead({ crumbs: [["Raccourcis clavier"]], eyebrow: "Guide", title: "Les raccourcis clavier",
+    lead: `${total} raccourcis pour aller deux fois plus vite sur ordinateur : Windows, Mac, navigateur, texte, Excel et tous les logiciels des formations.` }) + `
+  <section class="section-sm"><div class="wrap">
+    <div class="kb-tools">
+      <div class="field kb-search"><label for="kbq">Rechercher un raccourci</label><input class="input" id="kbq" type="search" placeholder="Ex. : copier, calque, capture…" value="${esc(q.get("q") || "")}" autocomplete="off"></div>
+      <div class="kb-os" role="radiogroup" aria-label="Système"><button type="button" role="radio" data-os="win">Windows</button><button type="button" role="radio" data-os="mac">Mac</button></div>
+      <button class="btn btn-ghost btn-sm" type="button" id="kbPrint">${icon("download")} Imprimer / PDF</button>
+    </div>
+    <nav class="kb-cats" id="kbCats" aria-label="Catégories"><a href="#kb-tout" data-cat="" aria-current="true">Tout</a>${SHORTCUTS.map(c => `<a href="#kb-${c.id}" data-cat="${c.id}">${esc(c.name)}</a>`).join("")}</nav>
+    <div class="kb-train card" id="kbTrain">
+      <div><span class="eyebrow">Entraînement</span><h2>Teste tes réflexes</h2><p class="small muted" id="kbTrainHelp">Appuie sur Commencer, puis fais le raccourci demandé sur ton clavier.</p></div>
+      <div class="kb-ask" id="kbAsk" aria-live="polite"><span class="kb-ask-l">Prêt ?</span></div>
+      <div class="kb-score"><b id="kbScore">0</b><span>bonnes réponses</span><button class="btn btn-grad btn-sm" type="button" id="kbStart">Commencer</button></div>
+    </div>
+    <div id="kbList"></div>
+    <p class="small muted kb-note">Sur Mac : <kbd>⌘</kbd> = Commande, <kbd>⌥</kbd> = Option, <kbd>⇧</kbd> = Majuscule, <kbd>⌃</kbd> = Contrôle. Les raccourcis peuvent varier selon la version du logiciel et la langue du clavier.</p>
+  </div></section>`;
+  const list = $("#kbList"), qi = $("#kbq");
+  $("#kbCats").style.top = ($(".site-header")?.offsetHeight || 0) + "px";   // reste visible sous l'en-tête fixe
+  const draw = () => {
+    const words = qi.value.trim().toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").split(/\s+/).filter(Boolean);
+    const match = (combo, desc, cat, grp) => !words.length || words.every(w => `${combo} ${desc} ${cat} ${grp}`.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").includes(w));
+    $$(".kb-os button").forEach(b => b.setAttribute("aria-checked", b.dataset.os === os ? "true" : "false"));
+    let shown = 0;
+    list.innerHTML = SHORTCUTS.map(c => {
+      if (c.only && c.only !== os && !words.length) return "";
+      const groups = c.groups.map(g => {
+        const rows = g.items.filter(([k, d]) => match(k, d, c.name, g.t)).map(([k, d, mac]) => {
+          const combo = c.only ? k : os === "mac" ? (mac === null ? null : mac || scToMac(k)) : k; shown++;
+          return `<li><span class="kb-keys">${combo === null ? `<span class="kb-none">Windows uniquement</span>` : scKeys(combo)}</span><span class="kb-desc">${esc(d)}</span></li>`;
+        }).join("");
+        return rows ? `<div class="kb-group"><h4>${esc(g.t)}</h4><ul>${rows}</ul></div>` : "";
+      }).join("");
+      return groups ? `<section class="kb-sec" id="kb-${c.id}"><header><span class="kb-ic">${icon(c.ic)}</span><h3>${esc(c.name)}</h3></header><div class="kb-groups">${groups}</div></section>` : "";
+    }).join("") || emptyState({ ic: "info", title: "Aucun raccourci trouvé", text: "Essaie un autre mot : copier, calque, onglet, capture…" });
+  };
+  draw();
+  qi.addEventListener("input", draw);
+  $$(".kb-os button").forEach(b => b.addEventListener("click", () => { os = b.dataset.os; store.set("kbOs", os); draw(); }));
+  $("#kbCats").addEventListener("click", e => {
+    const a = e.target.closest("a[data-cat]"); if (!a) return; e.preventDefault();
+    $$("#kbCats a").forEach(x => x.setAttribute("aria-current", x === a ? "true" : "false"));
+    const sec = a.dataset.cat ? $("#kb-" + a.dataset.cat) : list;
+    if (!sec && a.dataset.cat) { os = a.dataset.cat === "mac" ? "mac" : a.dataset.cat === "windows" ? "win" : os; draw(); }
+    ($("#kb-" + a.dataset.cat) || list).scrollIntoView({ behavior: calmMotion() ? "auto" : "smooth", block: "start" });
+  });
+  $("#kbPrint").addEventListener("click", () => window.print());
+  // Entraînement : on lit vraiment les touches pressées
+  const touch = matchMedia("(hover: none)").matches;
+  if (touch) { $("#kbTrainHelp").textContent = "L'entraînement se fait avec un clavier, sur ordinateur."; $("#kbStart").disabled = true; }
+  let target = null, score = 0, playing = false;
+  const label = combo => os === "mac" ? scToMac(combo) : combo;
+  const next = () => { let n; do n = SC_PRACTICE[Math.floor(Math.random() * SC_PRACTICE.length)]; while (target && n[0] === target[0]); target = n;
+    $("#kbAsk").innerHTML = `<span class="kb-ask-l">${esc(n[1])}</span><span class="kb-ask-k" aria-hidden="true">${scKeys(label(n[0]))}</span>`; $("#kbAsk").className = "kb-ask"; };
+  const onKey = e => {
+    if (!document.body.contains(list)) return document.removeEventListener("keydown", onKey, true);
+    if (!playing || ["Control", "Shift", "Alt", "Meta"].includes(e.key) || e.target.matches("input, textarea")) return;
+    e.preventDefault(); e.stopPropagation();
+    const mod = os === "mac" ? e.metaKey : e.ctrlKey;
+    const pressed = [mod && "Ctrl", e.altKey && "Alt", e.shiftKey && "Maj", (e.code.startsWith("Key") ? e.code.slice(3) : e.key).toUpperCase()].filter(Boolean).join("+");
+    const ok = pressed === target[0].toUpperCase().replace("MAJ", "Maj").replace("CTRL", "Ctrl").replace("ALT", "Alt");
+    $("#kbAsk").className = "kb-ask " + (ok ? "ok" : "ko");
+    if (ok) { score++; $("#kbScore").textContent = score; setTimeout(next, 650); }
+  };
+  $("#kbStart").addEventListener("click", () => {
+    playing = !playing; $("#kbStart").textContent = playing ? "Arrêter" : "Commencer";
+    if (playing) { score = 0; $("#kbScore").textContent = 0; next(); document.addEventListener("keydown", onKey, true); }
+    else { $("#kbAsk").innerHTML = `<span class="kb-ask-l">Bravo : ${score} bonne${score > 1 ? "s" : ""} réponse${score > 1 ? "s" : ""}</span>`; document.removeEventListener("keydown", onKey, true); }
+  });
+}
 /* ---------- Livres de formation (PDF A5 + lecteur à feuilleter) ---------- */
 let booksIndex = null;
 const loadBooks = () => booksIndex ||= fetch("apercus/livres/index.json").then(r => r.ok ? r.json() : {}).catch(() => ({}));
@@ -4541,6 +4718,7 @@ function markLesson(lid, done) {
 function renderResources(main, q) {
   main.innerHTML = pageHead({ crumbs: [["Ressources"]], eyebrow: "Bibliothèque", title: "Ressources téléchargeables", lead: "Cours, fiches, raccourcis, modèles et fichiers d'exercice. Chaque ressource indique sa licence. Le bouton « Télécharger » n'apparaît que si le fichier existe réellement." }) + `
   <section class="section-sm"><div class="wrap">
+    <a class="kb-promo" href="#/raccourcis"><span class="kb-promo-k" aria-hidden="true"><kbd>Ctrl</kbd><span>+</span><kbd>C</kbd></span><span><strong>Guide des raccourcis clavier</strong><span class="small">Windows, Mac, navigateur, Excel, Photoshop, Premiere, VS Code… avec un mode entraînement.</span></span>${icon("arrow")}</a>
     <form class="toolbar" id="rFilters" onsubmit="return false">
       <div class="field"><label for="rq">Rechercher</label><input class="input" id="rq" type="search" placeholder="Ex. : raccourcis, grille…" value="${esc(q.get("q") || "")}"></div>
       <div class="field"><label for="rc">Catégorie</label><select class="input" id="rc"><option value="">Toutes</option>${DOMAINS.map(d => `<option value="${d.id}">${d.name}</option>`).join("")}</select></div>
@@ -7166,7 +7344,7 @@ const ROUTES = [
   [/^ressources$/, (m, p, q) => renderResources(m, q)], [/^ressource\/([\w-]+)$/, (m, p) => renderResource(m, p[1])],
   [/^inscription$/, m => renderSignup(m)], [/^connexion$/, (m, p, q) => renderLogin(m, q)], [/^finaliser-inscription$/, (m, p, q) => renderSocialFinish(m, q)], [/^tableau-de-bord$/, (m, p, q) => renderDashboard(m, q)], [/^premium$/, m => renderPremium(m)],
   [/^portfolio$/, m => renderPortfolio(m)], [/^projet\/([\w-]+)$/, (m, p) => renderProject(m, p[1])], [/^profil$/, m => renderProfile(m)],
-  [/^parametres$/, m => renderSettings(m)], [/^aide$/, m => renderHelp(m)], [/^application$/, m => renderApp(m)], [/^examens$/, m => renderExams(m)], [/^livres$/, (m, p, q) => renderBooks(m, q)], [/^livre\/([\w-]+)$/, (m, p, q) => renderBook(m, p[1], q)], [/^examen\/([\w-]+)$/, (m, p) => renderExam(m, p[1])], [/^certificat\/([\w-]+)$/, (m, p) => renderVerify(m, p[1])], [/^defi$/, () => goDefi()], [/^reprendre$/, () => goResume()], [/^(conditions|confidentialite)$/, (m, p) => renderLegal(m, p[1])],
+  [/^parametres$/, m => renderSettings(m)], [/^aide$/, m => renderHelp(m)], [/^application$/, m => renderApp(m)], [/^examens$/, m => renderExams(m)], [/^livres$/, (m, p, q) => renderBooks(m, q)], [/^raccourcis$/, (m, p, q) => renderShortcuts(m, q)], [/^livre\/([\w-]+)$/, (m, p, q) => renderBook(m, p[1], q)], [/^examen\/([\w-]+)$/, (m, p) => renderExam(m, p[1])], [/^certificat\/([\w-]+)$/, (m, p) => renderVerify(m, p[1])], [/^defi$/, () => goDefi()], [/^reprendre$/, () => goResume()], [/^(conditions|confidentialite)$/, (m, p) => renderLegal(m, p[1])],
   [/^admin$/, m => renderAdmin(m)], [/^reinitialiser$/, (m, p, q) => renderReset(m, q)], [/^recherche$/, (m, p, q) => renderSearch(m, q)]
 ];
 const stripHash = h => String(h || "").replace(/^#\/?/, "");
@@ -7183,7 +7361,7 @@ function route() {
   favRefresh = null;
   const raw = currentPath; renderedPath = raw;
   const [path, qs] = raw.split("?"), q = new URLSearchParams(qs || ""), section = path.split("/")[0], main = $("#main");
-  const navKey = { livre: "livres", examen: "examens", certificat: "examens", formation: "formations", cours: "formations", ressource: "ressources", projet: "portfolio" }[section] ?? (DOMAINS.some(d => d.id === section) ? "domaines" : section);
+  const navKey = { raccourcis: "ressources", livre: "livres", examen: "examens", certificat: "examens", formation: "formations", cours: "formations", ressource: "ressources", projet: "portfolio" }[section] ?? (DOMAINS.some(d => d.id === section) ? "domaines" : section);
   $$("[data-nav]").forEach(a => a.dataset.nav === navKey ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
   const tabKey = { formation: "formations", cours: "formations", domaines: "formations", projet: "portfolio", connexion: "tableau-de-bord", inscription: "tableau-de-bord", profil: "tableau-de-bord", parametres: "tableau-de-bord" }[section] ?? (DOMAINS.some(d => d.id === section) ? "formations" : section);
   $$("[data-tabbar]").forEach(a => a.dataset.tabbar === tabKey ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
