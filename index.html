@@ -121,6 +121,58 @@ button,input,select,textarea{font:inherit;color:inherit}
 .ic{width:1.2em;height:1.2em;flex:none}
 :root[data-motion="reduce"] *{animation:none!important;transition:none!important}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+/* Livres */
+.bk-side{display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:start}
+.bk-mini img,.bk-cover img{display:block;width:100%;height:auto;border-radius:3px 6px 6px 3px;box-shadow:inset 6px 0 8px -6px #0008,0 10px 24px -8px rgb(0 0 0 / .45),0 2px 4px rgb(0 0 0 / .2)}
+.bk-mini{display:block;transition:transform .3s}.bk-mini:hover{transform:translateY(-3px) rotate(-1deg)}
+.bk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:28px 22px;margin-top:22px}
+.bk-card{display:flex;flex-direction:column;gap:12px}
+.bk-cover{position:relative;display:block;perspective:900px}
+.bk-cover img{transform-origin:left center;transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s}
+.bk-cover::after{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;border-radius:3px 0 0 3px;background:linear-gradient(90deg,rgb(0 0 0 / .35),rgb(255 255 255 / .12) 60%,transparent)}
+.bk-card:hover .bk-cover img{transform:rotateY(-14deg);box-shadow:inset 6px 0 8px -6px #0008,16px 18px 30px -10px rgb(0 0 0 / .5)}
+.bk-meta h3{font-size:1.02rem;margin:.25rem 0 .6rem}.bk-meta h3 a{color:inherit;text-decoration:none}
+.bk-reader{background:#0B0E17;color:#ECEEF5;padding:26px 0 40px;min-height:calc(100vh - 120px)}
+.bk-reader .crumbs,.bk-reader .crumbs a{color:var(--night-muted)}
+.bk-top{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between;margin:10px 0 18px}
+.bk-top h1{color:#fff;font-size:clamp(1.25rem,2.6vw,1.9rem);margin:0}
+.bk-stage{position:relative;display:flex;align-items:center;justify-content:center;gap:14px;padding:10px 0;outline:none;background:radial-gradient(60% 70% at 50% 45%,rgb(91 61 245 / .18),transparent 70%)}
+.bk-stage:fullscreen{background:#0B0E17;padding:20px}
+.bk-book{position:relative;display:flex;perspective:2200px;touch-action:pan-y;user-select:none;cursor:pointer;--h:max(380px,min(calc(100vh - 300px),820px))}
+.bk-stage:fullscreen .bk-book{--h:92vh}
+.bk-book.one,.bk-book .bk-under:only-child{--w:calc(var(--h) * .7048)}
+.bk-book .bk-page,.bk-under .bk-page{height:var(--h);aspect-ratio:148/210;background:#FBFAF7;overflow:hidden}
+.bk-book .bk-page img,.bk-face img{display:block;width:100%;height:100%;object-fit:cover}
+.bk-page.blank{background:transparent}
+.bk-page.l{border-radius:4px 0 0 4px;box-shadow:inset -18px 0 24px -14px rgb(0 0 0 / .35),-10px 20px 40px -10px rgb(0 0 0 / .6)}
+.bk-page.r{border-radius:0 4px 4px 0;box-shadow:inset 18px 0 24px -14px rgb(0 0 0 / .28),10px 20px 40px -10px rgb(0 0 0 / .6)}
+.bk-book.one .bk-page.r{border-radius:4px;box-shadow:inset 10px 0 14px -10px rgb(0 0 0 / .3),0 20px 40px -10px rgb(0 0 0 / .6)}
+.bk-page.blank{box-shadow:none}
+.bk-under{display:flex}
+.bk-leaf{position:absolute;top:0;height:var(--h);aspect-ratio:148/210;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.45,.05,.25,1);z-index:3}
+.bk-leaf.half.fwd{left:50%;transform-origin:left center}
+.bk-leaf.half.bwd{right:50%;transform-origin:right center}
+.bk-leaf.full{left:0;transform-origin:left center}
+.bk-leaf.full.bwd{transform:rotateY(-180deg)}
+.bk-leaf.fwd.go{transform:rotateY(-180deg)}
+.bk-leaf.half.bwd.go{transform:rotateY(180deg)}
+.bk-leaf.full.bwd.go{transform:rotateY(0)}
+.bk-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:#FBFAF7;overflow:hidden}
+.bk-face.backf{transform:rotateY(180deg)}
+.bk-leaf.full .bk-face.front,.bk-leaf.half.fwd .bk-face.front{border-radius:0 4px 4px 0}
+.bk-leaf.half.bwd .bk-face.front{border-radius:4px 0 0 4px}
+.bk-shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgb(0 0 0 / .28),transparent 40%);opacity:0;transition:opacity .35s}
+.bk-leaf.go .bk-shade{opacity:1}
+.bk-nav{flex:none;width:46px;height:46px;border-radius:50%;border:1px solid #ffffff26;background:#ffffff12;color:#fff;display:grid;place-items:center;cursor:pointer}
+.bk-nav:disabled{opacity:.3;cursor:default}.bk-nav:not(:disabled):hover{background:#ffffff24}
+.bk-count{text-align:center;font-family:var(--font-mono);font-size:.82rem;color:var(--night-muted);margin:12px 0 8px}
+.bk-thumbs{position:relative;display:flex;gap:10px;overflow-x:auto;padding:6px 2px 10px;scrollbar-width:thin}
+.bk-thumbs button{flex:none;position:relative;width:62px;padding:0;border:2px solid transparent;border-radius:4px;background:none;cursor:pointer;opacity:.6}
+.bk-thumbs button[aria-current=true]{border-color:#FF7A45;opacity:1}
+.bk-thumbs img{display:block;width:100%;border-radius:2px}
+.bk-thumbs span{position:absolute;right:3px;bottom:3px;font:600 .62rem var(--font-mono);background:#0B0E17cc;color:#fff;border-radius:3px;padding:0 3px}
+@media (max-width:899px){.bk-book{--h:min(68vh,calc((100vw - 120px) * 1.419))}.bk-nav{width:40px;height:40px}.bk-stage{gap:8px}}
+@media (max-width:520px){.bk-book{--h:calc((100vw - 32px) * 1.419)}.bk-nav{position:absolute;bottom:-56px;z-index:4}.bk-nav.prev{left:calc(50% - 56px)}.bk-nav.next{right:calc(50% - 56px)}.bk-count{margin-top:62px}}
 /* Grands titres : chaque mot monte du flou au net, l'un après l'autre (mots en ligne : la césure reste naturelle) */
 .tw{position:relative;opacity:0;animation:twIn .9s cubic-bezier(.19,.8,.18,1) var(--d,0s) both paused}
 .tw-go .tw{animation-play-state:running}
@@ -952,6 +1004,7 @@ h3,.card h3,.course-body h3,.pf-body h3{font-family:var(--font-body);font-weight
       <li><a href="#/ia" data-nav="ia" class="ai-link">IA créative</a></li>
       <li><a href="#/jeux" data-nav="jeux">Jeux et défis</a></li>
       <li><a href="#/ressources" data-nav="ressources">Ressources</a></li>
+      <li><a href="#/livres" data-nav="livres">Livres</a></li>
       <li><a href="#/portfolio" data-nav="portfolio">Portfolio</a></li>
       <li><a href="#/examens" data-nav="examens" class="exam-link">Examens finaux</a></li>
       <li class="only-mobile ts-row"><span>Apparence</span><button class="theme-switch" type="button" role="switch" aria-checked="false" aria-label="Mode nuit"><span class="ts-label">Mode jour</span><span class="ts-knob" aria-hidden="true"></span></button></li>
@@ -3251,6 +3304,8 @@ const ICONS = {
   game: '<rect x="2" y="6" width="20" height="12" rx="4"/><path d="M6 12h4M8 10v4M15 11h.01M18 13h.01"/>',
   download: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>',
   upload: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>',
+  book: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/>',
+  expand: '<path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>',
   file: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/>',
   star: '<path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9z"/>',
   check: '<path d="M20 6L9 17l-5-5"/>',
@@ -4122,10 +4177,122 @@ function renderFormation(main, id) {
       <div class="card"><h3>Objectifs</h3><ul class="checks">${f.goals.map(g => `<li>${icon("check")}<span>${esc(g)}</span></li>`).join("")}</ul></div>
       <div class="card"><h3>Ta progression</h3><div class="meter" role="progressbar" aria-label="Progression" aria-valuemin="0" aria-valuemax="${p.total}" aria-valuenow="${p.done}"><i style="width:${p.pct * 100}%"></i></div>
         <p class="small" style="margin-top:8px">${p.done} leçon${p.done > 1 ? "s" : ""} terminée${p.done > 1 ? "s" : ""} sur ${p.total}${state.user ? "" : " · enregistrée sur cet appareil"}</p></div>
+      <div class="card bk-side" id="bookSide"></div>
       <div class="card exam-card" id="examCard"><span class="exam-medal" aria-hidden="true">${icon("star")}</span><h3>Examen final et certificat</h3><p class="small">Termine toutes les leçons, puis réussis l'examen final (10 questions, 10/10 exigé) pour recevoir ton certificat de mérite en PDF.</p></div>
     </aside>
   </div></section>`;
-  examCard(f);
+  examCard(f); bookSide(f);
+}
+/* ---------- Livres de formation (PDF A5 + lecteur à feuilleter) ---------- */
+let booksIndex = null;
+const loadBooks = () => booksIndex ||= fetch("apercus/livres/index.json").then(r => r.ok ? r.json() : {}).catch(() => ({}));
+const bookPage = (id, n) => `apercus/livres/${id}/${String(n).padStart(2, "0")}.webp`;
+async function bookSide(f) {
+  const b = (await loadBooks())[f.id], box = $("#bookSide"); if (!box) return;
+  if (!b) { box.remove(); return; }
+  box.innerHTML = `<a class="bk-mini" href="#/livre/${f.id}" aria-label="Lire le livre ${esc(f.title)}"><img src="${bookPage(f.id, 1)}" alt="" loading="lazy" width="420" height="596"></a>
+    <div><h3 style="margin:0 0 .3rem">Le livre de la formation</h3><p class="small muted" style="margin:0 0 12px">${b.pages} pages à feuilleter : notions, exemples, quiz, glossaire et projet.</p>
+    <div class="row"><a class="btn btn-primary btn-sm" href="#/livre/${f.id}">${icon("book")} Lire</a><a class="btn btn-ghost btn-sm" href="ressources/livres/${f.id}.pdf" download>${icon("download")} PDF</a></div></div>`;
+}
+function renderBooks(main, q) {
+  main.innerHTML = pageHead({ crumbs: [["Livres"]], eyebrow: "Bibliothèque", title: "Les livres des formations",
+    lead: "Un livre de 10 à 15 pages pour chaque formation : les notions clés, des exemples concrets, un quiz, un glossaire et un projet. À feuilleter en ligne ou à télécharger en PDF." }) + `
+  <section class="section-sm"><div class="wrap">
+    <div class="pills" role="group" aria-label="Filtrer par domaine" id="bkFilter"><label><input type="radio" name="bkd" value="" checked><span>Tous</span></label>${DOMAINS.map(d => `<label><input type="radio" name="bkd" value="${d.id}"><span>${esc(d.name)}</span></label>`).join("")}</div>
+    <div class="bk-grid" id="bkGrid"><div class="boot" style="min-height:160px;grid-column:1/-1"><span class="spinner"></span></div></div>
+  </div></section>`;
+  loadBooks().then(idx => {
+    const draw = dom => {
+      const list = FORMATIONS.filter(f => idx[f.id] && (!dom || f.domain === dom));
+      $("#bkGrid").innerHTML = list.length ? list.map(f => `<article class="bk-card"><a class="bk-cover" href="#/livre/${f.id}"><img src="${bookPage(f.id, 1)}" alt="" loading="lazy" width="420" height="596"></a>
+        <div class="bk-meta"><span class="mono small muted">${esc(domainName(f.domain))} · ${idx[f.id].pages} pages</span><h3><a href="#/livre/${f.id}">${esc(f.title)}</a></h3>
+        <div class="row"><a class="btn btn-primary btn-sm" href="#/livre/${f.id}">${icon("book")} Feuilleter</a><a class="btn btn-ghost btn-sm" href="ressources/livres/${f.id}.pdf" download aria-label="Télécharger le PDF : ${esc(f.title)}">${icon("download")} PDF</a></div></div></article>`).join("")
+        : emptyState({ ic: "book", title: "Aucun livre", text: "Les livres de ce domaine arrivent bientôt." });
+    };
+    draw(q.get("domaine") || "");
+    const pre = $(`#bkFilter input[value="${q.get("domaine") || ""}"]`); if (pre) pre.checked = true;
+    $("#bkFilter").addEventListener("change", e => draw(e.target.value));
+  });
+}
+/* Lecteur : double page sur grand écran, page simple sur téléphone ; on tourne avec les flèches, un glissement du doigt, le clavier ou un clic sur le bord. */
+function renderBook(main, id, q) {
+  const f = formationById(id); if (!f) return renderNotFound(main);
+  main.innerHTML = `<section class="bk-reader"><div class="wrap">
+    <nav class="crumbs" aria-label="Fil d'Ariane"><a href="#/">Accueil</a> / <a href="#/livres">Livres</a> / <span aria-current="page">${esc(f.title)}</span></nav>
+    <div class="bk-top"><h1 tabindex="-1">${esc(f.title)}</h1>
+      <div class="row"><a class="btn btn-night btn-sm" href="#/formation/${f.id}">${icon("layers")} La formation</a><a class="btn btn-grad btn-sm" href="ressources/livres/${f.id}.pdf" download>${icon("download")} Télécharger le PDF</a><button class="btn btn-night btn-sm" type="button" id="bkFull" aria-label="Plein écran">${icon("expand")}</button></div></div>
+    <div class="bk-stage" id="bkStage" tabindex="0" aria-roledescription="livre" aria-label="Livre ${esc(f.title)}. Flèches gauche et droite pour tourner les pages.">
+      <button class="bk-nav prev" type="button" id="bkPrev" aria-label="Page précédente">${icon("back")}</button>
+      <div class="bk-book" id="bkBook"><div class="boot"><span class="spinner"></span></div></div>
+      <button class="bk-nav next" type="button" id="bkNext" aria-label="Page suivante">${icon("arrow")}</button>
+    </div>
+    <p class="bk-count" id="bkCount" aria-live="polite"></p>
+    <div class="bk-thumbs" id="bkThumbs" role="list"></div>
+  </div></section>`;
+  loadBooks().then(idx => {
+    const meta = idx[id];
+    if (!meta) { $("#bkBook").innerHTML = emptyState({ ic: "book", title: "Livre en préparation", text: "Ce livre sera bientôt disponible." }); return; }
+    const N = meta.pages, book = $("#bkBook"), calm = calmMotion();
+    const wide = () => matchMedia("(min-width:900px)").matches;
+    // Position : sur grand écran, la couverture est seule à droite, puis les pages vont par deux (2-3, 4-5…).
+    let cur = Math.min(Math.max(1, +q.get("page") || 1), N), busy = false;
+    const spread = n => wide() ? (n === 1 ? [null, 1] : n % 2 === 0 ? [n, n + 1 <= N ? n + 1 : null] : [n - 1, n]) : [n];
+    const img = n => n ? `<img src="${bookPage(id, n)}" alt="Page ${n}" draggable="false" decoding="async">` : "";
+    const paint = () => {
+      const s = spread(cur);
+      book.className = "bk-book " + (s.length === 2 ? "two" : "one");
+      book.innerHTML = s.map((n, i) => `<div class="bk-page ${s.length === 2 ? (i ? "r" : "l") : "r"} ${n ? "" : "blank"}">${img(n)}</div>`).join("");
+      const shown = s.filter(Boolean);
+      $("#bkCount").textContent = shown.length > 1 ? `Pages ${shown[0]}–${shown[1]} sur ${N}` : `Page ${shown[0]} sur ${N}`;
+      $("#bkPrev").disabled = cur <= 1; $("#bkNext").disabled = Math.max(...shown) >= N;
+      $$("#bkThumbs button").forEach(b => b.setAttribute("aria-current", shown.includes(+b.dataset.p) ? "true" : "false"));
+      // Centre la miniature active sans faire défiler la page entière
+      const th = $("#bkThumbs"), act = $("#bkThumbs button[aria-current=true]");
+      if (act) th.scrollTo({ left: act.offsetLeft - th.clientWidth / 2 + act.offsetWidth / 2, behavior: calm ? "auto" : "smooth" });
+      // Précharge les pages voisines
+      [Math.max(...shown) + 1, Math.max(...shown) + 2, Math.min(...shown) - 1, Math.min(...shown) - 2].filter(n => n >= 1 && n <= N).forEach(n => { const i = new Image(); i.src = bookPage(id, n); });
+    };
+    const step = dir => {
+      const s = spread(cur).filter(Boolean), target = dir > 0 ? Math.max(...s) + 1 : Math.min(...s) - 1;
+      if (target < 1 || target > N || busy) return;
+      turn(dir, target);
+    };
+    // Effet de page qui tourne : une feuille pivote autour de la reliure, recto = page actuelle, verso = page suivante
+    const turn = (dir, target) => {
+      const from = spread(cur), to = spread(target);
+      if (calm) { cur = target; paint(); return; }
+      busy = true;
+      // Double page : recto = page qui se soulève, verso = page qui arrive. Page simple : la feuille part (ou revient) seule.
+      const two = from.length === 2;
+      const front = two ? (dir > 0 ? from[1] : from[0]) : (dir > 0 ? from[0] : to[0]), back = two ? (dir > 0 ? to[0] : to[1]) : null;
+      // Le dessous montre déjà la destination côté où la feuille se soulève
+      const under = document.createElement("div"); under.className = "bk-under";
+      if (two) under.innerHTML = `<div class="bk-page l ${(dir > 0 ? from[0] : to[0]) ? "" : "blank"}">${img(dir > 0 ? from[0] : to[0])}</div><div class="bk-page r ${(dir > 0 ? to[1] : from[1]) ? "" : "blank"}">${img(dir > 0 ? to[1] : from[1])}</div>`;
+      else under.innerHTML = `<div class="bk-page r">${img(dir > 0 ? to[0] : from[0])}</div>`;
+      const leaf = document.createElement("div");
+      leaf.className = `bk-leaf ${dir > 0 ? "fwd" : "bwd"} ${two ? "half" : "full"}`;
+      leaf.innerHTML = `<div class="bk-face front">${img(front)}</div><div class="bk-face backf">${img(back)}</div><span class="bk-shade"></span>`;
+      book.innerHTML = ""; book.append(under, leaf);
+      requestAnimationFrame(() => requestAnimationFrame(() => leaf.classList.add("go")));
+      const done = () => { cur = target; busy = false; paint(); };
+      leaf.addEventListener("transitionend", e => { if (e.target === leaf) done(); }, { once: true });
+      setTimeout(() => { if (busy) done(); }, 900);
+    };
+    $("#bkThumbs").innerHTML = Array.from({ length: N }, (_, i) => `<button type="button" role="listitem" data-p="${i + 1}" aria-label="Aller à la page ${i + 1}"><img src="${bookPage(id, i + 1)}" alt="" loading="lazy"><span>${i + 1}</span></button>`).join("");
+    $("#bkThumbs").addEventListener("click", e => { const b = e.target.closest("button[data-p]"); if (b && !busy) { cur = +b.dataset.p; paint(); } });
+    $("#bkPrev").addEventListener("click", () => step(-1)); $("#bkNext").addEventListener("click", () => step(1));
+    let sx = null, swiped = false;
+    book.addEventListener("pointerdown", e => { sx = e.clientX; swiped = false; });
+    book.addEventListener("pointerup", e => { if (sx !== null && Math.abs(e.clientX - sx) > 40) { swiped = true; step(e.clientX < sx ? 1 : -1); } sx = null; });
+    book.addEventListener("click", e => { if (swiped) return; const r = book.getBoundingClientRect(); step(e.clientX - r.left > r.width / 2 ? 1 : -1); });
+    const key = e => { if (!document.body.contains(book)) return document.removeEventListener("keydown", key); if (e.key === "ArrowRight") step(1); if (e.key === "ArrowLeft") step(-1); };
+    document.addEventListener("keydown", key);
+    $("#bkFull").addEventListener("click", () => { const st = $("#bkStage"); document.fullscreenElement ? document.exitFullscreen() : st.requestFullscreen?.().catch(() => {}); });
+    let lastWide = wide();
+    const onResize = () => { if (!document.body.contains(book)) return removeEventListener("resize", onResize); if (wide() !== lastWide) { lastWide = wide(); paint(); } };
+    addEventListener("resize", onResize);
+    paint();
+  });
 }
 /* ---------- Examen final et certificat ---------- */
 async function examCard(f) {
@@ -6890,7 +7057,7 @@ const ROUTES = [
   [/^ressources$/, (m, p, q) => renderResources(m, q)], [/^ressource\/([\w-]+)$/, (m, p) => renderResource(m, p[1])],
   [/^inscription$/, m => renderSignup(m)], [/^connexion$/, (m, p, q) => renderLogin(m, q)], [/^finaliser-inscription$/, (m, p, q) => renderSocialFinish(m, q)], [/^tableau-de-bord$/, (m, p, q) => renderDashboard(m, q)], [/^premium$/, m => renderPremium(m)],
   [/^portfolio$/, m => renderPortfolio(m)], [/^projet\/([\w-]+)$/, (m, p) => renderProject(m, p[1])], [/^profil$/, m => renderProfile(m)],
-  [/^parametres$/, m => renderSettings(m)], [/^aide$/, m => renderHelp(m)], [/^application$/, m => renderApp(m)], [/^examens$/, m => renderExams(m)], [/^examen\/([\w-]+)$/, (m, p) => renderExam(m, p[1])], [/^certificat\/([\w-]+)$/, (m, p) => renderVerify(m, p[1])], [/^defi$/, () => goDefi()], [/^reprendre$/, () => goResume()], [/^(conditions|confidentialite)$/, (m, p) => renderLegal(m, p[1])],
+  [/^parametres$/, m => renderSettings(m)], [/^aide$/, m => renderHelp(m)], [/^application$/, m => renderApp(m)], [/^examens$/, m => renderExams(m)], [/^livres$/, (m, p, q) => renderBooks(m, q)], [/^livre\/([\w-]+)$/, (m, p, q) => renderBook(m, p[1], q)], [/^examen\/([\w-]+)$/, (m, p) => renderExam(m, p[1])], [/^certificat\/([\w-]+)$/, (m, p) => renderVerify(m, p[1])], [/^defi$/, () => goDefi()], [/^reprendre$/, () => goResume()], [/^(conditions|confidentialite)$/, (m, p) => renderLegal(m, p[1])],
   [/^admin$/, m => renderAdmin(m)], [/^reinitialiser$/, (m, p, q) => renderReset(m, q)], [/^recherche$/, (m, p, q) => renderSearch(m, q)]
 ];
 const stripHash = h => String(h || "").replace(/^#\/?/, "");
@@ -6907,7 +7074,7 @@ function route() {
   favRefresh = null;
   const raw = currentPath; renderedPath = raw;
   const [path, qs] = raw.split("?"), q = new URLSearchParams(qs || ""), section = path.split("/")[0], main = $("#main");
-  const navKey = { examen: "examens", certificat: "examens", formation: "formations", cours: "formations", ressource: "ressources", projet: "portfolio" }[section] ?? (DOMAINS.some(d => d.id === section) ? "domaines" : section);
+  const navKey = { livre: "livres", examen: "examens", certificat: "examens", formation: "formations", cours: "formations", ressource: "ressources", projet: "portfolio" }[section] ?? (DOMAINS.some(d => d.id === section) ? "domaines" : section);
   $$("[data-nav]").forEach(a => a.dataset.nav === navKey ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
   const tabKey = { formation: "formations", cours: "formations", domaines: "formations", projet: "portfolio", connexion: "tableau-de-bord", inscription: "tableau-de-bord", profil: "tableau-de-bord", parametres: "tableau-de-bord" }[section] ?? (DOMAINS.some(d => d.id === section) ? "formations" : section);
   $$("[data-tabbar]").forEach(a => a.dataset.tabbar === tabKey ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));

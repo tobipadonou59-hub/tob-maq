@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>
+/* Livres de formation TOB-MAQ — format A5 (148 × 210 mm), une page = un .page. */
+@page{size:148mm 210mm;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--v:#5B3DF5;--p:#A83BD8;--o:#F2612D;--o2:#FF7A45;--n:#0B0E17;--n2:#151A2B;--ink:#171A26;--mut:#5F6475;--line:#E6E1D8;--paper:#FBFAF7;--grad:linear-gradient(120deg,#5B3DF5 0%,#A83BD8 55%,#F2612D 100%)}
+html,body{background:#2a2a2a}
+body{font-family:"DM Sans";color:var(--ink);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{position:relative;width:148mm;height:210mm;overflow:hidden;background:var(--paper);page-break-after:always;break-after:page}
+.page:last-child{page-break-after:auto;break-after:auto}
+@media screen{.page{margin:0 auto 12px}}
+/* Logo */
+.ico{display:inline-block;width:26px;height:26px;border-radius:7px;background:url(../../icones/icone-512.png) center/100% no-repeat;flex:none}
+.mark{position:relative;font:800 13px "Syne";letter-spacing:.02em;padding:4px 7px;line-height:1;white-space:nowrap;color:#fff}
+.mark i{position:absolute;width:5px;height:5px;border:0 solid var(--o)}
+.mark .a{top:0;left:0;border-top-width:1.5px;border-left-width:1.5px}.mark .b{top:0;right:0;border-top-width:1.5px;border-right-width:1.5px}
+.mark .c{bottom:0;left:0;border-bottom-width:1.5px;border-left-width:1.5px}.mark .d{bottom:0;right:0;border-bottom-width:1.5px;border-right-width:1.5px}
+.mark .dash{display:inline-block;width:.42em;height:.16em;background:var(--grad);vertical-align:.22em;margin:0 .08em;border-radius:2px}
+.mark.dark{color:var(--n)}
+/* ---------- Couverture ---------- */
+.cover{background:var(--n);color:#fff}
+.cover .bgfx{position:absolute;inset:0;background:radial-gradient(90% 55% at 85% 8%,rgb(91 61 245 / .45),transparent 60%),radial-gradient(70% 45% at 0% 100%,rgb(242 97 45 / .32),transparent 65%),radial-gradient(60% 40% at 20% 40%,rgb(168 59 216 / .18),transparent 70%)}
+.cover .grid{position:absolute;inset:0;background-image:linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px);background-size:9mm 9mm;-webkit-mask-image:linear-gradient(#000,transparent 75%)}
+.cover .top{position:absolute;left:11mm;right:11mm;top:10mm;display:flex;align-items:center;gap:8px}
+.cover .top .coll{margin-left:auto;font:600 6.6px "JetBrains Mono";letter-spacing:.2em;color:#B9B3D9;text-transform:uppercase;text-align:right;line-height:1.5}
+.cover .rule{position:absolute;left:11mm;right:11mm;top:22mm;height:1.5px;background:var(--grad);opacity:.9}
+.cover .eyb{position:absolute;left:11mm;top:29mm;font:600 7.4px "JetBrains Mono";letter-spacing:.22em;color:var(--o2);text-transform:uppercase}
+.cover h1{position:absolute;left:11mm;right:11mm;top:34mm;font:800 29px/1.04 "Syne";letter-spacing:-.025em;color:#fff;text-wrap:balance}
+.cover h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cover .sum{position:absolute;left:11mm;right:14mm;font:400 9.4px/1.5 "DM Sans";color:#B8BCCB}
+.cover .art{position:absolute;left:11mm;right:11mm;height:55mm}
+.cover .art .frame{position:absolute;inset:0;border-radius:12px;overflow:hidden;box-shadow:0 18px 40px rgb(0 0 0 / .55),0 0 0 1px rgb(255 255 255 / .1);transform:rotate(-1.6deg)}
+.cover .art img{width:100%;height:100%;object-fit:cover;display:block}
+.cover .art .br{position:absolute;width:16px;height:16px;border:0 solid var(--o2)}
+.cover .art .br.a{top:-7px;left:-7px;border-top-width:3px;border-left-width:3px}.cover .art .br.b{top:-7px;right:-7px;border-top-width:3px;border-right-width:3px}
+.cover .art .br.c{bottom:-7px;left:-7px;border-bottom-width:3px;border-left-width:3px}.cover .art .br.d{bottom:-7px;right:-7px;border-bottom-width:3px;border-right-width:3px}
+.cover .chips{position:absolute;left:11mm;bottom:22mm;display:flex;gap:5px;flex-wrap:wrap}
+.chip{font:600 7.2px "DM Sans";padding:4px 8px;border-radius:99px;background:#ffffff14;border:1px solid #ffffff22;color:#E6E8F2;white-space:nowrap}
+.chip.hot{background:var(--grad);border:0;color:#fff}
+.cover .foot{position:absolute;left:11mm;right:11mm;bottom:9mm;display:flex;align-items:flex-end;justify-content:space-between;border-top:1px solid #ffffff1c;padding-top:3.2mm}
+.by{font:500 7.2px "DM Sans";letter-spacing:.1em;color:#9CA3B8}.by b{font:800 9.6px "Syne";letter-spacing:.26em;color:#fff;margin-left:4px}
+.url{font:600 6.6px "JetBrains Mono";letter-spacing:.14em;color:#8C93A8}
+/* ---------- Pages intérieures ---------- */
+.inner .hd{position:absolute;left:11mm;right:11mm;top:7mm;display:flex;align-items:center;gap:6px;padding-bottom:2.6mm;border-bottom:1px solid var(--line)}
+.inner .hd .ico{width:15px;height:15px;border-radius:4px}
+.inner .hd .t{font:600 6.4px "JetBrains Mono";letter-spacing:.16em;color:var(--mut);text-transform:uppercase}
+.inner .hd .f{margin-left:auto;font:500 7px "DM Sans";color:var(--mut);max-width:62%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.inner .ft{position:absolute;left:11mm;right:11mm;bottom:6.5mm;display:flex;align-items:center;justify-content:space-between;font:600 6.4px "JetBrains Mono";letter-spacing:.12em;color:#9A9FAE}
+.inner .ft .n{display:inline-grid;place-items:center;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--n);color:#fff;font:700 7.4px "DM Sans";letter-spacing:0}
+.body{position:absolute;left:11mm;right:11mm;top:17mm;bottom:15mm}
+.flow>*+*{margin-top:3.4mm}
+h2.sec{font:800 19px/1.08 "Syne";letter-spacing:-.02em;color:var(--n)}
+.kick{font:600 6.8px "JetBrains Mono";letter-spacing:.2em;color:var(--o);text-transform:uppercase}
+p.txt{font:400 8.9px/1.56 "DM Sans";color:#2A2E3B}
+p.lead{font:500 10px/1.5 "DM Sans";color:#2A2E3B}
+/* Ouverture de chapitre */
+.chap{position:relative;padding:5mm 5mm 4.6mm;border-radius:10px;background:var(--n);color:#fff;overflow:hidden}
+.chap::before{content:"";position:absolute;inset:0;background:radial-gradient(70% 90% at 100% 0%,rgb(91 61 245 / .55),transparent 70%),radial-gradient(50% 80% at 0% 100%,rgb(242 97 45 / .3),transparent 70%)}
+.chap>*{position:relative}
+.chap .num{font:800 34px/1 "Syne";background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.03em}
+.chap .mod{font:600 6.4px "JetBrains Mono";letter-spacing:.2em;color:#C9BCFF;text-transform:uppercase;margin-top:2mm}
+.chap h3{font:800 15px/1.12 "Syne";letter-spacing:-.015em;margin-top:1.4mm}
+.chap .obj{display:flex;gap:6px;margin-top:2.6mm;font:500 8px/1.45 "DM Sans";color:#C8CCDA}
+.chap .obj b{flex:none;font:600 6.2px "JetBrains Mono";letter-spacing:.16em;color:var(--o2);padding-top:1.4px}
+/* Notions */
+.notion{display:flex;gap:3.2mm;padding:3mm 3.4mm;border-radius:9px;background:#fff;border:1px solid var(--line)}
+.notion .k{flex:none;width:7mm;height:7mm;border-radius:6px;display:grid;place-items:center;background:var(--grad);color:#fff;font:800 9px "Syne"}
+.notion h4{font:700 9.4px/1.3 "DM Sans";color:var(--n)}
+.notion p{margin-top:1mm;font:400 8.4px/1.5 "DM Sans";color:#3A3E4B}
+.box{padding:3.2mm 3.6mm;border-radius:9px;font:400 8.4px/1.5 "DM Sans"}
+.box .bt{display:flex;align-items:center;gap:5px;font:700 6.6px "JetBrains Mono";letter-spacing:.16em;text-transform:uppercase;margin-bottom:1.2mm}
+.box .bt::before{content:"";width:7px;height:7px;border-radius:2px;background:currentColor}
+.box.tip{background:#F0ECFF;color:#2B2260}.box.tip .bt{color:var(--v)}
+.box.ex{background:#FFF1E8;color:#4A2412}.box.ex .bt{color:var(--o)}
+.box.work{background:var(--n);color:#E8EAF2}.box.work .bt{color:#FFB38F}
+.box.lvl{background:#EEF8F2;color:#173B28}.box.lvl .bt{color:#16794A}
+.recap{padding:3.2mm 3.6mm;border-radius:9px;border:1.5px solid var(--n)}
+.recap .bt{font:700 6.6px "JetBrains Mono";letter-spacing:.16em;text-transform:uppercase;color:var(--n);margin-bottom:1.6mm}
+.recap li{list-style:none;position:relative;padding-left:12px;font:500 8.3px/1.45 "DM Sans";color:#262A36}
+.recap li+li{margin-top:1mm}
+.recap li::before{content:"";position:absolute;left:0;top:3px;width:6px;height:6px;border-radius:2px;background:var(--grad)}
+.code{font:500 7.6px/1.55 "JetBrains Mono";background:#0F1320;color:#E6E8F0;padding:3mm 3.4mm;border-radius:8px;white-space:pre-wrap}
+/* Sommaire / fiche */
+.toc li{list-style:none;display:flex;align-items:baseline;gap:6px;padding:2.2mm 0;border-bottom:1px dashed var(--line)}
+.toc .i{font:800 10px "Syne";color:var(--o);width:7mm}
+.toc .l{font:600 9.4px "DM Sans";color:var(--n)}
+.toc .m{font:500 7px "JetBrains Mono";color:var(--mut);letter-spacing:.06em;margin-left:auto;white-space:nowrap}
+.toc .sub{display:block;font:400 7.6px "DM Sans";color:var(--mut);margin-top:.6mm}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:2.4mm}
+.fact{padding:2.8mm 3mm;border-radius:8px;background:#fff;border:1px solid var(--line)}
+.fact small{display:block;font:600 6.2px "JetBrains Mono";letter-spacing:.16em;color:var(--mut);text-transform:uppercase}
+.fact b{display:block;margin-top:1mm;font:700 9.6px "DM Sans";color:var(--n)}
+.goals li{list-style:none;display:flex;gap:6px;font:500 8.6px/1.45 "DM Sans";color:#262A36;padding:1.2mm 0}
+.goals li::before{content:"✓";flex:none;display:grid;place-items:center;width:12px;height:12px;border-radius:50%;background:var(--grad);color:#fff;font:700 7px "DM Sans";margin-top:.5px}
+/* Quiz */
+.q{padding:2.6mm 3.2mm;border-radius:8px;background:#fff;border:1px solid var(--line)}
+.q h4{font:700 8.6px/1.4 "DM Sans";color:var(--n)}
+.q ol{margin-top:1.2mm;padding-left:0;display:flex;flex-wrap:wrap;gap:1.4mm 3mm}
+.q li{list-style:none;font:400 7.9px/1.35 "DM Sans";color:#3A3E4B}
+.q li b{display:inline-grid;place-items:center;width:11px;height:11px;border-radius:3px;border:1px solid #C9C3B8;font:700 6.4px "DM Sans";margin-right:3px;color:var(--mut)}
+.answers{font:500 7.2px/1.5 "DM Sans";color:var(--mut);padding:2.4mm 3mm;border-radius:8px;background:#F2EFE9}
+.answers b{color:var(--n)}
+/* Glossaire */
+.gl{display:grid;grid-template-columns:1fr;gap:2mm}
+.gl div{display:grid;grid-template-columns:30mm 1fr;gap:3mm;padding:2.2mm 0;border-bottom:1px solid var(--line)}
+.gl dt{font:700 8.8px/1.35 "DM Sans";color:var(--n)}
+.gl dd{font:400 8.2px/1.45 "DM Sans";color:#3A3E4B}
+/* Mémo */
+.check li{list-style:none;display:flex;gap:7px;align-items:flex-start;padding:2.2mm 0;border-bottom:1px solid var(--line);font:500 9px/1.4 "DM Sans";color:#262A36}
+.check li::before{content:"";flex:none;width:11px;height:11px;border-radius:3px;border:1.6px solid var(--v);margin-top:1px}
+.notes{position:absolute;left:0;right:0;top:12mm;bottom:0;background-image:linear-gradient(transparent calc(8mm - 1px),#DDD7CC calc(8mm - 1px));background-size:100% 8mm}
+/* Quatrième de couverture */
+.back{background:var(--n);color:#fff}
+.back .bgfx{position:absolute;inset:0;background:radial-gradient(80% 50% at 50% 30%,rgb(91 61 245 / .38),transparent 65%),radial-gradient(60% 40% at 100% 100%,rgb(242 97 45 / .28),transparent 65%)}
+.back .center{position:absolute;left:12mm;right:12mm;top:30mm;text-align:center;display:flex;flex-direction:column;align-items:center}
+.back .big{width:30mm;height:30mm;border-radius:8mm;background:url(../../icones/icone-512.png) center/100% no-repeat;box-shadow:0 20px 50px rgb(0 0 0 / .6)}
+.back .mark{font-size:22px;padding:8px 13px;margin-top:7mm}
+.back .mark i{width:9px;height:9px}
+.back .by{margin-top:4mm}
+.back .tag{margin-top:7mm;font:400 9.2px/1.55 "DM Sans";color:#B8BCCB;max-width:100mm}
+.back .qr{position:absolute;left:50%;bottom:24mm;transform:translateX(-50%);display:flex;align-items:center;gap:4mm;padding:3mm 4mm;border-radius:10px;background:#ffffff0f;border:1px solid #ffffff1f}
+.back .qr img{width:20mm;height:20mm;border-radius:4px;background:#fff;padding:1.2mm}
+.back .qr p{font:500 8px/1.45 "DM Sans";color:#D9DCE6;text-align:left;max-width:48mm}
+.back .qr p b{display:block;font:800 9.6px "Syne";color:#fff;margin-bottom:.6mm}
+.back .url{position:absolute;left:0;right:0;bottom:11mm;text-align:center}
+</style></head><body>
+<div id="book"></div>
+<script>
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const strip = h => String(h || "").replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
+const rich = h => String(h || "").replace(/<(?!\/?(strong|em|b|i|code)\b)[^>]+>/g, "").trim();
+const MARK = (cls = "") => `<span class="mark ${cls}"><i class="a"></i><i class="b"></i><i class="c"></i><i class="d"></i>TOB<span class="dash"></span>MAQ</span>`;
+const pad = n => String(n).padStart(2, "0");
+
+/* Construit le livre : b = { f, domain, chapters[], quiz[], glossary[], memo[], project, accroche } */
+window.build = async (b, opts = {}) => {
+  // Les polices se chargent à la première utilisation : on les force avant de mesurer la mise en page
+  await Promise.all(["800 29px Syne", "700 12px Syne", "400 10px \"DM Sans\"", "500 10px \"DM Sans\"", "700 10px \"DM Sans\"", "600 8px \"JetBrains Mono\""].map(f => document.fonts.load(f)));
+  const root = document.getElementById("book"); root.innerHTML = "";
+  const compact = !!opts.compact;
+  const pages = [];
+  const page = (cls, html) => { const d = document.createElement("section"); d.className = "page " + cls; d.innerHTML = html; root.appendChild(d); pages.push(d); return d; };
+  const inner = (html = "") => page("inner", `<header class="hd"><span class="ico"></span><span class="t">TOB-MAQ · Livre</span><span class="f">${esc(b.f.title)}</span></header><div class="body flow">${html}</div><footer class="ft"><span>TOB-MAQ.ONRENDER.COM</span><span class="n"></span></footer>`);
+  // Remplit des pages avec une liste de blocs ; nouvelle page quand le bloc déborde.
+  const flowInto = (blocks, first = "", cont = false) => {
+    // cont : le chapitre peut commencer sur la page précédente si elle est à moitié vide
+    const prev = pages[pages.length - 1], pb = prev && prev.querySelector(".body");
+    let pg, body;
+    const used = pb && pb.lastElementChild ? pb.lastElementChild.offsetTop + pb.lastElementChild.offsetHeight : 0;
+    if (cont && pb && used < pb.clientHeight * .5) {
+      pg = prev; body = pb; const t = document.createElement("template"); t.innerHTML = `<div style="height:2mm"></div>${first}`; body.append(...t.content.childNodes);
+      if (body.scrollHeight > body.clientHeight + 1) { [...body.children].slice(-2).forEach(e => e.remove()); pg = inner(first); body = pg.querySelector(".body"); }
+    } else { pg = inner(first); body = pg.querySelector(".body"); }
+    for (const html of blocks) {
+      const t = document.createElement("template"); t.innerHTML = html.trim(); const el = t.content.firstElementChild;
+      body.appendChild(el);
+      if (body.scrollHeight > body.clientHeight + 1) { el.remove(); pg = inner(); body = pg.querySelector(".body"); body.appendChild(el); }
+    }
+  };
+  // 1. Couverture
+  const words = b.f.title.split(" "), last = words.pop();
+  const cov = page("cover", `<div class="bgfx"></div><div class="grid"></div>
+    <div class="top"><span class="ico" style="width:30px;height:30px;border-radius:8px"></span>${MARK()}<span class="coll">Collection<br>${esc(b.domain)}</span></div><div class="rule"></div>
+    <div class="eyb">Livre de formation · ${esc(b.f.level)}</div>
+    <h1>${esc(words.join(" "))} <em>${esc(last)}</em></h1>
+    <p class="sum">${esc(b.f.summary)}</p>
+    <div class="art"><div class="frame"><img src="../../apercus/formations/${b.f.id}.webp" alt=""></div><span class="br a"></span><span class="br b"></span><span class="br c"></span><span class="br d"></span></div>
+    <div class="chips"><span class="chip hot">${b.f.price === "premium" ? "Premium" : "Gratuit"}</span><span class="chip">${esc(b.f.level)}</span><span class="chip">${b.f.hours} h de formation</span><span class="chip">${b.chapters.length} chapitres</span></div>
+    <div class="foot"><span class="by">By<b>OLUWATOBI</b></span><span class="url">TOB-MAQ.ONRENDER.COM</span></div>`);
+  // Place le résumé et l'illustration sous le titre, quelle que soit sa hauteur
+  const h1 = cov.querySelector("h1"), sum = cov.querySelector(".sum"), art = cov.querySelector(".art");
+  const y1 = h1.offsetTop + h1.offsetHeight; sum.style.top = (y1 + 10) + "px";
+  const y2 = sum.offsetTop + sum.offsetHeight; art.style.top = Math.max(y2 + 22, 0) + "px";
+  const room = cov.querySelector(".chips").offsetTop - 26 - (y2 + 22); art.style.height = Math.min(Math.max(room, 140), 330) + "px";
+  // 2. Ouverture : accroche + sommaire
+  inner(`<div class="kick">Bienvenue</div><h2 class="sec">Ce que tu vas apprendre</h2><p class="lead">${esc(b.accroche)}</p>
+    <div class="kick" style="margin-top:5mm">Sommaire</div>
+    <ol class="toc">${b.chapters.map((c, i) => `<li><span class="i">${pad(i + 1)}</span><span class="l">${esc(c.title)}<span class="sub">${esc(c.module)}</span></span><span class="m">${c.minutes ? c.minutes + " min" : ""}</span></li>`).join("")}
+      ${b.quiz.length ? `<li><span class="i">✓</span><span class="l">Quiz d'auto-évaluation</span></li>` : ""}<li><span class="i">Aa</span><span class="l">Glossaire, exercices et mémo</span></li></ol>`);
+  // 3. Fiche de la formation
+  const soft = b.software.length ? b.software.join(", ") : "Aucun logiciel payant requis";
+  inner(`<div class="kick">Fiche de la formation</div><h2 class="sec">${esc(b.f.title)}</h2>
+    <div class="facts"><div class="fact"><small>Niveau</small><b>${esc(b.f.level)}</b></div><div class="fact"><small>Durée</small><b>${b.f.hours} heures</b></div><div class="fact"><small>Domaine</small><b>${esc(b.domain)}</b></div><div class="fact"><small>Accès</small><b>${b.f.price === "premium" ? "Premium" : "Gratuit"}</b></div></div>
+    <div class="fact"><small>Outils</small><b>${esc(soft)}</b></div>
+    <div class="kick" style="margin-top:4mm">À la fin de ce livre, tu sauras</div>
+    <ul class="goals">${b.f.goals.map(g => `<li>${esc(g)}</li>`).join("")}</ul>
+    <div class="box tip"><div class="bt">Comment utiliser ce livre</div>Lis un chapitre à la fois, réalise l'exercice proposé, puis vérifie tes acquis avec le quiz. Les leçons complètes, les jeux et l'examen final t'attendent sur l'application TOB-MAQ.</div>
+    <div class="box lvl"><div class="bt">Certificat</div>Réussis l'examen final de la formation (10/10) sur l'application pour obtenir ton certificat de mérite à ton nom.</div>`);
+  // 4. Chapitres
+  b.chapters.forEach((c, i) => {
+    const blocks = [];
+    if (c.intro) blocks.push(`<p class="txt">${rich(c.intro)}</p>`);
+    c.notions.forEach(([t, d], k) => blocks.push(`<div class="notion"><span class="k">${k + 1}</span><div><h4>${esc(t)}</h4><p>${rich(d)}</p></div></div>`));
+    if (c.code) blocks.push(`<div class="code">${esc(c.code)}</div>`);
+    if (c.beginner) blocks.push(`<div class="box lvl"><div class="bt">Si tu débutes</div>${rich(c.beginner)}</div>`);
+    if (c.tip) blocks.push(`<div class="box tip"><div class="bt">Bon à savoir</div>${rich(c.tip)}</div>`);
+    if (c.example) blocks.push(`<div class="box ex"><div class="bt">Exemple concret</div>${rich(c.example)}</div>`);
+    if (c.recap && c.recap.length) blocks.push(`<div class="recap"><div class="bt">À retenir</div><ul>${c.recap.map(r => `<li>${rich(r)}</li>`).join("")}</ul></div>`);
+    if (c.exercise) blocks.push(`<div class="box work"><div class="bt">À toi de jouer</div>${rich(c.exercise)}</div>`);
+    flowInto(blocks, `<div class="chap"><div class="num">${pad(i + 1)}</div><div class="mod">${esc(c.module)}</div><h3>${esc(c.title)}</h3>${c.objective ? `<div class="obj"><b>OBJECTIF</b><span>${rich(c.objective)}</span></div>` : ""}</div>`, i > 0);
+  });
+  // 5. Quiz
+  if (b.quiz.length) {
+    const L = "ABCD";
+    flowInto(b.quiz.map((q, i) => `<div class="q"><h4>${i + 1}. ${esc(q.q)}</h4><ol>${q.choices.map((c, k) => `<li><b>${L[k]}</b>${esc(c)}</li>`).join("")}</ol></div>`)
+      .concat([`<div class="answers"><b>Réponses :</b> ${b.quiz.map((q, i) => `${i + 1}-${L[q.answer]}`).join(" · ")}</div>`]),
+      `<div class="kick">Auto-évaluation</div><h2 class="sec">Quiz : vérifie tes acquis</h2><p class="txt">Réponds sans regarder les chapitres, puis compare avec les réponses en bas de page.</p>`);
+  }
+  // 6. Glossaire
+  flowInto([`<dl class="gl">${b.glossary.map(([t, d]) => `<div><dt>${esc(t)}</dt><dd>${esc(d)}</dd></div>`).join("")}</dl>`], `<div class="kick">Les mots du métier</div><h2 class="sec">Glossaire</h2>`);
+  // 7. Projet + mémo
+  flowInto([`<div class="box work"><div class="bt">Projet de fin de livre</div><b style="font:800 11px Syne;color:#fff;display:block;margin-bottom:1.4mm">${esc(b.project.titre)}</b>${esc(b.project.consigne)}</div>`,
+    `<div class="recap"><div class="bt">Ce que tu dois livrer</div><ul>${b.project.livrables.map(l => `<li>${esc(l)}</li>`).join("")}</ul></div>`,
+    `<div class="kick" style="margin-top:4mm">Mémo à garder</div>`, `<ul class="check">${b.memo.map(m => `<li>${esc(m)}</li>`).join("")}</ul>`],
+    `<div class="kick">Passe à la pratique</div><h2 class="sec">Projet et mémo</h2>`);
+  // 8. Pages de notes pour atteindre au moins 10 pages (couverture et dos compris)
+  const minPages = opts.min || 10;
+  while (pages.length + 1 < minPages) inner(`<div class="kick">Mes notes</div><div class="notes"></div>`);
+  // 9. Quatrième de couverture
+  page("back", `<div class="bgfx"></div><div class="center"><div class="big"></div>${MARK()}<span class="by">By<b>OLUWATOBI</b></span>
+    <p class="tag">TOB-MAQ est l'académie en ligne des métiers créatifs et du numérique au Bénin : formations, jeux, ressources et certificats, pour les 15–40 ans.</p></div>
+    <div class="qr"><img src="../../icones/qr-telecharger.png" alt=""><p><b>Continue sur l'application</b>Leçons complètes, jeux, examen final et certificat de mérite. Scanne pour l'installer.</p></div>
+    <div class="url">TOB-MAQ.ONRENDER.COM</div>`);
+  // Numéros de page
+  pages.forEach((p, i) => { const n = p.querySelector(".ft .n"); if (n) n.textContent = i + 1; });
+  return pages.length;
+};
+</script>
+</body></html>
