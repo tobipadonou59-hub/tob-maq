@@ -14,6 +14,7 @@ import { sendMail } from "./mail.js";
 import { registerBilling, isPremium } from "./billing.js";
 import { registerCertificates } from "./certificats.js";
 import { registerAppDownloads } from "./appli.js";
+import { registerOAuth } from "./oauth.js";
 import { imageProvider, videoProvider, generateImage, buildImagePrompt, buildDemoPrompt, IMAGE_SIZES, IMAGE_STYLES } from "./ai.js";
 
 const LEVELS = ["Débutant", "Intermédiaire", "Avancé"];
@@ -137,13 +138,8 @@ export function createApp() {
     return row;
   }
 
-  /* ---------------- Authentification ---------------- */
-  api.post("/auth/register", async (req, res) => {
-    rateLimit("register:" + ip(req), 10, 15 * 60000);
-    const b = req.body || {};
-    const displayName = text(b.displayName, { min: 2, max: 30, name: "Le prénom ou pseudonyme" });
-    if (!/^[\p{L}\p{N} ._'-]+$/u.test(displayName)) fail(400, "Le pseudonyme contient des caractères non autorisés.");
-    const mail = email(b.email), pw = password(b.password);
+  /* Profil d'inscription commun (e-mail + mot de passe, ou Google / Apple / Facebook). */
+  function signupProfile(b, mail) {
     const ageGroup = oneOf(b.ageGroup, ["adulte", "mineur", "moins15"], "Tranche d'âge");
     if (ageGroup === "moins15") fail(400, "TOB-MAQ s'adresse aux personnes de 15 ans et plus.", "TOO_YOUNG");
     if (b.acceptTerms !== true) fail(400, "Tu dois accepter les conditions d'utilisation.");
@@ -152,15 +148,30 @@ export function createApp() {
     if (!interests.length) fail(400, "Choisis au moins un domaine d'intérêt.");
     let parent = null;
     if (ageGroup === "mineur") { parent = email(b.parentEmail); if (parent === mail) fail(400, "L'e-mail du parent doit être différent du tien."); }
+    return { ageGroup, level, interests, parent };
+  }
+  async function createAccount({ displayName, mail, passwordHash, ageGroup, level, interests, parent }) {
     if (one("SELECT 1 FROM users WHERE email = ?", mail)) fail(409, "Un compte existe déjà avec cette adresse e-mail.", "EMAIL_TAKEN");
     const id = uid(), role = config.adminEmails.includes(mail) ? "admin" : "membre";
     run("INSERT INTO users(id, email, display_name, password_hash, role, level, interests, age_group, parent_email, created_at) VALUES (?,?,?,?,?,?,?,?,?,?)",
-      id, mail, displayName, await hashPassword(pw), role, level, JSON.stringify(interests), ageGroup, parent, now());
+      id, mail, displayName, passwordHash, role, level, JSON.stringify(interests), ageGroup, parent, now());
     if (parent) {
       const t = newMailToken(id, "consent", 24 * 14);
       await sendMail({ to: parent, subject: "TOB-MAQ : accord parental demandé",
         text: `Bonjour,\n\n${displayName} (15-17 ans) souhaite créer un compte sur TOB-MAQ, une plateforme de formation au graphisme et au montage vidéo.\n\nPour donner votre accord, ouvrez ce lien (valable 14 jours) :\n${config.publicUrl}/api/auth/parent-consent?token=${t}\n\nSi vous ne connaissez pas cette demande, ignorez ce message : le compte restera limité.\n\nL'équipe TOB-MAQ` });
     }
+    return id;
+  }
+  const cleanName = v => { const n = text(v, { min: 2, max: 30, name: "Le prénom ou pseudonyme" }); if (!/^[\p{L}\p{N} ._'-]+$/u.test(n)) fail(400, "Le pseudonyme contient des caractères non autorisés."); return n; };
+
+  /* ---------------- Authentification ---------------- */
+  api.post("/auth/register", async (req, res) => {
+    rateLimit("register:" + ip(req), 10, 15 * 60000);
+    const b = req.body || {};
+    const displayName = cleanName(b.displayName);
+    const mail = email(b.email), pw = password(b.password);
+    const profile = signupProfile(b, mail);
+    const id = await createAccount({ displayName, mail, passwordHash: await hashPassword(pw), ...profile });
     openSession(req, res, id);
     res.status(201).json({ user: publicUser(one("SELECT * FROM users WHERE id = ?", id)) });
   });
@@ -460,6 +471,7 @@ export function createApp() {
   registerBilling(api, { needUser, needAdmin, needConsent });
   registerCertificates(api, { needUser, needConsent });
   registerAppDownloads(app, api, { needAdmin });
+  registerOAuth(app, api, { openSession, createAccount, signupProfile, cleanName, publicUser });
   api.get("/health", (req, res) => res.json({ ok: true, ai: { images: Boolean(imageProvider), videos: Boolean(videoProvider) } }));
 
   api.use((req, res) => res.status(404).json({ message: "Route inconnue.", code: "NOT_FOUND" }));

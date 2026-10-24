@@ -40,5 +40,11 @@ export const config = {
   sessionDays: num("SESSION_DAYS", 30),
   fedapayKey: env("FEDAPAY_SECRET_KEY"),
   fedapayEnv: env("FEDAPAY_ENV", "sandbox"),           // "sandbox" pour les essais, "live" pour encaisser
-  fedapayApiUrl: env("FEDAPAY_API_URL")                // réservé aux tests automatiques
+  fedapayApiUrl: env("FEDAPAY_API_URL"),               // réservé aux tests automatiques
+  // Connexion avec Google, Apple ou Facebook : un fournisseur n'apparaît que si ses clés sont renseignées.
+  googleClientId: env("GOOGLE_CLIENT_ID"), googleClientSecret: env("GOOGLE_CLIENT_SECRET"),
+  facebookAppId: env("FACEBOOK_APP_ID"), facebookAppSecret: env("FACEBOOK_APP_SECRET"),
+  appleClientId: env("APPLE_CLIENT_ID"), appleTeamId: env("APPLE_TEAM_ID"), appleKeyId: env("APPLE_KEY_ID"),
+  applePrivateKey: env("APPLE_PRIVATE_KEY").replace(/\\n/g, "\n"),
+  oauthTestBase: env("OAUTH_TEST_BASE")                 // réservé aux tests automatiques
 };

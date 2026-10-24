@@ -787,6 +787,16 @@ h3,.card h3,.course-body h3,.pf-body h3{font-family:var(--font-body);font-weight
 .ts-row{display:none;align-items:center;justify-content:space-between;padding:.7rem .6rem;border-top:1px solid var(--line);margin-top:6px;font-weight:600}
 @media (max-width:980px){.ts-row{display:flex}#themeBtn{display:none}}
 
+.social{display:grid;gap:10px;margin-top:16px}
+.btn-social{display:flex;align-items:center;justify-content:center;gap:12px;min-height:48px;border-radius:12px;font-weight:700;font-size:.97rem;text-decoration:none;border:1px solid var(--line-2);background:var(--surface);color:var(--ink);transition:transform .15s,box-shadow .2s}
+.btn-social:hover{box-shadow:var(--shadow);transform:translateY(-1px)}
+.btn-social svg{width:22px;height:22px;flex:none}
+.btn-social.google{background:#fff;color:#1F1F1F;border-color:#DADCE0}
+.btn-social.apple{background:#000;color:#fff;border-color:#000}
+.btn-social.facebook{background:#1877F2;color:#fff;border-color:#1877F2}
+.btn-social.mini{min-height:30px;width:30px;padding:0;border-radius:8px;display:inline-flex}.btn-social.mini svg{width:16px;height:16px}
+.or{display:flex;align-items:center;gap:12px;margin:20px 0 4px;color:var(--muted);font-size:.85rem}
+.or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
 /* ---------- Examen final et certificats ---------- */
 .exams-intro{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .exams-intro>div{display:flex;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow)}
@@ -4383,11 +4393,64 @@ async function withLoading(form, text, zone, fn) {
   try { await fn(); } catch (e) { zone.innerHTML = alertBox("error", `<p>${esc(e.message || "Une erreur est survenue.")}</p>`); }
   finally { b.disabled = false; b.innerHTML = label; }
 }
+/* ---------- Connexion avec Google, Apple ou Facebook ---------- */
+const SOCIAL = {
+  google: ["Google", `<svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>`],
+  apple: ["Apple", `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.37 12.79c-.02-2.2 1.8-3.26 1.88-3.31-1.03-1.5-2.62-1.7-3.18-1.73-1.35-.14-2.64.8-3.33.8-.69 0-1.74-.78-2.86-.76-1.47.02-2.83.86-3.59 2.17-1.53 2.66-.39 6.59 1.1 8.75.73 1.05 1.6 2.23 2.73 2.19 1.1-.04 1.51-.71 2.84-.71 1.32 0 1.7.71 2.86.69 1.18-.02 1.93-1.07 2.65-2.13.83-1.22 1.18-2.4 1.2-2.46-.03-.01-2.29-.88-2.3-3.5zM14.2 6.33c.6-.73 1.01-1.75.9-2.76-.87.04-1.92.58-2.54 1.31-.56.65-1.05 1.68-.92 2.67.97.08 1.96-.49 2.56-1.22z"/></svg>`],
+  facebook: ["Facebook", `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.62 23.1 24 18.1 24 12.07z"/></svg>`]
+};
+async function socialButtons(box) {
+  if (!box || !api.configured) return;
+  try {
+    const list = await api.request("/auth/providers");
+    if (!list.length || !document.body.contains(box)) return;
+    box.innerHTML = `<div class="social">${list.map(p => `<a class="btn-social ${p}" href="/api/auth/oauth/${p}/start">${SOCIAL[p][1]}<span>Continuer avec ${SOCIAL[p][0]}</span></a>`).join("")}</div><div class="or"><span>ou avec ton adresse e-mail</span></div>`;
+  } catch { /* boutons masqués si le serveur ne répond pas */ }
+}
+const OAUTH_ERRORS = { annule: "Connexion annulée : tu peux réessayer quand tu veux.", session: "La demande a expiré. Recommence la connexion.", fournisseur: "Le service de connexion n'a pas répondu. Réessaie, ou utilise ton adresse e-mail." };
+function renderSocialFinish(main, q) {
+  const jeton = q.get("jeton") || "";
+  main.innerHTML = pageHead({ crumbs: [["Inscription"]], title: "Encore une étape", lead: "Complète ton profil pour créer ton compte TOB-MAQ." }) + `<section class="section-sm"><div class="wrap auth"><div class="card" style="padding:28px" id="finish"><div class="boot" style="min-height:120px"><span class="spinner"></span></div></div></div></section>`;
+  api.request(`/auth/oauth/pending?jeton=${encodeURIComponent(jeton)}`).then(pd => {
+    $("#finish").innerHTML = `<p class="small" style="display:flex;gap:10px;align-items:center;margin:0 0 16px"><span class="btn-social ${pd.provider} mini">${SOCIAL[pd.provider][1]}</span>Connecté avec <b>${SOCIAL[pd.provider][0]}</b></p>
+      <form id="fin" novalidate>
+        <div class="field"><label for="fName">Prénom ou pseudonyme</label><input class="input" id="fName" maxlength="30" value="${esc(pd.name)}" aria-describedby="fName-e"><p class="err" id="fName-e" hidden></p></div>
+        <div class="field"><label for="fMail">Adresse e-mail</label><input class="input" id="fMail" type="email" maxlength="160" value="${esc(pd.email || "")}" ${pd.emailLocked ? "readonly" : ""} aria-describedby="fMail-e">${pd.emailLocked ? `<p class="hint">Adresse confirmée par ${SOCIAL[pd.provider][0]}.</p>` : `<p class="hint">${SOCIAL[pd.provider][0]} ne nous a pas transmis ton adresse : indique-la.</p>`}<p class="err" id="fMail-e" hidden></p></div>
+        <div class="field"><span class="label" id="fDom-l">Domaines d'intérêt</span><div class="pills" role="group" aria-labelledby="fDom-l">${INTERESTS.map(([id, t]) => `<label><input type="checkbox" name="dom" value="${id}"><span>${t}</span></label>`).join("")}</div><p class="err" id="fDom-e" hidden></p></div>
+        <div class="field"><label for="fLvl">Niveau d'expérience</label><select class="input" id="fLvl" aria-describedby="fLvl-e"><option value="">Choisir…</option>${LEVELS.map(l => `<option>${l}</option>`).join("")}</select><p class="err" id="fLvl-e" hidden></p></div>
+        <div class="field"><span class="label" id="fAge-l">Ton âge</span><div class="pills" role="radiogroup" aria-labelledby="fAge-l"><label><input type="radio" name="age" value="adulte"><span>18 ans ou plus</span></label><label><input type="radio" name="age" value="mineur"><span>15 à 17 ans</span></label><label><input type="radio" name="age" value="moins15"><span>Moins de 15 ans</span></label></div><p class="err" id="fAge-e" hidden></p></div>
+        <div id="fMinor" hidden>${alertBox("info", "<p><strong>Tu as moins de 18 ans.</strong> Un parent ou tuteur doit donner son accord par e-mail.</p>")}<div class="field" style="margin-top:14px"><label for="fParent">E-mail du parent ou tuteur</label><input class="input" id="fParent" type="email" maxlength="160" aria-describedby="fParent-e"><p class="err" id="fParent-e" hidden></p></div></div>
+        <div id="fUnder" hidden>${alertBox("warn", "<p>TOB-MAQ s'adresse aux personnes de 15 ans et plus.</p>")}</div>
+        <div class="field"><label class="check"><input type="checkbox" id="fCgu" aria-describedby="fCgu-e"><span>J'accepte les <a href="#/conditions">conditions d'utilisation</a> et la <a href="#/confidentialite">politique de confidentialité</a>.</span></label><p class="err" id="fCgu-e" hidden></p></div>
+        <div id="fMsg" aria-live="assertive"></div>
+        <button class="btn btn-grad btn-lg btn-block" type="submit">Créer mon compte</button></form>`;
+    const f = $("#fin");
+    f.addEventListener("change", () => { const a = (f.querySelector('input[name="age"]:checked') || {}).value; $("#fMinor").hidden = a !== "mineur"; $("#fUnder").hidden = a !== "moins15"; f.querySelector('button[type="submit"]').disabled = a === "moins15"; });
+    f.addEventListener("submit", async e => {
+      e.preventDefault();
+      const name = $("#fName").value.trim(), mail = $("#fMail").value.trim(), lvl = $("#fLvl").value, doms = $$('input[name="dom"]:checked', f).map(i => i.value), age = (f.querySelector('input[name="age"]:checked') || {}).value, parent = $("#fParent").value.trim();
+      let ok = true;
+      ok &= fieldErr("fName", name.length >= 2 && /^[\p{L}\p{N} ._'-]+$/u.test(name) ? "" : "Écris un prénom ou un pseudonyme (2 caractères minimum).");
+      ok &= fieldErr("fMail", EMAIL_RE.test(mail) ? "" : "Entre une adresse e-mail valide.");
+      ok &= fieldErr("fDom", doms.length ? "" : "Choisis au moins un domaine.");
+      ok &= fieldErr("fLvl", lvl ? "" : "Choisis ton niveau.");
+      ok &= fieldErr("fAge", age ? "" : "Indique ta tranche d'âge.");
+      if (age === "mineur") ok &= fieldErr("fParent", EMAIL_RE.test(parent) && parent.toLowerCase() !== mail.toLowerCase() ? "" : "Entre l'e-mail d'un parent ou tuteur, différent du tien.");
+      ok &= fieldErr("fCgu", $("#fCgu").checked ? "" : "Tu dois accepter les conditions pour créer un compte.");
+      if (!ok) { f.querySelector('[aria-invalid="true"]')?.focus(); return; }
+      await withLoading(f, "Création du compte…", $("#fMsg"), async () => {
+        const d = await api.request("/auth/oauth/complete", { method: "POST", body: { jeton, displayName: name, email: mail, interests: doms, level: lvl, ageGroup: age, parentEmail: age === "mineur" ? parent : undefined, acceptTerms: true } });
+        state.user = d.user; renderAuth(); await syncAccount(); toast(d.user.pendingParentalConsent ? "Compte créé : un e-mail a été envoyé à ton parent pour son accord" : "Bienvenue sur TOB-MAQ !");
+        go("#/tableau-de-bord");
+      });
+    });
+  }).catch(e => { $("#finish").innerHTML = emptyState({ ic: "clock", title: "Lien expiré", text: esc(e.message), action: `<a class="btn btn-primary" href="#/inscription">Recommencer</a>` }); });
+}
 function renderSignup(main) {
   if (state.user) return go("#/tableau-de-bord");
   main.innerHTML = pageHead({ crumbs: [["Inscription"]], title: "Créer ton compte", lead: "Gratuit. Seules les informations nécessaires sont demandées." }) + `
   <section class="section-sm"><div class="wrap auth">
-    <div class="card" style="padding:28px">${backendNotice()}
+    <div class="card" style="padding:28px">${backendNotice()}<div id="socialBox"></div>
       <form id="signup" novalidate style="margin-top:18px">
         <div class="field"><label for="sName">Prénom ou pseudonyme</label><input class="input" id="sName" autocomplete="nickname" maxlength="30" aria-describedby="sName-e"><p class="err" id="sName-e" hidden></p></div>
         <div class="field"><label for="sMail">Adresse e-mail</label><input class="input" id="sMail" type="email" autocomplete="email" maxlength="160" aria-describedby="sMail-e"><p class="err" id="sMail-e" hidden></p></div>
@@ -4408,7 +4471,7 @@ function renderSignup(main) {
       <ul class="checks">${["Suivre ta progression sur tous tes appareils", "Télécharger les ressources réservées aux membres", "Enregistrer tes créations IA et tes projets", "Publier dans le portfolio après modération"].map(t => `<li>${icon("check")}<span>${t}</span></li>`).join("")}</ul>
       <h3 style="font-size:1rem;margin-top:22px">Tes données</h3><p class="small">Mot de passe transmis en HTTPS puis stocké uniquement sous forme d'empreinte sécurisée sur le serveur. Jamais de publicité ciblée, jamais de revente de données.</p></aside>
   </div></section>`;
-  bindPw(main);
+  bindPw(main); socialButtons($("#socialBox"));
   const f = $("#signup");
   f.addEventListener("change", () => {
     const age = (f.querySelector('input[name="age"]:checked') || {}).value;
@@ -4438,11 +4501,12 @@ function renderSignup(main) {
     });
   });
 }
-function renderLogin(main) {
+function renderLogin(main, q = new URLSearchParams()) {
   if (state.user) return go("#/tableau-de-bord");
+  const oauthErr = OAUTH_ERRORS[q.get("erreur")];
   main.innerHTML = pageHead({ crumbs: [["Connexion"]], title: "Se connecter", lead: "Retrouve tes formations, tes scores et tes créations." }) + `
   <section class="section-sm"><div class="wrap auth">
-    <div class="card" style="padding:28px">${backendNotice()}
+    <div class="card" style="padding:28px">${backendNotice()}${oauthErr ? `<div style="margin-bottom:14px">${alertBox("warn", `<p>${oauthErr}</p>`)}</div>` : ""}<div id="socialBox"></div>
       <form id="login" novalidate style="margin-top:18px">
         <div class="field"><label for="lMail">Adresse e-mail</label><input class="input" id="lMail" type="email" autocomplete="email" maxlength="160" aria-describedby="lMail-e"><p class="err" id="lMail-e" hidden></p></div>
         ${pwField("lPw", "Mot de passe", "current-password")}
@@ -4455,7 +4519,7 @@ function renderLogin(main) {
       <p class="small muted" style="text-align:center;margin-top:16px">Pas encore de compte ? <a href="#/inscription">S'inscrire gratuitement</a></p></div>
     <aside class="night-card"><h2 style="font-size:1.4rem">Bon retour</h2><p>Ta progression et tes créations t'attendent. Les jeux et les ressources libres restent accessibles sans compte.</p></aside>
   </div></section>`;
-  bindPw(main);
+  bindPw(main); socialButtons($("#socialBox"));
   $("#login").addEventListener("submit", async e => {
     e.preventDefault();
     const f = e.currentTarget, mail = $("#lMail").value.trim(), pw = $("#lPw").value;
@@ -6815,7 +6879,7 @@ const ROUTES = [
   [/^formation\/([\w-]+)$/, (m, p) => renderFormation(m, p[1])], [/^cours\/([\w-]+)$/, (m, p) => renderLesson(m, p[1])],
   [/^ia$/, (m, p, q) => renderStudio(m, q)], [/^jeux$/, m => renderGames(m)], [/^jeux\/([\w-]+)$/, (m, p, q) => renderGame(m, p[1], q)],
   [/^ressources$/, (m, p, q) => renderResources(m, q)], [/^ressource\/([\w-]+)$/, (m, p) => renderResource(m, p[1])],
-  [/^inscription$/, m => renderSignup(m)], [/^connexion$/, m => renderLogin(m)], [/^tableau-de-bord$/, (m, p, q) => renderDashboard(m, q)], [/^premium$/, m => renderPremium(m)],
+  [/^inscription$/, m => renderSignup(m)], [/^connexion$/, (m, p, q) => renderLogin(m, q)], [/^finaliser-inscription$/, (m, p, q) => renderSocialFinish(m, q)], [/^tableau-de-bord$/, (m, p, q) => renderDashboard(m, q)], [/^premium$/, m => renderPremium(m)],
   [/^portfolio$/, m => renderPortfolio(m)], [/^projet\/([\w-]+)$/, (m, p) => renderProject(m, p[1])], [/^profil$/, m => renderProfile(m)],
   [/^parametres$/, m => renderSettings(m)], [/^aide$/, m => renderHelp(m)], [/^application$/, m => renderApp(m)], [/^examens$/, m => renderExams(m)], [/^examen\/([\w-]+)$/, (m, p) => renderExam(m, p[1])], [/^certificat\/([\w-]+)$/, (m, p) => renderVerify(m, p[1])], [/^defi$/, () => goDefi()], [/^reprendre$/, () => goResume()], [/^(conditions|confidentialite)$/, (m, p) => renderLegal(m, p[1])],
   [/^admin$/, m => renderAdmin(m)], [/^reinitialiser$/, (m, p, q) => renderReset(m, q)], [/^recherche$/, (m, p, q) => renderSearch(m, q)]
