@@ -5136,15 +5136,6 @@ function bindDownloadButtons(root = document) {
     });
   });
 }
-async function installApp() {
-  const p = appInstall.prompt;
-  if (!p) return;
-  p.prompt();
-  const { outcome } = await p.userChoice;
-  appInstall.prompt = null;
-  if (outcome !== "accepted") toast("Installation annulée. Tu peux réessayer quand tu veux.", "info");
-  renderApp($("#main"));
-}
 function renderApp(main) {
   const plat = appPlatform(), standalone = isStandalone();
   const status = standalone
