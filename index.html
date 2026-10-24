@@ -121,6 +121,14 @@ button,input,select,textarea{font:inherit;color:inherit}
 .ic{width:1.2em;height:1.2em;flex:none}
 :root[data-motion="reduce"] *{animation:none!important;transition:none!important}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+/* Grands titres : chaque mot monte du flou au net, l'un après l'autre (mots en ligne : la césure reste naturelle) */
+.tw{position:relative;opacity:0;filter:blur(10px);animation:twIn .9s cubic-bezier(.19,.8,.18,1) var(--d,0s) both paused}
+.tw-go .tw{animation-play-state:running}
+@keyframes twIn{from{top:.55em;opacity:0;filter:blur(10px)}55%{opacity:1}to{top:0;opacity:1;filter:blur(0)}}
+.tw-after{animation:twUp .8s cubic-bezier(.19,.8,.18,1) var(--d,0s) both paused}
+.tw-go~.tw-after{animation-play-state:running}
+@keyframes twUp{from{opacity:0;transform:translateY(14px)}}
+:root[data-motion="reduce"] .tw,:root[data-motion="reduce"] .tw-after{opacity:1;transform:none;filter:none;top:0}
 
 /* ---------- Logo typographique ---------- */
 .logo{display:inline-flex;align-items:center;text-decoration:none;color:var(--ink);flex:none}
@@ -6917,6 +6925,74 @@ function route() {
   if (!firstRoute) { window.scrollTo(0, 0); h1?.focus({ preventScroll: true }); }
   firstRoute = false;
   startTimecode();
+  animateHeadings(main);
+}
+/* Animation des grands titres : le h1 de la page tout de suite (après l'écran d'ouverture), les titres de section à leur apparition. */
+let headingObserver = null;
+const calmMotion = () => root.getAttribute("data-motion") === "reduce" || matchMedia("(prefers-reduced-motion: reduce)").matches;
+const GRAD_STOPS = [[0, [91, 61, 245]], [.55, [168, 59, 216]], [1, [242, 97, 45]]];
+function gradAt(x) {
+  const i = x <= GRAD_STOPS[1][0] ? 0 : 1, [a, ca] = GRAD_STOPS[i], [b, cb] = GRAD_STOPS[i + 1], u = (x - a) / (b - a);
+  return `rgb(${ca.map((c, k) => Math.round(c + (cb[k] - c) * u)).join(",")})`;
+}
+function splitHeading(h) {
+  if (h.dataset.tw) return 0;
+  h.dataset.tw = "1"; h.setAttribute("aria-label", h.textContent.replace(/\s+/g, " ").trim());
+  let n = 0;
+  const walk = (node, grad) => {
+    [...node.childNodes].forEach(ch => {
+      if (ch.nodeType === 1) {
+        if (ch.matches("svg, img, .tw")) return;
+        // Texte en dégradé : chaque mot reçoit sa portion du dégradé (le découpage casse le dégradé d'origine)
+        const cs = getComputedStyle(ch), g = (cs.webkitBackgroundClip || cs.backgroundClip) === "text" && cs.backgroundImage.includes("gradient");
+        if (g) { ch.style.background = "none"; ch.style.color = "inherit"; ch.style.webkitTextFillColor = "currentColor"; }
+        walk(ch, g ? { words: (ch.textContent.match(/\S+/g) || []).length, i: 0 } : grad);
+        return;
+      }
+      if (ch.nodeType !== 3 || !ch.textContent.trim()) return;
+      const frag = document.createDocumentFragment();
+      ch.textContent.split(/(\s+)/).forEach(part => {
+        if (!part) return;
+        if (/^\s+$/.test(part)) { frag.append(" "); return; }
+        const i = document.createElement("span");
+        i.className = "tw"; i.setAttribute("aria-hidden", "true");
+        i.textContent = part; i.style.setProperty("--d", (n++ * .075).toFixed(3) + "s");
+        if (grad) { const a = grad.i / grad.words, b = ++grad.i / grad.words;
+          Object.assign(i.style, { backgroundImage: `linear-gradient(110deg,${gradAt(a)},${gradAt(b)})`, webkitBackgroundClip: "text", backgroundClip: "text", color: "transparent", webkitTextFillColor: "transparent" }); }
+        frag.append(i);
+      });
+      ch.replaceWith(frag);
+    });
+  };
+  walk(h, null);
+  // Le chapeau sous le titre suit les mots
+  const lead = h.nextElementSibling;
+  if (lead && lead.matches(".lead")) { lead.classList.add("tw-after"); lead.style.setProperty("--d", (n * .075 + .15).toFixed(2) + "s"); }
+  return n;
+}
+function playHeading(h) {
+  h.classList.add("tw-go");
+}
+function animateHeadings(main) {
+  if (headingObserver) { headingObserver.disconnect(); headingObserver = null; }
+  if (calmMotion()) return;
+  const h1 = $("h1", main);
+  if (h1) {
+    splitHeading(h1);
+    // Première visite : on attend la fin de l'écran d'ouverture
+    if (root.hasAttribute("data-intro")) {
+      const mo = new MutationObserver(() => { if (!root.hasAttribute("data-intro")) { mo.disconnect(); playHeading(h1); } });
+      mo.observe(root, { attributes: true, attributeFilter: ["data-intro"] });
+    } else playHeading(h1);
+  }
+  const h2s = $$("section h2", main).filter(h => parseFloat(getComputedStyle(h).fontSize) >= 24 && !h.closest(".card, .modal, dialog"));
+  if (!h2s.length) return;
+  if (!("IntersectionObserver" in window)) return;
+  headingObserver = new IntersectionObserver(entries => entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    headingObserver.unobserve(e.target); playHeading(e.target);
+  }), { rootMargin: "0px 0px -12% 0px" });
+  h2s.forEach(h => { splitHeading(h); headingObserver.observe(h); });
 }
 /* Code temporel animé du visuel d'accueil (25 images/s), arrêté hors de l'accueil. */
 function startTimecode() {
