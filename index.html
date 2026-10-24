@@ -122,9 +122,9 @@ button,input,select,textarea{font:inherit;color:inherit}
 :root[data-motion="reduce"] *{animation:none!important;transition:none!important}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 /* Grands titres : chaque mot monte du flou au net, l'un après l'autre (mots en ligne : la césure reste naturelle) */
-.tw{position:relative;opacity:0;filter:blur(10px);animation:twIn .9s cubic-bezier(.19,.8,.18,1) var(--d,0s) both paused}
+.tw{position:relative;opacity:0;animation:twIn .9s cubic-bezier(.19,.8,.18,1) var(--d,0s) both paused}
 .tw-go .tw{animation-play-state:running}
-@keyframes twIn{from{top:.55em;opacity:0;filter:blur(10px)}55%{opacity:1}to{top:0;opacity:1;filter:blur(0)}}
+@keyframes twIn{from{top:.55em;opacity:0;filter:blur(10px)}55%{opacity:1}to{top:0;opacity:1;filter:none}}
 .tw-after{animation:twUp .8s cubic-bezier(.19,.8,.18,1) var(--d,0s) both paused}
 .tw-go~.tw-after{animation-play-state:running}
 @keyframes twUp{from{opacity:0;transform:translateY(14px)}}
@@ -295,18 +295,19 @@ textarea.input{min-height:110px;resize:vertical;line-height:1.5}
 .hero-meta span{display:inline-flex;align-items:center;gap:.45rem}
 .hero-meta i{width:8px;height:8px;border-radius:2px;display:inline-block}
 .hero-logo{margin:0 0 0 auto;width:min(100%,460px);display:flex;flex-direction:column;align-items:center}
-.hl-stage{position:relative;width:min(78%,360px);aspect-ratio:1;animation:hlFloat 7s ease-in-out infinite}
-.hl-halo{position:absolute;inset:-22%;border-radius:50%;background:radial-gradient(closest-side,rgb(124 92 255 / .55),rgb(168 59 216 / .28) 45%,rgb(242 97 45 / .12) 65%,transparent 75%);filter:blur(18px);animation:hlGlow 7s ease-in-out infinite}
-.hl-icon{position:relative;display:block;width:100%;height:100%;filter:drop-shadow(0 40px 60px rgb(0 0 0 / .55)) drop-shadow(0 0 1px rgb(255 255 255 / .2))}
-.hl-c{transform-box:fill-box;animation:hlFocus 3.6s cubic-bezier(.5,0,.3,1) infinite}
+/* Animations légères (téléphones) : seul le flottement tourne en continu, sans filtre ni flou recalculé. */
+.hl-stage{position:relative;width:min(78%,360px);aspect-ratio:1;animation:hlFloat 7s ease-in-out infinite;will-change:transform}
+.hl-halo{position:absolute;inset:-26%;border-radius:50%;background:radial-gradient(closest-side,rgb(124 92 255 / .42),rgb(168 59 216 / .2) 40%,rgb(242 97 45 / .08) 62%,transparent 80%)}
+.hl-icon{position:relative;display:block;width:100%;height:100%;border-radius:22%;box-shadow:0 36px 60px -12px rgb(0 0 0 / .6),0 0 0 1px rgb(255 255 255 / .08)}
+.hl-c{transform-box:fill-box;animation:hlFocus 1.8s cubic-bezier(.5,0,.3,1) .5s 2}
+.hero-logo:hover .hl-c,.hero-logo:hover .hl-bar{animation-iteration-count:infinite}
 .hl-c.tl{transform-origin:100% 100%;--x:10px;--y:10px}.hl-c.tr{transform-origin:0 100%;--x:-10px;--y:10px}
 .hl-c.bl{transform-origin:100% 0;--x:10px;--y:-10px}.hl-c.br{transform-origin:0 0;--x:-10px;--y:-10px}
-.hl-bar{transform-box:fill-box;transform-origin:0 50%;animation:hlBar 3.6s cubic-bezier(.5,0,.3,1) infinite}
+.hl-bar{transform-box:fill-box;transform-origin:0 50%;animation:hlBar 1.8s cubic-bezier(.5,0,.3,1) .5s 2}
 .hl-by{margin-top:34px;font-family:var(--font-display);font-weight:800;font-size:clamp(1.05rem,2vw,1.35rem);letter-spacing:.32em;color:#fff;padding-left:.32em;text-align:center}
 .hl-by span{font-family:var(--font-body);font-weight:500;letter-spacing:.08em;color:var(--night-muted);margin-right:.35em}
 .hl-by::after{content:"";display:block;width:64px;height:3px;margin:14px auto 0;border-radius:2px;background:var(--grad)}
 @keyframes hlFloat{50%{transform:translateY(-14px) rotate(-1.2deg)}}
-@keyframes hlGlow{50%{opacity:.7;transform:scale(1.06)}}
 @keyframes hlFocus{0%,100%{transform:none}45%,55%{transform:translate(var(--x),var(--y))}}
 @keyframes hlBar{0%,100%{transform:scaleX(1)}45%,55%{transform:scaleX(.82) translateX(18px)}}
 @media (max-width:980px){.hero-grid{grid-template-columns:1fr;padding-block:48px 56px}.hero-logo{margin:12px auto 0}.hl-stage{width:min(62%,280px)}}
