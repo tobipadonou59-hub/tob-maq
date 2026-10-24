@@ -252,6 +252,10 @@ test("examen final : leçons requises, correction côté serveur, certificat PDF
   const pdf = await u("GET", `/api/certificates/${r.data.certificate}/pdf`);
   assert.equal(pdf.status, 200); assert.equal(pdf.headers.get("content-type"), "application/pdf"); assert.ok(pdf.data.startsWith("%PDF"));
   assert.equal((await u("GET", "/api/me/certificates")).data.length, 1);
+  const list = (await u("GET", "/api/exams")).data, mine = list.find(x => x.formation === fid);
+  assert.ok(list.length >= 20); assert.equal(mine.eligible, true); assert.equal(mine.certificate.id, r.data.certificate);
+  const pubList = (await client()("GET", "/api/exams")).data;
+  assert.equal(pubList.length, list.length); assert.equal(pubList[0].certificate, null);
 });
 
 test("téléchargement de l'appli : lien court, APK publié uniquement par l'admin", async () => {

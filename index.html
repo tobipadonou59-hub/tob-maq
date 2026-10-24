@@ -788,6 +788,21 @@ h3,.card h3,.course-body h3,.pf-body h3{font-family:var(--font-body);font-weight
 @media (max-width:980px){.ts-row{display:flex}#themeBtn{display:none}}
 
 /* ---------- Examen final et certificats ---------- */
+.exams-intro{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.exams-intro>div{display:flex;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow)}
+.exams-intro b{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font:800 1.15rem var(--font-body);color:#5B3B08;background:radial-gradient(circle at 35% 30%,#FFF1BF,#E9C46A 45%,#A6741F)}
+.exams-intro strong{display:block}.exams-intro small{color:var(--muted)}
+@media (max-width:760px){.exams-intro{grid-template-columns:1fr}}
+.exam-tile{padding:0;overflow:hidden;display:flex;flex-direction:column}
+.exam-tile-cover{height:120px;background:var(--night-2);overflow:hidden}.exam-tile-cover img{width:100%;height:100%;object-fit:cover}
+.exam-tile-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.exam-tile-body h3{margin:0;font-size:1.02rem}.exam-tile-body h3 a{color:inherit;text-decoration:none}
+.exam-tile-foot{margin-top:auto;padding-top:6px}
+.exam-tile.pret{border-color:color-mix(in srgb,#C9962F 55%,var(--line));box-shadow:0 0 0 1px #E9C46A55,var(--shadow)}
+.chip.exam-ready{background:linear-gradient(90deg,#F3D98B,#E9C46A);color:#4A3006}
+.mainnav .exam-link{font-weight:700;color:#A6741F}
+:root[data-theme="dark"] .mainnav .exam-link{color:#E9C46A}
+
 .exam-card{position:relative;overflow:hidden;border-color:color-mix(in srgb,#C9962F 45%,var(--line))}
 .exam-card::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:linear-gradient(90deg,#9C6B1E,#F3D98B,#B8862B)}
 .exam-medal{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#5B3B08;background:radial-gradient(circle at 35% 30%,#FFF1BF,#E9C46A 45%,#A6741F);box-shadow:0 6px 14px -6px #A6741F;margin-bottom:10px}
@@ -905,6 +920,7 @@ h3,.card h3,.course-body h3,.pf-body h3{font-family:var(--font-body);font-weight
       <li><a href="#/jeux" data-nav="jeux">Jeux et défis</a></li>
       <li><a href="#/ressources" data-nav="ressources">Ressources</a></li>
       <li><a href="#/portfolio" data-nav="portfolio">Portfolio</a></li>
+      <li><a href="#/examens" data-nav="examens" class="exam-link">Examens finaux</a></li>
       <li class="only-mobile ts-row"><span>Apparence</span><button class="theme-switch" type="button" role="switch" aria-checked="false" aria-label="Mode nuit"><span class="ts-label">Mode jour</span><span class="ts-knob" aria-hidden="true"></span></button></li>
       <li class="only-mobile" id="mobileAuth"></li>
     </ul>
@@ -940,7 +956,7 @@ h3,.card h3,.course-body h3,.pf-body h3{font-family:var(--font-body);font-weight
         <li><a href="#/dessin">Dessin et illustration</a></li><li><a href="#/informatique">Informatique et réseaux</a></li><li><a href="#/marketing">Marketing digital</a></li><li><a href="#/business">Business et finance</a></li></ul></div>
       <div><h3>Pratiquer</h3><ul>
         <li><a href="#/ia">IA créative</a></li><li><a href="#/jeux">Jeux et défis</a></li>
-        <li><a href="#/ressources">Ressources</a></li><li><a href="#/portfolio">Portfolio</a></li></ul></div>
+        <li><a href="#/ressources">Ressources</a></li><li><a href="#/portfolio">Portfolio</a></li><li><a href="#/examens">Examens finaux et certificats</a></li></ul></div>
       <div><h3>Mon compte</h3><ul>
         <li><a href="#/tableau-de-bord">Tableau de bord</a></li><li><a href="#/profil">Profil</a></li>
         <li><a href="#/parametres">Paramètres et thème</a></li><li id="footAdmin" hidden><a href="#/admin">Administration</a></li></ul></div>
@@ -4109,6 +4125,40 @@ async function examCard(f) {
       : `<p class="small">Tu as utilisé tes essais du jour. Révise les leçons et reviens demain.</p>`);
   } catch (e) { set(e.status === 404 ? `<p class="small muted">L'examen ouvrira quand les leçons de cette formation seront publiées.</p>` : `<p class="small muted">${esc(e.message)}</p>`); }
 }
+function renderExams(main) {
+  main.innerHTML = pageHead({ crumbs: [["Examens finaux"]], eyebrow: "Certification", title: "Examens finaux",
+    lead: "Choisis l'examen que tu veux passer. Il s'ouvre dès que tu as terminé toutes les leçons de la formation : 10 questions, 10/10 exigé, et ton certificat de mérite en PDF." }) + `
+  <section class="section-sm"><div class="wrap">
+    <div class="exams-intro">${[["1", "Termine les leçons", "Marque chaque leçon comme terminée."], ["2", "Passe l'examen", "10 questions tirées au hasard."], ["3", "Reçois ton certificat", "10/10 : PDF à ton nom, vérifiable en ligne."]].map(([n, t, d]) => `<div><b>${n}</b><span><strong>${t}</strong><small>${d}</small></span></div>`).join("")}</div>
+    <div class="toolbar" style="margin-top:22px"><div class="pills" role="group" aria-label="Filtrer les examens" id="exFilter">${[["", "Tous"], ["pret", "Prêts à passer"], ["cours", "En cours"], ["obtenu", "Certificats obtenus"]].map(([v, l], i) => `<label><input type="radio" name="exf" value="${v}" ${i ? "" : "checked"}><span>${l}</span></label>`).join("")}</div></div>
+    <div id="exList" class="grid g3" style="margin-top:18px"><div class="boot" style="min-height:160px;grid-column:1/-1"><span class="spinner"></span></div></div>
+  </div></section>`;
+  if (!api.configured) { $("#exList").innerHTML = `<div style="grid-column:1/-1">${alertBox("info", "<p>Les examens finaux sont disponibles sur le site en ligne.</p>")}</div>`; return; }
+  api.request("/exams").then(list => {
+    const rows = list.map(x => {
+      const f = FORMATIONS.find(y => y.id === x.formation); if (!f) return null;
+      const done = x.missing ? x.lessons - x.missing.length : f.modules.flatMap(m => m.lessons).filter(l => state.lessonsDone[l] && LESSONS[l] && !LESSONS[l].soon).length;
+      const st = x.certificate ? "obtenu" : x.eligible ? "pret" : done ? "cours" : "debut";
+      return { x, f, done, st };
+    }).filter(Boolean).sort((a, b) => ["pret", "cours", "obtenu", "debut"].indexOf(a.st) - ["pret", "cours", "obtenu", "debut"].indexOf(b.st));
+    const card = ({ x, f, done, st }) => {
+      const pct = Math.round(done / x.lessons * 100);
+      const badge = { obtenu: `<span class="chip chip-ok">${icon("check")} Certificat obtenu</span>`, pret: `<span class="chip exam-ready">${icon("star")} Prêt pour l'examen</span>`, cours: `<span class="chip chip-accent">En cours · ${done}/${x.lessons}</span>`, debut: `<span class="chip">${x.lessons} leçon${x.lessons > 1 ? "s" : ""} à suivre</span>` }[st];
+      const action = !state.user ? `<a class="btn btn-outline btn-sm" href="#/inscription">Créer mon compte</a>`
+        : st === "obtenu" ? `<a class="btn btn-grad btn-sm" href="/api/certificates/${esc(x.certificate.id)}/pdf" download>${icon("download")} Mon certificat</a>`
+        : st === "pret" ? (x.attemptsLeft ? `<a class="btn btn-grad btn-sm" href="#/examen/${f.id}">${icon("star")} Passer l'examen</a>` : `<span class="small muted">Essais du jour utilisés : reviens demain.</span>`)
+        : `<a class="btn btn-primary btn-sm" href="#/${x.missing && x.missing.length ? "cours/" + x.missing[0] : "formation/" + f.id}">${done ? "Continuer les leçons" : "Commencer la formation"} ${icon("arrow")}</a>`;
+      return `<article class="card exam-tile ${st}" data-st="${st}"><div class="exam-tile-cover"><img src="apercus/formations/${f.id}.webp" alt="" loading="lazy" onerror="this.remove()"></div>
+        <div class="exam-tile-body"><div class="row">${badge}</div><h3><a href="#/formation/${f.id}">${esc(f.title)}</a></h3><p class="small muted" style="margin:0">${domainName(f.domain)} · 10 questions · 10/10 exigé</p>
+          ${state.user ? `<div class="meter" style="margin-top:4px" aria-label="Leçons terminées"><i style="width:${pct}%"></i></div>` : ""}
+          <div class="exam-tile-foot">${action}</div></div></article>`;
+    };
+    const draw = () => { const v = (main.querySelector('input[name="exf"]:checked') || {}).value; const ls = rows.filter(r => !v || r.st === v);
+      $("#exList").innerHTML = ls.map(card).join("") || `<div style="grid-column:1/-1">${emptyState({ ic: "star", title: v === "pret" ? "Aucun examen prêt pour l'instant" : v === "obtenu" ? "Pas encore de certificat" : "Rien à afficher", text: v === "pret" ? "Termine toutes les leçons d'une formation pour débloquer son examen." : "Choisis une formation et commence ses leçons.", action: `<a class="btn btn-primary" href="#/formations">Voir les formations</a>` })}</div>`; };
+    $("#exFilter").addEventListener("change", draw); draw();
+    if (!state.user) $("#exList").insertAdjacentHTML("beforebegin", `<div style="margin-bottom:14px">${alertBox("info", `<p>Connecte-toi pour voir ta progression et passer les examens. <a href="#/connexion">Se connecter</a> ou <a href="#/inscription">créer un compte gratuit</a>.</p>`)}</div>`);
+  }).catch(e => { $("#exList").innerHTML = `<div style="grid-column:1/-1">${alertBox("error", `<p>${esc(e.message)}</p>`)}</div>`; });
+}
 function renderExam(main, fid) {
   const f = FORMATIONS.find(x => x.id === fid);
   if (!f) return renderNotFound(main);
@@ -4529,7 +4579,7 @@ function renderDashboard(main, q = new URLSearchParams()) {
   if (u) api.request("/me/certificates").then(cs => {
     const box = $("#myCerts"); if (!box) return;
     box.innerHTML = cs.length ? `<ul class="list">${cs.map(c => `<li style="display:block"><b>${esc(c.title)}</b><span class="small muted"> · ${fmtDate(c.issuedAt)}</span><div class="row" style="margin-top:6px"><a class="btn btn-grad btn-sm" href="/api/certificates/${esc(c.id)}/pdf" download>${icon("download")} PDF</a><a class="btn btn-ghost btn-sm" href="#/certificat/${esc(c.id)}">Vérifier</a></div></li>`).join("")}</ul>`
-      : `<p class="small">Termine une formation et réussis son examen final (10/10) pour obtenir ton premier certificat.</p><a class="btn btn-outline btn-sm" href="#/formations" style="margin-top:8px">Voir les formations</a>`;
+      : `<p class="small">Termine une formation et réussis son examen final (10/10) pour obtenir ton premier certificat.</p><a class="btn btn-outline btn-sm" href="#/examens" style="margin-top:8px">Voir les examens finaux</a>`;
   }).catch(() => {});
   if (u) api.request("/me/billing").then(b => {
     state.user.premium = b.premium; state.user.premiumUntil = b.premiumUntil;
@@ -6767,7 +6817,7 @@ const ROUTES = [
   [/^ressources$/, (m, p, q) => renderResources(m, q)], [/^ressource\/([\w-]+)$/, (m, p) => renderResource(m, p[1])],
   [/^inscription$/, m => renderSignup(m)], [/^connexion$/, m => renderLogin(m)], [/^tableau-de-bord$/, (m, p, q) => renderDashboard(m, q)], [/^premium$/, m => renderPremium(m)],
   [/^portfolio$/, m => renderPortfolio(m)], [/^projet\/([\w-]+)$/, (m, p) => renderProject(m, p[1])], [/^profil$/, m => renderProfile(m)],
-  [/^parametres$/, m => renderSettings(m)], [/^aide$/, m => renderHelp(m)], [/^application$/, m => renderApp(m)], [/^examen\/([\w-]+)$/, (m, p) => renderExam(m, p[1])], [/^certificat\/([\w-]+)$/, (m, p) => renderVerify(m, p[1])], [/^defi$/, () => goDefi()], [/^reprendre$/, () => goResume()], [/^(conditions|confidentialite)$/, (m, p) => renderLegal(m, p[1])],
+  [/^parametres$/, m => renderSettings(m)], [/^aide$/, m => renderHelp(m)], [/^application$/, m => renderApp(m)], [/^examens$/, m => renderExams(m)], [/^examen\/([\w-]+)$/, (m, p) => renderExam(m, p[1])], [/^certificat\/([\w-]+)$/, (m, p) => renderVerify(m, p[1])], [/^defi$/, () => goDefi()], [/^reprendre$/, () => goResume()], [/^(conditions|confidentialite)$/, (m, p) => renderLegal(m, p[1])],
   [/^admin$/, m => renderAdmin(m)], [/^reinitialiser$/, (m, p, q) => renderReset(m, q)], [/^recherche$/, (m, p, q) => renderSearch(m, q)]
 ];
 const stripHash = h => String(h || "").replace(/^#\/?/, "");
@@ -6785,7 +6835,7 @@ function route() {
   cancelAnimationFrame(tcRaf);
   const raw = currentPath; renderedPath = raw;
   const [path, qs] = raw.split("?"), q = new URLSearchParams(qs || ""), section = path.split("/")[0], main = $("#main");
-  const navKey = { formation: "formations", cours: "formations", ressource: "ressources", projet: "portfolio" }[section] ?? (DOMAINS.some(d => d.id === section) ? "domaines" : section);
+  const navKey = { examen: "examens", certificat: "examens", formation: "formations", cours: "formations", ressource: "ressources", projet: "portfolio" }[section] ?? (DOMAINS.some(d => d.id === section) ? "domaines" : section);
   $$("[data-nav]").forEach(a => a.dataset.nav === navKey ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
   const tabKey = { formation: "formations", cours: "formations", domaines: "formations", projet: "portfolio", connexion: "tableau-de-bord", inscription: "tableau-de-bord", profil: "tableau-de-bord", parametres: "tableau-de-bord" }[section] ?? (DOMAINS.some(d => d.id === section) ? "formations" : section);
   $$("[data-tabbar]").forEach(a => a.dataset.tabbar === tabKey ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));

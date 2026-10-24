@@ -75,6 +75,10 @@ export async function certificatePdf(c) {
 }
 
 export function registerCertificates(api, { needUser, needConsent }) {
+  // Liste de tous les examens : catalogue public, avec l'état de l'apprenant s'il est connecté.
+  api.get("/exams", (req, res) => res.json(Object.entries(BANK).map(([fid, f]) => req.user
+    ? (({ questions, ...st }) => st)(status(req.user.id, fid))
+    : { formation: fid, title: f.title, lessons: f.lessons.length, missing: null, eligible: false, attemptsLeft: null, certificate: null })));
   api.get("/exams/:fid", needUser, (req, res) => res.json(status(req.user.id, req.params.fid)));
 
   api.post("/exams/:fid/start", needUser, needConsent, (req, res) => {
