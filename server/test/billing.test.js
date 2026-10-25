@@ -114,15 +114,15 @@ test("l'administration voit les paiements et le chiffre d'affaires", async () =>
   assert.equal(b.data.trials, 0);
 });
 
-test("essai gratuit : 30 jours, une seule fois par compte, sans paiement", async () => {
+test("essai gratuit : 3 jours par défaut, une seule fois par compte, sans paiement", async () => {
   const c = client(); await reg(c, "Essai", "essai@exemple.bj");
   const plans = (await c("GET", "/api/billing/plans")).data;
-  assert.deepEqual(plans.trial, { enabled: true, days: 30 });
+  assert.deepEqual(plans.trial, { enabled: true, days: 3 });
   assert.equal((await c("GET", "/api/premium/lessons/test-premium")).data.code, "PREMIUM_REQUIRED");
   const t = await c("POST", "/api/billing/trial");
   assert.equal(t.status, 200);
   const days = (new Date(t.data.premiumUntil) - Date.now()) / 864e5;
-  assert.ok(days > 29.9 && days <= 30.01);
+  assert.ok(days > 2.9 && days <= 3.01);
   const me = (await c("GET", "/api/auth/me")).data.user;
   assert.equal(me.premium, true); assert.equal(me.trialUsed, true);
   assert.equal((await c("GET", "/api/premium/lessons/test-premium")).status, 200, "l'essai donne accès au contenu premium");
@@ -166,4 +166,31 @@ test("l'administration importe des leçons Premium validées, hors du dépôt", 
   assert.equal((await a("DELETE", "/api/admin/premium/test-premium")).status, 404, "les leçons du dépôt ne se suppriment pas ici");
   assert.equal((await a("DELETE", "/api/admin/premium/importee")).status, 200);
   assert.ok(!(await m("GET", "/api/premium/catalog")).data.some(l => l.id === "importee"));
+});
+
+test("accès payant obligatoire : examens, livres et ressources réservés aux abonnés", async () => {
+  const a = client(); await a("POST", "/api/auth/login", { email: "admin@tob-maq.test", password: "motdepasse12" });
+  assert.equal((await a("PATCH", "/api/admin/billing", { enabled: false, priceMonthly: 5000, paywall: true })).status, 400, "pas d'accès payant sans vente ouverte");
+  const c = client(); await reg(c, "Kofi", "kofi@exemple.bj");
+  // Interrupteur éteint : tout reste ouvert
+  assert.equal((await c("GET", "/api/billing/plans")).data.paywall, false);
+  assert.equal((await c("GET", "/ressources/livres/dev-python.pdf")).status, 200);
+  assert.equal((await a("PATCH", "/api/admin/billing", { enabled: true, priceMonthly: 5000, priceYearly: 55000, trialEnabled: true, trialDays: 3, paywall: true })).status, 200);
+  const plans = (await c("GET", "/api/billing/plans")).data;
+  assert.equal(plans.paywall, true);
+  assert.deepEqual(plans.plans.map(p => [p.id, p.price]), [["mois", 5000], ["an", 55000]]);
+  // Interrupteur allumé : bloqué côté serveur pour un membre sans abonnement
+  assert.equal((await c("POST", "/api/exams/dev-python/start")).data.code, "SUBSCRIPTION_REQUIRED");
+  assert.equal((await c("GET", "/ressources/livres/dev-python.pdf")).status, 402);
+  assert.equal((await c("GET", "/apercus/livres/dev-python/02.webp")).status, 402);
+  assert.equal((await c("GET", "/apercus/livres/dev-python/01.webp")).status, 200, "la couverture reste visible");
+  assert.equal((await client()("GET", "/ressources/livres/dev-python.pdf")).status, 402, "visiteur non connecté");
+  // Essai gratuit : accès ouvert
+  assert.equal((await c("POST", "/api/billing/trial")).status, 200);
+  assert.equal((await c("GET", "/ressources/livres/dev-python.pdf")).status, 200);
+  assert.equal((await c("POST", "/api/exams/dev-python/start")).data.code, "NOT_ELIGIBLE", "l'abonné passe le contrôle d'accès");
+  // L'administrateur garde l'accès
+  assert.equal((await a("GET", "/apercus/livres/dev-python/02.webp")).status, 200);
+  await a("PATCH", "/api/admin/billing", { enabled: true, priceMonthly: 5000, priceYearly: 55000, paywall: false });
+  assert.equal((await client()("GET", "/ressources/livres/dev-python.pdf")).status, 200);
 });

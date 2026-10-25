@@ -80,7 +80,8 @@ export function setAiSettings(v) {
 }
 
 /* Abonnement Premium : prix en FCFA fixés par l'administration (null = pas encore fixé). */
-const BILLING_DEFAULTS = { enabled: false, priceMonthly: null, priceYearly: null, trialEnabled: true, trialDays: 30 };
+// Tarifs par défaut : 5 000 FCFA par mois, 55 000 FCFA par an, 3 jours d'essai (modifiables dans Administration → Abonnements).
+const BILLING_DEFAULTS = { enabled: false, priceMonthly: 5000, priceYearly: 55000, trialEnabled: true, trialDays: 3, paywall: false };
 export function getBillingSettings() {
   const r = one("SELECT value FROM settings WHERE key = 'billing'");
   return { ...BILLING_DEFAULTS, ...(r ? JSON.parse(r.value) : {}) };

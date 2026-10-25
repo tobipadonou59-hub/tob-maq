@@ -74,14 +74,14 @@ export async function certificatePdf(c) {
   return done;
 }
 
-export function registerCertificates(api, { needUser, needConsent }) {
+export function registerCertificates(api, { needUser, needConsent, needAccess = (q, r, n) => n() }) {
   // Liste de tous les examens : catalogue public, avec l'état de l'apprenant s'il est connecté.
   api.get("/exams", (req, res) => res.json(Object.entries(BANK).map(([fid, f]) => req.user
     ? (({ questions, ...st }) => st)(status(req.user.id, fid))
     : { formation: fid, title: f.title, lessons: f.lessons.length, missing: null, eligible: false, attemptsLeft: null, certificate: null })));
   api.get("/exams/:fid", needUser, (req, res) => res.json(status(req.user.id, req.params.fid)));
 
-  api.post("/exams/:fid/start", needUser, needConsent, (req, res) => {
+  api.post("/exams/:fid/start", needUser, needConsent, needAccess, (req, res) => {
     const st = status(req.user.id, req.params.fid);
     if (!st.eligible) fail(403, "Termine d'abord toutes les leçons de la formation.", "NOT_ELIGIBLE");
     if (!st.attemptsLeft) fail(429, `Tu as utilisé tes ${MAX_ATTEMPTS_PER_DAY} essais du jour. Révise les leçons et réessaie demain.`, "ATTEMPTS");
@@ -93,7 +93,7 @@ export function registerCertificates(api, { needUser, needConsent }) {
     res.status(201).json({ attempt: id, title: st.title, questions: items.map(({ qi, order }) => ({ q: pool[qi].q, choices: order.map(o => pool[qi].choices[o]) })) });
   });
 
-  api.post("/exams/attempts/:id/submit", needUser, needConsent, (req, res) => {
+  api.post("/exams/attempts/:id/submit", needUser, needConsent, needAccess, (req, res) => {
     rateLimit("exam:" + req.user.id, 20, 3600000);
     const a = one("SELECT * FROM exam_attempts WHERE id = ? AND user_id = ?", req.params.id, req.user.id);
     if (!a) fail(404, "Examen introuvable.", "NOT_FOUND");

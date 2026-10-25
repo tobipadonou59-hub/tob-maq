@@ -11,7 +11,7 @@ import { config, SITE_DIR } from "./config.js";
 import { one, all, run, now, getAiSettings, setAiSettings } from "./db.js";
 import { HttpError, fail, hashPassword, verifyPassword, newToken, sha256, uid, rateLimit, text, email, password, oneOf, sniff, parseCookies } from "./security.js";
 import { sendMail } from "./mail.js";
-import { registerBilling, isPremium } from "./billing.js";
+import { registerBilling, isPremium, needAccess, hasAccess } from "./billing.js";
 import { registerCertificates } from "./certificats.js";
 import { registerAppDownloads } from "./appli.js";
 import { registerOAuth } from "./oauth.js";
@@ -469,7 +469,7 @@ export function createApp() {
   });
   api.get("/announcements", (req, res) => res.json(all("SELECT title, body, created_at AS createdAt FROM announcements ORDER BY created_at DESC LIMIT 5")));
   registerBilling(api, { needUser, needAdmin, needConsent });
-  registerCertificates(api, { needUser, needConsent });
+  registerCertificates(api, { needUser, needConsent, needAccess });
   registerAppDownloads(app, api, { needAdmin });
   registerOAuth(app, api, { openSession, createAccount, signupProfile, cleanName, publicUser });
   api.get("/health", (req, res) => res.json({ ok: true, ai: { images: Boolean(imageProvider), videos: Boolean(videoProvider) } }));
@@ -491,6 +491,11 @@ export function createApp() {
   };
   renderIndex(); // vérification au démarrage
   app.get(["/", "/index.html"], (req, res) => res.set("Cache-Control", "no-cache").type("html").send(renderIndex()));
+  /* Accès payant obligatoire : ressources et pages des livres réservées aux abonnés (la couverture reste visible). */
+  app.use(["/ressources", "/apercus/livres"], (req, res, next) => {
+    if (hasAccess(req.user) || (req.baseUrl === "/apercus/livres" && /^\/(index\.json|[\w-]+\/01\.webp)$/.test(req.path))) return next();
+    res.status(402).set("Cache-Control", "no-store").type("text/plain; charset=utf-8").send("Réservé aux abonnés TOB-MAQ : lance ton essai gratuit ou abonne-toi sur l'application.");
+  });
   app.use("/ressources", express.static(path.join(SITE_DIR, "ressources"), { maxAge: "7d", fallthrough: false }));
   /* Référencement : autoriser les moteurs de recherche sur le site public, pas sur l'API. */
   /* Lien de confiance site <-> appli Android : sans lui, l'appli affiche une barre d'adresse. */

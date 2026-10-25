@@ -215,6 +215,9 @@ kbd{display:inline-grid;place-items:center;min-width:1.9em;height:1.9em;padding:
 .kb-promo-k{display:flex;align-items:center;gap:4px}.kb-promo kbd{color:#fff;background:#1C2136;border-color:#ffffff30}
 @media (max-width:720px){.kb-train{grid-template-columns:1fr}.kb-ask{min-width:0}.kb-groups{grid-template-columns:1fr}.kb-group li{grid-template-columns:minmax(104px,auto) 1fr;gap:10px}.kb-group kbd{font-size:.72rem;min-width:1.7em;height:1.75em;padding:0 .4em}.kb-desc{font-size:.88rem}.kb-promo-k{display:none}}
 @media print{.site-header,.site-footer,.tabbar,.kb-tools,.kb-cats,.kb-train,.kb-promo,.page-head .crumbs,.update-bar{display:none!important}body{background:#fff}.kb-sec{break-inside:avoid-page}.kb-group{break-inside:avoid}}
+.pw-list{list-style:none;padding:0;margin:0 0 22px;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px 18px}
+.pw-list li{display:flex;align-items:center;gap:8px;font-weight:600}.pw-list .ic{color:var(--ok, #16794A)}
+.pw-admin{align-items:flex-start;margin-top:10px;padding:12px;border-radius:12px;background:var(--surface-2);border:1px solid var(--line)}
 /* Livres */
 .bk-side{display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:start}
 .bk-mini img,.bk-cover img{display:block;width:100%;height:auto;border-radius:3px 6px 6px 3px;box-shadow:inset 6px 0 8px -6px #0008,0 10px 24px -8px rgb(0 0 0 / .45),0 2px 4px rgb(0 0 0 / .2)}
@@ -3547,6 +3550,10 @@ async function loadPremium() {
   } catch { /* catalogue indisponible : les leçons restent « bientôt » */ }
 }
 const isPremiumUser = () => Boolean(state.user && (state.user.premium || state.user.role === "admin"));
+/* Accès payant obligatoire (réglé par l'administrateur) : ces parties demandent un abonnement ou l'essai gratuit.
+   Le serveur vérifie aussi l'accès (examens, livres, ressources) : l'écran n'est pas la seule protection. */
+const PAYWALL_SECTIONS = /^(cours|ia|jeux|ressources?|livre|examens?|raccourcis|defi|reprendre)$/;
+const paywalled = () => Boolean(state.billing?.paywall) && !isPremiumUser();
 
 /* Téléchargement d'un fichier public : capacité de téléchargement de claude.ai
    en version hébergée, lien direct sinon. Renvoie true si le fichier est remis. */
@@ -3587,6 +3594,7 @@ function pageHead({ crumbs = [], eyebrow = "", title, lead = "", extra = "" }) {
 const domainName = id => (DOMAINS.find(d => d.id === id) || {}).name || ({ marketing: "Marketing" })[id] || id;
 const GAME_DOMAINS = [...DOMAINS.map(d => ({ id: d.id, name: d.name })), ...(DOMAINS.some(d => d.id === "marketing") ? [] : [{ id: "marketing", name: "Marketing" }])];
 const priceChip = p => {
+  if (state.billing?.paywall) return `<span class="chip chip-orange">Abonnement</span>`;
   if (p === "gratuit") return `<span class="chip chip-ok">Gratuit</span>`;
   const prices = state.billing?.enabled ? (state.billing.plans || []).map(x => x.id === "an" ? Math.round(x.price / 12) : x.price).filter(Boolean) : [];
   return `<span class="chip chip-orange">Premium${prices.length ? ` · dès ${nf(Math.min(...prices))} ${CONFIG.CURRENCY}/mois` : ""}</span>`;
@@ -4174,13 +4182,13 @@ function renderFormations(main, q) {
     <p class="count" id="fCount" aria-live="polite"></p>
     <div class="grid g3" id="fList"></div>
   </div></section>
-  <section class="section-sm"><div class="wrap">
+  ${state.billing?.paywall ? paywallOffers() : `<section class="section-sm"><div class="wrap">
     <div class="head"><span class="eyebrow">Offres</span><h2>Gratuit pour commencer</h2><p>${state.billing?.enabled ? "Passe Premium pour débloquer toutes les formations premium, avec un paiement par MTN MoMo, Moov Money ou carte." : `Les tarifs premium seront affichés en ${CONFIG.CURRENCY} dès qu'ils seront définis.`}</p></div>
     <div class="grid g3">
       <article class="card offer feat"><span class="chip chip-ok">Disponible</span><h3>Gratuit</h3><div class="price">0 ${CONFIG.CURRENCY}</div><ul><li>Formations gratuites</li><li>Tous les jeux et défis</li><li>Ressources en accès libre</li></ul><a class="btn btn-primary" href="#/inscription">S'inscrire</a></article>
       <article class="card offer"><span class="chip ${state.billing?.enabled || state.billing?.trial?.enabled ? "chip-ok" : "chip-orange"}">${state.billing?.enabled || state.billing?.trial?.enabled ? "Disponible" : "Bientôt"}</span><h3>Premium</h3><div class="price">${state.billing?.enabled ? `dès ${nf(Math.min(...state.billing.plans.map(p => p.price)))} ${CONFIG.CURRENCY}` : state.billing?.trial?.enabled ? "Essai gratuit" : "Tarif à venir"}</div>${state.billing?.trial?.enabled ? `<span class="chip chip-ok">${state.billing.trial.days} jours gratuits pour essayer</span>` : ""}<ul><li>Formations complètes premium</li><li>Fichiers sources et packs</li><li>Paiement MTN MoMo, Moov Money ou carte</li></ul><a class="btn ${state.billing?.enabled || state.billing?.trial?.enabled ? "btn-grad" : "btn-outline"}" href="#/premium">${state.billing?.trial?.enabled && !state.user?.trialUsed ? "Essayer gratuitement" : "Découvrir Premium"}</a></article>
       <article class="card offer"><span class="chip chip-orange">Bientôt</span><h3>Crédits IA</h3><div class="price">Packs à venir</div><ul><li>Générations d'images</li><li>Générations de vidéos</li><li>Quotas affichés avant chaque génération</li></ul><button class="btn btn-outline" disabled>Paiement non activé</button></article>
-    </div></div></section>`;
+    </div></div></section>`}`;
   const upd = () => {
     const t = norm($("#fq").value.trim()), d = $("#fd").value, s = $("#fs").value, l = $("#fl").value, p = $("#fp").value;
     const list = FORMATIONS.filter(f => (!d || f.domain === d) && (!s || f.software.includes(s)) && (!l || f.level === l) && (!p || f.price === p)
@@ -4950,18 +4958,32 @@ function renderLogin(main, q = new URLSearchParams()) {
     });
   });
 }
-function renderPremium(main) {
-  const b = state.billing, u = state.user;
+/* Offres affichées quand l'accès payant obligatoire est actif. */
+function paywallOffers() {
+  const b = state.billing, trial = b.trial?.enabled && !state.user?.trialUsed;
+  return `<section class="section-sm"><div class="wrap">
+    <div class="head"><span class="eyebrow">Abonnement</span><h2>${trial ? `${b.trial.days} jours gratuits, puis l'abonnement` : "Choisis ton abonnement"}</h2><p>Un abonnement donne accès à toute l'application. Paiement par MTN MoMo, Moov Money ou carte, sans renouvellement automatique.</p></div>
+    <div class="grid g3">
+      ${trial ? `<article class="card offer feat"><span class="chip chip-ok">Sans engagement</span><h3>Essai gratuit</h3><div class="price">${b.trial.days} jours</div><ul><li>Toute l'application</li><li>Aucun moyen de paiement demandé</li><li>S'arrête tout seul</li></ul><a class="btn btn-grad" href="${state.user ? "#/premium" : "#/inscription"}">Commencer l'essai</a></article>` : ""}
+      ${b.plans.map(p => `<article class="card offer${!trial && p.id === "an" ? " feat" : ""}">${p.id === "an" ? `<span class="chip chip-ok">Le plus avantageux</span>` : ""}<h3>${p.id === "an" ? "Annuel" : "Mensuel"}</h3><div class="price">${nf(p.price)} ${esc(b.currency)}</div><ul><li>Accès pendant ${p.days} jours</li>${p.id === "an" ? `<li>Soit ${nf(Math.round(p.price / 12))} ${esc(b.currency)} par mois</li>` : "<li>Idéal pour essayer une formation</li>"}<li>Formations, jeux, livres, examens</li></ul><a class="btn ${trial ? "btn-outline" : "btn-grad"}" href="#/premium">S'abonner</a></article>`).join("")}
+    </div></div></section>`;
+}
+function renderPremium(main, { gate = false } = {}) {
+  const b = state.billing, u = state.user, all = Boolean(b?.paywall);
+  const what = all ? "Toute l'application : formations, jeux, livres, examens et certificats" : "Toutes les leçons premium";
   const trialOpen = Boolean(b?.trial?.enabled) && !(u && (u.trialUsed || isPremiumUser()));
   const cards = [
     trialOpen ? `<article class="card offer feat"><span class="chip chip-ok">Sans engagement</span><h3>Essai gratuit · ${b.trial.days} jours</h3><div class="price">0 ${CONFIG.CURRENCY}</div>
-      <ul><li>Toutes les leçons premium</li><li>Aucun moyen de paiement demandé</li><li>S'arrête tout seul à la fin, sans prélèvement</li></ul>
+      <ul><li>${what}</li><li>Aucun moyen de paiement demandé</li><li>S'arrête tout seul à la fin, sans prélèvement</li></ul>
       <button class="btn btn-grad" id="startTrial">${u ? "Commencer l'essai gratuit" : "Créer un compte pour l'essai gratuit"}</button></article>` : "",
     ...(b?.enabled ? b.plans.map(p => `<article class="card offer"><h3>Premium · ${esc(p.label)}</h3><div class="price">${nf(p.price)} ${esc(b.currency)}</div>
-      <ul><li>Toutes les leçons premium</li><li>Accès pendant ${p.days} jours</li><li>MTN MoMo, Moov Money ou carte</li></ul>
+      <ul><li>${what}</li><li>Accès pendant ${p.days} jours${p.id === "an" && b.plans.some(m => m.id === "mois") ? ` · soit ${nf(Math.round(p.price / 12))} ${esc(b.currency)}/mois` : ""}</li><li>MTN MoMo, Moov Money ou carte</li></ul>
       <button class="btn ${trialOpen ? "btn-outline" : "btn-grad"}" data-buy="${esc(p.id)}">${u ? "Payer avec FedaPay" : "Créer un compte pour s'abonner"}</button></article>`) : [])
   ].filter(Boolean);
-  main.innerHTML = pageHead({ crumbs: [["Premium"]], eyebrow: "Abonnement", title: "TOB-MAQ Premium", lead: "Toutes les formations premium et leurs leçons approfondies, pour progresser plus vite." }) + `<section class="section-sm"><div class="wrap">
+  main.innerHTML = (gate
+    ? pageHead({ crumbs: [["Abonnement"]], eyebrow: "Accès abonnés", title: "Abonne-toi pour continuer", lead: u ? `Cette partie de TOB-MAQ est réservée aux abonnés.${b?.trial?.enabled && !u.trialUsed ? ` Commence par ${b.trial.days} jours gratuits, sans moyen de paiement.` : ""}` : "Crée ton compte gratuit, puis lance ton essai ou ton abonnement pour accéder à toute l'application." })
+    : pageHead({ crumbs: [["Premium"]], eyebrow: "Abonnement", title: all ? "Abonnement TOB-MAQ" : "TOB-MAQ Premium", lead: all ? "Un abonnement donne accès à toute l'application : formations, leçons, jeux, livres, ressources, examens finaux et certificats." : "Toutes les formations premium et leurs leçons approfondies, pour progresser plus vite." })) + `<section class="section-sm"><div class="wrap">
+    ${gate ? `<ul class="pw-list">${["38 formations et leurs leçons", "63 jeux et défis", "38 livres à feuilleter", "Ressources et raccourcis", "Examens finaux et certificats", "Studio d'IA créative"].map(t => `<li>${icon("check")}${t}</li>`).join("")}</ul>` : ""}
     ${isPremiumUser() && u.premiumUntil ? alertBox("ok", `<p><strong>Tu es membre Premium</strong> jusqu'au ${fmtDate(u.premiumUntil)}.${b?.enabled ? " Un paiement prolonge ton accès à partir de cette date." : ""}</p>`) + "<div style='height:16px'></div>" : ""}
     ${u?.trialUsed && !isPremiumUser() ? alertBox("info", "<p>Ton essai gratuit est terminé. Merci d'avoir testé Premium !</p>") + "<div style='height:16px'></div>" : ""}
     ${!api.configured ? alertBox("warn", "<p>L'abonnement nécessite le serveur TOB-MAQ.</p>") : !cards.length ? (isPremiumUser() ? "" : emptyState({ ic: "clock", title: "Bientôt disponible", text: "L'abonnement Premium n'est pas encore ouvert. Les formations gratuites, les jeux et les ressources libres restent accessibles." })) : `
@@ -4976,7 +4998,7 @@ function renderPremium(main) {
     try {
       const d = await api.request("/billing/trial", { method: "POST" });
       Object.assign(state.user, { premium: true, premiumUntil: d.premiumUntil, trialUsed: true });
-      toast(`Essai gratuit activé jusqu'au ${fmtDate(d.premiumUntil)} !`); go("#/formations?prix=premium");
+      toast(`Essai gratuit activé jusqu'au ${fmtDate(d.premiumUntil)} !`); go(state.afterPay || (all ? "#/formations" : "#/formations?prix=premium")); state.afterPay = null;
     } catch (er) { $("#buyMsg").innerHTML = alertBox("error", `<p>${esc(er.message)}</p>`); btn.disabled = false; btn.innerHTML = label; }
   });
   $$("[data-buy]", main).forEach(btn => btn.addEventListener("click", async () => {
@@ -5560,6 +5582,8 @@ function renderAdmin(main) {
         <div class="field" style="margin-top:14px"><label for="pM">Prix pour 1 mois (${CONFIG.CURRENCY})</label><input class="input" id="pM" type="number" min="100" step="100" value="${b.priceMonthly ?? ""}" placeholder="Ex. 2000"></div>
         <div class="field"><label for="pY">Prix pour 1 an (${CONFIG.CURRENCY})</label><input class="input" id="pY" type="number" min="100" step="100" value="${b.priceYearly ?? ""}" placeholder="Laisse vide pour ne pas le proposer"></div>
         <label class="check"><input type="checkbox" id="pOn" ${b.enabled ? "checked" : ""}> Ouvrir la vente</label>
+        <label class="check pw-admin"><input type="checkbox" id="pWall" ${b.paywall ? "checked" : ""}> <span><strong>Accès payant obligatoire</strong> : formations, leçons, jeux, livres, ressources et examens réservés aux abonnés (et à l'essai gratuit). L'accueil, le catalogue et l'inscription restent visibles.</span></label>
+        ${b.paywall && !b.paywallActive ? alertBox("warn", "<p>L'accès payant est coché mais pas encore actif : il faut aussi FedaPay configuré et la vente ouverte.</p>") : ""}
         <div class="form-sep" style="height:1px;background:var(--line);margin:18px 0"></div>
         <label class="check"><input type="checkbox" id="tOn" ${b.trialEnabled ? "checked" : ""}> Proposer un essai gratuit (une fois par compte, sans paiement)</label>
         <div class="field" style="margin-top:12px"><label for="tDays">Durée de l'essai (jours)</label><input class="input" id="tDays" type="number" min="1" max="90" value="${b.trialDays ?? 30}"></div>
@@ -5604,9 +5628,9 @@ function renderAdmin(main) {
         e.preventDefault();
         await withLoading(e.currentTarget, "Enregistrement…", $("#bMsg"), async () => {
           const v = id => $(id).value === "" ? null : Number($(id).value);
-          await api.request("/admin/billing", { method: "PATCH", body: { priceMonthly: v("#pM"), priceYearly: v("#pY"), enabled: $("#pOn").checked, trialEnabled: $("#tOn").checked, trialDays: Number($("#tDays").value) } });
+          await api.request("/admin/billing", { method: "PATCH", body: { priceMonthly: v("#pM"), priceYearly: v("#pY"), enabled: $("#pOn").checked, trialEnabled: $("#tOn").checked, trialDays: Number($("#tDays").value), paywall: $("#pWall").checked } });
           try { state.billing = await api.request("/billing/plans"); } catch { /* sans incidence */ }
-          $("#bMsg").innerHTML = alertBox("ok", `<p>Enregistré. ${$("#pOn").checked ? "La vente est ouverte." : "La vente est fermée."}</p>`);
+          $("#bMsg").innerHTML = alertBox("ok", `<p>Enregistré. ${$("#pOn").checked ? "La vente est ouverte." : "La vente est fermée."}${state.billing?.paywall ? " L'accès payant obligatoire est actif." : ""}</p>`);
         });
       });
     },
@@ -7370,7 +7394,8 @@ function route() {
   $("#q").value = section === "recherche" ? q.get("q") || "" : "";
   main.classList.remove("view"); void main.offsetWidth; main.classList.add("view");
   const r = ROUTES.find(([re]) => re.test(path));
-  if (r) r[1](main, path.match(r[0]), q); else renderNotFound(main);
+  if (r && paywalled() && PAYWALL_SECTIONS.test(section)) { state.afterPay = "#/" + raw; renderPremium(main, { gate: true }); }
+  else if (r) r[1](main, path.match(r[0]), q); else renderNotFound(main);
   const h1 = $("h1", main);
   document.title = (h1 && path ? h1.textContent.trim() + " · " : "") + "TOB-MAQ";
   if (!firstRoute) { window.scrollTo(0, 0); h1?.focus({ preventScroll: true }); }

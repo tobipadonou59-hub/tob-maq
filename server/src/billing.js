@@ -49,6 +49,13 @@ export function validateLesson(l) {
 }
 
 export const isPremium = u => Boolean(u && (u.role === "admin" || (u.premium_until && u.premium_until > now())));
+/* Accès payant obligatoire : actif seulement si l'administrateur l'a choisi ET que la vente est réellement ouverte. */
+export const paywallOn = () => { const s = getBillingSettings(); return Boolean(s.paywall && s.enabled && config.fedapayKey && (s.priceMonthly || s.priceYearly)); };
+export const hasAccess = u => !paywallOn() || isPremium(u);
+export function needAccess(req, res, next) {
+  if (hasAccess(req.user)) return next();
+  fail(402, "Cette partie est réservée aux abonnés. Lance ton essai gratuit ou abonne-toi pour continuer.", "SUBSCRIPTION_REQUIRED");
+}
 
 /* ---------- Client FedaPay ---------- */
 const apiBase = () => config.fedapayApiUrl || (config.fedapayEnv === "live" ? "https://api.fedapay.com/v1" : "https://sandbox-api.fedapay.com/v1");
@@ -101,7 +108,7 @@ export function registerBilling(api, { needUser, needAdmin, needConsent }) {
     const s = getBillingSettings();
     const plans = Object.entries(PLANS).filter(([, p]) => Number.isInteger(s[p.key]) && s[p.key] > 0).map(([id, p]) => ({ id, label: p.label, price: s[p.key], days: p.days }));
     return { enabled: Boolean(s.enabled && config.fedapayKey && plans.length), configured: Boolean(config.fedapayKey), currency: "FCFA", plans, mode: config.fedapayEnv,
-      trial: { enabled: Boolean(s.trialEnabled), days: s.trialDays } };
+      trial: { enabled: Boolean(s.trialEnabled), days: s.trialDays }, paywall: paywallOn() };
   };
 
   api.get("/billing/plans", (req, res) => res.json(plansPublic()));
@@ -212,7 +219,7 @@ export function registerBilling(api, { needUser, needAdmin, needConsent }) {
 
   api.get("/admin/billing", needAdmin, (req, res) => {
     const s = getBillingSettings();
-    res.json({ ...s, configured: Boolean(config.fedapayKey), mode: config.fedapayEnv,
+    res.json({ ...s, paywallActive: paywallOn(), configured: Boolean(config.fedapayKey), mode: config.fedapayEnv,
       webhookUrl: `${config.publicUrl}/api/billing/webhook`,
       revenue: one("SELECT COALESCE(SUM(amount), 0) AS t FROM payments WHERE status = 'approved'").t,
       subscribers: one("SELECT COUNT(*) AS n FROM users WHERE premium_until > ?", now()).n,
@@ -225,8 +232,11 @@ export function registerBilling(api, { needUser, needAdmin, needConsent }) {
     const days = req.body?.trialDays === undefined ? cur.trialDays : Number(req.body.trialDays);
     if (!Number.isInteger(days) || days < 1 || days > 90) fail(400, "La durée de l'essai doit être comprise entre 1 et 90 jours.");
     const s = { enabled: req.body?.enabled === true, priceMonthly: price(req.body?.priceMonthly), priceYearly: price(req.body?.priceYearly),
-      trialEnabled: req.body?.trialEnabled === undefined ? cur.trialEnabled : req.body.trialEnabled === true, trialDays: days };
+      trialEnabled: req.body?.trialEnabled === undefined ? cur.trialEnabled : req.body.trialEnabled === true, trialDays: days,
+      paywall: req.body?.paywall === undefined ? Boolean(cur.paywall) : req.body.paywall === true };
     if (s.enabled && !s.priceMonthly && !s.priceYearly) fail(400, "Fixe au moins un prix avant d'ouvrir la vente.");
+    if (s.paywall && !s.enabled) fail(400, "Ouvre la vente avant de rendre l'accès payant.");
+    if (s.paywall && !config.fedapayKey) fail(400, "Configure FedaPay (FEDAPAY_SECRET_KEY) avant de rendre l'accès payant.");
     setBillingSettings(s);
     res.json(s);
   });
