@@ -99,6 +99,24 @@ Object.assign(S, {
   "ux-ui-figma": () => bg("#1A1035", "#14182E", "#A259FF") + monitor(110, 24, 450, 196, `<rect width="450" height="196" fill="#2C2C2C"/><rect width="70" height="196" fill="#1E1E1E"/>${[0, 1, 2, 3, 4].map(i => `<rect x="10" y="${14 + i * 22}" width="50" height="12" rx="3" fill="#3A3A3A"/>`).join("")}${[0, 1, 2].map(i => `<rect x="${90 + i * 120}" y="20" width="100" height="166" rx="8" fill="${i === 2 ? "#fff" : "#E8E8E8"}"/>${i < 2 ? `<rect x="${100 + i * 120}" y="34" width="80" height="40" fill="#C9C9C9"/>${lines(100 + i * 120, 86, 4, 80, 12, "#BDBDBD")}` : `<rect x="${100 + i * 120}" y="34" width="80" height="40" rx="6" fill="url(#grad)"/><rect x="${100 + i * 120}" y="150" width="80" height="22" rx="11" fill="#A259FF"/>`}`).join("")}<path d="M190 100 H210 M310 100 H330" stroke="#A259FF" stroke-width="2"/>`) + g(610, 80, `${sh(50, 130, 60, 8)}${[["#F24E1E", 0, 0], ["#FF7262", 40, 0], ["#A259FF", 0, 40], ["#1ABCFE", 40, 40], ["#0ACF83", 0, 80]].map(([c, x, y]) => `<rect x="${x}" y="${y}" width="40" height="40" rx="${x === 40 && y === 40 ? 20 : 12}" fill="${c}"/>`).join("")}`),
   "ia-machine-learning": () => bg("#0B1222", "#24103A", "#4ADE95") + g(120, 40, `${[[0, 3], [150, 4], [300, 4], [450, 2]].map(([x, n], k, arr) => Array.from({ length: n }, (_, i) => { const y = 90 + (i - (n - 1) / 2) * 46; return (k < arr.length - 1 ? Array.from({ length: arr[k + 1][1] }, (_, j) => `<line x1="${x}" y1="${y}" x2="${arr[k + 1][0]}" y2="${90 + (j - (arr[k + 1][1] - 1) / 2) * 46}" stroke="#ffffff22"/>`).join("") : "") + `<circle cx="${x}" cy="${y}" r="16" fill="${["#2A9DF4", V, P, "#4ADE95"][k]}" filter="url(#soft)"/>`; }).join("")).join("")}`) + g(640, 170, `<rect width="120" height="50" rx="10" fill="#141927" filter="url(#soft)"/><text x="60" y="32" text-anchor="middle" fill="#4ADE95" style="${FM(13)}">fit()</text>`)
 });
+/* Finitions du lot 3 : carte d'information flottante et objets de bureau, comme les autres illustrations */
+const card = (x, y, w, t, sub, c) => g(x, y, `<rect width="${w}" height="52" rx="12" fill="#fff" filter="url(#soft)"/><circle cx="24" cy="26" r="12" fill="${c}"/><text x="44" y="23" fill="${N}" style="${F(700, 11)}">${t}</text><text x="44" y="39" fill="#6B7083" style="${F(500, 9.5)}">${sub}</text>`);
+const LOT3_PLUS = {
+  "blender-3d": () => plant(70, 236, .85) + card(570, 196, 170, "Rendu terminé", "1920 × 1080 · Cycles", "#E87D0D"),
+  "depannage-pc": () => mug(90, 250, "#2A9DF4") + card(8, 40, 128, "Analyse finie", "Aucune menace", "#4ADE95"),
+  "photo-produit-mobile": () => card(672, 36, 120, "+ 38 ventes", "cette semaine", "#FFB703"),
+  "bureautique-pro": () => plant(66, 236, .8) + card(566, 234, 150, "Total du mois", "2 450 000 FCFA", "#1D6F42"),
+  "ia-entreprise": () => plant(78, 236, .85) + card(14, 40, 132, "Texte prêt", "en 8 secondes", P),
+  "assistance-virtuelle": () => card(668, 70, 124, "RDV confirmé", "Jeudi · 10 h 30", "#4ADE95"),
+  "analyse-donnees": () => plant(68, 236, .8) + card(600, 214, 150, "Ventes + 18 %", "vs mois dernier", "#F2C811"),
+  "motion-montage-pro": () => mug(60, 250, P) + card(598, 196, 150, "Export terminé", "4K · 3 formats", "#9B5CFF"),
+  "automatisation-ia": () => card(30, 196, 190, "312 tâches automatisées", "ce mois-ci · 0 erreur", "#EA4B71") + mug(752, 250, O),
+  "flutter-mobile": () => plant(92, 236, .85) + card(556, 196, 150, "Note 4,8 ★", "1 200 téléchargements", "#13B9FD"),
+  "web-fullstack": () => card(560, 212, 170, "En ligne", "HTTPS · 99,9 % dispo", "#3C873A") + plant(40, 236, .7),
+  "ux-ui-figma": () => plant(60, 236, .8) + card(650, 28, 140, "Test utilisateur", "5 sur 5 réussis", "#A259FF"),
+  "ia-machine-learning": () => plant(50, 236, .8) + card(610, 60, 150, "Précision 92 %", "rappel 88 %", "#4ADE95")
+};
+Object.entries(LOT3_PLUS).forEach(([k, f]) => { const base = S[k]; S[k] = () => base() + f(); });
 /* Scènes des domaines (cartes « Nos domaines de formation ») : même format 800×320, plus riches, sujet centré (recadrage en bandeau). */
 const D = {
   graphisme: () => bg("#1A1440", "#3A1530") +
