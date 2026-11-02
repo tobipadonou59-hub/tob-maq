@@ -4362,5 +4362,2865 @@
     "explain": "Aucun pronostic n'est sûr, et les captures d'écran se truquent facilement : c'est une arnaque typique."
    }
   ]
+ },
+ "blender-3d": {
+  "title": "Modélisation 3D avec Blender",
+  "lessons": [
+   "blender-interface",
+   "blender-modelisation",
+   "blender-rendu"
+  ],
+  "questions": [
+   {
+    "q": "Quelle touche déplace l'objet sélectionné dans Blender ?",
+    "choices": [
+     "G",
+     "R",
+     "S"
+    ],
+    "answer": 0,
+    "explain": "G (Grab) déplace, R tourne (Rotate), S change l'échelle (Scale)."
+   },
+   {
+    "q": "Quel raccourci ouvre le menu pour ajouter un objet ?",
+    "choices": [
+     "Ctrl + N",
+     "Maj + A",
+     "Alt + F4"
+    ],
+    "answer": 1,
+    "explain": "Maj + A ouvre le menu Ajouter dans la vue 3D."
+   },
+   {
+    "q": "Comment tourner la vue 3D autour de la scène ?",
+    "choices": [
+     "Clic droit maintenu",
+     "Clic molette maintenu",
+     "Touche Entrée"
+    ],
+    "answer": 1,
+    "explain": "Le clic molette maintenu fait tourner la vue (orbite)."
+   },
+   {
+    "q": "Quelle touche passe du mode Objet au mode Édition ?",
+    "choices": [
+     "Tab",
+     "Espace",
+     "Échap"
+    ],
+    "answer": 0,
+    "explain": "Tab bascule entre mode Objet et mode Édition."
+   },
+   {
+    "q": "Quelle opération fait « sortir » une face pour créer du volume ?",
+    "choices": [
+     "Le biseau",
+     "L'extrusion (E)",
+     "La subdivision"
+    ],
+    "answer": 1,
+    "explain": "E extrude la face sélectionnée."
+   },
+   {
+    "q": "À quoi sert le modificateur Miroir ?",
+    "choices": [
+     "À créer un objet symétrique en modélisant une seule moitié",
+     "À ajouter un reflet brillant",
+     "À inverser les couleurs"
+    ],
+    "answer": 0,
+    "explain": "On modélise un côté, Blender génère l'autre."
+   },
+   {
+    "q": "Quelle touche lance le rendu de l'image ?",
+    "choices": [
+     "F12",
+     "F5",
+     "Ctrl + P"
+    ],
+    "answer": 0,
+    "explain": "F12 lance le rendu de l'image depuis la caméra active."
+   },
+   {
+    "q": "Quel réglage rend un matériau plus mat ou plus brillant ?",
+    "choices": [
+     "Roughness",
+     "Scale",
+     "Alpha"
+    ],
+    "answer": 0,
+    "explain": "Une Roughness élevée donne une surface mate ; faible, brillante."
+   },
+   {
+    "q": "Quel moteur de rendu est le plus rapide ?",
+    "choices": [
+     "Cycles",
+     "Eevee",
+     "Les deux sont identiques"
+    ],
+    "answer": 1,
+    "explain": "Eevee rend en temps réel ; Cycles est plus réaliste mais plus lent."
+   },
+   {
+    "q": "Quelle touche déplace un objet dans Blender ?",
+    "choices": [
+     "R",
+     "G",
+     "S"
+    ],
+    "answer": 1,
+    "explain": "G (Grab) déplace, R tourne, S met à l'échelle."
+   },
+   {
+    "q": "Quel raccourci ouvre le menu Ajouter ?",
+    "choices": [
+     "Maj + A",
+     "Ctrl + Z",
+     "Tab"
+    ],
+    "answer": 0,
+    "explain": "Maj + A ajoute cube, sphère, cylindre…"
+   },
+   {
+    "q": "Comment passer en mode Édition ?",
+    "choices": [
+     "F12",
+     "Tab",
+     "Espace"
+    ],
+    "answer": 1,
+    "explain": "Tab bascule entre mode Objet et mode Édition."
+   },
+   {
+    "q": "Quelle touche lance le rendu de l'image ?",
+    "choices": [
+     "F12",
+     "F1",
+     "Entrée"
+    ],
+    "answer": 0,
+    "explain": "F12 rend l'image depuis la caméra."
+   },
+   {
+    "q": "Comment tourner la vue autour de la scène ?",
+    "choices": [
+     "Clic molette maintenu",
+     "Double clic",
+     "Touche Suppr"
+    ],
+    "answer": 0,
+    "explain": "Le clic molette fait orbiter la vue."
+   },
+   {
+    "q": "Quelle opération fait sortir une face pour créer du volume ?",
+    "choices": [
+     "Biseau",
+     "Extrusion (E)",
+     "Subdivision"
+    ],
+    "answer": 1,
+    "explain": "E extrude la face sélectionnée."
+   },
+   {
+    "q": "Quel modificateur évite de modéliser deux fois un objet symétrique ?",
+    "choices": [
+     "Miroir",
+     "Solidify",
+     "Array"
+    ],
+    "answer": 0,
+    "explain": "Miroir duplique un côté."
+   },
+   {
+    "q": "Quel réglage rend un matériau mat ?",
+    "choices": [
+     "Roughness élevée",
+     "Metallic à 1",
+     "Alpha à 0"
+    ],
+    "answer": 0,
+    "explain": "Une rugosité élevée diffuse la lumière."
+   },
+   {
+    "q": "Ctrl + B en mode Édition sert à…",
+    "choices": [
+     "Arrondir une arête (biseau)",
+     "Enregistrer",
+     "Supprimer"
+    ],
+    "answer": 0,
+    "explain": "Le biseau adoucit les angles trop vifs."
+   },
+   {
+    "q": "Quel moteur de rendu est le plus réaliste ?",
+    "choices": [
+     "Eevee",
+     "Cycles",
+     "Workbench"
+    ],
+    "answer": 1,
+    "explain": "Cycles calcule les rebonds de lumière."
+   },
+   {
+    "q": "Pourquoi garder une topologie en quadrilatères ?",
+    "choices": [
+     "Les modificateurs et l'animation fonctionnent mieux",
+     "Le fichier est plus lourd",
+     "C'est obligatoire pour enregistrer"
+    ],
+    "answer": 0,
+    "explain": "Les quads se subdivisent proprement."
+   },
+   {
+    "q": "Ctrl + R ajoute…",
+    "choices": [
+     "Une boucle d'arêtes",
+     "Une lumière",
+     "Une caméra"
+    ],
+    "answer": 0,
+    "explain": "La boucle donne plus de détails à un endroit."
+   }
+  ]
+ },
+ "depannage-pc": {
+  "title": "Dépannage informatique : installation, virus, Windows",
+  "lessons": [
+   "dep-installer-windows",
+   "dep-virus",
+   "dep-pannes"
+  ],
+  "questions": [
+   {
+    "q": "Quelle est la première étape avant de réinstaller Windows ?",
+    "choices": [
+     "Sauvegarder les données du client",
+     "Formater le disque",
+     "Installer un antivirus"
+    ],
+    "answer": 0,
+    "explain": "Sans sauvegarde, la réinstallation peut effacer tous les fichiers du client."
+   },
+   {
+    "q": "D'où doit venir la clé d'installation de Windows ?",
+    "choices": [
+     "De l'outil officiel de Microsoft",
+     "D'un fichier trouvé sur un forum",
+     "D'un CD copié"
+    ],
+    "answer": 0,
+    "explain": "Les fichiers non officiels peuvent contenir des logiciels malveillants."
+   },
+   {
+    "q": "Où vérifie-t-on que tous les pilotes sont installés ?",
+    "choices": [
+     "Gestionnaire de périphériques",
+     "Bloc-notes",
+     "Corbeille"
+    ],
+    "answer": 0,
+    "explain": "Un point d'exclamation jaune y signale un pilote manquant."
+   },
+   {
+    "q": "Que faire en premier sur un ordinateur infecté ?",
+    "choices": [
+     "Le déconnecter d'Internet et du réseau",
+     "Installer trois antivirus",
+     "Payer pour récupérer les fichiers"
+    ],
+    "answer": 0,
+    "explain": "L'isolement limite la propagation et les vols de données."
+   },
+   {
+    "q": "Combien d'antivirus actifs en même temps ?",
+    "choices": [
+     "Un seul",
+     "Deux minimum",
+     "Autant que possible"
+    ],
+    "answer": 0,
+    "explain": "Deux antivirus actifs se gênent et ralentissent l'ordinateur."
+   },
+   {
+    "q": "Un rançongiciel a chiffré les fichiers. Faut-il payer ?",
+    "choices": [
+     "Non, jamais",
+     "Oui, c'est la seule solution",
+     "Oui si le montant est faible"
+    ],
+    "answer": 0,
+    "explain": "Payer ne garantit rien et finance les criminels : on restaure depuis une sauvegarde."
+   },
+   {
+    "q": "Un PC est très lent : quel outil ouvrir en premier ?",
+    "choices": [
+     "Gestionnaire des tâches",
+     "Paint",
+     "Calculatrice"
+    ],
+    "answer": 0,
+    "explain": "Il montre quel élément sature : processeur, mémoire ou disque."
+   },
+   {
+    "q": "Un portable s'éteint pendant les jeux. Cause probable ?",
+    "choices": [
+     "Surchauffe",
+     "Clavier sale",
+     "Fond d'écran trop lourd"
+    ],
+    "answer": 0,
+    "explain": "Un ventilateur encrassé provoque des arrêts de sécurité."
+   },
+   {
+    "q": "Pourquoi noter le code d'un écran bleu ?",
+    "choices": [
+     "Il oriente vers la cause (pilote, mémoire, disque)",
+     "Pour le montrer au client",
+     "Il n'a aucune utilité"
+    ],
+    "answer": 0,
+    "explain": "Chaque code d'arrêt correspond à une famille de problèmes."
+   },
+   {
+    "q": "Avant de réinstaller Windows, que faire en premier ?",
+    "choices": [
+     "Formater",
+     "Sauvegarder les données du client",
+     "Installer des jeux"
+    ],
+    "answer": 1,
+    "explain": "La sauvegarde protège les fichiers du client."
+   },
+   {
+    "q": "Un PC est lent. Quel outil ouvrir ?",
+    "choices": [
+     "Gestionnaire des tâches",
+     "Paint",
+     "Calculatrice"
+    ],
+    "answer": 0,
+    "explain": "Il montre ce qui sature."
+   },
+   {
+    "q": "Combien d'antivirus actifs à la fois ?",
+    "choices": [
+     "Trois",
+     "Un seul",
+     "Aucun"
+    ],
+    "answer": 1,
+    "explain": "Deux antivirus se gênent."
+   },
+   {
+    "q": "Un ordinateur infecté : première action ?",
+    "choices": [
+     "Le déconnecter du réseau",
+     "Payer la rançon",
+     "Partager ses fichiers"
+    ],
+    "answer": 0,
+    "explain": "L'isolement limite la propagation."
+   },
+   {
+    "q": "D'où doit venir l'installation de Windows ?",
+    "choices": [
+     "D'un site de téléchargement inconnu",
+     "De l'outil officiel de Microsoft",
+     "D'un CD copié"
+    ],
+    "answer": 1,
+    "explain": "Les copies non officielles cachent souvent des virus."
+   },
+   {
+    "q": "Un portable s'éteint seul pendant les jeux. Cause probable ?",
+    "choices": [
+     "Surchauffe",
+     "Fond d'écran",
+     "Souris"
+    ],
+    "answer": 0,
+    "explain": "Ventilateur encrassé = arrêt de sécurité."
+   },
+   {
+    "q": "Où vérifier qu'un pilote manque ?",
+    "choices": [
+     "Gestionnaire de périphériques",
+     "Bloc-notes",
+     "Corbeille"
+    ],
+    "answer": 0,
+    "explain": "Un point d'exclamation jaune le signale."
+   },
+   {
+    "q": "Des publicités s'ouvrent seules dans le navigateur. On vérifie d'abord…",
+    "choices": [
+     "Les extensions du navigateur",
+     "Le clavier",
+     "L'écran"
+    ],
+    "answer": 0,
+    "explain": "Les extensions malveillantes injectent des publicités."
+   },
+   {
+    "q": "Quelle touche ouvre souvent le menu de démarrage pour choisir la clé USB ?",
+    "choices": [
+     "F12 (selon la marque)",
+     "Ctrl + C",
+     "Imprim écran"
+    ],
+    "answer": 0,
+    "explain": "F12, F9 ou Échap selon le fabricant."
+   },
+   {
+    "q": "Un écran bleu s'affiche. Que noter ?",
+    "choices": [
+     "Le code d'arrêt",
+     "L'heure uniquement",
+     "La couleur exacte"
+    ],
+    "answer": 0,
+    "explain": "Le code oriente vers la cause."
+   },
+   {
+    "q": "Les fichiers sont chiffrés par un rançongiciel. Que faire ?",
+    "choices": [
+     "Payer vite",
+     "Isoler, ne pas payer, restaurer une sauvegarde",
+     "Redémarrer dix fois"
+    ],
+    "answer": 1,
+    "explain": "Payer ne garantit rien."
+   },
+   {
+    "q": "Quel outil montre l'historique des plantages de Windows ?",
+    "choices": [
+     "Moniteur de fiabilité",
+     "Calculatrice",
+     "Lecteur Windows Media"
+    ],
+    "answer": 0,
+    "explain": "Il classe les erreurs par date."
+   }
+  ]
+ },
+ "photo-produit-mobile": {
+  "title": "Photo de produits au téléphone et retouche",
+  "lessons": [
+   "photo-prise-de-vue",
+   "photo-snapseed",
+   "photo-lightroom"
+  ],
+  "questions": [
+   {
+    "q": "Quelle lumière est la meilleure pour une photo produit ?",
+    "choices": [
+     "Lumière naturelle douce près d'une fenêtre",
+     "Flash du téléphone",
+     "Soleil de midi direct"
+    ],
+    "answer": 0,
+    "explain": "Une lumière douce évite les reflets et les ombres dures."
+   },
+   {
+    "q": "À quoi sert un réflecteur ?",
+    "choices": [
+     "À déboucher les ombres",
+     "À flouter le fond",
+     "À changer la couleur"
+    ],
+    "answer": 0,
+    "explain": "Il renvoie la lumière vers les zones sombres."
+   },
+   {
+    "q": "Combien de vues prévoir par produit ?",
+    "choices": [
+     "4 à 6",
+     "Une seule",
+     "30 au minimum"
+    ],
+    "answer": 0,
+    "explain": "Plusieurs angles remplacent le toucher en magasin."
+   },
+   {
+    "q": "Quel outil de Snapseed retire une poussière ?",
+    "choices": [
+     "Correcteur",
+     "Texte",
+     "Double exposition"
+    ],
+    "answer": 0,
+    "explain": "Le Correcteur efface les petites imperfections."
+   },
+   {
+    "q": "Pourquoi régler la balance des blancs ?",
+    "choices": [
+     "Pour des couleurs fidèles au vrai produit",
+     "Pour ajouter un filtre vintage",
+     "Pour réduire le poids du fichier"
+    ],
+    "answer": 0,
+    "explain": "Le client doit recevoir la couleur qu'il a vue."
+   },
+   {
+    "q": "Une bonne retouche de produit doit…",
+    "choices": [
+     "Montrer le vrai produit, en mieux",
+     "Changer la forme du produit",
+     "Cacher les défauts réels"
+    ],
+    "answer": 0,
+    "explain": "Tromper sur le produit crée des retours et de la méfiance."
+   },
+   {
+    "q": "À quoi sert un préréglage dans Lightroom ?",
+    "choices": [
+     "Appliquer les mêmes réglages à plusieurs photos",
+     "Supprimer les photos floues",
+     "Ajouter de la musique"
+    ],
+    "answer": 0,
+    "explain": "Il enregistre une recette de réglages réutilisable."
+   },
+   {
+    "q": "Quel réglage rend une photo plus chaude ou plus froide ?",
+    "choices": [
+     "Température",
+     "Netteté",
+     "Vignettage"
+    ],
+    "answer": 0,
+    "explain": "La température déplace les couleurs vers le jaune ou le bleu."
+   },
+   {
+    "q": "Pourquoi harmoniser un catalogue ?",
+    "choices": [
+     "Pour une image de marque professionnelle",
+     "Pour alourdir les fichiers",
+     "Ce n'est pas utile"
+    ],
+    "answer": 0,
+    "explain": "L'unité visuelle inspire confiance."
+   },
+   {
+    "q": "Quelle lumière choisir pour photographier un produit ?",
+    "choices": [
+     "Flash du téléphone",
+     "Lumière douce d'une fenêtre",
+     "Soleil de midi"
+    ],
+    "answer": 1,
+    "explain": "Douce = sans reflets durs."
+   },
+   {
+    "q": "À quoi sert un réflecteur ?",
+    "choices": [
+     "Déboucher les ombres",
+     "Flouter le fond",
+     "Changer la couleur"
+    ],
+    "answer": 0,
+    "explain": "Il renvoie la lumière."
+   },
+   {
+    "q": "Cause n°1 des photos floues au téléphone ?",
+    "choices": [
+     "Objectif sale",
+     "Trop de lumière",
+     "Fond blanc"
+    ],
+    "answer": 0,
+    "explain": "Un objectif gras brouille l'image."
+   },
+   {
+    "q": "Combien de vues par produit ?",
+    "choices": [
+     "Une",
+     "4 à 6",
+     "50"
+    ],
+    "answer": 1,
+    "explain": "Plusieurs angles remplacent le toucher."
+   },
+   {
+    "q": "Quel fond met le mieux un produit en valeur ?",
+    "choices": [
+     "Fond simple et uni",
+     "Fond très chargé",
+     "Une rue animée"
+    ],
+    "answer": 0,
+    "explain": "Rien ne distrait du produit."
+   },
+   {
+    "q": "Quel outil de Snapseed retire une poussière ?",
+    "choices": [
+     "Correcteur",
+     "Texte",
+     "Cadres"
+    ],
+    "answer": 0,
+    "explain": "Le correcteur efface les petites taches."
+   },
+   {
+    "q": "Pourquoi régler la balance des blancs ?",
+    "choices": [
+     "Couleurs fidèles au vrai produit",
+     "Effet vintage",
+     "Fichier plus léger"
+    ],
+    "answer": 0,
+    "explain": "Le client doit recevoir la bonne couleur."
+   },
+   {
+    "q": "Dans Lightroom, un préréglage sert à…",
+    "choices": [
+     "Appliquer les mêmes réglages à plusieurs photos",
+     "Supprimer des photos",
+     "Ajouter de la musique"
+    ],
+    "answer": 0,
+    "explain": "Une recette réutilisable."
+   },
+   {
+    "q": "Quel format convient à une publication Instagram en portrait ?",
+    "choices": [
+     "4:5",
+     "21:9",
+     "1:3"
+    ],
+    "answer": 0,
+    "explain": "Le 4:5 occupe plus d'écran dans le fil."
+   },
+   {
+    "q": "Comment garder la même exposition sur toute une série ?",
+    "choices": [
+     "Verrouiller mise au point et exposition",
+     "Changer de pièce à chaque photo",
+     "Utiliser le zoom numérique"
+    ],
+    "answer": 0,
+    "explain": "Appui long sur l'écran."
+   },
+   {
+    "q": "Une bonne retouche de produit doit…",
+    "choices": [
+     "Montrer le vrai produit, en mieux",
+     "Changer sa forme",
+     "Cacher ses vrais défauts"
+    ],
+    "answer": 0,
+    "explain": "Tromper crée des retours et de la méfiance."
+   },
+   {
+    "q": "Quel réglage rend une photo plus chaude ?",
+    "choices": [
+     "Température vers le jaune",
+     "Netteté au maximum",
+     "Vignettage"
+    ],
+    "answer": 0,
+    "explain": "La température déplace vers le jaune ou le bleu."
+   }
+  ]
+ },
+ "bureautique-pro": {
+  "title": "Excel, Word et Google Sheets",
+  "lessons": [
+   "bur-word",
+   "bur-excel-formules",
+   "bur-sheets-collab"
+  ],
+  "questions": [
+   {
+    "q": "Pourquoi utiliser les styles de titres ?",
+    "choices": [
+     "Pour une mise en forme uniforme et une table des matières automatique",
+     "Pour colorer le texte au hasard",
+     "Pour alourdir le fichier"
+    ],
+    "answer": 0,
+    "explain": "Les styles structurent le document."
+   },
+   {
+    "q": "Comment envoyer un document qui s'affiche identique partout ?",
+    "choices": [
+     "L'exporter en PDF",
+     "Envoyer une capture d'écran",
+     "Le copier dans WhatsApp"
+    ],
+    "answer": 0,
+    "explain": "Le PDF garde la mise en page."
+   },
+   {
+    "q": "Quelle fonction crée des lettres personnalisées en série ?",
+    "choices": [
+     "Le publipostage",
+     "La correction automatique",
+     "Le zoom"
+    ],
+    "answer": 0,
+    "explain": "Le publipostage fusionne un modèle et une liste."
+   },
+   {
+    "q": "Par quel signe commence toute formule Excel ?",
+    "choices": [
+     "=",
+     "#",
+     "@"
+    ],
+    "answer": 0,
+    "explain": "Le signe égal indique à Excel qu'il s'agit d'un calcul."
+   },
+   {
+    "q": "À quoi sert la touche F4 dans une formule ?",
+    "choices": [
+     "À bloquer une cellule avec des $",
+     "À enregistrer",
+     "À imprimer"
+    ],
+    "answer": 0,
+    "explain": "La référence absolue ne bouge pas quand on recopie."
+   },
+   {
+    "q": "Quelle fonction compte les cellules qui respectent un critère ?",
+    "choices": [
+     "NB.SI",
+     "SOMME",
+     "MAX"
+    ],
+    "answer": 0,
+    "explain": "NB.SI compte, par exemple, les factures « Payé »."
+   },
+   {
+    "q": "Quel droit donner à un client qui doit seulement consulter ?",
+    "choices": [
+     "Lecteur",
+     "Éditeur",
+     "Propriétaire"
+    ],
+    "answer": 0,
+    "explain": "Le lecteur voit sans pouvoir modifier."
+   },
+   {
+    "q": "Comment retrouver une ancienne version du fichier ?",
+    "choices": [
+     "Historique des versions",
+     "Ctrl + P",
+     "Supprimer et recommencer"
+    ],
+    "answer": 0,
+    "explain": "Google garde l'historique de toutes les modifications."
+   },
+   {
+    "q": "Quel outil colore automatiquement les retards en rouge ?",
+    "choices": [
+     "La mise en forme conditionnelle",
+     "Le correcteur",
+     "Le zoom"
+    ],
+    "answer": 0,
+    "explain": "La couleur change selon la valeur de la cellule."
+   },
+   {
+    "q": "Par quel signe commence une formule Excel ?",
+    "choices": [
+     "=",
+     "#",
+     "!"
+    ],
+    "answer": 0,
+    "explain": "Le signe égal annonce un calcul."
+   },
+   {
+    "q": "Quelle fonction additionne une colonne ?",
+    "choices": [
+     "MOYENNE",
+     "SOMME",
+     "MAX"
+    ],
+    "answer": 1,
+    "explain": "=SOMME(B2:B20)."
+   },
+   {
+    "q": "Dans Word, comment uniformiser les titres ?",
+    "choices": [
+     "Styles Titre 1, Titre 2",
+     "Grossir chaque titre à la main",
+     "Tout en majuscules"
+    ],
+    "answer": 0,
+    "explain": "Les styles structurent le document."
+   },
+   {
+    "q": "Comment envoyer un document qui s'affiche identique partout ?",
+    "choices": [
+     "En PDF",
+     "En capture d'écran",
+     "Par SMS"
+    ],
+    "answer": 0,
+    "explain": "Le PDF garde la mise en page."
+   },
+   {
+    "q": "Quel droit de partage pour un client qui doit seulement lire ?",
+    "choices": [
+     "Éditeur",
+     "Lecteur",
+     "Propriétaire"
+    ],
+    "answer": 1,
+    "explain": "Le lecteur ne peut pas modifier."
+   },
+   {
+    "q": "À quoi sert F4 dans une formule ?",
+    "choices": [
+     "Bloquer une cellule avec $",
+     "Imprimer",
+     "Fermer"
+    ],
+    "answer": 0,
+    "explain": "Référence absolue."
+   },
+   {
+    "q": "Quelle fonction compte les factures « Payé » ?",
+    "choices": [
+     "NB.SI",
+     "SOMME",
+     "ARRONDI"
+    ],
+    "answer": 0,
+    "explain": "NB.SI compte selon un critère."
+   },
+   {
+    "q": "Comment créer 100 lettres personnalisées depuis une liste ?",
+    "choices": [
+     "Le publipostage",
+     "Le copier-coller",
+     "Le zoom"
+    ],
+    "answer": 0,
+    "explain": "Un modèle + une liste."
+   },
+   {
+    "q": "Quel outil colore automatiquement les retards en rouge ?",
+    "choices": [
+     "Mise en forme conditionnelle",
+     "Correcteur",
+     "Gras"
+    ],
+    "answer": 0,
+    "explain": "La couleur suit la valeur."
+   },
+   {
+    "q": "Quelle fonction va chercher le prix d'un produit dans une autre feuille ?",
+    "choices": [
+     "RECHERCHEX",
+     "MOYENNE",
+     "MAJUSCULE"
+    ],
+    "answer": 0,
+    "explain": "RECHERCHEX trouve et renvoie une valeur."
+   },
+   {
+    "q": "Comment résumer 5 000 ventes par produit et par mois ?",
+    "choices": [
+     "Tableau croisé dynamique",
+     "Les additionner à la main",
+     "Un graphique 3D"
+    ],
+    "answer": 0,
+    "explain": "Quelques clics suffisent."
+   },
+   {
+    "q": "Comment retrouver une ancienne version d'un Google Sheets ?",
+    "choices": [
+     "Historique des versions",
+     "Ctrl + P",
+     "Supprimer le fichier"
+    ],
+    "answer": 0,
+    "explain": "Google garde chaque modification."
+   }
+  ]
+ },
+ "ia-entreprise": {
+  "title": "Outils d'IA pour les entreprises : textes, visuels, prompts",
+  "lessons": [
+   "ia-prompts",
+   "ia-textes",
+   "ia-visuels"
+  ],
+  "questions": [
+   {
+    "q": "Quels éléments composent un bon prompt ?",
+    "choices": [
+     "Rôle, tâche, contexte, format",
+     "Un seul mot-clé",
+     "Des majuscules partout"
+    ],
+    "answer": 0,
+    "explain": "Plus la demande est précise, plus la réponse est utile."
+   },
+   {
+    "q": "La première réponse ne convient pas. Que faire ?",
+    "choices": [
+     "Demander des ajustements précis",
+     "Abandonner l'IA",
+     "Copier la réponse telle quelle"
+    ],
+    "answer": 0,
+    "explain": "On travaille avec l'IA par itérations."
+   },
+   {
+    "q": "Pourquoi donner un exemple du résultat attendu ?",
+    "choices": [
+     "L'IA imite le ton et la structure",
+     "Pour allonger le prompt",
+     "Ce n'est jamais utile"
+    ],
+    "answer": 0,
+    "explain": "Un exemple vaut mieux qu'une longue explication."
+   },
+   {
+    "q": "Qui est responsable d'un texte écrit avec l'IA et envoyé à un client ?",
+    "choices": [
+     "Toi, l'entreprise",
+     "L'IA",
+     "Personne"
+    ],
+    "answer": 0,
+    "explain": "L'IA est un outil ; la responsabilité reste humaine."
+   },
+   {
+    "q": "D'où doivent venir les prix et les dates d'un texte ?",
+    "choices": [
+     "De tes propres informations vérifiées",
+     "De l'IA",
+     "D'Internet au hasard"
+    ],
+    "answer": 0,
+    "explain": "L'IA peut inventer des chiffres plausibles mais faux."
+   },
+   {
+    "q": "Comment limiter les inventions de l'IA ?",
+    "choices": [
+     "Lui fournir tes documents et lui demander de s'y limiter",
+     "Lui demander d'être créative",
+     "Écrire en majuscules"
+    ],
+    "answer": 0,
+    "explain": "Un contexte fourni réduit les erreurs."
+   },
+   {
+    "q": "Que ne faut-il pas mettre dans un outil d'IA public ?",
+    "choices": [
+     "Des données confidentielles de clients",
+     "Une description de décor",
+     "Un style de couleurs"
+    ],
+    "answer": 0,
+    "explain": "Les informations envoyées peuvent être stockées par le service."
+   },
+   {
+    "q": "L'IA écrit mal le texte sur l'image. Solution ?",
+    "choices": [
+     "Ajouter le texte ensuite dans un logiciel de design",
+     "Accepter les fautes",
+     "Abandonner le visuel"
+    ],
+    "answer": 0,
+    "explain": "On garde l'image et on pose un texte propre."
+   },
+   {
+    "q": "Une image IA peut-elle remplacer la photo du vrai produit vendu ?",
+    "choices": [
+     "Non, ce serait trompeur",
+     "Oui, toujours",
+     "Oui si elle est plus belle"
+    ],
+    "answer": 0,
+    "explain": "Le client doit voir ce qu'il achète réellement."
+   },
+   {
+    "q": "Quels éléments composent un bon prompt ?",
+    "choices": [
+     "Rôle, tâche, contexte, format",
+     "Un seul mot",
+     "Des majuscules"
+    ],
+    "answer": 0,
+    "explain": "Une demande précise donne une réponse utile."
+   },
+   {
+    "q": "Qui est responsable d'un texte IA envoyé à un client ?",
+    "choices": [
+     "L'IA",
+     "Toi, l'entreprise",
+     "Personne"
+    ],
+    "answer": 1,
+    "explain": "L'IA est un outil."
+   },
+   {
+    "q": "La première réponse ne convient pas. Que faire ?",
+    "choices": [
+     "Demander des ajustements précis",
+     "Abandonner",
+     "La publier quand même"
+    ],
+    "answer": 0,
+    "explain": "On travaille par itérations."
+   },
+   {
+    "q": "Peut-on coller les données confidentielles d'un client dans une IA publique ?",
+    "choices": [
+     "Oui",
+     "Non",
+     "Seulement le week-end"
+    ],
+    "answer": 1,
+    "explain": "Les données peuvent être conservées par le service."
+   },
+   {
+    "q": "D'où doivent venir les prix et dates d'un texte ?",
+    "choices": [
+     "De tes informations vérifiées",
+     "De l'IA",
+     "Du hasard"
+    ],
+    "answer": 0,
+    "explain": "L'IA peut inventer des chiffres."
+   },
+   {
+    "q": "Pourquoi donner un exemple du résultat attendu ?",
+    "choices": [
+     "L'IA imite le ton et la structure",
+     "Pour allonger",
+     "Inutile"
+    ],
+    "answer": 0,
+    "explain": "Un exemple vaut une longue explication."
+   },
+   {
+    "q": "L'IA écrit mal le texte sur l'image. Solution ?",
+    "choices": [
+     "Ajouter le texte dans un logiciel de design",
+     "Garder les fautes",
+     "Supprimer l'image"
+    ],
+    "answer": 0,
+    "explain": "Texte propre ajouté à la main."
+   },
+   {
+    "q": "Quel prompt visuel est le meilleur ?",
+    "choices": [
+     "Sujet, décor, style, lumière, couleurs, format",
+     "« Une belle image »",
+     "« Fais quelque chose »"
+    ],
+    "answer": 0,
+    "explain": "Chaque détail guide le résultat."
+   },
+   {
+    "q": "Comment limiter les inventions de l'IA dans un texte ?",
+    "choices": [
+     "Fournir ses documents et demander de s'y limiter",
+     "Demander d'être créative",
+     "Écrire vite"
+    ],
+    "answer": 0,
+    "explain": "Le contexte réduit les erreurs."
+   },
+   {
+    "q": "Une image IA peut-elle remplacer la photo du vrai produit vendu ?",
+    "choices": [
+     "Oui toujours",
+     "Non, ce serait trompeur",
+     "Oui si elle est jolie"
+    ],
+    "answer": 1,
+    "explain": "Le client doit voir ce qu'il achète."
+   },
+   {
+    "q": "Avant d'utiliser un résumé IA d'un contrat, que faire ?",
+    "choices": [
+     "Vérifier les points clés dans le document original",
+     "Le signer tout de suite",
+     "Le traduire"
+    ],
+    "answer": 0,
+    "explain": "Un résumé peut omettre une clause importante."
+   },
+   {
+    "q": "Quelle règle d'entreprise est essentielle pour l'IA ?",
+    "choices": [
+     "Liste des usages autorisés et données interdites",
+     "Tout autoriser",
+     "Tout interdire sans explication"
+    ],
+    "answer": 0,
+    "explain": "Des règles claires protègent l'entreprise."
+   }
+  ]
+ },
+ "assistance-virtuelle": {
+  "title": "Assistance virtuelle et saisie de données",
+  "lessons": [
+   "av-metier",
+   "av-saisie",
+   "av-organisation"
+  ],
+  "questions": [
+   {
+    "q": "Quel est le meilleur départ pour un assistant virtuel ?",
+    "choices": [
+     "Quelques services précis bien maîtrisés",
+     "Promettre tout faire",
+     "Travailler gratuitement sans limite"
+    ],
+    "answer": 0,
+    "explain": "Une offre claire rassure les clients."
+   },
+   {
+    "q": "Pourquoi proposer des forfaits mensuels ?",
+    "choices": [
+     "Pour des revenus plus stables",
+     "Pour travailler moins bien",
+     "C'est interdit"
+    ],
+    "answer": 0,
+    "explain": "Le forfait fidélise et lisse les revenus."
+   },
+   {
+    "q": "Que doit-on mettre par écrit avec un client ?",
+    "choices": [
+     "Mission, accès, délais et confidentialité",
+     "Rien",
+     "Seulement le prix"
+    ],
+    "answer": 0,
+    "explain": "Un cadre écrit évite les malentendus."
+   },
+   {
+    "q": "Quel outil empêche de saisir une ville qui n'existe pas dans la liste ?",
+    "choices": [
+     "La validation des données",
+     "Le zoom",
+     "L'impression"
+    ],
+    "answer": 0,
+    "explain": "La liste déroulante limite les choix possibles."
+   },
+   {
+    "q": "Comment contrôler une grande saisie ?",
+    "choices": [
+     "Vérification par échantillon et comparaison des totaux",
+     "Ne rien vérifier",
+     "Tout recommencer"
+    ],
+    "answer": 0,
+    "explain": "Les totaux révèlent vite une erreur."
+   },
+   {
+    "q": "Quel raccourci insère la date du jour dans une cellule ?",
+    "choices": [
+     "Ctrl + ;",
+     "Ctrl + Z",
+     "Alt + F4"
+    ],
+    "answer": 0,
+    "explain": "Ctrl + ; insère la date du jour."
+   },
+   {
+    "q": "Comment partager des mots de passe avec un client ?",
+    "choices": [
+     "Avec un gestionnaire de mots de passe",
+     "Par SMS",
+     "Sur un papier collé à l'écran"
+    ],
+    "answer": 0,
+    "explain": "Le gestionnaire chiffre et contrôle les accès."
+   },
+   {
+    "q": "À quoi sert le rapport hebdomadaire ?",
+    "choices": [
+     "Montrer le travail fait et ce qui attend une décision",
+     "Remplir le temps",
+     "Rien"
+    ],
+    "answer": 0,
+    "explain": "Le client garde la vue d'ensemble sans tout vérifier."
+   },
+   {
+    "q": "Quand confirmer un rendez-vous ?",
+    "choices": [
+     "La veille",
+     "Jamais",
+     "Après le rendez-vous"
+    ],
+    "answer": 0,
+    "explain": "La confirmation évite les déplacements inutiles."
+   },
+   {
+    "q": "Quel est le meilleur départ pour un assistant virtuel ?",
+    "choices": [
+     "3 services précis maîtrisés",
+     "Promettre tout",
+     "Travailler gratuitement"
+    ],
+    "answer": 0,
+    "explain": "Une offre claire rassure."
+   },
+   {
+    "q": "Quel raccourci insère la date du jour dans Excel ?",
+    "choices": [
+     "Ctrl + ;",
+     "Ctrl + Z",
+     "Alt + Tab"
+    ],
+    "answer": 0,
+    "explain": "Ctrl + ; insère la date."
+   },
+   {
+    "q": "Comment partager un mot de passe avec un client ?",
+    "choices": [
+     "Gestionnaire de mots de passe",
+     "Par SMS",
+     "Sur un papier"
+    ],
+    "answer": 0,
+    "explain": "Le gestionnaire chiffre les accès."
+   },
+   {
+    "q": "Quand confirmer un rendez-vous ?",
+    "choices": [
+     "La veille",
+     "Après",
+     "Jamais"
+    ],
+    "answer": 0,
+    "explain": "On évite les déplacements inutiles."
+   },
+   {
+    "q": "Quel outil empêche de saisir une ville inconnue ?",
+    "choices": [
+     "Validation des données (liste)",
+     "Zoom",
+     "Gras"
+    ],
+    "answer": 0,
+    "explain": "La liste limite les choix."
+   },
+   {
+    "q": "Comment contrôler une grosse saisie ?",
+    "choices": [
+     "Échantillon et comparaison des totaux",
+     "Rien",
+     "Tout ressaisir"
+    ],
+    "answer": 0,
+    "explain": "Les totaux révèlent les erreurs."
+   },
+   {
+    "q": "Pourquoi proposer des forfaits mensuels ?",
+    "choices": [
+     "Revenus plus stables",
+     "Moins de qualité",
+     "C'est interdit"
+    ],
+    "answer": 0,
+    "explain": "Le forfait fidélise."
+   },
+   {
+    "q": "Que doit contenir le rapport hebdomadaire ?",
+    "choices": [
+     "Fait, reste à faire, décisions attendues",
+     "Rien d'utile",
+     "Seulement la facture"
+    ],
+    "answer": 0,
+    "explain": "Le client garde la vue d'ensemble."
+   },
+   {
+    "q": "Quelle fonction supprime les espaces en trop ?",
+    "choices": [
+     "SUPPRESPACE",
+     "SOMME",
+     "MAX"
+    ],
+    "answer": 0,
+    "explain": "Elle nettoie les textes."
+   },
+   {
+    "q": "Un client demande de travailler sur un ordinateur de cybercafé avec ses accès. Réponse ?",
+    "choices": [
+     "Refuser : jamais de données client sur un poste public",
+     "Accepter",
+     "Envoyer ses mots de passe à tous"
+    ],
+    "answer": 0,
+    "explain": "Les postes publics gardent des traces."
+   },
+   {
+    "q": "Que mettre par écrit au début d'une mission ?",
+    "choices": [
+     "Mission, accès, délais, confidentialité, prix",
+     "Rien",
+     "Seulement le prénom"
+    ],
+    "answer": 0,
+    "explain": "Un cadre écrit évite les conflits."
+   },
+   {
+    "q": "Comment gérer une boîte e-mail client efficacement ?",
+    "choices": [
+     "Libellés, réponses types, zéro message en attente le soir",
+     "Tout laisser non lu",
+     "Tout supprimer"
+    ],
+    "answer": 0,
+    "explain": "Une méthode quotidienne."
+   }
+  ]
+ },
+ "analyse-donnees": {
+  "title": "Analyse de données : Excel, SQL et Power BI",
+  "lessons": [
+   "data-nettoyage",
+   "data-sql",
+   "data-powerbi"
+  ],
+  "questions": [
+   {
+    "q": "Pourquoi nettoyer les données avant d'analyser ?",
+    "choices": [
+     "Des données sales donnent des conclusions fausses",
+     "Pour faire joli",
+     "Ce n'est pas nécessaire"
+    ],
+    "answer": 0,
+    "explain": "Analyse fiable = données fiables."
+   },
+   {
+    "q": "Quel outil d'Excel rejoue automatiquement les étapes de nettoyage ?",
+    "choices": [
+     "Power Query",
+     "Le correcteur orthographique",
+     "WordArt"
+    ],
+    "answer": 0,
+    "explain": "Power Query enregistre les transformations."
+   },
+   {
+    "q": "Que faire d'un prix manifestement impossible ?",
+    "choices": [
+     "Le vérifier comme valeur aberrante",
+     "L'ignorer sans rien dire",
+     "Le doubler"
+    ],
+    "answer": 0,
+    "explain": "Une valeur aberrante fausse les moyennes."
+   },
+   {
+    "q": "Quel mot-clé filtre les lignes en SQL ?",
+    "choices": [
+     "WHERE",
+     "ORDER BY",
+     "FROM"
+    ],
+    "answer": 0,
+    "explain": "WHERE garde seulement les lignes qui respectent la condition."
+   },
+   {
+    "q": "Quel mot-clé calcule un total par groupe (par ville) ?",
+    "choices": [
+     "GROUP BY",
+     "LIMIT",
+     "DELETE"
+    ],
+    "answer": 0,
+    "explain": "GROUP BY regroupe les lignes avant le calcul."
+   },
+   {
+    "q": "À quoi sert JOIN ?",
+    "choices": [
+     "Relier deux tables par une colonne commune",
+     "Supprimer une table",
+     "Trier les résultats"
+    ],
+    "answer": 0,
+    "explain": "JOIN croise par exemple ventes et clients."
+   },
+   {
+    "q": "Quel visuel montre le mieux une évolution dans le temps ?",
+    "choices": [
+     "Une courbe",
+     "Un camembert",
+     "Un tableau de 1 000 lignes"
+    ],
+    "answer": 0,
+    "explain": "La courbe montre la tendance."
+   },
+   {
+    "q": "Combien d'indicateurs clés afficher pour commencer ?",
+    "choices": [
+     "3 à 5",
+     "50",
+     "Un seul chiffre"
+    ],
+    "answer": 0,
+    "explain": "Trop d'informations tue l'information."
+   },
+   {
+    "q": "À quoi servent les segments (slicers) ?",
+    "choices": [
+     "Filtrer le tableau de bord par mois, ville ou produit",
+     "Changer la police",
+     "Imprimer"
+    ],
+    "answer": 0,
+    "explain": "Le lecteur explore les données lui-même."
+   },
+   {
+    "q": "Quel mot-clé SQL filtre les lignes ?",
+    "choices": [
+     "ORDER BY",
+     "WHERE",
+     "FROM"
+    ],
+    "answer": 1,
+    "explain": "WHERE garde les lignes qui respectent la condition."
+   },
+   {
+    "q": "Quel visuel montre une évolution dans le temps ?",
+    "choices": [
+     "Courbe",
+     "Camembert",
+     "Tableau de 1 000 lignes"
+    ],
+    "answer": 0,
+    "explain": "La courbe montre la tendance."
+   },
+   {
+    "q": "Pourquoi nettoyer les données ?",
+    "choices": [
+     "Des données sales donnent des conclusions fausses",
+     "Pour la décoration",
+     "Inutile"
+    ],
+    "answer": 0,
+    "explain": "Fiabilité d'abord."
+   },
+   {
+    "q": "Combien d'indicateurs clés afficher pour commencer ?",
+    "choices": [
+     "3 à 5",
+     "50",
+     "0"
+    ],
+    "answer": 0,
+    "explain": "Peu, mais les bons."
+   },
+   {
+    "q": "Que fait COUNT(*) ?",
+    "choices": [
+     "Compte les lignes",
+     "Additionne",
+     "Supprime"
+    ],
+    "answer": 0,
+    "explain": "COUNT compte."
+   },
+   {
+    "q": "Quel mot-clé calcule un total par ville ?",
+    "choices": [
+     "GROUP BY",
+     "LIMIT",
+     "DELETE"
+    ],
+    "answer": 0,
+    "explain": "Regrouper avant de calculer."
+   },
+   {
+    "q": "À quoi sert JOIN ?",
+    "choices": [
+     "Relier deux tables",
+     "Trier",
+     "Supprimer"
+    ],
+    "answer": 0,
+    "explain": "Par une colonne commune."
+   },
+   {
+    "q": "Quel outil d'Excel rejoue les étapes de nettoyage ?",
+    "choices": [
+     "Power Query",
+     "WordArt",
+     "Correcteur"
+    ],
+    "answer": 0,
+    "explain": "Il enregistre les transformations."
+   },
+   {
+    "q": "Dans Power BI, à quoi servent les segments ?",
+    "choices": [
+     "Filtrer par mois, ville, produit",
+     "Changer la police",
+     "Imprimer"
+    ],
+    "answer": 0,
+    "explain": "Le lecteur explore."
+   },
+   {
+    "q": "Quel mot-clé filtre les groupes après GROUP BY ?",
+    "choices": [
+     "HAVING",
+     "WHERE",
+     "SELECT"
+    ],
+    "answer": 0,
+    "explain": "HAVING agit sur les agrégats."
+   },
+   {
+    "q": "Un savon à 5 000 000 FCFA dans les ventes est…",
+    "choices": [
+     "Une valeur aberrante à vérifier",
+     "Normal",
+     "À dupliquer"
+    ],
+    "answer": 0,
+    "explain": "Probablement une erreur de saisie."
+   },
+   {
+    "q": "Panier moyen =",
+    "choices": [
+     "Chiffre d'affaires ÷ nombre de commandes",
+     "Nombre de clients × 2",
+     "Total des stocks"
+    ],
+    "answer": 0,
+    "explain": "Montant moyen par commande."
+   }
+  ]
+ },
+ "motion-montage-pro": {
+  "title": "Motion design et montage pro (After Effects, Premiere Pro)",
+  "lessons": [
+   "mopro-workflow",
+   "mopro-motion",
+   "mopro-finition"
+  ],
+  "questions": [
+   {
+    "q": "À quoi servent les proxys ?",
+    "choices": [
+     "Monter de gros fichiers sur un ordinateur modeste",
+     "Ajouter de la musique",
+     "Changer la langue"
+    ],
+    "answer": 0,
+    "explain": "On monte en basse résolution et on exporte avec les originaux."
+   },
+   {
+    "q": "Que permet Dynamic Link ?",
+    "choices": [
+     "Lier une composition After Effects dans Premiere sans exporter",
+     "Partager sur Facebook",
+     "Compresser l'audio"
+    ],
+    "answer": 0,
+    "explain": "Les modifications apparaissent directement dans la timeline."
+   },
+   {
+    "q": "Pourquoi incruster le timecode dans les versions de validation ?",
+    "choices": [
+     "Pour des retours précis du client",
+     "Pour décorer",
+     "Pour protéger contre le piratage uniquement"
+    ],
+    "answer": 0,
+    "explain": "Le client indique la seconde exacte à corriger."
+   },
+   {
+    "q": "Quel outil rend un mouvement plus naturel ?",
+    "choices": [
+     "L'éditeur de graphiques (courbes de vitesse)",
+     "Le correcteur audio",
+     "La règle"
+    ],
+    "answer": 0,
+    "explain": "Les accélérations et ralentis imitent le réel."
+   },
+   {
+    "q": "À quoi sert un objet nul parent ?",
+    "choices": [
+     "Faire bouger plusieurs calques ensemble",
+     "Supprimer un calque",
+     "Ajouter du son"
+    ],
+    "answer": 0,
+    "explain": "Les calques enfants suivent le parent."
+   },
+   {
+    "q": "Quel effet fait « se dessiner » une ligne ?",
+    "choices": [
+     "Trim Paths",
+     "Flou gaussien",
+     "Teinte"
+    ],
+    "answer": 0,
+    "explain": "Trim Paths anime le début et la fin d'un tracé."
+   },
+   {
+    "q": "Quel niveau sonore viser pour une vidéo web ?",
+    "choices": [
+     "Environ -14 LUFS",
+     "0 dB en permanence",
+     "-60 dB"
+    ],
+    "answer": 0,
+    "explain": "Les plateformes normalisent autour de -14 LUFS."
+   },
+   {
+    "q": "Combien de lignes de sous-titres au maximum ?",
+    "choices": [
+     "2",
+     "5",
+     "10"
+    ],
+    "answer": 0,
+    "explain": "Au-delà, le texte devient illisible."
+   },
+   {
+    "q": "À quoi sert un calque de réglage pour l'étalonnage ?",
+    "choices": [
+     "Appliquer un look à tout le film d'un coup",
+     "Ajouter de la musique",
+     "Couper les plans"
+    ],
+    "answer": 0,
+    "explain": "Le look reste cohérent et modifiable."
+   },
+   {
+    "q": "Quelle touche lisse des images clés dans After Effects ?",
+    "choices": [
+     "F9",
+     "F1",
+     "F12"
+    ],
+    "answer": 0,
+    "explain": "F9 = lissage de vitesse."
+   },
+   {
+    "q": "Combien de lignes de sous-titres au maximum ?",
+    "choices": [
+     "2",
+     "6",
+     "10"
+    ],
+    "answer": 0,
+    "explain": "Au-delà, illisible."
+   },
+   {
+    "q": "À quoi servent les proxys ?",
+    "choices": [
+     "Monter de gros fichiers sur un ordinateur modeste",
+     "Ajouter de la musique",
+     "Traduire"
+    ],
+    "answer": 0,
+    "explain": "Fichiers allégés."
+   },
+   {
+    "q": "Quel format pour une vidéo verticale de réseaux ?",
+    "choices": [
+     "9:16",
+     "16:9",
+     "4:3"
+    ],
+    "answer": 0,
+    "explain": "Plein écran sur téléphone."
+   },
+   {
+    "q": "Que permet Dynamic Link ?",
+    "choices": [
+     "Lier After Effects et Premiere sans exporter",
+     "Partager sur Facebook",
+     "Compresser l'audio"
+    ],
+    "answer": 0,
+    "explain": "Mises à jour directes."
+   },
+   {
+    "q": "Quel niveau sonore viser pour le web ?",
+    "choices": [
+     "Environ -14 LUFS",
+     "0 dB constant",
+     "-60 dB"
+    ],
+    "answer": 0,
+    "explain": "Norme des plateformes."
+   },
+   {
+    "q": "Quel effet fait « se dessiner » une ligne ?",
+    "choices": [
+     "Trim Paths",
+     "Flou",
+     "Teinte"
+    ],
+    "answer": 0,
+    "explain": "Anime le début et la fin du tracé."
+   },
+   {
+    "q": "À quoi sert un objet nul parent ?",
+    "choices": [
+     "Déplacer plusieurs calques ensemble",
+     "Supprimer",
+     "Ajouter du son"
+    ],
+    "answer": 0,
+    "explain": "Les enfants suivent."
+   },
+   {
+    "q": "Pourquoi incruster le timecode dans une version de validation ?",
+    "choices": [
+     "Retours précis du client",
+     "Décorer",
+     "Ralentir"
+    ],
+    "answer": 0,
+    "explain": "Le client indique la seconde exacte."
+   },
+   {
+    "q": "Quelle expression répète une animation ?",
+    "choices": [
+     "loopOut()",
+     "wiggle()",
+     "time()"
+    ],
+    "answer": 0,
+    "explain": "loopOut boucle les images clés."
+   },
+   {
+    "q": "Ordre des étapes de montage ?",
+    "choices": [
+     "Ours, bout-à-bout, montage fin, finitions",
+     "Finitions puis ours",
+     "Export puis montage"
+    ],
+    "answer": 0,
+    "explain": "Du grossier au précis."
+   },
+   {
+    "q": "Que livrer pour l'archive d'un film ?",
+    "choices": [
+     "Un master haute qualité (ProRes)",
+     "Un GIF",
+     "Une capture d'écran"
+    ],
+    "answer": 0,
+    "explain": "La meilleure qualité pour l'avenir."
+   }
+  ]
+ },
+ "automatisation-ia": {
+  "title": "Automatisation avec l'IA : chatbots, Make, Zapier, n8n",
+  "lessons": [
+   "auto-logique",
+   "auto-scenario",
+   "auto-chatbot"
+  ],
+  "questions": [
+   {
+    "q": "Qu'est-ce qu'un déclencheur ?",
+    "choices": [
+     "L'événement qui lance l'automatisation",
+     "Le prix de l'outil",
+     "Le nom du scénario"
+    ],
+    "answer": 0,
+    "explain": "Par exemple : un nouveau formulaire rempli."
+   },
+   {
+    "q": "Quelle tâche automatiser en premier ?",
+    "choices": [
+     "Une tâche simple, répétitive et fréquente",
+     "La plus rare",
+     "Une décision stratégique"
+    ],
+    "answer": 0,
+    "explain": "Le gain est rapide et le risque faible."
+   },
+   {
+    "q": "Pourquoi prévoir les erreurs ?",
+    "choices": [
+     "Pour être alerté au lieu d'un échec silencieux",
+     "Ce n'est pas utile",
+     "Pour ralentir le scénario"
+    ],
+    "answer": 0,
+    "explain": "Une automatisation cassée sans alerte fait perdre des clients."
+   },
+   {
+    "q": "Quel outil peut s'installer sur son propre serveur ?",
+    "choices": [
+     "n8n",
+     "Zapier",
+     "Aucun"
+    ],
+    "answer": 0,
+    "explain": "n8n est libre et auto-hébergeable."
+   },
+   {
+    "q": "Que vérifier avant d'activer un scénario ?",
+    "choices": [
+     "Un test avec des données réelles",
+     "Rien",
+     "La couleur des modules"
+    ],
+    "answer": 0,
+    "explain": "Le test révèle les champs mal reliés."
+   },
+   {
+    "q": "Qu'est-ce qu'un webhook ?",
+    "choices": [
+     "Une adresse qui reçoit des données envoyées par un autre service",
+     "Un virus",
+     "Un type d'e-mail"
+    ],
+    "answer": 0,
+    "explain": "Il déclenche le scénario depuis n'importe quel site."
+   },
+   {
+    "q": "Un chatbot doit-il dire qu'il est automatique ?",
+    "choices": [
+     "Oui, toujours",
+     "Non, il doit se faire passer pour un humain",
+     "Seulement le dimanche"
+    ],
+    "answer": 0,
+    "explain": "La transparence protège la confiance des clients."
+   },
+   {
+    "q": "Que faire quand le chatbot ne connaît pas la réponse ?",
+    "choices": [
+     "Transférer à un humain",
+     "Inventer une réponse",
+     "Couper la conversation"
+    ],
+    "answer": 0,
+    "explain": "Une réponse inventée peut coûter un client."
+   },
+   {
+    "q": "Comment améliorer un chatbot ?",
+    "choices": [
+     "Analyser les conversations ratées et compléter la base",
+     "Ne jamais le modifier",
+     "Augmenter la vitesse"
+    ],
+    "answer": 0,
+    "explain": "La base de connaissances grandit avec l'usage."
+   },
+   {
+    "q": "Qu'est-ce qu'un déclencheur ?",
+    "choices": [
+     "L'événement qui lance l'automatisation",
+     "Le prix",
+     "Le logo"
+    ],
+    "answer": 0,
+    "explain": "Par exemple un formulaire rempli."
+   },
+   {
+    "q": "Quelle tâche automatiser en premier ?",
+    "choices": [
+     "Simple, répétitive, fréquente",
+     "Rare et complexe",
+     "Stratégique"
+    ],
+    "answer": 0,
+    "explain": "Gain rapide, faible risque."
+   },
+   {
+    "q": "Quel outil peut s'installer sur son propre serveur ?",
+    "choices": [
+     "n8n",
+     "Zapier",
+     "Aucun"
+    ],
+    "answer": 0,
+    "explain": "n8n est libre."
+   },
+   {
+    "q": "Un chatbot doit-il dire qu'il est automatique ?",
+    "choices": [
+     "Oui",
+     "Non",
+     "Parfois"
+    ],
+    "answer": 0,
+    "explain": "Transparence = confiance."
+   },
+   {
+    "q": "Que faire avant d'activer un scénario ?",
+    "choices": [
+     "Un test avec des données réelles",
+     "Rien",
+     "Changer les couleurs"
+    ],
+    "answer": 0,
+    "explain": "Le test révèle les erreurs."
+   },
+   {
+    "q": "Qu'est-ce qu'un webhook ?",
+    "choices": [
+     "Une adresse qui reçoit des données d'un autre service",
+     "Un virus",
+     "Un e-mail"
+    ],
+    "answer": 0,
+    "explain": "Il déclenche le scénario."
+   },
+   {
+    "q": "Le chatbot ne connaît pas la réponse. Il doit…",
+    "choices": [
+     "Transférer à un humain",
+     "Inventer",
+     "Couper"
+    ],
+    "answer": 0,
+    "explain": "Une invention coûte un client."
+   },
+   {
+    "q": "Quels comptes connecter aux automatisations ?",
+    "choices": [
+     "Les comptes de l'entreprise",
+     "Ses comptes personnels",
+     "Ceux d'un ami"
+    ],
+    "answer": 0,
+    "explain": "Continuité si un salarié part."
+   },
+   {
+    "q": "Exemple de condition (filtre) ?",
+    "choices": [
+     "Seulement si le montant dépasse 50 000 FCFA",
+     "Le nom du scénario",
+     "La couleur du module"
+    ],
+    "answer": 0,
+    "explain": "La condition trie les cas."
+   },
+   {
+    "q": "Pourquoi prévoir la gestion des erreurs ?",
+    "choices": [
+     "Être alerté au lieu d'un échec silencieux",
+     "Inutile",
+     "Ralentir"
+    ],
+    "answer": 0,
+    "explain": "Une automatisation cassée perd des clients."
+   },
+   {
+    "q": "Comment améliorer un chatbot ?",
+    "choices": [
+     "Analyser les conversations ratées et compléter la base",
+     "Ne jamais le modifier",
+     "Augmenter la vitesse"
+    ],
+    "answer": 0,
+    "explain": "Amélioration continue."
+   },
+   {
+    "q": "Comment mesurer l'intérêt d'une automatisation ?",
+    "choices": [
+     "Temps gagné × coût horaire, comparé au prix de l'outil",
+     "Au nombre de couleurs",
+     "À la longueur du scénario"
+    ],
+    "answer": 0,
+    "explain": "Le calcul du retour sur investissement."
+   }
+  ]
+ },
+ "flutter-mobile": {
+  "title": "Applications mobiles avec Flutter",
+  "lessons": [
+   "flutter-bases",
+   "flutter-ecrans",
+   "flutter-donnees"
+  ],
+  "questions": [
+   {
+    "q": "Dans Flutter, qu'est-ce qu'un widget ?",
+    "choices": [
+     "Tout élément de l'interface",
+     "Un serveur",
+     "Une base de données"
+    ],
+    "answer": 0,
+    "explain": "Texte, bouton, marge, colonne : tout est widget."
+   },
+   {
+    "q": "Quel widget empile ses enfants verticalement ?",
+    "choices": [
+     "Column",
+     "Row",
+     "Stack"
+    ],
+    "answer": 0,
+    "explain": "Column = vertical, Row = horizontal."
+   },
+   {
+    "q": "Quelle commande vérifie l'installation de Flutter ?",
+    "choices": [
+     "flutter doctor",
+     "flutter delete",
+     "npm start"
+    ],
+    "answer": 0,
+    "explain": "flutter doctor liste ce qui manque."
+   },
+   {
+    "q": "Quelle fonction redessine l'écran après un changement ?",
+    "choices": [
+     "setState",
+     "print",
+     "runApp"
+    ],
+    "answer": 0,
+    "explain": "setState signale à Flutter que l'état a changé."
+   },
+   {
+    "q": "Comment ouvrir un nouvel écran ?",
+    "choices": [
+     "Navigator.push",
+     "Column.add",
+     "flutter create"
+    ],
+    "answer": 0,
+    "explain": "push empile l'écran, pop revient en arrière."
+   },
+   {
+    "q": "Quel widget affiche efficacement une longue liste ?",
+    "choices": [
+     "ListView.builder",
+     "Text",
+     "Padding"
+    ],
+    "answer": 0,
+    "explain": "Il ne construit que les éléments visibles."
+   },
+   {
+    "q": "Quel paquet sert à faire des requêtes web dans Flutter ?",
+    "choices": [
+     "http",
+     "math",
+     "camera"
+    ],
+    "answer": 0,
+    "explain": "Le paquet http envoie des requêtes GET et POST."
+   },
+   {
+    "q": "Que faut-il afficher pendant le chargement ?",
+    "choices": [
+     "Un indicateur de chargement",
+     "Rien",
+     "Un message d'erreur"
+    ],
+    "answer": 0,
+    "explain": "L'utilisateur sait que l'application travaille."
+   },
+   {
+    "q": "Quelle commande produit l'application Android ?",
+    "choices": [
+     "flutter build apk",
+     "flutter doctor",
+     "flutter clean"
+    ],
+    "answer": 0,
+    "explain": "Elle génère le fichier .apk installable."
+   },
+   {
+    "q": "Dans Flutter, un widget est…",
+    "choices": [
+     "Tout élément de l'interface",
+     "Un serveur",
+     "Une base"
+    ],
+    "answer": 0,
+    "explain": "Tout est widget."
+   },
+   {
+    "q": "Quel widget empile verticalement ?",
+    "choices": [
+     "Row",
+     "Column",
+     "Stack"
+    ],
+    "answer": 1,
+    "explain": "Column = vertical."
+   },
+   {
+    "q": "Quelle commande vérifie l'installation ?",
+    "choices": [
+     "flutter doctor",
+     "npm start",
+     "pip install"
+    ],
+    "answer": 0,
+    "explain": "Elle liste ce qui manque."
+   },
+   {
+    "q": "Quel langage utilise Flutter ?",
+    "choices": [
+     "Dart",
+     "PHP",
+     "Swift"
+    ],
+    "answer": 0,
+    "explain": "Dart, créé par Google."
+   },
+   {
+    "q": "Le hot reload permet…",
+    "choices": [
+     "Voir les changements en une seconde",
+     "Supprimer l'app",
+     "Payer"
+    ],
+    "answer": 0,
+    "explain": "Sans redémarrer l'application."
+   },
+   {
+    "q": "Quelle fonction redessine l'écran après un changement ?",
+    "choices": [
+     "setState",
+     "print",
+     "main"
+    ],
+    "answer": 0,
+    "explain": "Signale le changement d'état."
+   },
+   {
+    "q": "Comment ouvrir un nouvel écran ?",
+    "choices": [
+     "Navigator.push",
+     "Column.add",
+     "http.get"
+    ],
+    "answer": 0,
+    "explain": "push empile, pop revient."
+   },
+   {
+    "q": "Quel widget pour une longue liste ?",
+    "choices": [
+     "ListView.builder",
+     "Text",
+     "Icon"
+    ],
+    "answer": 0,
+    "explain": "Il construit seulement le visible."
+   },
+   {
+    "q": "Quel paquet pour les requêtes web ?",
+    "choices": [
+     "http",
+     "math",
+     "camera"
+    ],
+    "answer": 0,
+    "explain": "GET et POST."
+   },
+   {
+    "q": "Que montrer pendant le chargement des données ?",
+    "choices": [
+     "Un indicateur de chargement",
+     "Rien",
+     "Une erreur"
+    ],
+    "answer": 0,
+    "explain": "L'utilisateur sait que ça travaille."
+   },
+   {
+    "q": "Quelle commande produit l'APK Android ?",
+    "choices": [
+     "flutter build apk",
+     "flutter doctor",
+     "flutter clean"
+    ],
+    "answer": 0,
+    "explain": "Fichier installable."
+   },
+   {
+    "q": "Que faut-il pour publier sur iPhone ?",
+    "choices": [
+     "Un Mac et un compte développeur Apple",
+     "Rien de plus",
+     "Une clé USB"
+    ],
+    "answer": 0,
+    "explain": "Apple impose ses outils."
+   }
+  ]
+ },
+ "web-fullstack": {
+  "title": "Développement web full-stack",
+  "lessons": [
+   "fs-architecture",
+   "fs-api",
+   "fs-deploiement"
+  ],
+  "questions": [
+   {
+    "q": "Où doit se faire la vérification des droits ?",
+    "choices": [
+     "Sur le serveur (back-end)",
+     "Uniquement dans le navigateur",
+     "Nulle part"
+    ],
+    "answer": 0,
+    "explain": "Le navigateur peut être modifié par l'utilisateur."
+   },
+   {
+    "q": "Quel verbe HTTP crée une nouvelle ressource ?",
+    "choices": [
+     "POST",
+     "GET",
+     "DELETE"
+    ],
+    "answer": 0,
+    "explain": "POST crée, GET lit, DELETE supprime."
+   },
+   {
+    "q": "Quel format échangent souvent l'API et l'interface ?",
+    "choices": [
+     "JSON",
+     "MP3",
+     "DOCX"
+    ],
+    "answer": 0,
+    "explain": "JSON est léger et lisible par JavaScript."
+   },
+   {
+    "q": "Quel code renvoyer quand les données envoyées sont invalides ?",
+    "choices": [
+     "400",
+     "200",
+     "500"
+    ],
+    "answer": 0,
+    "explain": "400 = mauvaise requête, avec un message explicatif."
+   },
+   {
+    "q": "Comment se protéger des injections SQL ?",
+    "choices": [
+     "Requêtes préparées avec paramètres",
+     "Mettre le code en majuscules",
+     "Cacher l'adresse du serveur"
+    ],
+    "answer": 0,
+    "explain": "Les paramètres ne sont jamais interprétés comme du code."
+   },
+   {
+    "q": "Pourquoi recalculer le prix sur le serveur ?",
+    "choices": [
+     "Le navigateur peut envoyer un prix modifié",
+     "Pour aller plus vite",
+     "Ce n'est pas utile"
+    ],
+    "answer": 0,
+    "explain": "Toute donnée du client peut être falsifiée."
+   },
+   {
+    "q": "Où ranger une clé d'API secrète ?",
+    "choices": [
+     "Dans une variable d'environnement chez l'hébergeur",
+     "Dans le code sur GitHub",
+     "Dans le HTML"
+    ],
+    "answer": 0,
+    "explain": "Un dépôt public expose tout son contenu."
+   },
+   {
+    "q": "Comment stocker les mots de passe des utilisateurs ?",
+    "choices": [
+     "Hachés (bcrypt, scrypt, argon2)",
+     "En clair",
+     "Dans un fichier texte"
+    ],
+    "answer": 0,
+    "explain": "Même en cas de fuite, ils restent illisibles."
+   },
+   {
+    "q": "Pourquoi limiter le nombre de tentatives de connexion ?",
+    "choices": [
+     "Pour bloquer les attaques par force brute",
+     "Pour économiser l'électricité",
+     "Ce n'est pas utile"
+    ],
+    "answer": 0,
+    "explain": "Sans limite, un robot peut essayer des milliers de mots de passe."
+   },
+   {
+    "q": "Quel verbe HTTP lit des données ?",
+    "choices": [
+     "GET",
+     "POST",
+     "DELETE"
+    ],
+    "answer": 0,
+    "explain": "GET lit."
+   },
+   {
+    "q": "Où vérifier les droits d'un utilisateur ?",
+    "choices": [
+     "Sur le serveur",
+     "Seulement dans le navigateur",
+     "Nulle part"
+    ],
+    "answer": 0,
+    "explain": "Le navigateur peut être modifié."
+   },
+   {
+    "q": "Quel format échangent l'API et l'interface ?",
+    "choices": [
+     "JSON",
+     "MP3",
+     "DOCX"
+    ],
+    "answer": 0,
+    "explain": "Léger et lisible."
+   },
+   {
+    "q": "Où ranger une clé secrète ?",
+    "choices": [
+     "Variable d'environnement",
+     "Code sur GitHub",
+     "HTML"
+    ],
+    "answer": 0,
+    "explain": "Jamais dans le dépôt."
+   },
+   {
+    "q": "Quel code HTTP signifie « créé » ?",
+    "choices": [
+     "201",
+     "404",
+     "500"
+    ],
+    "answer": 0,
+    "explain": "201 Created."
+   },
+   {
+    "q": "Quel code pour des données invalides ?",
+    "choices": [
+     "400",
+     "200",
+     "301"
+    ],
+    "answer": 0,
+    "explain": "Bad Request."
+   },
+   {
+    "q": "Comment stocker les mots de passe ?",
+    "choices": [
+     "Hachés (bcrypt, scrypt)",
+     "En clair",
+     "Dans un fichier texte"
+    ],
+    "answer": 0,
+    "explain": "Illisibles même en cas de fuite."
+   },
+   {
+    "q": "Comment éviter les injections SQL ?",
+    "choices": [
+     "Requêtes préparées avec paramètres",
+     "Majuscules",
+     "Cacher le serveur"
+    ],
+    "answer": 0,
+    "explain": "Les paramètres ne sont pas du code."
+   },
+   {
+    "q": "Pourquoi recalculer le prix côté serveur ?",
+    "choices": [
+     "Le navigateur peut envoyer un prix modifié",
+     "Plus rapide",
+     "Inutile"
+    ],
+    "answer": 0,
+    "explain": "Ne jamais faire confiance au client."
+   },
+   {
+    "q": "Quels attributs pour un cookie de session sûr ?",
+    "choices": [
+     "HttpOnly, Secure, SameSite",
+     "Public et sans date",
+     "Aucun"
+    ],
+    "answer": 0,
+    "explain": "Protection contre le vol de session."
+   },
+   {
+    "q": "Pourquoi limiter les tentatives de connexion ?",
+    "choices": [
+     "Bloquer la force brute",
+     "Économiser l'électricité",
+     "Inutile"
+    ],
+    "answer": 0,
+    "explain": "Sinon un robot essaie des milliers de mots de passe."
+   },
+   {
+    "q": "À quoi sert une route /health ?",
+    "choices": [
+     "Vérifier que le service fonctionne",
+     "Afficher la météo",
+     "Supprimer la base"
+    ],
+    "answer": 0,
+    "explain": "Les outils de suivi l'interrogent."
+   }
+  ]
+ },
+ "ux-ui-figma": {
+  "title": "UX/UI design avec Figma",
+  "lessons": [
+   "ux-recherche",
+   "ux-wireframes",
+   "ui-figma"
+  ],
+  "questions": [
+   {
+    "q": "Combien d'entretiens révèlent souvent les principaux problèmes ?",
+    "choices": [
+     "Environ 5",
+     "500",
+     "Aucun"
+    ],
+    "answer": 0,
+    "explain": "Les mêmes problèmes reviennent vite."
+   },
+   {
+    "q": "Qu'est-ce qu'un persona ?",
+    "choices": [
+     "Un portrait réaliste d'utilisateur type",
+     "Un logo",
+     "Une couleur de bouton"
+    ],
+    "answer": 0,
+    "explain": "Il garde l'équipe centrée sur de vrais besoins."
+   },
+   {
+    "q": "Quelle question est la meilleure en entretien ?",
+    "choices": [
+     "« Racontez la dernière fois que vous avez… »",
+     "« Aimeriez-vous une super application ? »",
+     "« Notre idée est géniale, non ? »"
+    ],
+    "answer": 0,
+    "explain": "Les faits passés sont plus fiables que les promesses."
+   },
+   {
+    "q": "Qu'est-ce qu'un wireframe ?",
+    "choices": [
+     "Le plan simplifié d'un écran, sans le design final",
+     "Le logo de l'application",
+     "Le code source"
+    ],
+    "answer": 0,
+    "explain": "Il valide l'organisation avant l'apparence."
+   },
+   {
+    "q": "Combien d'actions principales par écran ?",
+    "choices": [
+     "Une",
+     "Cinq",
+     "Aucune"
+    ],
+    "answer": 0,
+    "explain": "Une action claire guide l'utilisateur."
+   },
+   {
+    "q": "Pendant un test, que faire quand l'utilisateur hésite ?",
+    "choices": [
+     "Observer sans l'aider et noter",
+     "Lui montrer la réponse",
+     "Arrêter le test"
+    ],
+    "answer": 0,
+    "explain": "L'hésitation révèle un problème à corriger."
+   },
+   {
+    "q": "À quoi sert l'auto layout dans Figma ?",
+    "choices": [
+     "Aligner et espacer automatiquement les éléments",
+     "Supprimer les calques",
+     "Exporter en PDF"
+    ],
+    "answer": 0,
+    "explain": "Les éléments s'adaptent au contenu."
+   },
+   {
+    "q": "Quelle taille minimale pour une zone tactile ?",
+    "choices": [
+     "Environ 44 px",
+     "5 px",
+     "300 px"
+    ],
+    "answer": 0,
+    "explain": "Un doigt a besoin d'une cible suffisante."
+   },
+   {
+    "q": "Pourquoi créer des composants ?",
+    "choices": [
+     "Réutiliser et modifier partout en une fois",
+     "Rendre le fichier plus lourd",
+     "Ce n'est pas utile"
+    ],
+    "answer": 0,
+    "explain": "Une modification du composant met à jour toutes ses copies."
+   },
+   {
+    "q": "Qu'est-ce qu'un wireframe ?",
+    "choices": [
+     "Le plan simplifié d'un écran",
+     "Le logo",
+     "Le code"
+    ],
+    "answer": 0,
+    "explain": "Organisation avant apparence."
+   },
+   {
+    "q": "Combien d'entretiens révèlent les principaux problèmes ?",
+    "choices": [
+     "Environ 5",
+     "500",
+     "0"
+    ],
+    "answer": 0,
+    "explain": "Les mêmes problèmes reviennent vite."
+   },
+   {
+    "q": "Combien d'actions principales par écran ?",
+    "choices": [
+     "Une",
+     "Cinq",
+     "Aucune"
+    ],
+    "answer": 0,
+    "explain": "Une action claire guide."
+   },
+   {
+    "q": "Qu'est-ce qu'un persona ?",
+    "choices": [
+     "Un portrait d'utilisateur type",
+     "Une couleur",
+     "Une police"
+    ],
+    "answer": 0,
+    "explain": "Centre l'équipe sur les besoins."
+   },
+   {
+    "q": "Combien de polices conseillées dans une interface ?",
+    "choices": [
+     "2 au maximum",
+     "8",
+     "Une par écran"
+    ],
+    "answer": 0,
+    "explain": "La cohérence."
+   },
+   {
+    "q": "Raccourci de l'auto layout dans Figma ?",
+    "choices": [
+     "Maj + A",
+     "Ctrl + P",
+     "Alt + F4"
+    ],
+    "answer": 0,
+    "explain": "Aligne et espace automatiquement."
+   },
+   {
+    "q": "Taille minimale d'une zone tactile ?",
+    "choices": [
+     "Environ 44 px",
+     "5 px",
+     "300 px"
+    ],
+    "answer": 0,
+    "explain": "Un doigt a besoin de place."
+   },
+   {
+    "q": "Pendant un test, l'utilisateur hésite. Tu…",
+    "choices": [
+     "Observes sans aider et notes",
+     "Montres la réponse",
+     "Arrêtes"
+    ],
+    "answer": 0,
+    "explain": "L'hésitation révèle un problème."
+   },
+   {
+    "q": "Pourquoi créer des composants ?",
+    "choices": [
+     "Réutiliser et modifier partout en une fois",
+     "Alourdir",
+     "Inutile"
+    ],
+    "answer": 0,
+    "explain": "Une modification se propage."
+   },
+   {
+    "q": "Quel contraste minimum pour un texte courant ?",
+    "choices": [
+     "4,5:1",
+     "1:1",
+     "1,2:1"
+    ],
+    "answer": 0,
+    "explain": "Recommandation d'accessibilité WCAG."
+   },
+   {
+    "q": "Meilleure question d'entretien ?",
+    "choices": [
+     "« Racontez la dernière fois que… »",
+     "« Notre idée est géniale ? »",
+     "« Achèteriez-vous ? »"
+    ],
+    "answer": 0,
+    "explain": "Les faits passés sont fiables."
+   },
+   {
+    "q": "Où les développeurs lisent-ils tailles et couleurs dans Figma ?",
+    "choices": [
+     "Mode Dev (handoff)",
+     "Mode présentation",
+     "Corbeille"
+    ],
+    "answer": 0,
+    "explain": "Toutes les mesures y sont."
+   }
+  ]
+ },
+ "ia-machine-learning": {
+  "title": "Intelligence artificielle et machine learning",
+  "lessons": [
+   "ml-concepts",
+   "ml-premier-modele",
+   "ml-evaluation"
+  ],
+  "questions": [
+   {
+    "q": "Prédire le prix d'un terrain est un problème de…",
+    "choices": [
+     "Régression",
+     "Classification",
+     "Clustering"
+    ],
+    "answer": 0,
+    "explain": "La sortie est un nombre continu."
+   },
+   {
+    "q": "Pourquoi garder des données de test à part ?",
+    "choices": [
+     "Pour évaluer le modèle sur des cas jamais vus",
+     "Pour aller plus vite",
+     "Ce n'est pas utile"
+    ],
+    "answer": 0,
+    "explain": "Sinon on mesure seulement la mémoire du modèle."
+   },
+   {
+    "q": "Regrouper des clients sans étiquette s'appelle…",
+    "choices": [
+     "Clustering (non supervisé)",
+     "Régression",
+     "Rendu 3D"
+    ],
+    "answer": 0,
+    "explain": "L'algorithme trouve lui-même les groupes."
+   },
+   {
+    "q": "Quelle méthode entraîne un modèle scikit-learn ?",
+    "choices": [
+     "fit",
+     "print",
+     "split"
+    ],
+    "answer": 0,
+    "explain": "fit apprend à partir des données d'entraînement."
+   },
+   {
+    "q": "Que contient y ?",
+    "choices": [
+     "La colonne à prédire",
+     "Toutes les données",
+     "Les noms des colonnes"
+    ],
+    "answer": 0,
+    "explain": "X explique, y est la réponse attendue."
+   },
+   {
+    "q": "Quelle fonction sépare entraînement et test ?",
+    "choices": [
+     "train_test_split",
+     "read_csv",
+     "accuracy_score"
+    ],
+    "answer": 0,
+    "explain": "Elle réserve une partie des données pour l'évaluation."
+   },
+   {
+    "q": "Un modèle est excellent à l'entraînement mais mauvais au test. Problème ?",
+    "choices": [
+     "Surapprentissage",
+     "Trop de données de test",
+     "Un bug d'affichage"
+    ],
+    "answer": 0,
+    "explain": "Il a mémorisé au lieu de généraliser."
+   },
+   {
+    "q": "Pour détecter des fraudes rares, quelle mesure regarder en priorité ?",
+    "choices": [
+     "Le rappel",
+     "Seulement l'exactitude",
+     "La taille du fichier"
+    ],
+    "answer": 0,
+    "explain": "L'exactitude est trompeuse quand une classe est rare."
+   },
+   {
+    "q": "Quel est le bon rôle d'un modèle dans une décision importante ?",
+    "choices": [
+     "Aider l'humain, qui décide",
+     "Décider seul sans contrôle",
+     "Remplacer toutes les règles"
+    ],
+    "answer": 0,
+    "explain": "La responsabilité reste humaine."
+   },
+   {
+    "q": "Prédire le prix d'un terrain est…",
+    "choices": [
+     "Une régression",
+     "Une classification",
+     "Du clustering"
+    ],
+    "answer": 0,
+    "explain": "La sortie est un nombre."
+   },
+   {
+    "q": "Spam ou pas spam : c'est…",
+    "choices": [
+     "Une classification",
+     "Une régression",
+     "Un rendu"
+    ],
+    "answer": 0,
+    "explain": "Une catégorie."
+   },
+   {
+    "q": "Quelle bibliothèque Python pour le machine learning classique ?",
+    "choices": [
+     "scikit-learn",
+     "Paint",
+     "Excel"
+    ],
+    "answer": 0,
+    "explain": "La référence."
+   },
+   {
+    "q": "Quelle méthode entraîne un modèle ?",
+    "choices": [
+     "fit",
+     "print",
+     "open"
+    ],
+    "answer": 0,
+    "explain": "fit apprend."
+   },
+   {
+    "q": "Le machine learning apprend à partir…",
+    "choices": [
+     "D'exemples (données)",
+     "De règles écrites à la main uniquement",
+     "Du hasard"
+    ],
+    "answer": 0,
+    "explain": "Données → modèle."
+   },
+   {
+    "q": "Pourquoi garder des données de test ?",
+    "choices": [
+     "Évaluer sur des cas jamais vus",
+     "Aller plus vite",
+     "Inutile"
+    ],
+    "answer": 0,
+    "explain": "Sinon on mesure la mémoire."
+   },
+   {
+    "q": "Regrouper des clients sans étiquette, c'est…",
+    "choices": [
+     "Du clustering",
+     "Une régression",
+     "Un rendu"
+    ],
+    "answer": 0,
+    "explain": "Non supervisé."
+   },
+   {
+    "q": "Quelle fonction sépare entraînement et test ?",
+    "choices": [
+     "train_test_split",
+     "read_csv",
+     "fit"
+    ],
+    "answer": 0,
+    "explain": "80/20 par exemple."
+   },
+   {
+    "q": "Que contient y ?",
+    "choices": [
+     "La colonne à prédire",
+     "Tout le fichier",
+     "Les noms"
+    ],
+    "answer": 0,
+    "explain": "La réponse attendue."
+   },
+   {
+    "q": "Excellent à l'entraînement, mauvais au test : c'est…",
+    "choices": [
+     "Du surapprentissage",
+     "Un bon modèle",
+     "Un bug d'écran"
+    ],
+    "answer": 0,
+    "explain": "Il a mémorisé."
+   },
+   {
+    "q": "Fraudes rares : quelle mesure regarder ?",
+    "choices": [
+     "Le rappel",
+     "Seulement l'exactitude",
+     "La taille du fichier"
+    ],
+    "answer": 0,
+    "explain": "L'exactitude trompe sur les classes rares."
+   },
+   {
+    "q": "Rôle d'un modèle dans une décision de crédit ?",
+    "choices": [
+     "Aider l'humain qui décide",
+     "Décider seul",
+     "Remplacer toutes les règles"
+    ],
+    "answer": 0,
+    "explain": "La responsabilité reste humaine."
+   }
+  ]
  }
 }
