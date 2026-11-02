@@ -235,15 +235,22 @@ kbd{display:inline-grid;place-items:center;min-width:1.9em;height:1.9em;padding:
 .bk-top h1{color:#fff;font-size:clamp(1.25rem,2.6vw,1.9rem);margin:0}
 .bk-stage{position:relative;display:flex;align-items:center;justify-content:center;gap:14px;padding:10px 0;outline:none;background:radial-gradient(60% 70% at 50% 45%,rgb(91 61 245 / .18),transparent 70%)}
 .bk-stage:fullscreen{background:#0B0E17;padding:20px}
-.bk-book{position:relative;display:flex;perspective:2200px;touch-action:pan-y;user-select:none;cursor:pointer;--h:max(380px,min(calc(100vh - 300px),820px))}
+.bk-book{position:relative;display:flex;touch-action:pan-y;user-select:none;cursor:pointer;--h:max(380px,min(calc(100vh - 300px),820px))}
 .bk-stage:fullscreen .bk-book{--h:92vh}
+.bk-book.turning{perspective:2200px}
+.bk-page{position:relative}.bk-page::after{content:"";position:absolute;inset:0;pointer-events:none}
+.bk-page.l::after{background:linear-gradient(270deg,rgb(0 0 0 / .22),transparent 7%)}.bk-page.r::after{background:linear-gradient(90deg,rgb(0 0 0 / .2),transparent 7%)}.bk-book.one .bk-page.r::after{background:linear-gradient(90deg,rgb(0 0 0 / .16),transparent 4%)}
+.bk-page.blank::after{display:none}
+/* Téléphone : la page glisse en 2D (plus fiable que la 3D sur Safari iPhone) */
+.bk-slide{position:absolute;inset:0;transition:transform .38s cubic-bezier(.3,.7,.2,1),opacity .38s}
+.bk-slide .bk-page{height:100%}
 .bk-book.one,.bk-book .bk-under:only-child{--w:calc(var(--h) * .7048)}
 .bk-book .bk-page,.bk-under .bk-page{height:var(--h);aspect-ratio:148/210;background:#FBFAF7;overflow:hidden}
 .bk-book .bk-page img,.bk-face img{display:block;width:100%;height:100%;object-fit:cover}
 .bk-page.blank{background:transparent}
-.bk-page.l{border-radius:4px 0 0 4px;box-shadow:inset -18px 0 24px -14px rgb(0 0 0 / .35),-10px 20px 40px -10px rgb(0 0 0 / .6)}
-.bk-page.r{border-radius:0 4px 4px 0;box-shadow:inset 18px 0 24px -14px rgb(0 0 0 / .28),10px 20px 40px -10px rgb(0 0 0 / .6)}
-.bk-book.one .bk-page.r{border-radius:4px;box-shadow:inset 10px 0 14px -10px rgb(0 0 0 / .3),0 20px 40px -10px rgb(0 0 0 / .6)}
+.bk-page.l{border-radius:4px 0 0 4px;box-shadow:-8px 16px 32px -12px rgb(0 0 0 / .6)}
+.bk-page.r{border-radius:0 4px 4px 0;box-shadow:8px 16px 32px -12px rgb(0 0 0 / .6)}
+.bk-book.one .bk-page.r{border-radius:4px;box-shadow:0 16px 32px -12px rgb(0 0 0 / .6)}
 .bk-page.blank{box-shadow:none}
 .bk-under{display:flex}
 .bk-leaf{position:absolute;top:0;height:var(--h);aspect-ratio:148/210;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.45,.05,.25,1);z-index:3}
@@ -4565,10 +4572,17 @@ function renderBook(main, id, q) {
     let cur = Math.min(Math.max(1, +q.get("page") || 1), N), busy = false;
     const spread = n => wide() ? (n === 1 ? [null, 1] : n % 2 === 0 ? [n, n + 1 <= N ? n + 1 : null] : [n - 1, n]) : [n];
     const img = n => n ? `<img src="${bookPage(id, n)}" alt="Page ${n}" draggable="false" decoding="async">` : "";
-    const paint = () => {
-      const s = spread(cur);
+    // Les images sont entièrement décodées avant d'être affichées (évite les pages à moitié dessinées sur téléphone)
+    const decoded = el => Promise.all([...el.querySelectorAll("img")].map(i => i.decode().catch(() => {})));
+    let paintSeq = 0;
+    const paint = async () => {
+      const s = spread(cur), seq = ++paintSeq;
+      const t = document.createElement("div");
+      t.innerHTML = s.map((n, i) => `<div class="bk-page ${s.length === 2 ? (i ? "r" : "l") : "r"} ${n ? "" : "blank"}">${img(n)}</div>`).join("");
+      await decoded(t);
+      if (seq !== paintSeq) return;
       book.className = "bk-book " + (s.length === 2 ? "two" : "one");
-      book.innerHTML = s.map((n, i) => `<div class="bk-page ${s.length === 2 ? (i ? "r" : "l") : "r"} ${n ? "" : "blank"}">${img(n)}</div>`).join("");
+      book.replaceChildren(...t.children);
       const shown = s.filter(Boolean);
       $("#bkCount").textContent = shown.length > 1 ? `Pages ${shown[0]}–${shown[1]} sur ${N}` : `Page ${shown[0]} sur ${N}`;
       $("#bkPrev").disabled = cur <= 1; $("#bkNext").disabled = Math.max(...shown) >= N;
@@ -4589,6 +4603,7 @@ function renderBook(main, id, q) {
       const from = spread(cur), to = spread(target);
       if (calm) { cur = target; paint(); return; }
       busy = true;
+      if (from.length === 1) return slide(dir, target);
       // Double page : recto = page qui se soulève, verso = page qui arrive. Page simple : la feuille part (ou revient) seule.
       const two = from.length === 2;
       const front = two ? (dir > 0 ? from[1] : from[0]) : (dir > 0 ? from[0] : to[0]), back = two ? (dir > 0 ? to[0] : to[1]) : null;
@@ -4599,11 +4614,25 @@ function renderBook(main, id, q) {
       const leaf = document.createElement("div");
       leaf.className = `bk-leaf ${dir > 0 ? "fwd" : "bwd"} ${two ? "half" : "full"}`;
       leaf.innerHTML = `<div class="bk-face front">${img(front)}</div><div class="bk-face backf">${img(back)}</div><span class="bk-shade"></span>`;
-      book.innerHTML = ""; book.append(under, leaf);
+      book.innerHTML = ""; book.append(under, leaf); book.classList.add("turning");
       requestAnimationFrame(() => requestAnimationFrame(() => leaf.classList.add("go")));
-      const done = () => { cur = target; busy = false; paint(); };
+      let fin = false;
+      const done = async () => { if (fin) return; fin = true; cur = target; await paint(); book.classList.remove("turning"); busy = false; };
       leaf.addEventListener("transitionend", e => { if (e.target === leaf) done(); }, { once: true });
       setTimeout(() => { if (busy) done(); }, 900);
+    };
+    // Page simple : la nouvelle page glisse par-dessus (vers la gauche en avançant, depuis la gauche en reculant)
+    const slide = async (dir, target) => {
+      const make = n => { const d = document.createElement("div"); d.className = "bk-slide"; d.innerHTML = `<div class="bk-page r">${img(n)}</div>`; return d; };
+      const incoming = make(target); await decoded(incoming);
+      const page = book.querySelector(".bk-page"); if (!page) { cur = target; busy = false; return paint(); }
+      book.style.position = "relative"; book.style.overflow = "hidden"; book.style.borderRadius = "4px";
+      incoming.style.transform = `translateX(${dir > 0 ? 100 : -100}%)`; book.append(incoming);
+      requestAnimationFrame(() => requestAnimationFrame(() => { incoming.style.transform = "none"; page.style.transition = "transform .38s cubic-bezier(.3,.7,.2,1),opacity .38s"; page.style.transform = `translateX(${dir > 0 ? -30 : 30}%)`; page.style.opacity = ".4"; }));
+      let fin = false;
+      const done = async () => { if (fin) return; fin = true; cur = target; await paint(); book.style.overflow = ""; busy = false; };
+      incoming.addEventListener("transitionend", e => { if (e.target === incoming) done(); });
+      setTimeout(() => { if (busy) done(); }, 700);
     };
     $("#bkThumbs").innerHTML = Array.from({ length: N }, (_, i) => `<button type="button" role="listitem" data-p="${i + 1}" aria-label="Aller à la page ${i + 1}"><img src="${bookPage(id, i + 1)}" alt="" loading="lazy"><span>${i + 1}</span></button>`).join("");
     $("#bkThumbs").addEventListener("click", e => { const b = e.target.closest("button[data-p]"); if (b && !busy) { cur = +b.dataset.p; paint(); } });
